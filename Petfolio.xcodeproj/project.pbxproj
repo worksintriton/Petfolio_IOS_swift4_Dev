@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,13 @@
 		B094D221255BDE88008400D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B094D21F255BDE88008400D6 /* LaunchScreen.storyboard */; };
 		B094D22C255BDE89008400D6 /* PetfolioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D22B255BDE89008400D6 /* PetfolioTests.swift */; };
 		B094D237255BDE89008400D6 /* PetfolioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D236255BDE89008400D6 /* PetfolioUITests.swift */; };
+		B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D244255BEE25008400D6 /* SliderViewController.swift */; };
+		B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D246255BF4DB008400D6 /* petsliderCollectionViewCell.swift */; };
+		B094D249255C042E008400D6 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D248255C042E008400D6 /* DemoViewController.swift */; };
+		B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D24A255C052E008400D6 /* DemoCollectionViewCell.swift */; };
+		B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D24C255C0F07008400D6 /* LoginViewController.swift */; };
+		B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D24E255C1A78008400D6 /* SignupViewController.swift */; };
+		B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D250255C1F97008400D6 /* SignOTPViewController.swift */; };
 		FAE0654D78C0F0165A511498 /* Pods_Petfolio_PetfolioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F548575F5888AC40E9B3E03E /* Pods_Petfolio_PetfolioUITests.framework */; };
 		FF7F9F4FFE368C4E2AB7369F /* Pods_PetfolioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E929A655F93E5BBDE34706 /* Pods_PetfolioTests.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +65,13 @@
 		B094D232255BDE89008400D6 /* PetfolioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetfolioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094D236255BDE89008400D6 /* PetfolioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetfolioUITests.swift; sourceTree = "<group>"; };
 		B094D238255BDE89008400D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B094D244255BEE25008400D6 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
+		B094D246255BF4DB008400D6 /* petsliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petsliderCollectionViewCell.swift; sourceTree = "<group>"; };
+		B094D248255C042E008400D6 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		B094D24A255C052E008400D6 /* DemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCollectionViewCell.swift; sourceTree = "<group>"; };
+		B094D24C255C0F07008400D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B094D24E255C1A78008400D6 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		B094D250255C1F97008400D6 /* SignOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOTPViewController.swift; sourceTree = "<group>"; };
 		C4D35639EA0F276BB8A252E3 /* Pods-PetfolioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.debug.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB11F6AD2E8BAB19A1D33CB8 /* Pods-PetfolioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.release.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.release.xcconfig"; sourceTree = "<group>"; };
 		EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Petfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +117,6 @@
 				C4D35639EA0F276BB8A252E3 /* Pods-PetfolioTests.debug.xcconfig */,
 				EB11F6AD2E8BAB19A1D33CB8 /* Pods-PetfolioTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -136,10 +149,17 @@
 				B094D213255BDE82008400D6 /* SceneDelegate.swift */,
 				B094D215255BDE82008400D6 /* ViewController.swift */,
 				B094D217255BDE82008400D6 /* Main.storyboard */,
+				B094D24A255C052E008400D6 /* DemoCollectionViewCell.swift */,
 				B094D21D255BDE88008400D6 /* Assets.xcassets */,
 				B094D21F255BDE88008400D6 /* LaunchScreen.storyboard */,
 				B094D222255BDE88008400D6 /* Info.plist */,
 				B094D21A255BDE82008400D6 /* Petfolio.xcdatamodeld */,
+				B094D244255BEE25008400D6 /* SliderViewController.swift */,
+				B094D246255BF4DB008400D6 /* petsliderCollectionViewCell.swift */,
+				B094D248255C042E008400D6 /* DemoViewController.swift */,
+				B094D24C255C0F07008400D6 /* LoginViewController.swift */,
+				B094D24E255C1A78008400D6 /* SignupViewController.swift */,
+				B094D250255C1F97008400D6 /* SignOTPViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -447,8 +467,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
+				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
+				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
+				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
+				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
+				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,
 				B094D21C255BDE82008400D6 /* Petfolio.xcdatamodeld in Sources */,
 			);

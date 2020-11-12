@@ -24,6 +24,23 @@
 		B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D24C255C0F07008400D6 /* LoginViewController.swift */; };
 		B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D24E255C1A78008400D6 /* SignupViewController.swift */; };
 		B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D250255C1F97008400D6 /* SignOTPViewController.swift */; };
+		B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D252255C24CE008400D6 /* UsertypeViewController.swift */; };
+		B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D254255C259E008400D6 /* User_typeCollectionViewCell.swift */; };
+		B094D266255D6221008400D6 /* Futura Bold Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D257255D621A008400D6 /* Futura Bold Italic font.ttf */; };
+		B094D267255D6221008400D6 /* futura medium bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D258255D621A008400D6 /* futura medium bt.ttf */; };
+		B094D268255D6221008400D6 /* Futura Light font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D259255D621B008400D6 /* Futura Light font.ttf */; };
+		B094D269255D6221008400D6 /* futura light bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25A255D621B008400D6 /* futura light bt.ttf */; };
+		B094D26A255D6221008400D6 /* Futura Light Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25B255D621C008400D6 /* Futura Light Italic font.ttf */; };
+		B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25C255D621C008400D6 /* Futura Book font.ttf */; };
+		B094D26C255D6221008400D6 /* Futura Medium Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25D255D621D008400D6 /* Futura Medium Italic font.ttf */; };
+		B094D26D255D6221008400D6 /* Futura Book Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25E255D621D008400D6 /* Futura Book Italic font.ttf */; };
+		B094D26E255D6221008400D6 /* Futura Bold font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D25F255D621E008400D6 /* Futura Bold font.ttf */; };
+		B094D26F255D6221008400D6 /* Futura Heavy font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D260255D621E008400D6 /* Futura Heavy font.ttf */; };
+		B094D270255D6221008400D6 /* futura medium condensed bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D261255D621F008400D6 /* futura medium condensed bt.ttf */; };
+		B094D271255D6221008400D6 /* Futura Extra Black font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D262255D621F008400D6 /* Futura Extra Black font.ttf */; };
+		B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D263255D6220008400D6 /* Futura XBlk BT.ttf */; };
+		B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B094D264255D6220008400D6 /* Futura-CondensedLight.otf */; };
+		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
 		FAE0654D78C0F0165A511498 /* Pods_Petfolio_PetfolioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F548575F5888AC40E9B3E03E /* Pods_Petfolio_PetfolioUITests.framework */; };
 		FF7F9F4FFE368C4E2AB7369F /* Pods_PetfolioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E929A655F93E5BBDE34706 /* Pods_PetfolioTests.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +89,23 @@
 		B094D24C255C0F07008400D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B094D24E255C1A78008400D6 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		B094D250255C1F97008400D6 /* SignOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOTPViewController.swift; sourceTree = "<group>"; };
+		B094D252255C24CE008400D6 /* UsertypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsertypeViewController.swift; sourceTree = "<group>"; };
+		B094D254255C259E008400D6 /* User_typeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User_typeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B094D257255D621A008400D6 /* Futura Bold Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Bold Italic font.ttf"; sourceTree = "<group>"; };
+		B094D258255D621A008400D6 /* futura medium bt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "futura medium bt.ttf"; sourceTree = "<group>"; };
+		B094D259255D621B008400D6 /* Futura Light font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Light font.ttf"; sourceTree = "<group>"; };
+		B094D25A255D621B008400D6 /* futura light bt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "futura light bt.ttf"; sourceTree = "<group>"; };
+		B094D25B255D621C008400D6 /* Futura Light Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Light Italic font.ttf"; sourceTree = "<group>"; };
+		B094D25C255D621C008400D6 /* Futura Book font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Book font.ttf"; sourceTree = "<group>"; };
+		B094D25D255D621D008400D6 /* Futura Medium Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Medium Italic font.ttf"; sourceTree = "<group>"; };
+		B094D25E255D621D008400D6 /* Futura Book Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Book Italic font.ttf"; sourceTree = "<group>"; };
+		B094D25F255D621E008400D6 /* Futura Bold font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Bold font.ttf"; sourceTree = "<group>"; };
+		B094D260255D621E008400D6 /* Futura Heavy font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy font.ttf"; sourceTree = "<group>"; };
+		B094D261255D621F008400D6 /* futura medium condensed bt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "futura medium condensed bt.ttf"; sourceTree = "<group>"; };
+		B094D262255D621F008400D6 /* Futura Extra Black font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Extra Black font.ttf"; sourceTree = "<group>"; };
+		B094D263255D6220008400D6 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura XBlk BT.ttf"; sourceTree = "<group>"; };
+		B094D264255D6220008400D6 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-CondensedLight.otf"; sourceTree = "<group>"; };
+		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
 		C4D35639EA0F276BB8A252E3 /* Pods-PetfolioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.debug.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB11F6AD2E8BAB19A1D33CB8 /* Pods-PetfolioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.release.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.release.xcconfig"; sourceTree = "<group>"; };
 		EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Petfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,10 +179,12 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B094D256255D61D3008400D6 /* Font */,
 				B094D211255BDE82008400D6 /* AppDelegate.swift */,
 				B094D213255BDE82008400D6 /* SceneDelegate.swift */,
 				B094D215255BDE82008400D6 /* ViewController.swift */,
 				B094D217255BDE82008400D6 /* Main.storyboard */,
+				B094D254255C259E008400D6 /* User_typeCollectionViewCell.swift */,
 				B094D24A255C052E008400D6 /* DemoCollectionViewCell.swift */,
 				B094D21D255BDE88008400D6 /* Assets.xcassets */,
 				B094D21F255BDE88008400D6 /* LaunchScreen.storyboard */,
@@ -160,6 +196,7 @@
 				B094D24C255C0F07008400D6 /* LoginViewController.swift */,
 				B094D24E255C1A78008400D6 /* SignupViewController.swift */,
 				B094D250255C1F97008400D6 /* SignOTPViewController.swift */,
+				B094D252255C24CE008400D6 /* UsertypeViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -180,6 +217,28 @@
 				B094D238255BDE89008400D6 /* Info.plist */,
 			);
 			path = PetfolioUITests;
+			sourceTree = "<group>";
+		};
+		B094D256255D61D3008400D6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				B094D25F255D621E008400D6 /* Futura Bold font.ttf */,
+				B094D257255D621A008400D6 /* Futura Bold Italic font.ttf */,
+				B094D25C255D621C008400D6 /* Futura Book font.ttf */,
+				B094D25E255D621D008400D6 /* Futura Book Italic font.ttf */,
+				B094D262255D621F008400D6 /* Futura Extra Black font.ttf */,
+				B094D260255D621E008400D6 /* Futura Heavy font.ttf */,
+				B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */,
+				B094D25A255D621B008400D6 /* futura light bt.ttf */,
+				B094D259255D621B008400D6 /* Futura Light font.ttf */,
+				B094D25B255D621C008400D6 /* Futura Light Italic font.ttf */,
+				B094D258255D621A008400D6 /* futura medium bt.ttf */,
+				B094D261255D621F008400D6 /* futura medium condensed bt.ttf */,
+				B094D25D255D621D008400D6 /* Futura Medium Italic font.ttf */,
+				B094D263255D6220008400D6 /* Futura XBlk BT.ttf */,
+				B094D264255D6220008400D6 /* Futura-CondensedLight.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		BFC1A352B16A02A35923CB4C /* Frameworks */ = {
@@ -303,9 +362,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B094D26C255D6221008400D6 /* Futura Medium Italic font.ttf in Resources */,
+				B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */,
+				B094D266255D6221008400D6 /* Futura Bold Italic font.ttf in Resources */,
+				B094D267255D6221008400D6 /* futura medium bt.ttf in Resources */,
 				B094D221255BDE88008400D6 /* LaunchScreen.storyboard in Resources */,
+				B094D269255D6221008400D6 /* futura light bt.ttf in Resources */,
+				B094D270255D6221008400D6 /* futura medium condensed bt.ttf in Resources */,
+				B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */,
+				B094D26A255D6221008400D6 /* Futura Light Italic font.ttf in Resources */,
 				B094D21E255BDE88008400D6 /* Assets.xcassets in Resources */,
+				B094D26E255D6221008400D6 /* Futura Bold font.ttf in Resources */,
 				B094D219255BDE82008400D6 /* Main.storyboard in Resources */,
+				B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */,
+				B094D26F255D6221008400D6 /* Futura Heavy font.ttf in Resources */,
+				B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */,
+				B094D268255D6221008400D6 /* Futura Light font.ttf in Resources */,
+				B094D26D255D6221008400D6 /* Futura Book Italic font.ttf in Resources */,
+				B094D271255D6221008400D6 /* Futura Extra Black font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,8 +544,10 @@
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
+				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,

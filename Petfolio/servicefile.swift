@@ -19,7 +19,10 @@ class Servicefile {
     static let baseurl = "http://52.25.163.13:3000"
     static let slider = baseurl+"api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
-   
+    static let signup = baseurl + "/api/userdetails/create"
+    static let resend = baseurl + "/api/userdetails/mobile/resendotp"
+    
+    
     var customview = UIView()
     var backview = UIView()
     var loadlabel = UILabel()
@@ -30,7 +33,15 @@ class Servicefile {
     var viewcornorradius = 10.0
     // Desing Value
     
-   
+   // userdetails
+    var first_name = ""
+    var last_name = ""
+    var user_email = ""
+    var user_phone = ""
+    var date_of_reg = ""
+    var user_type = ""
+    var otp = ""
+    // userdetails
     var DemoData = [demodat]()
     var UtypeData = [Utype]()
     var utypesel = ["1"]
@@ -81,6 +92,13 @@ class Servicefile {
         let interval = 5
         let nextDiff = interval - calendar.component(.minute, from: rightNow) % interval
         let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: rightNow) ?? date
+        return nextDate
+    }
+    
+    func ddmmyyyyHHmmssstringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let nextDate = format.string(from: date)
         return nextDate
     }
     

@@ -22,6 +22,9 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
         self.getdemo()
+        if  UserDefaults.standard.string(forKey: "userid") != nil {
+            // call some function for getting details
+              }
         // Do any additional setup after loading the view.
     }
     
@@ -82,7 +85,6 @@ extension UIViewController  {
     
     func startAnimatingActivityIndicator() {
         Servicefile.shared.customview.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        
         Servicefile.shared.customview.backgroundColor = UIColor.clear        //give color to the view
         Servicefile.shared.customview.center = self.view.center
         Servicefile.shared.backview.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)

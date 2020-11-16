@@ -18,9 +18,12 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var ViewChangeUtype: UIView!
     @IBOutlet weak var viewcoun: UIView!
     
+    @IBOutlet weak var usertypetitle: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.usertypetitle.text = Servicefile.shared.usertype
         self.ViewFname.layer.cornerRadius = 5.0
          self.ViewLname.layer.cornerRadius = 5.0
          self.viewemail.layer.cornerRadius = 5.0
@@ -30,6 +33,10 @@ class SignupViewController: UIViewController {
         self.viewcoun.layer.cornerRadius = 5.0
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.usertypetitle.text = Servicefile.shared.usertype
     }
     
    

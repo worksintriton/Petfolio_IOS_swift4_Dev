@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
+		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
+		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
+		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
 		B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D211255BDE82008400D6 /* AppDelegate.swift */; };
 		B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D213255BDE82008400D6 /* SceneDelegate.swift */; };
 		B094D216255BDE82008400D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D215255BDE82008400D6 /* ViewController.swift */; };
@@ -67,6 +70,9 @@
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.debug.xcconfig"; sourceTree = "<group>"; };
+		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
+		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
+		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B094D20E255BDE82008400D6 /* Petfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094D211255BDE82008400D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B094D213255BDE82008400D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +160,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B0571C932562503400B42719 /* DOc */ = {
+			isa = PBXGroup;
+			children = (
+				B0571C942562504200B42719 /* GoogleService-Info.plist */,
+			);
+			path = DOc;
+			sourceTree = "<group>";
+		};
 		B094D205255BDE82008400D6 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +193,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B0571C932562503400B42719 /* DOc */,
 				B094D256255D61D3008400D6 /* Font */,
 				B094D211255BDE82008400D6 /* AppDelegate.swift */,
 				B094D213255BDE82008400D6 /* SceneDelegate.swift */,
@@ -197,6 +212,8 @@
 				B094D24E255C1A78008400D6 /* SignupViewController.swift */,
 				B094D250255C1F97008400D6 /* SignOTPViewController.swift */,
 				B094D252255C24CE008400D6 /* UsertypeViewController.swift */,
+				B0571C8F25624A2000B42719 /* servicefile.swift */,
+				B0571C9125624AF000B42719 /* Rechability.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -373,6 +390,7 @@
 				B094D26A255D6221008400D6 /* Futura Light Italic font.ttf in Resources */,
 				B094D21E255BDE88008400D6 /* Assets.xcassets in Resources */,
 				B094D26E255D6221008400D6 /* Futura Bold font.ttf in Resources */,
+				B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */,
 				B094D219255BDE82008400D6 /* Main.storyboard in Resources */,
 				B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */,
 				B094D26F255D6221008400D6 /* Futura Heavy font.ttf in Resources */,
@@ -542,10 +560,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
+				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
+				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,

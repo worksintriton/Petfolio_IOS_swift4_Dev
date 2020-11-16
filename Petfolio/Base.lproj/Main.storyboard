@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K8t-jj-RA9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -22,7 +22,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aw3-vv-phl">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Bc1-pQ-xr3">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Bc1-pQ-xr3">
                                             <size key="itemSize" width="414" height="823"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -770,6 +770,7 @@
                         <outlet property="ViewLname" destination="jKZ-tf-wTc" id="l54-Aa-dBb"/>
                         <outlet property="Viewotp" destination="d1c-a0-h6V" id="voT-iz-cdI"/>
                         <outlet property="Viewphone" destination="Yje-a0-yk1" id="D0H-yU-tEH"/>
+                        <outlet property="usertypetitle" destination="ZYZ-ih-7qo" id="Srk-c5-XZ8"/>
                         <outlet property="viewcoun" destination="8yz-Bb-weJ" id="FKU-XA-h9H"/>
                         <outlet property="viewemail" destination="yYv-0v-d9a" id="UDL-gt-9tv"/>
                     </connections>
@@ -971,13 +972,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBM-R1-CvF">
-                                                <rect key="frame" x="10" y="8" width="50" height="44"/>
+                                                <rect key="frame" x="10" y="17.5" width="40" height="25"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qmX-La-JIN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exit" translatesAutoresizingMaskIntoConstraints="NO" id="qmX-La-JIN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="25"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUH-Vw-JNn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="25"/>
                                                         <connections>
                                                             <segue destination="vKs-es-56D" kind="presentation" id="Cq3-7Y-dlu"/>
                                                         </connections>
@@ -987,8 +988,8 @@
                                                 <constraints>
                                                     <constraint firstItem="WUH-Vw-JNn" firstAttribute="centerX" secondItem="vBM-R1-CvF" secondAttribute="centerX" id="1Pg-bN-Rke"/>
                                                     <constraint firstItem="qmX-La-JIN" firstAttribute="centerY" secondItem="vBM-R1-CvF" secondAttribute="centerY" id="Dq0-4q-gzT"/>
-                                                    <constraint firstAttribute="width" constant="50" id="DwT-1H-eN8"/>
-                                                    <constraint firstAttribute="height" constant="44" id="Seo-2y-vNU"/>
+                                                    <constraint firstAttribute="width" constant="40" id="DwT-1H-eN8"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Seo-2y-vNU"/>
                                                     <constraint firstItem="qmX-La-JIN" firstAttribute="centerX" secondItem="vBM-R1-CvF" secondAttribute="centerX" id="Z1X-CK-5ck"/>
                                                     <constraint firstItem="qmX-La-JIN" firstAttribute="width" secondItem="vBM-R1-CvF" secondAttribute="width" id="c99-xV-xGV"/>
                                                     <constraint firstItem="WUH-Vw-JNn" firstAttribute="centerY" secondItem="vBM-R1-CvF" secondAttribute="centerY" id="eHP-m7-cvb"/>
@@ -998,8 +999,8 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose user type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKR-w3-ojp">
-                                                <rect key="frame" x="76" y="19.5" width="135" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="66" y="17" width="157.5" height="26"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1036,7 +1037,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxg-9k-B0f">
                                                                     <rect key="frame" x="0.0" y="0.0" width="187" height="183"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_covid_border_waypoint_alert_32pt.png" translatesAutoresizingMaskIntoConstraints="NO" id="4QH-AB-6w2">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bag" translatesAutoresizingMaskIntoConstraints="NO" id="4QH-AB-6w2">
                                                                             <rect key="frame" x="8" y="0.0" width="171" height="142"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet lovers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQL-dG-6yo">
@@ -1045,16 +1046,16 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jmc-R3-toy">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="Jmc-R3-toy">
                                                                             <rect key="frame" x="150" y="116" width="29" height="26"/>
-                                                                            <color key="backgroundColor" red="0.00093379826279999998" green="0.58740645650000001" blue="0.45683860780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="29" id="U0b-dl-pGR"/>
                                                                                 <constraint firstAttribute="height" constant="26" id="syb-0B-2xf"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="4QH-AB-6w2" firstAttribute="height" secondItem="zxg-9k-B0f" secondAttribute="height" multiplier="0.775956" id="3yA-Wj-4Tq"/>
                                                                         <constraint firstItem="4QH-AB-6w2" firstAttribute="width" secondItem="zxg-9k-B0f" secondAttribute="width" multiplier="0.914439" id="DB9-U2-Fej"/>
@@ -1109,6 +1110,7 @@
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                 <connections>
                                                     <action selector="Action_OTP:" destination="1qn-h1-gdt" eventType="touchUpInside" id="7QN-RQ-6ZX"/>
+                                                    <action selector="action_changeUT:" destination="UUD-ui-ZKO" eventType="touchUpInside" id="QKm-oO-k7o"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1151,6 +1153,7 @@
                         <viewLayoutGuide key="safeArea" id="foZ-p0-Hnp"/>
                     </view>
                     <connections>
+                        <outlet property="Viewchange" destination="4Fz-Se-ESL" id="wct-LV-UCR"/>
                         <outlet property="collec_usertype" destination="yMV-hZ-eCX" id="vxb-Yl-uQ6"/>
                     </connections>
                 </viewController>
@@ -1430,11 +1433,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="pY8-g7-HqB"/>
         <segue reference="Cq3-7Y-dlu"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Bag" width="63" height="61"/>
+        <image name="Exit" width="79" height="79"/>
+        <image name="Like" width="53" height="47"/>
         <image name="Splash" width="1250" height="2221"/>
         <image name="doc" catalog="system" width="115" height="128"/>
-        <image name="ic_covid_border_waypoint_alert_32pt.png" width="32" height="32"/>
     </resources>
 </document>

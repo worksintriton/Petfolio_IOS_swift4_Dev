@@ -21,7 +21,9 @@ class Servicefile {
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
-    
+    static let login = baseurl + "/api/userdetails/mobile/login"
+    static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
+    static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
     
     var customview = UIView()
     var backview = UIView()
@@ -31,6 +33,7 @@ class Servicefile {
     var user_type_value = 1
     // Design value
     var viewcornorradius = 10.0
+    var viewLabelcornorraius = 5.0
     // Desing Value
     
    // userdetails
@@ -46,6 +49,13 @@ class Servicefile {
     var UtypeData = [Utype]()
     var utypesel = ["1"]
     var orgiutypesel = ["0"]
+    
+    // pet dashboard
+    var petbanner = [Petdashbanner]()
+    var petdoc = [Petdashdoc]()
+    var petser = [Petdashservice]()
+    var petprod = [Petdashproduct]()
+    // pet dashboard
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -97,7 +107,7 @@ class Servicefile {
     
     func ddmmyyyyHHmmssstringformat(date: Date) -> String{
         let format = DateFormatter()
-        format.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        format.dateFormat = "dd/MM/yyyy hh:mm a"
         let nextDate = format.string(from: date)
         return nextDate
     }
@@ -244,3 +254,67 @@ struct Utype{
     }
 }
 
+struct Petdashservice{
+    var _id : String
+    var background_color : String
+    var service_icon : String
+    var service_title : String
+    init(UID : String, background_color: String, service_icon: String, service_title: String) {
+        self._id = UID
+        self.background_color = background_color
+        self.service_icon = service_icon
+        self.service_title = service_title
+    }
+}
+
+
+struct Petdashproduct{
+    var _id : String
+    var product_fav_status : Bool
+    var product_offer_status : Bool
+    var product_offer_value : Int
+    var product_prices : Int
+    var product_rate : String
+    var product_title : String
+    var products_img : String
+    var review_count : Int
+    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int) {
+        self._id = UID
+        self.product_fav_status = product_fav_status
+        self.product_offer_status = product_offer_status
+        self.product_offer_value = product_offer_value
+        self.product_prices = product_prices
+        self.product_rate = product_rate
+        self.product_title = product_title
+        self.products_img = products_img
+        self.review_count = review_count
+        
+    }
+}
+
+
+struct Petdashdoc{
+    var _id : String
+    var doctor_img : String
+    var doctor_name : String
+    var review_count : Int
+     var star_count : Int
+    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int) {
+        self._id = UID
+        self.doctor_img = doctor_img
+        self.doctor_name = doctor_name
+        self.review_count = review_count
+        self.star_count = star_count
+    }
+}
+
+struct Petdashbanner{
+    var _id : String
+    var img_path : String
+    var title : String
+    init(UID : String, img_path: String, title: String) {
+        self._id = UID
+        self.img_path = img_path
+        self.title = title
+    }
+}

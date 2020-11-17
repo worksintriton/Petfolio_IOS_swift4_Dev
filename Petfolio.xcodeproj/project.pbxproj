@@ -11,6 +11,13 @@
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
+		B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */; };
+		B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */; };
+		B08F73122563BE4C00AEB8CC /* petloverDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */; };
+		B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F73142563E1E200AEB8CC /* petdocCollectionViewCell.swift */; };
+		B08F73172563E1F300AEB8CC /* petServCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F73162563E1F300AEB8CC /* petServCollectionViewCell.swift */; };
+		B08F73192563E1FF00AEB8CC /* petprodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */; };
+		B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */; };
 		B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D211255BDE82008400D6 /* AppDelegate.swift */; };
 		B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D213255BDE82008400D6 /* SceneDelegate.swift */; };
 		B094D216255BDE82008400D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B094D215255BDE82008400D6 /* ViewController.swift */; };
@@ -73,6 +80,13 @@
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REGPetLoverViewController.swift; sourceTree = "<group>"; };
+		B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginotpViewController.swift; sourceTree = "<group>"; };
+		B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverDashboardViewController.swift; sourceTree = "<group>"; };
+		B08F73142563E1E200AEB8CC /* petdocCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petdocCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08F73162563E1F300AEB8CC /* petServCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petServCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprodCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petbannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B094D20E255BDE82008400D6 /* Petfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094D211255BDE82008400D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B094D213255BDE82008400D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +182,18 @@
 			path = DOc;
 			sourceTree = "<group>";
 		};
+		B08F73132563E1B700AEB8CC /* Petloversdashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */,
+				B08F73142563E1E200AEB8CC /* petdocCollectionViewCell.swift */,
+				B08F73162563E1F300AEB8CC /* petServCollectionViewCell.swift */,
+				B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */,
+				B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */,
+			);
+			path = Petloversdashboard;
+			sourceTree = "<group>";
+		};
 		B094D205255BDE82008400D6 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +219,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
 				B0571C932562503400B42719 /* DOc */,
 				B094D256255D61D3008400D6 /* Font */,
 				B094D211255BDE82008400D6 /* AppDelegate.swift */,
@@ -214,6 +241,8 @@
 				B094D252255C24CE008400D6 /* UsertypeViewController.swift */,
 				B0571C8F25624A2000B42719 /* servicefile.swift */,
 				B0571C9125624AF000B42719 /* Rechability.swift */,
+				B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */,
+				B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -559,17 +588,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08F73192563E1FF00AEB8CC /* petprodCollectionViewCell.swift in Sources */,
+				B08F73122563BE4C00AEB8CC /* petloverDashboardViewController.swift in Sources */,
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
 				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
+				B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
+				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B08F73172563E1F300AEB8CC /* petServCollectionViewCell.swift in Sources */,
+				B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
+				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,

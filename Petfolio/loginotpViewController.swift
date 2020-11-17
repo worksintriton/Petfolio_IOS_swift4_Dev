@@ -1,15 +1,15 @@
 //
-//  SignOTPViewController.swift
+//  loginotpViewController.swift
 //  Petfolio
 //
-//  Created by sriram ramachandran on 11/11/20.
+//  Created by sriram ramachandran on 17/11/20.
 //  Copyright © 2020 sriram ramachandran. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class SignOTPViewController: UIViewController, UITextFieldDelegate {
+class loginotpViewController: UIViewController , UITextFieldDelegate {
     
     @IBOutlet weak var Viewotp: UIView!
     @IBOutlet weak var Viewactionotp: UIView!
@@ -76,7 +76,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
-                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
+                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                             self.present(vc, animated: true, completion: nil)
                    }else{
                      print("verification Not success")

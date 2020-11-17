@@ -45,7 +45,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.textfield_lastname.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.textfield_email.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.textfield_phno.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
-        print()
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

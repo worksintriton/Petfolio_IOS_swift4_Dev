@@ -182,7 +182,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
     
     func moveTextField(textField: UITextField, up: Bool){
-        let movementDistance:CGFloat = -280
+         let movementDistance:CGFloat = -230
         let movementDuration: Double = 0.3
         var movement:CGFloat = 0
         if up {
@@ -198,7 +198,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if self.textfield_email == textField || self.textfield_phno == textField {
+        if self.textfield_email == textField || self.textfield_phno == textField  {
              self.moveTextField(textField: textField, up:true)
         }
        

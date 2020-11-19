@@ -60,6 +60,9 @@ class Servicefile {
     var petprod = [Petdashproduct]()
     // pet dashboard
     
+    var lati = 0.0
+    var long = 0.0
+    
     var appgreen = "#009675"
     
     
@@ -159,6 +162,7 @@ class Servicefile {
         let nextDate = format.date(from: date)
         return nextDate!
     }
+   
     
     func yyyyMMddhhmmaDateformat(date: String) -> Date{
         let format = DateFormatter()
@@ -173,6 +177,15 @@ class Servicefile {
         let nextDate = format.string(from: date)
         return nextDate
     }
+    
+    func ddMMyyyystringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
+    
     
     func ddmmhhmmastringformat(date: Date) -> String{
         let format = DateFormatter()

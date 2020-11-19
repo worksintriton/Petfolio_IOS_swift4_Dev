@@ -20,6 +20,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var colleView_Service: UICollectionView!
     @IBOutlet weak var colleView_product: UICollectionView!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_denypop: UIView!
+    @IBOutlet weak var view_allowpop: UIView!
     
     
     
@@ -27,6 +31,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         super.viewDidLoad()
 
         self.view_footer.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_popup.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_denypop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
+        self.view_allowpop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
         self.colleView_banner.delegate = self
         self.colleView_banner.dataSource = self
         self.colleView_Doctor.delegate = self
@@ -37,7 +44,19 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.colleView_Service.dataSource = self
         self.colleView_banner.isPagingEnabled = true
         self.callpetdash()
+         self.view_popup.isHidden = true
+        self.view_shadow.isHidden = true
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func action_denypop(_ sender: Any) {
+        self.view_popup.isHidden = true
+               self.view_shadow.isHidden = true
+    }
+    
+    @IBAction func action_allowpop(_ sender: Any) {
+        self.view_popup.isHidden = true
+               self.view_shadow.isHidden = true
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -177,6 +196,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                        let userid = user_details["_id"] as! String
                                                        UserDefaults.standard.set(userid, forKey: "userid")
                                                         Servicefile.shared.petbanner.removeAll()
+                                                        let LocationDetails = Data["LocationDetails"] as! NSArray
+                                                        if LocationDetails.count == 0 {
+                                                             self.view_shadow.isHidden = false
+                                                            self.view_popup.isHidden = false
+                                                        }else{
+                                                            self.view_shadow.isHidden = true
+                                                            self.view_popup.isHidden = true
+                                                        }
                                                         let Banner_details = dash["Banner_details"] as! NSArray
                                                         for item in 0..<Banner_details.count {
                                                             let Bval = Banner_details[item] as! NSDictionary

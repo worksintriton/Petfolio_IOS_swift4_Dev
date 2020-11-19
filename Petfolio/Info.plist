@@ -52,6 +52,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Add your service for better service</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Add your service for better service</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Add your service for better service</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

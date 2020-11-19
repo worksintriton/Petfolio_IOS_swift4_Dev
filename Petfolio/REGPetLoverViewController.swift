@@ -42,6 +42,8 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
+    @IBOutlet weak var tblview_gender: UITableView!
+    
     
     @IBOutlet weak var datepicker_date: UIDatePicker!
     
@@ -72,16 +74,21 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         self.tblview_pettype.dataSource = self
         self.tblview_petbreed.delegate = self
         self.tblview_petbreed.dataSource = self
-        
+        self.tblview_gender.delegate = self
+        self.tblview_gender.dataSource = self
         
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
+         self.tblview_gender.isHidden = true
+        
+        
         
         self.view_calender.isHidden = true
         self.view_calenderbtn.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
         self.datepicker_date.datePickerMode = .date
         
     self.textfiled_petage.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+       // Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                
            }
            
@@ -117,16 +124,21 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.tblview_pettype == tableView {
             return self.pet_type.count
-        }else{
+        }else if self.tblview_petbreed == tableView {
             return self.Pet_breed.count
+        }else{
+            return self.petgender.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.tblview_pettype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
             cell.textLabel?.text = self.pet_type[indexPath.row]
+            return cell
+        }else if self.tblview_gender == tableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "gender", for: indexPath)
+            cell.textLabel?.text = self.petgender[indexPath.row]
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
@@ -139,17 +151,35 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
+         self.tblview_gender.isHidden = true
+        if self.tblview_petbreed ==  tableView {
+            self.textfield_petbreed.text! = self.Pet_breed[indexPath.row]
+        }else if self.tblview_pettype ==  tableView {
+             self.textfield_pettype.text! = self.pet_type[indexPath.row]
+        }else{
+            self.textfield_petgender.text = self.petgender[indexPath.row]
+        }
     }
     
     @IBAction func action_pettype(_ sender: Any) {
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = false
+        self.tblview_gender.isHidden = true
         
     }
+    
+    
+    @IBAction func action_gender(_ sender: Any) {
+        self.tblview_petbreed.isHidden = true
+        self.tblview_pettype.isHidden = true
+        self.tblview_gender.isHidden = false
+    }
+    
     
     @IBAction func action_petbreed(_ sender: Any) {
         self.tblview_petbreed.isHidden = false
         self.tblview_pettype.isHidden = true
+        self.tblview_gender.isHidden = true
     }
     
     @IBAction func action_Novaccine(_ sender: Any) {
@@ -240,12 +270,13 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                         self.pet_type.append(pbv)
                     }
                     for item in 0..<Gender.count{
-                        let pb = Pet_type[item] as! NSDictionary
-                        let pbv = pb["Gender"] as! String
+                        let pb = Gender[item] as! NSDictionary
+                        let pbv = pb["gender"] as! String
                         self.petgender.append(pbv)
                     }
                     self.tblview_pettype.reloadData()
                     self.tblview_petbreed.reloadData()
+                    self.tblview_gender.reloadData()
                      self.stopAnimatingActivityIndicator()
                   
                 }else{

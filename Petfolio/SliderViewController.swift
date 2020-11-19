@@ -22,9 +22,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
         self.getdemo()
-        if  UserDefaults.standard.string(forKey: "userid") != nil {
-            // call some function for getting details
-              }
+       
         // Do any additional setup after loading the view.
     }
     
@@ -52,7 +50,21 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
        
     
     @IBAction func skipaction(_ sender: Any) {
-        print("skip action made")
+        if  UserDefaults.standard.string(forKey: "userid") != nil {
+              if  UserDefaults.standard.string(forKey: "userid") != "" {
+                Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                print("userid",Servicefile.shared.userid)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.present(vc, animated: true, completion: nil)
+            }
+                    
+        }else{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func getdemo() {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
+		B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */; };
+		B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA7472566014B00B1FA0B /* regdocViewController.swift */; };
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
@@ -77,6 +79,8 @@
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.debug.xcconfig"; sourceTree = "<group>"; };
+		B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocdashboardViewController.swift; sourceTree = "<group>"; };
+		B01DA7472566014B00B1FA0B /* regdocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regdocViewController.swift; sourceTree = "<group>"; };
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -174,6 +178,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B01DA74425655E8500B1FA0B /* Doctor */ = {
+			isa = PBXGroup;
+			children = (
+				B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */,
+				B01DA7472566014B00B1FA0B /* regdocViewController.swift */,
+			);
+			path = Doctor;
+			sourceTree = "<group>";
+		};
 		B0571C932562503400B42719 /* DOc */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +232,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
 				B0571C932562503400B42719 /* DOc */,
 				B094D256255D61D3008400D6 /* Font */,
@@ -596,6 +610,7 @@
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
+				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
@@ -607,6 +622,7 @@
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
+				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,
 				B094D21C255BDE82008400D6 /* Petfolio.xcdatamodeld in Sources */,
@@ -714,7 +730,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -768,7 +784,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

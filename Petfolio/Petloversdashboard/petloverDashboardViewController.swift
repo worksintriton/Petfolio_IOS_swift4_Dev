@@ -116,7 +116,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.label_prodtitile.text = Servicefile.shared.petprod[indexPath.row].product_title
             cell.label_rateing.text =  Servicefile.shared.petprod[indexPath.row].product_rate
             cell.label_ratedno.text =  String(Servicefile.shared.petprod[indexPath.row].review_count)
-            cell.price.text = String(Servicefile.shared.petprod[indexPath.row].product_prices)
+            cell.price.text = String(Servicefile.shared.petprod[indexPath.row].product_prices) + " % off"
             if Servicefile.shared.petprod[indexPath.row].product_fav_status != false {
                 
                 cell.img_Fav.image = UIImage(named: "Like 3")
@@ -153,7 +153,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     func callpetdash(){
            self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard, method: .post, parameters:
-        [   "user_id" : "5fb3c10dfda8295ba10a72ff",
+        [   "user_id" : Servicefile.shared.userid,
         "lat" : 12.09090,
         "long" : 80.09093,
         "user_type" : 1 ,
@@ -242,6 +242,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                self.alert(Message: "No Intenet Please check and try again ")
            }
        }
+    
+    
+    @IBAction func actionl_ogout(_ sender: Any) {
+        UserDefaults.standard.set("", forKey: "userid")
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
 }

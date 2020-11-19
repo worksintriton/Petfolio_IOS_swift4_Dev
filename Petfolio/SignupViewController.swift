@@ -34,7 +34,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
          self.viewemail.layer.cornerRadius = 5.0
          self.Viewphone.layer.cornerRadius = 5.0
         self.Viewotp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-         self.ViewChangeUtype.layer.cornerRadius = 5.0
+         self.ViewChangeUtype.layer.cornerRadius = 15.0
         self.viewcoun.layer.cornerRadius = 5.0
         self.textfield_phno.delegate = self
         self.textfield_email.delegate = self
@@ -159,6 +159,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                                                         Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                         let userid = user_details["_id"] as! String
                                                         UserDefaults.standard.set(userid, forKey: "userid")
+                                                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                        print("user id",Servicefile.shared.userid)
                                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                                                                                                               self.present(vc, animated: true, completion: nil)
                                                          self.stopAnimatingActivityIndicator()
@@ -180,7 +182,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
     
     func moveTextField(textField: UITextField, up: Bool){
-        let movementDistance:CGFloat = -130
+        let movementDistance:CGFloat = -280
         let movementDuration: Double = 0.3
         var movement:CGFloat = 0
         if up {

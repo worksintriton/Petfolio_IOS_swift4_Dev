@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
+    
     @IBOutlet weak var View_log: UIView!
     @IBOutlet weak var usercred: UITextField!
     @IBOutlet weak var ViewOTPBTN: UIView!
@@ -83,6 +84,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                            let userid = user_details["_id"] as! String
                                                            UserDefaults.standard.set(userid, forKey: "userid")
+                                                            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                           print("user id",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)
                                                             self.stopAnimatingActivityIndicator()

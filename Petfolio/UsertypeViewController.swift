@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SDWebImage
 
-class UsertypeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class UsertypeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
     @IBOutlet weak var collec_usertype: UICollectionView!
@@ -93,7 +93,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collec_usertype.frame.size.width / 2 , height:  self.collec_usertype.frame.size.width / 2)
+        return CGSize(width: self.collec_usertype.frame.size.width / 2.2 , height:  self.collec_usertype.frame.size.width / 2)
     }
     
     func callusertype(){

@@ -16,6 +16,7 @@ class Servicefile {
     
     static let shared = Servicefile()
     // http://15.207.51.203:3000
+    // sprint 1
     static let baseurl = "http://52.25.163.13:3000"
     static let slider = baseurl+"api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
@@ -24,6 +25,7 @@ class Servicefile {
     static let login = baseurl + "/api/userdetails/mobile/login"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
+    // sprint 1
     
     var customview = UIView()
     var backview = UIView()
@@ -32,8 +34,8 @@ class Servicefile {
     var usertype = "Pet Lover"
     var user_type_value = 1
     // Design value
-    var viewcornorradius = 10.0
-    var viewLabelcornorraius = 5.0
+    var viewcornorradius = 15.0
+    var viewLabelcornorraius = 10.0
     // Desing Value
     
    // userdetails
@@ -44,6 +46,7 @@ class Servicefile {
     var date_of_reg = ""
     var user_type = ""
     var otp = ""
+    var userid = ""
     // userdetails
     var DemoData = [demodat]()
     var UtypeData = [Utype]()
@@ -56,6 +59,9 @@ class Servicefile {
     var petser = [Petdashservice]()
     var petprod = [Petdashproduct]()
     // pet dashboard
+    
+    var appgreen = "#009675"
+    
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

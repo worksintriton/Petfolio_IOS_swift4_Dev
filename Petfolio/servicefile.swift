@@ -25,6 +25,8 @@ class Servicefile {
     static let login = baseurl + "/api/userdetails/mobile/login"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
+    static let addlocation = baseurl + "/api/locationdetails/create"
+    static let imageupload = baseurl + "/upload"
     // sprint 1
     
     var customview = UIView()
@@ -37,7 +39,7 @@ class Servicefile {
     var viewcornorradius = 15.0
     var viewLabelcornorraius = 10.0
     // Desing Value
-    
+    var locaaccess = ""
    // userdetails
     var first_name = ""
     var last_name = ""
@@ -62,7 +64,12 @@ class Servicefile {
     
     var lati = 0.0
     var long = 0.0
-    
+    var selectedaddress = ""
+    var selectedCity = ""
+    var selectedPincode = ""
+    var selectedCountry = ""
+    var selectedstate = ""
+    var selectedState = ""
     var appgreen = "#009675"
     
     

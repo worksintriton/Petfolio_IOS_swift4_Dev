@@ -50,13 +50,19 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction func action_denypop(_ sender: Any) {
+        Servicefile.shared.locaaccess = "Deny"
         self.view_popup.isHidden = true
                self.view_shadow.isHidden = true
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_allowpop(_ sender: Any) {
+         Servicefile.shared.locaaccess = "Allow"
         self.view_popup.isHidden = true
                self.view_shadow.isHidden = true
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+              self.present(vc, animated: true, completion: nil)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

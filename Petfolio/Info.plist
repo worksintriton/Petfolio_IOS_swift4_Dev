@@ -52,6 +52,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>to add picture for verification</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Add your service for better service</string>
 	<key>NSLocationAlwaysUsageDescription</key>

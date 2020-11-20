@@ -57,6 +57,16 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.textfield_cityname.delegate = self
         self.textfield_location.delegate = self
         self.textfield_pickname.delegate = self
+        
+        self.textfield_pincode.isUserInteractionEnabled = false
+        self.textfield_cityname.isUserInteractionEnabled = false
+        self.textfield_location.isUserInteractionEnabled = false
+        
+        self.textfield_pincode.text = Servicefile.shared.selectedPincode
+        self.textfield_cityname.text = Servicefile.shared.selectedCity
+        self.textfield_location.text = Servicefile.shared.selectedaddress
+        self.label_locaTitle.text = Servicefile.shared.selectedCity
+        self.label_locadetail.text = Servicefile.shared.selectedaddress
        
         // Do any additional setup after loading the view.
     }
@@ -147,5 +157,62 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
                  self.moveTextField(textField: textField, up:false)
            }
           }
-
+    
+    
+    @IBAction func action_savelocation(_ sender: Any) {
+        if self.textfield_pickname.text == ""{
+            self.alert(Message: "Please add the nick name")
+        }else{
+             self.calladdlocation()
+        }
+    }
+    
+    
+    func calladdlocation(){
+        self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.addlocation, method: .post, parameters:
+     ["user_id": Servicefile.shared.userid,
+      "location_state" : Servicefile.shared.selectedState,
+        "location_country" : Servicefile.shared.selectedCountry,
+        "location_city" : Servicefile.shared.selectedCity,
+        "location_pin" : Servicefile.shared.selectedPincode,
+        "location_address" : Servicefile.shared.selectedaddress,
+        "location_lat" : Servicefile.shared.lati,
+        "location_long" : Servicefile.shared.long,
+        "location_title" : Servicefile.shared.selectedCity,
+        "location_nickname" : self.textfield_pickname.text!,
+        "default_status" : true,
+        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                            switch (response.result) {
+                                            case .success:
+                                                  let res = response.value as! NSDictionary
+                                                  print("success data",res)
+                                                  let Code  = res["Code"] as! Int
+                                                  if Code == 200 {
+                                                    let Data = res["Data"] as! NSDictionary
+                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                                                    self.present(vc, animated: true, completion: nil)
+                                                     self.stopAnimatingActivityIndicator()
+                                                  }else{
+                                                    self.stopAnimatingActivityIndicator()
+                                                    print("status code service denied")
+                                                  }
+                                                break
+                                            case .failure(let Error):
+                                                self.stopAnimatingActivityIndicator()
+                                                print("Can't Connect to Server / TimeOut",Error)
+                                                break
+                                            }
+                               }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    func alert(Message: String){
+        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+             }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

@@ -201,6 +201,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                        Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                        let userid = user_details["_id"] as! String
                                                        UserDefaults.standard.set(userid, forKey: "userid")
+                                                        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                       print("user id",Servicefile.shared.userid)
                                                         Servicefile.shared.petbanner.removeAll()
                                                         let LocationDetails = Data["LocationDetails"] as! NSArray
                                                         if LocationDetails.count == 0 {

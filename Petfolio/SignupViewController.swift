@@ -161,8 +161,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                                                         UserDefaults.standard.set(userid, forKey: "userid")
                                                          Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                         print("user id",Servicefile.shared.userid)
-                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
-                                                                                                              self.present(vc, animated: true, completion: nil)
+                                                       
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
+                                                            self.present(vc, animated: true, completion: nil)
+                                                       
+                                                       
                                                          self.stopAnimatingActivityIndicator()
                                                       }else{
                                                         self.stopAnimatingActivityIndicator()

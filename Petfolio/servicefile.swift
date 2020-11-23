@@ -18,7 +18,7 @@ class Servicefile {
     // http://15.207.51.203:3000
     // sprint 1
     static let baseurl = "http://52.25.163.13:3000"
-    static let slider = baseurl+"api/demoscreen/mobile/getlist"
+    static let slider = baseurl + "api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
@@ -27,6 +27,10 @@ class Servicefile {
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
     static let addlocation = baseurl + "/api/locationdetails/create"
     static let imageupload = baseurl + "/upload"
+    static let docbusscreate = baseurl + "/api/doctordetails/create"
+    static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
+    static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
+    static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
     // sprint 1
     
     var customview = UIView()
@@ -71,7 +75,14 @@ class Servicefile {
     var selectedstate = ""
     var selectedState = ""
     var appgreen = "#009675"
-    
+    var edudicarray = [Any]()
+    var expdicarray = [Any]()
+    var specdicarray = [Any]()
+    var pethandicarray = [Any]()
+     var photodicarray = [Any]()
+     var govdicarray = [Any]()
+     var certifdicarray = [Any]()
+    var clinicdicarray = [Any]()
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -192,7 +203,12 @@ class Servicefile {
         return nextDate
     }
     
-    
+    func uploadddmmhhmmastringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "ddMMHHmmss"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
     
     func ddmmhhmmastringformat(date: Date) -> String{
         let format = DateFormatter()
@@ -343,4 +359,14 @@ struct Petdashbanner{
         self.img_path = img_path
         self.title = title
     }
+    
+   
+}
+struct educat{
+   var education : String
+   var year : String
+   init(ieducation : String, iyear: String) {
+       self.education = ieducation
+       self.year = iyear
+   }
 }

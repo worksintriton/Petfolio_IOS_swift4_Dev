@@ -12,9 +12,18 @@
 		B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */; };
 		B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */; };
 		B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA7472566014B00B1FA0B /* regdocViewController.swift */; };
+		B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486491256BCB7A0038A71D /* docsidemenuViewController.swift */; };
+		B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486493256BD14B0038A71D /* menuTableViewCell.swift */; };
+		B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486495256BE0580038A71D /* availdaysTableViewCell.swift */; };
+		B0486498256BE07D0038A71D /* holidaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */; };
+		B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486499256BE1240038A71D /* mycalenderViewController.swift */; };
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
+		B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */; };
+		B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */; };
+		B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96B025694404003B05B7 /* eduTableViewCell.swift */; };
+		B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96B225694484003B05B7 /* experienceTableViewCell.swift */; };
 		B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */; };
 		B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */; };
 		B08F73122563BE4C00AEB8CC /* petloverDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */; };
@@ -85,9 +94,18 @@
 		B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savelocationViewController.swift; sourceTree = "<group>"; };
 		B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocdashboardViewController.swift; sourceTree = "<group>"; };
 		B01DA7472566014B00B1FA0B /* regdocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regdocViewController.swift; sourceTree = "<group>"; };
+		B0486491256BCB7A0038A71D /* docsidemenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docsidemenuViewController.swift; sourceTree = "<group>"; };
+		B0486493256BD14B0038A71D /* menuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuTableViewCell.swift; sourceTree = "<group>"; };
+		B0486495256BE0580038A71D /* availdaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availdaysTableViewCell.swift; sourceTree = "<group>"; };
+		B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = holidaysTableViewCell.swift; sourceTree = "<group>"; };
+		B0486499256BE1240038A71D /* mycalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycalenderViewController.swift; sourceTree = "<group>"; };
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoidCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkupCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08C96B025694404003B05B7 /* eduTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eduTableViewCell.swift; sourceTree = "<group>"; };
+		B08C96B225694484003B05B7 /* experienceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = experienceTableViewCell.swift; sourceTree = "<group>"; };
 		B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REGPetLoverViewController.swift; sourceTree = "<group>"; };
 		B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginotpViewController.swift; sourceTree = "<group>"; };
 		B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverDashboardViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +113,7 @@
 		B08F73162563E1F300AEB8CC /* petServCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petServCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprodCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petbannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		B09340D3256A5DC6006F7616 /* Petfolio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Petfolio.entitlements; sourceTree = "<group>"; };
 		B094D20E255BDE82008400D6 /* Petfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094D211255BDE82008400D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B094D213255BDE82008400D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +206,14 @@
 			children = (
 				B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */,
 				B01DA7472566014B00B1FA0B /* regdocViewController.swift */,
+				B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */,
+				B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */,
+				B08C96B025694404003B05B7 /* eduTableViewCell.swift */,
+				B08C96B225694484003B05B7 /* experienceTableViewCell.swift */,
+				B0486491256BCB7A0038A71D /* docsidemenuViewController.swift */,
+				B0486495256BE0580038A71D /* availdaysTableViewCell.swift */,
+				B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */,
+				B0486499256BE1240038A71D /* mycalenderViewController.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -236,6 +263,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
 				B0571C932562503400B42719 /* DOc */,
@@ -244,6 +272,7 @@
 				B094D213255BDE82008400D6 /* SceneDelegate.swift */,
 				B094D215255BDE82008400D6 /* ViewController.swift */,
 				B094D217255BDE82008400D6 /* Main.storyboard */,
+				B0486493256BD14B0038A71D /* menuTableViewCell.swift */,
 				B094D254255C259E008400D6 /* User_typeCollectionViewCell.swift */,
 				B094D24A255C052E008400D6 /* DemoCollectionViewCell.swift */,
 				B094D21D255BDE88008400D6 /* Assets.xcassets */,
@@ -611,22 +640,31 @@
 				B08F73192563E1FF00AEB8CC /* petprodCollectionViewCell.swift in Sources */,
 				B08F73122563BE4C00AEB8CC /* petloverDashboardViewController.swift in Sources */,
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
+				B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */,
 				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
 				B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
+				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
+				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
+				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */,
+				B0486498256BE07D0038A71D /* holidaysTableViewCell.swift in Sources */,
 				B08F73172563E1F300AEB8CC /* petServCollectionViewCell.swift in Sources */,
 				B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
+				B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
+				B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */,
+				B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
@@ -807,6 +845,7 @@
 			baseConfigurationReference = AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
 				INFOPLIST_FILE = Petfolio/Info.plist;
@@ -826,6 +865,7 @@
 			baseConfigurationReference = 98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
 				INFOPLIST_FILE = Petfolio/Info.plist;

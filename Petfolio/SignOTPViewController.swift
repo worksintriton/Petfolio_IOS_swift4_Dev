@@ -76,8 +76,13 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
-                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
-                            self.present(vc, animated: true, completion: nil)
+                    if Servicefile.shared.usertype == "1"{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
+                        self.present(vc, animated: true, completion: nil)
+                    }else if Servicefile.shared.usertype == "4"{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                        self.present(vc, animated: true, completion: nil)
+                    }
                    }else{
                      print("verification Not success")
         }

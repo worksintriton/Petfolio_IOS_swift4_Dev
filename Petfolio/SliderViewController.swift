@@ -45,17 +45,28 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: self.dogshowcoll.frame.size.width , height:  self.dogshowcoll.frame.size.height)
+           return CGSize(width: self.view.frame.size.width , height:  self.view.frame.size.height)
        }
        
     
     @IBAction func skipaction(_ sender: Any) {
-        if  UserDefaults.standard.string(forKey: "userid") != nil {
-              if  UserDefaults.standard.string(forKey: "userid") != "" {
+        if  UserDefaults.standard.string(forKey: "usertype") != nil {
+              if  UserDefaults.standard.string(forKey: "usertype") != "" {
+                
+                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                print("userid",Servicefile.shared.userid)
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                self.present(vc, animated: true, completion: nil)
+                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                if Servicefile.shared.user_type == "1" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                    self.present(vc, animated: true, completion: nil)
+                }else if Servicefile.shared.user_type == "4" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                    self.present(vc, animated: true, completion: nil)
+                }
+                
             }else{
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 self.present(vc, animated: true, completion: nil)

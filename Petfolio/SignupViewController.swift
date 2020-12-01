@@ -28,7 +28,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.usertypetitle.text = Servicefile.shared.usertype
+        self.usertypetitle.text = Servicefile.shared.usertypetitle
         self.ViewFname.layer.cornerRadius = 5.0
          self.ViewLname.layer.cornerRadius = 5.0
          self.viewemail.layer.cornerRadius = 5.0
@@ -93,7 +93,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
        }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.usertypetitle.text = Servicefile.shared.usertype
+        self.usertypetitle.text = Servicefile.shared.usertypetitle
+        
+        print("user type and usertype value",Servicefile.shared.usertypetitle, Servicefile.shared.user_type_value)
     }
     
    
@@ -141,7 +143,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             "user_email": self.textfield_email.text!,
             "user_phone": self.textfield_phno.text!,
             "user_type" : Servicefile.shared.user_type_value,
-            "date_of_reg": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            "date_of_reg": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+            "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                 switch (response.result) {
                                                 case .success:
                                                       let res = response.value as! NSDictionary
@@ -161,7 +164,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                                                         UserDefaults.standard.set(userid, forKey: "userid")
                                                          Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                         print("user id",Servicefile.shared.userid)
-                                                       
+                                                        UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                                                        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                                                        
+                                                      
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                                                             self.present(vc, animated: true, completion: nil)
                                                        

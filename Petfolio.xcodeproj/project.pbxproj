@@ -10,8 +10,10 @@
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
 		B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79925666FE20004DB4D /* locationsettingViewController.swift */; };
 		B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */; };
+		B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */; };
 		B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */; };
 		B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA7472566014B00B1FA0B /* regdocViewController.swift */; };
+		B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E7A542576252300B2B0C2 /* docdashTableViewCell.swift */; };
 		B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486491256BCB7A0038A71D /* docsidemenuViewController.swift */; };
 		B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486493256BD14B0038A71D /* menuTableViewCell.swift */; };
 		B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486495256BE0580038A71D /* availdaysTableViewCell.swift */; };
@@ -20,6 +22,12 @@
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
+		B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */; };
+		B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */; };
+		B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0751611256D2682002DAA20 /* petlov_DocselectViewController.swift */; };
+		B0751614256D325D002DAA20 /* Doc_addholidayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0751613256D325D002DAA20 /* Doc_addholidayViewController.swift */; };
+		B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0751615256E4952002DAA20 /* petdoccalenderViewController.swift */; };
+		B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07516172570CA7C002DAA20 /* petloverAppointmentAddViewController.swift */; };
 		B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */; };
 		B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */; };
 		B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96B025694404003B05B7 /* eduTableViewCell.swift */; };
@@ -92,8 +100,10 @@
 		AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.debug.xcconfig"; sourceTree = "<group>"; };
 		B00AB79925666FE20004DB4D /* locationsettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsettingViewController.swift; sourceTree = "<group>"; };
 		B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savelocationViewController.swift; sourceTree = "<group>"; };
+		B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_selectdoctordateCollectionViewCell.swift; sourceTree = "<group>"; };
 		B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocdashboardViewController.swift; sourceTree = "<group>"; };
 		B01DA7472566014B00B1FA0B /* regdocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regdocViewController.swift; sourceTree = "<group>"; };
+		B02E7A542576252300B2B0C2 /* docdashTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docdashTableViewCell.swift; sourceTree = "<group>"; };
 		B0486491256BCB7A0038A71D /* docsidemenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docsidemenuViewController.swift; sourceTree = "<group>"; };
 		B0486493256BD14B0038A71D /* menuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuTableViewCell.swift; sourceTree = "<group>"; };
 		B0486495256BE0580038A71D /* availdaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availdaysTableViewCell.swift; sourceTree = "<group>"; };
@@ -102,6 +112,12 @@
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mycal_edit_availdayTableViewCell.swift; sourceTree = "<group>"; };
+		B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycal_hoursViewController.swift; sourceTree = "<group>"; };
+		B0751611256D2682002DAA20 /* petlov_DocselectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petlov_DocselectViewController.swift; sourceTree = "<group>"; };
+		B0751613256D325D002DAA20 /* Doc_addholidayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_addholidayViewController.swift; sourceTree = "<group>"; };
+		B0751615256E4952002DAA20 /* petdoccalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petdoccalenderViewController.swift; sourceTree = "<group>"; };
+		B07516172570CA7C002DAA20 /* petloverAppointmentAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverAppointmentAddViewController.swift; sourceTree = "<group>"; };
 		B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoidCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkupCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08C96B025694404003B05B7 /* eduTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eduTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +230,10 @@
 				B0486495256BE0580038A71D /* availdaysTableViewCell.swift */,
 				B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */,
 				B0486499256BE1240038A71D /* mycalenderViewController.swift */,
+				B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */,
+				B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */,
+				B0751613256D325D002DAA20 /* Doc_addholidayViewController.swift */,
+				B02E7A542576252300B2B0C2 /* docdashTableViewCell.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -234,6 +254,10 @@
 				B08F73162563E1F300AEB8CC /* petServCollectionViewCell.swift */,
 				B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */,
 				B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */,
+				B0751611256D2682002DAA20 /* petlov_DocselectViewController.swift */,
+				B0751615256E4952002DAA20 /* petdoccalenderViewController.swift */,
+				B07516172570CA7C002DAA20 /* petloverAppointmentAddViewController.swift */,
+				B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -637,6 +661,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0751614256D325D002DAA20 /* Doc_addholidayViewController.swift in Sources */,
 				B08F73192563E1FF00AEB8CC /* petprodCollectionViewCell.swift in Sources */,
 				B08F73122563BE4C00AEB8CC /* petloverDashboardViewController.swift in Sources */,
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
@@ -648,12 +673,16 @@
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
+				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
+				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
+				B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */,
 				B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */,
 				B0486498256BE07D0038A71D /* holidaysTableViewCell.swift in Sources */,
 				B08F73172563E1F300AEB8CC /* petServCollectionViewCell.swift in Sources */,
@@ -662,10 +691,13 @@
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
 				B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
+				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */,
 				B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
+				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
+				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,

@@ -167,6 +167,20 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if self.colleView_banner == collectionView {
+             print("data in")
+               }else if self.colleView_Doctor == collectionView {
+            Servicefile.shared.selectedindex = indexPath.row
+                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlov_DocselectViewController") as! petlov_DocselectViewController
+                                self.present(vc, animated: true, completion: nil)
+               }else if self.colleView_Service == collectionView {
+                     print("data in")
+               }else {
+                  print("data in")
+               }
+    }
+    
     func alert(Message: String){
          let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -256,6 +270,30 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                              let service_title =  Bval["service_title"] as! String
                                                             Servicefile.shared.petser.append(Petdashservice.init(UID: id, background_color: background_color, service_icon: service_icon, service_title: service_title))
                                                         }
+                                                        
+                                                        Servicefile.shared.pet_petlist.removeAll()
+                                                        
+                                                        let pet_details = Data["PetDetails"] as! NSArray
+                                                        for item in 0..<pet_details.count {
+                                                            let Bval = pet_details[item] as! NSDictionary
+                                                            let id = Bval["_id"] as! String
+                                                            let default_status = Bval["default_status"] as! Bool
+                                                            let last_vaccination_date = Bval["last_vaccination_date"] as! String
+                                                            let pet_age = Bval["pet_age"] as! Int
+                                                            let pet_breed = Bval["pet_breed"] as! String
+                                                            let pet_color = Bval["pet_color"] as! String
+                                                            let pet_gender = Bval["pet_gender"] as! String
+                                                            let pet_img = Bval["pet_img"] as! String
+                                                            let pet_name = Bval["pet_name"] as! String
+                                                            let pet_type = Bval["pet_type"] as! String
+                                                            let pet_weight = Bval["pet_weight"] as! Int
+                                                            let user_id = Bval["user_id"] as! String
+                                                            let vaccinated = Bval["vaccinated"] as! Bool
+                                                            Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id))
+                                                        }
+                                                        
+                                                       
+                                                        
                                                         self.colleView_banner.reloadData()
                                                         self.colleView_Doctor.reloadData()
                                                         self.colleView_product.reloadData()
@@ -281,6 +319,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     @IBAction func actionl_ogout(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "userid")
+        UserDefaults.standard.set("", forKey: "usertype")
+        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.present(vc, animated: true, completion: nil)

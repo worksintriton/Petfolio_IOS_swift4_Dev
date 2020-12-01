@@ -85,6 +85,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                            let userid = user_details["_id"] as! String
                                                            UserDefaults.standard.set(userid, forKey: "userid")
                                                             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                            UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                                                             Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
                                                            print("user id",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)
@@ -132,15 +134,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
        func textFieldDidEndEditing(_ textField: UITextField) {
         self.moveTextField(textField: textField, up:false)
        }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
 
 }

@@ -108,6 +108,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         Servicefile.shared.govdicarray.removeAll()
         Servicefile.shared.photodicarray.removeAll()
         
+        self.view_submit.layer.cornerRadius = 15.0
+       
+        
         self.clinicdetails.removeAllObjects()
         self.edudetails.removeAllObjects()
         self.expdetails.removeAllObjects()
@@ -159,6 +162,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         //self.setclinicimag()
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         self.locationManager.requestAlwaysAuthorization()
                          self.locationManager.requestWhenInUseAuthorization()
@@ -199,14 +204,14 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
 
     public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
+        documentPicker.present(documentPicker, animated: true, completion: nil)
     }
 
 
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("view was cancelled")
-        dismiss(animated: true, completion: nil)
-    }
+//    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+//        print("view was cancelled")
+//        dismiss(animated: true, completion: nil)
+//    }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
            let senderdate = sender.date
@@ -244,6 +249,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                   }else{
                       self.textview_clinicaddress.text = textView.text
                   }
+        if(text == "\n") {
+                          textview_clinicaddress.resignFirstResponder()
+                          return false
+                      }
            return true
        }
 
@@ -270,6 +279,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_submit.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
     }
     
+    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+        self.textview_clinicaddress.resignFirstResponder()
+        return true
+    }
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resigntext()
         return true
@@ -292,9 +307,16 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else if self.textfield_edu_YOC.text == "" {
             self.alert(Message: "Please enter Year of completion")
         }else {
-            self.edudetails["education"] = self.textfield_education.text!
-             self.edudetails["year"] = self.textfield_edu_YOC.text!
-            Servicefile.shared.edudicarray.append(self.edudetails)
+            
+            var B = Servicefile.shared.edudicarray
+                                   var arr = B
+            let a = ["education":self.textfield_education.text!,
+                     "year":self.textfield_edu_YOC.text!] as NSDictionary
+                                   arr.append(a)
+                                   B = arr
+                                   print(B)
+                                   Servicefile.shared.edudicarray = B
+           
             self.tbl_educationlist.isHidden = false
             self.tbl_educationlist.reloadData()
             self.textfield_education.text = ""
@@ -357,10 +379,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                }else if self.label_exp_to.text == "To" {
                    self.alert(Message: "Please Select To date")
                }else {
-            self.expdetails["company"] = self.textfield_exp_company.text!
-            self.expdetails["from"] = self.label_exp_from.text!
-            self.expdetails["to"] = self.label_exp_to.text!
-             Servicefile.shared.expdicarray.append(self.expdetails)
+            var B = Servicefile.shared.expdicarray
+            var arr = B
+            let a = ["company":self.textfield_exp_company.text!,
+                     "from":self.label_exp_from.text!,
+                     "to":self.label_exp_to.text!] as NSDictionary
+            arr.append(a)
+            B = arr
+            print(B)
+            Servicefile.shared.expdicarray = B
              self.tbl_experience.isHidden = false
              self.tbl_experience.reloadData()
             self.textfield_exp_company.text = ""
@@ -381,6 +408,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.seldate = "F"
         self.view_expire.isHidden = false
         self.resigntext()
+        let format = DateFormatter()
+                   format.dateFormat = "yyyy"
+                   let fromdat = format.date(from: "1950")
+                    print("fromdate",fromdat)
+        self.datepicker_expdate.minimumDate = fromdat
     
     }
     
@@ -405,7 +437,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if Servicefile.shared.clinicdicarray.count < 3 {
             self.callgalaryprocess()
         }else{
-            self.alert(Message: "You can upload only 3 times")
+            self.alert(Message: "You can upload only 3 Photo")
         }
         
     }
@@ -415,7 +447,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if Servicefile.shared.certifdicarray.count < 3 {
             self.callDocprocess()
         }else{
-            self.alert(Message: "You can upload only 3 times")
+            self.alert(Message: "You can upload only 3 File")
         }
         
     }
@@ -425,7 +457,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if Servicefile.shared.certifdicarray.count < 3 {
              self.callDocprocess()
         }else{
-            self.alert(Message: "You can upload only 3 times")
+            self.alert(Message: "You can upload only 3 File")
         }
         
     }
@@ -436,7 +468,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
          if Servicefile.shared.photodicarray.count < 3 {
              self.callDocprocess()
         }else{
-            self.alert(Message: "You can upload 3 times")
+            self.alert(Message: "You can upload 3 File")
         }
        
     }
@@ -484,7 +516,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
              self.callDocreg()
         }
-       print("spec details",self.specialza, Servicefile.shared.specdicarray)
+      
+       print("spec details", Servicefile.shared.specdicarray)
         print("pet details",self.pethandle, Servicefile.shared.pethandicarray)
     }
     
@@ -929,23 +962,23 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    self.startAnimatingActivityIndicator()
                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docbusscreate, method: .post, parameters:
                 ["user_id" : Servicefile.shared.userid,
-                   "dr_title" : "",
-                   "dr_name" : "",
+                   "dr_title" : "Dr",
+                   "dr_name" : Servicefile.shared.first_name,
                    "clinic_name" : self.textfield_clinicname.text!,
                    "clinic_loc" : self.textview_clinicaddress.text!,
                    "clinic_lat" : self.latitude,
                    "clinic_long" : self.longitude,
                    "education_details" : Servicefile.shared.edudicarray,
                    "experience_details" : Servicefile.shared.expdicarray,
-                   "specialization" : self.specialza,
-                   "pet_handled" : self.pethandle.count,
+                   "specialization" : Servicefile.shared.specdicarray,
+                   "pet_handled" : Servicefile.shared.pethandicarray,
                    "clinic_pic" : Servicefile.shared.clinicdicarray,
                    "certificate_pic" :  Servicefile.shared.certifdicarray,
                    "govt_id_pic" : Servicefile.shared.govdicarray,
                    "photo_id_pic" : Servicefile.shared.photodicarray,
                    "profile_status" : 0 ,
                    "profile_verification_status" : "Not verified",
-                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
                                                        case .success:
                                                              let res = response.value as! NSDictionary
@@ -953,11 +986,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                                              let Code  = res["Code"] as! Int
                                                              if Code == 200 {
                                                                let Data = res["Data"] as! NSDictionary
-                                                                let userid = Data["_id"] as! String
-                                                                UserDefaults.standard.set(userid, forKey: "userid")
-                                                                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                                                               let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
-                                                               self.present(vc, animated: true, completion: nil)
+                                                                
+                                                                self.callupdatestatus()
                                                                 self.stopAnimatingActivityIndicator()
                                                              }else{
                                                                self.stopAnimatingActivityIndicator()
@@ -975,5 +1005,40 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                        self.alert(Message: "No Intenet Please check and try again ")
                    }
                }
+    
+    func callupdatestatus(){
+        self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updatestatus, method: .post, parameters:
+     ["user_id" : Servicefile.shared.userid,
+       "user_status": "complete"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                            switch (response.result) {
+                                            case .success:
+                                                  let res = response.value as! NSDictionary
+                                                  print("success data",res)
+                                                  let Code  = res["Code"] as! Int
+                                                  if Code == 200 {
+//                                                    let Data = res["Data"] as! NSDictionary
+//                                                     let userid = Data["_id"] as! String
+//                                                     UserDefaults.standard.set(userid, forKey: "userid")
+//                                                      Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                    self.present(vc, animated: true, completion: nil)
+                                                     self.stopAnimatingActivityIndicator()
+                                                  }else{
+                                                    self.stopAnimatingActivityIndicator()
+                                                    print("status code service denied")
+                                                  }
+                                                break
+                                            case .failure(let Error):
+                                                self.stopAnimatingActivityIndicator()
+                                                print("Can't Connect to Server / TimeOut",Error)
+                                                break
+                                            }
+                               }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
    }
  

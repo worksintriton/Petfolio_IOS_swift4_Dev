@@ -55,6 +55,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! User_typeCollectionViewCell
+        
         cell.Img_Select.isHidden = false
         cell.Img_UT.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.UtypeData[indexPath.row].user_type_img)) { (image, error, cache, urls) in
                    if (error != nil) {
@@ -64,11 +65,15 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
                        cell.Img_UT.image = image
                    }
                }
-               
+        cell.Img_UT.layer.cornerRadius = 10.0
         cell.Lab_UT.text = Servicefile.shared.UtypeData[indexPath.row].user_type_title
         if self.locusel[indexPath.row] == "1"{
              cell.Img_Select.isHidden = false
+            cell.Img_UT.layer.borderWidth = 2.0
+            let borcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.Img_UT.layer.borderColor = borcolor.cgColor
         }else{
+             cell.Img_UT.layer.borderWidth = 0.0
             cell.Img_Select.isHidden = true
         }
         return cell
@@ -85,7 +90,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     @IBAction func action_changeUT(_ sender: Any) {
         Servicefile.shared.utypesel = self.locusel
-        Servicefile.shared.usertype = Servicefile.shared.UtypeData[self.selval].user_type_title
+        Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
         Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
         self.dismiss(animated: true, completion: nil)
     }

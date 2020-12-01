@@ -12,6 +12,8 @@ class holidaysTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var lab_title: UILabel!
+    @IBOutlet weak var btn_delete: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -13,6 +13,7 @@ target 'Petfolio' do
   pod 'AAMaterialSpinner', '0.1.2'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'FSCalendar'
 	
   # Pods for Petfolio
 	

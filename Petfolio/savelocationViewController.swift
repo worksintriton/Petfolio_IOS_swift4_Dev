@@ -160,11 +160,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     
     
     @IBAction func action_savelocation(_ sender: Any) {
-        if self.textfield_pickname.text == ""{
-            self.alert(Message: "Please add the nick name")
-        }else{
              self.calladdlocation()
-        }
     }
     
     
@@ -182,7 +178,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         "location_title" : Servicefile.shared.selectedCity,
         "location_nickname" : self.textfield_pickname.text!,
         "default_status" : true,
-        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary

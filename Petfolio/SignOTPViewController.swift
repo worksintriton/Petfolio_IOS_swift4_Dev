@@ -73,16 +73,11 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
+        print("user type",Servicefile.shared.user_type)
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
-                    if Servicefile.shared.usertype == "1"{
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
-                        self.present(vc, animated: true, completion: nil)
-                    }else if Servicefile.shared.usertype == "4"{
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
-                        self.present(vc, animated: true, completion: nil)
-                    }
+                    self.callFCM()
                    }else{
                      print("verification Not success")
         }
@@ -90,6 +85,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func action_ResendOTP(_ sender: Any) {
         self.counter = 120
+        self.textfield_otp.text = ""
         self.callotpresend()
     }
     
@@ -137,8 +133,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                             Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                           let userid = user_details["_id"] as! String
-                                                           UserDefaults.standard.set(userid, forKey: "userid")
+                                                           
                                                            
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
@@ -157,6 +152,43 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                    self.alert(Message: "No Intenet Please check and try again ")
                }
            }
+    
+    func callFCM(){
+           self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.tokenupdate, method: .post, parameters:
+        [ "user_id": Servicefile.shared.userid,
+          "fb_token" : Servicefile.shared.FCMtoken
+        ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                               switch (response.result) {
+                                               case .success:
+                                                     let res = response.value as! NSDictionary
+                                                     print("success data",res)
+                                                     let Code  = res["Code"] as! Int
+                                                     if Code == 200 {
+                                                      if Servicefile.shared.user_type == "1"{
+                                                          let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
+                                                          self.present(vc, animated: true, completion: nil)
+                                                      }else if Servicefile.shared.user_type == "4"{
+                                                          let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                                                          self.present(vc, animated: true, completion: nil)
+                                                      }
+                                                        self.stopAnimatingActivityIndicator()
+                                                     }else{
+                                                       self.stopAnimatingActivityIndicator()
+                                                       print("status code service denied")
+                                                     }
+                                                   break
+                                               case .failure(let Error):
+                                                   self.stopAnimatingActivityIndicator()
+                                                   print("Can't Connect to Server / TimeOut",Error)
+                                                   break
+                                               }
+                                  }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
 
     func alert(Message: String){
            let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)

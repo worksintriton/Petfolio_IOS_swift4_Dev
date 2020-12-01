@@ -18,27 +18,45 @@ class Servicefile {
     // http://15.207.51.203:3000
     // sprint 1
     static let baseurl = "http://52.25.163.13:3000"
+    static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
     static let slider = baseurl + "api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
+    static let petregister = baseurl + "/api/petdetails/mobile/create"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let login = baseurl + "/api/userdetails/mobile/login"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
+    static let petdetailget = baseurl + "/api/pettype/mobile/getlist"
     static let addlocation = baseurl + "/api/locationdetails/create"
     static let imageupload = baseurl + "/upload"
     static let docbusscreate = baseurl + "/api/doctordetails/create"
     static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
+    static let mycalender = baseurl + "/api/new_doctortime/fetch_dates"
+    static let mycalender_hour = baseurl + "/api/new_doctortime/get_time_Details"
+    static let Docupdatemycalender_hour = baseurl + "/api/new_doctortime/update_doc_date"
+    static let Doc_getholdiaylist = baseurl + "/api/holiday/getlist_id"
+    static let Doc_deleteholiday = baseurl + "/api/holiday/delete"
+    static let Doc_createholiday = baseurl + "/api/holiday/create"
+    static let updatestatus =  baseurl + "/api/userdetails/mobile/edit"
+    static let doc_fetchdocdetails  =  baseurl + "/api/doctordetails/fetch_doctor_id"
+    static let petbreedid =  baseurl + "/api/breedtype/mobile/getlist_id"
+    static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new"
+    static let pet_dov_check_time = baseurl + "/api/appointments/check"
+    static let pet_doc_createappointm = baseurl + "/api/appointments/mobile/create"
     // sprint 1
-    
+    var Doc_mycalender_selecteddates = [""]
+    var Doc_mycalender_selectedhours = [""]
     var customview = UIView()
     var backview = UIView()
     var loadlabel = UILabel()
-    
+    var sampleimag = "http://mysalveo.com/api/uploads/images.jpeg"
+    var FCMtoken = ""
     var usertype = "Pet Lover"
     var user_type_value = 1
+    var usertypetitle = "Pet Lover"
     // Design value
     var viewcornorradius = 15.0
     var viewLabelcornorraius = 10.0
@@ -53,6 +71,7 @@ class Servicefile {
     var user_type = ""
     var otp = ""
     var userid = ""
+    var selectedindex = 0
     // userdetails
     var DemoData = [demodat]()
     var UtypeData = [Utype]()
@@ -64,7 +83,35 @@ class Servicefile {
     var petdoc = [Petdashdoc]()
     var petser = [Petdashservice]()
     var petprod = [Petdashproduct]()
+    var pet_petlist = [petlist]()
     // pet dashboard
+    
+    // pet appointment params
+    
+            var pet_apoint_doctor_id = ""
+            var pet_apoint_booking_date = ""
+            var pet_apoint_booking_time = ""
+            var pet_apoint_booking_date_time = ""
+            var pet_apoint_communication_type = ""
+            var pet_apoint_video_id = ""
+            var pet_apoint_user_id = ""
+            var pet_apoint_pet_id = ""
+            var pet_apoint_problem_info = ""
+            var pet_apoint_doc_attched = [Any]()
+            var Pet_Appointment_petimg = [Any]()
+            var pet_apoint_doc_feedback = ""
+            var pet_apoint_doc_rate = ""
+            var pet_apoint_user_feedback = ""
+            var pet_apoint_user_rate = ""
+            var pet_apoint_display_date = ""
+            var pet_apoint_server_date_time = ""
+            var pet_apoint_payment_id = ""
+            var pet_apoint_payment_method = ""
+            var pet_apoint_appointment_types = ""
+            var pet_apoint_allergies = ""
+            var pet_apoint_amount = ""
+    
+    // pet appointment params
     
     var lati = 0.0
     var long = 0.0
@@ -75,6 +122,7 @@ class Servicefile {
     var selectedstate = ""
     var selectedState = ""
     var appgreen = "#009675"
+    var applightgreen = "#F4FAF9"
     var edudicarray = [Any]()
     var expdicarray = [Any]()
     var specdicarray = [Any]()
@@ -83,6 +131,11 @@ class Servicefile {
      var govdicarray = [Any]()
      var certifdicarray = [Any]()
     var clinicdicarray = [Any]()
+     var docMycalHourdicarray = [Any]()
+   
+    // Doctor
+    var Doc_dashlist = [doc_Dash_petdetails]()
+    // Doctor
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -160,6 +213,13 @@ class Servicefile {
         return nextDate
     }
     
+    func ddmmyyyystringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
     func DDMMMDateformat(date: String) -> Date{
         let format = DateFormatter()
         format.dateFormat = "dd MMM"
@@ -199,6 +259,13 @@ class Servicefile {
     func ddMMyyyystringformat(date: Date) -> String{
         let format = DateFormatter()
         format.dateFormat = "dd-MM-yyyy"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
+    func ddMMyyyyhhmmastringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "dd/MM/yyyy hh:mm a"
         let nextDate = format.string(from: date)
         return nextDate
     }
@@ -370,3 +437,67 @@ struct educat{
        self.year = iyear
    }
 }
+
+struct petlist{
+   var default_status : Bool
+   var last_vaccination_date : String
+    var pet_age : Int
+    var pet_breed : String
+    var pet_color : String
+    var pet_gender : String
+    var pet_img : String
+    var pet_name : String
+    var pet_type : String
+    var pet_weight : Int
+    var user_id : String
+    var vaccinated : Bool
+    var id : String
+   init(in_default_status : Bool, in_last_vaccination_date : String, in_pet_age : Int,
+    in_pet_breed : String, in_pet_color : String, in_pet_gender : String, in_pet_img : String,
+    in_pet_name : String, in_pet_type : String, in_pet_weight : Int, in_user_id : String, in_vaccinated : Bool, in_id : String) {
+    self.default_status = in_default_status
+    self.last_vaccination_date = in_last_vaccination_date
+    self.pet_age = in_pet_age
+    self.pet_breed = in_pet_breed
+    self.pet_color = in_pet_color
+    self.pet_gender = in_pet_gender
+    self.pet_img = in_pet_img
+    self.pet_name = in_pet_name
+    self.pet_type = in_pet_type
+    self.pet_weight = in_pet_weight
+    self.user_id = in_user_id
+    self.vaccinated = in_vaccinated
+    self.id = in_id
+   }
+}
+
+struct doc_Dash_petdetails{
+    var Appid : String
+    var allergies : String
+    var amount : String
+    var appoinment_status : String
+    var doc_attched : String
+    var pet_id : String
+    var pet_breed : String
+    var pet_img : String
+    var pet_name : String
+    var user_id : String
+    var pet_type : String
+   init(in_Appid : String, In_allergies : String, In_amount : String, In_appoinment_status : String,
+   In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
+   In_pet_name : String, In_user_id : String, In_pet_type: String) {
+    self.Appid = in_Appid
+    self.allergies = In_allergies
+    self.amount = In_amount
+    self.appoinment_status = In_appoinment_status
+    self.doc_attched = In_doc_attched
+    self.pet_id = In_pet_id
+    self.pet_breed = In_pet_breed
+    self.pet_img = In_pet_img
+    self.pet_name = In_pet_name
+    self.user_id = In_user_id
+    self.pet_type = In_pet_type
+   }
+}
+
+  

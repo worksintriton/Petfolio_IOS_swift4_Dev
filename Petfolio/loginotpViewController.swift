@@ -76,8 +76,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
-                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                            self.present(vc, animated: true, completion: nil)
+                    self.callFCM()
+                    
                    }else{
                      print("verification Not success")
         }
@@ -85,6 +85,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     
     @IBAction func action_ResendOTP(_ sender: Any) {
         self.counter = 120
+        self.textfield_otp.text = ""
         self.callotpresend()
     }
     
@@ -152,6 +153,43 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                    self.alert(Message: "No Intenet Please check and try again ")
                }
            }
+    
+    func callFCM(){
+           self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.tokenupdate, method: .post, parameters:
+        [ "user_id": Servicefile.shared.userid,
+          "fb_token" : Servicefile.shared.FCMtoken
+        ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                               switch (response.result) {
+                                               case .success:
+                                                     let res = response.value as! NSDictionary
+                                                     print("success data",res)
+                                                     let Code  = res["Code"] as! Int
+                                                     if Code == 200 {
+                                                       if Servicefile.shared.usertype == "1" {
+                                                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                                                                                      self.present(vc, animated: true, completion: nil)
+                                                       }else{
+                                                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                                                      self.present(vc, animated: true, completion: nil)
+                                                       }
+                                                        self.stopAnimatingActivityIndicator()
+                                                     }else{
+                                                       self.stopAnimatingActivityIndicator()
+                                                       print("status code service denied")
+                                                     }
+                                                   break
+                                               case .failure(let Error):
+                                                   self.stopAnimatingActivityIndicator()
+                                                   print("Can't Connect to Server / TimeOut",Error)
+                                                   break
+                                               }
+                                  }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
 
     func alert(Message: String){
            let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)

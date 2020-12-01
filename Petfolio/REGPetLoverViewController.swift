@@ -51,7 +51,10 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     
     var Pet_breed = [""]
     var pet_type = [""]
+    var petid = [""]
+    
     var petgender = [""]
+    
     var isvaccin = true
     
     override func viewDidLoad() {
@@ -72,6 +75,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         self.view_submit.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         // Do any additional setup after loading the view.
         self.callpetdetails()
+        self.callpetdetailget()
         
         self.textfield_petname.delegate = self
         self.textfield_petgender.delegate = self
@@ -89,7 +93,6 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
          self.tblview_gender.isHidden = true
-        
         
         
         self.view_calender.isHidden = true
@@ -194,6 +197,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
             self.textfield_petbreed.text! = self.Pet_breed[indexPath.row]
         }else if self.tblview_pettype ==  tableView {
              self.textfield_pettype.text! = self.pet_type[indexPath.row]
+            self.callpetbreedbyid(petid: self.petid[indexPath.row])
         }else{
             self.textfield_petgender.text = self.petgender[indexPath.row]
         }
@@ -319,29 +323,29 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                 let Code  = resp["Code"] as! Int
                 if Code == 200 {
                     let Data = resp["Data"] as! NSDictionary
-                    let Pet_breed = Data["Pet_breed"] as! NSArray
-                    let Pet_type = Data["Pet_type"] as! NSArray
+//                    let Pet_breed = Data["Pet_breed"] as! NSArray
+//                    let Pet_type = Data["Pet_type"] as! NSArray
                     let Gender = Data["Gender"] as! NSArray
-                    self.pet_type.removeAll()
-                    self.Pet_breed.removeAll()
+//                    self.pet_type.removeAll()
+//                    self.Pet_breed.removeAll()
                     self.petgender.removeAll()
-                    for item in 0..<Pet_breed.count{
-                        let pb = Pet_breed[item] as! NSDictionary
-                        let pbv = pb["pet_breed"] as! String
-                        self.Pet_breed.append(pbv)
-                    }
-                    for item in 0..<Pet_type.count{
-                        let pb = Pet_type[item] as! NSDictionary
-                        let pbv = pb["pet_type"] as! String
-                        self.pet_type.append(pbv)
-                    }
+//                    for item in 0..<Pet_breed.count{
+//                        let pb = Pet_breed[item] as! NSDictionary
+//                        let pbv = pb["pet_breed"] as! String
+//                        self.Pet_breed.append(pbv)
+//                    }
+//                    for item in 0..<Pet_type.count{
+//                        let pb = Pet_type[item] as! NSDictionary
+//                        let pbv = pb["pet_type"] as! String
+//                        self.pet_type.append(pbv)
+//                    }
                     for item in 0..<Gender.count{
                         let pb = Gender[item] as! NSDictionary
                         let pbv = pb["gender"] as! String
                         self.petgender.append(pbv)
                     }
-                    self.tblview_pettype.reloadData()
-                    self.tblview_petbreed.reloadData()
+//                    self.tblview_pettype.reloadData()
+//                    self.tblview_petbreed.reloadData()
                     self.tblview_gender.reloadData()
                      self.stopAnimatingActivityIndicator()
                   
@@ -375,7 +379,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         "default_status" , true,
         "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
         self.startAnimatingActivityIndicator()
-    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.signup, method: .post, parameters:
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
         ["user_id": Servicefile.shared.userid,
         "pet_img" :"",
         "pet_name" : self.textfield_petname.text!,
@@ -388,7 +392,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         "vaccinated" : self.isvaccin,
         "last_vaccination_date" : self.textfield_selectdate.text!,
         "default_status" : true,
-        "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary
@@ -396,8 +400,128 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
                                                     let Data = res["Data"] as! NSDictionary
+                                                    self.callupdatestatus()
+                                                    
+                                                     self.stopAnimatingActivityIndicator()
+                                                  }else{
+                                                    self.stopAnimatingActivityIndicator()
+                                                    print("status code service denied")
+                                                  }
+                                                break
+                                            case .failure(let Error):
+                                                self.stopAnimatingActivityIndicator()
+                                                print("Can't Connect to Server / TimeOut",Error)
+                                                break
+                                            }
+                               }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func callupdatestatus(){
+        self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updatestatus, method: .post, parameters:
+     ["user_id" : Servicefile.shared.userid,
+       "user_status": "complete"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                            switch (response.result) {
+                                            case .success:
+                                                  let res = response.value as! NSDictionary
+                                                  print("success data",res)
+                                                  let Code  = res["Code"] as! Int
+                                                  if Code == 200 {
+                                                    let Data = res["Data"] as! NSDictionary
+                                                     let userid = Data["_id"] as! String
+                                                     UserDefaults.standard.set(userid, forKey: "userid")
+                                                      Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                                                   self.present(vc, animated: true, completion: nil)
+                                                    self.present(vc, animated: true, completion: nil)
+                                                     self.stopAnimatingActivityIndicator()
+                                                  }else{
+                                                    self.stopAnimatingActivityIndicator()
+                                                    print("status code service denied")
+                                                  }
+                                                break
+                                            case .failure(let Error):
+                                                self.stopAnimatingActivityIndicator()
+                                                print("Can't Connect to Server / TimeOut",Error)
+                                                break
+                                            }
+                               }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+   func callpetdetailget(){
+             self.startAnimatingActivityIndicator()
+   if Servicefile.shared.updateUserInterface() {
+       AF.request(Servicefile.petdetailget, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+       switch (response.result) {
+       case .success:
+           let resp = response.value as! NSDictionary
+           print("display data",resp)
+           let Code  = resp["Code"] as! Int
+           if Code == 200 {
+               let Data = resp["Data"] as! NSDictionary
+               let Pet_type = Data["usertypedata"] as! NSArray
+               self.pet_type.removeAll()
+               self.petid.removeAll()
+              self.Pet_breed.removeAll()
+           
+               for item in 0..<Pet_type.count{
+                   let pb = Pet_type[item] as! NSDictionary
+                   let pbv = pb["pet_type_title"] as! String
+                   self.pet_type.append(pbv)
+               }
+            for item in 0..<Pet_type.count{
+                let pb = Pet_type[item] as! NSDictionary
+                   let pbv = pb["_id"] as! String
+                   self.petid.append(pbv)
+               }
+               self.tblview_pettype.reloadData()
+               self.tblview_petbreed.reloadData()
+            
+                self.stopAnimatingActivityIndicator()
+             
+           }else{
+                self.stopAnimatingActivityIndicator()
+               print("status code service denied")
+           }
+           break
+       case .failure(let Error):
+           self.stopAnimatingActivityIndicator()
+           print("Can't Connect to Server / TimeOut",Error)
+           break
+       }        }
+   }else{
+                 self.stopAnimatingActivityIndicator()
+                 self.alert(Message: "No Intenet Please check and try again ")
+             }
+         }
+    
+    func callpetbreedbyid(petid: String){
+        self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petbreedid, method: .post, parameters:
+     ["pet_type_id" : petid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                            switch (response.result) {
+                                            case .success:
+                                                  let res = response.value as! NSDictionary
+                                                  print("success data",res)
+                                                  let Code  = res["Code"] as! Int
+                                                  if Code == 200 {
+                                                     self.textfield_petbreed.text = ""
+                                                     let Pet_breed = res["Data"] as! NSArray
+                                                                 self.Pet_breed.removeAll()
+                                                                  for item in 0..<Pet_breed.count{
+                                                                      let pb = Pet_breed[item] as! NSDictionary
+                                                                      let pbv = pb["pet_breed"] as! String
+                                                                      self.Pet_breed.append(pbv)
+                                                                  }
+                                                                  self.tblview_petbreed.reloadData()
+                                                                   self.stopAnimatingActivityIndicator()
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()

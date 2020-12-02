@@ -126,6 +126,23 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
             
                return true
            }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.textfield_petweight {
+           let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+            let compSepByCharInSet = string.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            return string == numberFiltered
+        }
+        if textField == self.textfiled_petage{
+            let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+                      let compSepByCharInSet = string.components(separatedBy: aSet)
+                      let numberFiltered = compSepByCharInSet.joined(separator: "")
+                      return string == numberFiltered
+        }
+        return true
+
+    }
            
            @objc func textFieldDidChange(textField : UITextField){
                if self.textfield_petname == textField {

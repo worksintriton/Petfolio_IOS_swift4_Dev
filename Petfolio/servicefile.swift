@@ -46,6 +46,12 @@ class Servicefile {
     static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new"
     static let pet_dov_check_time = baseurl + "/api/appointments/check"
     static let pet_doc_createappointm = baseurl + "/api/appointments/mobile/create"
+    static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp"
+    static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp"
+    static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
+    static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
+    
+    
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -483,9 +489,10 @@ struct doc_Dash_petdetails{
     var pet_name : String
     var user_id : String
     var pet_type : String
+    var book_date_time : String
    init(in_Appid : String, In_allergies : String, In_amount : String, In_appoinment_status : String,
    In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
-   In_pet_name : String, In_user_id : String, In_pet_type: String) {
+   In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String) {
     self.Appid = in_Appid
     self.allergies = In_allergies
     self.amount = In_amount
@@ -497,6 +504,7 @@ struct doc_Dash_petdetails{
     self.pet_name = In_pet_name
     self.user_id = In_user_id
     self.pet_type = In_pet_type
+    self.book_date_time = In_book_date_time
    }
 }
 

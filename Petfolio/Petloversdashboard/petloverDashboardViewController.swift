@@ -49,6 +49,12 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func action_sidemenu(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_denypop(_ sender: Any) {
         Servicefile.shared.locaaccess = "Deny"
         self.view_popup.isHidden = true

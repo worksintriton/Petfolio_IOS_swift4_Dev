@@ -71,19 +71,22 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_commissed.isHidden = true
             cell.btn_complete.tag = indexPath.row
              cell.btn_cancel.tag = indexPath.row
+            cell.btn_complete.addTarget(self, action: #selector(action_complete), for: .touchUpInside)
+            cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
         }else if self.appointtype == "Complete"{
              cell.view_commissed.isHidden = false
-            cell.label_completedon.text = "date on :"
+            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
             cell.view_commissed.isHidden = false
-            cell.label_completedon.text = "data"
+            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
              cell.labe_comMissed.text = "Missed on :"
             cell.label_completedon.textColor = UIColor.red
              cell.labe_comMissed.textColor = UIColor.red
         }
+        
         cell.view_completebtn.layer.cornerRadius = 10.0
         cell.view_cancnel.layer.cornerRadius = 10.0
         cell.View_mainview.layer.borderWidth = 0.2
@@ -105,6 +108,15 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }
 
         return cell
+    }
+    
+    @objc func action_complete(sender : UIButton){
+        let tag = sender.tag
+        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[tag].Appid, appointmentstatus: "complete")
+    }
+    @objc func action_cancelled(sender : UIButton){
+        let tag = sender.tag
+        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[tag].Appid, appointmentstatus: "cancel")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -169,12 +181,14 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                   print("success data",res)
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
+                                                    Servicefile.shared.Doc_dashlist.removeAll()
                                                     let Data = res["Data"] as! NSArray
                                                     for itm in 0..<Data.count{
                                                         let dataitm = Data[itm] as! NSDictionary
                                                         let id = dataitm["_id"] as! String
                                                         let allergies = dataitm["allergies"] as! String
                                                         let amount = dataitm["amount"] as! String
+                                                        let booking_date_time = dataitm["booking_date_time"] as! String
                                                         let appoinment_status = dataitm["appoinment_status"] as! String
                                                         let docatt = dataitm["doc_attched"] as! NSArray
                                                         var docimg = ""
@@ -189,7 +203,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                          let pet_img = petdetail["pet_img"] as! String
                                                           let pet_name = petdetail["pet_name"] as! String
                                                          let user_id = petdetail["user_id"] as! String
-                                                        Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type))
+                                                        Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                     }
                                                    if Servicefile.shared.Doc_dashlist.count > 0 {
                                                         self.label_nodata.isHidden = true
@@ -234,6 +248,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                             let id = dataitm["_id"] as! String
                                                             let allergies = dataitm["allergies"] as! String
                                                             let amount = dataitm["amount"] as! String
+                                                            let booking_date_time = dataitm["booking_date_time"] as! String
                                                             let appoinment_status = dataitm["appoinment_status"] as! String
                                                             let docatt = dataitm["doc_attched"] as! NSArray
                                                             var docimg = ""
@@ -248,7 +263,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                             let pet_img = petdetail["pet_img"] as! String
                                                             let pet_name = petdetail["pet_name"] as! String
                                                             let user_id = petdetail["user_id"] as! String
-                                                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type))
+                                                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                         }
                                                        if Servicefile.shared.Doc_dashlist.count > 0 {
                                                             self.label_nodata.isHidden = true
@@ -291,6 +306,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                                 let id = dataitm["_id"] as! String
                                                                 let allergies = dataitm["allergies"] as! String
                                                                 let amount = dataitm["amount"] as! String
+                                                                let booking_date_time = dataitm["booking_date_time"] as! String
                                                                 let appoinment_status = dataitm["appoinment_status"] as! String
                                                                 let docatt = dataitm["doc_attched"] as! NSArray
                                                                 var docimg = ""
@@ -305,7 +321,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                                 let pet_img = petdetail["pet_img"] as! String
                                                                 let pet_name = petdetail["pet_name"] as! String
                                                                 let user_id = petdetail["user_id"] as! String
-                                                                Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type))
+                                                                Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                             }
                                                             if Servicefile.shared.Doc_dashlist.count > 0 {
                                                                 self.label_nodata.isHidden = true
@@ -330,6 +346,49 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                   self.alert(Message: "No Intenet Please check and try again ")
               }
           }
+    
+    func callcompleteMissedappoitment(Appointmentid: String, appointmentstatus: String){
+        
+        var params = ["":""]
+        if appointmentstatus != "cancel"{
+            params = ["_id": Appointmentid,
+                      "completed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                      "appoinment_status" : "Completed"]
+        }else{
+            params = [ "_id": Appointmentid,
+                       "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                       "appoinment_status" : "Missed"]
+        }
+                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                self.startAnimatingActivityIndicator()
+          if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_complete_and_Missedapp, method: .post, parameters: params
+               , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                    switch (response.result) {
+                                                    case .success:
+                                                          let res = response.value as! NSDictionary
+                                                          print("success data",res)
+                                                          let Code  = res["Code"] as! Int
+                                                          if Code == 200 {
+                                                              
+                                                            self.callnew()
+                                                            self.stopAnimatingActivityIndicator()
+                                                          }else{
+                                                            self.stopAnimatingActivityIndicator()
+                                                            print("status code service denied")
+                                                          }
+                                                        break
+                                                    case .failure(let Error):
+                                                        self.stopAnimatingActivityIndicator()
+                                                        print("Can't Connect to Server / TimeOut",Error)
+                                                        break
+                                                    }
+                                       }
+                }else{
+                    self.stopAnimatingActivityIndicator()
+                    self.alert(Message: "No Intenet Please check and try again ")
+                }
+            }
+    
     func alert(Message: String){
            let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in

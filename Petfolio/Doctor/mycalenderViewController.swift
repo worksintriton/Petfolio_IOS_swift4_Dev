@@ -112,6 +112,9 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tbl_availdays.reloadData()
     }
 
+    @IBAction func action_backaction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
        func callmycalender(){
         self.availday.removeAll()

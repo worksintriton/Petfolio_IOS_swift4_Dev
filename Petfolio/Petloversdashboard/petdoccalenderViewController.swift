@@ -15,6 +15,10 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     @IBOutlet weak var calender_cal: FSCalendar!
     @IBOutlet weak var coll_seltime: UICollectionView!
+    @IBOutlet weak var View_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_movetoapp: UIView!
+    
     var seldate = ""
     var listtime = [""]
     var seltime = [""]
@@ -27,6 +31,10 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         self.listtime.removeAll()
         self.seltime.removeAll()
         self.view_continue.layer.cornerRadius = 15.0
+        self.view_popup.layer.cornerRadius = 10.0
+        self.view_movetoapp.layer.cornerRadius = 10.0
+        self.View_shadow.isHidden = true
+        self.view_popup.isHidden = true
         self.seldate = Servicefile.shared.ddMMyyyystringformat(date: Date())
         self.coll_seltime.delegate = self
         self.coll_seltime.dataSource = self
@@ -37,6 +45,12 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     @IBAction func action_back(_ sender: Any) {
          self.dismiss(animated: true, completion: nil)
      }
+    
+    @IBAction func action_afterappBooked(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -128,8 +142,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                                                      print("success data",res)
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
-                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                                                        self.present(vc, animated: true, completion: nil)
+                                                        self.View_shadow.isHidden = false
+                                                        self.view_popup.isHidden = false
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

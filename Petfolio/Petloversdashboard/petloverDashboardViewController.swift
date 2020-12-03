@@ -100,6 +100,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_banner.image = image
                 }
             }
+            cell.img_banner.layer.cornerRadius = 5.0
            return cell
         }else if self.colleView_Doctor == collectionView {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -110,6 +111,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_doc.image = image
                 }
             }
+            cell.img_doc.layer.cornerRadius = 5.0
             cell.label_docname.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_rateing.text = String(Servicefile.shared.petdoc[indexPath.row].star_count)
@@ -119,11 +121,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ser", for: indexPath) as! petServCollectionViewCell
             let uicolo = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
             cell.view_ser.layer.shadowColor = uicolo.cgColor
-                       cell.view_ser.layer.shadowOpacity = 1
-                       cell.view_ser.layer.shadowOffset = CGSize.zero
-                       cell.view_ser.layer.shadowRadius = 2
-                       cell.view_ser.layer.cornerRadius = 5.0
-                       cell.view_ser.layer.borderWidth = 0.5
+            cell.view_ser.layer.shadowOpacity = 1
+            cell.view_ser.layer.shadowOffset = CGSize.zero
+            cell.view_ser.layer.shadowRadius = 2
+            cell.view_ser.layer.cornerRadius = 5.0
+            cell.view_ser.layer.borderWidth = 0.5
             cell.view_ser.layer.borderColor = uicolo.cgColor
             cell.label_ser.text = Servicefile.shared.petser[indexPath.row].service_title
             cell.view_ser.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)

@@ -82,11 +82,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                             Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                           let userid = user_details["_id"] as! String
-                                                           UserDefaults.standard.set(userid, forKey: "userid")
-                                                            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                                                            UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
-                                                             Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                                                           Servicefile.shared.userid = user_details["_id"] as! String
+                                                           
+                                                           
                                                            print("user id",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)

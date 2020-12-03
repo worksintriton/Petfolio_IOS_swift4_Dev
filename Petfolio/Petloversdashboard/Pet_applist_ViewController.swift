@@ -32,7 +32,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_current.layer.cornerRadius = 10.0
         self.view_cancelled.layer.cornerRadius = 10.0
         self.view_completed.layer.cornerRadius = 10.0
-        
         self.view_current.layer.borderWidth = 0.5
         self.view_cancelled.layer.borderWidth = 0.5
         self.view_completed.layer.borderWidth = 0.5
@@ -76,6 +75,13 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.label_completedon.textColor = UIColor.red
              cell.labe_comMissed.textColor = UIColor.red
         }
+        cell.label_servicename.text = "Type : " + Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
+        if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
+            cell.label_servicename.textColor = UIColor.red
+        }else{
+              cell.label_servicename.textColor = UIColor.black
+        }
+        
         cell.view_completebtn.layer.cornerRadius = 10.0
         cell.view_cancnel.layer.cornerRadius = 10.0
         cell.View_mainview.layer.borderWidth = 0.2
@@ -104,7 +110,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_backaction(_ sender: Any) {
-           self.dismiss(animated: true, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                          self.present(vc, animated: true, completion: nil)
        }
 
     @IBAction func action_cancelled(_ sender: Any) {
@@ -172,7 +179,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                             let allergies = dataitm["allergies"] as! String
                                                             let amount = dataitm["amount"] as! String
                                                             let booking_date_time = dataitm["booking_date_time"] as! String
-                                                            let appoinment_status = dataitm["appoinment_status"] as! String
+                                                            let appointment_types = dataitm["appointment_types"] as! String
                                                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
                                                             var docimg = ""
                                                             var pet_name = ""
@@ -191,7 +198,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                             let pet_breed = petdetail["pet_breed"] as! String
                                                             let pet_img = petdetail["pet_img"] as! String
                                                             let user_id = petdetail["user_id"] as! String
-                                                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
+                                                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                         }
                                                        if Servicefile.shared.Doc_dashlist.count > 0 {
                                                             self.label_nodata.isHidden = true
@@ -237,7 +244,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                 let allergies = dataitm["allergies"] as! String
                                                                 let amount = dataitm["amount"] as! String
                                                                 let booking_date_time = dataitm["booking_date_time"] as! String
-                                                                let appoinment_status = dataitm["appoinment_status"] as! String
+                                                                let appointment_types = dataitm["appointment_types"] as! String
                                                                 let doc_business_info = dataitm["doc_business_info"] as! NSArray
                                                                 var docimg = ""
                                                                 var pet_name = ""
@@ -256,7 +263,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                 let pet_breed = petdetail["pet_breed"] as! String
                                                                 let pet_img = petdetail["pet_img"] as! String
                                                                 let user_id = petdetail["user_id"] as! String
-                                                                Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
+                                                                Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                             }
                                                            if Servicefile.shared.Doc_dashlist.count > 0 {
                                                                 self.label_nodata.isHidden = true
@@ -300,7 +307,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                     let allergies = dataitm["allergies"] as! String
                                                                     let amount = dataitm["amount"] as! String
                                                                     let booking_date_time = dataitm["booking_date_time"] as! String
-                                                                    let appoinment_status = dataitm["appoinment_status"] as! String
+                                                                    let appointment_types = dataitm["appointment_types"] as! String
                                                                     let doc_business_info = dataitm["doc_business_info"] as! NSArray
                                                                     var docimg = ""
                                                                     var pet_name = ""
@@ -319,7 +326,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                     let pet_breed = petdetail["pet_breed"] as! String
                                                                     let pet_img = petdetail["pet_img"] as! String
                                                                     let user_id = petdetail["user_id"] as! String
-                                                                    Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appoinment_status: appoinment_status, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
+                                                                    Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time))
                                                                 }
                                                                 if Servicefile.shared.Doc_dashlist.count > 0 {
                                                                     self.label_nodata.isHidden = true

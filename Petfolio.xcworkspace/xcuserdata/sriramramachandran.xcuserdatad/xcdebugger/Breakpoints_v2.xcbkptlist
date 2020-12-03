@@ -30,8 +30,8 @@
             filePath = "Petfolio/Doctor/regdocViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "action_photoimg(_:)"
             landmarkType = "7">
          </BreakpointContent>

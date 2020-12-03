@@ -46,6 +46,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.pet_apoint_doc_attched.removeAll()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self
         self.imagepicker.delegate = self
@@ -360,7 +361,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             print("details for complettion")
             let date = Date()
             let format = DateFormatter()
-            format.dateFormat = "dd/MM/yyyy"
+            format.dateFormat = "dd-MM-yyyy"
             let tformat = DateFormatter()
             tformat.dateFormat = "hh:mm a"
             var booking_date = format.string(from: date)

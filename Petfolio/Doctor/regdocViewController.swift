@@ -96,6 +96,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
        var latitude : Double!
        var longitude : Double!
     
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_action: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.specialza.removeAll()
@@ -109,7 +114,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         Servicefile.shared.photodicarray.removeAll()
         
         self.view_submit.layer.cornerRadius = 15.0
-       
+        self.view_popup.layer.cornerRadius = 10.0
+        self.view_action.layer.cornerRadius = 10.0
+        self.view_shadow.isHidden = true
+        self.view_popup.isHidden = true
         
         self.clinicdetails.removeAllObjects()
         self.edudetails.removeAllObjects()
@@ -520,6 +528,13 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
        print("spec details", Servicefile.shared.specdicarray)
         print("pet details",self.pethandle, Servicefile.shared.pethandicarray)
     }
+    
+    
+    @IBAction func action_backtologin(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -976,7 +991,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "certificate_pic" :  Servicefile.shared.certifdicarray,
                    "govt_id_pic" : Servicefile.shared.govdicarray,
                    "photo_id_pic" : Servicefile.shared.photodicarray,
-                   "profile_status" : 0 ,
+                   "profile_status" : 1,
                    "profile_verification_status" : "Not verified",
                    "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
@@ -1021,8 +1036,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
 //                                                     let userid = Data["_id"] as! String
 //                                                     UserDefaults.standard.set(userid, forKey: "userid")
 //                                                      Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
-                                                    self.present(vc, animated: true, completion: nil)
+                                                    self.view_popup.isHidden = false
+                                                    self.view_shadow.isHidden = false
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()

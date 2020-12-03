@@ -76,8 +76,12 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
+                    UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
+                    UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                    UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                    Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
                     self.callFCM()
-                    
                    }else{
                      print("verification Not success")
         }
@@ -158,8 +162,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
            self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.tokenupdate, method: .post, parameters:
         [ "user_id": Servicefile.shared.userid,
-          "fb_token" : Servicefile.shared.FCMtoken
-        ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+          "fb_token" : Servicefile.shared.FCMtoken ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                switch (response.result) {
                                                case .success:
                                                      let res = response.value as! NSDictionary

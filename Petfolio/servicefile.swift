@@ -50,6 +50,7 @@ class Servicefile {
     static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp"
     static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
+    static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
     
     
     // sprint 1
@@ -193,7 +194,7 @@ class Servicefile {
     
     func ddmmyyyyHHmmssstringformat(date: Date) -> String{
         let format = DateFormatter()
-        format.dateFormat = "dd/MM/yyyy hh:mm a"
+        format.dateFormat = "dd-MM-yyyy hh:mm a"
         let nextDate = format.string(from: date)
         return nextDate
     }
@@ -271,7 +272,7 @@ class Servicefile {
     
     func ddMMyyyyhhmmastringformat(date: Date) -> String{
         let format = DateFormatter()
-        format.dateFormat = "dd/MM/yyyy hh:mm a"
+        format.dateFormat = "dd-MM-yyyy hh:mm a"
         let nextDate = format.string(from: date)
         return nextDate
     }
@@ -490,13 +491,13 @@ struct doc_Dash_petdetails{
     var user_id : String
     var pet_type : String
     var book_date_time : String
-   init(in_Appid : String, In_allergies : String, In_amount : String, In_appoinment_status : String,
+   init(in_Appid : String, In_allergies : String, In_amount : String, In_appointment_types : String,
    In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
    In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String) {
     self.Appid = in_Appid
     self.allergies = In_allergies
     self.amount = In_amount
-    self.appoinment_status = In_appoinment_status
+    self.appoinment_status = In_appointment_types
     self.doc_attched = In_doc_attched
     self.pet_id = In_pet_id
     self.pet_breed = In_pet_breed

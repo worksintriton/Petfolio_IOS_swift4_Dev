@@ -124,7 +124,9 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
-        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[tag].Appid, appointmentstatus: "complete")
+        Servicefile.shared.appointmentindex = tag
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_prescriptionViewController") as! Doc_prescriptionViewController
+               self.present(vc, animated: true, completion: nil)
     }
     @objc func action_cancelled(sender : UIButton){
         let tag = sender.tag
@@ -404,7 +406,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     func callcheckstatus(){
              Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-            self.startAnimatingActivityIndicator()
+    self.startAnimatingActivityIndicator()
       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_Dashboard_checkstatus, method: .post, parameters: ["user_id": Servicefile.shared.userid]
            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                 switch (response.result) {

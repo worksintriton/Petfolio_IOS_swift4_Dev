@@ -51,7 +51,7 @@ class Servicefile {
     static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
-    
+    static let Doc_prescription_create = baseurl + "/api/prescription/create"
     
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
@@ -135,6 +135,7 @@ class Servicefile {
     var specdicarray = [Any]()
     var pethandicarray = [Any]()
      var photodicarray = [Any]()
+    var Doc_pres = [Any]()
      var govdicarray = [Any]()
      var certifdicarray = [Any]()
     var clinicdicarray = [Any]()
@@ -143,6 +144,12 @@ class Servicefile {
     // Doctor
     var Doc_dashlist = [doc_Dash_petdetails]()
     // Doctor
+    // prescription
+    var medi = ""
+    var noofday = ""
+    var consdays = ""
+    var appointmentindex = 0
+    // prescription
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

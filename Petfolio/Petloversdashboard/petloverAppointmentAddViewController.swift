@@ -250,7 +250,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     }
     
     @IBAction func action_addimage(_ sender: Any) {
-        if Servicefile.shared.Pet_Appointment_petimg.count < 3 {
+        if Servicefile.shared.Pet_Appointment_petimg.count < 1 {
                     self.callgalaryprocess()
                }else{
                    self.alert(Message: "You can upload 3 File")
@@ -400,7 +400,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     func calladdpetdetails(){
            self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
-           ["user_id": Servicefile.shared.userid,
+           ["user_id" : Servicefile.shared.userid,
             "pet_img" : Servicefile.shared.sampleimag,
            "pet_name" : self.textfield_petname.text!,
            "pet_type" : self.textfield_pettype.text!,

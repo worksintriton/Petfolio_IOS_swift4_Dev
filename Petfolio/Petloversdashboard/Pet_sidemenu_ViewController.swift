@@ -51,6 +51,12 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

@@ -78,6 +78,8 @@
 		B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D263255D6220008400D6 /* Futura XBlk BT.ttf */; };
 		B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B094D264255D6220008400D6 /* Futura-CondensedLight.otf */; };
 		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
+		B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */; };
+		B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */; };
 		FAE0654D78C0F0165A511498 /* Pods_Petfolio_PetfolioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F548575F5888AC40E9B3E03E /* Pods_Petfolio_PetfolioUITests.framework */; };
 		FF7F9F4FFE368C4E2AB7369F /* Pods_PetfolioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E929A655F93E5BBDE34706 /* Pods_PetfolioTests.framework */; };
 /* End PBXBuildFile section */
@@ -181,6 +183,8 @@
 		B094D263255D6220008400D6 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura XBlk BT.ttf"; sourceTree = "<group>"; };
 		B094D264255D6220008400D6 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-CondensedLight.otf"; sourceTree = "<group>"; };
 		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
+		B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprofileViewController.swift; sourceTree = "<group>"; };
+		B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverProfilepetlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4D35639EA0F276BB8A252E3 /* Pods-PetfolioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.debug.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB11F6AD2E8BAB19A1D33CB8 /* Pods-PetfolioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.release.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.release.xcconfig"; sourceTree = "<group>"; };
 		EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Petfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +280,8 @@
 				B02E7A56257760C600B2B0C2 /* Pet_sidemenu_ViewController.swift */,
 				B02E7A58257768D700B2B0C2 /* Pet_applist_ViewController.swift */,
 				B02E7A5A25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift */,
+				B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */,
+				B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 				B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */,
 				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
 				B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */,
+				B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */,
 				B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
@@ -711,6 +718,7 @@
 				B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
+				B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */,
 				B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,

@@ -79,12 +79,18 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docdashTableViewCell
+        cell.image_emergnecy.isHidden = true
         if self.appointtype == "New" {
             cell.view_commissed.isHidden = true
             cell.btn_complete.tag = indexPath.row
              cell.btn_cancel.tag = indexPath.row
             cell.btn_complete.addTarget(self, action: #selector(action_complete), for: .touchUpInside)
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
+            if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
+                cell.image_emergnecy.isHidden = false
+            }else{
+                cell.image_emergnecy.isHidden = true
+            }
         }else if self.appointtype == "Complete"{
              cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
@@ -107,6 +113,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
+        
         if Servicefile.shared.Doc_dashlist[indexPath.row].pet_img == "" {
               cell.img_petimg.image = UIImage(named: "sample")
         }else{

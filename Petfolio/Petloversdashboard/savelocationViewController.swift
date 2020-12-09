@@ -175,7 +175,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         "location_address" : Servicefile.shared.selectedaddress,
         "location_lat" : Servicefile.shared.lati,
         "location_long" : Servicefile.shared.long,
-        "location_title" : Servicefile.shared.selectedCity,
+        "location_title" : self.isselected,
         "location_nickname" : self.textfield_pickname.text!,
         "default_status" : true,
         "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in

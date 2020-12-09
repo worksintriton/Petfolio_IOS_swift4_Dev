@@ -79,9 +79,9 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }
         cell.label_servicename.text = "Type : " + Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
         if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
-            cell.label_servicename.textColor = UIColor.red
+            cell.image_emergnecy.isHidden = false
         }else{
-              cell.label_servicename.textColor = UIColor.black
+            cell.image_emergnecy.isHidden = true
         }
         
         cell.view_completebtn.layer.cornerRadius = 10.0

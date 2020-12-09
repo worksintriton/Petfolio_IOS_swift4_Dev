@@ -136,10 +136,10 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                            
                                                             self.label_clinicdetails.text = self.clinic_name
                                                               
-                                                               self.label_city.text = ""
-                                                               self.label_distance.text = ""
-                                                               self.label_Noofcomments.text = ""
-                                                               self.Label_ratingval.text = ""
+//                                                               self.label_city.text = ""
+//                                                               self.label_distance.text = ""
+                                                               self.label_Noofcomments.text = "0"
+                                                               self.Label_ratingval.text = "0"
                                                             self.label_specdetails.text = specarray
                                                             self.label_descrption.text = self.descri
                                                              self.stopAnimatingActivityIndicator()

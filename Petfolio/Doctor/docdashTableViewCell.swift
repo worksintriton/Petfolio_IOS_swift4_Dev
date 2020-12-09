@@ -25,6 +25,7 @@ class docdashTableViewCell: UITableViewCell {
     @IBOutlet weak var labe_comMissed: UILabel!
     @IBOutlet weak var view_commissed: UIView!
     @IBOutlet weak var label_amount: UILabel!
+    @IBOutlet weak var image_emergnecy: UIImageView!
     
     
     override func awakeFromNib() {

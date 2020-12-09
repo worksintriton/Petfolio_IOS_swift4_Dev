@@ -167,9 +167,24 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
+        self.textview_clinicaddress.text = "Write here.."
+        self.textview_clinicaddress.textColor == UIColor.lightGray
         //self.setclinicimag()
     }
     
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+              if self.textview_clinicaddress == textView  {
+               if textView.text == "Write here.." {
+                   textView.text = ""
+                   if textView.textColor == UIColor.lightGray {
+                                            textView.text = nil
+                                            textView.textColor = UIColor.black
+                                        }
+               }
+              }
+             
+          }
     
     
     override func viewWillAppear(_ animated: Bool) {

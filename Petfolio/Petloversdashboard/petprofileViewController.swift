@@ -67,7 +67,8 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     @IBAction func action_manageaddress(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     

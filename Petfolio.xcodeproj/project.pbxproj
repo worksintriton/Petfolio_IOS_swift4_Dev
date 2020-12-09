@@ -80,6 +80,10 @@
 		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
 		B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */; };
 		B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */; };
+		B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */; };
+		B0FF1AEE25808897006227E4 /* manageaddresslistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AED25808897006227E4 /* manageaddresslistTableViewCell.swift */; };
+		B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AEF2580C85F006227E4 /* petlocationsettingViewController.swift */; };
+		B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AF12580C897006227E4 /* petsavelocationViewController.swift */; };
 		FAE0654D78C0F0165A511498 /* Pods_Petfolio_PetfolioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F548575F5888AC40E9B3E03E /* Pods_Petfolio_PetfolioUITests.framework */; };
 		FF7F9F4FFE368C4E2AB7369F /* Pods_PetfolioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E929A655F93E5BBDE34706 /* Pods_PetfolioTests.framework */; };
 /* End PBXBuildFile section */
@@ -185,6 +189,10 @@
 		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
 		B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprofileViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverProfilepetlistCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petManageaddressViewController.swift; sourceTree = "<group>"; };
+		B0FF1AED25808897006227E4 /* manageaddresslistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manageaddresslistTableViewCell.swift; sourceTree = "<group>"; };
+		B0FF1AEF2580C85F006227E4 /* petlocationsettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petlocationsettingViewController.swift; sourceTree = "<group>"; };
+		B0FF1AF12580C897006227E4 /* petsavelocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petsavelocationViewController.swift; sourceTree = "<group>"; };
 		C4D35639EA0F276BB8A252E3 /* Pods-PetfolioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.debug.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB11F6AD2E8BAB19A1D33CB8 /* Pods-PetfolioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetfolioTests.release.xcconfig"; path = "Target Support Files/Pods-PetfolioTests/Pods-PetfolioTests.release.xcconfig"; sourceTree = "<group>"; };
 		EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Petfolio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +290,12 @@
 				B02E7A5A25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift */,
 				B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */,
 				B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */,
+				B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */,
+				B0FF1AED25808897006227E4 /* manageaddresslistTableViewCell.swift */,
+				B00AB79925666FE20004DB4D /* locationsettingViewController.swift */,
+				B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */,
+				B0FF1AEF2580C85F006227E4 /* petlocationsettingViewController.swift */,
+				B0FF1AF12580C897006227E4 /* petsavelocationViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -338,8 +352,6 @@
 				B0571C9125624AF000B42719 /* Rechability.swift */,
 				B08F730D25638D1D00AEB8CC /* REGPetLoverViewController.swift */,
 				B08F730F2563BB9000AEB8CC /* loginotpViewController.swift */,
-				B00AB79925666FE20004DB4D /* locationsettingViewController.swift */,
-				B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -699,10 +711,13 @@
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B02E7A5B25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift in Sources */,
+				B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
+				B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */,
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
+				B0FF1AEE25808897006227E4 /* manageaddresslistTableViewCell.swift in Sources */,
 				B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */,
 				B02E7A57257760C600B2B0C2 /* Pet_sidemenu_ViewController.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
@@ -729,6 +744,7 @@
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
+				B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,

@@ -52,7 +52,10 @@ class Servicefile {
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
     static let Doc_prescription_create = baseurl + "/api/prescription/create"
-    
+    static let pet_getAddresslist = baseurl + "/api/locationdetails/mobile/getlist_id"
+    static let pet_updateaddress =  baseurl + "/api/locationdetails/edit"
+    static let pet_defaultaddress =  baseurl + "/api/locationdetails/default/edit"
+    static let pet_deleteaddress =  baseurl + "/api/locationdetails/delete"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -91,6 +94,7 @@ class Servicefile {
     var petser = [Petdashservice]()
     var petprod = [Petdashproduct]()
     var pet_petlist = [petlist]()
+    var petuserlocaadd = [locationdetails]()
     // pet dashboard
     
     // pet appointment params
@@ -516,4 +520,50 @@ struct doc_Dash_petdetails{
    }
 }
 
-  
+struct locationdetails{
+    var _id : String
+    var date_and_time : String
+    var default_status : Bool
+    var location_address : String
+    var location_city : String
+    var location_country : String
+    var location_lat : String
+    var location_long : String
+    var location_nickname : String
+    var location_pin : String
+    var location_state : String
+    var location_title : String
+    var user_id : String
+    init(In_id : String
+    , In_date_and_time : String
+    , In_default_status : Bool
+    , In_location_address : String
+    , In_location_city : String
+    , In_location_country : String
+    , In_location_lat : String
+    , In_location_long : String
+    , In_location_nickname : String
+    , In_location_pin : String
+    , In_location_state : String
+    , In_location_title : String
+    , In_user_id : String) {
+        self._id = In_id
+        self.date_and_time = In_date_and_time
+        self.default_status = In_default_status
+        self.location_address = In_location_address
+        self.location_city = In_location_city
+        self.location_country = In_location_country
+        self.location_lat = In_location_lat
+        self.location_long = In_location_long
+        self.location_nickname = In_location_nickname
+        self.location_pin = In_location_pin
+        self.location_state = In_location_state
+        self.location_title = In_location_title
+        self.user_id = In_user_id
+    }
+    
+}
+
+
+
+

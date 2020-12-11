@@ -120,15 +120,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.colleView_Service == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ser", for: indexPath) as! petServCollectionViewCell
             let uicolo = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
-            cell.view_ser.layer.shadowColor = uicolo.cgColor
-            cell.view_ser.layer.shadowOpacity = 1
-            cell.view_ser.layer.shadowOffset = CGSize.zero
-            cell.view_ser.layer.shadowRadius = 2
-            cell.view_ser.layer.cornerRadius = 5.0
-            cell.view_ser.layer.borderWidth = 0.5
-            cell.view_ser.layer.borderColor = uicolo.cgColor
+//            cell.view_ser.layer.shadowColor = uicolo.cgColor
+//            cell.view_ser.layer.shadowOpacity = 1
+//            cell.view_ser.layer.shadowOffset = CGSize.zero
+//            cell.view_ser.layer.shadowRadius = 2
+//            cell.view_ser.layer.cornerRadius = 5.0
+//            cell.view_ser.layer.borderWidth = 0.5
+            //cell.view_ser.layer.borderColor = uicolo.cgColor
             cell.label_ser.text = Servicefile.shared.petser[indexPath.row].service_title
-            cell.view_ser.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
+            //cell.view_ser.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
             cell.img_ser.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                            if (error != nil) {
                                cell.img_ser.image = UIImage(named: "sample")
@@ -168,7 +168,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.colleView_Doctor == collectionView {
              return CGSize(width: 138 , height:  171)
         }else if self.colleView_Service == collectionView {
-             return CGSize(width: 138 , height:  130)
+             return CGSize(width: 128 , height:  149)
         }else {
              return CGSize(width: 138 , height:  171)
         }

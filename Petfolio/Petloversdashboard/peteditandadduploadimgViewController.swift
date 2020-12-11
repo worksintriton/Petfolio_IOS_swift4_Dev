@@ -22,8 +22,12 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagepicker.delegate = self
+        if Servicefile.shared.pet_status == "edit" {
+            uploadimage = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
+        }else{
+            uploadimage = "http://mysalveo.com/api/uploads/images.jpeg"
+        }
         self.setimage(strimg: self.uploadimage)
-        // Do any additional setup after loading the view.
     }
     
     func setimage(strimg : String){

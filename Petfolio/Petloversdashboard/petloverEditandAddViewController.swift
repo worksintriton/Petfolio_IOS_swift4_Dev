@@ -110,6 +110,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             self.textfield_petcolor.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_color
             self.textfield_petweight.text = String(Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_weight)
             self.textfiled_petage.text = String(Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_age)
+            self.textfield_selectdate.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].last_vaccination_date
+            self.isvaccin = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].vaccinated
         }
           
     
@@ -395,8 +397,19 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                   }
               }
     func calladdpetdetails(){
+        var urldetails = ""
+        var setimag = ""
+        if Servicefile.shared.pet_status == "edit" {
+            urldetails = Servicefile.pet_updateimage
+            setimag = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
+            Servicefile.shared.petid = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
+        }else{
+            urldetails = Servicefile.petregister
+            setimag = Servicefile.shared.sampleimag
+        }
+        
         print("user_id", Servicefile.shared.userid,
-        "pet_img" ,"",
+        "pet_img" , setimag,
         "pet_name" , self.textfield_petname.text!,
         "pet_type" , self.textfield_pettype.text!,
         "pet_breed" , self.textfield_petbreed.text!,
@@ -409,9 +422,9 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         "default_status" , true,
         "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
         self.startAnimatingActivityIndicator()
-    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
+    if Servicefile.shared.updateUserInterface() { AF.request(urldetails, method: .post, parameters:
         ["user_id": Servicefile.shared.userid,
-        "pet_img" :"",
+         "pet_img" : setimag,
         "pet_name" : self.textfield_petname.text!,
         "pet_type" : self.textfield_pettype.text!,
         "pet_breed" : self.textfield_petbreed.text!,
@@ -429,8 +442,11 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                                                   print("success data",res)
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
+                                                    if Servicefile.shared.pet_status != "edit" {
                                                     let Data = res["Data"] as! NSDictionary
                                                     Servicefile.shared.petid = Data["_id"] as! String
+                                                    }
+                                                   
                                                     self.callupdatestatus()
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
@@ -465,7 +481,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                                                      let userid = Data["_id"] as! String
                                                      UserDefaults.standard.set(userid, forKey: "userid")
                                                       Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petimageUploadViewController") as! petimageUploadViewController
+                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "peteditandadduploadimgViewController") as! peteditandadduploadimgViewController
                                                     self.present(vc, animated: true, completion: nil)
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{

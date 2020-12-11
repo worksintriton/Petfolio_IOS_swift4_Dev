@@ -2678,7 +2678,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="147" id="JdG-Uc-6RN"/>
                                                                 </constraints>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="biZ-7e-5Ox">
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="biZ-7e-5Ox">
                                                                     <size key="itemSize" width="139" height="141"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2696,37 +2696,38 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="139" height="141"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoY-5i-SRs">
-                                                                                            <rect key="frame" x="8" y="5.5" width="130" height="120"/>
+                                                                                            <rect key="frame" x="8" y="5.5" width="130" height="128"/>
                                                                                             <subviews>
                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bag" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-vl-o3J">
-                                                                                                    <rect key="frame" x="35" y="18" width="60" height="60"/>
+                                                                                                    <rect key="frame" x="20.5" y="8" width="89" height="89"/>
+                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <constraints>
-                                                                                                        <constraint firstAttribute="width" constant="60" id="48o-LI-euG"/>
-                                                                                                        <constraint firstAttribute="height" constant="60" id="Y3b-Om-o9O"/>
+                                                                                                        <constraint firstAttribute="width" constant="89" id="48o-LI-euG"/>
+                                                                                                        <constraint firstAttribute="height" constant="89" id="Y3b-Om-o9O"/>
                                                                                                     </constraints>
                                                                                                 </imageView>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxr-Zn-uus">
-                                                                                                    <rect key="frame" x="10.5" y="84" width="109" height="28"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxr-Zn-uus">
+                                                                                                    <rect key="frame" x="11" y="100" width="109" height="26"/>
                                                                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                             </subviews>
-                                                                                            <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="height" constant="120" id="4Xx-xX-Isb"/>
-                                                                                                <constraint firstItem="vPC-vl-o3J" firstAttribute="top" secondItem="ZoY-5i-SRs" secondAttribute="top" constant="18" id="77M-Si-cN3"/>
-                                                                                                <constraint firstAttribute="width" constant="130" id="81v-X3-fj4"/>
+                                                                                                <constraint firstItem="vPC-vl-o3J" firstAttribute="top" secondItem="ZoY-5i-SRs" secondAttribute="top" constant="8" id="77M-Si-cN3"/>
                                                                                                 <constraint firstItem="vxr-Zn-uus" firstAttribute="width" secondItem="ZoY-5i-SRs" secondAttribute="width" multiplier="0.838462" id="D9C-uW-zzr"/>
                                                                                                 <constraint firstItem="vxr-Zn-uus" firstAttribute="centerX" secondItem="vPC-vl-o3J" secondAttribute="centerX" id="I6d-Gc-8ok"/>
-                                                                                                <constraint firstAttribute="bottom" secondItem="vxr-Zn-uus" secondAttribute="bottom" constant="8" id="ISX-sd-QwM"/>
+                                                                                                <constraint firstAttribute="bottom" secondItem="vxr-Zn-uus" secondAttribute="bottom" constant="16" id="ISX-sd-QwM"/>
                                                                                                 <constraint firstItem="vPC-vl-o3J" firstAttribute="centerX" secondItem="ZoY-5i-SRs" secondAttribute="centerX" id="aAw-Mb-xKZ"/>
-                                                                                                <constraint firstItem="vxr-Zn-uus" firstAttribute="top" secondItem="vPC-vl-o3J" secondAttribute="bottom" constant="6" id="cRE-Ta-zhM"/>
+                                                                                                <constraint firstItem="vxr-Zn-uus" firstAttribute="top" secondItem="vPC-vl-o3J" secondAttribute="bottom" constant="3" id="cRE-Ta-zhM"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                     </subviews>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
+                                                                                        <constraint firstAttribute="bottom" secondItem="ZoY-5i-SRs" secondAttribute="bottom" constant="7.5" id="0Zw-ta-22V"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="ZoY-5i-SRs" secondAttribute="trailing" constant="1" id="QAf-FJ-plb"/>
                                                                                         <constraint firstItem="ZoY-5i-SRs" firstAttribute="top" secondItem="P7t-3j-UdX" secondAttribute="top" constant="5.5" id="QQQ-op-KPa"/>
                                                                                         <constraint firstItem="ZoY-5i-SRs" firstAttribute="leading" secondItem="P7t-3j-UdX" secondAttribute="leading" constant="8" id="V80-qv-VRs"/>
                                                                                     </constraints>
@@ -3054,7 +3055,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dfo-8s-UrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9391.2000000000007" y="115.59220389805098"/>
+            <point key="canvasLocation" x="9388.4057971014499" y="115.17857142857142"/>
         </scene>
         <!--Docdashboard View Controller-->
         <scene sceneID="KIo-3a-9Rn">

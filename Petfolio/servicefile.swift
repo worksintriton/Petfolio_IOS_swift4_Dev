@@ -56,6 +56,7 @@ class Servicefile {
     static let pet_updateaddress =  baseurl + "/api/locationdetails/edit"
     static let pet_defaultaddress =  baseurl + "/api/locationdetails/default/edit"
     static let pet_deleteaddress =  baseurl + "/api/locationdetails/delete"
+    static let pet_updateimage =  baseurl + "/api/petdetails/edit"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -89,6 +90,7 @@ class Servicefile {
     var orgiutypesel = ["0"]
     
     // pet dashboard
+    var petid = ""
     var petbanner = [Petdashbanner]()
     var petdoc = [Petdashdoc]()
     var petser = [Petdashservice]()
@@ -123,7 +125,8 @@ class Servicefile {
             var pet_apoint_amount = ""
     
     // pet appointment params
-    
+    var pet_index = 0
+    var pet_status = ""
     var lati = 0.0
     var long = 0.0
     var selectedaddress = ""

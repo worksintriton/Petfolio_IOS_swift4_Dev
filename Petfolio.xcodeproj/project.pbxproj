@@ -78,6 +78,10 @@
 		B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D263255D6220008400D6 /* Futura XBlk BT.ttf */; };
 		B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B094D264255D6220008400D6 /* Futura-CondensedLight.otf */; };
 		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
+		B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */; };
+		B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */; };
+		B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */; };
+		B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */; };
 		B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */; };
 		B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */; };
 		B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */; };
@@ -187,6 +191,10 @@
 		B094D263255D6220008400D6 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura XBlk BT.ttf"; sourceTree = "<group>"; };
 		B094D264255D6220008400D6 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-CondensedLight.otf"; sourceTree = "<group>"; };
 		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
+		B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petaddimgCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverEditandAddViewController.swift; sourceTree = "<group>"; };
+		B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petimageUploadViewController.swift; sourceTree = "<group>"; };
+		B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = peteditandadduploadimgViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprofileViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverProfilepetlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petManageaddressViewController.swift; sourceTree = "<group>"; };
@@ -296,6 +304,10 @@
 				B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */,
 				B0FF1AEF2580C85F006227E4 /* petlocationsettingViewController.swift */,
 				B0FF1AF12580C897006227E4 /* petsavelocationViewController.swift */,
+				B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */,
+				B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */,
+				B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */,
+				B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -712,8 +724,10 @@
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B02E7A5B25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift in Sources */,
 				B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */,
+				B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
+				B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */,
 				B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */,
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
@@ -746,11 +760,13 @@
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
 				B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
+				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,
 				B094D21C255BDE82008400D6 /* Petfolio.xcdatamodeld in Sources */,
+				B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */,
 				B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

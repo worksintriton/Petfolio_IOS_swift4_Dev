@@ -314,8 +314,6 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         let Data = res["Data"] as! String
                        print("Uploaded file url:",Data)
                         Servicefile.shared.pet_apoint_doc_attched.removeAll()
-                            
-                            
                         var B = Servicefile.shared.pet_apoint_doc_attched
                             var arr = B
                             let a = ["file":Data] as NSDictionary

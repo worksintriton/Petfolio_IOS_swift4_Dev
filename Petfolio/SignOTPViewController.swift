@@ -91,7 +91,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     
     
     func moveTextField(textField: UITextField, up: Bool){
-         let movementDistance:CGFloat = -230
+         let movementDistance:CGFloat = -260
         let movementDuration: Double = 0.3
         var movement:CGFloat = 0
         if up {

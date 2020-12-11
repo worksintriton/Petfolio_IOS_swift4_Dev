@@ -1,15 +1,15 @@
 //
-//  REGPetLoverViewController.swift
+//  petloverEditandAddViewController.swift
 //  Petfolio
 //
-//  Created by sriram ramachandran on 17/11/20.
+//  Created by sriram ramachandran on 10/12/20.
 //  Copyright © 2020 sriram ramachandran. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     
@@ -102,7 +102,23 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     self.textfiled_petage.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
        // Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                 self.datepicker_date.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-           }
+        if Servicefile.shared.pet_status == "edit" {
+            self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
+            self.textfield_pettype.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_type
+            self.textfield_petbreed.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_breed
+            self.textfield_petgender.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_gender
+            self.textfield_petcolor.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_color
+            self.textfield_petweight.text = String(Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_weight)
+            self.textfiled_petage.text = String(Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_age)
+        }
+          
+    
+    }
+    
+    
+    @IBAction func action_bcak(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
            let senderdate = sender.date
@@ -166,13 +182,10 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                 }else{
                     self.textfiled_petage.text = textField.text
                 }
-               } 
+               }
            }
     
-    @IBAction func action_skip(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
-    }
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {

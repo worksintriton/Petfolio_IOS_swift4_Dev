@@ -44,7 +44,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var coll_speciali: UICollectionView!
     @IBOutlet weak var tbl_educationlist: UITableView!
     @IBOutlet weak var tbl_experience: UITableView!
-    
+    @IBOutlet weak var tbl_commtype: UITableView!
     
     @IBOutlet weak var textfield_pethandle: UITextField!
     @IBOutlet weak var textfield_spec: UITextField!
@@ -55,6 +55,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var textfield_exp_company: UITextField!
     @IBOutlet weak var label_exp_from: UILabel!
     @IBOutlet weak var label_exp_to: UILabel!
+    @IBOutlet weak var textfield_commtype: UITextField!
+    
     
     @IBOutlet weak var Img_clinic: UIImageView!
     @IBOutlet weak var view_edudate: UIView!
@@ -70,7 +72,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     var orgpethandle = [""]
     var isspecialza = ["0"]
     var ispethandle = ["0"]
+    var comm_type = [""]
     
+    var comm_type_Value = [""]
     var collphotoid = [""]
     var collgovtid = [""]
     var collcertificate = [""]
@@ -105,6 +109,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.specialza.removeAll()
         self.pethandle.removeAll()
+        self.comm_type.removeAll()
+        self.comm_type_Value.removeAll()
         self.callpetdetails()
         print("lat long",self.latitude, self.longitude)
         Servicefile.shared.edudicarray.removeAll()
@@ -134,6 +140,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.tbl_educationlist.dataSource = self
         self.tbl_educationlist.isHidden = true
         self.tbl_experience.isHidden = true
+        self.tbl_commtype.delegate = self
+        self.tbl_commtype.dataSource = self
+        self.tbl_commtype.isHidden = true
         
         self.coll_photoid.delegate = self
         self.coll_photoid.dataSource = self
@@ -183,8 +192,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                         }
                }
               }
-             
-          }
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,6 +203,13 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                     locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
                                     locationManager.startUpdatingLocation()
                                 }
+    }
+    
+    
+    @IBAction func action_commtype(_ sender: Any) {
+        self.tbl_commtype.isHidden = false
+        self.view_edudate.isHidden = true
+        self.view_expire.isHidden = true
     }
     
     
@@ -276,6 +291,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                           textview_clinicaddress.resignFirstResponder()
                           return false
                       }
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
+        self.view_expire.isHidden = true
            return true
        }
 
@@ -321,6 +339,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.textfield_exp_company.resignFirstResponder()
         self.textfield_spec.resignFirstResponder()
         self.textfield_pethandle.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.tbl_commtype.isHidden = true
     }
     
     
@@ -422,19 +444,22 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_edu_date(_ sender: Any) {
-         self.view_expire.isHidden = true
+        self.view_expire.isHidden = true
         self.view_edudate.isHidden = false
+        self.tbl_commtype.isHidden = true
         self.resigntext()
     }
     
     @IBAction func action_exp_from(_ sender: Any) {
         self.seldate = "F"
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
         self.view_expire.isHidden = false
         self.resigntext()
         let format = DateFormatter()
-                   format.dateFormat = "yyyy"
-                   let fromdat = format.date(from: "1950")
-                    print("fromdate",fromdat)
+        format.dateFormat = "yyyy"
+        let fromdat = format.date(from: "1950")
+        print("fromdate",fromdat)
         self.datepicker_expdate.minimumDate = fromdat
     
     }
@@ -451,8 +476,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
              print("fromdate",fromdat)
             self.datepicker_expdate.minimumDate = fromdat
         }
-         self.view_expire.isHidden = false
         self.resigntext()
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
+        self.view_expire.isHidden = false
     }
     
     @IBAction func action_addclinicimg(_ sender: Any) {
@@ -462,7 +489,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             self.alert(Message: "You can upload only 3 Photo")
         }
-        
+        self.tbl_commtype.isHidden = true
     }
     
     @IBAction func action_addcertifiimg(_ sender: Any) {
@@ -472,7 +499,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             self.alert(Message: "You can upload only 3 File")
         }
-        
+        self.tbl_commtype.isHidden = true
     }
     
     @IBAction func action_addgovimg(_ sender: Any) {
@@ -482,7 +509,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             self.alert(Message: "You can upload only 3 File")
         }
-        
+        self.tbl_commtype.isHidden = true
     }
     
     
@@ -493,11 +520,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             self.alert(Message: "You can upload 3 File")
         }
-       
+       self.tbl_commtype.isHidden = true
     }
     
     
     @IBAction func action_submit(_ sender: Any) {
+        self.tbl_commtype.isHidden = true
         if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
         } else if Servicefile.shared.edudicarray.count == 0 {
@@ -534,7 +562,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "certificate_pic" ,  Servicefile.shared.certifdicarray,
                    "govt_id_pic" , Servicefile.shared.govdicarray,
                    "photo_id_pic" , Servicefile.shared.photodicarray,
-                   "profile_status" , 0 ,
+                   "profile_status" , true ,
                    "profile_verification_status" , "Not verified",
                    "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
              self.callDocreg()
@@ -559,6 +587,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.tbl_experience == tableView {
             return Servicefile.shared.expdicarray.count
+        }else if self.tbl_commtype == tableView {
+            return self.comm_type.count
         }else{
             return Servicefile.shared.edudicarray.count
         }
@@ -576,7 +606,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             cell.BTN_expclose.tag = indexPath.row
             cell.BTN_expclose.addTarget(self, action: #selector(closeexp), for: .touchUpInside)
             return cell
-        }else{
+        } else if self.tbl_commtype == tableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = self.comm_type[indexPath.row]
+            return cell
+        } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "edu", for: indexPath) as! eduTableViewCell
             let eduval = Servicefile.shared.edudicarray[indexPath.row] as! NSDictionary
             cell.label_educa.text = (eduval["education"]  as! String)
@@ -584,6 +618,13 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             cell.BTN_close.tag = indexPath.row
             cell.BTN_close.addTarget(self, action: #selector(closeedu), for: .touchUpInside)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.tbl_commtype == tableView {
+            self.textfield_commtype.text = self.comm_type[indexPath.row]
+            self.tbl_commtype.isHidden = true
         }
     }
     
@@ -599,7 +640,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 69
+         if self.tbl_commtype == tableView {
+            return 40
+         }else{
+            return 69
+        }
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -683,6 +729,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.view_edudate.isHidden = true
+               self.tbl_commtype.isHidden = true
+               self.view_expire.isHidden = true
         if coll_pettype == collectionView {
             if self.ispethandle[indexPath.row] == "1" {
                 self.ispethandle.remove(at: indexPath.row)
@@ -947,19 +996,31 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                        let Data = resp["Data"] as! NSDictionary
                        let specialzation = Data["specialzation"] as! NSArray
                        let pet_handle = Data["pet_handle"] as! NSArray
+                    let comm_type_arr = Data["communication_type"] as! NSArray
                        self.specialza.removeAll()
                        self.pethandle.removeAll()
                        self.orgpethandle.removeAll()
                        self.orgspecialza.removeAll()
                        self.isspecialza.removeAll()
                        self.ispethandle.removeAll()
-                       for item in 0..<pet_handle.count{
-                           let pb = pet_handle[item] as! NSDictionary
-                           let pbv = pb["pet_handle"] as! String
-                           self.pethandle.append(pbv)
-                         self.ispethandle.append("0")
+                       self.comm_type.removeAll()
+                                  
+                    
+                    for item in 0..<comm_type_arr.count{
+                        let pb = comm_type_arr[item] as! NSDictionary
+                        let pbv = pb["com_type"] as! String
+                        let Value = pb["Value"] as! Int
+                        self.comm_type.append(pbv)
+                        self.comm_type_Value.append(String(Value))
+                    }
+                    
+                    for item in 0..<pet_handle.count{
+                        let pb = pet_handle[item] as! NSDictionary
+                        let pbv = pb["pet_handle"] as! String
+                        self.pethandle.append(pbv)
+                        self.ispethandle.append("0")
                         
-                       }
+                    }
                        for item in 0..<specialzation.count{
                            let pb = specialzation[item] as! NSDictionary
                            let pbv = pb["specialzation"] as! String
@@ -970,6 +1031,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                       self.orgpethandle = self.pethandle
                       self.coll_pettype.reloadData()
                       self.coll_speciali.reloadData()
+                      self.tbl_commtype.reloadData()
                       self.stopAnimatingActivityIndicator()
                      
                    }else{
@@ -1006,7 +1068,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "certificate_pic" :  Servicefile.shared.certifdicarray,
                    "govt_id_pic" : Servicefile.shared.govdicarray,
                    "photo_id_pic" : Servicefile.shared.photodicarray,
-                   "profile_status" : 1,
+                   "profile_status" : true,
                    "profile_verification_status" : "Not verified",
                    "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
@@ -1070,5 +1132,37 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    func calldetailget(){
+              self.startAnimatingActivityIndicator()
+    if Servicefile.shared.updateUserInterface() {
+        AF.request(Servicefile.petdetailget, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        switch (response.result) {
+        case .success:
+            let resp = response.value as! NSDictionary
+            print("display data",resp)
+            let Code  = resp["Code"] as! Int
+            if Code == 200 {
+                let Data = resp["Data"] as! NSDictionary
+               
+             
+                 self.stopAnimatingActivityIndicator()
+              
+            }else{
+                 self.stopAnimatingActivityIndicator()
+                print("status code service denied")
+            }
+            break
+        case .failure(let Error):
+            self.stopAnimatingActivityIndicator()
+            print("Can't Connect to Server / TimeOut",Error)
+            break
+        }        }
+    }else{
+                  self.stopAnimatingActivityIndicator()
+                  self.alert(Message: "No Intenet Please check and try again ")
+              }
+          }
+    
    }
  

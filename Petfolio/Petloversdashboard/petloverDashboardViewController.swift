@@ -24,7 +24,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_denypop: UIView!
     @IBOutlet weak var view_allowpop: UIView!
-    
+    var doc = 0
+    var pro = 0
+    var ser = 0
     
     
     override func viewDidLoad() {
@@ -70,6 +72,17 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
               self.present(vc, animated: true, completion: nil)
     }
+    
+    @IBAction func action_DocSeeMore(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+                    self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -200,11 +213,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     func callpetdash(){
            self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard, method: .post, parameters:
-        [   "user_id" : Servicefile.shared.userid,
-        "lat" : 12.09090,
-        "long" : 80.09093,
-        "user_type" : 1 ,
-        "address" : "Muthamil nager, Kodugaiyur, Chennai - 600 118"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        ["user_id" : Servicefile.shared.userid,
+         "lat" : 12.09090,
+         "long" : 80.09093,
+         "user_type" : 1 ,
+         "address" : "Muthamil nager, Kodugaiyur, Chennai - 600 118",
+         "Doctor": self.doc,
+         "Product" : self.pro,
+         "service" : self.ser], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                switch (response.result) {
                                                case .success:
                                                      let res = response.value as! NSDictionary
@@ -242,6 +258,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                             let title =  Bval["title"] as! String
                                                             Servicefile.shared.petbanner.append(Petdashbanner.init(UID: id, img_path: imgpath, title: title))
                                                         }
+                                                      
+                                                        
                                                         Servicefile.shared.petdoc.removeAll()
                                                         let Doctor_details = dash["Doctor_details"] as! NSArray
                                                         for item in 0..<Doctor_details.count {
@@ -279,6 +297,13 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                             Servicefile.shared.petser.append(Petdashservice.init(UID: id, background_color: background_color, service_icon: service_icon, service_title: service_title))
                                                         }
                                                         
+                                                        Servicefile.shared.sosnumbers.removeAll()
+                                                        let SOS = Data["SOS"] as! NSArray
+                                                        for item in 0..<SOS.count {
+                                                            let Bval = SOS[item] as! NSDictionary
+                                                            let Number = String(Bval["Number"] as! Int)
+                                                            Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: Number))
+                                                        }
                                                         Servicefile.shared.pet_petlist.removeAll()
                                                         
                                                         let pet_details = Data["PetDetails"] as! NSArray
@@ -299,9 +324,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                             let vaccinated = Bval["vaccinated"] as! Bool
                                                             Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id))
                                                         }
-                                                        
-                                                       
-                                                        
+                                                        if  Servicefile.shared.petdoc.count == 0 {
+//                                                            let alert = UIAlertController(title: "Alert", message: "", preferredStyle: .alert)
+//                                                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                                                                self.doc = 1
+//                                                                self.callpetdash()
+//                                                                 }))
+//                                                            self.present(alert, animated: true, completion: nil)
+                                                        }
                                                         self.colleView_banner.reloadData()
                                                         self.colleView_Doctor.reloadData()
                                                         self.colleView_product.reloadData()

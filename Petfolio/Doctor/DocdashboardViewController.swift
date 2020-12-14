@@ -423,8 +423,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                       let Code  = res["Code"] as! Int
                                                       if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
-                                                        let profile_status = Data["profile_status"] as! Int
-                                                        if profile_status == 0 {
+                                                        let profile_status = Data["profile_status"] as! Bool
+                                                        if profile_status == false {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
                                                                    self.present(vc, animated: true, completion: nil)
                                                         }else {

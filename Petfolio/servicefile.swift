@@ -57,6 +57,7 @@ class Servicefile {
     static let pet_defaultaddress =  baseurl + "/api/locationdetails/default/edit"
     static let pet_deleteaddress =  baseurl + "/api/locationdetails/delete"
     static let pet_updateimage =  baseurl + "/api/petdetails/edit"
+    static let pet_search = baseurl + "/api/doctordetails/text_search"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -98,7 +99,11 @@ class Servicefile {
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
     // pet dashboard
-    
+    // seemore
+    var moredocd = [moredoc]()
+    var specd = [spec]()
+    var sosnumbers = [sosnumber]()
+    // see more
     // pet appointment params
     
             var pet_apoint_doctor_id = ""
@@ -568,5 +573,58 @@ struct locationdetails{
 }
 
 
+struct moredoc{
+    var _id : String
+    var clinic_loc : String
+    var clinic_name : String
+    var communication_type : String
+    var distance : String
+    var doctor_img : String
+    var doctor_name : String
+    var dr_title : String
+    var review_count : String
+    var star_count : String
+    var user_id : String
+    var specialization : [spec]
+    init(I_id : String
+    , I_clinic_loc : String
+    , I_clinic_name : String
+    , I_communication_type : String
+    , I_distance : String
+    , I_doctor_img : String
+    , I_doctor_name : String
+    , I_dr_title : String
+    , I_review_count : String
+    , I_star_count : String
+    , I_user_id : String
+    , I_specialization : [spec]) {
+        self._id = I_id
+        self.clinic_loc = I_clinic_loc
+         self.clinic_name = I_clinic_name
+         self.communication_type = I_communication_type
+         self.distance = I_distance
+         self.doctor_img = I_doctor_img
+         self.doctor_name = I_doctor_name
+         self.dr_title = I_dr_title
+         self.review_count = I_review_count
+         self.star_count = I_star_count
+         self.user_id = I_user_id
+         self.specialization = I_specialization
+    }
+}
 
+struct spec {
+    var sepcial : String
+    init(i_spec: String) {
+        self.sepcial = i_spec
+    }
+}
 
+struct sosnumber {
+    var number : String
+    init(i_number: String) {
+        self.number = i_number
+    }
+}
+
+        

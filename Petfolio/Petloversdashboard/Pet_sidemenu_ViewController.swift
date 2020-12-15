@@ -12,8 +12,8 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
 
     @IBOutlet weak var tbl_menulist: UITableView!
     
-    var labelmenu = ["My Appointment"]
-    var imgmenu = ["Calendar"]
+    var labelmenu = ["My Appointment", "Logout"]
+    var imgmenu = ["Calendar", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,18 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
-        self.present(vc, animated: true, completion: nil)
+        if self.labelmenu[indexPath.row] == "My Appointment"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+                   self.present(vc, animated: true, completion: nil)
+        }else{
+            UserDefaults.standard.set("", forKey: "userid")
+                   UserDefaults.standard.set("", forKey: "usertype")
+                   Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                   Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                   self.present(vc, animated: true, completion: nil)
+        }
+       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

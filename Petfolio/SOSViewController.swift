@@ -15,26 +15,32 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var view_img: UIView!
     @IBOutlet weak var img_sos: UIImageView!
     @IBOutlet weak var tbl_calllist: UITableView!
+    @IBOutlet weak var view_call: UIView!
+    
     var sel = ["0"]
     var issel = ["0"]
+    var phono = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sel.removeAll()
         self.issel.removeAll()
         for itm in 0..<Servicefile.shared.sosnumbers.count{
             if itm == 0 {
-                self.sel.append("1")
                 self.issel.append("1")
+                self.phono = Servicefile.shared.sosnumbers[itm].number
             }else{
-                self.sel.append("0")
                 self.issel.append("0")
             }
+            self.sel.append("0")
         }
         self.tbl_calllist.delegate = self
         self.tbl_calllist.dataSource = self
         self.view_main.layer.cornerRadius = 15.0
+        self.view_img.dropShadow()
         self.view_img.layer.cornerRadius = self.view_img.frame.width / 2
         self.img_sos.layer.cornerRadius = self.img_sos.frame.width / 2
+        self.view_call.layer.cornerRadius = 15.0
+        self.view_call.dropShadow()
     }
     
     @IBAction func action_close(_ sender: Any) {
@@ -53,15 +59,19 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! sosTableViewCell
         if self.issel[indexPath.row] == "1" {
             cell.label_contact.textColor = UIColor.white
+             cell.label_phno.textColor = UIColor.white
             cell.label_phno.text = Servicefile.shared.sosnumbers[indexPath.row].number
             cell.view_sos.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: "#ED3558")
+            cell.view_sos.dropShadow()
         }else{
             cell.label_contact.textColor = UIColor.black
              cell.label_phno.textColor = UIColor.black
             cell.label_phno.text = Servicefile.shared.sosnumbers[indexPath.row].number
             cell.view_sos.backgroundColor = UIColor.white
+            cell.view_sos.removeshadow()
         }
         cell.view_sos.layer.cornerRadius = 15.0
+        
         return cell
     }
     
@@ -77,7 +87,8 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     @IBAction func action_call(_ sender: Any) {
-        
+        let url = URL(string: "tel://\(phono)")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
+		B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */; };
+		B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */; };
+		B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C6702588C6AD00B09126 /* filterTableViewCell.swift */; };
 		B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79925666FE20004DB4D /* locationsettingViewController.swift */; };
 		B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */; };
 		B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */; };
@@ -17,6 +20,7 @@
 		B020D0A825873CF9008F5C7B /* searchlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A725873CF9008F5C7B /* searchlistTableViewCell.swift */; };
 		B020D0AA25878641008F5C7B /* SOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A925878641008F5C7B /* SOSViewController.swift */; };
 		B020D0AC25878BDF008F5C7B /* sosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0AB25878BDF008F5C7B /* sosTableViewCell.swift */; };
+		B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */; };
 		B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */; };
 		B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */; };
 		B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */; };
@@ -118,6 +122,9 @@
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.debug.xcconfig"; sourceTree = "<group>"; };
+		B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchpetloverappointmentViewController.swift; sourceTree = "<group>"; };
+		B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetfilterpageViewController.swift; sourceTree = "<group>"; };
+		B008C6702588C6AD00B09126 /* filterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterTableViewCell.swift; sourceTree = "<group>"; };
 		B00AB79925666FE20004DB4D /* locationsettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsettingViewController.swift; sourceTree = "<group>"; };
 		B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savelocationViewController.swift; sourceTree = "<group>"; };
 		B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_selectdoctordateCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -127,6 +134,7 @@
 		B020D0A725873CF9008F5C7B /* searchlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchlistTableViewCell.swift; sourceTree = "<group>"; };
 		B020D0A925878641008F5C7B /* SOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSViewController.swift; sourceTree = "<group>"; };
 		B020D0AB25878BDF008F5C7B /* sosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sosTableViewCell.swift; sourceTree = "<group>"; };
+		B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchtoclinicdetailViewController.swift; sourceTree = "<group>"; };
 		B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_prescriptionViewController.swift; sourceTree = "<group>"; };
 		B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_labelTableViewCell.swift; sourceTree = "<group>"; };
 		B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_textfieldactionTableViewCell.swift; sourceTree = "<group>"; };
@@ -318,6 +326,10 @@
 				B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */,
 				B020D0A525872C25008F5C7B /* Pet_searchlist_DRViewController.swift */,
 				B020D0A725873CF9008F5C7B /* searchlistTableViewCell.swift */,
+				B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */,
+				B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */,
+				B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */,
+				B008C6702588C6AD00B09126 /* filterTableViewCell.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -742,6 +754,7 @@
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
 				B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */,
+				B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */,
 				B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */,
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				B094D253255C24CE008400D6 /* UsertypeViewController.swift in Sources */,
@@ -753,6 +766,7 @@
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */,
 				B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */,
 				B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */,
 				B0486498256BE07D0038A71D /* holidaysTableViewCell.swift in Sources */,
@@ -767,6 +781,7 @@
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,
 				B020D0A625872C25008F5C7B /* Pet_searchlist_DRViewController.swift in Sources */,
+				B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */,
 				B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */,
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */,
@@ -775,6 +790,7 @@
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
 				B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */,
+				B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,

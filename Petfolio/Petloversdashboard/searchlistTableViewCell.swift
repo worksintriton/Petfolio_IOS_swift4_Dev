@@ -18,6 +18,7 @@ class searchlistTableViewCell: UITableViewCell {
     @IBOutlet weak var label_likes: UILabel!
     @IBOutlet weak var label_rating: UILabel!
     @IBOutlet weak var btn_book: UIButton!
+    @IBOutlet weak var view_book: UIView!
     
     
     override func awakeFromNib() {

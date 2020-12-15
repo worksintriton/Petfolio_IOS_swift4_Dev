@@ -12,8 +12,8 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
 
     @IBOutlet weak var tbl_menulist: UITableView!
     
-    var labelmenu = ["My calender"]
-    var imgmenu = ["calender-menu"]
+    var labelmenu = ["My calender", "Logout"]
+    var imgmenu = ["Calendar", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,22 +44,22 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycalenderViewController") as! mycalenderViewController
         self.present(vc, animated: true, completion: nil)
+        }else{
+            UserDefaults.standard.set("", forKey: "userid")
+                   UserDefaults.standard.set("", forKey: "usertype")
+                   Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                   Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                   self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
 }

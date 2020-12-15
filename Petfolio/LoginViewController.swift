@@ -85,6 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                            Servicefile.shared.userid = user_details["_id"] as! String
                                                            
                                                            
+                                                           
                                                            print("user id",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)
@@ -134,4 +135,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
        }
   
 
+}
+
+extension UIView {
+  func dropShadow() {
+    layer.shadowColor = UIColor.gray.cgColor
+    layer.shadowOpacity = 0.5
+    layer.shadowOffset = CGSize.zero
+    layer.shadowRadius = 3
+  }
+    func removeshadow(){
+        layer.shadowColor = UIColor.white.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 0
+    }
 }

@@ -50,6 +50,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
        
     
     @IBAction func skipaction(_ sender: Any) {
+        
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
               if  UserDefaults.standard.string(forKey: "usertype") != "" {
                 

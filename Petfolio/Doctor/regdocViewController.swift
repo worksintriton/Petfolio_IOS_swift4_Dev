@@ -528,6 +528,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.tbl_commtype.isHidden = true
         if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
+        } else if self.textfield_commtype.text == "" {
+            self.alert(Message: "please Select the Communication Type")
         } else if Servicefile.shared.edudicarray.count == 0 {
              self.alert(Message: "please enter the Education details")
         } else if Servicefile.shared.expdicarray.count == 0 {
@@ -548,6 +550,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "Please select the certificate")
         }else{
             print("user_id" , Servicefile.shared.userid,
+                  "communication_type",self.textfield_commtype.text!,
                    "dr_title" , "",
                    "dr_name" , "",
                    "clinic_name" , self.textfield_clinicname.text!,
@@ -1057,6 +1060,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "dr_title" : "Dr",
                    "dr_name" : Servicefile.shared.first_name,
                    "clinic_name" : self.textfield_clinicname.text!,
+                   "communication_type": self.textfield_commtype.text!,
                    "clinic_loc" : self.textview_clinicaddress.text!,
                    "clinic_lat" : self.latitude,
                    "clinic_long" : self.longitude,

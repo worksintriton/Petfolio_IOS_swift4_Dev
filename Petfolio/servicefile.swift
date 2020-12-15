@@ -58,6 +58,7 @@ class Servicefile {
     static let pet_deleteaddress =  baseurl + "/api/locationdetails/delete"
     static let pet_updateimage =  baseurl + "/api/petdetails/edit"
     static let pet_search = baseurl + "/api/doctordetails/text_search"
+    static let filter = baseurl + "/api/doctordetails/filter_doctor"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -128,7 +129,7 @@ class Servicefile {
             var pet_apoint_appointment_types = ""
             var pet_apoint_allergies = ""
             var pet_apoint_amount = ""
-    
+    var sear_Docapp_id = ""
     // pet appointment params
     var pet_index = 0
     var pet_status = ""

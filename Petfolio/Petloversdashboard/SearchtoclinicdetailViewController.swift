@@ -1,15 +1,15 @@
 //
-//  petlov_DocselectViewController.swift
+//  SearchtoclinicdetailViewController.swift
 //  Petfolio
 //
-//  Created by sriram ramachandran on 24/11/20.
+//  Created by sriram ramachandran on 15/12/20.
 //  Copyright © 2020 sriram ramachandran. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var label_clinicname: UILabel!
     @IBOutlet weak var label_clinicdetails: UILabel!
@@ -45,7 +45,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.coll_imgview.isPagingEnabled = true
         self.view_book.layer.cornerRadius = 15.0
         // Do any additional setup after loading the view.
-     print("selected doctor details",Servicefile.shared.petdoc[Servicefile.shared.selectedindex])
+     print("selected doctor details",Servicefile.shared.sear_Docapp_id)
                // Do any additional setup after loading the view.
                self.calldocdetails()
            }
@@ -90,15 +90,15 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     }
     
     @IBAction func action_book(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
-                      self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchpetloverappointmentViewController") as! searchpetloverappointmentViewController
+               self.present(vc, animated: true, completion: nil)
     }
       
              func calldocdetails(){
                   Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                  self.startAnimatingActivityIndicator()
               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_fetchdocdetails, method: .post, parameters:
-                 ["user_id": Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                 ["user_id": Servicefile.shared.sear_Docapp_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                      switch (response.result) {
                                                      case .success:
                                                            let res = response.value as! NSDictionary

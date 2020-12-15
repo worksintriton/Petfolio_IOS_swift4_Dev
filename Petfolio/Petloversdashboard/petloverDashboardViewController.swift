@@ -24,15 +24,21 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_denypop: UIView!
     @IBOutlet weak var view_allowpop: UIView!
+    @IBOutlet weak var pagecontrol: UIPageControl!
     var doc = 0
     var pro = 0
     var ser = 0
+    var pagcount = 0
+    var timer = Timer()
+    var refreshControl = UIRefreshControl()
+    @IBOutlet weak var scrollview: UIScrollView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view_footer.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_footer.dropShadow()
         self.view_popup.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.view_denypop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
         self.view_allowpop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
@@ -49,6 +55,44 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
          self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
         // Do any additional setup after loading the view.
+    refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+           scrollview.addSubview(refreshControl) // not required when using UITableViewController
+        }
+
+        @objc func refresh(_ sender: AnyObject) {
+           self.callpetdash()
+        }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer.invalidate()
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    
+    @IBAction func action_care(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        if Servicefile.shared.petbanner.count > 0 {
+            self.pagcount += 1
+            if self.pagcount == Servicefile.shared.petbanner.count {
+                self.pagcount = 0
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+            }else{
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+            }
+            self.pagecontrol.currentPage = self.pagcount
+            //            print("data collection process",self.pagcount)
+        }
     }
     
     
@@ -332,6 +376,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
 //                                                                 }))
 //                                                            self.present(alert, animated: true, completion: nil)
                                                         }
+                                                        self.pagecontrol.numberOfPages = Servicefile.shared.petbanner.count
+                                                        self.startTimer()
+                                                        self.refreshControl.endRefreshing()
                                                         self.colleView_banner.reloadData()
                                                         self.colleView_Doctor.reloadData()
                                                         self.colleView_product.reloadData()
@@ -356,12 +403,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     
     @IBAction func actionl_ogout(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "userid")
-        UserDefaults.standard.set("", forKey: "usertype")
-        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
-        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(vc, animated: true, completion: nil)
+       
     }
     
     

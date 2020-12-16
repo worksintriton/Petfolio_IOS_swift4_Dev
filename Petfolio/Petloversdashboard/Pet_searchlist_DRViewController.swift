@@ -36,6 +36,12 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.textfield_search.delegate = self
     }
     
+    
+    @IBAction func action_sos(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+           self.present(vc, animated: true, completion: nil)
+       }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_search.resignFirstResponder()
         return true

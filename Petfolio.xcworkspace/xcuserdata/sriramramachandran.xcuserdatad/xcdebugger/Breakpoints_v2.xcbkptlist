@@ -30,8 +30,8 @@
             filePath = "Petfolio/Doctor/regdocViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "action_photoimg(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -81,6 +81,70 @@
             startingLineNumber = "54"
             endingLineNumber = "54"
             landmarkName = "skipaction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - eae66fdbec620382"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Petfolio.Pet_applist_ViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Petfolio"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sriramramachandran/Documents/Triton/R&amp;D/Petfolio/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "2112">
+               </Location>
+               <Location
+                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - eae66fdbec620382"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Petfolio.Pet_applist_ViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Petfolio"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sriramramachandran/Documents/Triton/R&amp;D/Petfolio/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "2560">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C79353E-04D4-421D-AEF2-E47267C5BF95"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Petloversdashboard/ReviewRateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "callupdaterateandreview()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

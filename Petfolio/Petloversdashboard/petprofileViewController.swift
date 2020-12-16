@@ -33,6 +33,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
        
     }

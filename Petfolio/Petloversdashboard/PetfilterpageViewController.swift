@@ -29,6 +29,8 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         self.view_apply.layer.cornerRadius = 10.0
         self.view_clearall.layer.cornerRadius = 10.0
+        self.view_apply.dropShadow()
+        self.view_clearall.dropShadow()
         self.callpetdetails()
         self.tbl_spec.delegate = self
         self.tbl_spec.dataSource = self

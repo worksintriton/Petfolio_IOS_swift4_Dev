@@ -1,6 +1,7 @@
 PODS:
   - AAMaterialSpinner (0.1.2)
   - Alamofire (5.2.2)
+  - Cosmos (23.0.0)
   - Firebase/Analytics (6.33.0):
     - Firebase/Core
   - Firebase/Core (6.33.0):
@@ -100,6 +101,7 @@ PODS:
 DEPENDENCIES:
   - AAMaterialSpinner (= 0.1.2)
   - Alamofire
+  - Cosmos (~> 23.0)
   - Firebase/Analytics
   - Firebase/Messaging
   - FSCalendar
@@ -113,6 +115,7 @@ SPEC REPOS:
   trunk:
     - AAMaterialSpinner
     - Alamofire
+    - Cosmos
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -136,6 +139,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AAMaterialSpinner: deae5c969a5e13ba096e65561d4e57dfd541d5fa
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
   FirebaseAnalytics: 5dd088bd2e67bb9d13dbf792d1164ceaf3052193
   FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
@@ -156,6 +160,6 @@ SPEC CHECKSUMS:
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: aacb118762f24f622c8a77fd36a68989f542f00b
+PODFILE CHECKSUM: 29fcce4055d7eaac3010ac2b98fb6c603adecca4
 
 COCOAPODS: 1.10.0

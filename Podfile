@@ -14,7 +14,7 @@ target 'Petfolio' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'FSCalendar'
-	
+  pod 'Cosmos', '~> 23.0'
   # Pods for Petfolio
 	
   target 'PetfolioTests' do

@@ -26,6 +26,7 @@ class Doc_pres_textfieldactionTableViewCell: UITableViewCell, UITextFieldDelegat
         self.textfield_medi.addTarget(self, action: #selector(textFieldmediTyping), for: .editingChanged)
         self.textfield_noofdays.addTarget(self, action: #selector(textFieldnoofdayTyping), for: .editingChanged)
         self.conspdays.addTarget(self, action: #selector(textFieldTyping), for: .editingChanged)
+        self.btn_add.addTarget(self, action: #selector(returntext), for: .touchUpInside)
     }
     
     @objc func textFieldmediTyping(textField:UITextField)
@@ -39,6 +40,12 @@ class Doc_pres_textfieldactionTableViewCell: UITableViewCell, UITextFieldDelegat
     @objc func textFieldTyping(textField:UITextField)
     {
         Servicefile.shared.consdays = self.conspdays.text!
+    }
+    
+    @objc func returntext(sender: UIButton){
+        self.textfield_medi.resignFirstResponder()
+        self.textfield_noofdays.resignFirstResponder()
+        self.conspdays.resignFirstResponder()
     }
     
     

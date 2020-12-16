@@ -49,7 +49,11 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                // Do any additional setup after loading the view.
                self.calldocdetails()
            }
-          
+    
+          @IBAction func action_sos(_ sender: Any) {
+              let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+              self.present(vc, animated: true, completion: nil)
+          }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -133,15 +137,25 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                             self.dr_name = Data["dr_name"] as! String
                                                             self.dr_title = Data["dr_title"] as! String
                                                             var strcount = Data["star_count"] as! Int
+                                                            var r_count =  Data["review_count"] as! Int
                                                             self.star_count = String(strcount)
+                                                            let rcount = String(r_count)
+                                                            if self.star_count == "" {
+                                                                self.Label_ratingval.text = "0"
+                                                            }else{
+                                                                self.Label_ratingval.text = self.star_count
+                                                            }
+                                                            if rcount == "" {
+                                                                self.label_Noofcomments.text = "0"
+                                                            }else{
+                                                                self.label_Noofcomments.text = rcount
+                                                            }
                                                             
-                                                           
                                                             self.label_clinicdetails.text = self.clinic_name
-                                                              
-//                                                               self.label_city.text = ""
-//                                                               self.label_distance.text = ""
-                                                               self.label_Noofcomments.text = "0"
-                                                               self.Label_ratingval.text = "0"
+                                                            
+                                                            //                                                               self.label_city.text = ""
+                                                            //                                                               self.label_distance.text = ""
+                                                                                                                         
                                                             self.label_specdetails.text = specarray
                                                             self.label_descrption.text = self.descri
                                                              self.stopAnimatingActivityIndicator()

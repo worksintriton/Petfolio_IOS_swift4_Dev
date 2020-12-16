@@ -42,6 +42,12 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         self.callgetdatedetails()
     }
     
+    @IBAction func action_sos(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+           self.present(vc, animated: true, completion: nil)
+       }
+    
+    
     @IBAction func action_back(_ sender: Any) {
          self.dismiss(animated: true, completion: nil)
      }

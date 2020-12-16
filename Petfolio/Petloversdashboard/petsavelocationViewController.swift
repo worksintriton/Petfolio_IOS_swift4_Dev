@@ -90,6 +90,11 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_pincode.resignFirstResponder()
         self.textfield_cityname.resignFirstResponder()

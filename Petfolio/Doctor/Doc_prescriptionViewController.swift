@@ -18,6 +18,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var label_popup: UILabel!
     @IBOutlet weak var view_btn: UIView!
+    @IBOutlet weak var view_submit: UIView!
     
     
     override func viewDidLoad() {
@@ -29,7 +30,11 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.view_popup.isHidden = true
         self.view_popup.layer.cornerRadius = 10.0
         self.view_btn.layer.cornerRadius = 10.0
+         self.view_submit.layer.cornerRadius = 10.0
+        self.view_submit.dropShadow()
+        self.view_btn.dropShadow()
         self.textview_descrip.delegate = self
+        self.textview_descrip.text = "Write here..."
         // Do any additional setup after loading the view.
     }
     
@@ -59,29 +64,35 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         return true
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textview_descrip.text == "Write here..."{
+            self.textview_descrip.text = ""
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return Servicefile.shared.Doc_pres.count
+            return 1
         }else{
-             return 1
+              return Servicefile.shared.Doc_pres.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-                   let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
-            let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-            cell.label_medi.text = presdata["Tablet_name"] as! String
-            cell.label_consp.text = presdata["consumption"] as! String
-            cell.label_noofdays.text = presdata["Quantity"] as! String
-                          return cell
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Doc_pres_textfieldactionTableViewCell
+                      cell.textfield_medi.text = ""
+                      cell.textfield_noofdays.text = ""
+                      cell.conspdays.text = ""
+                      cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
+                                     return cell
                }else{
-                    let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Doc_pres_textfieldactionTableViewCell
-            cell.textfield_medi.text = ""
-            cell.textfield_noofdays.text = ""
-            cell.conspdays.text = ""
-            cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
-                           return cell
+                  let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
+                  let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
+                  cell.label_medi.text = presdata["Tablet_name"] as! String
+                  cell.label_consp.text = presdata["consumption"] as! String
+                  cell.label_noofdays.text = presdata["Quantity"] as! String
+                                return cell
                }
        
     }

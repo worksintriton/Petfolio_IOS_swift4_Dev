@@ -122,6 +122,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_submit.layer.cornerRadius = 15.0
         self.view_popup.layer.cornerRadius = 10.0
         self.view_action.layer.cornerRadius = 10.0
+        self.view_action.dropShadow()
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         
@@ -244,12 +245,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         documentPicker.delegate = self
         documentPicker.present(documentPicker, animated: true, completion: nil)
     }
-
-
-//    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-//        print("view was cancelled")
-//        dismiss(animated: true, completion: nil)
-//    }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
            let senderdate = sender.date

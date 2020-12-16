@@ -17,6 +17,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var datepick_date: UIDatePicker!
     @IBOutlet weak var lbl_date: UILabel!
     @IBOutlet weak var view_submit: UIView!
+    @IBOutlet weak var view_date: UIView!
     
     
     var doc_selholiday = [""]
@@ -26,6 +27,9 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.callholidaylist()
         self.view_submit.layer.cornerRadius = 15.0
+        self.view_submit.dropShadow()
+        self.view_date.layer.cornerRadius = 15.0
+        self.view_date.dropShadow()
         self.doc_selholiday.removeAll()
         self.tbl_holidaylist.delegate = self
         self.tbl_holidaylist.dataSource = self
@@ -36,6 +40,9 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @objc func dateChange(_ sender: UIDatePicker) {
              let senderdate = sender.date
            let format = DateFormatter()

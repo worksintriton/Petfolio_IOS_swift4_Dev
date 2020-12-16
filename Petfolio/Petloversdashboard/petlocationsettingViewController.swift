@@ -43,6 +43,11 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
         self.textfield_search.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_search.resignFirstResponder()
         return true

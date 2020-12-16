@@ -11,6 +11,7 @@ import Alamofire
 
 class mycal_hoursViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var view_next: UIView!
     @IBOutlet weak var tbl_horlist: UITableView!
     var availhour = ["Monday"]
       var isavailhour = ["0"]
@@ -18,10 +19,17 @@ class mycal_hoursViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.callmycalender()
+        self.view_next.layer.cornerRadius = 10.0
+        self.view_next.dropShadow()
         self.tbl_horlist.delegate = self
         self.tbl_horlist.dataSource = self
          print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

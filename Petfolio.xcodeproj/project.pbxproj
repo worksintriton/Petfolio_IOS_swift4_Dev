@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
+		B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */; };
 		B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */; };
 		B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */; };
 		B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C6702588C6AD00B09126 /* filterTableViewCell.swift */; };
@@ -122,6 +123,7 @@
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.debug.xcconfig"; sourceTree = "<group>"; };
+		B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRateViewController.swift; sourceTree = "<group>"; };
 		B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchpetloverappointmentViewController.swift; sourceTree = "<group>"; };
 		B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetfilterpageViewController.swift; sourceTree = "<group>"; };
 		B008C6702588C6AD00B09126 /* filterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterTableViewCell.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */,
 				B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */,
 				B008C6702588C6AD00B09126 /* filterTableViewCell.swift */,
+				B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,
 				B094D21C255BDE82008400D6 /* Petfolio.xcdatamodeld in Sources */,
 				B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */,
+				B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */,
 				B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

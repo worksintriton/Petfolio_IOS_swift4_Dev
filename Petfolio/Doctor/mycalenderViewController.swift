@@ -29,7 +29,7 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tbl_availdays.delegate = self
         self.tbl_availdays.dataSource = self
         self.view_next.layer.cornerRadius = 15.0
-        
+        self.view_next.dropShadow()
         // Do any additional setup after loading the view.
     }
     
@@ -47,8 +47,13 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
-        self.present(vc, animated: true, completion: nil)
+       if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
+                   self.present(vc, animated: true, completion: nil)
+       }else {
+        self.alert(Message: "Please select the week days")
+        }
+       
     }
     
     @IBAction func sction_back(_ sender: Any) {

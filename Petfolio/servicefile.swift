@@ -130,6 +130,8 @@ class Servicefile {
             var pet_apoint_allergies = ""
             var pet_apoint_amount = ""
     var sear_Docapp_id = ""
+    
+    var pet_apoint_id = ""
     // pet appointment params
     var pet_index = 0
     var pet_status = ""
@@ -511,9 +513,11 @@ struct doc_Dash_petdetails{
     var user_id : String
     var pet_type : String
     var book_date_time : String
+    var user_rate : String
+    var user_feedback : String
    init(in_Appid : String, In_allergies : String, In_amount : String, In_appointment_types : String,
    In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
-   In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String) {
+   In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String) {
     self.Appid = in_Appid
     self.allergies = In_allergies
     self.amount = In_amount
@@ -526,6 +530,8 @@ struct doc_Dash_petdetails{
     self.user_id = In_user_id
     self.pet_type = In_pet_type
     self.book_date_time = In_book_date_time
+    self.user_rate = In_userrate
+    self.user_feedback = In_userfeedback
    }
 }
 

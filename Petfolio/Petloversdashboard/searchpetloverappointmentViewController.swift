@@ -12,7 +12,7 @@ import Toucan
 import MobileCoreServices
 import SDWebImage
 
-class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITextViewDelegate {
+class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var textfield_selectpettype: UITextField!
     @IBOutlet weak var textfield_petname: UITextField!
@@ -20,12 +20,13 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var radio_normal: UIImageView!
     @IBOutlet weak var textview_descrip: UITextView!
     @IBOutlet weak var view_change: UIView!
-    @IBOutlet weak var coll_imag: UICollectionView!
     @IBOutlet weak var textfield_petbreed: UITextField!
     @IBOutlet weak var textfield_pettype: UITextField!
     @IBOutlet weak var textfield_alergies: UITextField!
+    @IBOutlet weak var view_pickupload: UIView!
     
     
+    @IBOutlet weak var image_petcurrent: UIImageView!
     @IBOutlet weak var view_discription: UIView!
     @IBOutlet weak var view_choose: UIView!
     @IBOutlet weak var view_petalergy: UIView!
@@ -37,18 +38,15 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var tblview_petdetail: UITableView!
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
-    
     var Pet_breed = [""]
       var pet_type = [""]
       var petid = [""]
      let imagepicker = UIImagePickerController()
-    var petimage = [""]
+    var petimage = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
-        self.coll_imag.delegate = self
-        self.coll_imag.dataSource = self
         self.imagepicker.delegate = self
         self.tblview_petdetail.delegate = self
         self.tblview_petdetail.dataSource = self
@@ -57,6 +55,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.tblview_petbreed.delegate = self
         self.tblview_petbreed.dataSource = self
         self.view_change.layer.cornerRadius = 15.0
+        self.view_change.dropShadow()
         self.view_selectpet.layer.cornerRadius = 9.0
         self.view_pattype.layer.cornerRadius = 9.0
         self.view_petname.layer.cornerRadius = 9.0
@@ -77,12 +76,17 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textfield_petbreed.delegate = self
         self.textfield_selectpettype.delegate = self
         self.textview_descrip.delegate = self
+         
         self.textview_descrip.text = "Add comment here.."
         self.textview_descrip.textColor == UIColor.lightGray
-        
+        self.petimage = Servicefile.shared.sampleimag
+        self.setuploadimg()
     }
     
-   
+   @IBAction func action_sos(_ sender: Any) {
+             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+             self.present(vc, animated: true, completion: nil)
+         }
    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -99,30 +103,10 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         return true
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-           return 1
-       }
-
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     return  Servicefile.shared.pet_apoint_doc_attched.count
-    }
+   
     
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "petappcell", for: indexPath)  as! imgidCollectionViewCell
-                   let imgdat = Servicefile.shared.pet_apoint_doc_attched[indexPath.row] as! NSDictionary
-                   print("clinic data in", imgdat)
-                   cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["file"] as! String))) { (image, error, cache, urls) in
-                                  if (error != nil) {
-                                      cell.Img_id.image = UIImage(named: "sample")
-                                  } else {
-                                      cell.Img_id.image = image
-                                  }
-                              }
-        cell.Img_id.layer.cornerRadius = 15.0
-                              return cell
-    }
+  
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_petname.resignFirstResponder()
@@ -140,7 +124,21 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         return 1
     }
     
-    
+    func setuploadimg(){
+        if self.petimage == "" {
+            self.image_petcurrent.image = UIImage(named: "sample")
+        }else{
+            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
+                       if (error != nil) {
+                           self.image_petcurrent.image = UIImage(named: "sample")
+                       } else {
+                           self.image_petcurrent.image = image
+                       }
+                   }
+                   self.image_petcurrent.layer.cornerRadius = 15.0
+        }
+       
+    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -201,13 +199,18 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                    self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
                     self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
                    self.textfield_petname.isUserInteractionEnabled = false
+            self.petimage = Servicefile.shared.pet_petlist[index].pet_img
+            self.view_pickupload.isHidden = true
         }else{
+           self.view_pickupload.isHidden = false
             self.textfield_selectpettype.text! = ""
                    self.textfield_petname.text = ""
                    self.textfield_pettype.text = ""
                     self.textfield_petbreed.text = ""
                    self.textfield_petname.isUserInteractionEnabled = true
+            self.petimage = ""
         }
+        self.setuploadimg()
     }
     
     @IBAction func action_change(_ sender: Any) {
@@ -322,8 +325,8 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                              print(B)
                              Servicefile.shared.pet_apoint_doc_attched = B
                             print("uploaded data in clinic",Servicefile.shared.pet_apoint_doc_attched)
-                        
-                        self.coll_imag.reloadData()
+                        self.petimage = Data
+                        self.setuploadimg()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -353,7 +356,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
              self.alert(Message: "please enter the description")
         }else if self.textview_descrip.text == "Add comment here.." {
              self.alert(Message: "please enter the description")
-        }else if Servicefile.shared.pet_apoint_doc_attched.count == 0{
+        }else if self.petimage == ""{
              self.alert(Message: "please upload the")
         }else{
             print("details for complettion")
@@ -365,7 +368,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             var booking_date = format.string(from: date)
             var booking_time = tformat.string(from: date)
             
-            Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.sear_Docapp_id
+            Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
             Servicefile.shared.pet_apoint_booking_date = Servicefile.shared.ddMMyyyystringformat(date: Date())
             Servicefile.shared.pet_apoint_booking_time = Servicefile.shared.hhmmastringformat(date: Date())
             Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
@@ -399,7 +402,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
            self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
            ["user_id" : Servicefile.shared.userid,
-            "pet_img" : Servicefile.shared.sampleimag,
+            "pet_img" : self.petimage,
            "pet_name" : self.textfield_petname.text!,
            "pet_type" : self.textfield_pettype.text!,
            "pet_breed" : self.textfield_petbreed.text!,
@@ -476,7 +479,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                   }
                   self.tblview_pettype.reloadData()
                   self.tblview_petbreed.reloadData()
-               
                    self.stopAnimatingActivityIndicator()
                 
               }else{

@@ -11,13 +11,21 @@ import UIKit
 class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tbl_menulist: UITableView!
-    
+    @IBOutlet weak var imag_user: UIImageView!
+       @IBOutlet weak var label_user: UILabel!
+       @IBOutlet weak var label_email: UILabel!
+      
     var labelmenu = ["My Appointment", "Logout"]
     var imgmenu = ["Calendar", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
+               self.label_email.text = Servicefile.shared.user_email
+              // self.label_phono.text = Servicefile.shared.user_phone
+        
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         // Do any additional setup after loading the view.

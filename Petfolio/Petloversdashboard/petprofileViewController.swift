@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 class petprofileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
@@ -30,7 +31,16 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.coll_petlist.delegate = self
         self.coll_petlist.dataSource = self
         self.callpetdash()
-        // Do any additional setup after loading the view.
+        self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
+        self.label_email.text = Servicefile.shared.user_email
+        self.label_phono.text = Servicefile.shared.user_phone
+//        self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
+//                       if (error != nil) {
+//                           self.imag_user.image = UIImage(named: "sample")
+//                       } else {
+//                           self.imag_user.image = image
+//                       }
+//                   }
     }
     
     @IBAction func action_sos(_ sender: Any) {

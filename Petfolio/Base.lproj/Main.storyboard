@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZDp-Xu-N0b">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -19749,10 +19749,10 @@
             </objects>
             <point key="canvasLocation" x="11899" y="834"/>
         </scene>
-        <!--View Controller-->
+        <!--Reg View Controller-->
         <scene sceneID="W5p-ot-Hgv">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZDp-Xu-N0b" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SP_Reg_ViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZDp-Xu-N0b" customClass="SP_Reg_ViewController" customModule="Petfolio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pvH-HG-qMK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="2196"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19795,7 +19795,6 @@
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <connections>
                                                             <action selector="action_afterappBooked:" destination="sYM-WR-wwd" eventType="touchUpInside" id="APy-cU-5pw"/>
-                                                            <action selector="action_backtologin:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="7sm-sR-I6t"/>
                                                             <action selector="action_book:" destination="rjk-Eb-jav" eventType="touchUpInside" id="8zF-Bi-hWa"/>
                                                             <action selector="action_changeUT:" destination="UUD-ui-ZKO" eventType="touchUpInside" id="BRh-1J-YF8"/>
                                                         </connections>
@@ -19871,7 +19870,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAN-fg-tSg">
                                                                 <rect key="frame" x="30" y="0.0" width="350" height="52"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Clinic name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cCs-UQ-ysg">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cCs-UQ-ysg">
                                                                         <rect key="frame" x="8" y="8" width="325" height="36"/>
                                                                         <color key="textColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -19972,7 +19971,7 @@
                                                                             </collectionViewCell>
                                                                         </cells>
                                                                     </collectionView>
-                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stI-41-sMa">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stI-41-sMa">
                                                                         <rect key="frame" x="17.5" y="169" width="315" height="35"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pet type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5J-sS-p5v">
@@ -19991,9 +19990,6 @@
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWb-94-sWP">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="63" height="31.5"/>
-                                                                                        <connections>
-                                                                                            <action selector="action_pethandle_add:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="BTZ-ru-HNu"/>
-                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
@@ -20141,9 +20137,6 @@
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WO-Br-opm">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="63" height="31.5"/>
-                                                                                        <connections>
-                                                                                            <action selector="action_speciali_add:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="1lR-PR-Ucr"/>
-                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
@@ -20227,7 +20220,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gX-Gh-wEE">
                                                                                 <rect key="frame" x="0.5" y="3.5" width="46" height="30"/>
                                                                                 <connections>
-                                                                                    <action selector="action_addclinicimg:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="FyM-Qf-QyL"/>
+                                                                                    <action selector="action_gallary_pic_upload:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="LYn-Fl-61T"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -20267,7 +20260,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="clinic" id="Xhq-fF-Vfo" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="Xhq-fF-Vfo" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3hd-OU-pIf">
@@ -20331,7 +20324,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OA0-32-YG1">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="46.5" height="37"/>
                                                                                 <connections>
-                                                                                    <action selector="action_photoimg:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="am2-p9-CL1"/>
+                                                                                    <action selector="action_photo_upload:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="uUT-qf-jKh"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -20367,53 +20360,24 @@
                                                                     <constraint firstItem="jOL-jZ-yES" firstAttribute="leading" secondItem="ucp-69-rij" secondAttribute="leading" constant="8" id="xDm-L7-jl8"/>
                                                                 </constraints>
                                                             </view>
-                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="R6Y-nP-wfC">
-                                                                <rect key="frame" x="30" y="97" width="384" height="128"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGi-Fa-oz7">
-                                                                    <size key="itemSize" width="128" height="128"/>
-                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                </collectionViewFlowLayout>
-                                                                <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoid" id="TN3-GF-pSi" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Wa1-k5-irf">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                            <subviews>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2uA-rq-Ys1">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                                </imageView>
-                                                                            </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="2uA-rq-Ys1" firstAttribute="height" secondItem="Wa1-k5-irf" secondAttribute="height" id="8QD-0a-u9H"/>
-                                                                                <constraint firstItem="2uA-rq-Ys1" firstAttribute="width" secondItem="Wa1-k5-irf" secondAttribute="width" id="F4T-k4-Bx6"/>
-                                                                                <constraint firstItem="2uA-rq-Ys1" firstAttribute="centerX" secondItem="Wa1-k5-irf" secondAttribute="centerX" id="dAN-w9-fKp"/>
-                                                                                <constraint firstItem="2uA-rq-Ys1" firstAttribute="centerY" secondItem="Wa1-k5-irf" secondAttribute="centerY" id="j4h-0d-xJL"/>
-                                                                            </constraints>
-                                                                        </collectionViewCellContentView>
-                                                                        <connections>
-                                                                            <outlet property="Img_id" destination="2uA-rq-Ys1" id="Or8-GR-4PE"/>
-                                                                        </connections>
-                                                                    </collectionViewCell>
-                                                                </cells>
-                                                            </collectionView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cub-NS-CKc">
+                                                                <rect key="frame" x="30" y="97" width="128" height="128"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="128" id="UeF-Mz-Jri"/>
+                                                                    <constraint firstAttribute="width" constant="128" id="i4O-cg-z1C"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="R6Y-nP-wfC" secondAttribute="bottom" constant="10" id="9u8-cy-c2G"/>
                                                             <constraint firstItem="ucp-69-rij" firstAttribute="leading" secondItem="2lN-0K-vkJ" secondAttribute="leading" id="Doc-Ma-tjB"/>
                                                             <constraint firstItem="ucp-69-rij" firstAttribute="leading" secondItem="5oa-g6-1Wd" secondAttribute="leading" constant="30" id="KR6-dX-3ab"/>
                                                             <constraint firstAttribute="height" constant="235" id="Lb2-Yn-SFm"/>
                                                             <constraint firstItem="ucp-69-rij" firstAttribute="top" secondItem="2lN-0K-vkJ" secondAttribute="bottom" constant="14" id="XgK-dB-evE"/>
-                                                            <constraint firstAttribute="trailing" secondItem="R6Y-nP-wfC" secondAttribute="trailing" id="aby-Iz-DoN"/>
                                                             <constraint firstAttribute="trailing" secondItem="ucp-69-rij" secondAttribute="trailing" constant="34" id="cPv-jD-5Ip"/>
-                                                            <constraint firstItem="R6Y-nP-wfC" firstAttribute="top" secondItem="ucp-69-rij" secondAttribute="bottom" constant="8" id="ctE-Kg-t5I"/>
-                                                            <constraint firstItem="R6Y-nP-wfC" firstAttribute="leading" secondItem="ucp-69-rij" secondAttribute="leading" id="eWn-QS-TdV"/>
+                                                            <constraint firstItem="Cub-NS-CKc" firstAttribute="leading" secondItem="ucp-69-rij" secondAttribute="leading" id="hOv-v5-NZd"/>
                                                             <constraint firstItem="2lN-0K-vkJ" firstAttribute="top" secondItem="5oa-g6-1Wd" secondAttribute="top" constant="2" id="kBI-JN-7g1"/>
+                                                            <constraint firstItem="Cub-NS-CKc" firstAttribute="top" secondItem="ucp-69-rij" secondAttribute="bottom" constant="8" id="rZS-cy-F2p"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="75E-xj-RaH">
@@ -20441,7 +20405,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fpk-vk-DhK">
                                                                                 <rect key="frame" x="0.5" y="3.5" width="46" height="30"/>
                                                                                 <connections>
-                                                                                    <action selector="action_addgovimg:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="vh3-QV-YQy"/>
+                                                                                    <action selector="action_gov_upload:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="KUl-iM-xKc"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -20477,51 +20441,22 @@
                                                                     <constraint firstAttribute="trailing" secondItem="21m-Sn-ICk" secondAttribute="trailing" constant="18" id="v1i-Dg-HTj"/>
                                                                 </constraints>
                                                             </view>
-                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fq4-Kc-So4">
-                                                                <rect key="frame" x="30" y="97" width="384" height="128"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SoX-2n-fCx">
-                                                                    <size key="itemSize" width="128" height="128"/>
-                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                </collectionViewFlowLayout>
-                                                                <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="govtid" id="B25-T9-j0C" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Yi8-O2-6Xd">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                            <subviews>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xra-I6-Zcl">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                                </imageView>
-                                                                            </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="Xra-I6-Zcl" firstAttribute="centerY" secondItem="Yi8-O2-6Xd" secondAttribute="centerY" id="7ay-wO-TDk"/>
-                                                                                <constraint firstItem="Xra-I6-Zcl" firstAttribute="width" secondItem="Yi8-O2-6Xd" secondAttribute="width" id="NyY-E6-ZYM"/>
-                                                                                <constraint firstItem="Xra-I6-Zcl" firstAttribute="height" secondItem="Yi8-O2-6Xd" secondAttribute="height" id="eLt-bk-t3j"/>
-                                                                                <constraint firstItem="Xra-I6-Zcl" firstAttribute="centerX" secondItem="Yi8-O2-6Xd" secondAttribute="centerX" id="fuh-7p-yIM"/>
-                                                                            </constraints>
-                                                                        </collectionViewCellContentView>
-                                                                        <connections>
-                                                                            <outlet property="Img_id" destination="Xra-I6-Zcl" id="udb-Je-qdU"/>
-                                                                        </connections>
-                                                                    </collectionViewCell>
-                                                                </cells>
-                                                            </collectionView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3MD-Lz-tYd">
+                                                                <rect key="frame" x="30" y="99" width="128" height="128"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="128" id="L2D-wU-3nz"/>
+                                                                    <constraint firstAttribute="width" constant="128" id="QNC-gD-bbe"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="Fq4-Kc-So4" secondAttribute="trailing" id="4PI-Mf-nKA"/>
                                                             <constraint firstItem="8Z7-uM-gdS" firstAttribute="top" secondItem="75E-xj-RaH" secondAttribute="top" constant="2" id="8KU-Bo-lDX"/>
-                                                            <constraint firstItem="Fq4-Kc-So4" firstAttribute="top" secondItem="sKo-ru-uyw" secondAttribute="bottom" constant="8" id="DJi-h3-900"/>
+                                                            <constraint firstItem="3MD-Lz-tYd" firstAttribute="top" secondItem="sKo-ru-uyw" secondAttribute="bottom" constant="10" id="9WQ-9b-DOh"/>
                                                             <constraint firstAttribute="height" constant="235" id="DNx-5E-xBt"/>
                                                             <constraint firstItem="sKo-ru-uyw" firstAttribute="leading" secondItem="75E-xj-RaH" secondAttribute="leading" constant="30" id="Fry-AJ-8dD"/>
+                                                            <constraint firstItem="3MD-Lz-tYd" firstAttribute="leading" secondItem="sKo-ru-uyw" secondAttribute="leading" id="U0Z-SD-ogX"/>
                                                             <constraint firstAttribute="trailing" secondItem="sKo-ru-uyw" secondAttribute="trailing" constant="34" id="bCW-Av-J5j"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Fq4-Kc-So4" secondAttribute="bottom" constant="10" id="ifJ-QV-7uh"/>
-                                                            <constraint firstItem="Fq4-Kc-So4" firstAttribute="leading" secondItem="sKo-ru-uyw" secondAttribute="leading" id="lJT-B6-SpL"/>
                                                             <constraint firstItem="sKo-ru-uyw" firstAttribute="leading" secondItem="8Z7-uM-gdS" secondAttribute="leading" id="vXO-Aj-Kv2"/>
                                                             <constraint firstItem="sKo-ru-uyw" firstAttribute="top" secondItem="8Z7-uM-gdS" secondAttribute="bottom" constant="14" id="y1G-yw-PjF"/>
                                                         </constraints>
@@ -20551,7 +20486,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-je-rBv">
                                                                                 <rect key="frame" x="0.0" y="-1" width="46.5" height="30"/>
                                                                                 <connections>
-                                                                                    <action selector="action_addcertifiimg:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="y0u-1s-M1u"/>
+                                                                                    <action selector="action_certificate_upload:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="HcW-JN-LvH"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -20597,7 +20532,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="certificate" id="wC0-KU-5fS" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="wC0-KU-5fS" customClass="imgidCollectionViewCell" customModule="Petfolio" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8DO-fT-fPg">
@@ -20651,7 +20586,7 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4c-6s-3bs">
                                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="52"/>
                                                                         <connections>
-                                                                            <action selector="action_submit:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="HdK-UV-9tv"/>
+                                                                            <action selector="action_submit:" destination="ZDp-Xu-N0b" eventType="touchUpInside" id="nzn-Nf-qzN"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -20719,30 +20654,20 @@
                     <navigationItem key="navigationItem" id="9R9-Mm-ROG"/>
                     <size key="freeformSize" width="414" height="2196"/>
                     <connections>
-                        <outlet property="coll_certificate" destination="hze-ky-aOp" id="ctZ-7y-u8k"/>
-                        <outlet property="coll_clinicpic" destination="jGu-CS-ntl" id="bYj-gK-i1t"/>
-                        <outlet property="coll_govtid" destination="Fq4-Kc-So4" id="FVc-Ki-HCV"/>
-                        <outlet property="coll_pettype" destination="4Gd-3z-Vb9" id="TIS-fh-RXw"/>
-                        <outlet property="coll_photoid" destination="R6Y-nP-wfC" id="7lB-w7-Er2"/>
-                        <outlet property="coll_speciali" destination="vZV-BL-FOS" id="Vqj-G6-aBd"/>
-                        <outlet property="textfield_clinicname" destination="cCs-UQ-ysg" id="yVT-ft-My9"/>
-                        <outlet property="textfield_pethandle" destination="f5J-sS-p5v" id="IfA-kp-OoB"/>
-                        <outlet property="textfield_spec" destination="QnB-nC-UaF" id="Y44-hC-hve"/>
-                        <outlet property="view_action" destination="Y4p-vs-M9j" id="8Oy-WJ-wVi"/>
-                        <outlet property="view_certificate" destination="ljO-2p-lDJ" id="do9-QW-Rd7"/>
-                        <outlet property="view_clinic" destination="JAN-fg-tSg" id="cDH-8u-dSx"/>
-                        <outlet property="view_clinicimgadd" destination="DqQ-pc-98x" id="1Ng-hb-bh1"/>
-                        <outlet property="view_govtid" destination="sKo-ru-uyw" id="9Bl-OA-6OK"/>
-                        <outlet property="view_pethandle" destination="JZM-II-j0B" id="n2N-PF-Xlh"/>
-                        <outlet property="view_pethandle_add" destination="G9M-sc-75W" id="wJZ-Hp-oa4"/>
-                        <outlet property="view_pethandle_text" destination="stI-41-sMa" id="Bcn-e4-0eb"/>
-                        <outlet property="view_photoid" destination="ucp-69-rij" id="Qox-vj-wMW"/>
-                        <outlet property="view_popup" destination="Gbo-QU-r2H" id="fgX-pt-wx9"/>
-                        <outlet property="view_shadow" destination="KVW-2f-Ott" id="hC0-5c-ahN"/>
-                        <outlet property="view_speciali" destination="Vn9-Cu-Wzf" id="wXU-3c-Gej"/>
-                        <outlet property="view_speciali_add" destination="cKI-WW-acN" id="OIL-Zl-6db"/>
-                        <outlet property="view_speciali_textview" destination="qaS-MD-W4o" id="R65-SZ-oa1"/>
-                        <outlet property="view_submit" destination="eeP-iK-jmi" id="ef1-sf-EXQ"/>
+                        <outlet property="coll_certificate" destination="hze-ky-aOp" id="Qhc-GZ-4Fh"/>
+                        <outlet property="coll_galary_img" destination="jGu-CS-ntl" id="2HJ-DH-5cN"/>
+                        <outlet property="coll_service" destination="4Gd-3z-Vb9" id="zWT-lH-iXm"/>
+                        <outlet property="coll_special" destination="vZV-BL-FOS" id="xkc-HG-6Hd"/>
+                        <outlet property="image_gov" destination="3MD-Lz-tYd" id="Mh1-mw-S5r"/>
+                        <outlet property="image_photo_id" destination="Cub-NS-CKc" id="4hm-e8-Kzq"/>
+                        <outlet property="textfield_Bus_name" destination="cCs-UQ-ysg" id="vrD-aQ-Kgx"/>
+                        <outlet property="textfield_servicename" destination="f5J-sS-p5v" id="f2N-VU-LZz"/>
+                        <outlet property="textfield_spec" destination="QnB-nC-UaF" id="jns-Iw-bnf"/>
+                        <outlet property="view_Bus_name" destination="JAN-fg-tSg" id="dAQ-Vg-YpD"/>
+                        <outlet property="view_Service_Btn_add" destination="G9M-sc-75W" id="663-Zf-QVU"/>
+                        <outlet property="view_addservice" destination="JZM-II-j0B" id="EdY-eQ-6V8"/>
+                        <outlet property="view_spec" destination="Vn9-Cu-Wzf" id="ZYC-LQ-WMd"/>
+                        <outlet property="view_submit" destination="eeP-iK-jmi" id="gtb-7r-SLW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yWq-F8-54l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

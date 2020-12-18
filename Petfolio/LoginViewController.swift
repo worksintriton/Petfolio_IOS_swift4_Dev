@@ -132,9 +132,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
        
        func textFieldDidEndEditing(_ textField: UITextField) {
         self.moveTextField(textField: textField, up:false)
+        
        }
   
 
+}
+
+extension UIImage {
+        public func Image_cornor(radius: CGFloat? = nil) -> UIImage? {
+            let maxRadius = min(size.width, size.height) / 2
+            let cornerRadius: CGFloat
+            if let radius = radius, radius > 0 && radius <= maxRadius {
+                cornerRadius = radius
+            } else {
+                cornerRadius = maxRadius
+            }
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            let rect = CGRect(origin: .zero, size: size)
+            UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+            draw(in: rect)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
 }
 
 extension UIView {
@@ -144,6 +164,14 @@ extension UIView {
     layer.shadowOffset = CGSize.zero
     layer.shadowRadius = 3
   }
+    func submit_cornor(){
+        layer.cornerRadius = 15.0
+    }
+    
+    func view_cornor(){
+        layer.cornerRadius = 10.0
+    }
+    
     func removeshadow(){
         layer.shadowColor = UIColor.white.cgColor
         layer.shadowOpacity = 0.5

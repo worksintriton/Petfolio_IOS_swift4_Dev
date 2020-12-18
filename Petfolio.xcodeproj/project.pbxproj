@@ -17,6 +17,7 @@
 		B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */; };
 		B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */; };
 		B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA7472566014B00B1FA0B /* regdocViewController.swift */; };
+		B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */; };
 		B020D0A625872C25008F5C7B /* Pet_searchlist_DRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A525872C25008F5C7B /* Pet_searchlist_DRViewController.swift */; };
 		B020D0A825873CF9008F5C7B /* searchlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A725873CF9008F5C7B /* searchlistTableViewCell.swift */; };
 		B020D0AA25878641008F5C7B /* SOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A925878641008F5C7B /* SOSViewController.swift */; };
@@ -132,6 +133,7 @@
 		B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_selectdoctordateCollectionViewCell.swift; sourceTree = "<group>"; };
 		B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocdashboardViewController.swift; sourceTree = "<group>"; };
 		B01DA7472566014B00B1FA0B /* regdocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regdocViewController.swift; sourceTree = "<group>"; };
+		B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_Reg_ViewController.swift; sourceTree = "<group>"; };
 		B020D0A525872C25008F5C7B /* Pet_searchlist_DRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet_searchlist_DRViewController.swift; sourceTree = "<group>"; };
 		B020D0A725873CF9008F5C7B /* searchlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchlistTableViewCell.swift; sourceTree = "<group>"; };
 		B020D0A925878641008F5C7B /* SOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +293,14 @@
 			path = Doctor;
 			sourceTree = "<group>";
 		};
+		B01FD8B2258C9F8900AD2719 /* ServiceProvider */ = {
+			isa = PBXGroup;
+			children = (
+				B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */,
+			);
+			path = ServiceProvider;
+			sourceTree = "<group>";
+		};
 		B0571C932562503400B42719 /* DOc */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +375,7 @@
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
+				B01FD8B2258C9F8900AD2719 /* ServiceProvider */,
 				B0571C932562503400B42719 /* DOc */,
 				B094D256255D61D3008400D6 /* Font */,
 				B094D211255BDE82008400D6 /* AppDelegate.swift */,
@@ -769,6 +780,7 @@
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */,
 				B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */,
 				B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */,
 				B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */,

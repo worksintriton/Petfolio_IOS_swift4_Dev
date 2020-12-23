@@ -59,6 +59,10 @@ class Servicefile {
     static let pet_updateimage =  baseurl + "/api/petdetails/edit"
     static let pet_search = baseurl + "/api/doctordetails/text_search"
     static let filter = baseurl + "/api/doctordetails/filter_doctor"
+    static let sp_dropdown = baseurl + "/api/service_provider/sp_dropdown"
+    static let sp_register = baseurl + "/api/service_provider/create"
+     static let sp_regi_status = baseurl + "/api/service_provider/check_status"
+    
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -154,8 +158,11 @@ class Servicefile {
      var govdicarray = [Any]()
      var certifdicarray = [Any]()
     var clinicdicarray = [Any]()
+    var gallerydicarray = [Any]()
      var docMycalHourdicarray = [Any]()
    
+    
+    
     // Doctor
     var Doc_dashlist = [doc_Dash_petdetails]()
     // Doctor
@@ -166,6 +173,13 @@ class Servicefile {
     var appointmentindex = 0
     // prescription
     
+    // sp drop down
+    
+    var speclist = [""]
+    var servicelist = [""]
+      var servicelistdicarray = [Any]()
+      var speclistdicarray = [Any]()
+     // sp drop down
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         

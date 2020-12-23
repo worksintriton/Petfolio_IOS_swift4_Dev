@@ -172,6 +172,12 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
                                                           self.present(vc, animated: true, completion: nil)
                                                       }
+                                                        else if Servicefile.shared.user_type == "2"{
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
+                                                            self.present(vc, animated: true, completion: nil)
+                                                        }
+                                                        
+                                                        
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

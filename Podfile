@@ -16,7 +16,6 @@ target 'Petfolio' do
   pod 'FSCalendar'
   pod 'Cosmos', '~> 23.0'
   # Pods for Petfolio
-	
   target 'PetfolioTests' do
     inherit! :search_paths
     # Pods for testing

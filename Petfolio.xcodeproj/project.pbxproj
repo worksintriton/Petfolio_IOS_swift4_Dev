@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,10 @@
 		B020D0AA25878641008F5C7B /* SOSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0A925878641008F5C7B /* SOSViewController.swift */; };
 		B020D0AC25878BDF008F5C7B /* sosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0AB25878BDF008F5C7B /* sosTableViewCell.swift */; };
 		B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */; };
+		B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B021DC312590897100439A22 /* selectedCollectionViewCell.swift */; };
+		B021DC342591BE0A00439A22 /* Sp_dash_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */; };
+		B021DC392592319A00439A22 /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021DC37259230CE00439A22 /* Razorpay.xcframework */; };
+		B021DC3A2592319A00439A22 /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021DC37259230CE00439A22 /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */; };
 		B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */; };
 		B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */; };
@@ -119,6 +123,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B021DC3B2592319A00439A22 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B021DC3A2592319A00439A22 /* Razorpay.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		910CD289095552E1350FAF4A /* Pods-Petfolio-PetfolioUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +157,9 @@
 		B020D0A925878641008F5C7B /* SOSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSViewController.swift; sourceTree = "<group>"; };
 		B020D0AB25878BDF008F5C7B /* sosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sosTableViewCell.swift; sourceTree = "<group>"; };
 		B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchtoclinicdetailViewController.swift; sourceTree = "<group>"; };
+		B021DC312590897100439A22 /* selectedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedCollectionViewCell.swift; sourceTree = "<group>"; };
+		B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_dash_ViewController.swift; sourceTree = "<group>"; };
+		B021DC37259230CE00439A22 /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
 		B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_prescriptionViewController.swift; sourceTree = "<group>"; };
 		B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_labelTableViewCell.swift; sourceTree = "<group>"; };
 		B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_textfieldactionTableViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */,
+				B021DC392592319A00439A22 /* Razorpay.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */,
+				B021DC312590897100439A22 /* selectedCollectionViewCell.swift */,
+				B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */,
 			);
 			path = ServiceProvider;
 			sourceTree = "<group>";
@@ -372,6 +396,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B021DC37259230CE00439A22 /* Razorpay.xcframework */,
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
@@ -469,6 +494,7 @@
 				B094D20C255BDE82008400D6 /* Resources */,
 				A0542DF0DED5FCB239259F73 /* [CP] Embed Pods Frameworks */,
 				518DCD1F3A557DEEB23983A8 /* [CP] Copy Pods Resources */,
+				B021DC3B2592319A00439A22 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -768,6 +794,7 @@
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
 				B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */,
+				B021DC342591BE0A00439A22 /* Sp_dash_ViewController.swift in Sources */,
 				B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */,
 				B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */,
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
@@ -809,6 +836,7 @@
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
+				B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,

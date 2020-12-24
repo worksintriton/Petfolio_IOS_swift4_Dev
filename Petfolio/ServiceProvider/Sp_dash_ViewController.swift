@@ -65,7 +65,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
         self.present(vc, animated: true, completion: nil)
     }
     

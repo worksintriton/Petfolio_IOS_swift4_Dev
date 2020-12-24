@@ -25,11 +25,15 @@
 		B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */; };
 		B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B021DC312590897100439A22 /* selectedCollectionViewCell.swift */; };
 		B021DC342591BE0A00439A22 /* Sp_dash_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */; };
-		B021DC392592319A00439A22 /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021DC37259230CE00439A22 /* Razorpay.xcframework */; };
-		B021DC3A2592319A00439A22 /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021DC37259230CE00439A22 /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */; };
 		B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */; };
 		B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */; };
+		B02D3A812593019A0010A4B6 /* paymentpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D3A802593019A0010A4B6 /* paymentpageViewController.swift */; };
+		B02D3A88259311480010A4B6 /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02D3A86259311420010A4B6 /* Razorpay.xcframework */; };
+		B02D3A89259311480010A4B6 /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02D3A86259311420010A4B6 /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B02D3A8B259342F00010A4B6 /* sp_side_menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D3A8A259342F00010A4B6 /* sp_side_menuViewController.swift */; };
+		B02D3A8D259350270010A4B6 /* Sp_profile_edit_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D3A8C259350270010A4B6 /* Sp_profile_edit_ViewController.swift */; };
+		B02D3A8F259359080010A4B6 /* Sp_profile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D3A8E259359080010A4B6 /* Sp_profile_ViewController.swift */; };
 		B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E7A542576252300B2B0C2 /* docdashTableViewCell.swift */; };
 		B02E7A57257760C600B2B0C2 /* Pet_sidemenu_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E7A56257760C600B2B0C2 /* Pet_sidemenu_ViewController.swift */; };
 		B02E7A59257768D700B2B0C2 /* Pet_applist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E7A58257768D700B2B0C2 /* Pet_applist_ViewController.swift */; };
@@ -130,7 +134,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B021DC3A2592319A00439A22 /* Razorpay.xcframework in Embed Frameworks */,
+				B02D3A89259311480010A4B6 /* Razorpay.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,10 +163,14 @@
 		B020D0AD25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchtoclinicdetailViewController.swift; sourceTree = "<group>"; };
 		B021DC312590897100439A22 /* selectedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedCollectionViewCell.swift; sourceTree = "<group>"; };
 		B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_dash_ViewController.swift; sourceTree = "<group>"; };
-		B021DC37259230CE00439A22 /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
 		B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_prescriptionViewController.swift; sourceTree = "<group>"; };
 		B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_labelTableViewCell.swift; sourceTree = "<group>"; };
 		B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_textfieldactionTableViewCell.swift; sourceTree = "<group>"; };
+		B02D3A802593019A0010A4B6 /* paymentpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentpageViewController.swift; sourceTree = "<group>"; };
+		B02D3A86259311420010A4B6 /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
+		B02D3A8A259342F00010A4B6 /* sp_side_menuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sp_side_menuViewController.swift; sourceTree = "<group>"; };
+		B02D3A8C259350270010A4B6 /* Sp_profile_edit_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_profile_edit_ViewController.swift; sourceTree = "<group>"; };
+		B02D3A8E259359080010A4B6 /* Sp_profile_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_profile_ViewController.swift; sourceTree = "<group>"; };
 		B02E7A542576252300B2B0C2 /* docdashTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docdashTableViewCell.swift; sourceTree = "<group>"; };
 		B02E7A56257760C600B2B0C2 /* Pet_sidemenu_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet_sidemenu_ViewController.swift; sourceTree = "<group>"; };
 		B02E7A58257768D700B2B0C2 /* Pet_applist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet_applist_ViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */,
-				B021DC392592319A00439A22 /* Razorpay.xcframework in Frameworks */,
+				B02D3A88259311480010A4B6 /* Razorpay.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +329,9 @@
 				B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */,
 				B021DC312590897100439A22 /* selectedCollectionViewCell.swift */,
 				B021DC332591BE0A00439A22 /* Sp_dash_ViewController.swift */,
+				B02D3A8A259342F00010A4B6 /* sp_side_menuViewController.swift */,
+				B02D3A8C259350270010A4B6 /* Sp_profile_edit_ViewController.swift */,
+				B02D3A8E259359080010A4B6 /* Sp_profile_ViewController.swift */,
 			);
 			path = ServiceProvider;
 			sourceTree = "<group>";
@@ -367,6 +378,7 @@
 				B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */,
 				B008C6702588C6AD00B09126 /* filterTableViewCell.swift */,
 				B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */,
+				B02D3A802593019A0010A4B6 /* paymentpageViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -396,7 +408,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
-				B021DC37259230CE00439A22 /* Razorpay.xcframework */,
+				B02D3A86259311420010A4B6 /* Razorpay.xcframework */,
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
@@ -785,12 +797,15 @@
 				B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
+				B02D3A812593019A0010A4B6 /* paymentpageViewController.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
+				B02D3A8F259359080010A4B6 /* Sp_profile_ViewController.swift in Sources */,
 				B020D0AA25878641008F5C7B /* SOSViewController.swift in Sources */,
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B02E7A5B25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift in Sources */,
 				B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */,
 				B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */,
+				B02D3A8D259350270010A4B6 /* Sp_profile_edit_ViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
 				B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */,
@@ -828,6 +843,7 @@
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */,
 				B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */,
+				B02D3A8B259342F00010A4B6 /* sp_side_menuViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
@@ -1016,10 +1032,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Petfolio",
+				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1036,10 +1057,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Petfolio",
+				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

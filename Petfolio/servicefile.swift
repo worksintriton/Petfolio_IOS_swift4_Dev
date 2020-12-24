@@ -62,6 +62,7 @@ class Servicefile {
     static let sp_dropdown = baseurl + "/api/service_provider/sp_dropdown"
     static let sp_register = baseurl + "/api/service_provider/create"
      static let sp_regi_status = baseurl + "/api/service_provider/check_status"
+    static let sp_dash_get = baseurl + "/api/service_provider/getlist_id"
     
     // sprint 1
     var Doc_mycalender_selecteddates = [""]

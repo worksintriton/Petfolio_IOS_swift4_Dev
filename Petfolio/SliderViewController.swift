@@ -8,20 +8,24 @@
 
 import UIKit
 import Alamofire
+import Razorpay
+import SafariServices
+import WebKit
 
-class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
 
     @IBOutlet weak var dogshowcoll: UICollectionView!
-    
+    //typealias Razorpay = RazorpayCheckout
     var petlist = ["mydog","mydog","mydog"]
     var demodata = [{}]
-    
+     var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
         self.getdemo()
+        
        
         // Do any additional setup after loading the view.
     }
@@ -48,12 +52,16 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
            return CGSize(width: self.view.frame.size.width , height:  self.view.frame.size.height)
        }
        
+    func movetestpayment(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "paymentpageViewController") as! paymentpageViewController
+                                                                self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func skipaction(_ sender: Any) {
-        
+         //self.showPaymentForm()
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
               if  UserDefaults.standard.string(forKey: "usertype") != "" {
-                
+
                 Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                  print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
@@ -63,16 +71,20 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }else if Servicefile.shared.user_type == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else{
+                }else if Servicefile.shared.user_type == "2" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                    self.present(vc, animated: true, completion: nil)
+                }
+                else{
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                     self.present(vc, animated: true, completion: nil)
                 }
-                
+
             }else{
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 self.present(vc, animated: true, completion: nil)
             }
-                    
+
         }else{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.present(vc, animated: true, completion: nil)
@@ -103,6 +115,72 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }        }
     
         }
+    
+    
+    func showPaymentForm(){
+         self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+        let options: [String:Any] = [
+                    "amount": "100", //This is in currency subunits. 100 = 100 paise= INR 1.
+                    "currency": "INR",//We support more that 92 international currencies.
+                    "description": "some some",
+                    "image": "http://52.25.163.13:3000/api/uploads/template.png",
+                    "name": "sriram",
+                    "prefill": [
+                        "contact": "9003525711",
+                        "email": "sriramchanr@gmail.com.com"
+                    ],
+                    "theme": [
+                        "color": "#F37254"
+                    ]
+                ]
+
+        if let rzp = self.razorpay {
+                   rzp.open(options)
+               } else {
+                   print("Unable to initialize")
+               }
+        
+//        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+//               let options: [AnyHashable:Any] = [
+//                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
+//                   "currency": "INR",//We support more that 92 international currencies.
+//                   "description": "some data",
+//                   "order_id": "order_DBJOWzybf0sJbb",
+//                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
+//                   "name": "sriram",
+//                   "prefill": [
+//                       "contact": "9003525711",
+//                       "email": "sriramchanr@gmail.com"
+//                   ],
+//                   "theme": [
+//                       "color": "#F37254"
+//                   ]
+//               ]
+//               if let rzp = self.razorpay {
+//                   rzp.open(options)
+//               } else {
+//                   print("Unable to initialize")
+//               }
+       
+    }
+    
+    func onPaymentError(_ code: Int32, description str: String) {
+            print("Payment failed with code")
+       }
+       
+       func onPaymentSuccess(_ payment_id: String) {
+             print("Payment Success payment")
+       }
+    
+    func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
+           print("error: ", code)
+          
+       }
+       
+       func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
+           print("success: ", payment_id)
+           
+       }
 
 }
 extension UIViewController  {
@@ -133,4 +211,8 @@ extension UIViewController  {
         //        Servicefile.shared.activity.stopAnimating()
         
     }
+    
+   
+    
+   
 }

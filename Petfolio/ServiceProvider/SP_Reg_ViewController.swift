@@ -19,7 +19,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var longitude : Double!
     let imagepicker = UIImagePickerController()
     var Img_uploadarea = "clinic"
-    
+    var locationaddress = ""
     @IBOutlet weak var view_Bus_name: UIView!
     @IBOutlet weak var view_addservice: UIView!
     @IBOutlet weak var view_Service_Btn_add: UIView!
@@ -91,6 +91,59 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.coll_speclist.dataSource = self
        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.locationManager.requestAlwaysAuthorization()
+                         self.locationManager.requestWhenInUseAuthorization()
+                          if CLLocationManager.locationServicesEnabled() {
+                                    locationManager.delegate = self
+                                    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                                    locationManager.startUpdatingLocation()
+                                }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+                 guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+                 print("locations = \(locValue.latitude) \(locValue.longitude)")
+              
+              
+           self.latitude = locValue.latitude
+           self.longitude = locValue.longitude
+        self.latLong(lat: self.latitude,long: self.longitude)
+                 self.locationManager.stopUpdatingLocation()
+             }
+    
+    func latLong(lat: Double,long: Double)  {
+               if Servicefile.shared.updateUserInterface(){
+                   let geoCoder = CLGeocoder()
+                   let location = CLLocation(latitude: lat , longitude: long)
+                   geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                       var pm: CLPlacemark!
+                       pm = placemarks?[0]
+                      var addressString : String = ""
+                                         if pm.subLocality != nil {
+                                             addressString = addressString + pm.subLocality! + ", "
+                                         }
+                                         if pm.thoroughfare != nil {
+                                             addressString = addressString + pm.thoroughfare! + ", "
+                                         }
+                                         if pm.locality != nil {
+                                             addressString = addressString + pm.locality! + ", "
+                                         }
+                                         if pm.country != nil {
+                                             addressString = addressString + pm.country! + ", "
+                                         }
+                                         if pm.postalCode != nil {
+                                             addressString = addressString + pm.postalCode! + " "
+                                         }
+
+                    self.locationaddress = addressString
+                                         print(addressString)
+                   })
+               }
+              
+           }
+             
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_resign()
@@ -518,6 +571,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_register, method: .post, parameters:
         ["user_id": Servicefile.shared.userid,
+         "sp_loc": self.locationaddress,
+         "sp_lat": String(self.latitude),
+         "sp_long": String(self.longitude),
          "bus_user_name": Servicefile.shared.first_name,
          "bus_user_email": Servicefile.shared.user_email,
          "profile_status": true,

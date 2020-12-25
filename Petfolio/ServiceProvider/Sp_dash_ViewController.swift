@@ -450,6 +450,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                       if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
                                                         let profile_status = Data["profile_status"] as! Bool
+                                                        print("profile_status",profile_status)
                                                         if profile_status == false {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
                                                                    self.present(vc, animated: true, completion: nil)
@@ -463,7 +464,6 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                             }else{
                                                                 self.view_shadow.isHidden = true
                                                                 self.view_popup.isHidden = true
-                                                               // self.callnew()
                                                             }
                                                         }
                                                         self.stopAnimatingActivityIndicator()

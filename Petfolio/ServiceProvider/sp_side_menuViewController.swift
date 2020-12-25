@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
@@ -21,7 +22,6 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         super.viewDidLoad()
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
-        
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         // Do any additional setup after loading the view.
@@ -29,7 +29,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     
     
        @IBAction func action_edit(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
                   self.present(vc, animated: true, completion: nil)
        }
     
@@ -73,3 +73,9 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
 
    
 }
+
+extension sp_side_menuViewController {
+    
+   
+}
+

@@ -38,6 +38,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var image_photo_id: UIImageView!
     @IBOutlet weak var image_gov: UIImageView!
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_btn_ok: UIView!
     
     var selservice = ["0"]
     var selspec = ["0"]
@@ -54,15 +57,19 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.callSP_Ser_Spec_get()
         self.added_service.removeAll()
         self.added_spec.removeAll()
+        
     }
     
     func call_protocals(){
         self.call_delegates()
         self.viewcornordadius()
         self.setimag()
+        
     }
     
     func call_delegates(){
+        self.view_popup.isHidden = true
+        self.view_shadow.isHidden = true
         self.imagepicker.delegate = self
         self.textfield_servicename.delegate = self
         self.textfield_Bus_name.delegate = self
@@ -159,6 +166,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     func viewcornordadius(){
         self.view_submit.submit_cornor()
         self.view_Service_Btn_add.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_shadow.view_cornor()
+        self.view_btn_ok.view_cornor()
     }
     
     @IBAction func action_gallary_pic_upload(_ sender: Any) {
@@ -595,8 +605,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
                                                     let Data = res["Data"] as! NSDictionary
-                                                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
-                                                    self.present(vc, animated: true, completion: nil)
+                                                    self.callupdatestatus()
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()
@@ -614,6 +623,42 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    func callupdatestatus(){
+                self.startAnimatingActivityIndicator()
+            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updatestatus, method: .post, parameters:
+             ["user_id" : Servicefile.shared.userid,
+               "user_status": "complete"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                    switch (response.result) {
+                                                    case .success:
+                                                          let res = response.value as! NSDictionary
+                                                          print("success data",res)
+                                                          let Code  = res["Code"] as! Int
+                                                          if Code == 200 {
+                                                             self.view_popup.isHidden = false
+                                                           self.view_shadow.isHidden = false
+                                                             self.stopAnimatingActivityIndicator()
+                                                          }else{
+                                                            self.stopAnimatingActivityIndicator()
+                                                            print("status code service denied")
+                                                          }
+                                                        break
+                                                    case .failure(let Error):
+                                                        self.stopAnimatingActivityIndicator()
+                                                        print("Can't Connect to Server / TimeOut",Error)
+                                                        break
+                                                    }
+                                       }
+                }else{
+                    self.stopAnimatingActivityIndicator()
+        }
+    }
+    
+    @IBAction func action_register_success(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                                          self.present(vc, animated: true, completion: nil)
+    }
+    
     
     func callSP_Ser_Spec_get(){
               self.startAnimatingActivityIndicator()

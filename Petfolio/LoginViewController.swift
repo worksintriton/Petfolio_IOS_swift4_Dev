@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.View_log.layer.cornerRadius = 10.0
         self.ViewOTPBTN.layer.cornerRadius = 10.0
         self.View_usercred.layer.cornerRadius = 10.0
+        self.ViewOTPBTN.dropShadow()
         self.View_usercred.dropShadow()
         self.usercred.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.usercred.delegate = self

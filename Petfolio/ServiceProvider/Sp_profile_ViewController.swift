@@ -27,7 +27,6 @@ class Sp_profile_ViewController: UIViewController {
          Servicefile.shared.pet_status = ""
         self.ismenu.removeAll()
         Servicefile.shared.pet_petlist.removeAll()
-        self.callpetdash()
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.label_phono.text = Servicefile.shared.user_phone
@@ -61,40 +60,5 @@ class Sp_profile_ViewController: UIViewController {
 //        self.present(vc, animated: true, completion: nil)
     }
     
-    func callpetdash(){
-              self.startAnimatingActivityIndicator()
-       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_dash_get, method: .post, parameters:
-           [   "user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                                  switch (response.result) {
-                                                  case .success:
-                                                        let res = response.value as! NSDictionary
-                                                        print("success data",res)
-                                                        let Code  = res["Code"] as! Int
-                                                        if Code == 200 {
-                                                          let Data = res["Data"] as! NSDictionary
-                                                         
-                                                           self.stopAnimatingActivityIndicator()
-                                                        }else{
-                                                          self.stopAnimatingActivityIndicator()
-                                                          print("status code service denied")
-                                                        }
-                                                      break
-                                                  case .failure(let Error):
-                                                      self.stopAnimatingActivityIndicator()
-                                                      print("Can't Connect to Server / TimeOut",Error)
-                                                      break
-                                                  }
-                                     }
-              }else{
-                  self.stopAnimatingActivityIndicator()
-                  self.alert(Message: "No Intenet Please check and try again ")
-              }
-          }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-             }))
-        self.present(alert, animated: true, completion: nil)
-    }
 }

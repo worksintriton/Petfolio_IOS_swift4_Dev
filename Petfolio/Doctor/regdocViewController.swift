@@ -1108,10 +1108,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                                   print("success data",res)
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
-//                                                    let Data = res["Data"] as! NSDictionary
-//                                                     let userid = Data["_id"] as! String
-//                                                     UserDefaults.standard.set(userid, forKey: "userid")
-//                                                      Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                     self.view_popup.isHidden = false
                                                     self.view_shadow.isHidden = false
                                                      self.stopAnimatingActivityIndicator()

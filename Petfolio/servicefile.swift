@@ -19,7 +19,7 @@ class Servicefile {
     // sprint 1
     static let baseurl = "http://52.25.163.13:3000"
     static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
-    static let slider = baseurl + "api/demoscreen/mobile/getlist"
+    static let slider = baseurl + "/api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
     static let petregister = baseurl + "/api/petdetails/mobile/create"
@@ -63,6 +63,7 @@ class Servicefile {
     static let sp_register = baseurl + "/api/service_provider/create"
      static let sp_regi_status = baseurl + "/api/service_provider/check_status"
     static let sp_dash_get = baseurl + "/api/service_provider/getlist_id"
+    static let sp_Profile_edit = baseurl + "/api/service_provider/edit"
     
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
@@ -150,6 +151,7 @@ class Servicefile {
     var selectedState = ""
     var appgreen = "#009675"
     var applightgreen = "#F4FAF9"
+    
     var edudicarray = [Any]()
     var expdicarray = [Any]()
     var specdicarray = [Any]()
@@ -181,6 +183,29 @@ class Servicefile {
       var servicelistdicarray = [Any]()
       var speclistdicarray = [Any]()
      // sp drop down
+    
+    // sp update
+    var sp_id = ""
+    var Sp_bus_certifdicarray = [Any]()
+    var sp_bus_profile = ""
+    var sp_bus_proof = ""
+    var sp_bus_service_galldicarray = [Any]()
+    var sp_bus_service_list = [Any]()
+    var sp_bus_spec_list = [Any]()
+    var sp_bus_user_email = ""
+    var sp_bus_user_name = ""
+    var sp_bus_user_phone = ""
+    var sp_bussiness_name = ""
+    var sp_date_and_time  = ""
+    var sp_delete_status = true
+    var sp_mobile_type = ""
+    var sp_profile_status = true;
+    var sp_profile_verification_status = "";
+    var sp_lat = 0.0
+    var sp_loc = ""
+    var sp_long = 0.0
+    var sp_user_id = ""
+    // sp update
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         

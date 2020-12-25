@@ -25,21 +25,21 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
    @IBOutlet weak var view_addservice: UIView!
    @IBOutlet weak var view_Service_Btn_add: UIView!
    @IBOutlet weak var view_submit: UIView!
-   
    @IBOutlet weak var textfield_Bus_name: UITextField!
    @IBOutlet weak var textfield_servicename: UITextField!
    @IBOutlet weak var textfield_spec: UITextField!
-   
    @IBOutlet weak var coll_selservice: UICollectionView!
    @IBOutlet weak var coll_service: UICollectionView!
    @IBOutlet weak var coll_galary_img: UICollectionView!
    @IBOutlet weak var coll_certificate: UICollectionView!
    @IBOutlet weak var coll_speclist: UICollectionView!
    @IBOutlet weak var coll_selspec: UICollectionView!
-   
    @IBOutlet weak var image_photo_id: UIImageView!
    @IBOutlet weak var image_gov: UIImageView!
-   
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_btn_ok: UIView!
+    
    var selservice = ["0"]
    var selspec = ["0"]
    var added_service = [""]
@@ -51,22 +51,28 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
    
    override func viewDidLoad() {
        super.viewDidLoad()
-       self.call_protocals()
-       self.callSP_Ser_Spec_get()
-       self.added_service.removeAll()
-       self.added_spec.removeAll()
+    self.call_protocals()
+    self.callSP_Ser_Spec_get()
+    self.added_service.removeAll()
+    self.added_spec.removeAll()
    }
    
    func call_protocals(){
-       self.call_delegates()
-       self.viewcornordadius()
-       self.setimag()
+    Servicefile.shared.speclist.removeAll()
+    Servicefile.shared.gallerydicarray.removeAll()
+    Servicefile.shared.certifdicarray.removeAll()
+    Servicefile.shared.servicelist.removeAll()
+    self.call_delegates()
+    self.viewcornordadius()
+    self.setimag()
    }
    
    func call_delegates(){
-       self.imagepicker.delegate = self
-       self.textfield_servicename.delegate = self
-       self.textfield_Bus_name.delegate = self
+    self.view_shadow.isHidden = true
+    self.view_popup.isHidden = true
+    self.imagepicker.delegate = self
+    self.textfield_servicename.delegate = self
+    self.textfield_Bus_name.delegate = self
        self.textfield_spec.delegate = self
        self.collectiondelegate()
    }
@@ -144,7 +150,12 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
               }
              
           }
-            
+    
+    
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
    
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        self.textfield_resign()
@@ -160,6 +171,9 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
    func viewcornordadius(){
        self.view_submit.submit_cornor()
        self.view_Service_Btn_add.view_cornor()
+    self.view_shadow.view_cornor()
+    self.view_popup.view_cornor()
+    self.view_btn_ok.view_cornor()
    }
    
    @IBAction func action_gallary_pic_upload(_ sender: Any) {
@@ -269,7 +283,26 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
        }else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please upload the certificates")
        }else{
-           self.callDocspec()
+          // self.callDocspec()
+       print( "_id" , Servicefile.shared.sp_id,
+        "user_id", Servicefile.shared.userid,
+        "sp_loc", self.locationaddress,
+        "sp_lat", String(self.latitude),
+        "sp_long", String(self.longitude),
+        "bus_user_name", Servicefile.shared.first_name,
+        "bus_user_email", Servicefile.shared.user_email,
+        "profile_status", true,
+        "profile_verification_status","Not verified",
+        "bussiness_name",self.textfield_Bus_name.text!,
+        "bus_user_phone", Servicefile.shared.user_phone,
+        "bus_service_list", Servicefile.shared.servicelistdicarray,
+        "bus_spec_list", Servicefile.shared.speclistdicarray,
+        "bus_service_gall", Servicefile.shared.gallerydicarray,
+        "bus_profile", self.image_photo,
+        "bus_proof", self.image_govid,
+        "bus_certif", Servicefile.shared.certifdicarray,
+        "date_and_time", Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+        "mobile_type" , "IOS")
        }
    }
    
@@ -277,6 +310,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
        return 1
    }
    
+    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        if coll_galary_img ==  collectionView {
             return Servicefile.shared.gallerydicarray.count
@@ -570,8 +604,9 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
    
    func callDocspec(){
        self.startAnimatingActivityIndicator()
-   if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_register, method: .post, parameters:
-       ["user_id": Servicefile.shared.userid,
+   if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_Profile_edit, method: .post, parameters:
+    [ "_id" : Servicefile.shared.sp_id,
+        "user_id": Servicefile.shared.userid,
         "sp_loc": self.locationaddress,
         "sp_lat": String(self.latitude),
         "sp_long": String(self.longitude),
@@ -596,8 +631,8 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                                                  let Code  = res["Code"] as! Int
                                                  if Code == 200 {
                                                    let Data = res["Data"] as! NSDictionary
-                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
-                                                   self.present(vc, animated: true, completion: nil)
+                                                    self.view_shadow.isHidden = false
+                                                    self.view_popup.isHidden = false
                                                     self.stopAnimatingActivityIndicator()
                                                  }else{
                                                    self.stopAnimatingActivityIndicator()
@@ -615,6 +650,12 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
            self.alert(Message: "No Intenet Please check and try again ")
        }
    }
+    
+    @IBAction func action_update_popup(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
    
    func callSP_Ser_Spec_get(){
              self.startAnimatingActivityIndicator()
@@ -647,6 +688,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                }
                self.coll_speclist.reloadData()
                self.coll_service.reloadData()
+               self.callSp_details()
                 self.stopAnimatingActivityIndicator()
              
            }else{
@@ -668,3 +710,124 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
   }
 
 
+extension Sp_profile_edit_ViewController {
+    func callSp_details(){
+           Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                 self.startAnimatingActivityIndicator()
+          if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_dash_get, method: .post, parameters:
+              [   "user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                     switch (response.result) {
+                                                     case .success:
+                                                           let res = response.value as! NSDictionary
+                                                           print("success data",res)
+                                                           let Code  = res["Code"] as! Int
+                                                           if Code == 200 {
+                                                               let Data = res["Data"] as! NSDictionary
+                                                               let bus_certif = Data["bus_certif"] as! NSArray
+                                                               let _id  = Data["_id"] as! String
+                                                               let bus_profile  = Data["bus_profile"] as! String
+                                                               let bus_proof  = Data["bus_proof"] as! String
+                                                               let bus_user_email  = Data["bus_user_email"] as! String
+                                                               let bus_user_name  = Data["bus_user_name"] as! String
+                                                               let bus_user_phone  = Data["bus_user_phone"] as! String
+                                                               let bussiness_name  = Data["bussiness_name"] as! String
+                                                               let date_and_time  = Data["date_and_time"] as! String
+                                                               let delete_status  = Data["delete_status"] as! Bool
+                                                               let profile_status  = Data["profile_status"] as! Bool
+                                                               let profile_verification_status  = Data["profile_verification_status"] as! String
+                                                               let sp_lat  = Data["sp_lat"] as! Double
+                                                               let sp_long  = Data["sp_long"] as! Double
+                                                               let sp_loc  = Data["sp_loc"] as! String
+                                                               let user_id  = Data["user_id"] as! String
+                                                               let bus_service_gall = Data["bus_service_gall"] as! NSArray
+                                                               let bus_service_list = Data["bus_service_list"] as! NSArray
+                                                               let bus_spec_list = Data["bus_spec_list"] as! NSArray
+                                                            Servicefile.shared.Sp_bus_certifdicarray.removeAll()
+                                                            Servicefile.shared.sp_bus_service_galldicarray.removeAll()
+                                                            Servicefile.shared.sp_bus_service_list.removeAll()
+                                                            Servicefile.shared.sp_bus_spec_list.removeAll()
+                                                               Servicefile.shared.sp_id = _id
+                                                               Servicefile.shared.sp_bus_profile = bus_profile
+                                                               Servicefile.shared.sp_bus_proof = bus_proof
+                                                             Servicefile.shared.Sp_bus_certifdicarray =  bus_certif as! [Any]
+                                                               Servicefile.shared.sp_bus_service_galldicarray = bus_service_gall as! [Any]
+                                                               Servicefile.shared.sp_bus_service_list = bus_service_list as! [Any]
+                                                               Servicefile.shared.sp_bus_spec_list = bus_spec_list as! [Any]
+                                                               Servicefile.shared.sp_bus_user_email = bus_user_email
+                                                               Servicefile.shared.sp_bus_user_name = bus_user_name
+                                                               Servicefile.shared.sp_bus_user_phone = bus_user_phone
+                                                               Servicefile.shared.sp_bussiness_name = bussiness_name
+                                                               Servicefile.shared.sp_date_and_time  = date_and_time
+                                                               Servicefile.shared.sp_delete_status = delete_status
+                                                               Servicefile.shared.sp_mobile_type = "IOS"
+                                                               Servicefile.shared.sp_profile_status = profile_status
+                                                               Servicefile.shared.sp_profile_verification_status = profile_verification_status
+                                                               Servicefile.shared.sp_lat = sp_lat
+                                                               Servicefile.shared.sp_loc = sp_loc
+                                                               Servicefile.shared.sp_long = sp_long
+                                                               Servicefile.shared.sp_user_id = user_id
+                                                               print("Details in certificate",Servicefile.shared.Sp_bus_certifdicarray)
+                                                            self.resetdata()
+                                                            self.stopAnimatingActivityIndicator()
+                                                           }else{
+                                                             self.stopAnimatingActivityIndicator()
+                                                             print("status code service denied")
+                                                           }
+                                                         break
+                                                     case .failure(let Error):
+                                                         self.stopAnimatingActivityIndicator()
+                                                         print("Can't Connect to Server / TimeOut",Error)
+                                                         break
+                                                     }
+                                        }
+                 }else{
+                     self.stopAnimatingActivityIndicator()
+                     self.alert(Message: "No Intenet Please check and try again ")
+                 }
+             }
+
+    
+    func resetdata(){
+        self.selservice.removeAll()
+        self.selspec.removeAll()
+        for itm in 0..<Servicefile.shared.servicelist.count {
+            let SP_itm = Servicefile.shared.servicelist[itm]
+             self.selservice.append("0")
+            for Edit_list in 0..<Servicefile.shared.sp_bus_service_list.count {
+                let edit_itm = Servicefile.shared.sp_bus_service_list[Edit_list]
+                var edit_str = edit_itm  as! NSDictionary
+                if edit_str["bus_service_list"] as! String == SP_itm {
+                    print(edit_itm)
+                    self.selservice.remove(at: itm)
+                    self.selservice.insert("1", at: itm)
+                }
+            }
+        }
+        for itme in 0..<Servicefile.shared.speclist.count {
+            let SP_itm = Servicefile.shared.speclist[itme]
+             self.selspec.append("0")
+            for Edit_speclist in 0..<Servicefile.shared.sp_bus_spec_list.count {
+                let edit_specitm =  Servicefile.shared.sp_bus_spec_list[Edit_speclist]
+                var edit_spestr = edit_specitm as! NSDictionary
+                if  edit_spestr["bus_spec_list"] as! String == SP_itm {
+                    print(edit_specitm)
+                    self.selspec.remove(at: itme)
+                    self.selspec.insert("1", at: itme)
+                }
+            }
+        }
+       self.coll_speclist.reloadData()
+       self.coll_service.reloadData()
+        
+        self.image_photo = Servicefile.shared.sp_bus_profile
+        self.image_govid = Servicefile.shared.sp_bus_profile
+        self.setimag()
+        Servicefile.shared.gallerydicarray = Servicefile.shared.sp_bus_service_galldicarray
+        Servicefile.shared.certifdicarray = Servicefile.shared.Sp_bus_certifdicarray
+        self.coll_galary_img.reloadData()
+        self.coll_certificate.reloadData()
+        self.textfield_Bus_name.text = Servicefile.shared.sp_bussiness_name
+    }
+
+}

@@ -25,7 +25,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
         self.getdemo()
-        
        
         // Do any additional setup after loading the view.
     }
@@ -61,7 +60,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
          //self.showPaymentForm()
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
               if  UserDefaults.standard.string(forKey: "usertype") != "" {
-
                 Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                  print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
@@ -101,7 +99,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     if Code == 200 {
                         self.demodata.removeAll()
                         let Data = resp["Data"] as! NSDictionary
-                        let SSdata = Data["SplashScreendata"] as! NSArray
                         
                       
                     }else{
@@ -181,7 +178,8 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
            print("success: ", payment_id)
            
        }
-
+    
+     
 }
 extension UIViewController  {
     

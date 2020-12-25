@@ -166,18 +166,18 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
                                                       if Servicefile.shared.user_type == "1"{
-                                                          let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
-                                                          self.present(vc, animated: true, completion: nil)
-                                                      }else if Servicefile.shared.user_type == "4"{
-                                                          let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
-                                                          self.present(vc, animated: true, completion: nil)
-                                                      }
-                                                        else if Servicefile.shared.user_type == "2"{
-                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
-                                                            self.present(vc, animated: true, completion: nil)
+                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
+                                                        self.present(vc, animated: true, completion: nil)
+                                                        } else if Servicefile.shared.user_type == "4"{
+                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                                                        self.present(vc, animated: true, completion: nil)
+                                                        } else if Servicefile.shared.user_type == "2"{
+                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
+                                                        self.present(vc, animated: true, completion: nil)
+                                                        } else if Servicefile.shared.user_type == "3"{
+                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Vendor_reg_ViewController") as! Vendor_reg_ViewController
+                                                        self.present(vc, animated: true, completion: nil)
                                                         }
-                                                        
-                                                        
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

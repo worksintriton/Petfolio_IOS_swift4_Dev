@@ -96,6 +96,7 @@
 		B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D263255D6220008400D6 /* Futura XBlk BT.ttf */; };
 		B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B094D264255D6220008400D6 /* Futura-CondensedLight.otf */; };
 		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
+		B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D887F82595B13000191833 /* Vendor_reg_ViewController.swift */; };
 		B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */; };
 		B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */; };
 		B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */; };
@@ -240,6 +241,7 @@
 		B094D263255D6220008400D6 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura XBlk BT.ttf"; sourceTree = "<group>"; };
 		B094D264255D6220008400D6 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-CondensedLight.otf"; sourceTree = "<group>"; };
 		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
+		B0D887F82595B13000191833 /* Vendor_reg_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor_reg_ViewController.swift; sourceTree = "<group>"; };
 		B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petaddimgCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverEditandAddViewController.swift; sourceTree = "<group>"; };
 		B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petimageUploadViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				B0D887F72595B11600191833 /* Vendor  */,
 				B02D3A86259311420010A4B6 /* Razorpay.xcframework */,
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
@@ -481,6 +484,14 @@
 				B094D264255D6220008400D6 /* Futura-CondensedLight.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		B0D887F72595B11600191833 /* Vendor  */ = {
+			isa = PBXGroup;
+			children = (
+				B0D887F82595B13000191833 /* Vendor_reg_ViewController.swift */,
+			);
+			path = "Vendor ";
 			sourceTree = "<group>";
 		};
 		BFC1A352B16A02A35923CB4C /* Frameworks */ = {
@@ -820,6 +831,7 @@
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
+				B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
 				B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */,

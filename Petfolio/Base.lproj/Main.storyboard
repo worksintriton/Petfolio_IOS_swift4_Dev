@@ -25144,10 +25144,10 @@
             </objects>
             <point key="canvasLocation" x="3163.7681159420295" y="6085.7142857142853"/>
         </scene>
-        <!--View Controller-->
+        <!--Vendor reg View Controller-->
         <scene sceneID="xvQ-Ae-pRH">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cfP-6Y-AnG" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Vendor_reg_ViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cfP-6Y-AnG" customClass="Vendor_reg_ViewController" customModule="Petfolio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vg6-g6-8XE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1496"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25297,7 +25297,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37j-dg-j5o">
                                                                 <rect key="frame" x="30" y="0.0" width="350" height="47"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hR-sG-dcm">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hR-sG-dcm">
                                                                         <rect key="frame" x="8" y="8" width="325" height="31"/>
                                                                         <color key="textColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -25328,7 +25328,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yy-a3-Lj4">
                                                                 <rect key="frame" x="30" y="0.0" width="350" height="47"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x0w-AB-qON">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x0w-AB-qON">
                                                                         <rect key="frame" x="8" y="8" width="325" height="31"/>
                                                                         <color key="textColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -25413,7 +25413,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-Mi-vYr">
                                                                 <rect key="frame" x="30" y="0.0" width="350" height="47"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQe-a7-26B">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Business registration details" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQe-a7-26B">
                                                                         <rect key="frame" x="8" y="8" width="325" height="31"/>
                                                                         <color key="textColor" red="0.40784313729999999" green="0.75294117650000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -25908,9 +25908,18 @@
                         <outlet property="image_gov" destination="STM-fK-Vlz" id="CxK-G5-5q2"/>
                         <outlet property="image_photo_id" destination="W7B-UW-uZ2" id="n2H-2Z-xq9"/>
                         <outlet property="textfield_Bus_name" destination="LwZ-WZ-jdI" id="tYQ-fY-ibq"/>
+                        <outlet property="textfield_bus_email" destination="3hR-sG-dcm" id="X52-rC-mOe"/>
+                        <outlet property="textfield_bus_phno" destination="pjE-Df-9ys" id="LRB-9b-ORS"/>
+                        <outlet property="textfield_bus_reg" destination="DQe-a7-26B" id="own-Ns-h19"/>
+                        <outlet property="textfield_business" destination="x0w-AB-qON" id="AfN-zA-6hl"/>
                         <outlet property="view_Bus_name" destination="jIj-x9-EWa" id="8tU-27-1lE"/>
                         <outlet property="view_btn_ok" destination="kXD-fv-Ska" id="lzo-1f-GE9"/>
+                        <outlet property="view_bus_email" destination="37j-dg-j5o" id="svP-80-UE1"/>
+                        <outlet property="view_busi" destination="6yy-a3-Lj4" id="r43-Fh-Z4L"/>
+                        <outlet property="view_ph_cou" destination="C2U-XU-w4P" id="TOX-Es-k4N"/>
+                        <outlet property="view_phno" destination="kmp-TE-PQH" id="73y-kl-Wnu"/>
                         <outlet property="view_popup" destination="Bss-8J-7Xh" id="qHO-VV-C4T"/>
+                        <outlet property="view_reg" destination="nJx-Mi-vYr" id="unx-K8-5cE"/>
                         <outlet property="view_shadow" destination="fg1-j0-6oP" id="nPi-LD-GIH"/>
                         <outlet property="view_submit" destination="gbc-LN-I5m" id="elS-Ch-Tww"/>
                     </connections>

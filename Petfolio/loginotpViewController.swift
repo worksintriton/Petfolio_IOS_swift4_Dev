@@ -25,6 +25,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         self.textfield_otp.delegate = self
         self.Viewotp.layer.cornerRadius = 5.0
         self.Viewactionotp.layer.cornerRadius = 10.0
+        self.Viewactionotp.dropShadow()
+        self.Viewotp.dropShadow()
          self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }

@@ -43,7 +43,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.coll_imgview.delegate = self
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
-        self.view_book.layer.cornerRadius = 15.0
+        self.view_book.submit_cornor()
+        self.view_book.dropShadow()
         // Do any additional setup after loading the view.
      print("selected doctor details",Servicefile.shared.petdoc[Servicefile.shared.selectedindex])
                // Do any additional setup after loading the view.

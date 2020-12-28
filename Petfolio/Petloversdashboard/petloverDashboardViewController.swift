@@ -52,6 +52,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.colleView_Service.dataSource = self
         self.colleView_banner.isPagingEnabled = true
         self.callpetdash()
+        self.view_denypop.dropShadow()
+        self.view_allowpop.dropShadow()
          self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
         // Do any additional setup after loading the view.

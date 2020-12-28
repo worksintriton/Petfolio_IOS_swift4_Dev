@@ -42,6 +42,8 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
         self.tbl_searchlist.delegate = self
         self.tbl_searchlist.dataSource = self
          self.tbl_searchlist.isHidden = true
+        self.view_setloca.dropShadow()
+        self.view_footer.dropShadow()
         // Do any additional setup after loading the view.
         self.textfield_search.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }

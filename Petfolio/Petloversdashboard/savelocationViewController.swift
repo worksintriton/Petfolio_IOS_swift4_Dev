@@ -52,7 +52,8 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
          self.view_pickname.layer.cornerRadius = 9.0
          self.view_saveview.layer.cornerRadius = 15.0
         self.GMS_mapView.delegate = self
-        
+        self.view_change.dropShadow()
+        self.view_saveview.dropShadow()
         self.textfield_pincode.delegate = self
         self.textfield_cityname.delegate = self
         self.textfield_location.delegate = self

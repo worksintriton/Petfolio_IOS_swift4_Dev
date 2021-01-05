@@ -96,7 +96,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     }
     
     @IBAction func action_book(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petdoccalenderViewController") as! petdoccalenderViewController
                       self.present(vc, animated: true, completion: nil)
     }
       

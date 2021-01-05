@@ -19,6 +19,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var colleView_Doctor: UICollectionView!
     @IBOutlet weak var colleView_Service: UICollectionView!
     @IBOutlet weak var colleView_product: UICollectionView!
+    @IBOutlet weak var colleView_puppylove: UICollectionView!
+    
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
@@ -50,6 +52,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.colleView_product.dataSource = self
         self.colleView_Service.delegate = self
         self.colleView_Service.dataSource = self
+        self.colleView_puppylove.delegate = self
+        self.colleView_puppylove.dataSource = self
         self.colleView_banner.isPagingEnabled = true
         self.callpetdash()
         self.view_denypop.dropShadow()
@@ -141,9 +145,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return Servicefile.shared.petdoc.count
         }else if self.colleView_Service == collectionView {
             return Servicefile.shared.petser.count
+        }else if self.colleView_puppylove == collectionView {
+            return Servicefile.shared.Petpuppylove.count
         }else {
             return Servicefile.shared.petprod.count
-            
         }
         
     }
@@ -196,7 +201,26 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                            }
                        }
             return cell
-        }else {
+        }else if self.colleView_puppylove == collectionView{
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puppyprod", for: indexPath) as! petprodCollectionViewCell
+                    cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
+                        if (error != nil) {
+                            cell.img_prod.image = UIImage(named: "sample")
+                        } else {
+                            cell.img_prod.image = image
+                        }
+                    }
+                    //cell.label_prodtitile.text = Servicefile.shared.petprod[indexPath.row].product_title
+        //            cell.label_rateing.text =  Servicefile.shared.petprod[indexPath.row].product_rate
+        //            cell.label_ratedno.text =  String(Servicefile.shared.petprod[indexPath.row].review_count)
+        //            cell.price.text = String(Servicefile.shared.petprod[indexPath.row].product_prices) + " % off"
+        //            if Servicefile.shared.petprod[indexPath.row].product_fav_status != false {
+        //                cell.img_Fav.image = UIImage(named: "Like 3")
+        //            }else{
+        //                cell.img_Fav.image = UIImage(named: "Like 2")
+        //            }
+                    return cell
+                }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! petprodCollectionViewCell
             cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
@@ -205,18 +229,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
-            cell.label_prodtitile.text = Servicefile.shared.petprod[indexPath.row].product_title
-            cell.label_rateing.text =  Servicefile.shared.petprod[indexPath.row].product_rate
-            cell.label_ratedno.text =  String(Servicefile.shared.petprod[indexPath.row].review_count)
-            cell.price.text = String(Servicefile.shared.petprod[indexPath.row].product_prices) + " % off"
-            if Servicefile.shared.petprod[indexPath.row].product_fav_status != false {
-                
-                cell.img_Fav.image = UIImage(named: "Like 3")
-            }else{
-                cell.img_Fav.image = UIImage(named: "Like 2")
-                
-            }
-            
+            //cell.label_prodtitile.text = Servicefile.shared.petprod[indexPath.row].product_title
+//            cell.label_rateing.text =  Servicefile.shared.petprod[indexPath.row].product_rate
+//            cell.label_ratedno.text =  String(Servicefile.shared.petprod[indexPath.row].review_count)
+//            cell.price.text = String(Servicefile.shared.petprod[indexPath.row].product_prices) + " % off"
+//            if Servicefile.shared.petprod[indexPath.row].product_fav_status != false {
+//                cell.img_Fav.image = UIImage(named: "Like 3")
+//            }else{
+//                cell.img_Fav.image = UIImage(named: "Like 2")
+//            }
             return cell
         }
     }
@@ -225,11 +246,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         if self.colleView_banner == collectionView {
           return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
         }else if self.colleView_Doctor == collectionView {
-             return CGSize(width: 138 , height:  171)
+             return CGSize(width: 188 , height:  161)
         }else if self.colleView_Service == collectionView {
              return CGSize(width: 128 , height:  149)
         }else {
-             return CGSize(width: 138 , height:  171)
+             return CGSize(width: 238 , height:  171)
         }
                
     }
@@ -322,15 +343,27 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                         for item in 0..<Products_details.count {
                                                             let Bval = Products_details[item] as! NSDictionary
                                                             let id = Bval["_id"] as! String
-                                                            let product_fav_status = Bval["product_fav_status"] as! Bool
-                                                            let product_offer_status =  Bval["product_offer_status"] as! Bool
-                                                            let product_offer_value =  Bval["product_offer_value"] as! Int
-                                                            let product_prices =  Bval["product_prices"] as! Int
-                                                            let product_rate =  String(Double(Bval["product_rate"] as! NSNumber))
-                                                            let product_title =  Bval["product_title"] as! String
-                                                            let products_img =  Bval["products_img"] as! String
-                                                            let review_count =  Bval["review_count"] as! Int
-                                                            Servicefile.shared.petprod.append(Petdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count))
+                                                            let delete_status = Bval["delete_status"] as! Bool
+                                                            let show_status =  Bval["show_status"] as! Bool
+                                                            let img_index =  Bval["img_index"] as! Int
+                                                            let product_title =  Bval["product_cate"] as! String
+                                                            let products_img =  Bval["img_path"] as! String
+                                                           
+                                                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
+//                                                            Servicefile.shared.petprod.append(Petdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count))
+                                                        }
+                                                        Servicefile.shared.Petpuppylove.removeAll()
+                                                        let Puppy_Products_details = dash["Puppy_Products_details"] as! NSArray
+                                                        for item in 0..<Puppy_Products_details.count {
+                                                            let Bval = Puppy_Products_details[item] as! NSDictionary
+                                                            let id = Bval["_id"] as! String
+                                                            let delete_status = Bval["delete_status"] as! Bool
+                                                            let show_status =  Bval["show_status"] as! Bool
+                                                            let img_index =  Bval["img_index"] as! Int
+                                                            let product_title =  Bval["product_cate"] as! String
+                                                            let products_img =  Bval["img_path"] as! String
+                                                            Servicefile.shared.Petpuppylove.append(Petdashpuppylove.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
+                                                            //                                                            Servicefile.shared.petprod.append(Petdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count))
                                                         }
                                                         Servicefile.shared.petser.removeAll()
                                                         let Service_details = dash["Service_details"] as! NSArray
@@ -385,6 +418,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                         self.colleView_Doctor.reloadData()
                                                         self.colleView_product.reloadData()
                                                         self.colleView_Service.reloadData()
+                                                        self.colleView_puppylove.reloadData()
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

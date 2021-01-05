@@ -25,7 +25,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
         self.getdemo()
-       
         // Do any additional setup after loading the view.
     }
     
@@ -57,19 +56,23 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func skipaction(_ sender: Any) {
-         //self.showPaymentForm()
+        // self.showPaymentForm()
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
               if  UserDefaults.standard.string(forKey: "usertype") != "" {
-                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
-                if Servicefile.shared.user_type == "1" {
+                Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                 print("user type ",Servicefile.shared.usertype,"user id",Servicefile.shared.userid)
+                if Servicefile.shared.usertype == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.user_type == "4" {
+                }else if Servicefile.shared.usertype == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.user_type == "2" {
+                }else if Servicefile.shared.usertype == "2" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                     self.present(vc, animated: true, completion: nil)
                 }
@@ -136,29 +139,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                } else {
                    print("Unable to initialize")
                }
-        
-//        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-//               let options: [AnyHashable:Any] = [
-//                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
-//                   "currency": "INR",//We support more that 92 international currencies.
-//                   "description": "some data",
-//                   "order_id": "order_DBJOWzybf0sJbb",
-//                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
-//                   "name": "sriram",
-//                   "prefill": [
-//                       "contact": "9003525711",
-//                       "email": "sriramchanr@gmail.com"
-//                   ],
-//                   "theme": [
-//                       "color": "#F37254"
-//                   ]
-//               ]
-//               if let rzp = self.razorpay {
-//                   rzp.open(options)
-//               } else {
-//                   print("Unable to initialize")
-//               }
-       
     }
     
     func onPaymentError(_ code: Int32, description str: String) {
@@ -182,6 +162,12 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
      
 }
 extension UIViewController  {
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
     
     func startAnimatingActivityIndicator() {
         Servicefile.shared.customview.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)

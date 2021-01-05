@@ -80,9 +80,16 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                    if trimmedString  == Servicefile.shared.otp {
                     UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                     UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                    UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
+                    UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
+                    UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
+                    UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                    UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                     Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                    Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                    Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                    Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                    Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                     self.callFCM()
                    }else{
                      print("verification Not success")

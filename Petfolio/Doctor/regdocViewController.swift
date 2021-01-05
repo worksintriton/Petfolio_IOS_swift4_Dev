@@ -33,6 +33,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var view_govtid: UIView!
     @IBOutlet weak var view_photoid: UIView!
     @IBOutlet weak var view_submit: UIView!
+    @IBOutlet weak var view_ser_amt: UIView!
     
    
     
@@ -56,7 +57,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var label_exp_from: UILabel!
     @IBOutlet weak var label_exp_to: UILabel!
     @IBOutlet weak var textfield_commtype: UITextField!
-    
+    @IBOutlet weak var textfield_ser_amt: UITextField!
     
     @IBOutlet weak var Img_clinic: UIImageView!
     @IBOutlet weak var view_edudate: UIView!
@@ -65,6 +66,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var view_expire: UIView!
     @IBOutlet weak var datepicker_expdate: UIDatePicker!
+    
+    
     
     var specialza = [""]
     var pethandle = [""]
@@ -165,6 +168,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.textfield_exp_company.delegate = self
         self.textfield_spec.delegate = self
         self.textfield_pethandle.delegate = self
+        self.textfield_ser_amt.delegate = self
         
         self.datepicker_date.datePickerMode = .date
         self.datepicker_expdate.datePickerMode = .date
@@ -337,6 +341,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.textfield_ser_amt {
+            self.moveTextField(textField: textField, up:true)
+        }
         self.tbl_commtype.isHidden = true
     }
     
@@ -543,7 +550,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "Please select the certificate")
         } else if Servicefile.shared.photodicarray.count == 0 {
             self.alert(Message: "Please select the certificate")
-        }else{
+        }else if  self.textfield_ser_amt.text == "" {
+                   self.alert(Message: "please enter the Service amount")
+         } else {
             print("user_id" , Servicefile.shared.userid,
                   "communication_type",self.textfield_commtype.text!,
                    "dr_title" , "",
@@ -562,7 +571,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "photo_id_pic" , Servicefile.shared.photodicarray,
                    "profile_status" , true ,
                    "profile_verification_status" , "Not verified",
-                   "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
+                   "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+                   "consultancy_fees" , "200")
              self.callDocreg()
         }
       
@@ -572,7 +582,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_backtologin(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -1049,6 +1059,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                  }
     
         func callDocreg(){
+            self.textfield_ser_amt.resignFirstResponder()
                    self.startAnimatingActivityIndicator()
                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docbusscreate, method: .post, parameters:
                 ["user_id" : Servicefile.shared.userid,
@@ -1069,6 +1080,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "photo_id_pic" : Servicefile.shared.photodicarray,
                    "profile_status" : true,
                    "profile_verification_status" : "Not verified",
+                   "consultancy_fees" : self.textfield_ser_amt.text!,
                    "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
                                                        case .success:
@@ -1127,6 +1139,29 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    func moveTextField(textField: UITextField, up: Bool){
+            let movementDistance:CGFloat = -230
+            let movementDuration: Double = 0.3
+            var movement:CGFloat = 0
+            if up {
+                movement = movementDistance
+            } else {
+                movement = -movementDistance
+            }
+            UIView.beginAnimations("animateTextField", context: nil)
+            UIView.setAnimationBeginsFromCurrentState(true)
+            UIView.setAnimationDuration(movementDuration)
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            UIView.commitAnimations()
+        }
+        
+      
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            if textField == self.textfield_ser_amt {
+         self.moveTextField(textField: textField, up:false)
+            }
+        }
     
     func calldetailget(){
               self.startAnimatingActivityIndicator()

@@ -11,8 +11,11 @@ import Alamofire
 import Toucan
 import MobileCoreServices
 import SDWebImage
+import Razorpay
+import SafariServices
+import WebKit
 
-class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
+class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
 
     @IBOutlet weak var textfield_selectpettype: UITextField!
     @IBOutlet weak var textfield_petname: UITextField!
@@ -38,14 +41,25 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var tblview_petdetail: UITableView!
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
+    
+    @IBOutlet weak var View_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_btn: UIView!
+    
     var Pet_breed = [""]
-      var pet_type = [""]
-      var petid = [""]
-     let imagepicker = UIImagePickerController()
+    var pet_type = [""]
+    var petid = [""]
+    let imagepicker = UIImagePickerController()
     var petimage = ""
+    
+    var razorpay: RazorpayCheckout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.View_shadow.isHidden = true
+        self.view_popup.isHidden = true
+         self.view_popup.layer.cornerRadius = 9.0
+        self.view_btn.layer.cornerRadius = 9.0
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
         self.imagepicker.delegate = self
         self.tblview_petdetail.delegate = self
@@ -76,7 +90,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textfield_petbreed.delegate = self
         self.textfield_selectpettype.delegate = self
         self.textview_descrip.delegate = self
-         
         self.textview_descrip.text = "Add comment here.."
         self.textview_descrip.textColor == UIColor.lightGray
         self.petimage = Servicefile.shared.sampleimag
@@ -88,6 +101,11 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
              self.present(vc, animated: true, completion: nil)
          }
    
+    @IBAction func action_afterappBooked(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+           self.present(vc, animated: true, completion: nil)
+       }
+       
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
      if self.textview_descrip.text!.count > 252 {
@@ -102,11 +120,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                }
         return true
     }
-    
-   
-    
-    
-  
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_petname.resignFirstResponder()
@@ -368,19 +381,17 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             var booking_date = format.string(from: date)
             var booking_time = tformat.string(from: date)
             
-            Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
-            Servicefile.shared.pet_apoint_booking_date = Servicefile.shared.ddMMyyyystringformat(date: Date())
-            Servicefile.shared.pet_apoint_booking_time = Servicefile.shared.hhmmastringformat(date: Date())
-            Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
-            Servicefile.shared.pet_apoint_communication_type = ""
+            Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.sear_Docapp_id
+            Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
+            Servicefile.shared.pet_apoint_communication_type = "Online"
             Servicefile.shared.pet_apoint_video_id = ""
             Servicefile.shared.pet_apoint_user_id = ""
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_doc_feedback = ""
-            Servicefile.shared.pet_apoint_doc_rate = ""
+            Servicefile.shared.pet_apoint_doc_rate = "0"
             Servicefile.shared.pet_apoint_user_feedback = ""
-            Servicefile.shared.pet_apoint_user_rate = ""
-            Servicefile.shared.pet_apoint_display_date = ""
+            Servicefile.shared.pet_apoint_user_rate = "0"
+            Servicefile.shared.pet_apoint_display_date = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
             Servicefile.shared.pet_apoint_payment_method = ""
@@ -390,58 +401,108 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "petdoccalenderViewController") as! petdoccalenderViewController
-                self.present(vc, animated: true, completion: nil)
+                self.showPaymentForm()
             }else{
                 self.calladdpetdetails()
             }
         }
     }
     
-    func calladdpetdetails(){
-           self.startAnimatingActivityIndicator()
-       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
-           ["user_id" : Servicefile.shared.userid,
-            "pet_img" : self.petimage,
-           "pet_name" : self.textfield_petname.text!,
-           "pet_type" : self.textfield_pettype.text!,
-           "pet_breed" : self.textfield_petbreed.text!,
-           "pet_gender" : "",
-           "pet_color" : "",
-           "pet_weight" : "0",
-           "pet_age" : "0",
-           "vaccinated" : false,
-           "last_vaccination_date" : "",
-           "default_status" : true,
-           "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                               switch (response.result) {
-                                               case .success:
-                                                     let res = response.value as! NSDictionary
-                                                     print("success data",res)
-                                                     let Code  = res["Code"] as! Int
-                                                     if Code == 200 {
-                                                       let Data = res["Data"] as! NSDictionary
-                                                        let id = Data["_id"] as! String
-                                                        Servicefile.shared.pet_apoint_pet_id = id
-                                                       let vc = self.storyboard?.instantiateViewController(withIdentifier: "petdoccalenderViewController") as! petdoccalenderViewController
-                                                       self.present(vc, animated: true, completion: nil)
-                                                        self.stopAnimatingActivityIndicator()
-                                                     }else{
-                                                       self.stopAnimatingActivityIndicator()
-                                                       print("status code service denied")
-                                                     }
-                                                   break
-                                               case .failure(let Error):
-                                                   self.stopAnimatingActivityIndicator()
-                                                   print("Can't Connect to Server / TimeOut",Error)
-                                                   break
-                                               }
-                                  }
-           }else{
-               self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
-           }
-       }
+   func callsubmit(){
+             self.startAnimatingActivityIndicator()
+         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_createappointm, method: .post, parameters:
+             [ "doctor_id":  Servicefile.shared.pet_apoint_doctor_id,
+                      "booking_date": Servicefile.shared.pet_apoint_booking_date,
+                      "booking_time": Servicefile.shared.pet_apoint_booking_time,
+                      "booking_date_time" : Servicefile.shared.pet_apoint_booking_date_time,
+                      "communication_type": Servicefile.shared.pet_apoint_communication_type,
+                      "video_id":  Servicefile.shared.pet_apoint_video_id,
+                      "user_id": Servicefile.shared.userid,
+                      "pet_id" : Servicefile.shared.pet_apoint_pet_id,
+                      "problem_info": Servicefile.shared.pet_apoint_problem_info,
+                      "doc_attched": Servicefile.shared.pet_apoint_doc_attched ,
+                      "doc_feedback":  Servicefile.shared.pet_apoint_doc_feedback,
+                      "doc_rate": Servicefile.shared.pet_apoint_doc_rate,
+                      "user_feedback" : Servicefile.shared.pet_apoint_user_feedback,
+                      "user_rate" : Servicefile.shared.pet_apoint_user_rate,
+                      "display_date" : Servicefile.shared.pet_apoint_display_date,
+                      "server_date_time" : Servicefile.shared.pet_apoint_server_date_time ,
+                      "payment_id" : Servicefile.shared.pet_apoint_payment_id ,
+                      "payment_method" : Servicefile.shared.pet_apoint_payment_method ,
+                      "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
+                      "allergies" : Servicefile.shared.pet_apoint_allergies,
+                      "amount" : Servicefile.shared.pet_apoint_amount,"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                 switch (response.result) {
+                                                 case .success:
+                                                       let res = response.value as! NSDictionary
+                                                       print("success data",res)
+                                                       let Code  = res["Code"] as! Int
+                                                       if Code == 200 {
+                                                          self.View_shadow.isHidden = false
+                                                          self.view_popup.isHidden = false
+                                                          self.stopAnimatingActivityIndicator()
+                                                       }else{
+                                                         self.stopAnimatingActivityIndicator()
+                                                         print("status code service denied")
+                                                           let Message = res["Message"] as! String
+                                                          self.alert(Message: Message)
+                                                       }
+                                                     break
+                                                 case .failure(let Error):
+                                                     self.stopAnimatingActivityIndicator()
+                                                     print("Can't Connect to Server / TimeOut",Error)
+                                                     break
+                                                 }
+                                    }
+             }else{
+                 self.stopAnimatingActivityIndicator()
+                 self.alert(Message: "No Intenet Please check and try again ")
+             }
+         }
+      
+      func calladdpetdetails(){
+             self.startAnimatingActivityIndicator()
+         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
+             ["user_id" : Servicefile.shared.userid,
+              "pet_img" : self.petimage,
+             "pet_name" : self.textfield_petname.text!,
+             "pet_type" : self.textfield_pettype.text!,
+             "pet_breed" : self.textfield_petbreed.text!,
+             "pet_gender" : "",
+             "pet_color" : "",
+             "pet_weight" : "0",
+             "pet_age" : "0",
+             "vaccinated" : false,
+             "last_vaccination_date" : "",
+             "default_status" : true,
+             "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                 switch (response.result) {
+                                                 case .success:
+                                                       let res = response.value as! NSDictionary
+                                                       print("success data",res)
+                                                       let Code  = res["Code"] as! Int
+                                                       if Code == 200 {
+                                                         let Data = res["Data"] as! NSDictionary
+                                                          let id = Data["_id"] as! String
+                                                          Servicefile.shared.pet_apoint_pet_id = id
+                                                          self.showPaymentForm()
+                                                          self.stopAnimatingActivityIndicator()
+                                                       }else{
+                                                         self.stopAnimatingActivityIndicator()
+                                                         print("status code service denied")
+                                                       }
+                                                     break
+                                                 case .failure(let Error):
+                                                     self.stopAnimatingActivityIndicator()
+                                                     print("Can't Connect to Server / TimeOut",Error)
+                                                     break
+                                                 }
+                                    }
+             }else{
+                 self.stopAnimatingActivityIndicator()
+                 self.alert(Message: "No Intenet Please check and try again ")
+             }
+         }
     
     
     func alert(Message: String){
@@ -452,7 +513,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
        }
     
     func callpetdetailget(){
-                self.startAnimatingActivityIndicator()
+        self.startAnimatingActivityIndicator()
       if Servicefile.shared.updateUserInterface() {
           AF.request(Servicefile.petdetailget, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
           switch (response.result) {
@@ -465,8 +526,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                   let Pet_type = Data["usertypedata"] as! NSArray
                   self.pet_type.removeAll()
                   self.petid.removeAll()
-                 self.Pet_breed.removeAll()
-              
+                  self.Pet_breed.removeAll()
                   for item in 0..<Pet_type.count{
                       let pb = Pet_type[item] as! NSDictionary
                       let pbv = pb["pet_type_title"] as! String
@@ -536,6 +596,77 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    func showPaymentForm(){
+           if Servicefile.shared.pet_apoint_amount == "" {
+               Servicefile.shared.pet_apoint_amount = "100"
+           }
+           let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
+           print("value changed",data)
+           self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+                   let options: [String:Any] = [
+                       "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
+                               "currency": "INR",//We support more that 92 international currencies.
+                               "description": "some some",
+                               "image": "http://52.25.163.13:3000/api/uploads/template.png",
+                               "name": "sriram",
+                               "prefill": [
+                                   "contact": Servicefile.shared.user_phone,
+                                   "email": Servicefile.shared.user_email
+                               ],
+                               "theme": [
+                                   "color": "#F37254"
+                               ]
+                           ]
+
+                   if let rzp = self.razorpay {
+                             // rzp.open(options)
+                       rzp.open(options,displayController:self)
+                          } else {
+                              print("Unable to initialize")
+                          }
+                   
+           //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+           //               let options: [AnyHashable:Any] = [
+           //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
+           //                   "currency": "INR",//We support more that 92 international currencies.
+           //                   "description": "some data",
+           //                   "order_id": "order_DBJOWzybf0sJbb",
+           //                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
+           //                   "name": "sriram",
+           //                   "prefill": [
+           //                       "contact": "9003525711",
+           //                       "email": "sriramchanr@gmail.com"
+           //                   ],
+           //                   "theme": [
+           //                       "color": "#F37254"
+           //                   ]
+           //               ]
+           //               if let rzp = self.razorpay {
+           //                   rzp.open(options)
+           //               } else {
+           //                   print("Unable to initialize")
+           //               }
+           }
+           
+           func onPaymentError(_ code: Int32, description str: String) {
+                   print("Payment failed with code")
+              }
+              
+              func onPaymentSuccess(_ payment_id: String) {
+                    print("Payment Success payment")
+                 self.callsubmit()
+              }
+           
+           func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
+                  print("error: ", code)
+                 
+              }
+              
+              func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
+                  print("success: ", payment_id)
+                  
+              }
     
     func moveTextField(textview: UITextView, up: Bool){
             let movementDistance:CGFloat = -230

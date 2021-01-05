@@ -17,6 +17,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     var labelmenu = ["My calender", "Logout"]
     var imgmenu = ["Calendar", "Exit"]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -30,6 +31,12 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBAction func action_dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func action_edit_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -65,5 +72,9 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         return 60
     }
 
-   
+    @IBAction func action_view_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }

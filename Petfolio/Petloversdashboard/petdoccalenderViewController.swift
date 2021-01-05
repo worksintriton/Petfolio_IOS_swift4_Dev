@@ -82,7 +82,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     
     @IBAction func action_bookappoint(_ sender: Any) {
-        self.callsubmit()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -112,71 +113,13 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         self.present(alert, animated: true, completion: nil)
     }
     
-//
-   
-    //
-    
-    func callsubmit(){
-           self.startAnimatingActivityIndicator()
-       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_createappointm, method: .post, parameters:
-           [ "doctor_id":  Servicefile.shared.pet_apoint_doctor_id,
-                    "booking_date": Servicefile.shared.pet_apoint_booking_date,
-                    "booking_time": Servicefile.shared.pet_apoint_booking_time,
-                    "booking_date_time" : Servicefile.shared.pet_apoint_booking_date_time,
-                    "communication_type": Servicefile.shared.pet_apoint_communication_type,
-                    "video_id":  Servicefile.shared.pet_apoint_video_id,
-                    "user_id": Servicefile.shared.userid,
-                    "pet_id" : Servicefile.shared.pet_apoint_pet_id,
-                    "problem_info": Servicefile.shared.pet_apoint_problem_info,
-                    "doc_attched": Servicefile.shared.pet_apoint_doc_attched ,
-                    "doc_feedback":  Servicefile.shared.pet_apoint_doc_feedback,
-                    "doc_rate": Servicefile.shared.pet_apoint_doc_rate,
-                    "user_feedback" : Servicefile.shared.pet_apoint_user_feedback,
-                    "user_rate" : Servicefile.shared.pet_apoint_user_rate,
-                    "display_date" : Servicefile.shared.pet_apoint_display_date,
-                    "server_date_time" : Servicefile.shared.pet_apoint_server_date_time ,
-                    "payment_id" : Servicefile.shared.pet_apoint_payment_id ,
-                    "payment_method" : Servicefile.shared.pet_apoint_payment_method ,
-                    "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
-                    "allergies" : Servicefile.shared.pet_apoint_allergies,
-                    "amount" : Servicefile.shared.pet_apoint_amount,"mobile_type" : "IOS",
-                    "service_name" : "",
-                    "service_amount" : ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                               switch (response.result) {
-                                               case .success:
-                                                     let res = response.value as! NSDictionary
-                                                     print("success data",res)
-                                                     let Code  = res["Code"] as! Int
-                                                     if Code == 200 {
-                                                        self.View_shadow.isHidden = false
-                                                        self.view_popup.isHidden = false
-                                                        self.stopAnimatingActivityIndicator()
-                                                     }else{
-                                                       self.stopAnimatingActivityIndicator()
-                                                       print("status code service denied")
-                                                         let Message = res["Message"] as! String
-                                                        self.alert(Message: Message)
-                                                     }
-                                                   break
-                                               case .failure(let Error):
-                                                   self.stopAnimatingActivityIndicator()
-                                                   print("Can't Connect to Server / TimeOut",Error)
-                                                   break
-                                               }
-                                  }
-           }else{
-               self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
-           }
-       }
-    
     func callgetdatedetails(){
         self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_avail_time, method: .post, parameters:
-        [ "user_id":Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
-       "Date": self.seldate,
-       "cur_date": Servicefile.shared.ddmmyyyystringformat(date: Date()),
-      "cur_time": Servicefile.shared.hhmmastringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        ["user_id":Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+         "Date": self.seldate,
+         "cur_date": Servicefile.shared.ddmmyyyystringformat(date: Date()),
+         "cur_time": Servicefile.shared.hhmmastringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary
@@ -239,6 +182,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                                                     }
                                                     self.seltime.remove(at: index)
                                                     self.seltime.insert("1", at: index)
+                                                    Servicefile.shared.pet_apoint_booking_date = self.seldate
+                                                    Servicefile.shared.pet_apoint_booking_time = self.listtime[index]
                                                     self.coll_seltime.reloadData()
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{

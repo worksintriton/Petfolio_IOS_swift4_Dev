@@ -86,11 +86,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                return true
     }
     
-    func isValidEmail(_ email: String) -> Bool {
-           let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-           let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-           return emailPred.evaluate(with: email)
-       }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.usertypetitle.text = Servicefile.shared.usertypetitle
@@ -112,7 +108,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
              self.alert(Message: "Please enter the Phone number")
         }else {
             if self.textfield_email.text != ""{
-                if isValidEmail(self.textfield_email.text!) != false {
+                if self.isValidEmail(self.textfield_email.text!) != false {
 //                     self.alert(Message: "Email ID is valid")
                     self.callsignup()
                 }else{

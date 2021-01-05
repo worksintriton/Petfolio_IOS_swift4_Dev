@@ -192,6 +192,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func action_logout(_ sender: Any) {
         
     }
+    
     func callnew(){
          Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
@@ -450,8 +451,12 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                       if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
                                                         let profile_status = Data["profile_status"] as! Bool
+                                                        let calender_status = Data["calender_status"] as! Bool
                                                         if profile_status == false {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                                                                   self.present(vc, animated: true, completion: nil)
+                                                        }else if calender_status == false {
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
                                                                    self.present(vc, animated: true, completion: nil)
                                                         }else {
                                                              let profile_verification_status = Data["profile_verification_status"] as! String

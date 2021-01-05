@@ -134,13 +134,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
        func textFieldDidBeginEditing(_ textField: UITextField) {
                 self.moveTextField(textField: textField, up:true)
        }
-       
+    
        func textFieldDidEndEditing(_ textField: UITextField) {
         self.moveTextField(textField: textField, up:false)
         
        }
-  
-
 }
 
 extension UIImage {

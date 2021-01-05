@@ -94,7 +94,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func action_book(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchpetloverappointmentViewController") as! searchpetloverappointmentViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
                self.present(vc, animated: true, completion: nil)
     }
       

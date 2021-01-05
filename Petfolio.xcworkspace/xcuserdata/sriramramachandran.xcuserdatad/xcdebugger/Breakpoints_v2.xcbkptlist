@@ -30,8 +30,8 @@
             filePath = "Petfolio/Doctor/regdocViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "action_photoimg(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,38 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7E02CA41-2EC6-4D01-AAF7-9A21FA9568E4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Petfolio/SliderViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "skipaction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "662FF70E-29F3-4E7A-BB32-3E75724BAEFE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Petfolio/SliderViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "skipaction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -100,34 +68,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - 893494f9cb96d7f"
+                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - eae66fdbec620382"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Petfolio.Pet_applist_ViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
                   moduleName = "Petfolio"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sriramramachandran/Documents/GitHub/Petfolio_IOS_swift4_Dev/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
+                  urlString = "file:///Users/sriramramachandran/Documents/Triton/R&amp;D/Petfolio/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "134"
                   endingLineNumber = "134"
-                  offsetFromSymbolStart = "1572">
+                  offsetFromSymbolStart = "2112">
                </Location>
                <Location
-                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - 893494f9cb96d7f"
+                  uuid = "77B83F9A-2183-4870-B458-EA5BA86E7BF8 - eae66fdbec620382"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Petfolio.Pet_applist_ViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
                   moduleName = "Petfolio"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sriramramachandran/Documents/GitHub/Petfolio_IOS_swift4_Dev/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
+                  urlString = "file:///Users/sriramramachandran/Documents/Triton/R&amp;D/Petfolio/Petfolio/Petloversdashboard/Pet_applist_ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "134"
                   endingLineNumber = "134"
-                  offsetFromSymbolStart = "1968">
+                  offsetFromSymbolStart = "2560">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -148,7 +148,8 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func action_editprofile(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -211,16 +212,24 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                            let Products_details = dash["Products_details"] as! NSArray
                                                            for item in 0..<Products_details.count {
                                                                let Bval = Products_details[item] as! NSDictionary
-                                                               let id = Bval["_id"] as! String
-                                                               let product_fav_status = Bval["product_fav_status"] as! Bool
-                                                               let product_offer_status =  Bval["product_offer_status"] as! Bool
-                                                               let product_offer_value =  Bval["product_offer_value"] as! Int
-                                                               let product_prices =  Bval["product_prices"] as! Int
-                                                               let product_rate =  String(Double(Bval["product_rate"] as! NSNumber))
-                                                               let product_title =  Bval["product_title"] as! String
-                                                               let products_img =  Bval["products_img"] as! String
-                                                               let review_count =  Bval["review_count"] as! Int
-                                                               Servicefile.shared.petprod.append(Petdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count))
+//                                                               let id = Bval["_id"] as! String
+//                                                               let product_fav_status = Bval["product_fav_status"] as! Bool
+//                                                               let product_offer_status =  Bval["product_offer_status"] as! Bool
+//                                                               let product_offer_value =  Bval["product_offer_value"] as! Int
+//                                                               let product_prices =  Bval["product_prices"] as! Int
+//                                                               let product_rate =  String(Double(Bval["product_rate"] as! NSNumber))
+//                                                               let product_title =  Bval["product_title"] as! String
+//                                                               let products_img =  Bval["products_img"] as! String
+//                                                               let review_count =  Bval["review_count"] as! Int
+//                                                               Servicefile.shared.petprod.append(Petdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count))
+                                                            let id = Bval["_id"] as! String
+                                                             let delete_status = Bval["delete_status"] as! Bool
+                                                             let show_status =  Bval["show_status"] as! Bool
+                                                             let img_index =  Bval["img_index"] as! Int
+                                                             let product_title =  Bval["product_cate"] as! String
+                                                             let products_img =  Bval["img_path"] as! String
+                                                            
+                                                             Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
                                                            }
                                                            Servicefile.shared.petser.removeAll()
                                                            let Service_details = dash["Service_details"] as! NSArray

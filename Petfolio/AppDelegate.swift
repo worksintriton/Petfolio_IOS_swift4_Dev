@@ -18,6 +18,11 @@ let googleApiKey = "AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc"
 var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+//            while let presentedViewController = topController.presentedViewController {
+//                topController = presentedViewController
+//            }
+//        }
        GMSServices.provideAPIKey(googleApiKey)
             FirebaseApp.configure()
             do {

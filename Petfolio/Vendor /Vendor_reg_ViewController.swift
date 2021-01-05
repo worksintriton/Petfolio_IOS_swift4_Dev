@@ -143,12 +143,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
              
           }
             
-    func isValidEmail(_ email: String) -> Bool {
-              let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-              let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-              return emailPred.evaluate(with: email)
-          }
-       
+   
    
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        self.textfield_resign()
@@ -211,7 +206,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         self.alert(Message: "Please upload the certificates")
     }else{
         if self.textfield_bus_email.text != ""{
-            if isValidEmail(self.textfield_bus_email.text!) != false {
+            if self.isValidEmail(self.textfield_bus_email.text!) != false {
                 self.callvendorreg()
             }else{
                 self.alert(Message: "Email ID is invalid")

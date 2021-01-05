@@ -12,10 +12,6 @@ class petprodCollectionViewCell: UICollectionViewCell {
  
     
     @IBOutlet weak var img_prod: UIImageView!
-    @IBOutlet weak var img_Fav: UIImageView!
     @IBOutlet weak var label_prodtitile: UILabel!
-    @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var label_rateing: UILabel!
-    @IBOutlet weak var label_ratedno: UILabel!
     
 }

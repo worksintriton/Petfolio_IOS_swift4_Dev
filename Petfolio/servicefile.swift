@@ -25,12 +25,14 @@ class Servicefile {
     static let petregister = baseurl + "/api/petdetails/mobile/create"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let login = baseurl + "/api/userdetails/mobile/login"
-    static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
+    //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
+     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard1"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
     static let petdetailget = baseurl + "/api/pettype/mobile/getlist"
     static let addlocation = baseurl + "/api/locationdetails/create"
     static let imageupload = baseurl + "/upload"
     static let docbusscreate = baseurl + "/api/doctordetails/create"
+    static let docbussedit = baseurl + "/api/doctordetails/edit"
     static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
@@ -65,6 +67,8 @@ class Servicefile {
     static let sp_dash_get = baseurl + "/api/service_provider/getlist_id"
     static let sp_Profile_edit = baseurl + "/api/service_provider/edit"
     
+    static let update_profile = baseurl + "/api/userdetails/mobile/update/profile"
+    static let DOc_get_details = baseurl + "/api/doctordetails/fetch_doctor_user_id"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -103,6 +107,7 @@ class Servicefile {
     var petdoc = [Petdashdoc]()
     var petser = [Petdashservice]()
     var petprod = [Petdashproduct]()
+    var Petpuppylove = [Petdashpuppylove]()
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
     // pet dashboard
@@ -177,13 +182,44 @@ class Servicefile {
     // prescription
     
     // sp drop down
-    
+   
     var speclist = [""]
     var servicelist = [""]
       var servicelistdicarray = [Any]()
       var speclistdicarray = [Any]()
      // sp drop down
-    
+    var communication_type = ""
+    var consultancy_fees = ""
+     var DOC_edudicarray = [Any]()
+     var DOC_expdicarray = [Any]()
+     var DOC_specdicarray = [Any]()
+     var DOC_pethandicarray = [Any]()
+     var DOC_clinicdicarray = [Any]()
+     var DOC_certifdicarray = [Any]()
+     var DOC_govdicarray = [Any]()
+     var DOC_photodicarray = [Any]()
+    // DOc update
+       var Doc_id = ""
+       var Doc_bus_certifdicarray = [Any]()
+       var Doc_bus_profile = ""
+       var Doc_bus_proof = ""
+       var Doc_bus_service_galldicarray = [Any]()
+       var Doc_bus_service_list = [Any]()
+       var Doc_bus_spec_list = [Any]()
+       var Doc_bus_user_email = ""
+       var Doc_bus_user_name = ""
+       var Doc_bus_user_phone = ""
+       var Doc_bussiness_name = ""
+       var Doc_date_and_time  = ""
+       var Doc_delete_status = true
+       var Doc_mobile_type = ""
+       var Doc_profile_status = true;
+       var Doc_profile_verification_status = "";
+       var Doc_lat = 0.0
+       var Doc_loc = ""
+       var Doc_long = 0.0
+       var Doc_user_id = ""
+    // doc update
     // sp update
     var sp_id = ""
     var Sp_bus_certifdicarray = [Any]()
@@ -445,30 +481,77 @@ struct Petdashservice{
     }
 }
 
+//
+//struct Petdashproduct{
+//    var _id : String
+//    var product_fav_status : Bool
+//    var product_offer_status : Bool
+//    var product_offer_value : Int
+//    var product_prices : Int
+//    var product_rate : String
+//    var product_title : String
+//    var products_img : String
+//    var review_count : Int
+//    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int) {
+//        self._id = UID
+//        self.product_fav_status = product_fav_status
+//        self.product_offer_status = product_offer_status
+//        self.product_offer_value = product_offer_value
+//        self.product_prices = product_prices
+//        self.product_rate = product_rate
+//        self.product_title = product_title
+//        self.products_img = products_img
+//        self.review_count = review_count
+//
+//    }
+//}
 
 struct Petdashproduct{
     var _id : String
-    var product_fav_status : Bool
-    var product_offer_status : Bool
-    var product_offer_value : Int
-    var product_prices : Int
-    var product_rate : String
+    var delete_status : Bool
+    var show_status : Bool
+    var img_index : Int
     var product_title : String
     var products_img : String
-    var review_count : Int
-    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int) {
-        self._id = UID
-        self.product_fav_status = product_fav_status
-        self.product_offer_status = product_offer_status
-        self.product_offer_value = product_offer_value
-        self.product_prices = product_prices
-        self.product_rate = product_rate
-        self.product_title = product_title
-        self.products_img = products_img
-        self.review_count = review_count
-        
+
+    init(I_id : String,
+    Idelete_status : Bool,
+    Ishow_status : Bool,
+    Iimg_index : Int,
+    Iproduct_title : String,
+    Iproducts_img : String) {
+        self._id = I_id
+        self.delete_status = Idelete_status
+        self.show_status = Ishow_status
+        self.img_index = Iimg_index
+        self.products_img = Iproducts_img
+        self.product_title  = Iproduct_title
     }
 }
+
+struct Petdashpuppylove{
+    var _id : String
+    var delete_status : Bool
+    var show_status : Bool
+    var img_index : Int
+    var product_title : String
+    var products_img : String
+
+    init(I_id : String,
+    Idelete_status : Bool,
+    Ishow_status : Bool,
+    Iimg_index : Int,
+    Iproduct_title : String,
+    Iproducts_img : String) {
+        self._id = I_id
+        self.delete_status = Idelete_status
+        self.show_status = Ishow_status
+        self.img_index = Iimg_index
+        self.products_img = Iproducts_img
+        self.product_title  = Iproduct_title
+    }
+}
+
 
 
 struct Petdashdoc{

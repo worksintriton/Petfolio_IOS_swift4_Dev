@@ -185,6 +185,8 @@ class Servicefile {
    
     var speclist = [""]
     var servicelist = [""]
+    var selectedservice = [""]
+    var sertime = [""]
       var servicelistdicarray = [Any]()
       var speclistdicarray = [Any]()
      // sp drop down

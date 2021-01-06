@@ -12,7 +12,8 @@ import Toucan
 import MobileCoreServices
 import CoreLocation
 
-class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
+class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+   
     
     let locationManager = CLLocationManager()
     var latitude : Double!
@@ -20,6 +21,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     let imagepicker = UIImagePickerController()
     var Img_uploadarea = "clinic"
     var locationaddress = ""
+    
     @IBOutlet weak var view_Bus_name: UIView!
     @IBOutlet weak var view_addservice: UIView!
     @IBOutlet weak var view_Service_Btn_add: UIView!
@@ -41,6 +43,10 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_btn_ok: UIView!
+    @IBOutlet weak var view_picker: UIView!
+    @IBOutlet weak var tbl_service_list: UITableView!
+    @IBOutlet weak var picker_time: UIPickerView!
+    
     
     var selservice = ["0"]
     var selspec = ["0"]
@@ -49,7 +55,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var image_photo = ""
     var image_govid = ""
     var img_for = "Gall" // Photo or Gov or Certi
-    
+    var timeindex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +74,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func call_delegates(){
+        self.view_picker.isHidden = true
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
         self.imagepicker.delegate = self
@@ -79,8 +86,11 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func collectiondelegate(){
         
-        self.coll_service.delegate = self
-        self.coll_service.dataSource = self
+        self.picker_time.delegate = self
+        self.picker_time.dataSource = self
+        
+//        self.coll_service.delegate = self
+//        self.coll_service.dataSource = self
         
         self.coll_galary_img.delegate = self
         self.coll_galary_img.dataSource = self
@@ -96,7 +106,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.coll_speclist.delegate = self
         self.coll_speclist.dataSource = self
-       
+        
+        self.tbl_service_list.delegate = self
+        self.tbl_service_list.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -222,7 +234,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             if self.selservice[itm] == "1" {
                 var ser = Servicefile.shared.servicelistdicarray
                        var serarr = ser
-                       let a = ["bus_service_list": Servicefile.shared.servicelist[itm]] as NSDictionary
+                let a = ["bus_service_list": Servicefile.shared.servicelist[itm],"time_slots":Servicefile.shared.selectedservice[itm]] as NSDictionary
                        serarr.append(a)
                        ser = serarr
                        print(ser)
@@ -233,7 +245,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         for itm in 0..<self.added_service.count {
                 var ser = Servicefile.shared.servicelistdicarray
                        var serarr = ser
-                let a = ["bus_service_list": self.added_service[itm]] as NSDictionary
+                let a = ["bus_service_list": self.added_service[itm],"time_slots":Servicefile.shared.selectedservice[0]] as NSDictionary
                        serarr.append(a)
                        ser = serarr
                        print(ser)
@@ -282,6 +294,72 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+           return 1
+       }
+       
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+         return Servicefile.shared.sertime.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+         return Servicefile.shared.sertime[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+          Servicefile.shared.selectedservice.remove(at: self.timeindex)
+              Servicefile.shared.selectedservice.insert( Servicefile.shared.sertime[row], at: self.timeindex)
+              self.view_picker.isHidden = true
+              self.tbl_service_list.reloadData()
+    }
+
+   
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Servicefile.shared.servicelist.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! service_select_TableViewCell
+        cell.label_service.text = Servicefile.shared.servicelist[indexPath.row]
+                   if self.selservice[indexPath.row] != "0" {
+                       cell.imag_check.image = UIImage(named: " checkbox-1")
+                    cell.view_time.isHidden = false
+                   } else{
+                       cell.imag_check.image = UIImage(named: " checkbox")
+                    cell.view_time.isHidden = true
+                   }
+        cell.label_time.text = Servicefile.shared.selectedservice[indexPath.row]
+        cell.btn_drop.tag = indexPath.row
+        cell.btn_drop.addTarget(self, action: #selector(clickdropdown), for: .touchUpInside)
+        return cell
+    }
+    
+    @objc func clickdropdown(sender: UIButton){
+        let tag = sender.tag
+        self.timeindex = tag
+        self.view_picker.isHidden = false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selservice.append("0")
+                   if self.selservice[indexPath.row] == "1" {
+                       self.selservice.remove(at: indexPath.row)
+                       self.selservice.insert("0", at: indexPath.row)
+                   }else{
+                       self.selservice.remove(at: indexPath.row)
+                       self.selservice.insert("1", at: indexPath.row)
+                   }
+        self.tbl_service_list.reloadData()
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -293,8 +371,6 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
            return Servicefile.shared.certifdicarray.count
         }else if coll_speclist == collectionView{
             return Servicefile.shared.speclist.count
-        }else if coll_service == collectionView{
-            return Servicefile.shared.servicelist.count
         }else if coll_selservice == collectionView{
            return self.added_service.count
         }else{
@@ -322,17 +398,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             
              cell.Img_id.image = UIImage(named: "sample")
                 return cell
-        }else if coll_service == collectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "service", for: indexPath) as! checkupCollectionViewCell
-            cell.title.text = Servicefile.shared.servicelist[indexPath.row]
-            
-            if self.selservice[indexPath.row] != "0" {
-                cell.img_check.image = UIImage(named: " checkbox-1")
-            } else{
-                cell.img_check.image = UIImage(named: " checkbox")
-            }
-            return cell
-        }  else if coll_speclist == collectionView{
+        }else if coll_speclist == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spec", for: indexPath) as! checkupCollectionViewCell
             cell.title.text = Servicefile.shared.speclist[indexPath.row]
              
@@ -372,16 +438,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if coll_service == collectionView {
-            self.selservice.append("0")
-            if self.selservice[indexPath.row] == "1" {
-                self.selservice.remove(at: indexPath.row)
-                self.selservice.insert("0", at: indexPath.row)
-            }else{
-                self.selservice.remove(at: indexPath.row)
-                self.selservice.insert("1", at: indexPath.row)
-            }
-        }else if coll_speclist == collectionView {
+         if coll_speclist == collectionView {
             
             if self.selspec[indexPath.row] == "1" {
                 self.selspec.remove(at: indexPath.row)
@@ -392,7 +449,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         self.coll_speclist.reloadData()
-        self.coll_service.reloadData()
+        //self.coll_service.reloadData()
     }
     
     func setimag(){
@@ -673,13 +730,22 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let Data = resp["Data"] as! NSDictionary
                 let service_list = Data["service_list"] as! NSArray
                 let Specialization = Data["Specialization"] as! NSArray
+                 let sertime = Data["time"] as! NSArray
                 self.selservice.removeAll()
                  self.selspec.removeAll()
+                Servicefile.shared.sertime.removeAll()
+                for itm in 0..<sertime.count{
+                    let sitm = sertime[itm] as! NSDictionary
+                    let slistitm = sitm["time"] as! String
+                    Servicefile.shared.sertime.append(slistitm)
+                }
                 Servicefile.shared.servicelist.removeAll()
+                Servicefile.shared.selectedservice.removeAll()
                 for itm in 0..<service_list.count{
                     let ditm = service_list[itm] as! NSDictionary
                     let listitm = ditm["service_list"] as! String
                     Servicefile.shared.servicelist.append(listitm)
+                    Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
                     self.selservice.append("0")
                 }
                 Servicefile.shared.speclist.removeAll()
@@ -689,8 +755,11 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     Servicefile.shared.speclist.append(listitm)
                      self.selspec.append("0")
                 }
+               
                 self.coll_speclist.reloadData()
-                self.coll_service.reloadData()
+                //self.coll_service.reloadData()
+                self.tbl_service_list.reloadData()
+                self.picker_time.reloadAllComponents()
                  self.stopAnimatingActivityIndicator()
               
             }else{

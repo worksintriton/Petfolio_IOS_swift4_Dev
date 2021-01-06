@@ -56,6 +56,7 @@
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
+		B075132F25A44FDA00C850DF /* service_select_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */; };
 		B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */; };
 		B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */; };
 		B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0751611256D2682002DAA20 /* petlov_DocselectViewController.swift */; };
@@ -205,6 +206,7 @@
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = service_select_TableViewCell.swift; sourceTree = "<group>"; };
 		B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mycal_edit_availdayTableViewCell.swift; sourceTree = "<group>"; };
 		B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycal_hoursViewController.swift; sourceTree = "<group>"; };
 		B0751611256D2682002DAA20 /* petlov_DocselectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petlov_DocselectViewController.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				B02D3A8A259342F00010A4B6 /* sp_side_menuViewController.swift */,
 				B02D3A8C259350270010A4B6 /* Sp_profile_edit_ViewController.swift */,
 				B02D3A8E259359080010A4B6 /* Sp_profile_ViewController.swift */,
+				B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */,
 			);
 			path = ServiceProvider;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				B02E7A59257768D700B2B0C2 /* Pet_applist_ViewController.swift in Sources */,
 				B08F73172563E1F300AEB8CC /* petServCollectionViewCell.swift in Sources */,
 				B08F730E25638D1D00AEB8CC /* REGPetLoverViewController.swift in Sources */,
+				B075132F25A44FDA00C850DF /* service_select_TableViewCell.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B0891F6C259B255E00764396 /* searchcalenderdetailsViewController.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,

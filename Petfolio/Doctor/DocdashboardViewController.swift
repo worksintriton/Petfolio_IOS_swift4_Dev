@@ -29,6 +29,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var view_refresh: UIView!
     @IBOutlet weak var label_failedstatus: UILabel!
     
+    @IBOutlet weak var view_close_btn: UIView!
     
     
     var appointtype = "New"
@@ -45,22 +46,26 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
          self.view_refresh.layer.cornerRadius = 9.0
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
+        self.view_close_btn.isHidden = true
         self.view_completed.layer.borderWidth = 0.5
         self.view_missed.layer.borderWidth = 0.5
         self.view_new.layer.borderWidth = 0.5
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
-        
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        // Do any additional setup after loading the view.
         self.callcheckstatus()
     }
     
     
     @IBAction func action_refresh(_ sender: Any) {
         self.callcheckstatus()
+    }
+    
+    @IBAction func action_close(_ sender: Any) {
+        self.view_popup.isHidden = true
+        self.view_shadow.isHidden = true
     }
     
     
@@ -463,6 +468,12 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                             if profile_verification_status == "Not verified" {
                                                                 self.view_shadow.isHidden = false
                                                                 self.view_popup.isHidden = false
+                                                                let Message = res["Message"] as! String
+                                                                self.label_failedstatus.text = Message
+                                                            }else if profile_verification_status == "profile updated" {
+                                                                self.view_shadow.isHidden = false
+                                                                self.view_popup.isHidden = false
+                                                                self.view_close_btn.isHidden = false
                                                                 let Message = res["Message"] as! String
                                                                 self.label_failedstatus.text = Message
                                                             }else{

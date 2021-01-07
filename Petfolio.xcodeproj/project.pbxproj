@@ -30,6 +30,8 @@
 		B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */; };
 		B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */; };
 		B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */; };
+		B024F52625A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024F52525A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift */; };
+		B024F52825A5AFD9004F0CC4 /* pet_servicelist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */; };
 		B02AA437259D97EC00A94990 /* pet_new_dashboard_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA436259D97EC00A94990 /* pet_new_dashboard_ViewController.swift */; };
 		B02AA439259DEB1100A94990 /* Doc_profiledetails_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA438259DEB1100A94990 /* Doc_profiledetails_ViewController.swift */; };
 		B02AA43B259E03CE00A94990 /* profile_edit_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA43A259E03CE00A94990 /* profile_edit_ViewController.swift */; };
@@ -181,6 +183,8 @@
 		B0228C8C2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_prescriptionViewController.swift; sourceTree = "<group>"; };
 		B0228C8E257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_labelTableViewCell.swift; sourceTree = "<group>"; };
 		B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_textfieldactionTableViewCell.swift; sourceTree = "<group>"; };
+		B024F52525A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashfooter_servicelist_ViewController.swift; sourceTree = "<group>"; };
+		B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_servicelist_ViewController.swift; sourceTree = "<group>"; };
 		B02AA436259D97EC00A94990 /* pet_new_dashboard_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_new_dashboard_ViewController.swift; sourceTree = "<group>"; };
 		B02AA438259DEB1100A94990 /* Doc_profiledetails_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_profiledetails_ViewController.swift; sourceTree = "<group>"; };
 		B02AA43A259E03CE00A94990 /* profile_edit_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profile_edit_ViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +371,15 @@
 			path = ServiceProvider;
 			sourceTree = "<group>";
 		};
+		B024F52425A58688004F0CC4 /* SP */ = {
+			isa = PBXGroup;
+			children = (
+				B024F52525A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift */,
+				B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */,
+			);
+			path = SP;
+			sourceTree = "<group>";
+		};
 		B02D745F2599A5AE0033D2D0 /* pet_order_list */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +401,7 @@
 		B08F73132563E1B700AEB8CC /* Petloversdashboard */ = {
 			isa = PBXGroup;
 			children = (
+				B024F52425A58688004F0CC4 /* SP */,
 				B02D745F2599A5AE0033D2D0 /* pet_order_list */,
 				B08F73112563BE4C00AEB8CC /* petloverDashboardViewController.swift */,
 				B08F73142563E1E200AEB8CC /* petdocCollectionViewCell.swift */,
@@ -846,6 +860,7 @@
 				B094D24D255C0F07008400D6 /* LoginViewController.swift in Sources */,
 				B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */,
 				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
+				B024F52825A5AFD9004F0CC4 /* pet_servicelist_ViewController.swift in Sources */,
 				B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */,
 				B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */,
 				B020D0AC25878BDF008F5C7B /* sosTableViewCell.swift in Sources */,
@@ -881,6 +896,7 @@
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */,
+				B024F52625A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
 				B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */,

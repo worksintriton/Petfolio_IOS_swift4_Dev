@@ -15,6 +15,8 @@ class service_select_TableViewCell: UITableViewCell {
     @IBOutlet weak var btn_drop: UIButton!
     @IBOutlet weak var label_time: UILabel!
     @IBOutlet weak var view_time: UIView!
+    @IBOutlet weak var view_amt: UIView!
+    @IBOutlet weak var label_amt: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

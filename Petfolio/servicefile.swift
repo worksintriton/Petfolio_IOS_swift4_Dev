@@ -66,9 +66,11 @@ class Servicefile {
      static let sp_regi_status = baseurl + "/api/service_provider/check_status"
     static let sp_dash_get = baseurl + "/api/service_provider/getlist_id"
     static let sp_Profile_edit = baseurl + "/api/service_provider/edit"
-    
+    static let pet_service_cat = baseurl + "/api/service_provider/mobile/service_cat"
     static let update_profile = baseurl + "/api/userdetails/mobile/update/profile"
     static let DOc_get_details = baseurl + "/api/doctordetails/fetch_doctor_user_id"
+     static let pet_servicedetails = baseurl + "/api/service_provider/mobile/servicedetails"
+    
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
@@ -111,6 +113,9 @@ class Servicefile {
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
     // pet dashboard
+    // pet service
+    var pet_servicecat = [service_cat]()
+    //pet service
     // seemore
     var moredocd = [moredoc]()
     var specd = [spec]()
@@ -186,7 +191,9 @@ class Servicefile {
     var speclist = [""]
     var servicelist = [""]
     var selectedservice = [""]
+    var selectedamount = [""]
     var sertime = [""]
+    var seramt = [""]
       var servicelistdicarray = [Any]()
       var speclistdicarray = [Any]()
      // sp drop down
@@ -244,6 +251,8 @@ class Servicefile {
     var sp_long = 0.0
     var sp_user_id = ""
     // sp update
+    
+    var service_id = ""
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -759,4 +768,17 @@ struct sosnumber {
     }
 }
 
+struct service_cat {
+    var _id : String
+    var image : String
+    var sub_title : String
+    var title : String
+    init( I_id : String, Iimage : String, Isub_title : String, Ititle : String) {
+        self._id = I_id
+        self.image = Iimage
+        self.sub_title = Isub_title
+        self.title = Ititle
+    }
+}
         
+

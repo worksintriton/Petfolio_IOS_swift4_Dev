@@ -46,7 +46,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var view_picker: UIView!
     @IBOutlet weak var tbl_service_list: UITableView!
     @IBOutlet weak var picker_time: UIPickerView!
-    
+    @IBOutlet weak var textfield_amt: UITextField!
     
     var selservice = ["0"]
     var selspec = ["0"]
@@ -56,6 +56,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var image_govid = ""
     var img_for = "Gall" // Photo or Gov or Certi
     var timeindex = 0
+    var tblindex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,7 +235,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             if self.selservice[itm] == "1" {
                 var ser = Servicefile.shared.servicelistdicarray
                        var serarr = ser
-                let a = ["bus_service_list": Servicefile.shared.servicelist[itm],"time_slots":Servicefile.shared.selectedservice[itm]] as NSDictionary
+                let a = ["bus_service_list": Servicefile.shared.servicelist[itm],
+                         "time_slots":Servicefile.shared.selectedservice[itm],
+                         "amount":Servicefile.shared.selectedamount[itm]] as NSDictionary
                        serarr.append(a)
                        ser = serarr
                        print(ser)
@@ -244,8 +247,10 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         for itm in 0..<self.added_service.count {
                 var ser = Servicefile.shared.servicelistdicarray
-                       var serarr = ser
-                let a = ["bus_service_list": self.added_service[itm],"time_slots":Servicefile.shared.selectedservice[0]] as NSDictionary
+                var serarr = ser
+                let a = ["bus_service_list": self.added_service[itm],
+                         "time_slots":Servicefile.shared.selectedservice[itm],
+                         "amount":"0"] as NSDictionary
                        serarr.append(a)
                        ser = serarr
                        print(ser)
@@ -312,11 +317,36 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
           Servicefile.shared.selectedservice.remove(at: self.timeindex)
               Servicefile.shared.selectedservice.insert( Servicefile.shared.sertime[row], at: self.timeindex)
-              self.view_picker.isHidden = true
-              self.tbl_service_list.reloadData()
+              
     }
 
-   
+    @IBAction func action_addtTmeandAmt(_ sender: Any) {
+        if self.textfield_amt.text! == "" || self.textfield_amt.text! == "0" {
+            self.alert(Message: "Please enter valid Service amount")
+        }else{
+            
+            Servicefile.shared.selectedamount.remove(at: self.timeindex)
+                         Servicefile.shared.selectedamount.insert(  self.textfield_amt.text!, at: self.timeindex)
+            
+             self.view_picker.isHidden = true
+            self.tbl_service_list.reloadData()
+            self.selservice.append("0")
+            if self.selservice[self.tblindex] == "1" {
+                self.selservice.remove(at: self.tblindex)
+                self.selservice.insert("0", at: self.tblindex)
+            }else{
+                self.selservice.remove(at: self.tblindex)
+                self.selservice.insert("1", at: self.tblindex)
+            }
+            self.tbl_service_list.reloadData()
+            self.textfield_amt.text = ""
+        }
+        
+    }
+    
+    @IBAction func action_closeamtview(_ sender: Any) {
+         self.view_picker.isHidden = true
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -332,10 +362,13 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                    if self.selservice[indexPath.row] != "0" {
                        cell.imag_check.image = UIImage(named: " checkbox-1")
                     cell.view_time.isHidden = false
+                    cell.view_amt.isHidden = false
                    } else{
                        cell.imag_check.image = UIImage(named: " checkbox")
                     cell.view_time.isHidden = true
+                    cell.view_amt.isHidden = true
                    }
+        cell.label_amt.text = "₹ " + Servicefile.shared.selectedamount[indexPath.row]
         cell.label_time.text = Servicefile.shared.selectedservice[indexPath.row]
         cell.btn_drop.tag = indexPath.row
         cell.btn_drop.addTarget(self, action: #selector(clickdropdown), for: .touchUpInside)
@@ -349,15 +382,15 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selservice.append("0")
-                   if self.selservice[indexPath.row] == "1" {
-                       self.selservice.remove(at: indexPath.row)
-                       self.selservice.insert("0", at: indexPath.row)
-                   }else{
-                       self.selservice.remove(at: indexPath.row)
-                       self.selservice.insert("1", at: indexPath.row)
-                   }
-        self.tbl_service_list.reloadData()
+        if self.selservice[self.tblindex] == "1" {
+            self.selservice.remove(at: self.tblindex)
+            self.selservice.insert("0", at: self.tblindex)
+            self.tbl_service_list.reloadData()
+        }else{
+            self.tblindex = indexPath.row
+            self.view_picker.isHidden = false
+        }
+       
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -740,12 +773,14 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     Servicefile.shared.sertime.append(slistitm)
                 }
                 Servicefile.shared.servicelist.removeAll()
+                Servicefile.shared.selectedamount.removeAll()
                 Servicefile.shared.selectedservice.removeAll()
                 for itm in 0..<service_list.count{
                     let ditm = service_list[itm] as! NSDictionary
                     let listitm = ditm["service_list"] as! String
                     Servicefile.shared.servicelist.append(listitm)
                     Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
+                    Servicefile.shared.selectedamount.append("0")
                     self.selservice.append("0")
                 }
                 Servicefile.shared.speclist.removeAll()

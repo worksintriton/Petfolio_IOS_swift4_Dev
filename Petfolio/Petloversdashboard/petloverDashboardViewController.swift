@@ -101,6 +101,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }
     }
     
+    @IBAction func action_petservice(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+                      self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func action_sidemenu(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController

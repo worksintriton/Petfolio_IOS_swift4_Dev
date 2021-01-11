@@ -19,6 +19,10 @@ class service_TableViewCell: UITableViewCell {
     @IBOutlet weak var label_like: UILabel!
     @IBOutlet weak var label_sp_name: UILabel!
     @IBOutlet weak var label_price: UILabel!
+    @IBOutlet weak var view_book: UIView!
+    @IBOutlet weak var label_offer: UILabel!
+    @IBOutlet weak var btn_book: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

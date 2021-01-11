@@ -37,11 +37,23 @@ class Servicefile {
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
     static let mycalender = baseurl + "/api/new_doctortime/fetch_dates"
+    static let Sp_mycalender = baseurl + "/api/sp_available_time/fetch_dates"
+    
     static let mycalender_hour = baseurl + "/api/new_doctortime/get_time_Details"
+    static let Sp_mycalender_hour = baseurl + "/api/sp_available_time/get_time_Details"
+    
     static let Docupdatemycalender_hour = baseurl + "/api/new_doctortime/update_doc_date"
+    static let SPupdatemycalender_hour = baseurl + "/api/sp_available_time/update_doc_date"
+    
     static let Doc_getholdiaylist = baseurl + "/api/holiday/getlist_id"
     static let Doc_deleteholiday = baseurl + "/api/holiday/delete"
     static let Doc_createholiday = baseurl + "/api/holiday/create"
+    
+    static let SP_getholdiaylist = baseurl + " /api/sp_holiday/getlist_id"
+    static let SP_deleteholiday = baseurl + "/api/sp_holiday/delete"
+    static let SP_createholiday = baseurl + "/api/sp_holiday/create"
+   
+    
     static let updatestatus =  baseurl + "/api/userdetails/mobile/edit"
     static let doc_fetchdocdetails  =  baseurl + "/api/doctordetails/fetch_doctor_id"
     static let petbreedid =  baseurl + "/api/breedtype/mobile/getlist_id"
@@ -70,6 +82,8 @@ class Servicefile {
     static let update_profile = baseurl + "/api/userdetails/mobile/update/profile"
     static let DOc_get_details = baseurl + "/api/doctordetails/fetch_doctor_user_id"
      static let pet_servicedetails = baseurl + "/api/service_provider/mobile/servicedetails"
+     static let pet_sp_service_details = baseurl + "/api/service_provider/mobile/sp_fetch_by_id"
+    
     
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
@@ -112,6 +126,7 @@ class Servicefile {
     var Petpuppylove = [Petdashpuppylove]()
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
+    var pet_SP_service_details = [SP_service_details]()
     // pet dashboard
     // pet service
     var pet_servicecat = [service_cat]()
@@ -246,6 +261,9 @@ class Servicefile {
     var sp_mobile_type = ""
     var sp_profile_status = true;
     var sp_profile_verification_status = "";
+    var sp_distance = ""
+    var Sp_comments = ""
+    var Sp_rating = ""
     var sp_lat = 0.0
     var sp_loc = ""
     var sp_long = 0.0
@@ -253,6 +271,12 @@ class Servicefile {
     // sp update
     
     var service_id = ""
+    var service_sp_id = ""
+    var ser_detail_id = ""
+    var service_id_count = 0
+    var service_id_image_path = ""
+    var service_id_title = ""
+    
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -780,5 +804,30 @@ struct service_cat {
         self.title = Ititle
     }
 }
-        
+    
+struct SP_service_details{
+    var _id : String
+    var comments_count : Int
+    var distance : Double
+    var image : String
+    var rating_count :  Int
+    var service_offer : Int
+    var service_place : String
+    var service_price : Int
+    var service_provider_name : String
+    init( I_id : String, Icomments_count : Int, Idistance : Double, Iimage : String,
+       Irating_count :  Int, Iservice_offer : Int, Iservice_place : String, Iservice_price : Int,
+       Iservice_provider_name : String) {
+        self._id = I_id
+        self.comments_count = Icomments_count
+        self.distance = Idistance
+        self.image = Iimage
+        self.rating_count = Irating_count
+        self.service_offer = Iservice_offer
+        self.service_place = Iservice_place
+        self.service_price = Iservice_price
+        self.service_provider_name = Iservice_provider_name
+    }
+}
+
 

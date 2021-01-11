@@ -101,7 +101,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_reg_calender_hour_ViewController") as! sp_reg_calender_hour_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -128,9 +128,9 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
        print("user type",Servicefile.shared.userid)
                self.startAnimatingActivityIndicator()
-           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.mycalender, method: .post, parameters:
-            [ "user_id": Servicefile.shared.userid,
-                  "Doctor_name":"",
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Sp_mycalender, method: .post, parameters:
+            ["user_id": Servicefile.shared.userid,
+                  "sp_name":"",
                   "types" : 1 ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                    switch (response.result) {
                                                    case .success:

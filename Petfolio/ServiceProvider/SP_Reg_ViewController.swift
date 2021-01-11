@@ -82,6 +82,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.textfield_servicename.delegate = self
         self.textfield_Bus_name.delegate = self
         self.textfield_spec.delegate = self
+        self.textfield_amt.delegate = self
         self.collectiondelegate()
     }
     
@@ -174,6 +175,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.textfield_spec.resignFirstResponder()
         self.textfield_Bus_name.resignFirstResponder()
         self.textfield_servicename.resignFirstResponder()
+        self.textfield_amt.resignFirstResponder()
     }
     
     func viewcornordadius(){
@@ -225,6 +227,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
          self.coll_selspec.reloadData()
          self.textfield_spec.text = ""
     }
+    
     
     
     
@@ -321,13 +324,13 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     @IBAction func action_addtTmeandAmt(_ sender: Any) {
+        self.textfield_resign()
         if self.textfield_amt.text! == "" || self.textfield_amt.text! == "0" {
             self.alert(Message: "Please enter valid Service amount")
         }else{
             
-            Servicefile.shared.selectedamount.remove(at: self.timeindex)
-                         Servicefile.shared.selectedamount.insert(  self.textfield_amt.text!, at: self.timeindex)
-            
+            Servicefile.shared.selectedamount.remove(at: self.tblindex)
+            Servicefile.shared.selectedamount.insert(  self.textfield_amt.text!, at: self.tblindex)
              self.view_picker.isHidden = true
             self.tbl_service_list.reloadData()
             self.selservice.append("0")
@@ -339,12 +342,12 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.selservice.insert("1", at: self.tblindex)
             }
             self.tbl_service_list.reloadData()
-            self.textfield_amt.text = ""
         }
         
     }
     
     @IBAction func action_closeamtview(_ sender: Any) {
+        self.textfield_resign()
          self.view_picker.isHidden = true
     }
     
@@ -382,11 +385,12 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.selservice[self.tblindex] == "1" {
-            self.selservice.remove(at: self.tblindex)
-            self.selservice.insert("0", at: self.tblindex)
+        if self.selservice[indexPath.row] == "1" {
+            self.selservice.remove(at: indexPath.row)
+            self.selservice.insert("0", at: indexPath.row)
             self.tbl_service_list.reloadData()
         }else{
+            self.textfield_amt.text = ""
             self.tblindex = indexPath.row
             self.view_picker.isHidden = false
         }
@@ -745,7 +749,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func action_register_success(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_reg_calender_ViewController") as! Sp_reg_calender_ViewController
                                                           self.present(vc, animated: true, completion: nil)
     }
     

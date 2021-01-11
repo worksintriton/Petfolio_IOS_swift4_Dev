@@ -204,6 +204,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                cell.img_ser.image = image
                            }
                        }
+            cell.img_ser.layer.cornerRadius = cell.img_ser.frame.size.height / 2
             return cell
         }else if self.colleView_puppylove == collectionView{
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puppyprod", for: indexPath) as! petprodCollectionViewCell

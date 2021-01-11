@@ -25,6 +25,13 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
         self.call_service_cat()
     }
     
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion:nil)
+    }
+    @IBAction func action_home(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                             self.present(vc, animated: true, completion: nil)
+    }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -68,6 +75,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                                          print("success data",res)
                                                          let Code  = res["Code"] as! Int
                                                          if Code == 200 {
+                                                            Servicefile.shared.pet_servicecat.removeAll()
                                                               let Data = res["Data"] as! NSArray
                                                             for itm in 0..<Data.count {
                                                                 let itm_val = Data[itm] as! NSDictionary

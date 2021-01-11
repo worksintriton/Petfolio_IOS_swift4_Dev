@@ -107,9 +107,12 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
         }
     
     func callsubmit(){
+        print("url",Servicefile.SPupdatemycalender_hour,"user_id", Servicefile.shared.userid,
+          "days" , Servicefile.shared.Doc_mycalender_selecteddates,
+        "timing" , Servicefile.shared.docMycalHourdicarray)
                    self.startAnimatingActivityIndicator()
-               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Docupdatemycalender_hour, method: .post, parameters:
-                [ "user_id": Servicefile.shared.userid,
+               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SPupdatemycalender_hour, method: .post, parameters:
+                ["user_id": Servicefile.shared.userid,
                   "days" : Servicefile.shared.Doc_mycalender_selecteddates,
                 "timing" : Servicefile.shared.docMycalHourdicarray], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
@@ -120,7 +123,7 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
                                                             
                                                              if Code == 200 {
                                                                let Data = res["Data"] as! NSDictionary
-                                                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                                                                                   self.present(vc, animated: true, completion: nil)
                                                                 self.stopAnimatingActivityIndicator()
                                                              }else{
@@ -155,7 +158,7 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
            print("user type",Servicefile.shared.userid)
                    self.startAnimatingActivityIndicator()
-               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.mycalender_hour, method: .post, parameters:
+               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Sp_mycalender_hour, method: .post, parameters:
                 [ "user_id": Servicefile.shared.userid,
                   "Day": day], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {

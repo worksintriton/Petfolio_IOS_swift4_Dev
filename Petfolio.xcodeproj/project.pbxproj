@@ -119,6 +119,11 @@
 		B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */; };
 		B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */; };
 		B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */; };
+		B0E98F7325A80D58005C0EF9 /* Sp_mycalender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7225A80D58005C0EF9 /* Sp_mycalender_ViewController.swift */; };
+		B0E98F7525A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7425A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift */; };
+		B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7625A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift */; };
+		B0E98F7925A846EB005C0EF9 /* pet_service_appointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7825A846EB005C0EF9 /* pet_service_appointmentViewController.swift */; };
+		B0E98F7B25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */; };
 		B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */; };
 		B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */; };
 		B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */; };
@@ -282,6 +287,11 @@
 		B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverEditandAddViewController.swift; sourceTree = "<group>"; };
 		B0E3F43325822ABF00F05D15 /* petimageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petimageUploadViewController.swift; sourceTree = "<group>"; };
 		B0E3F43525823FEE00F05D15 /* peteditandadduploadimgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = peteditandadduploadimgViewController.swift; sourceTree = "<group>"; };
+		B0E98F7225A80D58005C0EF9 /* Sp_mycalender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_mycalender_ViewController.swift; sourceTree = "<group>"; };
+		B0E98F7425A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sp_calender_hour_ViewController.swift; sourceTree = "<group>"; };
+		B0E98F7625A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_mycal_addholiday_ViewController.swift; sourceTree = "<group>"; };
+		B0E98F7825A846EB005C0EF9 /* pet_service_appointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_service_appointmentViewController.swift; sourceTree = "<group>"; };
+		B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_service_details_ViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprofileViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverProfilepetlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petManageaddressViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +387,9 @@
 				B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */,
 				B02F7AD725A73B9C009EC53D /* Sp_reg_calender_ViewController.swift */,
 				B02F7AD925A73BC1009EC53D /* sp_reg_calender_hour_ViewController.swift */,
+				B0E98F7225A80D58005C0EF9 /* Sp_mycalender_ViewController.swift */,
+				B0E98F7425A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift */,
+				B0E98F7625A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift */,
 			);
 			path = ServiceProvider;
 			sourceTree = "<group>";
@@ -388,6 +401,8 @@
 				B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */,
 				B02F7AD525A7111D009EC53D /* service_TableViewCell.swift */,
 				B02F7AD325A6FE82009EC53D /* servicecat_CollectionViewCell.swift */,
+				B0E98F7825A846EB005C0EF9 /* pet_service_appointmentViewController.swift */,
+				B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */,
 			);
 			path = SP;
 			sourceTree = "<group>";
@@ -880,6 +895,7 @@
 				B020D0AC25878BDF008F5C7B /* sosTableViewCell.swift in Sources */,
 				B0228C8F257A144700E16FD7 /* Doc_pres_labelTableViewCell.swift in Sources */,
 				B094D216255BDE82008400D6 /* ViewController.swift in Sources */,
+				B0E98F7B25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
 				B02D3A812593019A0010A4B6 /* paymentpageViewController.swift in Sources */,
 				B094D24F255C1A78008400D6 /* SignupViewController.swift in Sources */,
@@ -893,6 +909,7 @@
 				B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */,
 				B02D3A8D259350270010A4B6 /* Sp_profile_edit_ViewController.swift in Sources */,
 				B0431DA425A330C2000424E9 /* Doc_update_details_ViewController.swift in Sources */,
+				B0E98F7525A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
 				B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */,
 				B0E3F43425822ABF00F05D15 /* petimageUploadViewController.swift in Sources */,
@@ -913,6 +930,7 @@
 				B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */,
 				B024F52625A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift in Sources */,
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
+				B0E98F7925A846EB005C0EF9 /* pet_service_appointmentViewController.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
 				B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */,
 				B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */,
@@ -953,11 +971,13 @@
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
+				B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B02AA439259DEB1100A94990 /* Doc_profiledetails_ViewController.swift in Sources */,
 				B094D214255BDE82008400D6 /* SceneDelegate.swift in Sources */,
 				B094D21C255BDE82008400D6 /* Petfolio.xcdatamodeld in Sources */,
 				B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */,
+				B0E98F7325A80D58005C0EF9 /* Sp_mycalender_ViewController.swift in Sources */,
 				B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */,
 				B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */,
 			);

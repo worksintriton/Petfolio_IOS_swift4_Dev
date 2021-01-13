@@ -60,6 +60,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Servicefile.shared.service_id = Servicefile.shared.pet_servicecat[indexPath.row]._id
+        Servicefile.shared.service_index = indexPath.row
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
                       self.present(vc, animated: true, completion: nil)
     }

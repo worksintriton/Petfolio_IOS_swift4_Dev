@@ -82,8 +82,11 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     
     @IBAction func action_bookappoint(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
-        self.present(vc, animated: true, completion: nil)
+        if Servicefile.shared.pet_apoint_booking_time != "" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
+            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -173,8 +176,9 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary
-                                                  print("success data",res)
+                                                  print("success check status data",res)
                                                   let Code  = res["Code"] as! Int
+                                                  Servicefile.shared.pet_apoint_booking_time = ""
                                                   if Code == 200 {
                                                     self.seltime.removeAll()
                                                     for timitm in 0..<self.listtime.count{

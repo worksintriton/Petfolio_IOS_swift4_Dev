@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class pet_sp_service_details_ViewController: UIViewController {
+class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var label_service_com_name: UILabel!
     @IBOutlet weak var label_serview_provider: UILabel!
@@ -19,13 +19,47 @@ class pet_sp_service_details_ViewController: UIViewController {
     @IBOutlet weak var label_nooflikes: UILabel!
     @IBOutlet weak var label_rating: UILabel!
     @IBOutlet weak var label_description: UILabel!
-    @IBOutlet weak var coll_service_list: UICollectionView!
     @IBOutlet weak var tbl_service_list: UITableView!
-    
-    
+    @IBOutlet weak var image_service: UIImageView!
+    @IBOutlet weak var label_service: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.call_ser_details()
+        self.coll_service.delegate = self
+        self.coll_service.dataSource = self
+        self.image_service.layer.cornerRadius = self.image_service.frame.size.height / 2
+        
+    }
+    
+   
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Servicefile.shared.sp_bus_service_galldicarray.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
+        let bannerdic = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
+        let image = bannerdic["bus_service_gall"] as! String
+                   cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
+                       if (error != nil) {
+                           cell.img_banner.image = UIImage(named: "sample")
+                       } else {
+                           cell.img_banner.image = image
+                       }
+                   }
+                   cell.img_banner.layer.cornerRadius = 5.0
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_calender_ViewController") as! pet_sp_calender_ViewController
+               self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -40,15 +74,15 @@ class pet_sp_service_details_ViewController: UIViewController {
     
     func call_ser_details(){
         print("url",Servicefile.pet_sp_service_details,"user_id", Servicefile.shared.userid,
-        "cata_id", Servicefile.shared.service_id,
-        "sp_id", Servicefile.shared.service_sp_id)
-                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+              "cata_id", Servicefile.shared.service_id,
+              "sp_id", Servicefile.shared.service_sp_id)
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_service_details, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
              "cata_id":Servicefile.shared.service_id,
              "sp_id":Servicefile.shared.service_sp_id]
-                   , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                         switch (response.result) {
                                                         case .success:
                                                               let res = response.value as! NSDictionary
@@ -79,10 +113,29 @@ class pet_sp_service_details_ViewController: UIViewController {
                                                                 let Details = res["Details"] as! NSDictionary
                                                                 let Sp_comments  = Data["distance"] as! Int
                                                                 let Sp_rating  = Data["distance"] as! Int
+                                                                var dicarray = [Any]()
+                                                                dicarray.removeAll()
+                                                                dicarray.append(Data)
+                                                                Servicefile.shared.service_prov_buss_info.removeAll()
+                                                                Servicefile.shared.service_prov_buss_info = dicarray
                                                                 Servicefile.shared.service_id = Details["_id"] as! String
                                                                 Servicefile.shared.service_id_count = Details["count"] as! Int
                                                                 Servicefile.shared.service_id_image_path = Details["image_path"] as! String
                                                                 Servicefile.shared.service_id_title = Details["title"] as! String
+                                                                Servicefile.shared.service_id_amount = String(Details["amount"] as! Int)
+                                                                Servicefile.shared.service_id_time = Details["time"] as! String
+                                                                
+                                                                
+                                                                
+                                                                self.label_service.text = Servicefile.shared.service_id_title
+                                                                       self.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.service_id_image_path )) { (image, error, cache, urls) in
+                                                                                             if (error != nil) {
+                                                                                                 self.image_service.image = UIImage(named: "sample")
+                                                                                             } else {
+                                                                                                 self.image_service.image = image
+                                                                                             }
+                                                                                         }
+                                                                
                                                                  Servicefile.shared.Sp_bus_certifdicarray.removeAll()
                                                                  Servicefile.shared.sp_bus_service_galldicarray.removeAll()
                                                                  Servicefile.shared.sp_bus_service_list.removeAll()
@@ -116,7 +169,8 @@ class pet_sp_service_details_ViewController: UIViewController {
                                                                 self.label_distance.text = Servicefile.shared.sp_distance + " Km away"
                                                                 self.label_nooflikes.text = Servicefile.shared.Sp_comments
                                                                 self.label_rating.text = Servicefile.shared.Sp_rating
-                                                                self.label_description.text = ""
+                                                                //self.label_description.text = ""
+                                                                self.coll_service.reloadData()
                                                                 self.stopAnimatingActivityIndicator()
                                                               }else{
                                                                 self.stopAnimatingActivityIndicator()

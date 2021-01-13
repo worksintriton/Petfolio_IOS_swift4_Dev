@@ -36,6 +36,12 @@ class Servicefile {
     static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
+    
+    static let SPdashboardnewapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/newapp"
+       static let SPdashboardcomapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/comapp"
+       static let SPdashboardmissapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/missapp"
+    
+    
     static let mycalender = baseurl + "/api/new_doctortime/fetch_dates"
     static let Sp_mycalender = baseurl + "/api/sp_available_time/fetch_dates"
     
@@ -58,12 +64,19 @@ class Servicefile {
     static let doc_fetchdocdetails  =  baseurl + "/api/doctordetails/fetch_doctor_id"
     static let petbreedid =  baseurl + "/api/breedtype/mobile/getlist_id"
     static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new"
+    static let pet_sp_avail_time =  baseurl + "/api/sp_available_time/get_sp_new"
     static let pet_dov_check_time = baseurl + "/api/appointments/check"
     static let pet_doc_createappointm = baseurl + "/api/appointments/mobile/create"
-    static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp"
-    static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp"
-    static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
+     static let pet_sp_createappointm = baseurl + "/api/sp_appointments/mobile/create"
+   // static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp"
+//    static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp"
+//       static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
+    static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp1"
+    static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp1"
+    static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp1"
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
+     static let SP_complete_and_Missedapp = baseurl + "/api/sp_appointments/edit"
+    
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
     static let Doc_prescription_create = baseurl + "/api/prescription/create"
     static let pet_getAddresslist = baseurl + "/api/locationdetails/mobile/getlist_id"
@@ -194,6 +207,9 @@ class Servicefile {
     // Doctor
     var Doc_dashlist = [doc_Dash_petdetails]()
     // Doctor
+    
+   var SP_Das_petdetails = [SP_Dash_petdetails]()
+    var pet_applist_do_sp = [pet_applist_doc_sp]()
     // prescription
     var medi = ""
     var noofday = ""
@@ -271,11 +287,15 @@ class Servicefile {
     // sp update
     
     var service_id = ""
+    var service_index = 0
     var service_sp_id = ""
     var ser_detail_id = ""
     var service_id_count = 0
     var service_id_image_path = ""
     var service_id_title = ""
+    var service_id_amount = ""
+     var service_id_time = ""
+    var service_prov_buss_info = [Any]()
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -693,6 +713,39 @@ struct doc_Dash_petdetails{
    }
 }
 
+struct SP_Dash_petdetails{
+    var Appid : String
+    var amount : String
+    var sername: String
+    var appoinment_status : String
+    var pet_id : String
+    var pet_breed : String
+    var pet_img : String
+    var pet_name : String
+    var user_id : String
+    var pet_type : String
+    var book_date_time : String
+    var user_rate : String
+    var user_feedback : String
+   init(in_Appid : String, In_amount : String, In_appointment_types : String,
+    In_pet_id : String, In_pet_breed : String, In_pet_img : String,
+    In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String) {
+    self.Appid = in_Appid
+    self.amount = In_amount
+    self.appoinment_status = In_appointment_types
+    self.pet_id = In_pet_id
+    self.pet_breed = In_pet_breed
+    self.pet_img = In_pet_img
+    self.pet_name = In_pet_name
+    self.user_id = In_user_id
+    self.pet_type = In_pet_type
+    self.book_date_time = In_book_date_time
+    self.user_rate = In_userrate
+    self.user_feedback = In_userfeedback
+    self.sername = In_servicename
+   }
+}
+
 struct locationdetails{
     var _id : String
     var date_and_time : String
@@ -829,5 +882,55 @@ struct SP_service_details{
         self.service_provider_name = Iservice_provider_name
     }
 }
+
+struct  pet_applist_doc_sp {
+    var Booked_at : String
+    var Booking_Id : String
+    var Service_name : String
+    var _id : String
+    var appointment_for : String
+    var appointment_time : String
+    var appointment_type : String
+    var clinic_name : String
+    var completed_at : String
+    var cost : String
+    var createdAt : String
+    var missed_at : String
+    var pet_name : String
+    var pet_type : String
+    var photo : String
+    var service_cost : String
+    var service_provider_name : String
+    var status : String
+    var type : String
+    var updatedAt : String
+    init(IN_Booked_at : String, IN_Booking_Id : String, IN_Service_name : String, IN__id : String, IN_appointment_for : String
+    , IN_appointment_time : String, IN_appointment_type : String, IN_clinic_name : String, IN_completed_at : String
+    , IN_cost : String, IN_createdAt : String, IN_missed_at : String, IN_pet_name : String, IN_pet_type : String
+    , IN_photo : String, IN_service_cost : String, IN_service_provider_name : String, IN_status : String
+    , IN_type : String, IN_updatedAt : String) {
+        self.Booked_at = IN_Booked_at
+        self.Booking_Id = IN_Booking_Id
+        self.Service_name = IN_Service_name
+        self._id = IN__id
+        self.appointment_for = IN_appointment_for
+        self.appointment_time = IN_appointment_time
+        self.appointment_type = IN_appointment_type
+        self.clinic_name = IN_clinic_name
+        self.completed_at = IN_completed_at
+        self.cost = IN_cost
+        self.createdAt = IN_createdAt
+        self.missed_at = IN_missed_at
+        self.pet_name = IN_pet_name
+        self.pet_type = IN_pet_type
+        self.photo = IN_photo
+        self.service_cost = IN_service_cost
+        self.service_provider_name = IN_service_provider_name
+        self.status = IN_status
+        self.type = IN_type
+        self.updatedAt = IN_updatedAt
+    }
+}
+
 
 

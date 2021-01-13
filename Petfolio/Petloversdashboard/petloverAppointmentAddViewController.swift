@@ -201,7 +201,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                    let cell = tableView.dequeueReusableCell(withIdentifier: "petlistcell", for: indexPath)
             if Servicefile.shared.pet_petlist.count != indexPath.row{
                 cell.textLabel?.text = Servicefile.shared.pet_petlist[indexPath.row].pet_name
-                Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[indexPath.row].id
+                
+                
             }else{
                   cell.textLabel?.text = "Select pet name"
             }
@@ -227,6 +228,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
          self.tblview_petdetail.isHidden = true
         if self.tblview_petdetail ==  tableView {
             self.ispetnameselect(index: indexPath.row)
+           
         }
         else if self.tblview_petbreed ==  tableView {
             self.textfield_petbreed.text! = self.Pet_breed[indexPath.row]
@@ -245,6 +247,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                     self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
                    self.textfield_petname.isUserInteractionEnabled = false
             self.petimage = Servicefile.shared.pet_petlist[index].pet_img
+             Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[index].id
             self.view_pickupload.isHidden = true
         }else{
            self.view_pickupload.isHidden = false
@@ -464,7 +467,9 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                     "payment_method" : Servicefile.shared.pet_apoint_payment_method ,
                     "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
                     "allergies" : Servicefile.shared.pet_apoint_allergies,
-                    "amount" : Servicefile.shared.pet_apoint_amount,"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                    "amount" : Servicefile.shared.pet_apoint_amount,"mobile_type" : "IOS"
+                    ,"missed_at" : "",
+                     "completed_at": ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                switch (response.result) {
                                                case .success:
                                                      let res = response.value as! NSDictionary
@@ -723,6 +728,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
            
            func onPaymentSuccess(_ payment_id: String) {
                  print("Payment Success payment")
+            Servicefile.shared.pet_apoint_payment_id = payment_id
               self.callsubmit()
            }
         

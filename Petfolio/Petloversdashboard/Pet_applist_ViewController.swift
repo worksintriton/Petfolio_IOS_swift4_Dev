@@ -31,7 +31,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_footer.layer.cornerRadius = 15.0
         self.tbl_applist.delegate = self
         self.tbl_applist.dataSource = self
-       
         // Do any additional setup after loading the view.
     }
     
@@ -67,34 +66,41 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Servicefile.shared.Doc_dashlist.count
+        return Servicefile.shared.pet_applist_do_sp.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docdashTableViewCell
         if self.appointtype == "current" {
             cell.view_commissed.isHidden = false
+            cell.view_completebtn.isHidden = true
+            cell.view_cancnel.isHidden = false
             cell.btn_complete.tag = indexPath.row
              cell.btn_cancel.tag = indexPath.row
-            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
+            cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
+            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
             cell.labe_comMissed.text = "Booked on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else if self.appointtype == "Complete"{
              cell.view_commissed.isHidden = false
-            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
+            cell.view_cancnel.isHidden = true
+            cell.view_completebtn.isHidden = true
+            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
+            cell.view_cancnel.isHidden = true
+            cell.view_completebtn.isHidden = true
             cell.view_commissed.isHidden = false
-            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
+            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
              cell.labe_comMissed.text = "Cancelled on :"
             cell.label_completedon.textColor = UIColor.red
              cell.labe_comMissed.textColor = UIColor.red
         }
-        cell.label_servicename.text = "Type : " + Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
-        if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
+        cell.label_servicename.text = "Appointment Type : " + Servicefile.shared.pet_applist_do_sp[indexPath.row].appointment_for
+        if Servicefile.shared.pet_applist_do_sp[indexPath.row].appointment_type == "Emergency" {
             cell.image_emergnecy.isHidden = false
         }else{
             cell.image_emergnecy.isHidden = true
@@ -104,14 +110,19 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.view_cancnel.layer.cornerRadius = 10.0
         cell.View_mainview.layer.borderWidth = 0.2
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
-        cell.label_petname.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_name
-        cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
+        if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name
+        }else{
+             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].service_provider_name
+        }
+       
+            cell.label_pettype.text = "Pet name : " + Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: "sample")
-        cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
-        if Servicefile.shared.Doc_dashlist[indexPath.row].pet_img == "" {
+        cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
+        if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
               cell.img_petimg.image = UIImage(named: "sample")
         }else{
-              cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.Doc_dashlist[indexPath.row].pet_img)) { (image, error, cache, urls) in
+              cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_applist_do_sp[indexPath.row].photo)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.img_petimg.image = UIImage(named: "sample")
                         } else {
@@ -123,8 +134,13 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    @objc func action_cancelled(sender : UIButton){
+        let tag = sender.tag
+        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[tag]._id, type:  Servicefile.shared.pet_applist_do_sp[tag].appointment_for)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 162
+        return 178
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -200,40 +216,35 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                       print("success data",res)
                                                       let Code  = res["Code"] as! Int
                                                       if Code == 200 {
-                                                          Servicefile.shared.Doc_dashlist.removeAll()
+                                                           Servicefile.shared.pet_applist_do_sp.removeAll()
                                                           let Data = res["Data"] as! NSArray
                                                           for itm in 0..<Data.count{
                                                               let dataitm = Data[itm] as! NSDictionary
-                                                              let id = dataitm["_id"] as! String
-                                                              let allergies = dataitm["allergies"] as! String
-                                                              let amount = dataitm["amount"] as! String
-                                                              let booking_date_time = dataitm["booking_date_time"] as! String
-                                                              let appointment_types = dataitm["appointment_types"] as! String
-                                                              let user_rate = dataitm["user_rate"] as! String
-                                                              let user_feedback = dataitm["user_feedback"] as! String
-                                                              
-                                                              let doc_business_info = dataitm["doc_business_info"] as! NSArray
-                                                              var docimg = ""
-                                                              var pet_name = ""
-                                                              if doc_business_info.count > 0 {
-                                                                  let doc_business = doc_business_info[0] as! NSDictionary
-                                                                  let clinic_pic = doc_business["clinic_pic"] as! NSArray
-                                                                  if clinic_pic.count > 0 {
-                                                                      let imgdata = clinic_pic[0] as! NSDictionary
-                                                                      docimg = imgdata["clinic_pic"] as! String
-                                                                  }
-                                                                   pet_name = doc_business["clinic_name"] as! String
-                                                              }
-                                                              let petdetail = dataitm["pet_id"] as! NSDictionary
-                                                              let petid = petdetail["_id"] as! String
-                                                              let pet_type = petdetail["pet_name"] as! String
-                                                              let pet_breed = petdetail["pet_breed"] as! String
-                                                              let pet_img = petdetail["pet_img"] as! String
-                                                              let user_id = petdetail["user_id"] as! String
-                                                              Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback))
+                                                              let Booked_at = dataitm["Booked_at"] as! String
+                                                            let Booking_Id = dataitm["Booking_Id"] as! String
+                                                            let Service_name = dataitm["Service_name"] as! String
+                                                            let _id = dataitm["_id"] as! String
+                                                            let appointment_for = dataitm["appointment_for"] as! String
+                                                            let appointment_time = dataitm["appointment_time"] as! String
+                                                            let appointment_type = dataitm["appointment_type"] as! String
+                                                            let clinic_name = dataitm["clinic_name"] as! String
+                                                            let completed_at = dataitm["completed_at"] as! String
+                                                            let cost  = dataitm["cost"] as! String
+                                                            let createdAt = dataitm["createdAt"] as! String
+                                                            let missed_at = dataitm["missed_at"] as! String
+                                                            let pet_name = dataitm["pet_name"] as! String
+                                                            let pet_type = dataitm["pet_type"] as! String
+                                                            let photo = dataitm["photo"] as! String
+                                                            let service_cost = dataitm["service_cost"] as! String
+                                                            let service_provider_name = dataitm["service_provider_name"] as! String
+                                                            let status = dataitm["status"] as! String
+                                                            let type  = dataitm["type"] as! String
+                                                            let updatedAt = dataitm["updatedAt"] as! String
+                                                            
+                                                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt))
                                                             
                                                           }
-                                                          if Servicefile.shared.Doc_dashlist.count > 0 {
+                                                          if Servicefile.shared.pet_applist_do_sp.count > 0 {
                                                               self.label_nodata.isHidden = true
                                                           }else{
                                                                self.label_nodata.isHidden = false
@@ -256,6 +267,50 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                 self.alert(Message: "No Intenet Please check and try again ")
             }
         }
+    
+    func callcompleteMissedappoitment(Appointmentid: String, type: String){
+        var link = ""
+        if type == "SP" {
+             link =  Servicefile.SP_complete_and_Missedapp
+        }else{
+            link =  Servicefile.Doc_complete_and_Missedapp
+        }
+      
+           var params = ["":""]
+               params = ["_id": Appointmentid,
+                          "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                          "appoinment_status" : "Missed"]
+                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                   self.startAnimatingActivityIndicator()
+             if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
+                  , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                       switch (response.result) {
+                                                       case .success:
+                                                             let res = response.value as! NSDictionary
+                                                             print("success data",res)
+                                                             let Code  = res["Code"] as! Int
+                                                             if Code == 200 {
+                                                                
+                                                               
+                                                               self.callnew()
+                                                               self.stopAnimatingActivityIndicator()
+                                                             }else{
+                                                               self.stopAnimatingActivityIndicator()
+                                                               print("status code service denied")
+                                                             }
+                                                           break
+                                                       case .failure(let Error):
+                                                           self.stopAnimatingActivityIndicator()
+                                                           print("Can't Connect to Server / TimeOut",Error)
+                                                           break
+                                                       }
+                                          }
+                   }else{
+                       self.stopAnimatingActivityIndicator()
+                       self.alert(Message: "No Intenet Please check and try again ")
+                   }
+               }
+    
         func callcom(){
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                self.startAnimatingActivityIndicator()
@@ -267,40 +322,35 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                          print("success data",res)
                                                          let Code  = res["Code"] as! Int
                                                          if Code == 200 {
-                                                             Servicefile.shared.Doc_dashlist.removeAll()
+                                                              Servicefile.shared.pet_applist_do_sp.removeAll()
                                                              let Data = res["Data"] as! NSArray
                                                              for itm in 0..<Data.count{
                                                                  let dataitm = Data[itm] as! NSDictionary
-                                                                 let id = dataitm["_id"] as! String
-                                                                 let allergies = dataitm["allergies"] as! String
-                                                                 let amount = dataitm["amount"] as! String
-                                                                 let booking_date_time = dataitm["booking_date_time"] as! String
-                                                                 let appointment_types = dataitm["appointment_types"] as! String
-                                                                 let user_rate = dataitm["user_rate"] as! String
-                                                                 let user_feedback = dataitm["user_feedback"] as! String
-                                                                 
-                                                                 let doc_business_info = dataitm["doc_business_info"] as! NSArray
-                                                                 var docimg = ""
-                                                                 var pet_name = ""
-                                                                 if doc_business_info.count > 0 {
-                                                                     let doc_business = doc_business_info[0] as! NSDictionary
-                                                                     let clinic_pic = doc_business["clinic_pic"] as! NSArray
-                                                                     if clinic_pic.count > 0 {
-                                                                         let imgdata = clinic_pic[0] as! NSDictionary
-                                                                         docimg = imgdata["clinic_pic"] as! String
-                                                                     }
-                                                                      pet_name = doc_business["clinic_name"] as! String
-                                                                 }
-                                                                 let petdetail = dataitm["pet_id"] as! NSDictionary
-                                                                 let petid = petdetail["_id"] as! String
-                                                                 let pet_type = petdetail["pet_name"] as! String
-                                                                 let pet_breed = petdetail["pet_breed"] as! String
-                                                                 let pet_img = petdetail["pet_img"] as! String
-                                                                 let user_id = petdetail["user_id"] as! String
-                                                                 Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback))
+                                                                 let Booked_at = dataitm["Booked_at"] as! String
+                                                               let Booking_Id = dataitm["Booking_Id"] as! String
+                                                               let Service_name = dataitm["Service_name"] as! String
+                                                               let _id = dataitm["_id"] as! String
+                                                               let appointment_for = dataitm["appointment_for"] as! String
+                                                               let appointment_time = dataitm["appointment_time"] as! String
+                                                               let appointment_type = dataitm["appointment_type"] as! String
+                                                               let clinic_name = dataitm["clinic_name"] as! String
+                                                               let completed_at = dataitm["completed_at"] as! String
+                                                               let cost  = dataitm["cost"] as! String
+                                                               let createdAt = dataitm["createdAt"] as! String
+                                                               let missed_at = dataitm["missed_at"] as! String
+                                                               let pet_name = dataitm["pet_name"] as! String
+                                                               let pet_type = dataitm["pet_type"] as! String
+                                                               let photo = dataitm["photo"] as! String
+                                                               let service_cost = dataitm["service_cost"] as! String
+                                                               let service_provider_name = dataitm["service_provider_name"] as! String
+                                                               let status = dataitm["status"] as! String
+                                                               let type  = dataitm["type"] as! String
+                                                               let updatedAt = dataitm["updatedAt"] as! String
+                                                               
+                                                               Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt))
                                                                
                                                              }
-                                                             if Servicefile.shared.Doc_dashlist.count > 0 {
+                                                             if  Servicefile.shared.pet_applist_do_sp.count > 0 {
                                                                  self.label_nodata.isHidden = true
                                                              }else{
                                                                   self.label_nodata.isHidden = false
@@ -334,40 +384,35 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                             print("success data",res)
                                                             let Code  = res["Code"] as! Int
                                                             if Code == 200 {
-                                                                Servicefile.shared.Doc_dashlist.removeAll()
+                                                                 Servicefile.shared.pet_applist_do_sp.removeAll()
                                                                 let Data = res["Data"] as! NSArray
                                                                 for itm in 0..<Data.count{
                                                                     let dataitm = Data[itm] as! NSDictionary
-                                                                    let id = dataitm["_id"] as! String
-                                                                    let allergies = dataitm["allergies"] as! String
-                                                                    let amount = dataitm["amount"] as! String
-                                                                    let booking_date_time = dataitm["booking_date_time"] as! String
-                                                                    let appointment_types = dataitm["appointment_types"] as! String
-                                                                    let user_rate = dataitm["user_rate"] as! String
-                                                                    let user_feedback = dataitm["user_feedback"] as! String
-                                                                    
-                                                                    let doc_business_info = dataitm["doc_business_info"] as! NSArray
-                                                                    var docimg = ""
-                                                                    var pet_name = ""
-                                                                    if doc_business_info.count > 0 {
-                                                                        let doc_business = doc_business_info[0] as! NSDictionary
-                                                                        let clinic_pic = doc_business["clinic_pic"] as! NSArray
-                                                                        if clinic_pic.count > 0 {
-                                                                            let imgdata = clinic_pic[0] as! NSDictionary
-                                                                            docimg = imgdata["clinic_pic"] as! String
-                                                                        }
-                                                                         pet_name = doc_business["clinic_name"] as! String
-                                                                    }
-                                                                    let petdetail = dataitm["pet_id"] as! NSDictionary
-                                                                    let petid = petdetail["_id"] as! String
-                                                                    let pet_type = petdetail["pet_name"] as! String
-                                                                    let pet_breed = petdetail["pet_breed"] as! String
-                                                                    let pet_img = petdetail["pet_img"] as! String
-                                                                    let user_id = petdetail["user_id"] as! String
-                                                                    Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback))
+                                                                    let Booked_at = dataitm["Booked_at"] as! String
+                                                                  let Booking_Id = dataitm["Booking_Id"] as! String
+                                                                  let Service_name = dataitm["Service_name"] as! String
+                                                                  let _id = dataitm["_id"] as! String
+                                                                  let appointment_for = dataitm["appointment_for"] as! String
+                                                                  let appointment_time = dataitm["appointment_time"] as! String
+                                                                  let appointment_type = dataitm["appointment_type"] as! String
+                                                                  let clinic_name = dataitm["clinic_name"] as! String
+                                                                  let completed_at = dataitm["completed_at"] as! String
+                                                                  let cost  = dataitm["cost"] as! String
+                                                                  let createdAt = dataitm["createdAt"] as! String
+                                                                  let missed_at = dataitm["missed_at"] as! String
+                                                                  let pet_name = dataitm["pet_name"] as! String
+                                                                  let pet_type = dataitm["pet_type"] as! String
+                                                                  let photo = dataitm["photo"] as! String
+                                                                  let service_cost = dataitm["service_cost"] as! String
+                                                                  let service_provider_name = dataitm["service_provider_name"] as! String
+                                                                  let status = dataitm["status"] as! String
+                                                                  let type  = dataitm["type"] as! String
+                                                                  let updatedAt = dataitm["updatedAt"] as! String
+                                                                  
+                                                                  Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt))
                                                                   
                                                                 }
-                                                                if Servicefile.shared.Doc_dashlist.count > 0 {
+                                                                if Servicefile.shared.pet_applist_do_sp.count > 0 {
                                                                     self.label_nodata.isHidden = true
                                                                 }else{
                                                                      self.label_nodata.isHidden = false

@@ -185,7 +185,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                                                                                       self.present(vc, animated: true, completion: nil)
                                                        } else if Servicefile.shared.user_type == "2"{
-                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                                                             self.present(vc, animated: true, completion: nil)
                                                         }
                                                         

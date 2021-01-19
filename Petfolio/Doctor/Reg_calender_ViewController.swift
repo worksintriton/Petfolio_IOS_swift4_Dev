@@ -129,9 +129,9 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
        print("user type",Servicefile.shared.userid)
                self.startAnimatingActivityIndicator()
            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.mycalender, method: .post, parameters:
-            [ "user_id": Servicefile.shared.userid,
-                  "Doctor_name":"",
-                  "types" : 1 ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            ["user_id": Servicefile.shared.userid,
+              "Doctor_name":"",
+              "types" : 1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                    switch (response.result) {
                                                    case .success:
                                                          let res = response.value as! NSDictionary

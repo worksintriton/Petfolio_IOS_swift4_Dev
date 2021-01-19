@@ -26,12 +26,23 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion:nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+                                    self.present(vc, animated: true, completion: nil)
     }
     @IBAction func action_home(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                              self.present(vc, animated: true, completion: nil)
     }
+    @IBAction func action_cares(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+                             self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

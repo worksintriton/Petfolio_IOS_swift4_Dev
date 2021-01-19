@@ -144,7 +144,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
           "Prescription_img" : "http://mysalveo.com/api/public/prescriptions/231afd32-6d68-4288-a8e5-1c599833c0e8.pdf",
           "user_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].user_id,
           "Prescription_data": Servicefile.shared.Doc_pres,
-          "Treatment_Done_by":"Self"]
+          "Treatment_Done_by":"Self",
+            "Appointment_ID": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid]
                , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                     switch (response.result) {
                                                     case .success:
@@ -177,7 +178,6 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         params = ["_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid,
                         "completed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                         "appoinment_status" : "Completed"]
-         
                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                   self.startAnimatingActivityIndicator()
             if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_complete_and_Missedapp, method: .post, parameters: params

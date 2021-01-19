@@ -75,7 +75,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     func startTimer() {
         self.timer.invalidate()
-        timer =  Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
     }
     
     
@@ -97,11 +97,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
             }
             self.pagecontrol.currentPage = self.pagcount
-            //            print("data collection process",self.pagcount)
         }
     }
     
     @IBAction func action_petservice(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+                      self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_petservice_seemore(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
                       self.present(vc, animated: true, completion: nil)
     }
@@ -181,7 +185,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }
             cell.img_doc.layer.cornerRadius = 5.0
             cell.label_docname.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
-            cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
+            cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].spec
             cell.label_rateing.text = String(Servicefile.shared.petdoc[indexPath.row].star_count)
             cell.label_ratedno.text = String(Servicefile.shared.petdoc[indexPath.row].review_count)
             return cell
@@ -253,7 +257,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.colleView_Doctor == collectionView {
              return CGSize(width: 188 , height:  161)
         }else if self.colleView_Service == collectionView {
-             return CGSize(width: 128 , height:  149)
+             return CGSize(width: 90 , height:  119)
         }else {
              return CGSize(width: 238 , height:  171)
         }
@@ -268,7 +272,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlov_DocselectViewController") as! petlov_DocselectViewController
                                 self.present(vc, animated: true, completion: nil)
                }else if self.colleView_Service == collectionView {
-                     print("data in")
+                    
+            Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
+                Servicefile.shared.service_index = indexPath.row
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
+                              self.present(vc, animated: true, completion: nil)
                }else {
                   print("data in")
                }
@@ -341,7 +349,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                                                             let title =  Bval["doctor_name"] as! String
                                                             let review_count =  Bval["review_count"] as! Int
                                                              let star_count =  Bval["star_count"] as! Int
-                                                            Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count))
+                                                            let specialization = Bval["specialization"] as! NSArray
+                                                            let Dicspec = specialization[specialization.count-1] as! NSDictionary
+                                                            var spec = Dicspec["specialization"] as! String
+                                                            Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec))
                                                         }
                                                         Servicefile.shared.petprod.removeAll()
                                                         let Products_details = dash["Products_details"] as! NSArray

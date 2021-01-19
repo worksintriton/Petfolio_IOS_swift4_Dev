@@ -63,7 +63,7 @@ class Servicefile {
     static let updatestatus =  baseurl + "/api/userdetails/mobile/edit"
     static let doc_fetchdocdetails  =  baseurl + "/api/doctordetails/fetch_doctor_id"
     static let petbreedid =  baseurl + "/api/breedtype/mobile/getlist_id"
-    static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new"
+    static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new1"
     static let pet_sp_avail_time =  baseurl + "/api/sp_available_time/get_sp_new"
     static let pet_dov_check_time = baseurl + "/api/appointments/check"
     static let pet_doc_createappointm = baseurl + "/api/appointments/mobile/create"
@@ -79,6 +79,7 @@ class Servicefile {
     
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
     static let Doc_prescription_create = baseurl + "/api/prescription/create"
+    static let view_prescription_create = baseurl + "/api/prescription/fetch_by_appointment_id"
     static let pet_getAddresslist = baseurl + "/api/locationdetails/mobile/getlist_id"
     static let pet_updateaddress =  baseurl + "/api/locationdetails/edit"
     static let pet_defaultaddress =  baseurl + "/api/locationdetails/default/edit"
@@ -189,6 +190,8 @@ class Servicefile {
     var selectedState = ""
     var appgreen = "#009675"
     var applightgreen = "#F4FAF9"
+    var lightgray = "#cfd0d1"
+    var black = "#080808"
     
     var edudicarray = [Any]()
     var expdicarray = [Any]()
@@ -615,12 +618,14 @@ struct Petdashdoc{
     var doctor_name : String
     var review_count : Int
      var star_count : Int
-    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int) {
+    var spec : String
+    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String) {
         self._id = UID
         self.doctor_img = doctor_img
         self.doctor_name = doctor_name
         self.review_count = review_count
         self.star_count = star_count
+        self.spec = ispec
     }
 }
 

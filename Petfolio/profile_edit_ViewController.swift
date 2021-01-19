@@ -36,7 +36,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_back(_ sender: Any) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func action_submit(_ sender: Any) {
@@ -91,11 +91,24 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                            let userid = user_details["_id"] as! String
                                                            UserDefaults.standard.set(userid, forKey: "userid")
-                                                            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                           Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                            print("user id",Servicefile.shared.userid)
                                                            UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                                                            Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
-                                                            self.alert(Message: "Profile Updated sucessfully")
+                                                            let alert = UIAlertController(title: "Alert", message: "Profile Updated sucessfully", preferredStyle: .alert)
+                                                                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                                                        if Servicefile.shared.usertype == "1" {
+                                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                                                                            self.present(vc, animated: true, completion: nil)
+                                                                        } else if Servicefile.shared.user_type == "4" {
+                                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                                            self.present(vc, animated: true, completion: nil)
+                                                                        } else if Servicefile.shared.user_type == "2" {
+                                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                                                            self.present(vc, animated: true, completion: nil)
+                                                                        }
+                                                                         }))
+                                                                    self.present(alert, animated: true, completion: nil)
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()

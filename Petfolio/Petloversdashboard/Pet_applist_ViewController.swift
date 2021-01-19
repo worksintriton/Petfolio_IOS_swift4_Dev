@@ -23,14 +23,23 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var label_nodata: UILabel!
    
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_yes: UIView!
+    @IBOutlet weak var view_no: UIView!
     
     var appointtype = "current"
-    
+    var indextag = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_footer.layer.cornerRadius = 15.0
+        self.view_popup.layer.cornerRadius = 10.0
+        self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2
+        self.view_no.layer.cornerRadius = self.view_yes.frame.height / 2
         self.tbl_applist.delegate = self
         self.tbl_applist.dataSource = self
+        self.view_shadow.isHidden = true
+        self.view_popup.isHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -71,6 +80,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docdashTableViewCell
+        cell.view_pres.isHidden = true
         if self.appointtype == "current" {
             cell.view_commissed.isHidden = false
             cell.view_completebtn.isHidden = true
@@ -83,6 +93,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else if self.appointtype == "Complete"{
+            if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+                 cell.view_pres.isHidden = false
+            }else{
+                 cell.view_pres.isHidden = true
+            }
+             cell.view_pres.isHidden = false
              cell.view_commissed.isHidden = false
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
@@ -105,7 +121,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             cell.image_emergnecy.isHidden = true
         }
-        
+        cell.btn_pres.tag = indexPath.row
+        cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
         cell.view_completebtn.layer.cornerRadius = 10.0
         cell.view_cancnel.layer.cornerRadius = 10.0
         cell.View_mainview.layer.borderWidth = 0.2
@@ -134,9 +151,18 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    @objc func action_pres(sender : UIButton){
+        let tag = sender.tag
+        Servicefile.shared.pet_apoint_id = Servicefile.shared.pet_applist_do_sp[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "viewprescriptionViewController") as! viewprescriptionViewController
+        self.present(vc, animated: true, completion: nil)
+       }
+    
     @objc func action_cancelled(sender : UIButton){
         let tag = sender.tag
-        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[tag]._id, type:  Servicefile.shared.pet_applist_do_sp[tag].appointment_for)
+        self.indextag = tag
+        self.view_shadow.isHidden = false
+        self.view_popup.isHidden = false
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,14 +170,24 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.appointtype == "Complete" {
-            if Servicefile.shared.Doc_dashlist[indexPath.row].user_rate == "" || Servicefile.shared.Doc_dashlist[indexPath.row].user_feedback == "" {
-                Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[indexPath.row].Appid
-                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewRateViewController") as! ReviewRateViewController
-                                                    self.present(vc, animated: true, completion: nil)
+        if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+             if self.appointtype == "Complete" {
+                       if Servicefile.shared.Doc_dashlist[indexPath.row].user_rate == "" || Servicefile.shared.Doc_dashlist[indexPath.row].user_feedback == "" {
+                           Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[indexPath.row].Appid
+                                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewRateViewController") as! ReviewRateViewController
+                                                               self.present(vc, animated: true, completion: nil)
+                }
             }
-           
         }
+    }
+    
+    @IBAction func action_confrim(_ sender: Any) {
+        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[indextag]._id, type:  Servicefile.shared.pet_applist_do_sp[indextag].appointment_for)
+    }
+    
+    @IBAction func action_no(_ sender: Any) {
+        self.view_shadow.isHidden = true
+        self.view_popup.isHidden = true
     }
     
     @IBAction func action_backaction(_ sender: Any) {
@@ -205,6 +241,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         @IBAction func action_logout(_ sender: Any) {
             
         }
+    
         func callnew(){
              Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
@@ -291,7 +328,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                              let Code  = res["Code"] as! Int
                                                              if Code == 200 {
                                                                 
-                                                               
+                                                               self.view_shadow.isHidden = true
+                                                               self.view_popup.isHidden = true
                                                                self.callnew()
                                                                self.stopAnimatingActivityIndicator()
                                                              }else{

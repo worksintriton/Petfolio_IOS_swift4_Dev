@@ -570,7 +570,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                    "certificate_pic" ,  Servicefile.shared.certifdicarray,
                    "govt_id_pic" , Servicefile.shared.govdicarray,
                    "photo_id_pic" , Servicefile.shared.photodicarray,
-                   "profile_status" , true ,
+                   "profile_status" , false ,
                    "profile_verification_status" , "Not verified",
                    "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
                    "consultancy_fees" , "200")
@@ -837,11 +837,11 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         if coll_govtid == collectionView {
               return CGSize(width: 100 , height:  160)
         }else if coll_pettype == collectionView {
-              return CGSize(width: 80 , height:  40)
+             return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_photoid == collectionView {
             return CGSize(width: 100 , height:  160)
         }else if coll_speciali == collectionView {
-           return CGSize(width: 80 , height:  40)
+             return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_certificate == collectionView {
             return CGSize(width: 100 , height:  160)
         }else{

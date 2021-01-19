@@ -75,6 +75,10 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
                self.present(vc, animated: true, completion: nil)
     }
     
-
+    @IBAction func action_profile_edit(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 
 }

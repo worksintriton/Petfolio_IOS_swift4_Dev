@@ -16,17 +16,31 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var tabl_service: UITableView!
     @IBOutlet weak var label_nodatafound: UILabel!
     @IBOutlet weak var label_category: UILabel!
+    @IBOutlet weak var view_sortby: UIView!
+    @IBOutlet weak var view_filter: UIView!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.label_nodatafound.isHidden = true
         self.call_service_details()
         self.tabl_service.delegate = self
         self.tabl_service.dataSource = self
-        self.image_catimg.layer.cornerRadius = 10.0
+        self.image_catimg.layer.cornerRadius = self.image_catimg.frame.height / 2
+        self.view_sortby.layer.cornerRadius = self.view_sortby.frame.height / 2
+        self.view_filter.layer.cornerRadius = self.view_filter.frame.height / 2
     }
     
+    @IBAction func action_home(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+                                self.present(vc, animated: true, completion: nil)
+       }
+    
+    @IBAction func action_petcare(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -35,6 +49,12 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    @IBAction func action_sos(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Servicefile.shared.pet_SP_service_details.count
@@ -45,9 +65,9 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         cell.label_distance.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].distance)
         cell.label_like.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].comments_count)
         cell.label_place.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_place
-        cell.label_price.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_price)
+        cell.label_price.text = "₹ " +  String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_price)
         cell.label_rating.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].rating_count)
-        cell.label_offer.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_offer) + "% offer"
+           cell.label_offer.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_offer) + "% offer"
         cell.label_sp_name.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name
         cell.img_sp.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
                                       if (error != nil) {
@@ -120,6 +140,11 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                                                                     let service_price = itmval["service_price"] as! Int
                                                                     let service_provider_name = itmval["service_provider_name"] as! String
                                                                     Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name))
+                                                                }
+                                                                if Servicefile.shared.pet_SP_service_details.count > 0 {
+                                                                    self.label_nodatafound.isHidden = true
+                                                                }else{
+                                                                    self.label_nodatafound.isHidden = false
                                                                 }
                                                                
                                                                self.tabl_service.reloadData()

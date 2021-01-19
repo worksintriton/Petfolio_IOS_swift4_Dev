@@ -794,11 +794,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if coll_govtid == collectionView {
               return CGSize(width: 100 , height:  160)
         }else if coll_pettype == collectionView {
-              return CGSize(width: 80 , height:  40)
+              return CGSize(width: collectionView.frame.size.width / 2.1 , height:   40)
         }else if coll_photoid == collectionView {
             return CGSize(width: 100 , height:  160)
         }else if coll_speciali == collectionView {
-           return CGSize(width: 80 , height:  40)
+//           return CGSize(width: 80 , height:  40)
+            return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_certificate == collectionView {
             return CGSize(width: 100 , height:  160)
         }else{

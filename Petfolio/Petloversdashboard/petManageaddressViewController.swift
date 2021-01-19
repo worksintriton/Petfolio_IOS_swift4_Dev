@@ -14,6 +14,15 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var tbl_addresslist: UITableView!
     @IBOutlet weak var label_noofsavedaddress: UILabel!
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var label_alertMSG: UILabel!
+    @IBOutlet weak var view_yes: UIView!
+    @IBOutlet weak var view_no: UIView!
+    
+    var proc_type = "edit"
+    var indextag = 0
+    
     var isclickisoption = ["0"]
     var isorgiclikcopt = ["0"]
     override func viewDidLoad() {
@@ -25,6 +34,11 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         self.tbl_addresslist.delegate = self
         self.tbl_addresslist.dataSource = self
         self.label_noofsavedaddress.text = ""
+        self.view_shadow.isHidden = true
+        self.view_popup.isHidden = true
+        self.view_popup.layer.cornerRadius = 10.0
+        self.view_yes.layer.cornerRadius = 10.0
+        self.view_no.layer.cornerRadius = 10.0
         // Do any additional setup after loading the view.
     }
     
@@ -72,6 +86,27 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         self.callchangedefault(id : Servicefile.shared.petuserlocaadd[indexPath.row]._id)
     }
     
+    @IBAction func action_yes(_ sender: Any) {
+        if  self.proc_type == "edit" {
+            self.view_shadow.isHidden = false
+                   self.view_popup.isHidden = false
+            Servicefile.shared.locaaccess = "update"
+                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
+                   self.present(vc, animated: true, completion: nil)
+        }else{
+            if Servicefile.shared.petuserlocaadd[indextag].default_status != false {
+                      print("you can't delete the default address")
+                   }else{
+                       self.calldeleteaddress(id : Servicefile.shared.petuserlocaadd[indextag]._id)
+                   }
+        }
+    }
+    
+    @IBAction func action_no(_ sender: Any) {
+        self.view_shadow.isHidden = true
+               self.view_popup.isHidden = true
+    }
+    
     @objc func action_optionvisible(sender : UIButton){
         let tag = sender.tag
         self.isclickisoption = self.isorgiclikcopt
@@ -81,21 +116,19 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @objc func action_edit(sender : UIButton){
+        self.proc_type = "edit"
         let tag = sender.tag
         Servicefile.shared.selectedindex = tag
-        Servicefile.shared.locaaccess = "update"
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
-        self.present(vc, animated: true, completion: nil)
+        self.view_shadow.isHidden = false
+        self.view_popup.isHidden = false
     }
     
     @objc func action_delete(sender : UIButton){
+        self.proc_type = "delete"
         let tag = sender.tag
-        if Servicefile.shared.petuserlocaadd[tag].default_status != false {
-           print("you can't delete the default address")
-        }else{
-            self.calldeleteaddress(id : Servicefile.shared.petuserlocaadd[tag]._id)
-        }
-        
+        Servicefile.shared.selectedindex = tag
+        self.view_shadow.isHidden = false
+        self.view_popup.isHidden = false
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -111,8 +144,15 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func action_back(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
-        self.present(vc, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+         if let firstVC = presentingViewController as? petprofileViewController {
+                   DispatchQueue.main.async {
+                    firstVC.viewWillAppear(true)
+                   }
+               }
     }
     
     func callchangedefault(id : String){

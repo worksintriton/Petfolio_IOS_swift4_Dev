@@ -24,23 +24,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
-         Servicefile.shared.pet_status = ""
-        self.ismenu.removeAll()
-        self.view_footer.layer.cornerRadius = 15.0
-        Servicefile.shared.pet_petlist.removeAll()
-        self.coll_petlist.delegate = self
-        self.coll_petlist.dataSource = self
-        self.callpetdash()
-        self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
-        self.label_email.text = Servicefile.shared.user_email
-        self.label_phono.text = Servicefile.shared.user_phone
-//        self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
-//                       if (error != nil) {
-//                           self.imag_user.image = UIImage(named: "sample")
-//                       } else {
-//                           self.imag_user.image = image
-//                       }
-//                   }
+       
     }
     
     @IBAction func action_sos(_ sender: Any) {
@@ -49,7 +33,16 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
+       Servicefile.shared.pet_status = ""
+             self.ismenu.removeAll()
+             self.view_footer.layer.cornerRadius = 15.0
+             Servicefile.shared.pet_petlist.removeAll()
+             self.coll_petlist.delegate = self
+             self.coll_petlist.dataSource = self
+             self.callpetdash()
+             self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
+             self.label_email.text = Servicefile.shared.user_email
+             self.label_phono.text = Servicefile.shared.user_phone
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -206,7 +199,10 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                                let title =  Bval["doctor_name"] as! String
                                                                let review_count =  Bval["review_count"] as! Int
                                                                 let star_count =  Bval["star_count"] as! Int
-                                                               Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count))
+                                                                let specialization = Bval["specialization"] as! NSArray
+                                                                let Dicspec = specialization[specialization.count-1] as! NSDictionary
+                                                                var spec = Dicspec["specialization"] as! String
+                                                                Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec))
                                                            }
                                                            Servicefile.shared.petprod.removeAll()
                                                            let Products_details = dash["Products_details"] as! NSArray

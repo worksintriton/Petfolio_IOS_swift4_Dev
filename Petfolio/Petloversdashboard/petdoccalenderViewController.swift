@@ -21,6 +21,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     var seldate = ""
     var listtime = [""]
+    var bookstatus = [""]
     var seltime = [""]
     var selectedtime = ""
     
@@ -28,6 +29,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_continue.isHidden = true
         self.listtime.removeAll()
         self.seltime.removeAll()
         self.view_continue.layer.cornerRadius = 15.0
@@ -69,12 +71,17 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_app_selectdoctordateCollectionViewCell
         cell.label_time.text = self.listtime[indexPath.row]
-        if self.seltime[indexPath.row] == "1"{
-            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-             cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+        if self.bookstatus[indexPath.row] == "1" {
+            if self.seltime[indexPath.row] == "1"{
+                       cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                        cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+                   }else{
+                       cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+                       cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                   }
         }else{
-            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
-            cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+            cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.black)
         }
         cell.view_time.layer.cornerRadius = 10.0
         return cell
@@ -82,6 +89,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     
     @IBAction func action_bookappoint(_ sender: Any) {
+       
         if Servicefile.shared.pet_apoint_booking_time != "" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
             self.present(vc, animated: true, completion: nil)
@@ -90,7 +98,13 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.callcheckdatedetails(index: indexPath.row)
+        if self.bookstatus[indexPath.row] == "1" {
+            self.callcheckdatedetails(index: indexPath.row)
+            
+        }else{
+            self.alert(Message: "Slot is not available")
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -105,6 +119,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         let nextDate = format.string(from: selddate!)
         print("selected date",nextDate)
         self.seldate = nextDate
+        self.view_continue.isHidden = true
+        Servicefile.shared.pet_apoint_booking_time = ""
         self.callgetdatedetails()
     }
     
@@ -133,15 +149,22 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                                                     for itm in 0..<Data.count{
                                                         self.listtime.removeAll()
                                                          self.seltime.removeAll()
+                                                        self.bookstatus.removeAll()
                                                         let datadic = Data[itm] as! NSDictionary
                                                         let timedic = datadic["Times"] as! NSArray
                                                         for timitm in 0..<timedic.count{
                                                             let timitmdic = timedic[timitm] as! NSDictionary
                                                             let timval = timitmdic["time"]  as! NSString
+                                                            let bookstatus = timitmdic["book_status"]  as! Bool
+                                                            if bookstatus ==  true {
+                                                                self.bookstatus.append("1")
+                                                            }else{
+                                                                self.bookstatus.append("0")
+                                                            }
                                                             self.listtime.append(timval as String)
                                                             if timitm == 0 {
-                                                                self.seltime.append("1")
-                                                                self.selectedtime = timval as String
+                                                                self.seltime.append("0")
+                                                                self.selectedtime = ""
                                                             }else{
                                                                  self.seltime.append("0")
                                                             }
@@ -171,7 +194,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     func callcheckdatedetails(index: Int){
         self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_dov_check_time, method: .post, parameters:
-        [ "user_id":Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+        ["doctor_id":Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
        "Booking_Date":self.seldate,"Booking_Time": self.listtime[index]], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
@@ -188,6 +211,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                                                     self.seltime.insert("1", at: index)
                                                     Servicefile.shared.pet_apoint_booking_date = self.seldate
                                                     Servicefile.shared.pet_apoint_booking_time = self.listtime[index]
+                                                    self.view_continue.isHidden = false
                                                     self.coll_seltime.reloadData()
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{

@@ -84,10 +84,12 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docdashTableViewCell
-        
+         cell.view_pres.isHidden = true
         if self.appointtype == "New" {
             cell.image_emergnecy.isHidden = true
-            cell.view_commissed.isHidden = true
+            cell.view_commissed.isHidden = false
+            cell.view_completebtn.isHidden = false
+                       cell.view_cancnel.isHidden = false
             cell.btn_complete.tag = indexPath.row
              cell.btn_cancel.tag = indexPath.row
             cell.btn_complete.addTarget(self, action: #selector(action_complete), for: .touchUpInside)
@@ -97,20 +99,33 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }else{
                 cell.image_emergnecy.isHidden = true
             }
+            cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
+                       cell.labe_comMissed.text = "Booked on :"
+                       cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                       cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else if self.appointtype == "Complete"{
+            
+                             cell.view_pres.isHidden = false
+                       
              cell.view_commissed.isHidden = false
+            cell.view_completebtn.isHidden = true
+            cell.view_cancnel.isHidden = true
+            
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
             cell.view_commissed.isHidden = false
+            cell.view_completebtn.isHidden = true
+                       cell.view_cancnel.isHidden = true
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].book_date_time
              cell.labe_comMissed.text = "Missed on :"
             cell.label_completedon.textColor = UIColor.red
              cell.labe_comMissed.textColor = UIColor.red
         }
-        
+        cell.btn_pres.tag = indexPath.row
+        cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
         cell.view_completebtn.layer.cornerRadius = 10.0
         cell.view_cancnel.layer.cornerRadius = 10.0
         cell.View_mainview.layer.borderWidth = 0.2
@@ -135,6 +150,13 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    @objc func action_pres(sender : UIButton){
+           let tag = sender.tag
+        Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[tag].Appid
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "viewprescriptionViewController") as! viewprescriptionViewController
+           self.present(vc, animated: true, completion: nil)
+          }
+    
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
@@ -147,7 +169,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 162
+        return 182
     }
     
 

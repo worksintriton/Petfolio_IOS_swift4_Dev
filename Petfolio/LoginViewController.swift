@@ -85,15 +85,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                            Servicefile.shared.userid = user_details["_id"] as! String
-                                                           
-                                                           
-                                                           
-                                                           print("user id",Servicefile.shared.userid)
+                                                           print("userid",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)
-                                                            
-                                                        
-                                                            
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()

@@ -101,24 +101,15 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Action_Votp(_ sender: Any) {
         if self.textfield_fname.text! == "" {
-             self.alert(Message: "Please enter the First name")
-        }else if self.textfield_lastname.text! == "" {
-              self.alert(Message: "Please enter the Last name")
-        }else if self.textfield_phno.text! == ""{
-             self.alert(Message: "Please enter the Phone number")
-        }else {
-            if self.textfield_email.text != ""{
-                if self.isValidEmail(self.textfield_email.text!) != false {
-//                     self.alert(Message: "Email ID is valid")
-                    self.callsignup()
-                }else{
-                     self.alert(Message: "Email ID is invalid")
-                }
-            }else{
-//                self.alert(Message: "Email ID is empty and submiting the process")
-                self.callsignup()
-            }
-             
+            self.alert(Message: "Please enter the First name")
+        } else if self.textfield_lastname.text! == "" {
+            self.alert(Message: "Please enter the Last name")
+        } else if self.textfield_phno.text! == "" {
+            self.alert(Message: "Please enter the Phone number")
+        } else if self.isValidEmail(self.textfield_email.text!) == false || self.textfield_email.text! == "" {
+            self.alert(Message: "Email ID is invalid")
+        } else {
+            self.callsignup()
         }
     }
     
@@ -156,21 +147,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                                                          Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                                                         Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                         Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                        let userid = user_details["_id"] as! String
-                                                        UserDefaults.standard.set(userid, forKey: "userid")
-                                                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                                                        print("user id",Servicefile.shared.userid)
-                                                        UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
-                                                        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
-                                                        
-                                                      
+                                                         Servicefile.shared.userid  = user_details["_id"] as! String
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                                                             self.present(vc, animated: true, completion: nil)
-                                                       
-                                                       
                                                          self.stopAnimatingActivityIndicator()
                                                       }else{
                                                         self.stopAnimatingActivityIndicator()
+                                                        let Messages = res["Message"] as! String
+                                                        self.alert(Message: Messages)
                                                         print("status code service denied")
                                                       }
                                                     break

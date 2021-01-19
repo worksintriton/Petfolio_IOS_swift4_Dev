@@ -18,7 +18,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var resendbtn: UIButton!
     @IBOutlet weak var secondstext: UILabel!
     
-     var counter = 120
+    var counter = 120
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         return true
     }
     
-    @objc func textFieldDidChange(textField : UITextField){
+    @objc func textFieldDidChange(textField : UITextField) {
           if self.textfield_otp.text!.count > 6 {
             let otptxt = self.textfield_otp.text!
             let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
@@ -78,6 +78,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
                    if trimmedString  == Servicefile.shared.otp {
+                    print("user id data",Servicefile.shared.userid)
                     UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                     UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                     UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
@@ -181,14 +182,13 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                        if Servicefile.shared.usertype == "1" {
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                                                                                       self.present(vc, animated: true, completion: nil)
-                                                       } else if Servicefile.shared.user_type == "4"{
+                                                       } else if Servicefile.shared.user_type == "4" {
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                                                                                       self.present(vc, animated: true, completion: nil)
-                                                       } else if Servicefile.shared.user_type == "2"{
+                                                       } else if Servicefile.shared.user_type == "2" {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                                                             self.present(vc, animated: true, completion: nil)
                                                         }
-                                                        
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

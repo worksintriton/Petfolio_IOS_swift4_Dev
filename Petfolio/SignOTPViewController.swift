@@ -133,8 +133,6 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                             Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                           
-                                                           
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
@@ -147,7 +145,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                        break
                                                    }
                                       }
-               }else{
+               } else {
                    self.stopAnimatingActivityIndicator()
                    self.alert(Message: "No Intenet Please check and try again ")
                }
@@ -165,6 +163,20 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                      print("success data",res)
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
+                                                        
+                                                        UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                                                        UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
+                                                        UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
+                                                        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                                                        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                                                        Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                                                        Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                                                        Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                                                        Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                                                        
                                                       if Servicefile.shared.user_type == "1"{
                                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
                                                         self.present(vc, animated: true, completion: nil)

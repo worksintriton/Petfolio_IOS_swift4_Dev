@@ -21,6 +21,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var switch_commtype: UISwitch!
     @IBOutlet weak var label_comm_type: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
+    @IBOutlet weak var view_search: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.label_comm_type.text = "Communication offline "
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
+        self.view_search.layer.cornerRadius = 10.0
+        self.view_footer.layer.cornerRadius = 15.0
     }
     
     
@@ -41,6 +44,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
            self.present(vc, animated: true, completion: nil)
        }
+    
+    @IBAction func action_petservice(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_search.resignFirstResponder()

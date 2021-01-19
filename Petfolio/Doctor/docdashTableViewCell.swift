@@ -26,7 +26,8 @@ class docdashTableViewCell: UITableViewCell {
     @IBOutlet weak var view_commissed: UIView!
     @IBOutlet weak var label_amount: UILabel!
     @IBOutlet weak var image_emergnecy: UIImageView!
-    
+    @IBOutlet weak var view_pres: UIView!
+    @IBOutlet weak var btn_pres: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

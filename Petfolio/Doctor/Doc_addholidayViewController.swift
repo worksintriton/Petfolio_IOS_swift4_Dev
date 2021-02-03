@@ -11,7 +11,6 @@ import Alamofire
 
 class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
     @IBOutlet weak var tbl_holidaylist: UITableView!
     @IBOutlet weak var view_datepicker: UIView!
     @IBOutlet weak var datepick_date: UIDatePicker!
@@ -19,10 +18,10 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var view_submit: UIView!
     @IBOutlet weak var view_date: UIView!
     
-    
     var doc_selholiday = [""]
     var docselholidayid = [""]
     var seldate = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.callholidaylist()
@@ -36,35 +35,34 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         self.view_datepicker.isHidden = true
         self.datepick_date.datePickerMode = .date
         self.datepick_date.minimumDate = Date()
-           self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
-        // Do any additional setup after loading the view.
+        self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
     }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @objc func dateChange(_ sender: UIDatePicker) {
              let senderdate = sender.date
            let format = DateFormatter()
           format.dateFormat = "dd-MM-yyyy"
           let Date = format.string(from: senderdate)
         self.seldate = Date
-      }
+    }
       
-      override func viewWillDisappear(_ animated: Bool) {
-              if let firstVC = presentingViewController as? mycalenderViewController {
-                        DispatchQueue.main.async {
-                         firstVC.viewWillAppear(true)
-                        }
-                    }
-         }
+    override func viewWillDisappear(_ animated: Bool) {
+        if let firstVC = presentingViewController as? mycalenderViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+    }
     
     @IBAction func action_showdate(_ sender: Any) {
          self.view_datepicker.isHidden = false
     }
     
     @IBAction func action_selectdate(_ sender: Any) {
-    //self.seldate
         self.lbl_date.text = self.seldate
         self.view_datepicker.isHidden = true
     }
@@ -72,8 +70,6 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func action_submit(_ sender: Any) {
         self.callcreateholiday()
     }
-    
-    // submit action
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -135,8 +131,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
             }
        
 
-    func callholidaylist(){
-       
+    func callholidaylist() {
         self.startAnimatingActivityIndicator()
                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_getholdiaylist, method: .post, parameters:
                 ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -177,8 +172,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                }
     }
     
-    func callcreateholiday(){
-       
+    func callcreateholiday() {
         self.startAnimatingActivityIndicator()
                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_createholiday, method: .post, parameters:
                 ["user_id" : Servicefile.shared.userid,
@@ -204,10 +198,9 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                                                        break
                                                    }
                                       }
-               }else{
+               } else{
                    self.stopAnimatingActivityIndicator()
                    self.alert(Message: "No Intenet Please check and try again ")
                }
     }
-    
 }

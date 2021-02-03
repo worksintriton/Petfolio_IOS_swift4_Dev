@@ -16,6 +16,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textview_review: UITextView!
     @IBOutlet weak var view_addreview: UIView!
     @IBOutlet weak var view_main: UIView!
+    @IBOutlet var view_shadow: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,13 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
         self.view_addreview.layer.cornerRadius = 10.0
         self.textview_review.delegate = self
     
-    }
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        self.view_shadow.addGestureRecognizer(tap)
+        }
+        
+        @objc func dismissKeyboard() {
+            self.dismiss(animated: true, completion: nil)
+        }
     
     override func viewWillDisappear(_ animated: Bool) {
                 if let firstVC = presentingViewController as? Pet_applist_ViewController {
@@ -50,7 +57,6 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func action_addreview(_ sender: Any) {
-        
         self.callupdaterateandreview()
     }
     
@@ -62,9 +68,8 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
             }
       
       func callupdaterateandreview(){
-        //http://52.25.163.13:3000/api/appointments/reviews/update
          self.startAnimatingActivityIndicator()
-         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.filter, method: .post, parameters:
+         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_review_update, method: .post, parameters:
              ["_id": Servicefile.shared.pet_apoint_id,
               "user_feedback": self.textview_review.text!,
               "user_rate": self.Cosmos_rate.rating

@@ -15,6 +15,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_clinicdetails: UILabel!
     @IBOutlet weak var coll_imgview: UICollectionView!
     @IBOutlet weak var label_city: UILabel!
+    
     @IBOutlet weak var label_distance: UILabel!
     @IBOutlet weak var label_Noofcomments: UILabel!
     @IBOutlet weak var Label_ratingval: UILabel!
@@ -115,7 +116,11 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                              let Data = res["Data"] as! NSDictionary
                                                             self._id = Data["_id"] as! String
                                                             self.clinic_name = Data["clinic_name"] as! String
+                                                            Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as! String
                                                             let clidet = Data["clinic_pic"] as! NSArray
+                                                            let clicloc =  Data["clinic_loc"] as! String
+                                                             self.label_city.text = clicloc + ". "
+                                                            self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                                                             for itm in 0..<clidet.count{
                                                                 let dat = clidet[itm] as! NSDictionary
                                                                 let pic = dat["clinic_pic"] as! String
@@ -152,13 +157,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                             }else{
                                                                 self.label_Noofcomments.text = rcount
                                                             }
-                                                           
                                                             self.label_clinicdetails.text = self.clinic_name
-                                                              
-//                                                               self.label_city.text = ""
-//                                                               self.label_distance.text = ""
-                                                             
-                                                              
+                                                           
                                                             self.label_specdetails.text = specarray
                                                             self.label_descrption.text = self.descri
                                                              self.stopAnimatingActivityIndicator()

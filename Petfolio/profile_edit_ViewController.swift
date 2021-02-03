@@ -19,7 +19,9 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textfield_phoneno: UITextField!
     @IBOutlet weak var view_save: UIView!
     @IBOutlet weak var view_country: UIView!
-    
+    @IBOutlet weak var view_verifyemail: UIView!
+    @IBOutlet weak var label_emailstatus: UILabel!
+    @IBOutlet weak var view_details: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,39 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
         self.textfield_lastname.text = Servicefile.shared.last_name
         self.textfield_phoneno.text = Servicefile.shared.user_phone
         // Do any additional setup after loading the view.
+     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+               view_details.addGestureRecognizer(tap)
+           }
+           
+           @objc func dismissKeyboard() {
+               view.endEditing(true)
+           }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.textfield_email.resignFirstResponder()
+        self.textfield_firstname.resignFirstResponder()
+        self.textfield_lastname.resignFirstResponder()
+        return true
     }
+    
+    @IBAction func action_email_verify(_ sender: Any) {
+           self.view.endEditing(true)
+           if self.isValidEmail(self.textfield_email.text!) == false || self.textfield_email.text! == "" {
+                self.alert(Message: "Email ID is invalid")
+           }else {
+               Servicefile.shared.signupemail = self.textfield_email.text!
+               let vc = self.storyboard?.instantiateViewController(withIdentifier: "emailsignupViewController") as! emailsignupViewController
+                      self.present(vc, animated: true, completion: nil)
+           }
+       }
+    
+    @objc func textFieldDidChange(textField : UITextField){
+          if self.textfield_email == textField {
+               Servicefile.shared.email_status = false
+               Servicefile.shared.email_status_label = "verify email"
+               self.label_emailstatus.text = Servicefile.shared.email_status_label
+           }
+       }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -52,13 +86,23 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         }else{
                              self.alert(Message: "Email ID is invalid")
                         }
-                    }else{
+                    }
+//                    else if Servicefile.shared.email_status == false {
+//                     self.alert(Message: "Email ID is not verified")
+//                    }
+                    else{
         //                self.alert(Message: "Email ID is empty and submiting the process")
                         self.callupdate()
                     }
                      
                 }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+           self.label_emailstatus.text = Servicefile.shared.email_status_label
+          
+       }
+       
     
     func alert(Message: String){
          let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)

@@ -119,6 +119,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                   geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
                       var pm: CLPlacemark!
                       pm = placemarks?[0]
+                     if placemarks?[0] != nil {
                      var addressString : String = ""
                                         if pm.subLocality != nil {
                                             addressString = addressString + pm.subLocality! + ", "
@@ -138,6 +139,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
 
                    self.locationaddress = addressString
                                         print(addressString)
+                    }
                   })
               }
              

@@ -316,10 +316,11 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                                                             let title =  Bval["doctor_name"] as! String
                                                             let review_count =  Bval["review_count"] as! Int
                                                              let star_count =  Bval["star_count"] as! Int
-                                                             let specialization = Bval["specialization"] as! NSArray
-                                                             let Dicspec = specialization[specialization.count-1] as! NSDictionary
-                                                             var spec = Dicspec["specialization"] as! String
-                                                             Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec))
+                                                            let distance = Bval["distance"] as! String
+                                                            let specialization = Bval["specialization"] as! NSArray
+                                                            let Dicspec = specialization[specialization.count-1] as! NSDictionary
+                                                            var spec = Dicspec["specialization"] as! String
+                                                            Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec,idistance: distance))
                                                         }
                                                         Servicefile.shared.petprod.removeAll()
                                                         let Products_details = dash["Products_details"] as! NSArray

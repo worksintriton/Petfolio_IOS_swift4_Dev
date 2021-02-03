@@ -180,7 +180,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
        self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.filter, method: .post, parameters:
            ["user_id" : Servicefile.shared.userid,
-            "specialization": self.selrate,
+            "specialization": self.selspec,
             "nearby": self.selnearby,
             "Review_count" : self.selrate], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                   switch (response.result) {

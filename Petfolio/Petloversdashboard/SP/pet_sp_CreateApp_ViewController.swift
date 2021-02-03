@@ -80,9 +80,21 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.view_petbreed.layer.cornerRadius = 9.0
         self.view_petalergy.layer.cornerRadius = 9.0
         self.view_discription.layer.cornerRadius = 9.0
+        
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
         self.tblview_petdetail.isHidden = true
+        let apgreen = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.tblview_petbreed.layer.borderColor = apgreen.cgColor
+        self.tblview_pettype.layer.borderColor = apgreen.cgColor
+        self.tblview_petdetail.layer.borderColor = apgreen.cgColor
+        self.tblview_petbreed.layer.borderWidth = 0.2
+        self.tblview_pettype.layer.borderWidth = 0.2
+        self.tblview_petdetail.layer.borderWidth = 0.2
+        
+        self.tblview_petbreed.layer.cornerRadius = 9.0
+        self.tblview_pettype.layer.cornerRadius = 9.0
+        self.tblview_petdetail.layer.cornerRadius = 9.0
         
         self.callpetdetailget()
         self.textfield_color.delegate = self
@@ -180,15 +192,17 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             }else{
                   cell.textLabel?.text = "Select pet name"
             }
-            
+            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                    return cell
         } else if self.tblview_pettype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
             cell.textLabel?.text = self.pet_type[indexPath.row]
+            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
             cell.textLabel?.text = self.Pet_breed[indexPath.row]
+            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             return cell
         }
         

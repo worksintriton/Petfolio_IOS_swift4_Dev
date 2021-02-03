@@ -16,7 +16,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
-    var petlist = ["mydog","mydog","mydog"]
+    var petlist = ["Splash","Splash","Splash"]
     var demodata = [{}]
      var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
         let val = self.demodata[indexPath.row]
         cell.pettitle.text = ""
-        cell.petimage.image = UIImage(named: "mydog")
+        cell.petimage.image = UIImage(named: "Splash")
         return cell
     }
     
@@ -65,6 +65,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
                 Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                  print("user type ",Servicefile.shared.usertype,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.usertype == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController

@@ -187,6 +187,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         //self.setclinicimag()
     }
     
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
               if self.textview_clinicaddress == textView  {

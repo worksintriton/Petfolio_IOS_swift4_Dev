@@ -70,24 +70,28 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.label_locaTitle.text = Servicefile.shared.selectedCity
             self.label_locadetail.text = Servicefile.shared.selectedaddress
         }else{
-            self.textfield_pickname.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
-            self.textfield_pincode.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
-            self.textfield_cityname.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
-            self.textfield_location.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
-            self.label_locaTitle.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
-            self.label_locadetail.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
-             Servicefile.shared.selectedPincode = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
-            Servicefile.shared.selectedCity = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
-           Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
-            Servicefile.shared.lati = Double(Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_lat)!
-            Servicefile.shared.long = Double(Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_long)!
+            self.textfield_pincode.text = Servicefile.shared.selectedPincode
+            self.textfield_cityname.text = Servicefile.shared.selectedCity
+            self.textfield_location.text = Servicefile.shared.selectedaddress
+            self.label_locaTitle.text = Servicefile.shared.selectedCity
+            self.label_locadetail.text = Servicefile.shared.selectedaddress
+             self.textfield_pickname.text = Servicefile.shared.selectedpickname
+          
+//            self.textfield_pincode.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
+//            self.textfield_cityname.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
+//            self.textfield_location.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
+//            self.label_locaTitle.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
+            
+//             
             self.id = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex]._id
             self.isselected = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_title
              self.changeaddtype(type: self.isselected)
         }
-        
-       
-        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func action_back(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
@@ -109,6 +113,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     
     @IBAction func action_changeloca(_ sender: Any) {
+        Servicefile.shared.selectedpickname = self.textfield_pickname.text!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
               self.present(vc, animated: true, completion: nil)
     }
@@ -129,6 +134,10 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         }
         
     }
+    
+    
+    
+   
     
     
     @IBAction func action_home(_ sender: Any) {
@@ -195,11 +204,16 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     
     @IBAction func action_savelocation(_ sender: Any) {
-         if Servicefile.shared.locaaccess == "Add" {
-             self.calladdlocation()
-         }else{
-            self.callupdatelocation()
+        if self.textfield_pickname.text == "" {
+            self.alert(Message: "Please enter pick a nick name for this location")
+        }else{
+            if Servicefile.shared.locaaccess == "Add" {
+                        self.calladdlocation()
+                    }else{
+                       self.callupdatelocation()
+                   }
         }
+        
     }
     
     func callupdatelocation(){

@@ -9,22 +9,22 @@
 import UIKit
 
 class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tbl_menulist: UITableView!
     @IBOutlet weak var imag_user: UIImageView!
-       @IBOutlet weak var label_user: UILabel!
-       @IBOutlet weak var label_email: UILabel!
-      
-    var labelmenu = ["My Appointment", "Logout"]
-    var imgmenu = ["Calendar", "Exit"]
+    @IBOutlet weak var label_user: UILabel!
+    @IBOutlet weak var label_email: UILabel!
+    
+    var labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Settings", "Logout"]
+    var imgmenu = ["Like","Doc","Calendar","Discount","Medical History","Setting", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
-               self.label_email.text = Servicefile.shared.user_email
-              // self.label_phono.text = Servicefile.shared.user_phone
+        self.label_email.text = Servicefile.shared.user_email
+        // self.label_phono.text = Servicefile.shared.user_phone
         
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
@@ -54,16 +54,24 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My Appointment"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
-                   self.present(vc, animated: true, completion: nil)
-        }else{
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
-                   UserDefaults.standard.set("", forKey: "usertype")
-                   Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
-                   Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                   self.present(vc, animated: true, completion: nil)
+            UserDefaults.standard.set("", forKey: "usertype")
+            UserDefaults.standard.set("", forKey: "userid")
+            UserDefaults.standard.set("", forKey: "usertype")
+            UserDefaults.standard.set("", forKey: "first_name")
+            UserDefaults.standard.set("", forKey: "last_name")
+            UserDefaults.standard.set("", forKey: "user_email")
+            UserDefaults.standard.set("", forKey: "user_phone")
+            UserDefaults.standard.set("", forKey: "user_image")
+            UserDefaults.standard.set("", forKey: "user_image")
+            Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.present(vc, animated: true, completion: nil)
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,7 +80,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     
     @IBAction func action_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
-               self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile_edit(_ sender: Any) {
@@ -80,5 +88,5 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         self.present(vc, animated: true, completion: nil)
     }
     
-
+    
 }

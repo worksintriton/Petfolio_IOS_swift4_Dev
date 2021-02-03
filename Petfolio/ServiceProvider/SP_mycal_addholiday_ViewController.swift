@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     @IBOutlet weak var tbl_holidaylist: UITableView!
     @IBOutlet weak var view_datepicker: UIView!
@@ -36,7 +36,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
         self.view_datepicker.isHidden = true
         self.datepick_date.datePickerMode = .date
         self.datepick_date.minimumDate = Date()
-           self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
+        self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
         // Do any additional setup after loading the view.
     }
     
@@ -44,27 +44,27 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
         self.dismiss(animated: true, completion: nil)
     }
     @objc func dateChange(_ sender: UIDatePicker) {
-             let senderdate = sender.date
-           let format = DateFormatter()
-          format.dateFormat = "dd-MM-yyyy"
-          let Date = format.string(from: senderdate)
+        let senderdate = sender.date
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let Date = format.string(from: senderdate)
         self.seldate = Date
-      }
-      
-      override func viewWillDisappear(_ animated: Bool) {
-              if let firstVC = presentingViewController as? mycalenderViewController {
-                        DispatchQueue.main.async {
-                         firstVC.viewWillAppear(true)
-                        }
-                    }
-         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let firstVC = presentingViewController as? mycalenderViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+    }
     
     @IBAction func action_showdate(_ sender: Any) {
-         self.view_datepicker.isHidden = false
+        self.view_datepicker.isHidden = false
     }
     
     @IBAction func action_selectdate(_ sender: Any) {
-    //self.seldate
+        //self.seldate
         self.lbl_date.text = self.seldate
         self.view_datepicker.isHidden = true
     }
@@ -100,114 +100,113 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
         print("data in delete",del_val)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_deleteholiday, method: .post, parameters:
-     ["_id": del_val], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                            switch (response.result) {
-                                            case .success:
-                                                  let res = response.value as! NSDictionary
-                                                  print("success data",res)
-                                                  let Code  = res["Code"] as! Int
-                                                  if Code == 200 {
-                                                    self.callholidaylist()
-                                                     self.stopAnimatingActivityIndicator()
-                                                  }else{
-                                                    self.stopAnimatingActivityIndicator()
-                                                    print("status code service denied")
-                                                    let Message  = res["Message"] as! String
-                                                    self.alert(Message: Message)
-                                                  }
-                                                break
-                                            case .failure(let Error):
-                                                self.stopAnimatingActivityIndicator()
-                                                print("Can't Connect to Server / TimeOut",Error)
-                                                break
-                                            }
-                               }
+            ["_id": del_val], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callholidaylist()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                        let Message  = res["Message"] as! String
+                        self.alert(Message: Message)
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
     func alert(Message: String){
-                let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                     }))
-                self.present(alert, animated: true, completion: nil)
-            }
-       
-
+        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     func callholidaylist(){
-       
         self.startAnimatingActivityIndicator()
-               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_getholdiaylist, method: .post, parameters:
-                ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                                   switch (response.result) {
-                                                   case .success:
-                                                         let res = response.value as! NSDictionary
-                                                         print("success data",res)
-                                                         let Code  = res["Code"] as! Int
-                                                         if Code == 200 {
-                                                            self.doc_selholiday.removeAll()
-                                                            self.docselholidayid.removeAll()
-                                                          let data  = res["Data"] as! NSArray
-                                                            for itm in 0..<data.count{
-                                                                let itdata = data[itm] as! NSDictionary
-                                                                let id = itdata["_id"] as! String
-                                                                let date = itdata["Date"] as! String
-                                                                self.doc_selholiday.append(date)
-                                                                self.docselholidayid.append(id)
-                                                            }
-                                                            self.tbl_holidaylist.reloadData()
-                                                            self.stopAnimatingActivityIndicator()
-                                                         }else{
-                                                           self.stopAnimatingActivityIndicator()
-                                                            let Message  = res["Message"] as! String
-                                                            self.alert(Message: Message)
-                                                           print("status code service denied")
-                                                         }
-                                                       break
-                                                   case .failure(let Error):
-                                                       self.stopAnimatingActivityIndicator()
-                                                       print("Can't Connect to Server / TimeOut",Error)
-                                                       break
-                                                   }
-                                      }
-               }else{
-                   self.stopAnimatingActivityIndicator()
-                   self.alert(Message: "No Intenet Please check and try again ")
-               }
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_getholdiaylist, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.doc_selholiday.removeAll()
+                        self.docselholidayid.removeAll()
+                        let data  = res["Data"] as! NSArray
+                        for itm in 0..<data.count{
+                            let itdata = data[itm] as! NSDictionary
+                            let id = itdata["_id"] as! String
+                            let date = itdata["Date"] as! String
+                            self.doc_selholiday.append(date)
+                            self.docselholidayid.append(id)
+                        }
+                        self.tbl_holidaylist.reloadData()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        let Message  = res["Message"] as! String
+                        self.alert(Message: Message)
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     func callcreateholiday(){
-       
         self.startAnimatingActivityIndicator()
-               if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_createholiday, method: .post, parameters:
-                ["user_id" : Servicefile.shared.userid,
-                 "Date" : self.lbl_date.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                                   switch (response.result) {
-                                                   case .success:
-                                                         let res = response.value as! NSDictionary
-                                                         print("success data",res)
-                                                         let Code  = res["Code"] as! Int
-                                                         if Code == 200 {
-                                                            self.callholidaylist()
-                                                            self.stopAnimatingActivityIndicator()
-                                                         }else{
-                                                           self.stopAnimatingActivityIndicator()
-                                                           print("status code service denied")
-                                                            let Message  = res["Message"] as! String
-                                                            self.alert(Message: Message)
-                                                         }
-                                                       break
-                                                   case .failure(let Error):
-                                                       self.stopAnimatingActivityIndicator()
-                                                       print("Can't Connect to Server / TimeOut",Error)
-                                                       break
-                                                   }
-                                      }
-               }else{
-                   self.stopAnimatingActivityIndicator()
-                   self.alert(Message: "No Intenet Please check and try again ")
-               }
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_createholiday, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid,
+             "Date" : self.lbl_date.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callholidaylist()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                        let Message  = res["Message"] as! String
+                        self.alert(Message: Message)
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
 }

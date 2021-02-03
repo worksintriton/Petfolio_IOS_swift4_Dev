@@ -89,13 +89,14 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     
     @IBAction func action_changeUT(_ sender: Any) {
-        Servicefile.shared.utypesel = self.locusel
-        Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
-        Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
-        self.dismiss(animated: true, completion: nil)
+        if Servicefile.shared.UtypeData[self.selval].user_type_value == 1 || Servicefile.shared.UtypeData[self.selval].user_type_value == 4{
+            Servicefile.shared.utypesel = self.locusel
+            Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
+            Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
+            self.dismiss(animated: true, completion: nil)
+       }
+        
     }
-    
-   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.collec_usertype.frame.size.width / 2.2 , height:  self.collec_usertype.frame.size.width / 2)

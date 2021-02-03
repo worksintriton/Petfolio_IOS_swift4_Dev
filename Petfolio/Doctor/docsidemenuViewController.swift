@@ -14,10 +14,12 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-    var labelmenu = ["My calender", "Logout"]
-    var imgmenu = ["Calendar", "Exit"]
+//    var labelmenu = ["My calender", "Logout"]
+//    var imgmenu = ["Calendar", "Exit"]
     
-    
+    var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons","Settings", "Logout"]
+    var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Setting", "Exit"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -50,7 +52,6 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! menuTableViewCell
         cell.Img_menu.image = UIImage(named: self.imgmenu[indexPath.row])
         cell.label_menu.text = self.labelmenu[indexPath.row]
-        
         return cell
     }
     
@@ -58,7 +59,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycalenderViewController") as! mycalenderViewController
         self.present(vc, animated: true, completion: nil)
-        }else{
+        }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
                    Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!

@@ -18,19 +18,28 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var label_spec: UILabel!
     @IBOutlet weak var label_pethandle: UILabel!
     @IBOutlet weak var label_clinicaddress: UILabel!
+    @IBOutlet weak var view_footer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.coll_clinic.delegate = self
         self.coll_clinic.dataSource = self
+        self.view_footer.layer.cornerRadius = 15.0
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.label_username.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
+        self.label_phno.text = Servicefile.shared.user_phone
         self.calldetails()
     }
+    
+    @IBAction func action_home(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 //
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

@@ -4,7 +4,6 @@
 target 'Petfolio' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Alamofire'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'SDWebImage'
@@ -15,6 +14,7 @@ target 'Petfolio' do
   pod 'Firebase/Messaging'
   pod 'FSCalendar'
   pod 'Cosmos', '~> 23.0'
+  pod 'Alamofire', '~> 5.0'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths
@@ -25,4 +25,10 @@ target 'Petfolio' do
     # Pods for testing
   end
 
+  post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+end
+  
 end

@@ -15,9 +15,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var usercred: UITextField!
     @IBOutlet weak var ViewOTPBTN: UIView!
     @IBOutlet weak var View_usercred: UIView!
+    @IBOutlet weak var view_details: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.email_status = false
+        Servicefile.shared.email_status_label = "verify email"
         self.View_log.layer.cornerRadius = 10.0
         self.ViewOTPBTN.layer.cornerRadius = 10.0
         self.View_usercred.layer.cornerRadius = 10.0
@@ -26,7 +29,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.usercred.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.usercred.delegate = self
         // Do any additional setup after loading the view.
-    }
+     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        self.view_details.addGestureRecognizer(tap)
+                     }
+
+                     @objc func dismissKeyboard() {
+                         view.endEditing(true)
+                     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.usercred.resignFirstResponder()
@@ -85,6 +94,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
                                                            Servicefile.shared.userid = user_details["_id"] as! String
+                                                            Servicefile.shared.userimage = user_details["profile_img"] as! String
+                                                            
                                                            print("userid",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
                                                                                                                  self.present(vc, animated: true, completion: nil)

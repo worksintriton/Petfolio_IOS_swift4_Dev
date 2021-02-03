@@ -37,6 +37,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.textfield_search.delegate = self
         self.view_search.layer.cornerRadius = 10.0
         self.view_footer.layer.cornerRadius = 15.0
+        self.view_search.dropShadow()
     }
     
     
@@ -115,6 +116,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
             }
         }
         cell.view_book.dropShadow()
+        cell.img_doc.dropShadow()
         cell.img_doc.layer.cornerRadius = 10.0
         cell.view_book.layer.cornerRadius = 10.0
         cell.btn_book.tag = indexPath.row
@@ -125,6 +127,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @objc func action_book(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
+        Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
         
         self.present(vc, animated: true, completion: nil)
@@ -132,6 +135,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[indexPath.row].user_id
+        Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchtoclinicdetailViewController") as! SearchtoclinicdetailViewController
         self.present(vc, animated: true, completion: nil)
     }
@@ -157,6 +161,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callsearchlist(){
+      print("user_id" , Servicefile.shared.userid,
+        "search_string", self.textfield_search.text!,
+         "communication_type", self.comm_type)
               self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_search, method: .post, parameters:
            ["user_id" : Servicefile.shared.userid,
@@ -192,13 +199,12 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                 let user_id = dat["user_id"] as! String
                                                                 Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd))
                                                             }
-                                                            self.noofdoc.text = String(Servicefile.shared.moredocd.count)
+                                                            self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
                                                             if  Servicefile.shared.moredocd.count ==  0{
                                                                  self.label_nodata.isHidden = false
                                                             }else{
                                                                  self.label_nodata.isHidden = true
                                                             }
-                                                            
                                                             self.tbl_searchlist.reloadData()
                                                             self.refreshControl.endRefreshing()
                                                            self.stopAnimatingActivityIndicator()

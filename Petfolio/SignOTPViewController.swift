@@ -17,7 +17,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var resendbtn: UIButton!
     @IBOutlet weak var secondstext: UILabel!
-    
+     @IBOutlet weak var view_main: UIView!
      var counter = 120
    
     override func viewDidLoad() {
@@ -27,7 +27,13 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         self.Viewactionotp.layer.cornerRadius = 10.0
          self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-    }
+   let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+            view_main.addGestureRecognizer(tap)
+        }
+        
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
     
     @objc func updateCounter() {
       self.secondstext.layer.cornerRadius = 10.0
@@ -170,13 +176,14 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                                                         UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
                                                         UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
                                                         UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
+                                                        UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
                                                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                                                         Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
                                                         Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
                                                         Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
                                                         Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                                                         Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
-                                                        
+                                                        Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                                                       if Servicefile.shared.user_type == "1"{
                                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
                                                         self.present(vc, animated: true, completion: nil)

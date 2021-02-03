@@ -24,8 +24,13 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.view_footer.layer.cornerRadius = 15.0
     }
+    
+    @IBAction func action_care(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+           self.present(vc, animated: true, completion: nil)
+       }
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
@@ -33,16 +38,31 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       Servicefile.shared.pet_status = ""
+             Servicefile.shared.pet_status = ""
              self.ismenu.removeAll()
+             self.isorgi.removeAll()
              self.view_footer.layer.cornerRadius = 15.0
              Servicefile.shared.pet_petlist.removeAll()
              self.coll_petlist.delegate = self
              self.coll_petlist.dataSource = self
              self.callpetdash()
+             
              self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
              self.label_email.text = Servicefile.shared.user_email
              self.label_phono.text = Servicefile.shared.user_phone
+        
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: "sample")
+        }else{
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: "sample")
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+         self.imag_user.layer.cornerRadius = 10.0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -122,22 +142,30 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @objc func action_clickdelete(sender: UIButton){
               let tag = sender.tag
-             
+              Servicefile.shared.pet_index = tag
+        let alert = UIAlertController(title: "", message: "Are you sure you need to delete pet details", preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.calldeleteaddress(id: Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id)
+                    }))
+                alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        
+            }))
+               self.present(alert, animated: true, completion: nil)
+                
           }
     
     @objc func action_healthrecord(sender: UIButton){
                  let tag = sender.tag
                 
              }
-       
-   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
              return CGSize(width: 128 , height:  151)
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_editprofile(_ sender: Any) {
@@ -151,14 +179,51 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_upload_pic(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileimageuploadViewController") as! ProfileimageuploadViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func calldeleteaddress(id : String){
+           self.startAnimatingActivityIndicator()
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_deletedetails, method: .post, parameters:
+               ["_id": id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   switch (response.result) {
+                   case .success:
+                       let res = response.value as! NSDictionary
+                       print("success data",res)
+                       let Code  = res["Code"] as! Int
+                       if Code == 200 {
+                           self.ismenu = self.isorgi
+                            self.callpetdash()
+                           self.stopAnimatingActivityIndicator()
+                       }else{
+                           self.stopAnimatingActivityIndicator()
+                           print("status code service denied")
+                       }
+                       break
+                   case .failure(let Error):
+                       self.stopAnimatingActivityIndicator()
+                       print("Can't Connect to Server / TimeOut",Error)
+                       break
+                   }
+               }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
+    
     func callpetdash(){
+      
               self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard, method: .post, parameters:
            [   "user_id" : Servicefile.shared.userid,
-           "lat" : 12.09090,
-           "long" : 80.09093,
+           "lat" : Servicefile.shared.pet_dash_lati,
+           "long" : Servicefile.shared.pet_dash_long,
            "user_type" : 1 ,
-           "address" : "Muthamil nager, Kodugaiyur, Chennai - 600 118"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+           "address" : Servicefile.shared.pet_dash_address], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                   switch (response.result) {
                                                   case .success:
                                                         let res = response.value as! NSDictionary
@@ -199,10 +264,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                                let title =  Bval["doctor_name"] as! String
                                                                let review_count =  Bval["review_count"] as! Int
                                                                 let star_count =  Bval["star_count"] as! Int
-                                                                let specialization = Bval["specialization"] as! NSArray
-                                                                let Dicspec = specialization[specialization.count-1] as! NSDictionary
-                                                                var spec = Dicspec["specialization"] as! String
-                                                                Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec))
+                                                               let distance = Bval["distance"] as! String
+                                                               let specialization = Bval["specialization"] as! NSArray
+                                                               let Dicspec = specialization[specialization.count-1] as! NSDictionary
+                                                               var spec = Dicspec["specialization"] as! String
+                                                               Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec,idistance: distance))
                                                            }
                                                            Servicefile.shared.petprod.removeAll()
                                                            let Products_details = dash["Products_details"] as! NSArray
@@ -287,4 +353,6 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
              }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
 }

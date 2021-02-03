@@ -53,6 +53,16 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_petservice(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+           self.present(vc, animated: true, completion: nil)
+       }
+       
+       @IBAction func action_petcare(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+           self.present(vc, animated: true, completion: nil)
+       }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_search.resignFirstResponder()
         return true
@@ -94,17 +104,32 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
        }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-           cell.textLabel?.text = self.searlocation[indexPath.row]
-           return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! locationdetailsTableViewCell
+                  cell.Label_location.text = self.searlocation[indexPath.row]
+                  return cell
        }
        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            print(self.searlocation[indexPath.row])
            self.tbl_searchlist.isHidden = true
            self.textfield_search.resignFirstResponder()
            self.getlatlongforaddress(Address: self.searlocation[indexPath.row])
        }
+    
+    @IBAction func action_get_curr_location(_ sender: Any) {
+        self.tbl_searchlist.isHidden = true
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
     
     @IBAction func action_setlocation(_ sender: Any) {
         if Servicefile.shared.long != 0.0 {
@@ -115,6 +140,33 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
         }
        
     }
+    
+    // UpdteLocationCoordinate
+      
+
+       // Camera change Position this methods will call every time
+       func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+         self.tbl_searchlist.isHidden = true
+        self.view.endEditing(true)
+              marker.position = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
+                  self.latitude = position.target.latitude
+                  self.longitude = position.target.longitude
+               Servicefile.shared.lati = self.latitude
+               Servicefile.shared.long = self.longitude
+               self.latLong(lat: Servicefile.shared.lati,long: Servicefile.shared.long)
+               self.findareabylatlong()
+               marker.title = "Area Details"
+               marker.snippet = "my loc"
+               marker.map = self.GMS_mapView
+               let markerImage = UIImage(named: "location")!
+               let markerView = UIImageView(image: markerImage)
+               markerView.frame = CGRect(x: 0, y: 0, width: 22, height: 30)
+               markerView.tintColor = UIColor.red
+               marker.iconView = markerView
+           
+       }
+       
+       // gms move marker work
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -151,6 +203,8 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
            print("You tapped at \(coordinate)")
+          self.tbl_searchlist.isHidden = true
+                self.view.endEditing(true)
            marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
            self.latitude = coordinate.latitude
            self.longitude = coordinate.longitude
@@ -176,6 +230,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
                     var placeMark: CLPlacemark!
                     placeMark = placemarks?[0]
                     print("placemarks",placemarks?[0] as Any)
+                     if placemarks?[0] != nil {
                    if let country = placeMark.addressDictionary!["Country"] as? String {
                         Servicefile.shared.selectedCountry = country
                    }
@@ -204,6 +259,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
                                         print("Thoroughfare :- \(thoroughfare)")
 
                                         }
+                    }
                 })
             }
            

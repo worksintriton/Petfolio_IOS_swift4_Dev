@@ -14,10 +14,15 @@
 		B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C6702588C6AD00B09126 /* filterTableViewCell.swift */; };
 		B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79925666FE20004DB4D /* locationsettingViewController.swift */; };
 		B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */; };
+		B01306D125C7F74500B9778B /* Pet_confrence_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01306D025C7F74500B9778B /* Pet_confrence_ViewController.swift */; };
 		B013E9E825B718FE00A8E41E /* viewprescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B013E9E725B718FE00A8E41E /* viewprescriptionViewController.swift */; };
 		B0155D5E259C4C600094A7D2 /* Reg_calender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0155D5D259C4C600094A7D2 /* Reg_calender_ViewController.swift */; };
 		B0155D60259C4F430094A7D2 /* reg_cal_hour_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0155D5F259C4F430094A7D2 /* reg_cal_hour_ViewController.swift */; };
 		B0161648257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */; };
+		B019893B25B828FC00A650AD /* emailsignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019893A25B828FC00A650AD /* emailsignupViewController.swift */; };
+		B019893D25B8426900A650AD /* pet_email_otp_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019893C25B8426900A650AD /* pet_email_otp_ViewController.swift */; };
+		B019893F25B842C700A650AD /* Doc_email_otp_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019893E25B842C700A650AD /* Doc_email_otp_ViewController.swift */; };
+		B01D1C9425C17C2100EE9D57 /* pet_sp_filer_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01D1C9325C17C2100EE9D57 /* pet_sp_filer_ViewController.swift */; };
 		B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */; };
 		B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DA7472566014B00B1FA0B /* regdocViewController.swift */; };
 		B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */; };
@@ -33,6 +38,7 @@
 		B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */; };
 		B024F52625A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024F52525A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift */; };
 		B024F52825A5AFD9004F0CC4 /* pet_servicelist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */; };
+		B0251C8425C3DBA000C14BD2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0251C8225C3D85100C14BD2 /* Alamofire.framework */; };
 		B02AA437259D97EC00A94990 /* pet_new_dashboard_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA436259D97EC00A94990 /* pet_new_dashboard_ViewController.swift */; };
 		B02AA439259DEB1100A94990 /* Doc_profiledetails_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA438259DEB1100A94990 /* Doc_profiledetails_ViewController.swift */; };
 		B02AA43B259E03CE00A94990 /* profile_edit_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02AA43A259E03CE00A94990 /* profile_edit_ViewController.swift */; };
@@ -60,9 +66,15 @@
 		B0486496256BE0580038A71D /* availdaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486495256BE0580038A71D /* availdaysTableViewCell.swift */; };
 		B0486498256BE07D0038A71D /* holidaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */; };
 		B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0486499256BE1240038A71D /* mycalenderViewController.swift */; };
+		B052D4F725BAD0050013000E /* locationdetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B052D4F625BAD0050013000E /* locationdetailsTableViewCell.swift */; };
 		B0571C9025624A2000B42719 /* servicefile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C8F25624A2000B42719 /* servicefile.swift */; };
 		B0571C9225624AF000B42719 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0571C9125624AF000B42719 /* Rechability.swift */; };
 		B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0571C942562504200B42719 /* GoogleService-Info.plist */; };
+		B063369E25C3EDB00015EC38 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0658EBD25C27CA60074C2D1 /* JitsiMeetSDK.xcframework */; };
+		B063369F25C3EDB00015EC38 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B0658EBD25C27CA60074C2D1 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B06336A225C3F64D0015EC38 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0658EBC25C27CA10074C2D1 /* WebRTC.xcframework */; };
+		B06336A325C3F64D0015EC38 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B0658EBC25C27CA10074C2D1 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B0658EC925C2A84B0074C2D1 /* pdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0658EC825C2A84B0074C2D1 /* pdfViewController.swift */; };
 		B075132F25A44FDA00C850DF /* service_select_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */; };
 		B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */; };
 		B0751610256D029C002DAA20 /* mycal_hoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */; };
@@ -72,6 +84,7 @@
 		B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07516172570CA7C002DAA20 /* petloverAppointmentAddViewController.swift */; };
 		B07CB1B825AC0FBB00E899B0 /* pet_sp_CreateApp_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CB1B725AC0FBB00E899B0 /* pet_sp_CreateApp_ViewController.swift */; };
 		B07CB1BA25AC1DFF00E899B0 /* pet_sp_calender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CB1B925AC1DFF00E899B0 /* pet_sp_calender_ViewController.swift */; };
+		B084F10D25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B084F10C25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift */; };
 		B0891F6C259B255E00764396 /* searchcalenderdetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0891F6B259B255E00764396 /* searchcalenderdetailsViewController.swift */; };
 		B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */; };
 		B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */; };
@@ -117,6 +130,8 @@
 		B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D263255D6220008400D6 /* Futura XBlk BT.ttf */; };
 		B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B094D264255D6220008400D6 /* Futura-CondensedLight.otf */; };
 		B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */; };
+		B0A4C2A825BE9E51008103F3 /* pet_callroom_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4C2A725BE9E51008103F3 /* pet_callroom_ViewController.swift */; };
+		B0BB3B4325C96D72003B9B83 /* ProfileimageuploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BB3B4225C96D72003B9B83 /* ProfileimageuploadViewController.swift */; };
 		B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D887F82595B13000191833 /* Vendor_reg_ViewController.swift */; };
 		B0E3F430258202FD00F05D15 /* petaddimgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */; };
 		B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */; };
@@ -127,6 +142,8 @@
 		B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7625A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift */; };
 		B0E98F7925A846EB005C0EF9 /* pet_service_appointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7825A846EB005C0EF9 /* pet_service_appointmentViewController.swift */; };
 		B0E98F7B25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */; };
+		B0F56E3625C820EB00B1634F /* Doc_detailspage_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F56E3525C820EB00B1634F /* Doc_detailspage_ViewController.swift */; };
+		B0F56E3825C82B0E00B1634F /* Pet_app_details_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F56E3725C82B0E00B1634F /* Pet_app_details_ViewController.swift */; };
 		B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */; };
 		B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */; };
 		B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */; };
@@ -162,6 +179,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B02D3A89259311480010A4B6 /* Razorpay.xcframework in Embed Frameworks */,
+				B063369F25C3EDB00015EC38 /* JitsiMeetSDK.xcframework in Embed Frameworks */,
+				B06336A325C3F64D0015EC38 /* WebRTC.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,10 +198,15 @@
 		B008C6702588C6AD00B09126 /* filterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterTableViewCell.swift; sourceTree = "<group>"; };
 		B00AB79925666FE20004DB4D /* locationsettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsettingViewController.swift; sourceTree = "<group>"; };
 		B00AB79B25668D5B0004DB4D /* savelocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savelocationViewController.swift; sourceTree = "<group>"; };
+		B01306D025C7F74500B9778B /* Pet_confrence_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet_confrence_ViewController.swift; sourceTree = "<group>"; };
 		B013E9E725B718FE00A8E41E /* viewprescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewprescriptionViewController.swift; sourceTree = "<group>"; };
 		B0155D5D259C4C600094A7D2 /* Reg_calender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reg_calender_ViewController.swift; sourceTree = "<group>"; };
 		B0155D5F259C4F430094A7D2 /* reg_cal_hour_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reg_cal_hour_ViewController.swift; sourceTree = "<group>"; };
 		B0161647257506A100A13B81 /* pet_app_selectdoctordateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_selectdoctordateCollectionViewCell.swift; sourceTree = "<group>"; };
+		B019893A25B828FC00A650AD /* emailsignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailsignupViewController.swift; sourceTree = "<group>"; };
+		B019893C25B8426900A650AD /* pet_email_otp_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_email_otp_ViewController.swift; sourceTree = "<group>"; };
+		B019893E25B842C700A650AD /* Doc_email_otp_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_email_otp_ViewController.swift; sourceTree = "<group>"; };
+		B01D1C9325C17C2100EE9D57 /* pet_sp_filer_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_filer_ViewController.swift; sourceTree = "<group>"; };
 		B01DA74525655E9F00B1FA0B /* DocdashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocdashboardViewController.swift; sourceTree = "<group>"; };
 		B01DA7472566014B00B1FA0B /* regdocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regdocViewController.swift; sourceTree = "<group>"; };
 		B01FD8B3258C9FF500AD2719 /* SP_Reg_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_Reg_ViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +222,7 @@
 		B0228C90257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_pres_textfieldactionTableViewCell.swift; sourceTree = "<group>"; };
 		B024F52525A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashfooter_servicelist_ViewController.swift; sourceTree = "<group>"; };
 		B024F52725A5AFD8004F0CC4 /* pet_servicelist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_servicelist_ViewController.swift; sourceTree = "<group>"; };
+		B0251C8225C3D85100C14BD2 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B02AA436259D97EC00A94990 /* pet_new_dashboard_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_new_dashboard_ViewController.swift; sourceTree = "<group>"; };
 		B02AA438259DEB1100A94990 /* Doc_profiledetails_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_profiledetails_ViewController.swift; sourceTree = "<group>"; };
 		B02AA43A259E03CE00A94990 /* profile_edit_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profile_edit_ViewController.swift; sourceTree = "<group>"; };
@@ -224,9 +249,14 @@
 		B0486495256BE0580038A71D /* availdaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = availdaysTableViewCell.swift; sourceTree = "<group>"; };
 		B0486497256BE07D0038A71D /* holidaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = holidaysTableViewCell.swift; sourceTree = "<group>"; };
 		B0486499256BE1240038A71D /* mycalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycalenderViewController.swift; sourceTree = "<group>"; };
+		B052D4F625BAD0050013000E /* locationdetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationdetailsTableViewCell.swift; sourceTree = "<group>"; };
 		B0571C8F25624A2000B42719 /* servicefile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicefile.swift; sourceTree = "<group>"; };
 		B0571C9125624AF000B42719 /* Rechability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
 		B0571C942562504200B42719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B0658EBC25C27CA10074C2D1 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebRTC.xcframework; sourceTree = "<group>"; };
+		B0658EBD25C27CA60074C2D1 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = JitsiMeetSDK.xcframework; sourceTree = "<group>"; };
+		B0658EC425C282270074C2D1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B0658EC825C2A84B0074C2D1 /* pdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfViewController.swift; sourceTree = "<group>"; };
 		B075132E25A44FDA00C850DF /* service_select_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = service_select_TableViewCell.swift; sourceTree = "<group>"; };
 		B075160D256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mycal_edit_availdayTableViewCell.swift; sourceTree = "<group>"; };
 		B075160F256D029C002DAA20 /* mycal_hoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycal_hoursViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +266,7 @@
 		B07516172570CA7C002DAA20 /* petloverAppointmentAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverAppointmentAddViewController.swift; sourceTree = "<group>"; };
 		B07CB1B725AC0FBB00E899B0 /* pet_sp_CreateApp_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_CreateApp_ViewController.swift; sourceTree = "<group>"; };
 		B07CB1B925AC1DFF00E899B0 /* pet_sp_calender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_calender_ViewController.swift; sourceTree = "<group>"; };
+		B084F10C25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_confrence_ViewController.swift; sourceTree = "<group>"; };
 		B0891F6B259B255E00764396 /* searchcalenderdetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchcalenderdetailsViewController.swift; sourceTree = "<group>"; };
 		B08C96AC25691ABB003B05B7 /* photoidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoidCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08C96AE25692421003B05B7 /* checkupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkupCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +319,8 @@
 		B094D263255D6220008400D6 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura XBlk BT.ttf"; sourceTree = "<group>"; };
 		B094D264255D6220008400D6 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-CondensedLight.otf"; sourceTree = "<group>"; };
 		B094D265255D6221008400D6 /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
+		B0A4C2A725BE9E51008103F3 /* pet_callroom_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_callroom_ViewController.swift; sourceTree = "<group>"; };
+		B0BB3B4225C96D72003B9B83 /* ProfileimageuploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileimageuploadViewController.swift; sourceTree = "<group>"; };
 		B0D887F82595B13000191833 /* Vendor_reg_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor_reg_ViewController.swift; sourceTree = "<group>"; };
 		B0E3F42F258202FD00F05D15 /* petaddimgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petaddimgCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0E3F43125820A0D00F05D15 /* petloverEditandAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverEditandAddViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +331,8 @@
 		B0E98F7625A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_mycal_addholiday_ViewController.swift; sourceTree = "<group>"; };
 		B0E98F7825A846EB005C0EF9 /* pet_service_appointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_service_appointmentViewController.swift; sourceTree = "<group>"; };
 		B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_service_details_ViewController.swift; sourceTree = "<group>"; };
+		B0F56E3525C820EB00B1634F /* Doc_detailspage_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc_detailspage_ViewController.swift; sourceTree = "<group>"; };
+		B0F56E3725C82B0E00B1634F /* Pet_app_details_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet_app_details_ViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE7257F9C14006227E4 /* petprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprofileViewController.swift; sourceTree = "<group>"; };
 		B0FF1AE9257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petloverProfilepetlistCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0FF1AEB2580865C006227E4 /* petManageaddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petManageaddressViewController.swift; sourceTree = "<group>"; };
@@ -316,8 +351,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0251C8425C3DBA000C14BD2 /* Alamofire.framework in Frameworks */,
 				4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */,
 				B02D3A88259311480010A4B6 /* Razorpay.xcframework in Frameworks */,
+				B06336A225C3F64D0015EC38 /* WebRTC.xcframework in Frameworks */,
+				B063369E25C3EDB00015EC38 /* JitsiMeetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +415,9 @@
 				B0155D5F259C4F430094A7D2 /* reg_cal_hour_ViewController.swift */,
 				B02AA438259DEB1100A94990 /* Doc_profiledetails_ViewController.swift */,
 				B0431DA325A330C2000424E9 /* Doc_update_details_ViewController.swift */,
+				B019893E25B842C700A650AD /* Doc_email_otp_ViewController.swift */,
+				B084F10C25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift */,
+				B0F56E3525C820EB00B1634F /* Doc_detailspage_ViewController.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -411,6 +452,7 @@
 				B0E98F7A25A86C9B005C0EF9 /* pet_sp_service_details_ViewController.swift */,
 				B07CB1B725AC0FBB00E899B0 /* pet_sp_CreateApp_ViewController.swift */,
 				B07CB1B925AC1DFF00E899B0 /* pet_sp_calender_ViewController.swift */,
+				B01D1C9325C17C2100EE9D57 /* pet_sp_filer_ViewController.swift */,
 			);
 			path = SP;
 			sourceTree = "<group>";
@@ -472,6 +514,12 @@
 				B02D3A802593019A0010A4B6 /* paymentpageViewController.swift */,
 				B0891F6B259B255E00764396 /* searchcalenderdetailsViewController.swift */,
 				B02AA436259D97EC00A94990 /* pet_new_dashboard_ViewController.swift */,
+				B019893C25B8426900A650AD /* pet_email_otp_ViewController.swift */,
+				B052D4F625BAD0050013000E /* locationdetailsTableViewCell.swift */,
+				B0A4C2A725BE9E51008103F3 /* pet_callroom_ViewController.swift */,
+				B0658EC825C2A84B0074C2D1 /* pdfViewController.swift */,
+				B01306D025C7F74500B9778B /* Pet_confrence_ViewController.swift */,
+				B0F56E3725C82B0E00B1634F /* Pet_app_details_ViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -504,6 +552,8 @@
 				B0D887F72595B11600191833 /* Vendor  */,
 				B02D3A86259311420010A4B6 /* Razorpay.xcframework */,
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
+				B0658EBD25C27CA60074C2D1 /* JitsiMeetSDK.xcframework */,
+				B0658EBC25C27CA10074C2D1 /* WebRTC.xcframework */,
 				B01DA74425655E8500B1FA0B /* Doctor */,
 				B08F73132563E1B700AEB8CC /* Petloversdashboard */,
 				B01FD8B2258C9F8900AD2719 /* ServiceProvider */,
@@ -535,6 +585,8 @@
 				B020D0A925878641008F5C7B /* SOSViewController.swift */,
 				B02AA43A259E03CE00A94990 /* profile_edit_ViewController.swift */,
 				B013E9E725B718FE00A8E41E /* viewprescriptionViewController.swift */,
+				B019893A25B828FC00A650AD /* emailsignupViewController.swift */,
+				B0BB3B4225C96D72003B9B83 /* ProfileimageuploadViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -591,6 +643,8 @@
 		BFC1A352B16A02A35923CB4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B0251C8225C3D85100C14BD2 /* Alamofire.framework */,
+				B0658EC425C282270074C2D1 /* SystemConfiguration.framework */,
 				EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */,
 				F548575F5888AC40E9B3E03E /* Pods_Petfolio_PetfolioUITests.framework */,
 				F9E929A655F93E5BBDE34706 /* Pods_PetfolioTests.framework */,
@@ -937,6 +991,7 @@
 				B02D74632599A5EF0033D2D0 /* order_complete_TableViewCell.swift in Sources */,
 				B094D245255BEE25008400D6 /* SliderViewController.swift in Sources */,
 				B0571C9225624AF000B42719 /* Rechability.swift in Sources */,
+				B019893F25B842C700A650AD /* Doc_email_otp_ViewController.swift in Sources */,
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */,
 				B024F52625A586AF004F0CC4 /* pet_dashfooter_servicelist_ViewController.swift in Sources */,
@@ -954,7 +1009,10 @@
 				B075132F25A44FDA00C850DF /* service_select_TableViewCell.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B0891F6C259B255E00764396 /* searchcalenderdetailsViewController.swift in Sources */,
+				B0BB3B4325C96D72003B9B83 /* ProfileimageuploadViewController.swift in Sources */,
 				B094D24B255C052E008400D6 /* DemoCollectionViewCell.swift in Sources */,
+				B01D1C9425C17C2100EE9D57 /* pet_sp_filer_ViewController.swift in Sources */,
+				B019893D25B8426900A650AD /* pet_email_otp_ViewController.swift in Sources */,
 				B0155D5E259C4C600094A7D2 /* Reg_calender_ViewController.swift in Sources */,
 				B020D0A825873CF9008F5C7B /* searchlistTableViewCell.swift in Sources */,
 				B0FF1AE8257F9C14006227E4 /* petprofileViewController.swift in Sources */,
@@ -963,25 +1021,33 @@
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,
 				B020D0A625872C25008F5C7B /* Pet_searchlist_DRViewController.swift in Sources */,
+				B052D4F725BAD0050013000E /* locationdetailsTableViewCell.swift in Sources */,
 				B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */,
+				B0A4C2A825BE9E51008103F3 /* pet_callroom_ViewController.swift in Sources */,
+				B019893B25B828FC00A650AD /* emailsignupViewController.swift in Sources */,
 				B0155D60259C4F430094A7D2 /* reg_cal_hour_ViewController.swift in Sources */,
 				B0228C91257A146000E16FD7 /* Doc_pres_textfieldactionTableViewCell.swift in Sources */,
 				B08F73102563BB9000AEB8CC /* loginotpViewController.swift in Sources */,
 				B07CB1BA25AC1DFF00E899B0 /* pet_sp_calender_ViewController.swift in Sources */,
+				B01306D125C7F74500B9778B /* Pet_confrence_ViewController.swift in Sources */,
 				B048649A256BE1240038A71D /* mycalenderViewController.swift in Sources */,
 				B02F7AD825A73B9C009EC53D /* Sp_reg_calender_ViewController.swift in Sources */,
 				B0486492256BCB7A0038A71D /* docsidemenuViewController.swift in Sources */,
+				B084F10D25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift in Sources */,
 				B02D3A8B259342F00010A4B6 /* sp_side_menuViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
+				B0F56E3825C82B0E00B1634F /* Pet_app_details_ViewController.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
 				B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */,
 				B02D74652599B0DE0033D2D0 /* vendor_myorder_ViewController.swift in Sources */,
 				B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */,
+				B0658EC925C2A84B0074C2D1 /* pdfViewController.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
 				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */,
+				B0F56E3625C820EB00B1634F /* Doc_detailspage_ViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
 				B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
@@ -1164,24 +1230,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF99EFCF38FC665145A58CDF /* Pods-Petfolio.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Petfolio",
 				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = Com.PetFolio.Infinitus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";
 			};
 			name = Debug;
 		};
@@ -1189,16 +1258,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PLV25N8T7A;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Petfolio",
 				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1207,6 +1277,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";
 			};
 			name = Release;
 		};

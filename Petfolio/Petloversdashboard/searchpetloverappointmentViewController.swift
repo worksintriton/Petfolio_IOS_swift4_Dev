@@ -28,7 +28,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var textfield_alergies: UITextField!
     @IBOutlet weak var view_pickupload: UIView!
     
-    
     @IBOutlet weak var image_petcurrent: UIImageView!
     @IBOutlet weak var view_discription: UIView!
     @IBOutlet weak var view_choose: UIView!
@@ -45,6 +44,13 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var View_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_btn: UIView!
+    
+    
+    @IBOutlet weak var btn_online: UIButton!
+    @IBOutlet weak var btn_visit: UIButton!
+    @IBOutlet weak var image_visit: UIImageView!
+    @IBOutlet weak var image_online: UIImageView!
+    
     
     var Pet_breed = [""]
     var pet_type = [""]
@@ -79,6 +85,19 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
         self.tblview_petdetail.isHidden = true
+        
+        let apgreen = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+               self.tblview_petbreed.layer.borderColor = apgreen.cgColor
+               self.tblview_pettype.layer.borderColor = apgreen.cgColor
+               self.tblview_petdetail.layer.borderColor = apgreen.cgColor
+               self.tblview_petbreed.layer.borderWidth = 0.2
+               self.tblview_pettype.layer.borderWidth = 0.2
+               self.tblview_petdetail.layer.borderWidth = 0.2
+        
+        self.tblview_petbreed.layer.cornerRadius = 9.0
+        self.tblview_pettype.layer.cornerRadius = 9.0
+        self.tblview_petdetail.layer.cornerRadius = 9.0
+        
         self.textfield_alergies.delegate = self
         self.callpetdetailget()
         self.radio_emergency.image = UIImage(named: "Radio")
@@ -94,6 +113,54 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textview_descrip.textColor == UIColor.lightGray
         self.petimage = Servicefile.shared.sampleimag
         self.setuploadimg()
+        print("Communication type",Servicefile.shared.pet_apoint_communication_type)
+        self.checkappointmentcommtype()
+    }
+    
+    func checkappointmentcommtype() {
+        if Servicefile.shared.pet_apoint_communication_type == "Online Or Visit" {
+            self.image_visit.image = UIImage(named: "Radio")
+            self.image_online.image = UIImage(named: "selectedRadio")
+            self.btn_visit.isHidden = false
+            self.btn_online.isHidden = false
+            Servicefile.shared.pet_apoint_communication_type = "Online"
+        }else if Servicefile.shared.pet_apoint_communication_type == "Online" {
+            self.image_visit.image = UIImage(named: "Radio")
+            self.image_online.image = UIImage(named: "selectedRadio")
+            self.btn_visit.isHidden = true
+            self.btn_online.isHidden = true
+        }else if Servicefile.shared.pet_apoint_communication_type == "Visit" {
+           self.image_visit.image = UIImage(named: "selectedRadio")
+           self.image_online.image = UIImage(named: "Radio")
+            self.btn_visit.isHidden = true
+            self.btn_online.isHidden = true
+        }
+    }
+    
+    func checkcommtype(){
+        if Servicefile.shared.pet_apoint_communication_type == "Online Or Visit" {
+            self.image_visit.image = UIImage(named: "Radio")
+            self.image_online.image = UIImage(named: "selectedRadio")
+            self.btn_visit.isHidden = false
+            self.btn_online.isHidden = false
+            Servicefile.shared.pet_apoint_communication_type = "Online"
+        }else if Servicefile.shared.pet_apoint_communication_type == "Online" {
+            self.image_visit.image = UIImage(named: "Radio")
+            self.image_online.image = UIImage(named: "selectedRadio")
+        }else if Servicefile.shared.pet_apoint_communication_type == "Visit" {
+            self.image_visit.image = UIImage(named: "selectedRadio")
+            self.image_online.image = UIImage(named: "Radio")
+        }
+    }
+    
+    @IBAction func action_visit(_ sender: Any) {
+        Servicefile.shared.pet_apoint_communication_type = "Visit"
+        self.checkcommtype()
+    }
+    
+    @IBAction func action_online(_ sender: Any) {
+        Servicefile.shared.pet_apoint_communication_type = "Online"
+        self.checkcommtype()
     }
     
    @IBAction func action_sos(_ sender: Any) {
@@ -173,15 +240,18 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }else{
                   cell.textLabel?.text = "Select pet name"
             }
+            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             
                    return cell
         } else if self.tblview_pettype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
             cell.textLabel?.text = self.pet_type[indexPath.row]
+             cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
             cell.textLabel?.text = self.Pet_breed[indexPath.row]
+             cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             return cell
         }
         
@@ -383,7 +453,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             
             Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.sear_Docapp_id
             Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
-            Servicefile.shared.pet_apoint_communication_type = "Online"
             Servicefile.shared.pet_apoint_video_id = ""
             Servicefile.shared.pet_apoint_user_id = ""
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
@@ -391,7 +460,9 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             Servicefile.shared.pet_apoint_doc_rate = "0"
             Servicefile.shared.pet_apoint_user_feedback = ""
             Servicefile.shared.pet_apoint_user_rate = "0"
-            Servicefile.shared.pet_apoint_display_date = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
+            let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
+                       let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
+                       Servicefile.shared.pet_apoint_display_date = stringformat
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
             Servicefile.shared.pet_apoint_payment_method = ""

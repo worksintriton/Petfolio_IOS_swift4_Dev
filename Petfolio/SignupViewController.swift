@@ -33,6 +33,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.checkemailvalid = "signup"
         self.viewemail.layer.cornerRadius = 15.0
         self.ViewFname.layer.cornerRadius = 5.0
         self.ViewLname.layer.cornerRadius = 5.0
@@ -184,7 +185,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     if Servicefile.shared.email_status == true {
                         self.callsignup()
                     }else{
-                        self.alert(Message: "Email ID is not verified")
+                         self.callsignup()
                     }
                 }else{
                     self.alert(Message: "Email ID is invalid")
@@ -215,7 +216,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
              "user_type" : Servicefile.shared.user_type_value,
              "date_of_reg": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
              "mobile_type" : "IOS",
-             "user_email_verification":Servicefile.shared.email_status], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "user_email_verification": Servicefile.shared.email_status], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -232,6 +233,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                         Servicefile.shared.otp = String(user_details["otp"] as! Int)
                         Servicefile.shared.userid  = user_details["_id"] as! String
+                        Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()

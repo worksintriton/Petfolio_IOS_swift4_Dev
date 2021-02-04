@@ -498,7 +498,6 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             Servicefile.shared.pet_apoint_payment_method = ""
             Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
             Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
-            Servicefile.shared.pet_apoint_amount = ""
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
                 self.showPaymentForm()
@@ -617,7 +616,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
@@ -744,31 +743,30 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     }
     
     func showPaymentForm(){
-        if Servicefile.shared.pet_apoint_amount == "" {
-            Servicefile.shared.pet_apoint_amount = "100"
-        }
-        let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
-        print("value changed",data)
-        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-        let options: [String:Any] = [
-            "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
-            "currency": "INR",//We support more that 92 international currencies.
-            "description": "some some",
-            "image": "http://52.25.163.13:3000/api/uploads/template.png",
-            "name": "sriram",
-            "prefill": [
-                "contact": Servicefile.shared.user_phone,
-                "email": Servicefile.shared.user_email
-            ],
-            "theme": [
-                "color": "#F37254"
-            ]
-        ]
-        if let rzp = self.razorpay {
-            // rzp.open(options)
-            rzp.open(options,displayController:self)
-        } else {
-            print("Unable to initialize")
+        if Servicefile.shared.pet_apoint_amount != "" {
+            let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
+                   print("value changed",data)
+                   self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+                   let options: [String:Any] = [
+                       "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
+                       "currency": "INR",//We support more that 92 international currencies.
+                       "description": "some some",
+                       "image": "http://52.25.163.13:3000/api/uploads/template.png",
+                       "name": "sriram",
+                       "prefill": [
+                           "contact": Servicefile.shared.user_phone,
+                           "email": Servicefile.shared.user_email
+                       ],
+                       "theme": [
+                           "color": "#F37254"
+                       ]
+                   ]
+                   if let rzp = self.razorpay {
+                       // rzp.open(options)
+                       rzp.open(options,displayController:self)
+                   } else {
+                       print("Unable to initialize")
+                   }
         }
     }
     

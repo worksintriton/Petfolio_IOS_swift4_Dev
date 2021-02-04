@@ -12,7 +12,7 @@ import Toucan
 
 
 class ProfileimageuploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     let imagepicker = UIImagePickerController()
     var imageval = ""
     
@@ -26,27 +26,36 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
         self.image_profile.dropShadow()
     }
     
-    func setimage(strimg : String){
+    func setimage(strimg : String) {
         if strimg == "" {
             self.image_profile.image = UIImage(named: "sample")
         }else{
             self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
-                              if (error != nil) {
-                                  self.image_profile.image = UIImage(named: "sample")
-                              } else {
-                                  self.image_profile.image = image
-                              }
-                          }
+                if (error != nil) {
+                    self.image_profile.image = UIImage(named: "sample")
+                } else {
+                    self.image_profile.image = image
+                }
+            }
         }   
-       }
-   
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
-         if let firstVC = presentingViewController as? petprofileViewController {
-                   DispatchQueue.main.async {
+        if Servicefile.shared.usertype == "1"{
+            if let firstVC = presentingViewController as? petprofileViewController {
+                DispatchQueue.main.async {
                     firstVC.viewWillAppear(true)
-                   }
-               }
+                }
+            }
+        }else{
+            if let firstVC = presentingViewController as? Doc_profiledetails_ViewController {
+                DispatchQueue.main.async {
+                    firstVC.viewWillAppear(true)
+                }
+            }
+        }
+        
     }
     
     
@@ -64,113 +73,111 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
-              alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-                  self.imagepicker.allowsEditing = false
-                 self.imagepicker.sourceType = .camera
-                  self.present(self.imagepicker, animated: true, completion: nil)
-              }))
-              alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
-                 self.imagepicker.allowsEditing = false
-                 self.imagepicker.sourceType = .photoLibrary
-                  self.present(self.imagepicker, animated: true, completion: nil)
-              }))
-              alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
-                print("ok")
-              }))
-              self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .camera
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .photoLibrary
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            print("ok")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                    let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-                 self.upload(imagedata: reimage!)
+        if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
+            self.upload(imagedata: reimage!)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func upload(imagedata: UIImage) {
+        print("Upload started")
+        print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
+        let headers: HTTPHeaders = [
+            "Content-type": "multipart/form-data"
+        ]
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                if let imageData = imagedata.jpegData(compressionQuality: 0.5) {
+                    multipartFormData.append(imageData, withName: "sampleFile", fileName: Servicefile.shared.userid +  Servicefile.shared.uploadddmmhhmmastringformat(date: Date()), mimeType: "image/png")
                 }
-                  dismiss(animated: true, completion: nil)
-            }
-         
-         func upload(imagedata: UIImage) {
-              print("Upload started")
-                 print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
-             let headers: HTTPHeaders = [
-                 "Content-type": "multipart/form-data"
-             ]
-             AF.upload(
-                 multipartFormData: { multipartFormData in
-                    if let imageData = imagedata.jpegData(compressionQuality: 0.5) {
-                     multipartFormData.append(imageData, withName: "sampleFile", fileName: Servicefile.shared.userid +  Servicefile.shared.uploadddmmhhmmastringformat(date: Date()), mimeType: "image/png")
-                     }
-             },
-                 to: Servicefile.imageupload, method: .post , headers: headers)
-                 .responseJSON { resp in
-                     
-                     switch (resp.result) {
-                     case .success:
-                         let res = resp.value as! NSDictionary
-                         print("success data",res)
-                         let Code  = res["Code"] as! Int
-                         if Code == 200 {
-                             let Data = res["Data"] as! String
-                            print("Uploaded file url:",Data)
-                            self.imageval = Data
-                            self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: self.imageval)) { (image, error, cache, urls) in
+        },
+            to: Servicefile.imageupload, method: .post , headers: headers)
+            .responseJSON { resp in
+                
+                switch (resp.result) {
+                case .success:
+                    let res = resp.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! String
+                        print("Uploaded file url:",Data)
+                        self.imageval = Data
+                        self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: self.imageval)) { (image, error, cache, urls) in
                             if (error != nil) {
                                 self.image_profile.image = UIImage(named: "sample")
                             } else {
                                 self.image_profile.image = image
                             }
-                            }
-                             self.stopAnimatingActivityIndicator()
-                         }else{
-                             self.stopAnimatingActivityIndicator()
-                             print("status code service denied")
-                         }
-                         break
-                     case .failure(let Error):
-                         self.stopAnimatingActivityIndicator()
-                         print("Can't Connect to Server / TimeOut",Error)
-                         break
-                     }
-                 }
-             }
-    
-         func callupdateimage(){
-                self.startAnimatingActivityIndicator()
-                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updateprofileimage, method: .post, parameters:
-                    ["user_id" : Servicefile.shared.userid,
-                    "profile_img" : self.imageval], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                        switch (response.result) {
-                        case .success:
-                            let res = response.value as! NSDictionary
-                            print("Email success data",res)
-                            let Code  = res["Code"] as! Int
-                            if Code == 200 {
-                                UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
-                                Servicefile.shared.userimage = self.imageval
-                                self.dismiss(animated: true, completion: nil)
-                                self.stopAnimatingActivityIndicator()
-                            }else{
-                                self.stopAnimatingActivityIndicator()
-                                print("status code service denied")
-                            }
-                            break
-                        case .failure(let Error):
-                            self.stopAnimatingActivityIndicator()
-                            print("Can't Connect to Server / TimeOut",Error)
-                            break
                         }
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
                     }
-                } else {
+                    break
+                case .failure(let Error):
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+        }
+    }
+    
+    func callupdateimage(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updateprofileimage, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid,
+             "profile_img" : self.imageval], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("Email success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
+                        Servicefile.shared.userimage = self.imageval
+                        self.dismiss(animated: true, completion: nil)
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
                 }
             }
+        } else {
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-             }))
+        }))
         self.present(alert, animated: true, completion: nil)
     }
-
-    
 }

@@ -127,6 +127,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @objc func action_book(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
+        Servicefile.shared.pet_apoint_amount = Servicefile.shared.moredocd[tag].amount
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
         
@@ -135,6 +136,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[indexPath.row].user_id
+        Servicefile.shared.pet_apoint_amount = Servicefile.shared.moredocd[indexPath.row].amount
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchtoclinicdetailViewController") as! SearchtoclinicdetailViewController
         self.present(vc, animated: true, completion: nil)
@@ -180,6 +182,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                             for itm in 0..<Data.count{
                                                                 let dat = Data[itm] as! NSDictionary
                                                                 let _id = dat["_id"] as! String
+                                                                let amount = String(dat["amount"] as! Int)
                                                                 let clinic_loc = dat["clinic_loc"] as! String
                                                                 let clinic_name = dat["clinic_name"] as! String
                                                                 let communication_type = dat["communication_type"] as! String
@@ -197,7 +200,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                 }
                                                                 let star_count = String(Double(truncating: dat["star_count"] as! NSNumber))
                                                                 let user_id = dat["user_id"] as! String
-                                                                Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd))
+                                                                Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount))
                                                             }
                                                             self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
                                                             if  Servicefile.shared.moredocd.count ==  0{
@@ -226,7 +229,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
           }
     
      func alert(Message: String){
-          let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+          let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                }))
           self.present(alert, animated: true, completion: nil)

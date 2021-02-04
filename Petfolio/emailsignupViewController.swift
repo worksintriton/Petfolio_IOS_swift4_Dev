@@ -81,11 +81,22 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let firstVC = presentingViewController as? SignupViewController {
-            DispatchQueue.main.async {
-                firstVC.viewWillAppear(true)
+       // Servicefile.shared.checkemailvalid = "signup" // pet // doctor // sp / vendor
+        if Servicefile.shared.checkemailvalid == "signup" {
+            if let firstVC = presentingViewController as? SignupViewController {
+                DispatchQueue.main.async {
+                    firstVC.viewWillAppear(true)
+                }
+            }
+        }else {
+            if let firstVC = presentingViewController as? profile_edit_ViewController {
+                DispatchQueue.main.async {
+                    firstVC.viewWillAppear(true)
+                }
             }
         }
+        
+        
     }
     
     @IBAction func action_Submit(_ sender: Any) {
@@ -170,7 +181,7 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)

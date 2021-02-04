@@ -236,7 +236,7 @@ class Servicefile {
     var gallerydicarray = [Any]()
     var docMycalHourdicarray = [Any]()
     
-    
+    var checkemailvalid = "signup" // pet // doctor // sp / vendor
      var pet_selected_app_list = ""
     // Doctor
     var Doc_selected_app_list = ""
@@ -339,18 +339,15 @@ class Servicefile {
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)
         }
-        
         if ((cString.count) != 6) {
             return UIColor.gray
         }
         
         var rgbValue:UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
-        
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
@@ -881,6 +878,7 @@ struct moredoc{
     var star_count : String
     var user_id : String
     var specialization : [spec]
+    var amount : String
     init(I_id : String
         , I_clinic_loc : String
         , I_clinic_name : String
@@ -892,7 +890,7 @@ struct moredoc{
         , I_review_count : String
         , I_star_count : String
         , I_user_id : String
-        , I_specialization : [spec]) {
+        , I_specialization : [spec], in_amount: String) {
         self._id = I_id
         self.clinic_loc = I_clinic_loc
         self.clinic_name = I_clinic_name
@@ -905,6 +903,7 @@ struct moredoc{
         self.star_count = I_star_count
         self.user_id = I_user_id
         self.specialization = I_specialization
+        self.amount = in_amount
     }
 }
 

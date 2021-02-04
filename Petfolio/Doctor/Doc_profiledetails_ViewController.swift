@@ -19,6 +19,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var label_pethandle: UILabel!
     @IBOutlet weak var label_clinicaddress: UILabel!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var imag_user: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,18 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         self.label_username.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.label_phno.text = Servicefile.shared.user_phone
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: "sample")
+        }else{
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: "sample")
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+         self.imag_user.layer.cornerRadius = 10.0
         self.calldetails()
     }
     
@@ -69,7 +82,8 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     
     
     @IBAction func action_image_upload(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileimageuploadViewController") as! ProfileimageuploadViewController
+               self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_move_edit_busi_info(_ sender: Any) {
@@ -84,7 +98,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     }
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
              }))
         self.present(alert, animated: true, completion: nil)

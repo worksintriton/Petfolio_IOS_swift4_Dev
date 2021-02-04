@@ -16,14 +16,19 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var coll_imgview: UICollectionView!
     @IBOutlet weak var label_city: UILabel!
     
+    @IBOutlet weak var label_doc_edu: UILabel!
     @IBOutlet weak var label_distance: UILabel!
     @IBOutlet weak var label_Noofcomments: UILabel!
     @IBOutlet weak var Label_ratingval: UILabel!
     @IBOutlet weak var label_specdetails: UILabel!
     @IBOutlet weak var view_book: UIView!
     @IBOutlet weak var label_descrption: UILabel!
+    @IBOutlet weak var label_yr_exp: UILabel!
+    @IBOutlet weak var label_const_amt: UILabel!
+    
     
     var clinicpic = [""]
+    var edu = ""
     var _id = ""
     var clinic_name = ""
     var descri = ""
@@ -37,6 +42,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.pet_type.removeAll()
          self.petid.removeAll()
         self.Pet_breed.removeAll()
@@ -118,7 +124,11 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                             self.clinic_name = Data["clinic_name"] as! String
                                                             Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as! String
                                                             let clidet = Data["clinic_pic"] as! NSArray
+                                                            
                                                             let clicloc =  Data["clinic_loc"] as! String
+                                                            let amount =  String(Data["amount"] as! Int)
+                                                            Servicefile.shared.pet_apoint_amount = amount
+                                                            self.label_const_amt.text = " ₹ " + Servicefile.shared.pet_apoint_amount
                                                              self.label_city.text = clicloc + ". "
                                                             self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                                                             for itm in 0..<clidet.count{
@@ -126,6 +136,18 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                                 let pic = dat["clinic_pic"] as! String
                                                                 self.clinicpic.append(pic)
                                                             }
+                                                            let educ_details = Data["education_details"] as! NSArray
+                                                            for itm in 0..<educ_details.count{
+                                                                let dat = educ_details[itm] as! NSDictionary
+                                                                let ed = dat["education"] as! String
+                                                                if self.edu == "" {
+                                                                    self.edu = ed  + self.edu
+                                                                }else{
+                                                                     self.edu =  self.edu + ", " +  ed
+                                                                }
+                                                                
+                                                            }
+                                                            self.label_doc_edu.text =  self.edu
                                                             var specarray = ""
                                                             let spec =  Data["specialization"] as! NSArray
                                                             
@@ -157,8 +179,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                             }else{
                                                                 self.label_Noofcomments.text = rcount
                                                             }
-                                                            self.label_clinicdetails.text = self.clinic_name
-                                                           
+                                                            self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
+                                                            self.label_clinicname.text = self.clinic_name
                                                             self.label_specdetails.text = specarray
                                                             self.label_descrption.text = self.descri
                                                              self.stopAnimatingActivityIndicator()
@@ -181,7 +203,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
 
 
               func alert(Message: String){
-                  let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+                  let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
                   alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                        }))
                   self.present(alert, animated: true, completion: nil)

@@ -18,7 +18,7 @@ class DemoViewController: UIViewController,UICollectionViewDataSource, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Servicefile.shared.checkemailvalid = "login"
         self.Democollec.delegate = self
         self.Democollec.dataSource = self
         self.ViewGetstart.layer.cornerRadius = 10.0

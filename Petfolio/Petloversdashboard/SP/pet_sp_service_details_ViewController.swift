@@ -192,7 +192,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                     }
                 }
          func alert(Message: String){
-              let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+              let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                    }))
               self.present(alert, animated: true, completion: nil)

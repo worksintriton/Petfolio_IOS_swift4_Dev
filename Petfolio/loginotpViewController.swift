@@ -92,7 +92,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                     UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
                     UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
                     UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
-                    UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
+                    UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                     Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
                     Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
@@ -100,6 +100,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                     Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                     Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                     Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                    Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
                     self.callFCM()
                    }else{
                      print("verification Not success")
@@ -217,7 +218,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
        }
 
     func alert(Message: String){
-           let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 }))
            self.present(alert, animated: true, completion: nil)

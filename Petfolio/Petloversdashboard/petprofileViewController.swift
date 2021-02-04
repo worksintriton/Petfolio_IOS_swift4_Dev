@@ -240,6 +240,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                            Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                                                           Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
                                                           Servicefile.shared.otp = String(user_details["otp"] as! Int)
+                                                          Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
                                                           let userid = user_details["_id"] as! String
                                                           UserDefaults.standard.set(userid, forKey: "userid")
                                                            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -348,7 +349,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
           }
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
              }))
         self.present(alert, animated: true, completion: nil)

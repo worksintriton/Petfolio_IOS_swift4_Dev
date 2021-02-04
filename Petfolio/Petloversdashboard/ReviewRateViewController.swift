@@ -61,7 +61,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     }
     
    func alert(Message: String){
-                let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+                let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                      }))
                 self.present(alert, animated: true, completion: nil)
@@ -80,7 +80,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
                                                           print("success data",res)
                                                           let Code  = res["Code"] as! Int
                                                           if Code == 200 {
-                                                          let alert = UIAlertController(title: "Alert", message: "Rating and Review updated successfully", preferredStyle: .alert)
+                                                          let alert = UIAlertController(title: "", message: "Rating and Review updated successfully", preferredStyle: .alert)
                                                                          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                                                              self.dismiss(animated: true, completion: nil)
                                                                               }))

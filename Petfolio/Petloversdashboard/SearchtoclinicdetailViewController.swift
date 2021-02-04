@@ -21,8 +21,12 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var view_book: UIView!
     @IBOutlet weak var label_descrption: UILabel!
     @IBOutlet weak var label_distance: UILabel!
+    @IBOutlet weak var label_cont_amt: UILabel!
+    @IBOutlet weak var label_edu_year: UILabel!
+    @IBOutlet weak var label_edu: UILabel!
     
     var clinicpic = [""]
+    var edu = ""
     var _id = ""
     var clinic_name = ""
     var descri = ""
@@ -115,7 +119,9 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as! String
                         let clidet = Data["clinic_pic"] as! NSArray
                         let clicloc =  Data["clinic_loc"] as! String
-                        
+                        let amount =  String(Data["amount"] as! Int)
+                        Servicefile.shared.pet_apoint_amount = amount
+                        self.label_cont_amt.text = " ₹ " + Servicefile.shared.pet_apoint_amount
                         self.label_city.text = clicloc + ". "
                         self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                         for itm in 0..<clidet.count{
@@ -123,6 +129,18 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                             let pic = dat["clinic_pic"] as! String
                             self.clinicpic.append(pic)
                         }
+                        let educ_details = Data["education_details"] as! NSArray
+                        for itm in 0..<educ_details.count{
+                            let dat = educ_details[itm] as! NSDictionary
+                            let ed = dat["education"] as! String
+                            if self.edu == "" {
+                                self.edu = ed  + self.edu
+                            }else{
+                                self.edu =  self.edu + ", " +  ed
+                            }
+                            
+                        }
+                        self.label_edu.text = self.edu
                         var specarray = ""
                         let spec =  Data["specialization"] as! NSArray
                         
@@ -155,7 +173,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                             self.label_Noofcomments.text = rcount
                         }
                         
-                        self.label_clinicdetails.text = self.clinic_name
+                        self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
+                        self.label_clinicname.text = self.clinic_name
                         
                         self.label_specdetails.text = specarray
                         self.label_descrption.text = self.descri
@@ -179,7 +198,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     
     func alert(Message: String){
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)

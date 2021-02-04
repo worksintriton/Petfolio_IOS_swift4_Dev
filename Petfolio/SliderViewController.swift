@@ -21,6 +21,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
      var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
@@ -66,6 +67,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                 Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                
                  print("user type ",Servicefile.shared.usertype,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.usertype == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController

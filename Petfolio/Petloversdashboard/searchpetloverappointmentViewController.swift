@@ -468,7 +468,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             Servicefile.shared.pet_apoint_payment_method = ""
             Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
             Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
-            Servicefile.shared.pet_apoint_amount = ""
             
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
@@ -577,7 +576,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     
     func alert(Message: String){
-           let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 }))
            self.present(alert, animated: true, completion: nil)
@@ -669,9 +668,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     func showPaymentForm(){
-           if Servicefile.shared.pet_apoint_amount == "" {
-               Servicefile.shared.pet_apoint_amount = "100"
-           }
+           if Servicefile.shared.pet_apoint_amount != "" {
            let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
            print("value changed",data)
            self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
@@ -718,6 +715,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
            //               } else {
            //                   print("Unable to initialize")
            //               }
+        }
            }
            
            func onPaymentError(_ code: Int32, description str: String) {

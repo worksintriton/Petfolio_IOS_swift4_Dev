@@ -19,6 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.checkemailvalid = "login"
         Servicefile.shared.email_status = false
         Servicefile.shared.email_status_label = "verify email"
         self.View_log.layer.cornerRadius = 10.0
@@ -68,7 +69,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     func alert(Message: String){
-           let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 }))
            self.present(alert, animated: true, completion: nil)
@@ -91,10 +92,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                             Servicefile.shared.user_email = user_details["user_email"] as! String
                                                             Servicefile.shared.user_phone = user_details["user_phone"] as! String
                                                             Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                                                           Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                                                           Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                           Servicefile.shared.userid = user_details["_id"] as! String
+                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
+                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
+                                                            Servicefile.shared.userid = user_details["_id"] as! String
                                                             Servicefile.shared.userimage = user_details["profile_img"] as! String
+                                                            Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
                                                             
                                                            print("userid",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController

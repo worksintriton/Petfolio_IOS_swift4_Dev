@@ -134,7 +134,7 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     func alert(Message: String){
-           let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: .alert)
+           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
            }))
            self.present(alert, animated: true, completion: nil)
@@ -192,7 +192,7 @@ class Pet_app_details_ViewController: UIViewController {
                         let userimage = user_id["profile_img"] as? String
                         self.label_holder_name.text = firstname! + " " + lastname!
                         //self.label_holder_servie_name.isHidden = true
-                        let amt = data["amount"] as! String
+                        let amt = String(data["amount"] as! Int)
                         let doc_business_info = data["doc_business_info"] as! NSArray
                         let doc_busi = doc_business_info[0] as! NSDictionary
                         let clinic_loc  = doc_busi["clinic_loc"] as! String

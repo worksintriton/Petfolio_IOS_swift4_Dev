@@ -495,7 +495,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             Servicefile.shared.pet_apoint_display_date = stringformat
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
-            Servicefile.shared.pet_apoint_payment_method = ""
+            Servicefile.shared.pet_apoint_payment_method = "Online"
             Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
             Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
             if self.textfield_selectpettype.text != ""{

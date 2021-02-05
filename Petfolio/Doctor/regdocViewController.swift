@@ -1090,8 +1090,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                                              let Code  = res["Code"] as! Int
                                                              if Code == 200 {
                                                                let Data = res["Data"] as! NSDictionary
-                                                                
-                                                                self.callupdatestatus()
+                                                                self.view_popup.isHidden = false
+                                                                self.view_shadow.isHidden = false
+                                                                //self.callupdatestatus()
                                                                 self.stopAnimatingActivityIndicator()
                                                              }else{
                                                                self.stopAnimatingActivityIndicator()
@@ -1121,8 +1122,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                                   print("success data",res)
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
-                                                    self.view_popup.isHidden = false
-                                                    self.view_shadow.isHidden = false
+                                                    
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()

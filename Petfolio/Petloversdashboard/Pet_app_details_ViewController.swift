@@ -39,6 +39,8 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_complete_cancel: UIView!
     @IBOutlet weak var label_Holder_service_name: UILabel!
     @IBOutlet weak var label_Holder_cost: UILabel!
+    @IBOutlet weak var label_vacindate: UILabel!
+    @IBOutlet weak var view_vacc_date: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,11 +167,13 @@ class Pet_app_details_ViewController: UIViewController {
                         self.label_ordercost.text = data["amount"] as? String
                         
                         let pet_id = data["pet_id"] as! NSDictionary
-                        
+                        let last_vaccination_date = pet_id["last_vaccination_date"] as! String
                         if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
                             self.label_vaccinated.text = "Yes"
+                            self.label_vacindate.text = last_vaccination_date
                         }else{
                             self.label_vaccinated.text = "No"
+                            self.view_vacc_date.isHidden = true
                         }
                         self.label_age.text = String(pet_id["pet_age"] as! Int)
                         self.label_weight.text = String(pet_id["pet_weight"] as! Int)
@@ -192,7 +196,7 @@ class Pet_app_details_ViewController: UIViewController {
                         let userimage = user_id["profile_img"] as? String
                         self.label_holder_name.text = firstname! + " " + lastname!
                         //self.label_holder_servie_name.isHidden = true
-                        let amt = String(data["amount"] as! Int)
+                        let amt = data["amount"] as! String
                         let doc_business_info = data["doc_business_info"] as! NSArray
                         let doc_busi = doc_business_info[0] as! NSDictionary
                         let clinic_loc  = doc_busi["clinic_loc"] as! String

@@ -143,13 +143,13 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+//        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+//        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
@@ -310,10 +310,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             self.present(vc, animated: true, completion: nil)
         }else if self.colleView_Service == collectionView {
             
-            Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
-            Servicefile.shared.service_index = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
-            self.present(vc, animated: true, completion: nil)
+//            Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
+//            Servicefile.shared.service_index = indexPath.row
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
+//            self.present(vc, animated: true, completion: nil)
         }else {
             print("data in")
         }

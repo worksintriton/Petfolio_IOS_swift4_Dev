@@ -24,6 +24,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_cont_amt: UILabel!
     @IBOutlet weak var label_edu_year: UILabel!
     @IBOutlet weak var label_edu: UILabel!
+    @IBOutlet weak var view_footer: UIView!
     
     var clinicpic = [""]
     var edu = ""
@@ -48,11 +49,24 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
         self.view_book.layer.cornerRadius = 15.0
+        self.view_footer.layer.cornerRadius = 15.0
+        self.view_footer.dropShadow()
+        self.view_book.dropShadow()
         // Do any additional setup after loading the view.
         print("selected doctor details",Servicefile.shared.sear_Docapp_id)
         // Do any additional setup after loading the view.
         self.calldocdetails()
     }
+    
+    @IBAction func action_home(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_care(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+           self.present(vc, animated: true, completion: nil)
+       }
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController

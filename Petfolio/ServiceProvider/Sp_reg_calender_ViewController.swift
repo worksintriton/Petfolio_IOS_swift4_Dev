@@ -53,7 +53,6 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
        }else {
         self.alert(Message: "Please select the week days")
         }
-       
     }
     
     @IBAction func sction_back(_ sender: Any) {

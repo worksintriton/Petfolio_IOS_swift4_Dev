@@ -38,6 +38,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.view_search.layer.cornerRadius = 10.0
         self.view_footer.layer.cornerRadius = 15.0
         self.view_search.dropShadow()
+        self.view_footer.dropShadow()
     }
     
     
@@ -47,8 +48,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
        }
     
     @IBAction func action_petservice(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+//        self.present(vc, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

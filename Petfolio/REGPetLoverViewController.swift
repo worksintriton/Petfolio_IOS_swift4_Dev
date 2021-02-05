@@ -454,7 +454,8 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         Servicefile.shared.petid = Data["_id"] as! String
-                        self.callupdatestatus()
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petimageUploadViewController") as! petimageUploadViewController
+                        self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

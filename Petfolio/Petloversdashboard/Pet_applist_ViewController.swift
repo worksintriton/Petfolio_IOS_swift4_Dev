@@ -73,8 +73,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+//        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
@@ -177,10 +177,11 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name
+            
         }else{
             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].service_provider_name
         }
-        
+        cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_type
         cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost

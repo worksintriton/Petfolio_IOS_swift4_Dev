@@ -43,6 +43,8 @@ class Doc_detailspage_ViewController: UIViewController {
     
     @IBOutlet weak var label_holder_servie_name: UILabel!
     @IBOutlet weak var label_holder_cost: UILabel!
+    @IBOutlet weak var label_vacindate: UILabel!
+    @IBOutlet weak var view_vacc_date: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,11 +213,13 @@ class Doc_detailspage_ViewController: UIViewController {
                         self.label_ordercost.text = data["amount"] as? String
                         
                         let pet_id = data["pet_id"] as! NSDictionary
-                        
+                        let last_vaccination_date = pet_id["last_vaccination_date"] as! String
                         if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
                             self.label_vaccinated.text = "Yes"
+                            self.label_vacindate.text = last_vaccination_date
                         }else{
                             self.label_vaccinated.text = "No"
+                            self.view_vacc_date.isHidden = true
                         }
                         self.label_age.text = String(pet_id["pet_age"] as! Int)
                         self.label_weight.text = String(pet_id["pet_weight"] as! Int)

@@ -34,6 +34,7 @@ class docdashTableViewCell: UITableViewCell {
     @IBOutlet weak var btn_online: UIButton!
     @IBOutlet weak var label_status: UILabel!
     @IBOutlet weak var label_status_val: UILabel!
+    @IBOutlet weak var label_type_pet: UILabel!
     
     
     

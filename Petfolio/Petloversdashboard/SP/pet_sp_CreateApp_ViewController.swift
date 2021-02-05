@@ -415,7 +415,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             Servicefile.shared.pet_apoint_display_date = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
-            Servicefile.shared.pet_apoint_payment_method = "card"
+            Servicefile.shared.pet_apoint_payment_method = "Online"
             Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
             Servicefile.shared.pet_apoint_amount = Servicefile.shared.service_id_amount
             if self.textfield_selectpettype.text != ""{

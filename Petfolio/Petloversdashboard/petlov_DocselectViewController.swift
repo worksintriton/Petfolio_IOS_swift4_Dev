@@ -63,6 +63,11 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func action_profile(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+                  self.present(vc, animated: true, completion: nil)
+       }
+    
     @IBAction func action_sos(_ sender: Any) {
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
            self.present(vc, animated: true, completion: nil)
@@ -153,20 +158,23 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                             
                                                             for itm in 0..<spec.count{
                                                                 let dat = spec[itm] as! NSDictionary
-                                                                var pic = dat["specialization"] as! String
+                                                                let pic = dat["specialization"] as! String
                                                                 if itm == 0 {
                                                                     specarray =   pic
                                                                 }else{
-                                                                    var val = specarray + ", "
+                                                                    let val = specarray + ", "
                                                                     specarray = val + pic
                                                                 }
                                                             }
+                                                            
                                                             self.coll_imgview.reloadData()
                                                             self.descri = Data["descri"] as! String
                                                             self.dr_name = Data["dr_name"] as! String
                                                             self.dr_title = Data["dr_title"] as! String
+                                                            self.label_yr_exp.text = String(Data["doctor_exp"] as! Int)
                                                             var strcount = Data["star_count"] as! Int
                                                             var r_count =  Data["review_count"] as! Int
+                                                            
                                                             self.star_count = String(strcount)
                                                             let rcount = String(r_count)
                                                             if self.star_count == "" {
@@ -179,6 +187,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                                                             }else{
                                                                 self.label_Noofcomments.text = rcount
                                                             }
+                                                            
                                                             self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
                                                             self.label_clinicname.text = self.clinic_name
                                                             self.label_specdetails.text = specarray

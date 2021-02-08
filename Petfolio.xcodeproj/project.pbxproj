@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
+		84860DC325D0F6DD000747A9 /* pet_notification_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84860DC225D0F6DD000747A9 /* pet_notification_ViewController.swift */; };
+		84860DC525D100F7000747A9 /* notification_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84860DC425D100F7000747A9 /* notification_TableViewCell.swift */; };
 		B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */; };
 		B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */; };
 		B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */; };
@@ -188,6 +190,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		84860DC225D0F6DD000747A9 /* pet_notification_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_notification_ViewController.swift; sourceTree = "<group>"; };
+		84860DC425D100F7000747A9 /* notification_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notification_TableViewCell.swift; sourceTree = "<group>"; };
 		910CD289095552E1350FAF4A /* Pods-Petfolio-PetfolioUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -562,7 +566,9 @@
 				B094D211255BDE82008400D6 /* AppDelegate.swift */,
 				B094D213255BDE82008400D6 /* SceneDelegate.swift */,
 				B094D215255BDE82008400D6 /* ViewController.swift */,
+				84860DC225D0F6DD000747A9 /* pet_notification_ViewController.swift */,
 				B094D217255BDE82008400D6 /* Main.storyboard */,
+				84860DC425D100F7000747A9 /* notification_TableViewCell.swift */,
 				B020D0AB25878BDF008F5C7B /* sosTableViewCell.swift */,
 				B0486493256BD14B0038A71D /* menuTableViewCell.swift */,
 				B094D254255C259E008400D6 /* User_typeCollectionViewCell.swift */,
@@ -998,6 +1004,7 @@
 				B08C96AF25692421003B05B7 /* checkupCollectionViewCell.swift in Sources */,
 				B0E98F7925A846EB005C0EF9 /* pet_service_appointmentViewController.swift in Sources */,
 				B094D212255BDE82008400D6 /* AppDelegate.swift in Sources */,
+				84860DC325D0F6DD000747A9 /* pet_notification_ViewController.swift in Sources */,
 				B01FD8B4258C9FF500AD2719 /* SP_Reg_ViewController.swift in Sources */,
 				B020D0AE25888AE6008F5C7B /* SearchtoclinicdetailViewController.swift in Sources */,
 				B02E7A552576252300B2B0C2 /* docdashTableViewCell.swift in Sources */,
@@ -1047,6 +1054,7 @@
 				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */,
+				84860DC525D100F7000747A9 /* notification_TableViewCell.swift in Sources */,
 				B0F56E3625C820EB00B1634F /* Doc_detailspage_ViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
 				B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */,

@@ -30,6 +30,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
         super.viewDidLoad()
         self.listtime.removeAll()
         self.seltime.removeAll()
+        self.view_continue.isHidden = true
         self.view_continue.layer.cornerRadius = 15.0
         self.view_popup.layer.cornerRadius = 10.0
         self.view_movetoapp.layer.cornerRadius = 10.0
@@ -88,6 +89,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.seltime.removeAll()
+        self.view_continue.isHidden = false
         for timitm in 0..<self.listtime.count{
             self.seltime.append("0")
         }
@@ -108,11 +110,8 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
               
               let nextstrDate = formatter.string(from: date)
               let currstrdate = formatter.string(from: Date())
-              
               let nextDate = formatter.date(from: nextstrDate)
               let currdate = formatter.date(from: currstrdate)
-              
-              
               if currdate! > nextDate! {
                   return false
               } else {
@@ -163,16 +162,21 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                     let timval = timitmdic["time"]  as! NSString
                                     self.listtime.append(timval as String)
                                     if timitm == 0 {
-                                        self.seltime.append("1")
+                                        self.seltime.append("0")
                                         self.selectedtime = timval as String
                                     }else{
                                         self.seltime.append("0")
                                     }
                                 }
                             }
+                            self.view_continue.isHidden = true
                             self.coll_seltime.reloadData()
                             self.stopAnimatingActivityIndicator()
                         }else{
+                            self.listtime.removeAll()
+                            self.seltime.removeAll()
+                            self.coll_seltime.reloadData()
+                            self.view_continue.isHidden = true
                             self.stopAnimatingActivityIndicator()
                             print("status code service denied")
                             let Message = res["Message"] as! String

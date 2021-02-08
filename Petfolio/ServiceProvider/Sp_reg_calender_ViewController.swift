@@ -29,6 +29,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         self.tbl_availdays.delegate = self
         self.tbl_availdays.dataSource = self
         self.view_next.layer.cornerRadius = 15.0
+        self.view_next.isHidden = true
         self.view_next.dropShadow()
         // Do any additional setup after loading the view.
     }
@@ -154,7 +155,6 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
                                                                 self.isedit.append(isstatus)
                                                                 self.isavailday.append("0")
                                                             }
-                                                          
                                                             self.tbl_availdays.reloadData()
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{

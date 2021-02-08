@@ -11,5 +11,7 @@ import UIKit
 class imgidCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var Img_id: UIImageView!
+    @IBOutlet weak var btn_close: UIButton!
+    @IBOutlet weak var view_close: UIView!
     
 }

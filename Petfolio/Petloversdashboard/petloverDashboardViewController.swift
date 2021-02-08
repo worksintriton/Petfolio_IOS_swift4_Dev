@@ -137,19 +137,31 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_notification(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func action_care(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-//        self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-//        self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
@@ -218,12 +230,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if self.colleView_banner == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_banner.image = UIImage(named: "sample")
+                    cell.img_banner.image = UIImage(named: "b_sample")
                 } else {
                     cell.img_banner.image = image
                 }
@@ -310,10 +321,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             self.present(vc, animated: true, completion: nil)
         }else if self.colleView_Service == collectionView {
             
-//            Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
-//            Servicefile.shared.service_index = indexPath.row
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
-//            self.present(vc, animated: true, completion: nil)
+            Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
+            Servicefile.shared.service_index = indexPath.row
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else {
             print("data in")
         }

@@ -106,10 +106,16 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_action: UIView!
+    @IBOutlet weak var view_communi: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view_clinic.layer.cornerRadius = 5.0
+        self.view_communi.layer.cornerRadius = 5.0
+        
+        
         self.specialza.removeAll()
         self.pethandle.removeAll()
         self.comm_type.removeAll()
@@ -215,6 +221,26 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.tbl_commtype.isHidden = false
         self.view_edudate.isHidden = true
         self.view_expire.isHidden = true
+    }
+    
+    
+    @IBAction func action_back(_ sender: Any) {
+            UserDefaults.standard.set("", forKey: "userid")
+            UserDefaults.standard.set("", forKey: "usertype")
+            UserDefaults.standard.set("", forKey: "userid")
+            UserDefaults.standard.set("", forKey: "usertype")
+            UserDefaults.standard.set("", forKey: "first_name")
+            UserDefaults.standard.set("", forKey: "last_name")
+            UserDefaults.standard.set("", forKey: "user_email")
+            UserDefaults.standard.set("", forKey: "user_phone")
+            UserDefaults.standard.set("", forKey: "user_image")
+            UserDefaults.standard.set("", forKey: "user_image")
+            UserDefaults.standard.set(false, forKey: "email_status")
+            Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+            Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.present(vc, animated: true, completion: nil)
+        
     }
     
     
@@ -426,11 +452,21 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                }else if self.label_exp_to.text == "To" {
                    self.alert(Message: "Please Select To date")
                }else {
+            let format = DateFormatter()
+            format.dateFormat = "YYYY"
+            let fromdate = format.date(from: self.label_exp_from.text!)
+            let todate = format.date(from: self.label_exp_to.text!)
+            
+            var  compdate = Calendar.current.dateComponents([.year], from: fromdate!, to: todate!).year ?? 0
+            var cdate = String(compdate + 1)
+            print("comared date",cdate)
+            
             var B = Servicefile.shared.expdicarray
             var arr = B
             let a = ["company":self.textfield_exp_company.text!,
                      "from":self.label_exp_from.text!,
-                     "to":self.label_exp_to.text!] as NSDictionary
+                     "to":self.label_exp_to.text!,
+                     "yearsofexperience": cdate] as NSDictionary
             arr.append(a)
             B = arr
             print(B)
@@ -547,9 +583,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         } else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please select the certificate")
         } else if Servicefile.shared.govdicarray.count == 0 {
-            self.alert(Message: "Please select the certificate")
+            self.alert(Message: "Please select the Goverment ID")
         } else if Servicefile.shared.photodicarray.count == 0 {
-            self.alert(Message: "Please select the certificate")
+            self.alert(Message: "Please select the photo")
         }else if  self.textfield_ser_amt.text == "" {
                    self.alert(Message: "please enter the Service amount")
          } else {
@@ -573,7 +609,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "profile_verification_status" , "Not verified",
                    "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
                    "consultancy_fees" , "200")
-             self.callDocreg()
+                  self.callDocreg()
         }
       
        print("spec details", Servicefile.shared.specdicarray)
@@ -681,8 +717,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if coll_govtid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "govtid", for: indexPath) as! imgidCollectionViewCell
-                               cell.Img_id.image = UIImage(named: "sample")
-
+                cell.Img_id.image = UIImage(named: "pdf")
+                cell.Img_id.layer.cornerRadius = 5.0
+                cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+                cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
             return cell
         }else if coll_pettype == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pettype", for: indexPath) as! checkupCollectionViewCell
@@ -696,9 +734,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             return cell
         }else if coll_photoid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoid", for: indexPath)  as! imgidCollectionViewCell
-           
-                               cell.Img_id.image = UIImage(named: "sample")
-                          
+            
+            cell.Img_id.image = UIImage(named: "pdf")
+            cell.Img_id.layer.cornerRadius = 5.0
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_photoid), for: .touchUpInside)
+            
             return cell
         }else if coll_speciali == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciali", for: indexPath) as! checkupCollectionViewCell
@@ -711,12 +752,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             cell.title.text = self.specialza[indexPath.row]
                        return cell
         }else if coll_certificate == collectionView{
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
-
-                               cell.Img_id.image = UIImage(named: "sample")
-//
-                       return cell
-            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
+                cell.Img_id.image = UIImage(named: "pdf")
+                cell.Img_id.layer.cornerRadius = 5.0
+                cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+                cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
+            return cell
         } else {
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clinic", for: indexPath)  as! imgidCollectionViewCell
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
@@ -728,10 +769,40 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                cell.Img_id.image = image
                            }
                        }
+            cell.Img_id.layer.cornerRadius = 5.0
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
                        return cell
             
         }
     }
+    
+    
+    @objc func action_close_clinic(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.clinicdicarray.remove(at: tag)
+        self.coll_clinicpic.reloadData()
+    }
+    
+    @objc func action_close_govid(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.govdicarray.remove(at: tag)
+        self.coll_govtid.reloadData()
+    }
+    
+    @objc func action_close_photoid(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.photodicarray.remove(at: tag)
+        self.coll_photoid.reloadData()
+    }
+    
+    @objc func action_close_certifid(sender: UIButton){
+           let tag = sender.tag
+           Servicefile.shared.certifdicarray.remove(at: tag)
+           self.coll_certificate.reloadData()
+       }
+    
+    
     
   
     
@@ -792,18 +863,18 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if coll_govtid == collectionView {
-              return CGSize(width: 100 , height:  160)
+              return CGSize(width: 100 , height:  100)
         }else if coll_pettype == collectionView {
               return CGSize(width: collectionView.frame.size.width / 2.1 , height:   40)
         }else if coll_photoid == collectionView {
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }else if coll_speciali == collectionView {
 //           return CGSize(width: 80 , height:  40)
             return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_certificate == collectionView {
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }else{
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }
        }
     
@@ -841,6 +912,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
            if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
             self.upload(imagedata: reimage!)

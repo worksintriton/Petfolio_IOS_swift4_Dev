@@ -73,8 +73,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-//        self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
@@ -112,11 +112,15 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_complete.tag = indexPath.row
             cell.btn_cancel.tag = indexPath.row
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
-            cell.btn_online.addTarget(self, action: #selector(action_online), for: .touchUpInside)
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
             cell.labe_comMissed.text = "Booked on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+                cell.btn_online.addTarget(self, action: #selector(action_online), for: .touchUpInside)
+            }else{
+                 cell.view_online.isHidden = true
+            }
             
         }else if self.appointtype == "Complete"{
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
@@ -177,12 +181,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name
-            
+            cell.label_servicer_title.text = "Doctor Name"
+            cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].doctor_name
         }else{
             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].service_provider_name
+            cell.label_servicer_title.text = "Service Name"
+            cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Service_name
         }
-        cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_type
-        cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
+        cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
@@ -250,12 +256,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+       // if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
            Servicefile.shared.pet_selected_app_list = self.appointtype
             Servicefile.shared.selectedindex = indexPath.row
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_app_details_ViewController") as! Pet_app_details_ViewController
                    self.present(vc, animated: true, completion: nil)
-        }
+       // }
     }
     
     @IBAction func action_confrim(_ sender: Any) {
@@ -340,6 +346,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                             let Booked_at = dataitm["Booked_at"] as! String
                             let Booking_Id = dataitm["Booking_Id"] as! String
                             let Service_name = dataitm["Service_name"] as! String
+                            
                             let _id = dataitm["_id"] as! String
                             let appointment_for = dataitm["appointment_for"] as! String
                             let appointment_time = dataitm["appointment_time"] as! String
@@ -362,7 +369,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                             let updatedAt = dataitm["updatedAt"] as! String
                             let user_feedback = dataitm["user_feedback"] as! String
                             let user_rate = dataitm["user_rate"] as! String
-                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st))
+                            let doctor_name = dataitm["doctor_name"] as! String
+                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name))
                             
                         }
                         if Servicefile.shared.pet_applist_do_sp.count > 0 {
@@ -474,7 +482,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                             let updatedAt = dataitm["updatedAt"] as! String
                             let user_feedback = dataitm["user_feedback"] as! String
                             let user_rate = dataitm["user_rate"] as! String
-                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st))
+                            let doctor_name = dataitm["doctor_name"] as! String
+                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name))
                             
                         }
                         if  Servicefile.shared.pet_applist_do_sp.count > 0 {
@@ -513,7 +522,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     if Code == 200 {
                         Servicefile.shared.pet_applist_do_sp.removeAll()
                         let Data = res["Data"] as! NSArray
-                        for itm in 0..<Data.count{
+                        for itm in 0..<Data.count {
                             let dataitm = Data[itm] as! NSDictionary
                             let Booked_at = dataitm["Booked_at"] as! String
                             let Booking_Id = dataitm["Booking_Id"] as! String
@@ -540,14 +549,16 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                             let updatedAt = dataitm["updatedAt"] as! String
                             let user_feedback = dataitm["user_feedback"] as! String
                             let user_rate = dataitm["user_rate"] as! String
-                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st))
-                            
+                            let doctor_name = dataitm["doctor_name"] as! String
+                            Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name))
                         }
+                        
                         if Servicefile.shared.pet_applist_do_sp.count > 0 {
                             self.label_nodata.isHidden = true
                         }else{
                             self.label_nodata.isHidden = false
                         }
+                        
                         self.tbl_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{

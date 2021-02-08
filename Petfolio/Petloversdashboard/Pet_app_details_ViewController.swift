@@ -61,7 +61,9 @@ class Pet_app_details_ViewController: UIViewController {
             self.view_complete_cancel.isHidden = true
             self.view_confrence.isHidden = true
         }
-        self.call_getdetails()
+        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+             self.call_getdetails()
+        }
     }
     
     @IBAction func action_start_confrence(_ sender: Any) {

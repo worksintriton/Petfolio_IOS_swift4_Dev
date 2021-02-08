@@ -14,8 +14,8 @@ class Servicefile {
     static let shared = Servicefile()
     // http://15.207.51.203:3000
     // sprint 1
-    static let baseurl = "http://52.25.163.13:3000" // live
-    //static let baseurl = "http://54.212.108.156:3000" // Dev
+    // static let baseurl = "http://52.25.163.13:3000" // live
+    static let baseurl = "http://54.212.108.156:3000" // Dev
     static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
     static let slider = baseurl + "/api/demoscreen/mobile/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
@@ -112,6 +112,8 @@ class Servicefile {
     static let Doc_fetch_appointment_id = baseurl + "/api/appointments/mobile/fetch_appointment_id"
     static let SP_fetch_appointment_id = baseurl + "/api/sp_appointments/mobile/fetch_appointment_id"
     
+    static let notification = baseurl + "/api/notification/mobile/getlist_id"
+    
     
     
     // Signup page
@@ -153,6 +155,7 @@ class Servicefile {
     var utypesel = ["1"]
     var orgiutypesel = ["0"]
     
+    var notif_list = [notificationlist]()
     // pet dashboard
     var petid = ""
     var petbanner = [Petdashbanner]()
@@ -996,11 +999,12 @@ struct  pet_applist_doc_sp {
     var userfeed : String
     var start_appointment_status : String
     var appoint_patient_st : String
+    var doctor_name : String
     init(IN_Booked_at : String, IN_Booking_Id : String, IN_Service_name : String, IN__id : String, IN_appointment_for : String
         , IN_appointment_time : String, IN_appointment_type : String, IN_clinic_name : String, IN_completed_at : String
         , IN_cost : String, IN_createdAt : String, IN_missed_at : String, IN_pet_name : String, IN_pet_type : String
         , IN_photo : String, IN_service_cost : String, IN_service_provider_name : String, IN_status : String
-        , IN_type : String, IN_updatedAt : String,In_userrate: String, In_userfeed: String, In_communication_type: String, In_start_appointment_status : String, In_appoint_patient_st : String) {
+        , IN_type : String, IN_updatedAt : String,In_userrate: String, In_userfeed: String, In_communication_type: String, In_start_appointment_status : String, In_appoint_patient_st : String, In_doctor_name : String) {
         self.Booked_at = IN_Booked_at
         self.Booking_Id = IN_Booking_Id
         self.Service_name = IN_Service_name
@@ -1026,6 +1030,33 @@ struct  pet_applist_doc_sp {
         self.userfeed = In_userfeed
         self.start_appointment_status = In_start_appointment_status
         self.appoint_patient_st = In_appoint_patient_st
+        self.doctor_name = In_doctor_name
+    }
+}
+
+
+struct notificationlist{
+    var _id : String
+    var user_id : String
+    var notify_title : String
+    var notify_descri : String
+    var notify_img :  String
+    var notify_time : String
+    var date_and_time : String
+    init(I_id : String,
+       Iuser_id : String,
+       Inotify_title : String,
+       Inotify_descri : String,
+       Inotify_img :  String,
+       Inotify_time : String,
+       Idate_and_time : String) {
+        self._id = I_id
+        self.user_id = Iuser_id
+        self.notify_title = Inotify_title
+        self.notify_descri = Inotify_descri
+        self.notify_img = Inotify_img
+        self.notify_time = Inotify_time
+        self.date_and_time = Idate_and_time
     }
 }
 

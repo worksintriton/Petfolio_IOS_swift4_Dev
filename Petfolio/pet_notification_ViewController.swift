@@ -1,0 +1,151 @@
+//
+//  pet_notification_ViewController.swift
+//  Petfolio
+//
+//  Created by Admin on 08/02/21.
+//  Copyright © 2021 sriram ramachandran. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+
+class pet_notification_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    
+    @IBOutlet weak var tbl_notifi_list: UITableView!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tbl_notifi_list.delegate = self
+        self.tbl_notifi_list.dataSource = self
+        self.callnotification()
+        // Do any additional setup after loading the view.
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Servicefile.shared.notif_list.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! notification_TableViewCell
+        cell.selectionStyle = .none
+        cell.view_main.layer.cornerRadius = 10.0
+        cell.view_main.dropShadow()
+        if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
+            cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
+                      if (error != nil) {
+                          cell.image_noti.image = UIImage(named: "sample")
+                      } else {
+                          cell.image_noti.image = image
+                      }
+                  }
+        }else{
+            cell.image_noti.image = UIImage(named: "sample")
+        }
+      
+        cell.label_title.text = Servicefile.shared.notif_list[indexPath.row].notify_title
+        cell.label_date.text = Servicefile.shared.notif_list[indexPath.row].date_and_time
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+    
+    
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func action_sos(_ sender: Any) {
+        
+    }
+    
+    @IBAction func action_profile(_ sender: Any) {
+        
+    }
+    
+    @IBAction func action_home(_ sender: Any) {
+        
+    }
+    
+    @IBAction func action_shop(_ sender: Any) {
+        
+    }
+    
+    
+    @IBAction func action_pet_service(_ sender: Any) {
+        
+    }
+    
+    @IBAction func action_pet_care(_ sender: Any) {
+        
+    }
+    
+    @IBAction func action_market(_ sender: Any) {
+        
+    }
+    
+    
+   
+    func callnotification(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.notification, method: .post, parameters:
+            ["user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        Servicefile.shared.notif_list.removeAll()
+                        let Dat = res["Data"] as! NSArray
+                        for item in 0..<Dat.count{
+                            let notilist = Dat[item] as! NSDictionary
+                            let _id = notilist["_id"] as! String
+                            let user_id = notilist["user_id"] as! String
+                            let notify_title = notilist["notify_title"] as! String
+                            let notify_descri = notilist["notify_descri"] as! String
+                            let notify_img = notilist["notify_img"] as! String
+                            let notify_time = notilist["notify_time"] as! String
+                            let date_and_time = notilist["date_and_time"] as! String
+                            Servicefile.shared.notif_list.append(notificationlist.init(I_id: _id, Iuser_id: user_id, Inotify_title: notify_title, Inotify_descri: notify_descri, Inotify_img: notify_img, Inotify_time: notify_time, Idate_and_time: date_and_time))
+                        }
+                        self.tbl_notifi_list.reloadData()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                         Servicefile.shared.notif_list.removeAll()
+                        self.tbl_notifi_list.reloadData()
+                        self.stopAnimatingActivityIndicator()
+                        let Messages = res["Message"] as! String
+                        self.alert(Message: Messages)
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func alert(Message: String){
+          let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+          }))
+          self.present(alert, animated: true, completion: nil)
+      }
+      
+
+}

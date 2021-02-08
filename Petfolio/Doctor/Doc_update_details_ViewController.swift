@@ -430,11 +430,21 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                }else if self.label_exp_to.text == "To" {
                    self.alert(Message: "Please Select To date")
                }else {
+            let format = DateFormatter()
+            format.dateFormat = "YYYY"
+            let fromdate = format.date(from: self.label_exp_from.text!)
+            let todate = format.date(from: self.label_exp_to.text!)
+            
+            var compdate = Calendar.current.dateComponents([.year], from: fromdate!, to: todate!).year ?? 0
+            let cdate = String(compdate + 1)
+            print("comared date",cdate)
+            
             var B = Servicefile.shared.expdicarray
             var arr = B
             let a = ["company":self.textfield_exp_company.text!,
                      "from":self.label_exp_from.text!,
-                     "to":self.label_exp_to.text!] as NSDictionary
+                     "to":self.label_exp_to.text!,
+                     "yearsofexperience": cdate] as NSDictionary
             arr.append(a)
             B = arr
             print(B)
@@ -1149,7 +1159,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                    "profile_status" : true,
                    "profile_verification_status" : "Not verified",
                    "consultancy_fees" : self.textfield_ser_amt.text!,
-                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+                   "mobile_type" : "IOS",
+                   "doctor_exp":0], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
                                                        case .success:
                                                              let res = response.value as! NSDictionary

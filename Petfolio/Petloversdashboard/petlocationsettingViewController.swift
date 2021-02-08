@@ -59,8 +59,8 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-//        self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {

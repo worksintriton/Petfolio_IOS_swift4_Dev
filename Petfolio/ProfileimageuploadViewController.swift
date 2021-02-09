@@ -42,14 +42,20 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        if Servicefile.shared.usertype == "1"{
+        if Servicefile.shared.user_type == "1"{
             if let firstVC = presentingViewController as? petprofileViewController {
                 DispatchQueue.main.async {
                     firstVC.viewWillAppear(true)
                 }
             }
-        }else{
+        }else if Servicefile.shared.user_type == "4"{
             if let firstVC = presentingViewController as? Doc_profiledetails_ViewController {
+                DispatchQueue.main.async {
+                    firstVC.viewWillAppear(true)
+                }
+            }
+        }else if Servicefile.shared.user_type == "2"{
+            if let firstVC = presentingViewController as? Sp_profile_ViewController {
                 DispatchQueue.main.async {
                     firstVC.viewWillAppear(true)
                 }

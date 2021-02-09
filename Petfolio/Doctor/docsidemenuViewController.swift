@@ -62,7 +62,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
-                   Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                   Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                    self.present(vc, animated: true, completion: nil)

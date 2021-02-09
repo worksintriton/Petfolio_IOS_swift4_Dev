@@ -199,7 +199,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
                         let alert = UIAlertController(title: "", message: "Profile Updated sucessfully", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            if Servicefile.shared.usertype == "1" {
+                            if Servicefile.shared.user_type == "1" {
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                                 self.present(vc, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "4" {

@@ -61,21 +61,21 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
               if  UserDefaults.standard.string(forKey: "usertype") != "" {
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
                 Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
                 Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                 Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                 
-                 print("user type ",Servicefile.shared.usertype,"user id",Servicefile.shared.userid)
-                if Servicefile.shared.usertype == "1" {
+                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                if Servicefile.shared.user_type == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.usertype == "4" {
+                }else if Servicefile.shared.user_type == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.usertype == "2" {
+                }else if Servicefile.shared.user_type == "2" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                     self.present(vc, animated: true, completion: nil)
                 }

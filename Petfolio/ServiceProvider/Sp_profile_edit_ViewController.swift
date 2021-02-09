@@ -283,7 +283,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
        }else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please upload the certificates")
        }else{
-          // self.callDocspec()
+          self.callDocspec()
        print( "_id" , Servicefile.shared.sp_id,
         "user_id", Servicefile.shared.userid,
         "sp_loc", self.locationaddress,
@@ -712,7 +712,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
 
 extension Sp_profile_edit_ViewController {
     func callSp_details(){
-           Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+           Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                  self.startAnimatingActivityIndicator()
           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_dash_get, method: .post, parameters:

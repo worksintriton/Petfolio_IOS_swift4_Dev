@@ -29,14 +29,23 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var view_refresh: UIView!
     @IBOutlet weak var label_failedstatus: UILabel!
     
+    @IBOutlet weak var view_popalert: UIView!
+    @IBOutlet weak var label_popalert_details: UILabel!
+    @IBOutlet weak var view_btn_yes: UIView!
+    @IBOutlet weak var view_btn_no: UIView!
     
+    var indextag = 0
+    var statussel = ""
     
     var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.label_nodata.isHidden = true
-        
+        self.view_popalert.isHidden = true
+        self.view_popalert.layer.cornerRadius = 10.0
+        self.view_btn_yes.layer.cornerRadius = 10.0
+        self.view_btn_no.layer.cornerRadius = 10.0
         self.view_new.layer.cornerRadius = 9.0
         self.view_missed.layer.cornerRadius = 9.0
         self.view_footer.layer.cornerRadius = 15.0
@@ -55,7 +64,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         // Do any additional setup after loading the view.
-        self.callcheckstatus()
+       
     }
     
     
@@ -63,6 +72,9 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.callcheckstatus()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         self.callcheckstatus()
+    }
     
     @IBAction func action_sidemenu(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
@@ -126,17 +138,51 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         }
                     }
         }
-
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Servicefile.shared.Doc_selected_app_list = self.appointtype
+        Servicefile.shared.appointmentindex = indexPath.row
+        Servicefile.shared.pet_apoint_id = Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_app_details_page_ViewController") as! sp_app_details_page_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
-       self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[tag].Appid, appointmentstatus: "completed")
+        self.indextag = tag
+        self.statussel = "completed"
+       self.view_shadow.isHidden = false
+              self.view_popalert.isHidden = false
+        
     }
     @objc func action_cancelled(sender : UIButton){
         let tag = sender.tag
-        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[tag].Appid, appointmentstatus: "cancel")
+        self.indextag = tag
+        self.statussel = "cancel"
+        self.view_shadow.isHidden = false
+        self.view_popalert.isHidden = false
+       
+    }
+    
+    
+    @IBAction func action_pop_yes(_ sender: Any) {
+        if self.statussel != "cancel"{
+             self.label_popalert_details.text = "Are you sure you want to complete this appointment"
+            self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[self.indextag].Appid, appointmentstatus: "completed")
+        }else{
+             self.label_popalert_details.text = "Are you sure you want to cancel this appointment"
+             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[self.indextag].Appid, appointmentstatus: "cancel")
+        }
+        self.view_shadow.isHidden = true
+               self.view_popalert.isHidden = true
+    }
+    
+    @IBAction func action_pop_no(_ sender: Any) {
+        self.view_shadow.isHidden = true
+        self.view_popalert.isHidden = true
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -465,7 +511,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBAction func actionl_ogout(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "userid")
         UserDefaults.standard.set("", forKey: "usertype")
-        Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
            self.present(vc, animated: true, completion: nil)

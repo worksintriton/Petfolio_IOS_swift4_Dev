@@ -94,7 +94,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                     UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
                     UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                    Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                    Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                     Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
                     Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
                     Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
@@ -189,7 +189,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                      print("success data",res)
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
-                                                       if Servicefile.shared.usertype == "1" {
+                                                       if Servicefile.shared.user_type == "1" {
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                                                                                       self.present(vc, animated: true, completion: nil)
                                                        } else if Servicefile.shared.user_type == "4" {

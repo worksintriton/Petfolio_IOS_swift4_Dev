@@ -489,6 +489,8 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         //self.coll_service.reloadData()
     }
     
+      
+    
     func setimag(){
         if self.image_photo != "" {
              self.image_photo_id.isHidden = false

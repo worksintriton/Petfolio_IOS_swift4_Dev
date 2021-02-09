@@ -236,7 +236,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             UserDefaults.standard.set("", forKey: "user_image")
             UserDefaults.standard.set("", forKey: "user_image")
             UserDefaults.standard.set(false, forKey: "email_status")
-            Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+            Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.present(vc, animated: true, completion: nil)

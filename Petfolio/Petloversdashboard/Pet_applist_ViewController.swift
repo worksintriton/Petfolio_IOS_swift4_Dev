@@ -113,7 +113,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_cancel.tag = indexPath.row
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked on :"
+            cell.labe_comMissed.text = "Booked for :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {

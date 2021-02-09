@@ -66,7 +66,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
             UserDefaults.standard.set("", forKey: "user_phone")
             UserDefaults.standard.set("", forKey: "user_image")
             UserDefaults.standard.set("", forKey: "user_image")
-            Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+            Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.present(vc, animated: true, completion: nil)

@@ -14,7 +14,7 @@ class Servicefile {
     static let shared = Servicefile()
     // http://15.207.51.203:3000
     // sprint 1
-    // static let baseurl = "http://52.25.163.13:3000" // live
+    //static let baseurl = "http://52.25.163.13:3000" // live
     static let baseurl = "http://54.212.108.156:3000" // Dev
     static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
     static let slider = baseurl + "/api/demoscreen/mobile/getlist"
@@ -57,7 +57,7 @@ class Servicefile {
     static let Doc_deleteholiday = baseurl + "/api/holiday/delete"
     static let Doc_createholiday = baseurl + "/api/holiday/create"
     
-    static let SP_getholdiaylist = baseurl + " /api/sp_holiday/getlist_id"
+    static let SP_getholdiaylist = baseurl + "/api/sp_holiday/getlist_id"
     static let SP_deleteholiday = baseurl + "/api/sp_holiday/delete"
     static let SP_createholiday = baseurl + "/api/sp_holiday/create"
     

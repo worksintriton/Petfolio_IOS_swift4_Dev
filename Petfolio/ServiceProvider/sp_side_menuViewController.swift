@@ -15,8 +15,8 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-    var labelmenu = ["My calender", "Logout"]
-    var imgmenu = ["Calendar", "Exit"]
+     var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons","Settings", "Logout"]
+       var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Setting", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     
     
        @IBAction func action_edit(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
                   self.present(vc, animated: true, completion: nil)
        }
     
@@ -57,10 +57,10 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
         self.present(vc, animated: true, completion: nil)
-        }else{
+        }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
-                   Servicefile.shared.usertype = UserDefaults.standard.string(forKey: "usertype")!
+                   Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                    self.present(vc, animated: true, completion: nil)

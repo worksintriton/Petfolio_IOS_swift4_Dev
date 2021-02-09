@@ -110,10 +110,12 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         if self.isavailday[btntag] == "0" {
             self.isavailday.remove(at: btntag)
             self.isavailday.insert("1", at: btntag)
+            self.view_next.isHidden = false
         }else{
             self.isavailday.remove(at: btntag)
             self.isavailday.insert("0", at: btntag)
         }
+        
         self.tbl_availdays.reloadData()
     }
 

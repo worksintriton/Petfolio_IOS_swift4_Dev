@@ -66,7 +66,9 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                    self.present(vc, animated: true, completion: nil)
-        }
+        }else{
+                self.dismiss(animated: true, completion: nil)
+            }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

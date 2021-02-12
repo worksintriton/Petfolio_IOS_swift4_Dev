@@ -86,6 +86,34 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.collectiondelegate()
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           if textField == self.textfield_servicename {
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+               let compSepByCharInSet = string.components(separatedBy: aSet)
+               let numberFiltered = compSepByCharInSet.joined(separator: "")
+               return string == numberFiltered
+           }
+           if textField == self.textfield_Bus_name {
+               let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+               let compSepByCharInSet = string.components(separatedBy: aSet)
+               let numberFiltered = compSepByCharInSet.joined(separator: "")
+               return string == numberFiltered
+           }
+           if textField == self.textfield_spec{
+               let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+               let compSepByCharInSet = string.components(separatedBy: aSet)
+               let numberFiltered = compSepByCharInSet.joined(separator: "")
+               return string == numberFiltered
+           }
+            if textField == self.textfield_amt{
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+            let compSepByCharInSet = string.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            return string == numberFiltered
+            }
+           return true
+       }
+    
     func collectiondelegate(){
         
         self.picker_time.delegate = self
@@ -253,7 +281,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                 var serarr = ser
                 let a = ["bus_service_list": self.added_service[itm],
                          "time_slots":Servicefile.shared.selectedservice[itm],
-                         "amount":"0"] as NSDictionary
+                         "amount":0] as NSDictionary
                        serarr.append(a)
                        ser = serarr
                        print(ser)
@@ -330,7 +358,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }else{
             
             Servicefile.shared.selectedamount.remove(at: self.tblindex)
-            Servicefile.shared.selectedamount.insert(  self.textfield_amt.text!, at: self.tblindex)
+            Servicefile.shared.selectedamount.insert(Int(self.textfield_amt.text!)!, at: self.tblindex)
              self.view_picker.isHidden = true
             self.tbl_service_list.reloadData()
             self.selservice.append("0")
@@ -371,7 +399,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     cell.view_time.isHidden = true
                     cell.view_amt.isHidden = true
                    }
-        cell.label_amt.text = "₹ " + Servicefile.shared.selectedamount[indexPath.row]
+        cell.label_amt.text = "₹ " + String(Servicefile.shared.selectedamount[indexPath.row])
         cell.label_time.text = Servicefile.shared.selectedservice[indexPath.row]
         cell.btn_drop.tag = indexPath.row
         cell.btn_drop.addTarget(self, action: #selector(clickdropdown), for: .touchUpInside)
@@ -786,7 +814,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     let listitm = ditm["service_list"] as! String
                     Servicefile.shared.servicelist.append(listitm)
                     Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
-                    Servicefile.shared.selectedamount.append("0")
+                    Servicefile.shared.selectedamount.append(0)
                     self.selservice.append("0")
                 }
                 Servicefile.shared.speclist.removeAll()

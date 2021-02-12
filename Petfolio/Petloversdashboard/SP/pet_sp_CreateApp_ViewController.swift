@@ -705,5 +705,32 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.moveTextField(textview: textView, up:false)
            }
        }
+    
+    func callpaymentfail(){
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
+               ["appointment_UID": "",
+                "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                "sp_id":Servicefile.shared.sp_user_id,
+                "status":"Payment Failed",
+                "user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   switch (response.result) {
+                   case .success:
+                       let res = response.value as! NSDictionary
+                       print("success data",res)
+                       let Code  = res["Code"] as! Int
+                       if Code == 200 {
+                       }else{
+                       }
+                       break
+                   case .failure(let Error):
+                       self.stopAnimatingActivityIndicator()
+                       break
+                   }
+               }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
 
 }

@@ -58,6 +58,24 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.calldocdetails()
     }
     
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_notifica(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_pet_service(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func action_home(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
         self.present(vc, animated: true, completion: nil)

@@ -38,6 +38,16 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                              self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_notifi(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
         self.present(vc, animated: true, completion: nil)
@@ -52,21 +62,64 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! servicecat_CollectionViewCell
-        cell.label_title.text = Servicefile.shared.pet_servicecat[indexPath.row].title
-        cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
-        cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
-                               if (error != nil) {
-                                   cell.imag_cat.image = UIImage(named: "sample")
-                               } else {
-                                   cell.imag_cat.image = image
-                               }
-                           }
-        return cell
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! servicecat_CollectionViewCell
+                   cell.label_title.text = Servicefile.shared.pet_servicecat[indexPath.row].title
+                   cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
+                   cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
+                                          if (error != nil) {
+                                              cell.imag_cat.image = UIImage(named: "sample")
+                                          } else {
+                                              cell.imag_cat.image = image
+                                          }
+                                      }
+                    cell.imag_cat.layer.cornerRadius = 10.0
+                   return cell
+        }else if indexPath.row == 1 {
+              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "scell", for: indexPath) as! servicedashfooterCollectionViewCell
+                      cell.label_title.text = Servicefile.shared.pet_servicecat[indexPath.row].title
+                      cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
+                      cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
+                                             if (error != nil) {
+                                                 cell.imag_cat.image = UIImage(named: "sample")
+                                             } else {
+                                                 cell.imag_cat.image = image
+                                             }
+                                         }
+                    cell.imag_cat.layer.cornerRadius = 10.0
+                      return cell
+        }else if indexPath.row % 2 == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! servicecat_CollectionViewCell
+                      cell.label_title.text = Servicefile.shared.pet_servicecat[indexPath.row].title
+                      cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
+                      cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
+                                             if (error != nil) {
+                                                 cell.imag_cat.image = UIImage(named: "sample")
+                                             } else {
+                                                 cell.imag_cat.image = image
+                                             }
+                                         }
+                    cell.imag_cat.layer.cornerRadius = 10.0
+                      return cell
+           
+        }else{
+             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "scell", for: indexPath) as! servicedashfooterCollectionViewCell
+                        cell.label_title.text = Servicefile.shared.pet_servicecat[indexPath.row].title
+                        cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
+                        cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
+                                               if (error != nil) {
+                                                   cell.imag_cat.image = UIImage(named: "sample")
+                                               } else {
+                                                   cell.imag_cat.image = image
+                                               }
+                                           }
+                        cell.imag_cat.layer.cornerRadius = 10.0
+                        return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 2.2)
+        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 1.8)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

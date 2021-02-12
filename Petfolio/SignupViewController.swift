@@ -193,7 +193,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             }else{
                  self.callsignup()
             }
-            
         }
     }
     
@@ -237,7 +236,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
-                    }else{
+                    } else {
                         self.stopAnimatingActivityIndicator()
                         let Messages = res["Message"] as! String
                         self.alert(Message: Messages)

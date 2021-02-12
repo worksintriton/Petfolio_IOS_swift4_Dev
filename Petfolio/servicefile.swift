@@ -115,6 +115,9 @@ class Servicefile {
     static let notification = baseurl + "/api/notification/mobile/getlist_id"
     
     
+    static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
+     static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
+    
     
     // Signup page
     var email_status = false
@@ -155,6 +158,9 @@ class Servicefile {
     var utypesel = ["1"]
     var orgiutypesel = ["0"]
     
+    static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
+    static let approvednumber = "1234567890"
+    static let approvednumberandspecial = "1234567890."
     var notif_list = [notificationlist]()
     // pet dashboard
     var petid = ""
@@ -265,7 +271,7 @@ class Servicefile {
     var speclist = [""]
     var servicelist = [""]
     var selectedservice = [""]
-    var selectedamount = [""]
+    var selectedamount = [0]
     var sertime = [""]
     var seramt = [""]
     var servicelistdicarray = [Any]()
@@ -765,9 +771,10 @@ struct doc_Dash_petdetails{
     var completed_at : String
     var missed_at : String
     var commtype : String
+    var appointment_UID : String
     init(in_Appid : String, In_allergies : String, In_amount : String, In_appointment_types : String,
          In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
-         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_Booked_at : String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String, In_commtype : String) {
+         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_Booked_at : String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String, In_commtype : String, In_appointment_UID : String) {
         self.Appid = in_Appid
         self.allergies = In_allergies
         self.amount = In_amount
@@ -787,6 +794,7 @@ struct doc_Dash_petdetails{
         self.missed_at = In_missed_at
         self.appoint_patient_st = In_appoint_patient_st
         self.commtype = In_commtype
+        self.appointment_UID = In_appointment_UID
     }
 }
 
@@ -804,9 +812,13 @@ struct SP_Dash_petdetails{
     var book_date_time : String
     var user_rate : String
     var user_feedback : String
+    var sp_id : String
+    var appointment_UID : String
+    var completed_at : String
+    var missed_at : String
     init(in_Appid : String, In_amount : String, In_appointment_types : String,
          In_pet_id : String, In_pet_breed : String, In_pet_img : String,
-         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String) {
+         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String, In_sp_id : String, In_appointment_UID: String, In_completed_at : String, In_missed_at : String) {
         self.Appid = in_Appid
         self.amount = In_amount
         self.appoinment_status = In_appointment_types
@@ -820,6 +832,10 @@ struct SP_Dash_petdetails{
         self.user_rate = In_userrate
         self.user_feedback = In_userfeedback
         self.sername = In_servicename
+        self.sp_id = In_sp_id
+        self.appointment_UID = In_appointment_UID
+        self.completed_at = In_completed_at
+        self.missed_at = In_missed_at
     }
 }
 
@@ -1000,11 +1016,14 @@ struct  pet_applist_doc_sp {
     var start_appointment_status : String
     var appoint_patient_st : String
     var doctor_name : String
+    var doctor_id : String
+    var sp_id : String
     init(IN_Booked_at : String, IN_Booking_Id : String, IN_Service_name : String, IN__id : String, IN_appointment_for : String
         , IN_appointment_time : String, IN_appointment_type : String, IN_clinic_name : String, IN_completed_at : String
         , IN_cost : String, IN_createdAt : String, IN_missed_at : String, IN_pet_name : String, IN_pet_type : String
         , IN_photo : String, IN_service_cost : String, IN_service_provider_name : String, IN_status : String
-        , IN_type : String, IN_updatedAt : String,In_userrate: String, In_userfeed: String, In_communication_type: String, In_start_appointment_status : String, In_appoint_patient_st : String, In_doctor_name : String) {
+        , IN_type : String, IN_updatedAt : String,In_userrate: String, In_userfeed: String, In_communication_type: String, In_start_appointment_status : String, In_appoint_patient_st : String, In_doctor_name : String,In_doctor_id : String
+        , In_sp_id : String) {
         self.Booked_at = IN_Booked_at
         self.Booking_Id = IN_Booking_Id
         self.Service_name = IN_Service_name
@@ -1031,6 +1050,8 @@ struct  pet_applist_doc_sp {
         self.start_appointment_status = In_start_appointment_status
         self.appoint_patient_st = In_appoint_patient_st
         self.doctor_name = In_doctor_name
+        self.doctor_id = In_doctor_id
+        self.sp_id = In_sp_id
     }
 }
 

@@ -70,6 +70,19 @@ class Doc_detailspage_ViewController: UIViewController {
        
     }
     
+    @IBAction func action_notific(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     @IBAction func action_Start_confrence(_ sender: Any) {
         let alert = UIAlertController(title: "", message: "Are you sure you need to start te call", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -467,5 +480,35 @@ class Doc_detailspage_ViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func callDocappcancel(){
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_notification, method: .post, parameters:
+              ["appointment_UID": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].appointment_UID,
+                "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                "doctor_id": Servicefile.shared.userid,
+                "status":"Doctor Appointment Cancelled",
+                "user_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].user_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   switch (response.result) {
+                   case .success:
+                       let res = response.value as! NSDictionary
+                       print("success data",res)
+                       let Code  = res["Code"] as! Int
+                       if Code == 200 {
+                           
+                       }else{
+                       }
+                       break
+                   case .failure(let Error):
+                       self.stopAnimatingActivityIndicator()
+                       
+                       break
+                   }
+               }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+            self.dismiss(animated: true, completion: nil)
+       }
     
 }

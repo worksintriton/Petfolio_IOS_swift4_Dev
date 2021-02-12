@@ -144,7 +144,8 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                 ["user_id":Servicefile.shared.sp_user_id,
                  "Date": self.seldate,
                  "cur_date": Servicefile.shared.ddmmyyyystringformat(date: Date()),
-                 "cur_time": Servicefile.shared.hhmmastringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                 "cur_time": Servicefile.shared.hhmmastringformat(date: Date()),
+                 "current_time": Servicefile.shared.yyyyMMddHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                     switch (response.result) {
                     case .success:
                         let res = response.value as! NSDictionary

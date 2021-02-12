@@ -32,6 +32,12 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
            self.present(vc, animated: true, completion: nil)
        }
     
+    
+    @IBAction func action_notification(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
         self.present(vc, animated: true, completion: nil)

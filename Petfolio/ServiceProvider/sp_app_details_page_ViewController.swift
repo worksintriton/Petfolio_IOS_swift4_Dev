@@ -67,6 +67,18 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.view_address_details.isHidden = true
        
     }
+   
+    
+    
+    @IBAction func action_profile(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+                         self.present(vc, animated: true, completion: nil)
+       }
+       
+       @IBAction func action_notifi(_ sender: Any) {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+                  self.present(vc, animated: true, completion: nil)
+       }
     
     @IBAction func action_Start_confrence(_ sender: Any) {
         let alert = UIAlertController(title: "", message: "Are you sure you need to start te call", preferredStyle: .alert)
@@ -179,7 +191,11 @@ class sp_app_details_page_ViewController: UIViewController  {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        self.dismiss(animated: true, completion: nil)
+                        if appointmentstatus != "cancel"{
+                             self.dismiss(animated: true, completion: nil)
+                        }else{
+                            self.callspappcancel()
+                        }
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -292,6 +308,36 @@ class sp_app_details_page_ViewController: UIViewController  {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func callspappcancel(){
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
+           ["appointment_UID": Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].appointment_UID,
+             "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "sp_id": Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].sp_id,
+             "status":"Doctor Appointment Cancelled",
+             "user_id": Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].user_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        
+                    }else{
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+         self.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 class Pet_app_details_ViewController: UIViewController {
-
+    
     
     @IBOutlet weak var image_holder_name: UIImageView!
     @IBOutlet weak var label_holder_name: UILabel!
@@ -54,13 +54,20 @@ class Pet_app_details_ViewController: UIViewController {
         self.view_complete.dropShadow()
         self.view_confrence.isHidden = true
         self.view_complete.isHidden = true
+         self.view_cancel.isHidden = true
         self.label_Holder_service_name.isHidden = true
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            
             if Servicefile.shared.pet_selected_app_list == "current" {
-                self.view_complete_cancel.isHidden = false
+                self.view_complete_cancel.isHidden = true
                 //self.view_complete.isHidden = true
                 self.view_confrence.isHidden = false
+                if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
+                    self.view_complete_cancel.isHidden = false
+                     self.view_cancel.isHidden = false
+                } else {
+                    self.view_complete_cancel.isHidden  = true
+                     self.view_cancel.isHidden = true
+                }
             } else if Servicefile.shared.pet_selected_app_list == "Complete" {
                 self.view_complete_cancel.isHidden = true
                 self.view_confrence.isHidden = true
@@ -71,7 +78,14 @@ class Pet_app_details_ViewController: UIViewController {
             
         }else{
             if Servicefile.shared.pet_selected_app_list == "current" {
-                self.view_complete_cancel.isHidden = false
+                self.view_complete_cancel.isHidden  = true
+                if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
+                    self.view_complete_cancel.isHidden = false
+                     self.view_cancel.isHidden = false
+                } else {
+                    self.view_complete_cancel.isHidden  = true
+                     self.view_cancel.isHidden = true
+                }
             } else if Servicefile.shared.pet_selected_app_list == "Complete" {
                 self.view_complete_cancel.isHidden = true
             } else {
@@ -79,8 +93,11 @@ class Pet_app_details_ViewController: UIViewController {
             }
             
         }
+        
+        
+        
         self.call_getdetails()
-       
+        
     }
     
     @IBAction func action_start_confrence(_ sender: Any) {
@@ -94,7 +111,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     @IBAction func action_notification(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-               self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
@@ -123,21 +140,21 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     func callcompleteMissedappoitment(Appointmentid: String, appointmentstatus: String){
-        var params = ["":""]
-        if appointmentstatus != "cancel"{
-            params = ["_id": Appointmentid,
-                      "completed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-                      "appoinment_status" : "Completed"]
+        var link = ""
+        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+            link =  Servicefile.SP_complete_and_Missedapp
         }else{
-            params = [ "_id": Appointmentid,
-                       "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-                       "appoinment_status" : "Missed",
-                       "appoint_patient_st": "Petowner Cancelled appointment"]
+            link =  Servicefile.Doc_complete_and_Missedapp
         }
         
+        var params = ["":""]
+        params = ["_id": Appointmentid,
+                  "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                  "appoinment_status" : "Missed",
+                  "appoint_patient_st": "Petowner Cancelled appointment"]
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_complete_and_Missedapp, method: .post, parameters: params
+        if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
             , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
@@ -145,7 +162,11 @@ class Pet_app_details_ViewController: UIViewController {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        self.dismiss(animated: true, completion: nil)
+                        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                            self.callDocappcancel()
+                        }else{
+                            self.callspappcancel()
+                        }
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -165,11 +186,11 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     func alert(Message: String){
-           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-           }))
-           self.present(alert, animated: true, completion: nil)
-       }
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func call_getdetails(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -189,76 +210,83 @@ class Pet_app_details_ViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let data = res["Data"] as! NSDictionary
-                         self.view_confrence.isHidden = true
+                        self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-                        self.label_orderdate.text = data["booking_date_time"] as? String
-                        let comm_type = data["communication_type"] as? String
-                        if comm_type == "Online" || comm_type == "Online Or Visit"{
-                             if Servicefile.shared.pet_selected_app_list == "current" {
-                                           self.view_complete_cancel.isHidden = false
-                                           //self.view_complete.isHidden = true
-                                           self.view_confrence.isHidden = false
-                                       } else if Servicefile.shared.pet_selected_app_list == "Complete" {
-                                           self.view_complete_cancel.isHidden = true
-                                           self.view_confrence.isHidden = true
-                                       } else {
-                                           self.view_complete_cancel.isHidden = true
-                                           self.view_confrence.isHidden = true
-                                       }
-                        }else{
-                            self.view_confrence.isHidden = true
-                        }
-                        self.label_order_id.text = data["payment_id"] as? String
-                        self.label_payment_method.text = data["payment_method"] as? String
-                        self.label_ordercost.text = data["amount"] as? String
-                        
-                        let pet_id = data["pet_id"] as! NSDictionary
-                        let last_vaccination_date = pet_id["last_vaccination_date"] as! String
-                        if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
-                            self.label_vaccinated.text = "Yes"
-                            self.label_vacindate.text = last_vaccination_date
-                        }else{
-                            self.label_vaccinated.text = "No"
-                            self.view_vacc_date.isHidden = true
-                        }
-                        self.label_age.text = String(pet_id["pet_age"] as! Int)
-                        self.label_weight.text = String(pet_id["pet_weight"] as! Int)
-                        self.label_color.text = pet_id["pet_color"] as? String
-                        self.label_gender.text = pet_id["pet_gender"] as? String
-                        self.label_breed.text = pet_id["pet_breed"] as? String
-                        self.label_petType.text = pet_id["pet_type"] as? String
-                        self.label_petname_details.text =  pet_id["pet_name"] as? String
-                        let petimage = pet_id["pet_img"] as? String
-                        self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage!)) { (image, error, cache, urls) in
-                            if (error != nil) {
-                                self.image_pet_img.image = UIImage(named: "sample")
-                            } else {
-                                self.image_pet_img.image = image
-                            }
-                        }
-                        let user_id = data["user_id"] as! NSDictionary
-                        let firstname = user_id["first_name"] as? String
-                        let lastname = user_id["last_name"] as? String
-                        let userimage = user_id["profile_img"] as? String
-                        self.label_holder_name.text = firstname! + " " + lastname!
-                        //self.label_holder_servie_name.isHidden = true
-                        let amt = data["amount"] as! String
-                        let doc_business_info = data["doc_business_info"] as! NSArray
-                        let doc_busi = doc_business_info[0] as! NSDictionary
-                        let clinic_loc  = doc_busi["clinic_loc"] as! String
-                        self.label_Holder_cost.text = "₹ " + amt
-                        self.label_address_details.text = clinic_loc
-                        if userimage == "" {
-                            self.image_holder_name.image = UIImage(named: "sample")
-                        } else {
-                            self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
-                                if (error != nil) {
-                                    self.image_holder_name.image = UIImage(named: "sample")
+                            self.label_orderdate.text = data["booking_date_time"] as? String
+                            let comm_type = data["communication_type"] as? String
+                            if comm_type == "Online" || comm_type == "Online Or Visit"{
+                                if Servicefile.shared.pet_selected_app_list == "current" {
+                                    self.view_complete_cancel.isHidden = false
+                                    //self.view_complete.isHidden = true
+                                    self.view_confrence.isHidden = false
+                                    if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
+                                        self.view_complete_cancel.isHidden = false
+                                         self.view_cancel.isHidden = false
+                                    } else {
+                                        self.view_complete_cancel.isHidden  = true
+                                         self.view_cancel.isHidden = true
+                                    }
+                                } else if Servicefile.shared.pet_selected_app_list == "Complete" {
+                                    self.view_complete_cancel.isHidden = true
+                                    self.view_confrence.isHidden = true
                                 } else {
-                                    self.image_holder_name.image = image
+                                    self.view_complete_cancel.isHidden = true
+                                    self.view_confrence.isHidden = true
+                                }
+                            }else{
+                                self.view_confrence.isHidden = true
+                            }
+                            self.label_order_id.text = data["payment_id"] as? String
+                            self.label_payment_method.text = data["payment_method"] as? String
+                            self.label_ordercost.text = data["amount"] as? String
+                            
+                            let pet_id = data["pet_id"] as! NSDictionary
+                            let last_vaccination_date = pet_id["last_vaccination_date"] as! String
+                            if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
+                                self.label_vaccinated.text = "Yes"
+                                self.label_vacindate.text = last_vaccination_date
+                            }else{
+                                self.label_vaccinated.text = "No"
+                                self.view_vacc_date.isHidden = true
+                            }
+                            self.label_age.text = String(pet_id["pet_age"] as! Int)
+                            self.label_weight.text = String(pet_id["pet_weight"] as! Int)
+                            self.label_color.text = pet_id["pet_color"] as? String
+                            self.label_gender.text = pet_id["pet_gender"] as? String
+                            self.label_breed.text = pet_id["pet_breed"] as? String
+                            self.label_petType.text = pet_id["pet_type"] as? String
+                            self.label_petname_details.text =  pet_id["pet_name"] as? String
+                            let petimage = pet_id["pet_img"] as? String
+                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage!)) { (image, error, cache, urls) in
+                                if (error != nil) {
+                                    self.image_pet_img.image = UIImage(named: "sample")
+                                } else {
+                                    self.image_pet_img.image = image
                                 }
                             }
-                        }
+                            let user_id = data["user_id"] as! NSDictionary
+                            let firstname = user_id["first_name"] as? String
+                            let lastname = user_id["last_name"] as? String
+                            let userimage = user_id["profile_img"] as? String
+                            self.label_holder_name.text = firstname! + " " + lastname!
+                            //self.label_holder_servie_name.isHidden = true
+                            let amt = data["amount"] as! String
+                            let doc_business_info = data["doc_business_info"] as! NSArray
+                            let doc_busi = doc_business_info[0] as! NSDictionary
+                            let clinic_loc  = doc_busi["clinic_loc"] as! String
+                            self.label_Holder_cost.text = "₹ " + amt
+                            self.label_address_details.text = clinic_loc
+                            if userimage == "" {
+                                self.image_holder_name.image = UIImage(named: "sample")
+                            } else {
+                                self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
+                                    if (error != nil) {
+                                        self.image_holder_name.image = UIImage(named: "sample")
+                                    } else {
+                                        self.image_holder_name.image = image
+                                    }
+                                }
+                            }
                         }else{
                             self.label_orderdate.text = data["booking_date_time"] as? String
                             self.view_confrence.isHidden = true
@@ -316,9 +344,22 @@ class Pet_app_details_ViewController: UIViewController {
                             }
                         }
                         
+                        if Servicefile.shared.pet_selected_app_list == "current" {
+                            self.view_complete_cancel.isHidden  = true
+                            if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
+                                self.view_complete_cancel.isHidden = false
+                                 self.view_cancel.isHidden = false
+                            } else {
+                                self.view_complete_cancel.isHidden  = true
+                                 self.view_cancel.isHidden = true
+                            }
+                        } else if Servicefile.shared.pet_selected_app_list == "Complete" {
+                            self.view_complete_cancel.isHidden = true
+                        } else {
+                            self.view_complete_cancel.isHidden = true
+                        }
                         
                         
-                      
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -335,6 +376,66 @@ class Pet_app_details_ViewController: UIViewController {
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
+    }
+    
+    func callDocappcancel(){
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_notification, method: .post, parameters:
+            ["appointment_UID": Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].Booking_Id,
+             "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "doctor_id":  Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].doctor_id,
+             "status":"Patient Appointment Cancelled",
+             "user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                    }else{
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func callspappcancel(){
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
+            ["appointment_UID": Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].Booking_Id,
+             "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "sp_id": Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].sp_id,
+             "status":"Patient Appointment Cancelled",
+             "user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        
+                    }else{
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

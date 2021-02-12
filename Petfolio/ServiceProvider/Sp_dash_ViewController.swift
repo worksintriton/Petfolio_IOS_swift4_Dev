@@ -67,6 +67,16 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
        
     }
     
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+                      self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_notifi(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+               self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @IBAction func action_refresh(_ sender: Any) {
         self.callcheckstatus()
@@ -106,16 +116,16 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 //            }
         }else if self.appointtype == "Complete"{
              cell.view_commissed.isHidden = false
-            cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].book_date_time
+            cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].completed_at
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
             cell.view_commissed.isHidden = false
-            cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].book_date_time
+            cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].missed_at
              cell.labe_comMissed.text = "Missed on :"
-            cell.label_completedon.textColor = UIColor.red
-             cell.labe_comMissed.textColor = UIColor.red
+             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }
         
         cell.view_completebtn.layer.cornerRadius = 10.0
@@ -266,7 +276,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                         let pet_breed = petdetail["pet_breed"] as! String
                                                         let pet_img = petdetail["pet_img"] as! String
                                                         let user_id = petdetail["user_id"] as! String
-                                                        Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name))
+                                                        let sp_id = dataitm["sp_id"] as! String
+                                                        let appointment_UID = dataitm["appointment_UID"] as! String
+                                                        let completed_at = dataitm["completed_at"] as! String
+                                                         let missed_at = dataitm["missed_at"] as! String
+                                                        Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at))
                                                         
                                                         
                                                     }
@@ -314,7 +328,6 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                             let amount = dataitm["service_amount"] as! String
                                                             let service_name = dataitm["service_name"] as! String
                                                             let booking_date_time = dataitm["booking_date_time"] as! String
-                                                            
                                                             let user_rate = dataitm["user_rate"] as! String
                                                             let user_feedback = dataitm["user_feedback"] as! String
                                                             let petdetail = dataitm["pet_id"] as! NSDictionary
@@ -324,7 +337,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                             let pet_breed = petdetail["pet_breed"] as! String
                                                             let pet_img = petdetail["pet_img"] as! String
                                                             let user_id = petdetail["user_id"] as! String
-                                                            Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name))
+                                                            let sp_id = dataitm["sp_id"] as! String
+                                                            let appointment_UID = dataitm["appointment_UID"] as! String
+                                                             let completed_at = dataitm["completed_at"] as! String
+                                                             let missed_at = dataitm["missed_at"] as! String
+                                                            Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at))
                                                             
                                                             
                                                         }
@@ -371,7 +388,6 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                                 let amount = dataitm["service_amount"] as! String
                                                                 let service_name = dataitm["service_name"] as! String
                                                                 let booking_date_time = dataitm["booking_date_time"] as! String
-                                                                
                                                                 let user_rate = dataitm["user_rate"] as! String
                                                                 let user_feedback = dataitm["user_feedback"] as! String
                                                                 let petdetail = dataitm["pet_id"] as! NSDictionary
@@ -381,8 +397,13 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                                 let pet_breed = petdetail["pet_breed"] as! String
                                                                 let pet_img = petdetail["pet_img"] as! String
                                                                 let user_id = petdetail["user_id"] as! String
-                                                                Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name))
+                                                                let sp_id = dataitm["sp_id"] as! String
+                                                                let appointment_UID = dataitm["appointment_UID"] as! String
+                                                                let completed_at = dataitm["completed_at"] as! String
+                                                                 let missed_at = dataitm["missed_at"] as! String
+                                                                Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at))
                                                                 
+                                                               // appointment_UID
                                                                 
                                                             }
                                                             if Servicefile.shared.SP_Das_petdetails.count > 0 {
@@ -431,7 +452,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                           print("success data",res)
                                                           let Code  = res["Code"] as! Int
                                                           if Code == 200 {
-                                                             
+                                                             if appointmentstatus != "cancel"{
+                                                                      
+                                                                    }else{
+                                                                self.callspappcancel()
+                                                                    }
                                                             
                                                             self.callnew()
                                                             self.stopAnimatingActivityIndicator()
@@ -516,4 +541,34 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
            self.present(vc, animated: true, completion: nil)
        }
+    
+    func callspappcancel(){
+         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
+            ["appointment_UID": Servicefile.shared.SP_Das_petdetails[self.indextag].appointment_UID,
+              "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+              "sp_id": Servicefile.shared.SP_Das_petdetails[self.indextag].sp_id,
+              "status":"Doctor Appointment Cancelled",
+              "user_id": Servicefile.shared.SP_Das_petdetails[self.indextag].user_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                 switch (response.result) {
+                 case .success:
+                     let res = response.value as! NSDictionary
+                     print("success data",res)
+                     let Code  = res["Code"] as! Int
+                     if Code == 200 {
+                         
+                     }else{
+                     }
+                     break
+                 case .failure(let Error):
+                     self.stopAnimatingActivityIndicator()
+                     
+                     break
+                 }
+             }
+         }else{
+             self.stopAnimatingActivityIndicator()
+             self.alert(Message: "No Intenet Please check and try again ")
+         }
+         
+     }
 }

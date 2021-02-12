@@ -14,7 +14,8 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var view_next: UIView!
     @IBOutlet weak var tbl_horlist: UITableView!
     var availhour = ["Monday"]
-      var isavailhour = ["0"]
+    var isavailhour = ["0"]
+    var format = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +75,8 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
                 var B = Servicefile.shared.docMycalHourdicarray
                                    var arr = B
                                    let a = ["Time" : self.availhour[itme],
-                                   "Status" : true ] as NSDictionary
+                                   "Status" : true,
+                                   "format" : self.format[itme]] as NSDictionary
                                    arr.append(a)
                                    B = arr
                                    print(B)
@@ -83,7 +85,8 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
                 var B = Servicefile.shared.docMycalHourdicarray
                 var arr = B
                 let a = ["Time" : self.availhour[itme],
-                         "Status" : false ] as NSDictionary
+                         "Status" : false,
+                         "format" : self.format[itme]] as NSDictionary
                 arr.append(a)
                 B = arr
                 print(B)
@@ -155,6 +158,7 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
         print("day val",day)
         self.availhour.removeAll()
         self.isavailhour.removeAll()
+        self.format.removeAll()
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
            print("user type",Servicefile.shared.userid)
                    self.startAnimatingActivityIndicator()
@@ -172,6 +176,7 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
                                                                     let itdata = Data[itm] as! NSDictionary
                                                                     let title = itdata["Time"] as! String
                                                                     let status = itdata["Status"] as! Bool
+                                                                    let forma = itdata["format"] as! String
     //                                                                if false checkbok should allow to click check box else
     //                                                                show edit box
                                                                     var isstatus = "0"
@@ -180,6 +185,7 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
                                                                     }else{
                                                                          isstatus = "1"
                                                                     }
+                                                                    self.format.append(forma)
                                                                     self.availhour.append(title)
                                                                     self.isavailhour.append(isstatus)
                                                                 }

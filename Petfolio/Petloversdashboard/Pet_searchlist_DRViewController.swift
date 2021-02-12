@@ -42,6 +42,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
+    @IBAction func action_pet_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_sos(_ sender: Any) {
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
            self.present(vc, animated: true, completion: nil)

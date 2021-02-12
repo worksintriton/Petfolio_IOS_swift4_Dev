@@ -125,7 +125,6 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                             let ut_value = idata["user_type_value"] as! Int
                                                             Servicefile.shared.orgiutypesel.append("0")
                                                             if item != 0 {
-                                                                 
                                                                  Servicefile.shared.utypesel.append("0")
                                                             }else{
                                                                  Servicefile.shared.utypesel.append("1")

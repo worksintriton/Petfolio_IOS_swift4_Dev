@@ -101,7 +101,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_calender_hour_ViewController") as! Sp_calender_hour_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     

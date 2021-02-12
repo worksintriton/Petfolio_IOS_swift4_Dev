@@ -48,6 +48,12 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         self.calldetails()
     }
     
+    
+    @IBAction func action_notifica(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_home(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
         self.present(vc, animated: true, completion: nil)

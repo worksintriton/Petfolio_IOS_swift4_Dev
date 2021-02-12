@@ -222,6 +222,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let tag = sender.tag
+            self.tag_val = tag
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[tag].Appid, appointmentstatus: "cancel")
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
@@ -355,7 +356,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_breed = petdetail["pet_breed"] as! String
                             let pet_img = petdetail["pet_img"] as! String
                             let user_id = petdetail["user_id"] as! String
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st, In_commtype : comm_type!))
+                            let appointment_UID = dataitm["appointment_UID"] as! String
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : "", In_completed_at : "", In_missed_at : "", In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -427,7 +429,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_breed = petdetail["pet_breed"] as! String
                             let pet_img = petdetail["pet_img"] as! String
                             let user_id = petdetail["user_id"] as! String
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st, In_commtype : comm_type!))
+                            let appointment_UID = dataitm["appointment_UID"] as! String
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : "", In_completed_at : "", In_missed_at : "", In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -498,7 +501,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_breed = petdetail["pet_breed"] as! String
                             let pet_img = petdetail["pet_img"] as! String
                             let user_id = petdetail["user_id"] as! String
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st, In_commtype : comm_type!))
+                            let appointment_UID = dataitm["appointment_UID"] as! String
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : "", In_completed_at : "", In_missed_at : "", In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -549,6 +553,11 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
+                        if appointmentstatus != "cancel"{
+                           
+                        }else{
+                            self.callDocappcancel()
+                        }
                         self.callnew()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -639,5 +648,33 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    func callDocappcancel(){
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_notification, method: .post, parameters:
+           ["appointment_UID": Servicefile.shared.Doc_dashlist[self.tag_val].appointment_UID,
+             "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "doctor_id": Servicefile.shared.userid,
+             "status":"Doctor Appointment Cancelled",
+             "user_id": Servicefile.shared.Doc_dashlist[self.tag_val].user_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        
+                    }else{
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
 }

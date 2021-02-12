@@ -58,6 +58,16 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     }
     
     
+    @IBAction func action_notifica(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+                          self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
     @IBAction func action_book(_ sender: Any) {
@@ -67,6 +77,12 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_petcare(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {
@@ -199,3 +215,5 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
           }
 
 }
+
+

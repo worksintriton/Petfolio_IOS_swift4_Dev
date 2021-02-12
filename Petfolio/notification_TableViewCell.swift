@@ -15,6 +15,7 @@ class notification_TableViewCell: UITableViewCell {
     @IBOutlet weak var image_noti: UIImageView!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_date: UILabel!
+    @IBOutlet weak var label_description: UILabel!
     
     
     override func awakeFromNib() {

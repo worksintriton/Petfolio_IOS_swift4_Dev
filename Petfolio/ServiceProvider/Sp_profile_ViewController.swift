@@ -21,6 +21,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var label_special: UILabel!
     @IBOutlet weak var label_myservices: UILabel!
     
+    @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var coll_bussi_img: UICollectionView!
     
     var ismenu = ["0"]
@@ -28,9 +29,16 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_footer.layer.cornerRadius = 10.0
         self.coll_bussi_img.delegate = self
         self.coll_bussi_img.dataSource = self
     }
+    
+    @IBAction func action_home(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                 self.present(vc, animated: true, completion: nil)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.callSp_details()
@@ -62,7 +70,15 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                       self.present(vc, animated: true, completion: nil)
     }
     
-   
+   @IBAction func action_profile(_ sender: Any) {
+             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+                           self.present(vc, animated: true, completion: nil)
+         }
+         
+         @IBAction func action_notifi(_ sender: Any) {
+             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+                    self.present(vc, animated: true, completion: nil)
+         }
     
     
     
@@ -97,11 +113,15 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     @IBAction func action_profile_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
    
+    @IBAction func action_bussi_edit(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
    
@@ -154,7 +174,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                                                             if itm == 0 {
                                                                 serv = valser
                                                             }else{
-                                                                serv = ", " + valser
+                                                                serv =  serv + ", " + valser
                                                             }
                                                         }
                                                         self.label_myservices.text = serv

@@ -482,7 +482,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             var booking_date = format.string(from: date)
             var booking_time = tformat.string(from: date)
             Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
-            Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + "   " + Servicefile.shared.pet_apoint_booking_time
+            Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
             Servicefile.shared.pet_apoint_video_id = ""
             Servicefile.shared.pet_apoint_user_id = ""
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
@@ -772,6 +772,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     func onPaymentError(_ code: Int32, description str: String) {
         print("Payment failed with code")
+        self.callpaymentfail()
     }
     
     func onPaymentSuccess(_ payment_id: String) {
@@ -782,12 +783,39 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
         print("error: ", code)
-        
     }
     
     func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
         print("success: ", payment_id)
-        
     }
     
+    func callpaymentfail(){
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_notification, method: .post, parameters:
+            ["appointment_UID": "",
+             "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "doctor_id":Servicefile.shared.pet_apoint_doctor_id,
+             "status":"Payment Failed",
+             "user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        
+                    }else{
+                      
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                   
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
 }

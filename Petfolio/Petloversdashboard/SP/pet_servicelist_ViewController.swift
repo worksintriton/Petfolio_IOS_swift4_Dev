@@ -18,9 +18,11 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var label_category: UILabel!
     @IBOutlet weak var view_sortby: UIView!
     @IBOutlet weak var view_filter: UIView!
+    @IBOutlet weak var view_footer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_footer.layer.cornerRadius = 15.0
         self.label_nodatafound.isHidden = true
         self.tabl_service.delegate = self
         self.tabl_service.dataSource = self

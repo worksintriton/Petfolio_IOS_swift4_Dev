@@ -103,6 +103,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.view_online.isHidden = true
         cell.label_status.isHidden = true
         cell.label_status_val.isHidden = true
+        cell.view_pres.isHidden = true
         cell.selectionStyle = .none
         cell.selectionStyle = .none
         if self.appointtype == "current" {
@@ -136,18 +137,23 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }else if self.appointtype == "Complete"{
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
                 cell.view_pres.isHidden = false
-                if Servicefile.shared.pet_applist_do_sp[indexPath.row].userrate == "" || Servicefile.shared.pet_applist_do_sp[indexPath.row].userfeed == ""{
+                if Servicefile.shared.pet_applist_do_sp[indexPath.row].userrate == "0" || Servicefile.shared.pet_applist_do_sp[indexPath.row].userfeed == ""{
                     cell.view_addview.isHidden = false
                 } else {
                     cell.view_addview.isHidden = true
                 }
             }else{
                 cell.view_pres.isHidden = true
+                if Servicefile.shared.pet_applist_do_sp[indexPath.row].userrate == "0" || Servicefile.shared.pet_applist_do_sp[indexPath.row].userfeed == ""{
+                                   cell.view_addview.isHidden = false
+                               } else {
+                                   cell.view_addview.isHidden = true
+                               }
             }
             cell.view_addview.layer.cornerRadius = 10.0
             cell.btn_addreview.tag = indexPath.row
             cell.btn_addreview.addTarget(self, action: #selector(action_addreview), for: .touchUpInside)
-            cell.view_pres.isHidden = false
+            //cell.view_pres.isHidden = false
             cell.view_commissed.isHidden = false
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
@@ -246,6 +252,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @objc func action_addreview(sender : UIButton){
         let tag = sender.tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.pet_applist_do_sp[tag]._id
+        Servicefile.shared.selectedindex = tag
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewRateViewController") as! ReviewRateViewController
         self.present(vc, animated: true, completion: nil)
     }

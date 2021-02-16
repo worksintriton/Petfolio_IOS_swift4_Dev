@@ -737,8 +737,10 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if coll_govtid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "govtid", for: indexPath) as! imgidCollectionViewCell
-                               cell.Img_id.image = UIImage(named: "sample")
-
+                cell.Img_id.image = UIImage(named: "pdf")
+                cell.Img_id.layer.cornerRadius = 5.0
+                cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+                cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
             return cell
         }else if coll_pettype == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pettype", for: indexPath) as! checkupCollectionViewCell
@@ -752,9 +754,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             return cell
         }else if coll_photoid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoid", for: indexPath)  as! imgidCollectionViewCell
-           
-                               cell.Img_id.image = UIImage(named: "sample")
-                          
+            
+            cell.Img_id.image = UIImage(named: "pdf")
+            cell.Img_id.layer.cornerRadius = 5.0
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_photoid), for: .touchUpInside)
+            
             return cell
         }else if coll_speciali == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciali", for: indexPath) as! checkupCollectionViewCell
@@ -767,12 +772,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             cell.title.text = self.specialza[indexPath.row]
                        return cell
         }else if coll_certificate == collectionView{
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
-
-                               cell.Img_id.image = UIImage(named: "sample")
-//
-                       return cell
-            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
+                cell.Img_id.image = UIImage(named: "pdf")
+                cell.Img_id.layer.cornerRadius = 5.0
+                cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+                cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
+            return cell
         } else {
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clinic", for: indexPath)  as! imgidCollectionViewCell
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
@@ -784,10 +789,37 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                                cell.Img_id.image = image
                            }
                        }
+            cell.Img_id.layer.cornerRadius = 5.0
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
                        return cell
             
         }
     }
+    @objc func action_close_clinic(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.clinicdicarray.remove(at: tag)
+        self.coll_clinicpic.reloadData()
+    }
+    
+    @objc func action_close_govid(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.govdicarray.remove(at: tag)
+        self.coll_govtid.reloadData()
+    }
+    
+    @objc func action_close_photoid(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.photodicarray.remove(at: tag)
+        self.coll_photoid.reloadData()
+    }
+    
+    @objc func action_close_certifid(sender: UIButton){
+           let tag = sender.tag
+           Servicefile.shared.certifdicarray.remove(at: tag)
+           self.coll_certificate.reloadData()
+       }
+    
     
   
     
@@ -848,17 +880,17 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if coll_govtid == collectionView {
-              return CGSize(width: 100 , height:  160)
+              return CGSize(width: 100 , height:  100)
         }else if coll_pettype == collectionView {
              return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_photoid == collectionView {
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }else if coll_speciali == collectionView {
              return CGSize(width: coll_speciali.frame.size.width / 2.1 , height:   40)
         }else if coll_certificate == collectionView {
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }else{
-            return CGSize(width: 100 , height:  160)
+            return CGSize(width: 100 , height:  100)
         }
        }
     
@@ -1146,8 +1178,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                    "clinic_name" : self.textfield_clinicname.text!,
                    "communication_type": self.textfield_commtype.text!,
                    "clinic_loc" : self.textview_clinicaddress.text!,
-                   "clinic_lat" : self.latitude,
-                   "clinic_long" : self.longitude,
+                   "clinic_lat" : self.latitude!,
+                   "clinic_long" : self.longitude!,
                    "education_details" : Servicefile.shared.edudicarray,
                    "experience_details" : Servicefile.shared.expdicarray,
                    "specialization" : Servicefile.shared.specdicarray,

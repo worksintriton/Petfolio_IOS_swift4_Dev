@@ -133,7 +133,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @objc func action_book(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
-        Servicefile.shared.pet_apoint_amount = Servicefile.shared.moredocd[tag].amount
+        Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[tag].amount)!
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
         
@@ -142,7 +142,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[indexPath.row].user_id
-        Servicefile.shared.pet_apoint_amount = Servicefile.shared.moredocd[indexPath.row].amount
+        Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[indexPath.row].amount)!
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchtoclinicdetailViewController") as! SearchtoclinicdetailViewController
         self.present(vc, animated: true, completion: nil)

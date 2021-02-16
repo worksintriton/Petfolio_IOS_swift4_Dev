@@ -409,9 +409,9 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             var booking_time = tformat.string(from: date)
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_doc_feedback = ""
-            Servicefile.shared.pet_apoint_doc_rate = "0"
+            Servicefile.shared.pet_apoint_doc_rate = 0
             Servicefile.shared.pet_apoint_user_feedback = ""
-            Servicefile.shared.pet_apoint_user_rate = "0"
+            Servicefile.shared.pet_apoint_user_rate = 0.0
             Servicefile.shared.pet_apoint_display_date = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
@@ -490,8 +490,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
              "pet_breed" : self.textfield_petbreed.text!,
              "pet_gender" : self.textfield_petage.text!,
              "pet_color" : self.textfield_color.text!,
-             "pet_weight" : self.textfield_weight.text!,
-             "pet_age" : self.textfield_petage.text!,
+             "pet_weight" : Int(self.textfield_weight.text!),
+             "pet_age" : Int(self.textfield_petage.text!),
              "vaccinated" : false,
              "last_vaccination_date" : "",
              "default_status" : true,
@@ -618,10 +618,10 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     }
     
     func showPaymentForm(){
-           if Servicefile.shared.pet_apoint_amount == "" {
-               Servicefile.shared.pet_apoint_amount = "100"
+           if Servicefile.shared.pet_apoint_amount == 0 {
+               Servicefile.shared.pet_apoint_amount = 0
            }
-           let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
+        let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
            print("value changed",data)
            self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
                    let options: [String:Any] = [
@@ -649,6 +649,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
            
            func onPaymentError(_ code: Int32, description str: String) {
                    print("Payment failed with code")
+            self.callpaymentfail()
               }
               
               func onPaymentSuccess(_ payment_id: String) {

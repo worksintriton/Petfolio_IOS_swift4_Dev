@@ -17,6 +17,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var view_addreview: UIView!
     @IBOutlet weak var view_main: UIView!
     @IBOutlet var view_shadow: UIView!
+    @IBOutlet weak var view_textview: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,8 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
         self.view_main.layer.cornerRadius = 15.0
         self.view_addreview.layer.cornerRadius = 10.0
         self.textview_review.delegate = self
+        self.view_textview.layer.cornerRadius = 10.0
+        self.view_textview.dropShadow()
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         self.view_shadow.addGestureRecognizer(tap)
@@ -68,12 +71,18 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
             }
       
       func callupdaterateandreview(){
+        var linkurl = ""
+         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+            linkurl = Servicefile.pet_review_update
+         }else{
+            linkurl = Servicefile.pet_spreview_update
+        }
+        
          self.startAnimatingActivityIndicator()
-         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_review_update, method: .post, parameters:
+         if Servicefile.shared.updateUserInterface() { AF.request(linkurl, method: .post, parameters:
              ["_id": Servicefile.shared.pet_apoint_id,
               "user_feedback": self.textview_review.text!,
-              "user_rate": self.Cosmos_rate.rating
-              ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+              "user_rate": self.Cosmos_rate.rating], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                     switch (response.result) {
                                                     case .success:
                                                           let res = response.value as! NSDictionary

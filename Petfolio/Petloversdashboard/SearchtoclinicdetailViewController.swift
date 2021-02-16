@@ -151,9 +151,9 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as! String
                         let clidet = Data["clinic_pic"] as! NSArray
                         let clicloc =  Data["clinic_loc"] as! String
-                        let amount =  String(Data["amount"] as! Int)
+                        let amount =  Data["amount"] as! Int
                         Servicefile.shared.pet_apoint_amount = amount
-                        self.label_cont_amt.text = " ₹ " + Servicefile.shared.pet_apoint_amount
+                        self.label_cont_amt.text = " ₹ " + String(Servicefile.shared.pet_apoint_amount)
                         self.label_city.text = clicloc + ". "
                         self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                         for itm in 0..<clidet.count{

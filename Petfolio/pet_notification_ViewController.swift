@@ -10,16 +10,19 @@ import UIKit
 import Alamofire
 
 class pet_notification_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     @IBOutlet weak var tbl_notifi_list: UITableView!
     
-    
-    
+    var selcted = ["0"]
+    var orginal = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tbl_notifi_list.delegate = self
         self.tbl_notifi_list.dataSource = self
+        Servicefile.shared.notif_list.removeAll()
+        self.selcted.removeAll()
+        self.orginal.removeAll()
         self.callnotification()
         // Do any additional setup after loading the view.
     }
@@ -33,31 +36,71 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! notification_TableViewCell
-        cell.selectionStyle = .none
-        cell.view_main.layer.cornerRadius = 10.0
-        cell.view_main.dropShadow()
-        if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
-            cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
-                      if (error != nil) {
-                          cell.image_noti.image = UIImage(named: "logo")
-                      } else {
-                          cell.image_noti.image = image
-                      }
-                  }
+        if self.selcted[indexPath.row] == "1" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! notification_TableViewCell
+            cell.selectionStyle = .none
+            cell.view_main.layer.cornerRadius = 10.0
+            cell.view_main.dropShadow()
+            if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
+                cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.image_noti.image = UIImage(named: "logo")
+                    } else {
+                        cell.image_noti.image = image
+                    }
+                }
+            }else{
+                cell.image_noti.image = UIImage(named: "logo")
+            }
+            cell.label_description.text = Servicefile.shared.notif_list[indexPath.row].notify_descri
+            cell.label_title.text = Servicefile.shared.notif_list[indexPath.row].notify_title
+            cell.label_date.text = Servicefile.shared.notif_list[indexPath.row].date_and_time
+            return cell
         }else{
-            cell.image_noti.image = UIImage(named: "logo")
+            
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! notification_TableViewCell
+            cell.selectionStyle = .none
+            cell.view_main.layer.cornerRadius = 10.0
+            cell.view_main.dropShadow()
+            if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
+                cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.image_noti.image = UIImage(named: "logo")
+                    } else {
+                        cell.image_noti.image = image
+                    }
+                }
+            }else{
+                cell.image_noti.image = UIImage(named: "logo")
+            }
+            cell.label_description.text = Servicefile.shared.notif_list[indexPath.row].notify_descri
+            cell.label_title.text = Servicefile.shared.notif_list[indexPath.row].notify_title
+            cell.label_date.text = Servicefile.shared.notif_list[indexPath.row].date_and_time
+            
+            return cell
         }
-        cell.label_description.text = Servicefile.shared.notif_list[indexPath.row].notify_descri
-        cell.label_title.text = Servicefile.shared.notif_list[indexPath.row].notify_title
-        cell.label_date.text = Servicefile.shared.notif_list[indexPath.row].date_and_time
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.selcted[indexPath.row] == "1" {
+            self.selcted = self.orginal
+        }else{
+            self.selcted = self.orginal
+            self.selcted.remove(at: indexPath.row)
+            self.selcted.insert("1", at: indexPath.row)
+            
+        }
+        self.tbl_notifi_list.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        if self.selcted[indexPath.row] == "1" {
+            return 150
+        }else{
+            return 120
+        }
     }
-    
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -93,7 +136,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
-   
+    
     func callnotification(){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.notification, method: .post, parameters:
@@ -105,8 +148,12 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         Servicefile.shared.notif_list.removeAll()
+                        self.selcted.removeAll()
+                        self.orginal.removeAll()
                         let Dat = res["Data"] as! NSArray
                         for item in 0..<Dat.count{
+                            self.selcted.append("0")
+                            self.orginal.append("0")
                             let notilist = Dat[item] as! NSDictionary
                             let _id = notilist["_id"] as! String
                             let user_id = notilist["user_id"] as! String
@@ -120,7 +167,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                         self.tbl_notifi_list.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
-                         Servicefile.shared.notif_list.removeAll()
+                        Servicefile.shared.notif_list.removeAll()
                         self.tbl_notifi_list.reloadData()
                         self.stopAnimatingActivityIndicator()
                         let Messages = res["Message"] as! String
@@ -141,11 +188,11 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func alert(Message: String){
-          let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-          }))
-          self.present(alert, animated: true, completion: nil)
-      }
-      
-
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
 }

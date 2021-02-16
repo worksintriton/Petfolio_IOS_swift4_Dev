@@ -72,15 +72,14 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 if Servicefile.shared.user_type == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.user_type == "4" {
+                } else if Servicefile.shared.user_type == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)
-                }else if Servicefile.shared.user_type == "2" {
+                } else if Servicefile.shared.user_type == "2" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                     self.present(vc, animated: true, completion: nil)
-                }
-                else{
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                } else{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
                     self.present(vc, animated: true, completion: nil)
                 }
 

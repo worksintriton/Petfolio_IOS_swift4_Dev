@@ -70,8 +70,11 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
         Servicefile.shared.Count_value_start = 0
         Servicefile.shared.review_count = 0
         Servicefile.shared.selrate = 0
-        Servicefile.shared.SP_filter_price.removeAll()
-        self.dismiss(animated: true, completion: nil)
+        self.check_review()
+        //Servicefile.shared.SP_filter_price.removeAll()
+        Servicefile.shared.isspecialza = Servicefile.shared.orgspecialza
+        self.tbl_spec.reloadData()
+        //self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func action_apply(_ sender: Any) {

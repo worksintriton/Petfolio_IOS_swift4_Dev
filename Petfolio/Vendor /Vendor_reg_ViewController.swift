@@ -445,7 +445,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    func callvendorreg(){
     print("details in vendor registration",Servicefile.shared.gallerydicarray,Servicefile.shared.certifdicarray,self.image_photo,self.image_govid)
        self.startAnimatingActivityIndicator()
-   if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_register, method: .post, parameters:
+   if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Vendor_reg, method: .post, parameters:
        [ "user_id": Servicefile.shared.userid,
                 "user_name" : Servicefile.shared.first_name,
                 "user_email": Servicefile.shared.user_email,
@@ -462,8 +462,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                 "mobile_type" : "IOS",
                 "profile_status": true,
                 "profile_verification_status" : "Not Verified",
-                "bussiness_loc" : String(self.latitude),
-                "bussiness_lat" : String(self.longitude),
+                "bussiness_loc" : self.latitude!,
+                "bussiness_lat" : self.longitude!,
                 "bussiness_long" : self.locationaddress,
                 "delete_status" : false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                            switch (response.result) {
@@ -472,7 +472,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                                  print("success data",res)
                                                  let Code  = res["Code"] as! Int
                                                  if Code == 200 {
-                                                   let Data = res["Data"] as! NSDictionary
+                                                   //let Data = res["Data"] as! NSDictionary
                                                    self.callupdatestatus()
                                                     self.stopAnimatingActivityIndicator()
                                                  }else{

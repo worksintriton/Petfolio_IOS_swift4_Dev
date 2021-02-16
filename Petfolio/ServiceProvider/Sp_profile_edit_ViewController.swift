@@ -49,6 +49,9 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     @IBOutlet weak var picker_time: UIPickerView!
     @IBOutlet weak var textfield_amt: UITextField!
     
+    @IBOutlet weak var view_photo_id_close: UIView!
+    @IBOutlet weak var view_govid_close: UIView!
+    
     var selservice = ["0"]
     var selspec = ["0"]
     var added_service = [""]
@@ -72,7 +75,8 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         Servicefile.shared.selectedservice.removeAll()
         Servicefile.shared.sertime.removeAll()
         Servicefile.shared.speclist.removeAll()
-        
+        self.view_photo_id_close.layer.cornerRadius =  self.view_photo_id_close.frame.size.height / 2
+        self.view_govid_close.layer.cornerRadius =  self.view_govid_close.frame.size.height / 2
     }
     
     func call_protocals(){
@@ -464,16 +468,20 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                     cell.Img_id.image = image
                 }
             }
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_gallary), for: .touchUpInside)
             cell.Img_id.layer.cornerRadius = 10.0
             return cell
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
-            
-            cell.Img_id.image = UIImage(named: "sample")
+            cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
+            cell.Img_id.image = UIImage(named: "pdf")
             return cell
         }else if coll_speclist == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spec", for: indexPath) as! checkupCollectionViewCell
             cell.title.text = Servicefile.shared.speclist[indexPath.row]
+            
             if self.selspec[indexPath.row] != "0" {
                 cell.img_check.image = UIImage(named: " checkbox-1")
             } else{
@@ -493,6 +501,32 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             cell.btn_close.addTarget(self, action: #selector(sel_spec), for: .touchUpInside)
             return cell
         }
+    }
+    
+    @IBAction func action_close_photoid(_ sender: Any) {
+        self.image_photo = ""
+        self.setimag()
+        self.view_photo_id_close.isHidden = true
+    }
+    
+    @IBAction func action_close_govid(_ sender: Any) {
+        self.img_for = ""
+        self.setimag()
+        self.view_photo_id_close.isHidden = true
+    }
+    
+    
+    
+    
+    @objc func action_close_certifid(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.certifdicarray.remove(at: tag)
+        self.coll_certificate.reloadData()
+    }
+    @objc func action_close_gallary(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.gallerydicarray.remove(at: tag)
+        self.coll_galary_img.reloadData()
     }
     
     @objc func sel_serli(sender: UIButton){
@@ -528,14 +562,14 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     func setimag(){
         if self.image_photo != "" {
             self.image_photo_id.isHidden = false
-            self.image_photo_id.image = UIImage(named: "sample")
+            self.image_photo_id.image = UIImage(named: "pdf")
         }else{
             self.image_photo_id.isHidden = true
         }
         
         if self.image_govid != "" {
             self.image_gov.isHidden = false
-            self.image_gov.image = UIImage(named: "sample")
+            self.image_gov.image = UIImage(named: "pdf")
         }else{
             self.image_gov.isHidden = true
         }
@@ -712,8 +746,8 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             [ "_id" : Servicefile.shared.sp_id,
               "user_id": Servicefile.shared.userid,
               "sp_loc": self.locationaddress,
-              "sp_lat": String(self.latitude),
-              "sp_long": String(self.longitude),
+              "sp_lat": self.latitude!,
+              "sp_long": self.longitude!,
               "bus_user_name": Servicefile.shared.first_name,
               "bus_user_email": Servicefile.shared.user_email,
               "profile_status": true,

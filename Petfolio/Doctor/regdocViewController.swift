@@ -1141,8 +1141,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "clinic_name" : self.textfield_clinicname.text!,
                    "communication_type": self.textfield_commtype.text!,
                    "clinic_loc" : self.textview_clinicaddress.text!,
-                   "clinic_lat" : self.latitude,
-                   "clinic_long" : self.longitude,
+                   "clinic_lat" : self.latitude!,
+                   "clinic_long" : self.longitude!,
                    "education_details" : Servicefile.shared.edudicarray,
                    "experience_details" : Servicefile.shared.expdicarray,
                    "specialization" : Servicefile.shared.specdicarray,
@@ -1153,7 +1153,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "photo_id_pic" : Servicefile.shared.photodicarray,
                    "profile_status" : true,
                    "profile_verification_status" : "Not verified",
-                   "consultancy_fees" : self.textfield_ser_amt.text!,
+                   "consultancy_fees" : Int(self.textfield_ser_amt.text!)!,
                    "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
                                                        case .success:
@@ -1161,7 +1161,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                                                              print("success data",res)
                                                              let Code  = res["Code"] as! Int
                                                              if Code == 200 {
-                                                               let Data = res["Data"] as! NSDictionary
+                                                               //let Data = res["Data"] as! NSDictionary
                                                                 self.view_popup.isHidden = false
                                                                 self.view_shadow.isHidden = false
                                                                 //self.callupdatestatus()

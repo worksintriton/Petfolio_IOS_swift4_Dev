@@ -457,9 +457,9 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             Servicefile.shared.pet_apoint_user_id = ""
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_doc_feedback = ""
-            Servicefile.shared.pet_apoint_doc_rate = "0"
+            Servicefile.shared.pet_apoint_doc_rate = 0
             Servicefile.shared.pet_apoint_user_feedback = ""
-            Servicefile.shared.pet_apoint_user_rate = "0"
+            Servicefile.shared.pet_apoint_user_rate = 0.0
             let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
             let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
             Servicefile.shared.pet_apoint_display_date = stringformat
@@ -668,8 +668,8 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     func showPaymentForm(){
-        if Servicefile.shared.pet_apoint_amount != "" {
-            let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
+        if Servicefile.shared.pet_apoint_amount != 0 {
+            let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
             print("value changed",data)
             self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
             let options: [String:Any] = [

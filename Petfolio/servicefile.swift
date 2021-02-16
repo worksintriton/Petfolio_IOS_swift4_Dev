@@ -24,6 +24,7 @@ class Servicefile {
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let verifyemail = baseurl + "/api/userdetails/send/emailotp"
     static let login = baseurl + "/api/userdetails/mobile/login"
+    
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard1"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
@@ -105,7 +106,7 @@ class Servicefile {
     static let pet_servicedetails = baseurl + "/api/service_provider/mobile/servicedetails"
     static let pet_sp_service_details = baseurl + "/api/service_provider/mobile/sp_fetch_by_id"
     static let pet_review_update = baseurl + "/api/appointments/reviews/update"
-    
+    static let pet_spreview_update = baseurl + "/api/sp_appointments/reviews/update"
     static let doc_start_appointment = baseurl + "/api/appointments/edit"
     static let doc_cancel_appointment = baseurl + "/api/appointments/edit"
     
@@ -119,6 +120,8 @@ class Servicefile {
      static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
     
     
+    static let Vendor_reg = baseurl + "/api/product_vendor/create"
+    static let Vendor_check_status = baseurl + "/api/product_vendor/check_status"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -195,16 +198,16 @@ class Servicefile {
     var pet_apoint_doc_attched = [Any]()
     var Pet_Appointment_petimg = [Any]()
     var pet_apoint_doc_feedback = ""
-    var pet_apoint_doc_rate = ""
+    var pet_apoint_doc_rate = 0
     var pet_apoint_user_feedback = ""
-    var pet_apoint_user_rate = ""
+    var pet_apoint_user_rate = 0.0
     var pet_apoint_display_date = ""
     var pet_apoint_server_date_time = ""
     var pet_apoint_payment_id = ""
     var pet_apoint_payment_method = ""
     var pet_apoint_appointment_types = ""
     var pet_apoint_allergies = ""
-    var pet_apoint_amount = ""
+    var pet_apoint_amount = 0
     var pet_apoint_servicename = ""
     var sear_Docapp_id = ""
     var pet_dash_lati = 0.0
@@ -223,6 +226,7 @@ class Servicefile {
     var selectedCountry = ""
     var selectedstate = ""
     var selectedState = ""
+    
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
@@ -342,7 +346,7 @@ class Servicefile {
     var service_id_count = 0
     var service_id_image_path = ""
     var service_id_title = ""
-    var service_id_amount = ""
+    var service_id_amount = 0
     var service_id_time = ""
     var service_prov_buss_info = [Any]()
     

@@ -179,19 +179,18 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.textfield_petweight {
-            let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
         if textField == self.textfiled_petage{
-            let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
         return true
-        
     }
     
     @objc func textFieldDidChange(textField : UITextField){
@@ -451,8 +450,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                       "pet_breed" : self.textfield_petbreed.text!,
                       "pet_gender" : self.textfield_petgender.text!,
                       "pet_color" : self.textfield_petcolor.text!,
-                      "pet_weight" : self.textfield_petweight.text!,
-                      "pet_age" : self.textfiled_petage.text!,
+                      "pet_weight" : Int(self.textfield_petweight.text!)!,
+                      "pet_age" : Int(self.textfiled_petage.text!)!,
                       "vaccinated" : self.isvaccin,
                       "last_vaccination_date" : self.textfield_selectdate.text!,
                       "default_status" : true,
@@ -467,8 +466,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                       "pet_breed" : self.textfield_petbreed.text!,
                       "pet_gender" : self.textfield_petgender.text!,
                       "pet_color" : self.textfield_petcolor.text!,
-                      "pet_weight" : self.textfield_petweight.text!,
-                      "pet_age" : self.textfiled_petage.text!,
+                      "pet_weight" : Int(self.textfield_petweight.text!)!,
+                      "pet_age" : Int(self.textfiled_petage.text!)!,
                       "vaccinated" : self.isvaccin,
                       "last_vaccination_date" : self.textfield_selectdate.text!,
                       "default_status" : true,
@@ -482,8 +481,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
               "pet_breed" , self.textfield_petbreed.text!,
               "pet_gender" , self.textfield_petgender.text!,
               "pet_color" , self.textfield_petcolor.text!,
-              "pet_weight" , self.textfield_petweight.text!,
-              "pet_age" , self.textfiled_petage.text!,
+              "pet_weight" , Int(self.textfield_petweight.text!)!,
+              "pet_age" , Int(self.textfiled_petage.text!)!,
               "vaccinated" , self.isvaccin,
               "last_vaccination_date" , self.textfield_selectdate.text!,
               "default_status" , true,

@@ -487,9 +487,9 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             Servicefile.shared.pet_apoint_user_id = ""
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_doc_feedback = ""
-            Servicefile.shared.pet_apoint_doc_rate = "0"
+            Servicefile.shared.pet_apoint_doc_rate = 0
             Servicefile.shared.pet_apoint_user_feedback = ""
-            Servicefile.shared.pet_apoint_user_rate = "0"
+            Servicefile.shared.pet_apoint_user_rate = 0.0
             let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
             let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
             Servicefile.shared.pet_apoint_display_date = stringformat
@@ -539,7 +539,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
              "payment_method" : Servicefile.shared.pet_apoint_payment_method ,
              "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
              "allergies" : Servicefile.shared.pet_apoint_allergies,
-             "amount" : Servicefile.shared.pet_apoint_amount,"mobile_type" : "IOS"
+             "amount" : String(Servicefile.shared.pet_apoint_amount),"mobile_type" : "IOS"
                 ,"missed_at" : "",
                  "completed_at": ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                     switch (response.result) {
@@ -743,8 +743,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     }
     
     func showPaymentForm(){
-        if Servicefile.shared.pet_apoint_amount != "" {
-            let data = Double(Servicefile.shared.pet_apoint_amount)! * Double(100)
+        if Servicefile.shared.pet_apoint_amount != 0 {
+            let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
                    print("value changed",data)
                    self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
                    let options: [String:Any] = [

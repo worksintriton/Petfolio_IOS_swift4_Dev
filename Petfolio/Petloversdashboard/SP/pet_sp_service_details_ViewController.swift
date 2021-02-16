@@ -130,8 +130,8 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                     let bus_service_list = Data["bus_service_list"] as! NSArray
                                                                 let bus_spec_list = Data["bus_spec_list"] as! NSArray
                                                                 let Details = res["Details"] as! NSDictionary
-                                                                let Sp_comments  = Data["distance"] as! Int
-                                                                let Sp_rating  = Data["distance"] as! Int
+                                                                let Sp_comments  = Data["comments"] as! Int
+                                                                let Sp_rating  = Data["rating"] as! Int
                                                                 var dicarray = [Any]()
                                                                 dicarray.removeAll()
                                                                 dicarray.append(Data)
@@ -141,7 +141,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 Servicefile.shared.service_id_count = Details["count"] as! Int
                                                                 Servicefile.shared.service_id_image_path = Details["image_path"] as! String
                                                                 Servicefile.shared.service_id_title = Details["title"] as! String
-                                                                Servicefile.shared.service_id_amount = String(Details["amount"] as! Int)
+                                                                Servicefile.shared.service_id_amount = Details["amount"] as! Int
                                                                 Servicefile.shared.service_id_time = Details["time"] as! String
                                                                 
                                                                 

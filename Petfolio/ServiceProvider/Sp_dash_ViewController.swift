@@ -101,9 +101,8 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docdashTableViewCell
-        
+         cell.image_emergnecy.isHidden = true
         if self.appointtype == "New" {
-            cell.image_emergnecy.isHidden = true
             cell.view_commissed.isHidden = true
             cell.btn_complete.tag = indexPath.row
              cell.btn_cancel.tag = indexPath.row
@@ -113,7 +112,13 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 //                cell.image_emergnecy.isHidden = false
 //            }else{
 //                cell.image_emergnecy.isHidden = true
+            
 //            }
+            if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.SP_Das_petdetails[indexPath.row].book_date_time) > Date() {
+                cell.view_cancnel.isHidden = false
+            } else {
+                cell.view_cancnel.isHidden = true
+            }
         }else if self.appointtype == "Complete"{
              cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].completed_at
@@ -163,15 +168,17 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
         self.indextag = tag
+         self.label_popalert_details.text = "Are you sure you want to complete this appointment"
         self.statussel = "completed"
        self.view_shadow.isHidden = false
-              self.view_popalert.isHidden = false
+       self.view_popalert.isHidden = false
         
     }
     @objc func action_cancelled(sender : UIButton){
         let tag = sender.tag
         self.indextag = tag
         self.statussel = "cancel"
+        self.label_popalert_details.text = "Are you sure you want to cancel this appointment"
         self.view_shadow.isHidden = false
         self.view_popalert.isHidden = false
        
@@ -180,10 +187,10 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     
     @IBAction func action_pop_yes(_ sender: Any) {
         if self.statussel != "cancel"{
-             self.label_popalert_details.text = "Are you sure you want to complete this appointment"
+            
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[self.indextag].Appid, appointmentstatus: "completed")
         }else{
-             self.label_popalert_details.text = "Are you sure you want to cancel this appointment"
+             
              self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[self.indextag].Appid, appointmentstatus: "cancel")
         }
         self.view_shadow.isHidden = true
@@ -266,7 +273,6 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                         let amount = dataitm["service_amount"] as! String
                                                         let service_name = dataitm["service_name"] as! String
                                                         let booking_date_time = dataitm["booking_date_time"] as! String
-                                                        
                                                         let user_rate = dataitm["user_rate"] as! String
                                                         let user_feedback = dataitm["user_feedback"] as! String
                                                         let petdetail = dataitm["pet_id"] as! NSDictionary
@@ -491,10 +497,14 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                       if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
                                                         let profile_status = Data["profile_status"] as! Bool
+                                                         let calender_status = Data["calender_status"] as! Bool
                                                         print("profile_status",profile_status)
                                                         if profile_status == false {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
                                                                    self.present(vc, animated: true, completion: nil)
+                                                        }else if calender_status == false {
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_reg_calender_ViewController") as! Sp_reg_calender_ViewController
+                                                            self.present(vc, animated: true, completion: nil)
                                                         }else {
                                                              let profile_verification_status = Data["profile_verification_status"] as! String
                                                             if profile_verification_status == "Not verified" {

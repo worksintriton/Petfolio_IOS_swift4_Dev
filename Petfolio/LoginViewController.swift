@@ -43,12 +43,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return true
     }
     
+    
     @objc func textFieldDidChange(textField : UITextField){
         if self.usercred == textField {
             if self.usercred.text!.count > 9 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.usercred.text = string
+                }else{
+                    self.usercred.text = numberFiltered
+                }
                 self.usercred.resignFirstResponder()
             }else{
-                self.usercred.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.usercred.text = string
+                }else{
+                    self.usercred.text = numberFiltered
+                }
             }
         }
     }

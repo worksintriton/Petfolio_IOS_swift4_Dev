@@ -129,7 +129,6 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                             }else{
                                                                  Servicefile.shared.utypesel.append("1")
                                                             }
-                                                           
                                                             Servicefile.shared.UtypeData.append(Utype.init(UID: id, Utypeimg: ut_img, Utypetitle: ut_title, utypevalue: ut_value))
                                                         }
                                                         self.locusel = Servicefile.shared.utypesel

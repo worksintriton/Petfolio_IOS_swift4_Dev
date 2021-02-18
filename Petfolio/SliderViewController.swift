@@ -11,16 +11,20 @@ import Alamofire
 import Razorpay
 import SafariServices
 import WebKit
+import SDWebImage
 
 class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
 
+    @IBOutlet weak var view_skip_btn: UIView!
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
-    var petlist = ["Splash","Splash","Splash"]
+    var petlist = [""]
     var demodata = [{}]
      var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
+        self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
@@ -36,14 +40,20 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.demodata.count
+        return self.petlist.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
-        let val = self.demodata[indexPath.row]
         cell.pettitle.text = ""
-        cell.petimage.image = UIImage(named: "Splash")
+        print("image path",self.petlist[indexPath.row])
+        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
+                       if (error != nil) {
+                           cell.petimage.image = UIImage(named: "sample")
+                       } else {
+                           cell.petimage.image = image
+                       }
+                   }
         return cell
     }
     
@@ -103,9 +113,15 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     let Code  = resp["Code"] as! Int
                     if Code == 200 {
                         self.demodata.removeAll()
-                        let Data = resp["Data"] as! NSDictionary
-                        
-                      
+                        let Data = resp["Data"] as! NSArray
+                        self.petlist.removeAll()
+                        for i in 0..<Data.count{
+                            let itmval = Data[i] as! NSDictionary
+                            let img = itmval["img_path"] as! String
+                            self.petlist.append(img)
+                        }
+                        print(self.petlist)
+                        self.dogshowcoll.reloadData()
                     }else{
                         print("status code service denied")
                     }

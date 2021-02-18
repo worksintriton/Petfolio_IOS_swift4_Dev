@@ -228,6 +228,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     func ispetnameselect(index: Int){
         print(Servicefile.shared.pet_petlist.count,index)
         if Servicefile.shared.pet_petlist.count != index {
+            Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[index].id
             self.textfield_selectpettype.text! = Servicefile.shared.pet_petlist[index].pet_name
             self.textfield_petname.text = Servicefile.shared.pet_petlist[index].pet_name
             self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
@@ -412,7 +413,9 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             Servicefile.shared.pet_apoint_doc_rate = 0
             Servicefile.shared.pet_apoint_user_feedback = ""
             Servicefile.shared.pet_apoint_user_rate = 0.0
-            Servicefile.shared.pet_apoint_display_date = Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())
+             let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
+                       let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
+                       Servicefile.shared.pet_apoint_display_date = stringformat
             Servicefile.shared.pet_apoint_server_date_time = ""
             Servicefile.shared.pet_apoint_payment_id = ""
             Servicefile.shared.pet_apoint_payment_method = "Online"
@@ -442,7 +445,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
              "sp_rate" : "",
              "user_feedback" : "",
              "user_rate" : "",
-             "display_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+             "display_date" : Servicefile.shared.pet_apoint_display_date,
              "server_date_time" : "",
              "payment_id" : Servicefile.shared.pet_apoint_payment_id,
              "payment_method" : "Online",

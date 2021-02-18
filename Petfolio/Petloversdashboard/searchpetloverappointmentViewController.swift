@@ -725,6 +725,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     func onPaymentSuccess(_ payment_id: String) {
         print("Payment Success payment")
+        Servicefile.shared.pet_apoint_payment_id = payment_id
         self.callsubmit()
     }
     

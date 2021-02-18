@@ -17,7 +17,7 @@ class Servicefile {
     //static let baseurl = "http://52.25.163.13:3000" // live
     static let baseurl = "http://54.212.108.156:3000" // Dev
     static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
-    static let slider = baseurl + "/api/demoscreen/mobile/getlist"
+    static let slider = baseurl + "/api/splashscreen/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
     static let petregister = baseurl + "/api/petdetails/mobile/create"
@@ -119,6 +119,8 @@ class Servicefile {
     static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
      static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
     
+    
+    static let pet_shop_dash = baseurl + "/api/product_details/getproductdetails_list"
     
     static let Vendor_reg = baseurl + "/api/product_vendor/create"
     static let Vendor_check_status = baseurl + "/api/product_vendor/check_status"
@@ -339,6 +341,9 @@ class Servicefile {
     var sp_user_id = ""
     // sp update
     
+    var sp_shop_dash_tbl_index = 0
+    var sp_shop_dash_tbl_coll_index = 0
+    
     var service_id = ""
     var service_index = 0
     var service_sp_id = ""
@@ -349,6 +354,11 @@ class Servicefile {
     var service_id_amount = 0
     var service_id_time = ""
     var service_prov_buss_info = [Any]()
+    
+    var sp_dash_Banner_details = [pet_sp_dash_banner]()
+    var sp_dash_Product_details = [pet_sp_dash_productdetails]()
+    var sp_dash_Today_Special = [productdetails]()
+    var sp_dash_productdetails = [productdetails]()
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -369,6 +379,14 @@ class Servicefile {
         )
     }
     
+    func nullToNil(value : AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return "" as AnyObject
+        } else {
+            return value
+        }
+    }
+    
     func updateUserInterface()-> Bool {
         print("Reachability Summary")
         print("Status:", Network.reachability.status)
@@ -384,6 +402,15 @@ class Servicefile {
         let data = urldat.replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: data)
         return url!
+    }
+    
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
     }
     
     func roundingtime(date: Date) -> Date{
@@ -820,9 +847,10 @@ struct SP_Dash_petdetails{
     var appointment_UID : String
     var completed_at : String
     var missed_at : String
+    var appoint_patient_st : String
     init(in_Appid : String, In_amount : String, In_appointment_types : String,
          In_pet_id : String, In_pet_breed : String, In_pet_img : String,
-         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String, In_sp_id : String, In_appointment_UID: String, In_completed_at : String, In_missed_at : String) {
+         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String, In_sp_id : String, In_appointment_UID: String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String) {
         self.Appid = in_Appid
         self.amount = In_amount
         self.appoinment_status = In_appointment_types
@@ -840,6 +868,7 @@ struct SP_Dash_petdetails{
         self.appointment_UID = In_appointment_UID
         self.completed_at = In_completed_at
         self.missed_at = In_missed_at
+        self.appoint_patient_st = In_appoint_patient_st
     }
 }
 
@@ -1085,5 +1114,53 @@ struct notificationlist{
     }
 }
 
+struct pet_sp_dash_banner {
+    var banner_img : String
+    var banner_title : String
+    init(In_banner: String, In_banner_title: String) {
+        self.banner_img = In_banner
+        self.banner_title = In_banner_title
+    }
+}
+
+struct productdetails{
+    var _id : String
+    var product_discount : Int
+    var product_fav : Bool
+    var product_img : String
+    var product_price : Int
+    var product_rating : String
+    var product_review : String
+    var product_title : String
+    init(In_id : String,
+    In_product_discount : Int,
+    In_product_fav : Bool,
+    In_product_img : String,
+    In_product_price : Int,
+    In_product_rating : String,
+    In_product_review : String,
+    In_product_title : String) {
+        self._id = In_id
+        self.product_discount = In_product_discount
+        self.product_fav = In_product_fav
+        self.product_img = In_product_img
+        self.product_price = In_product_price
+        self.product_rating = In_product_rating
+        self.product_review = In_product_review
+        self.product_title = In_product_title
+    }
+}
+
+
+struct pet_sp_dash_productdetails {
+    var cat_id : String
+    var cat_name : String
+    var prod_details : [productdetails]
+    init(In_cartid: String, In_cart_name: String, In_product_details: [productdetails]) {
+        self.cat_id = In_cartid
+        self.cat_name = In_cart_name
+        self.prod_details = In_product_details
+    }
+}
 
 

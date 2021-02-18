@@ -142,6 +142,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_shop(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func action_notification(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController

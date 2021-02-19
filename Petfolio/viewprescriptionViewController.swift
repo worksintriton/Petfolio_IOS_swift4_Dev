@@ -50,9 +50,9 @@ class viewprescriptionViewController: UIViewController , UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
         let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-        cell.label_medi.text = presdata["Tablet_name"] as! String
-        cell.label_consp.text = presdata["consumption"] as! String
-        cell.label_noofdays.text = presdata["Quantity"] as! String
+        cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
+        cell.label_consp.text = presdata["consumption"] as? String ?? ""
+        cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
         return cell
     }
     

@@ -208,7 +208,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         self.alert(Message: "Please upload the certificates")
     }else{
         if self.textfield_bus_email.text != ""{
-            if self.isValidEmail(self.textfield_bus_email.text!) != false {
+            let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_bus_email.text!)
+            if self.isValidEmail(emailval) != false {
                 self.callvendorreg()
             }else{
                 self.alert(Message: "Email ID is invalid")
@@ -237,7 +238,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
            
            let imgdat = Servicefile.shared.gallerydicarray[indexPath.row] as! NSDictionary
                       print("clinic data in", imgdat)
-                      cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as! String))) { (image, error, cache, urls) in
+        cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                                      if (error != nil) {
                                          cell.Img_id.image = UIImage(named: "sample")
                                      } else {
@@ -349,7 +350,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                       print("success data",res)
                       let Code  = res["Code"] as! Int
                       if Code == 200 {
-                          let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? Servicefile.sample_img
                          print("Uploaded file url:",Data)
                           if self.img_for == "Gall" {
                            var B = Servicefile.shared.gallerydicarray
@@ -398,7 +399,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                          print("success data",res)
                          let Code  = res["Code"] as! Int
                          if Code == 200 {
-                             let Data = res["Data"] as! String
+                            let Data = res["Data"] as? String ?? Servicefile.sample_img
                             print("Uploaded file url:",Data, self.img_for)
                          
                           if self.img_for == "Certi" {
@@ -449,11 +450,11 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
        [ "user_id": Servicefile.shared.userid,
                 "user_name" : Servicefile.shared.first_name,
                 "user_email": Servicefile.shared.user_email,
-                "bussiness_name" : self.textfield_Bus_name.text!,
-                "bussiness_email" : self.textfield_bus_email.text!,
-                "bussiness" : self.textfield_business.text!,
-                "bussiness_phone": self.textfield_bus_phno.text!,
-                "business_reg" : self.textfield_bus_reg.text!,
+                "bussiness_name" : Servicefile.shared.checktextfield(textfield: self.textfield_Bus_name.text!),
+                "bussiness_email" : Servicefile.shared.checktextfield(textfield: self.textfield_bus_email.text!),
+                "bussiness" : Servicefile.shared.checktextfield(textfield: self.textfield_business.text!),
+                "bussiness_phone": Servicefile.shared.checktextfield(textfield: self.textfield_bus_phno.text!),
+                "business_reg" : Servicefile.shared.checktextfield(textfield: self.textfield_bus_reg.text!),
                 "bussiness_gallery" : Servicefile.shared.gallerydicarray,
                 "photo_id_proof" : self.image_photo,
                 "govt_id_proof":  self.image_govid,
@@ -462,9 +463,9 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                 "mobile_type" : "IOS",
                 "profile_status": true,
                 "profile_verification_status" : "Not Verified",
-                "bussiness_loc" : self.latitude!,
-                "bussiness_lat" : self.longitude!,
-                "bussiness_long" : self.locationaddress,
+                "bussiness_loc" : self.locationaddress,
+                "bussiness_lat" : self.latitude!,
+                "bussiness_long" : self.longitude!,
                 "delete_status" : false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                            switch (response.result) {
                                            case .success:

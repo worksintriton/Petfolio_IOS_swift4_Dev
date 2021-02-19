@@ -645,8 +645,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if self.tbl_experience == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "exper", for: indexPath) as! experienceTableViewCell
             let expval = Servicefile.shared.expdicarray[indexPath.row] as! NSDictionary
-            cell.Label_company.text = (expval["company"]  as! String)
-            cell.Label_fromto.text = (expval["from"]  as! String) + " - " + (expval["to"]  as! String)
+            cell.Label_company.text = (expval["company"]  as? String ?? "")
+            cell.Label_fromto.text = (expval["from"]  as? String ?? "") + " - " + (expval["to"]  as? String ?? "")
             cell.BTN_expclose.tag = indexPath.row
             cell.BTN_expclose.addTarget(self, action: #selector(closeexp), for: .touchUpInside)
             return cell
@@ -657,8 +657,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "edu", for: indexPath) as! eduTableViewCell
             let eduval = Servicefile.shared.edudicarray[indexPath.row] as! NSDictionary
-            cell.label_educa.text = (eduval["education"]  as! String)
-            cell.label_yoc.text = (eduval["year"]  as! String)
+            cell.label_educa.text = (eduval["education"]  as? String ?? "")
+            cell.label_yoc.text = (eduval["year"]  as? String ?? "")
             cell.BTN_close.tag = indexPath.row
             cell.BTN_close.addTarget(self, action: #selector(closeedu), for: .touchUpInside)
             return cell
@@ -762,7 +762,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clinic", for: indexPath)  as! imgidCollectionViewCell
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
-            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["clinic_pic"] as! String))) { (image, error, cache, urls) in
+            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["clinic_pic"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                            if (error != nil) {
                                cell.Img_id.image = UIImage(named: "sample")
                            } else {
@@ -942,7 +942,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? ""
                        print("Uploaded file url:",Data)
                         if self.Img_uploadarea == "clinic" {
                             self.clinicdetails.removeAllObjects()
@@ -992,7 +992,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
-                           let Data = res["Data"] as! String
+                           let Data = res["Data"] as? String ?? ""
                           print("Uploaded file url:",Data)
                         
                         if self.Img_uploadarea == "certif" {
@@ -1089,24 +1089,29 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     
                     for item in 0..<comm_type_arr.count{
                         let pb = comm_type_arr[item] as! NSDictionary
-                        let pbv = pb["com_type"] as! String
-                        let Value = pb["Value"] as! Int
-                        self.comm_type.append(pbv)
-                        self.comm_type_Value.append(String(Value))
+                        let pbv = pb["com_type"] as? String ?? ""
+                        let Value = String(pb["Value"] as? Int ?? 0)
+                        if Value != "0" && pbv != "" {
+                            self.comm_type.append(pbv)
+                            self.comm_type_Value.append(Value)
+                        }
                     }
                     
                     for item in 0..<pet_handle.count{
                         let pb = pet_handle[item] as! NSDictionary
-                        let pbv = pb["pet_handle"] as! String
-                        self.pethandle.append(pbv)
-                        self.ispethandle.append("0")
-                        
+                        let pbv = pb["pet_handle"] as? String ?? ""
+                        if pbv != ""{
+                            self.pethandle.append(pbv)
+                            self.ispethandle.append("0")
+                        }
                     }
                        for item in 0..<specialzation.count{
                            let pb = specialzation[item] as! NSDictionary
-                           let pbv = pb["specialzation"] as! String
+                           let pbv = pb["specialzation"] as? String ?? ""
+                        if pbv != ""{
                            self.specialza.append(pbv)
                          self.isspecialza.append("0")
+                        }
                        }
                       self.orgspecialza = self.specialza
                       self.orgpethandle = self.pethandle
@@ -1138,9 +1143,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                 ["user_id" : Servicefile.shared.userid,
                    "dr_title" : "Dr",
                    "dr_name" : Servicefile.shared.first_name,
-                   "clinic_name" : self.textfield_clinicname.text!,
-                   "communication_type": self.textfield_commtype.text!,
-                   "clinic_loc" : self.textview_clinicaddress.text!,
+                   "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
+                   "communication_type": Servicefile.shared.checktextfield(textfield: self.textfield_commtype.text!),
+                   "clinic_loc" : Servicefile.shared.checktextfield(textfield: self.textview_clinicaddress.text!),
                    "clinic_lat" : self.latitude!,
                    "clinic_long" : self.longitude!,
                    "education_details" : Servicefile.shared.edudicarray,
@@ -1153,8 +1158,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                    "photo_id_pic" : Servicefile.shared.photodicarray,
                    "profile_status" : true,
                    "profile_verification_status" : "Not verified",
-                   "consultancy_fees" : Int(self.textfield_ser_amt.text!)!,
-                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   "consultancy_fees" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_ser_amt.text!),
+                   "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+                   "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                        switch (response.result) {
                                                        case .success:
                                                              let res = response.value as! NSDictionary

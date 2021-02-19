@@ -79,13 +79,15 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
-        print("user type",Servicefile.shared.user_type)
-        let otptxt = self.textfield_otp.text!
-        let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
-        if trimmedString  == Servicefile.shared.otp {
-            self.callFCM()
-        }else{
-            print("verification Not success")
+        if Servicefile.shared.otp != "0"{
+            print("user type",Servicefile.shared.user_type)
+                   let otptxt = self.textfield_otp.text!
+                   let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
+                   if trimmedString  == Servicefile.shared.otp {
+                       self.callFCM()
+                   }else{
+                       print("verification Not success")
+                   }
         }
     }
     
@@ -132,13 +134,13 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         let user_details = Data["User_Details"] as! NSDictionary
-                        Servicefile.shared.first_name = user_details["first_name"] as! String
-                        Servicefile.shared.last_name = user_details["last_name"] as! String
-                        Servicefile.shared.user_email = user_details["user_email"] as! String
-                        Servicefile.shared.user_phone = user_details["user_phone"] as! String
+                        Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                        Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                        Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                        Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
                         Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                        Servicefile.shared.otp = String(user_details["otp"] as! Int)
+                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                        Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -204,7 +206,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func callSkipupdatestatus(){
+    func callSkipupdatestatus() {
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updatestatus, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,

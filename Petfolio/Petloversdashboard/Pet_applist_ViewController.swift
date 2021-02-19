@@ -372,35 +372,34 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
-                            let Booked_at = dataitm["Booked_at"] as! String
-                            let Booking_Id = dataitm["Booking_Id"] as! String
-                            let Service_name = dataitm["Service_name"] as! String
-                            
-                            let _id = dataitm["_id"] as! String
-                            let appointment_for = dataitm["appointment_for"] as! String
-                            let appointment_time = dataitm["appointment_time"] as! String
-                            let appointment_type = dataitm["appointment_type"] as! String
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as! String
-                            let communication_type = dataitm["communication_type"] as! String
-                            let start_appointment_status = dataitm["start_appointment_status"] as! String
-                            let clinic_name = dataitm["clinic_name"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let cost  = dataitm["cost"] as! String
-                            let createdAt = dataitm["createdAt"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
-                            let pet_name = dataitm["pet_name"] as! String
-                            let pet_type = dataitm["pet_type"] as! String
-                            let photo = dataitm["photo"] as! String
-                            let service_cost = dataitm["service_cost"] as! String
-                            let service_provider_name = dataitm["service_provider_name"] as! String
-                            let status = dataitm["status"] as! String
-                            let type  = dataitm["type"] as! String
-                            let updatedAt = dataitm["updatedAt"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let doctor_name = dataitm["doctor_name"] as! String
-                            let doctor_id = dataitm["doctor_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
+                            let Booked_at = dataitm["Booked_at"] as? String ?? ""
+                            let Booking_Id = dataitm["Booking_Id"] as? String ?? ""
+                            let Service_name = dataitm["Service_name"] as? String ?? ""
+                            let _id = dataitm["_id"] as? String ?? ""
+                            let appointment_for = dataitm["appointment_for"] as? String ?? ""
+                            let appointment_time = dataitm["appointment_time"] as? String ?? ""
+                            let appointment_type = dataitm["appointment_type"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let communication_type = dataitm["communication_type"] as? String ?? ""
+                            let start_appointment_status = dataitm["start_appointment_status"] as? String ?? ""
+                            let clinic_name = dataitm["clinic_name"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let cost  = dataitm["cost"] as? String ?? ""
+                            let createdAt = dataitm["createdAt"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
+                            let pet_name = dataitm["pet_name"] as? String ?? ""
+                            let pet_type = dataitm["pet_type"] as? String ?? ""
+                            let photo = dataitm["photo"] as? String ?? Servicefile.sample_img
+                            let service_cost = dataitm["service_cost"] as? String ?? ""
+                            let service_provider_name = dataitm["service_provider_name"] as? String ?? ""
+                            let status = dataitm["status"] as? String ?? ""
+                            let type  = dataitm["type"] as? String ?? ""
+                            let updatedAt = dataitm["updatedAt"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let doctor_name = dataitm["doctor_name"] as? String ?? ""
+                            let doctor_id = dataitm["doctor_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
                             Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name, In_doctor_id : doctor_id, In_sp_id : sp_id))
                             
                         }
@@ -440,7 +439,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         params = ["_id": Appointmentid,
                   "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                   "appoinment_status" : "Missed",
-                  "appoint_patient_st": "Petowner Cancelled appointment"]
+                  "doc_feedback" : "",
+                  "appoint_patient_st": "Patient Appointment Cancelled"]
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
@@ -493,34 +493,34 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
-                            let Booked_at = dataitm["Booked_at"] as! String
-                            let Booking_Id = dataitm["Booking_Id"] as! String
-                            let Service_name = dataitm["Service_name"] as! String
-                            let _id = dataitm["_id"] as! String
-                            let appointment_for = dataitm["appointment_for"] as! String
-                            let appointment_time = dataitm["appointment_time"] as! String
-                            let appointment_type = dataitm["appointment_type"] as! String
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as! String
-                            let communication_type = dataitm["communication_type"] as! String
-                            let start_appointment_status = dataitm["start_appointment_status"] as! String
-                            let clinic_name = dataitm["clinic_name"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let cost  = dataitm["cost"] as! String
-                            let createdAt = dataitm["createdAt"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
-                            let pet_name = dataitm["pet_name"] as! String
-                            let pet_type = dataitm["pet_type"] as! String
-                            let photo = dataitm["photo"] as! String
-                            let service_cost = dataitm["service_cost"] as! String
-                            let service_provider_name = dataitm["service_provider_name"] as! String
-                            let status = dataitm["status"] as! String
-                            let type  = dataitm["type"] as! String
-                            let updatedAt = dataitm["updatedAt"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let doctor_name = dataitm["doctor_name"] as! String
-                            let doctor_id = dataitm["doctor_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
+                            let Booked_at = dataitm["Booked_at"] as? String ?? ""
+                            let Booking_Id = dataitm["Booking_Id"] as? String ?? ""
+                            let Service_name = dataitm["Service_name"] as? String ?? ""
+                            let _id = dataitm["_id"] as? String ?? ""
+                            let appointment_for = dataitm["appointment_for"] as? String ?? ""
+                            let appointment_time = dataitm["appointment_time"] as? String ?? ""
+                            let appointment_type = dataitm["appointment_type"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let communication_type = dataitm["communication_type"] as? String ?? ""
+                            let start_appointment_status = dataitm["start_appointment_status"] as? String ?? ""
+                            let clinic_name = dataitm["clinic_name"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let cost  = dataitm["cost"] as? String ?? ""
+                            let createdAt = dataitm["createdAt"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
+                            let pet_name = dataitm["pet_name"] as? String ?? ""
+                            let pet_type = dataitm["pet_type"] as? String ?? ""
+                            let photo = dataitm["photo"] as? String ?? Servicefile.sample_img
+                            let service_cost = dataitm["service_cost"] as? String ?? ""
+                            let service_provider_name = dataitm["service_provider_name"] as? String ?? ""
+                            let status = dataitm["status"] as? String ?? ""
+                            let type  = dataitm["type"] as? String ?? ""
+                            let updatedAt = dataitm["updatedAt"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let doctor_name = dataitm["doctor_name"] as? String ?? ""
+                            let doctor_id = dataitm["doctor_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
                             Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name, In_doctor_id : doctor_id, In_sp_id : sp_id))
                             
                         }
@@ -562,34 +562,34 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count {
                             let dataitm = Data[itm] as! NSDictionary
-                            let Booked_at = dataitm["Booked_at"] as! String
-                            let Booking_Id = dataitm["Booking_Id"] as! String
-                            let Service_name = dataitm["Service_name"] as! String
-                            let _id = dataitm["_id"] as! String
-                            let appointment_for = dataitm["appointment_for"] as! String
-                            let appointment_time = dataitm["appointment_time"] as! String
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as! String
-                            let appointment_type = dataitm["appointment_type"] as! String
-                            let communication_type = dataitm["communication_type"] as! String
-                            let start_appointment_status = dataitm["start_appointment_status"] as! String
-                            let clinic_name = dataitm["clinic_name"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let cost  = dataitm["cost"] as! String
-                            let createdAt = dataitm["createdAt"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
-                            let pet_name = dataitm["pet_name"] as! String
-                            let pet_type = dataitm["pet_type"] as! String
-                            let photo = dataitm["photo"] as! String
-                            let service_cost = dataitm["service_cost"] as! String
-                            let service_provider_name = dataitm["service_provider_name"] as! String
-                            let status = dataitm["status"] as! String
-                            let type  = dataitm["type"] as! String
-                            let updatedAt = dataitm["updatedAt"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let doctor_name = dataitm["doctor_name"] as! String
-                            let doctor_id = dataitm["doctor_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
+                            let Booked_at = dataitm["Booked_at"] as? String ?? ""
+                            let Booking_Id = dataitm["Booking_Id"] as? String ?? ""
+                            let Service_name = dataitm["Service_name"] as? String ?? ""
+                            let _id = dataitm["_id"] as? String ?? ""
+                            let appointment_for = dataitm["appointment_for"] as? String ?? ""
+                            let appointment_time = dataitm["appointment_time"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let appointment_type = dataitm["appointment_type"] as? String ?? ""
+                            let communication_type = dataitm["communication_type"] as? String ?? ""
+                            let start_appointment_status = dataitm["start_appointment_status"] as? String ?? ""
+                            let clinic_name = dataitm["clinic_name"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let cost  = dataitm["cost"] as? String ?? ""
+                            let createdAt = dataitm["createdAt"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
+                            let pet_name = dataitm["pet_name"] as? String ?? ""
+                            let pet_type = dataitm["pet_type"] as? String ?? ""
+                            let photo = dataitm["photo"] as? String ?? Servicefile.sample_img
+                            let service_cost = dataitm["service_cost"] as? String ?? ""
+                            let service_provider_name = dataitm["service_provider_name"] as? String ?? ""
+                            let status = dataitm["status"] as? String ?? ""
+                            let type  = dataitm["type"] as? String ?? ""
+                            let updatedAt = dataitm["updatedAt"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let doctor_name = dataitm["doctor_name"] as? String ?? ""
+                            let doctor_id = dataitm["doctor_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
                             Servicefile.shared.pet_applist_do_sp.append(pet_applist_doc_sp.init(IN_Booked_at: Booked_at, IN_Booking_Id: Booking_Id, IN_Service_name: Service_name, IN__id: _id, IN_appointment_for: appointment_for, IN_appointment_time: appointment_time, IN_appointment_type: appointment_type, IN_clinic_name: clinic_name, IN_completed_at: completed_at, IN_cost: cost, IN_createdAt: createdAt, IN_missed_at: missed_at, IN_pet_name: pet_name, IN_pet_type: pet_type, IN_photo: photo, IN_service_cost: service_cost, IN_service_provider_name: service_provider_name, IN_status: status, IN_type: type, IN_updatedAt: updatedAt,In_userrate: user_rate, In_userfeed: user_feedback, In_communication_type: communication_type, In_start_appointment_status: start_appointment_status, In_appoint_patient_st : appoint_patient_st,In_doctor_name : doctor_name, In_doctor_id : doctor_id, In_sp_id : sp_id))
                         }
                         

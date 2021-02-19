@@ -411,8 +411,10 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                         //                    }
                         for item in 0..<Gender.count{
                             let pb = Gender[item] as! NSDictionary
-                            let pbv = pb["gender"] as! String
-                            self.petgender.append(pbv)
+                            let pbv = pb["gender"] as? String ?? ""
+                            if pbv != "" {
+                                 self.petgender.append(pbv)
+                            }
                         }
                         //                    self.tblview_pettype.reloadData()
                         //                    self.tblview_petbreed.reloadData()
@@ -445,46 +447,47 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             params = ["_id" : Servicefile.shared.petid,
                       "user_id": Servicefile.shared.userid,
                       "pet_img" : setimag,
-                      "pet_name" : self.textfield_petname.text!,
-                      "pet_type" : self.textfield_pettype.text!,
-                      "pet_breed" : self.textfield_petbreed.text!,
-                      "pet_gender" : self.textfield_petgender.text!,
-                      "pet_color" : self.textfield_petcolor.text!,
-                      "pet_weight" : Int(self.textfield_petweight.text!)!,
-                      "pet_age" : Int(self.textfiled_petage.text!)!,
+                      "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
+                      "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
+                      "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
+                      "pet_gender" : Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
+                      "pet_color" : Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
+                      "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
+                      "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
                       "vaccinated" : self.isvaccin,
-                      "last_vaccination_date" : self.textfield_selectdate.text!,
+                      "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
                       "default_status" : true,
-                      "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"]
+                      "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+                      "mobile_type" : "IOS"]
         }else{
             urldetails = Servicefile.petregister
             setimag = Servicefile.shared.sampleimag
             params = ["user_id": Servicefile.shared.userid,
                       "pet_img" : setimag,
-                      "pet_name" : self.textfield_petname.text!,
-                      "pet_type" : self.textfield_pettype.text!,
-                      "pet_breed" : self.textfield_petbreed.text!,
-                      "pet_gender" : self.textfield_petgender.text!,
-                      "pet_color" : self.textfield_petcolor.text!,
-                      "pet_weight" : Int(self.textfield_petweight.text!)!,
-                      "pet_age" : Int(self.textfiled_petage.text!)!,
+                      "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
+                      "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
+                      "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
+                      "pet_gender" : Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
+                      "pet_color" : Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
+                      "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
+                      "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
                       "vaccinated" : self.isvaccin,
-                      "last_vaccination_date" : self.textfield_selectdate.text!,
+                      "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
                       "default_status" : true,
                       "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"]
         }
         
         print("user_id", Servicefile.shared.userid,
               "pet_img" , setimag,
-              "pet_name" , self.textfield_petname.text!,
-              "pet_type" , self.textfield_pettype.text!,
-              "pet_breed" , self.textfield_petbreed.text!,
-              "pet_gender" , self.textfield_petgender.text!,
-              "pet_color" , self.textfield_petcolor.text!,
-              "pet_weight" , Int(self.textfield_petweight.text!)!,
-              "pet_age" , Int(self.textfiled_petage.text!)!,
+              "pet_name" , Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
+              "pet_type" , Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
+              "pet_breed" , Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
+              "pet_gender" , Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
+              "pet_color" , Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
+              "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
+              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
               "vaccinated" , self.isvaccin,
-              "last_vaccination_date" , self.textfield_selectdate.text!,
+              "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
               "default_status" , true,
               "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
         self.startAnimatingActivityIndicator()
@@ -498,9 +501,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                     if Code == 200 {
                         if Servicefile.shared.pet_status != "edit" {
                             let Data = res["Data"] as! NSDictionary
-                            Servicefile.shared.petid = Data["_id"] as! String
+                            Servicefile.shared.petid = Data["_id"] as? String ?? ""
                         }
-                        
                         self.callupdatestatus()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -532,7 +534,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        let userid = Data["_id"] as! String
+                        let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "peteditandadduploadimgViewController") as! peteditandadduploadimgViewController
@@ -573,14 +575,18 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                         
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["pet_type_title"] as! String
-                            self.pet_type.append(pbv)
+                            let pbv = pb["pet_type_title"] as? String ?? ""
+                            if pbv != "" {
+                                 self.pet_type.append(pbv)
+                            }
                         }
                         
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["_id"] as! String
-                            self.petid.append(pbv)
+                            let pbv = pb["_id"] as? String ?? ""
+                            if pbv != "" {
+                                self.petid.append(pbv)
+                            }
                         }
                         self.callpetbreedbyid(petid: self.petid[0])
                         self.tblview_pettype.reloadData()
@@ -618,8 +624,10 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_breed.count{
                             let pb = Pet_breed[item] as! NSDictionary
-                            let pbv = pb["pet_breed"] as! String
-                            self.Pet_breed.append(pbv)
+                            let pbv = pb["pet_breed"] as? String ?? ""
+                            if pbv != "" {
+                                self.Pet_breed.append(pbv)
+                            }
                         }
                         self.tblview_petbreed.reloadData()
                         self.stopAnimatingActivityIndicator()

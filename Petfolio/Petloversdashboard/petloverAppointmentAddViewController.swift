@@ -210,7 +210,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "petappcell", for: indexPath)  as! imgidCollectionViewCell
         let imgdat = Servicefile.shared.pet_apoint_doc_attched[indexPath.row] as! NSDictionary
         print("clinic data in", imgdat)
-        cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["file"] as! String))) { (image, error, cache, urls) in
+        cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["file"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.Img_id.image = UIImage(named: "sample")
             } else {
@@ -428,7 +428,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? ""
                         print("Uploaded file url:",Data)
                         Servicefile.shared.pet_apoint_doc_attched.removeAll()
                         var B = Servicefile.shared.pet_apoint_doc_attched
@@ -444,7 +444,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        let Message  = res["Message"] as! String
+                        let Message  = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                         print("status code service denied")
                     }
@@ -540,8 +540,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
              "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
              "allergies" : Servicefile.shared.pet_apoint_allergies,
              "amount" : String(Servicefile.shared.pet_apoint_amount),"mobile_type" : "IOS"
-                ,"missed_at" : "",
-                 "completed_at": ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                ,"service_name" : "",
+                 "service_amount": ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                     switch (response.result) {
                     case .success:
                         let res = response.value as! NSDictionary
@@ -554,7 +554,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         }else{
                             self.stopAnimatingActivityIndicator()
                             print("status code service denied")
-                            let Message = res["Message"] as! String
+                            let Message = res["Message"] as? String ?? ""
                             self.alert(Message: Message)
                         }
                         break
@@ -593,7 +593,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        let id = Data["_id"] as! String
+                        let id = Data["_id"] as? String ?? ""
                         Servicefile.shared.pet_apoint_pet_id = id
                         self.showPaymentForm()
                         self.stopAnimatingActivityIndicator()
@@ -639,13 +639,17 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["pet_type_title"] as! String
-                            self.pet_type.append(pbv)
+                            let pbv = pb["pet_type_title"] as? String ?? ""
+                            if pbv != "" {
+                                self.pet_type.append(pbv)
+                            }
                         }
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["_id"] as! String
-                            self.petid.append(pbv)
+                            let pbv = pb["_id"] as? String ?? ""
+                            if pbv != "" {
+                                 self.petid.append(pbv)
+                            }
                         }
                         self.tblview_pettype.reloadData()
                         self.tblview_petbreed.reloadData()
@@ -684,8 +688,10 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_breed.count{
                             let pb = Pet_breed[item] as! NSDictionary
-                            let pbv = pb["pet_breed"] as! String
-                            self.Pet_breed.append(pbv)
+                            let pbv = pb["pet_breed"] as? String ?? ""
+                            if pbv != "" {
+                                 self.Pet_breed.append(pbv)
+                            }
                         }
                         self.tblview_petbreed.reloadData()
                         self.stopAnimatingActivityIndicator()

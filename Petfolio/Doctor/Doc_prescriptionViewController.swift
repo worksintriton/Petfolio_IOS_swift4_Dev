@@ -89,9 +89,9 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                }else{
                   let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
                   let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-                  cell.label_medi.text = presdata["Tablet_name"] as! String
-                  cell.label_consp.text = presdata["consumption"] as! String
-                  cell.label_noofdays.text = presdata["Quantity"] as! String
+                  cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
+                  cell.label_consp.text = presdata["consumption"] as? String ?? ""
+                  cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
                                 return cell
                }
        
@@ -138,10 +138,9 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_prescription_create, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
           "Date":Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
           "Doctor_Comments":"test",
-          "Doctor_ID":Servicefile.shared.userid,
           "PDF_format":"",
-          "Prescription_type" :"Image / PDF",
-          "Prescription_img" : "http://mysalveo.com/api/public/prescriptions/231afd32-6d68-4288-a8e5-1c599833c0e8.pdf",
+          "Prescription_type" :"PDF",
+          "Prescription_img" : "",
           "user_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].user_id,
           "Prescription_data": Servicefile.shared.Doc_pres,
           "Treatment_Done_by":"Self",

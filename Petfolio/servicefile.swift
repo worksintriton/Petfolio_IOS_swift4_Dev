@@ -20,9 +20,11 @@ class Servicefile {
     static let slider = baseurl + "/api/splashscreen/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
-    static let petregister = baseurl + "/api/petdetails/mobile/create"
-    static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let verifyemail = baseurl + "/api/userdetails/send/emailotp"
+     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
+    static let petregister = baseurl + "/api/petdetails/mobile/create"
+   
+    
     static let login = baseurl + "/api/userdetails/mobile/login"
     
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
@@ -129,14 +131,15 @@ class Servicefile {
     var signupemail = ""
     var email_status_label = "Verify email"
     // Signup page
-    
+    static let sample_bannerimg = "http://52.25.163.13:3000/api/uploads/banner_empty.jpg"
+    static let sample_img = "http://52.25.163.13:3000/api/uploads/Pic_empty.jpg"
     // sprint 1
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
     var customview = UIView()
     var backview = UIView()
     var loadlabel = UILabel()
-    var sampleimag = "http://mysalveo.com/api/uploads/images.jpeg"
+    var sampleimag = Servicefile.sample_img
     var FCMtoken = ""
     var usertype = "Pet Lover"
     var user_type_value = 1
@@ -228,6 +231,7 @@ class Servicefile {
     var selectedCountry = ""
     var selectedstate = ""
     var selectedState = ""
+    var selecteddefaultstatus = false
     
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
@@ -343,7 +347,7 @@ class Servicefile {
     
     var sp_shop_dash_tbl_index = 0
     var sp_shop_dash_tbl_coll_index = 0
-    
+    var sp_shop_dash_tbl_today_val = 0
     var service_id = ""
     var service_index = 0
     var service_sp_id = ""
@@ -387,6 +391,26 @@ class Servicefile {
         }
     }
     
+    func checktextfield(textfield: String)->String{
+        if textfield.isEmpty {
+             return ""
+        }else{
+             return textfield
+           
+        }
+    }
+    
+   
+    
+    func checkInttextfield(strtoInt: String)->Int{
+        if strtoInt.isEmpty {
+             return 0
+        }else{
+            let intval = Int(strtoInt) ?? 0
+            return intval
+        }
+    }
+    
     func updateUserInterface()-> Bool {
         print("Reachability Summary")
         print("Status:", Network.reachability.status)
@@ -400,6 +424,7 @@ class Servicefile {
         let str = url
         let urldat = str
         let data = urldat.replacingOccurrences(of: " ", with: "%20")
+        //let data = urldat.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: data)
         return url!
     }

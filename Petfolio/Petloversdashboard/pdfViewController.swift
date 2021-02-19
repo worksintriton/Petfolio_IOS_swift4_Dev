@@ -62,7 +62,7 @@ class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegat
                                                       let Code  = res["Code"] as! Int
                                                       if Code == 200 {
                                                          let Data = res["Data"] as! NSDictionary
-                                                        let Prescription_data = Data["PDF_format"] as! String
+                                                        let Prescription_data = Data["PDF_format"] as? String ?? ""
                                                         let str = Prescription_data
                                                         let myBlog = str
                                                         self.pdflink = str

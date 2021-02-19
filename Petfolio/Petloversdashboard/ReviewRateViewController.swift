@@ -81,7 +81,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
          self.startAnimatingActivityIndicator()
          if Servicefile.shared.updateUserInterface() { AF.request(linkurl, method: .post, parameters:
              ["_id": Servicefile.shared.pet_apoint_id,
-              "user_feedback": self.textview_review.text!,
+              "user_feedback": Servicefile.shared.checktextfield(textfield: self.textview_review.text!),
               "user_rate": self.Cosmos_rate.rating], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                     switch (response.result) {
                                                     case .success:

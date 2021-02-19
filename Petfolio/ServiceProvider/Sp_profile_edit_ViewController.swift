@@ -461,7 +461,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             
             let imgdat = Servicefile.shared.gallerydicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
-            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as! String))) { (image, error, cache, urls) in
+            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"]  as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.Img_id.image = UIImage(named: "sample")
                 } else {
@@ -648,7 +648,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"]  as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data)
                         if self.img_for == "Gall" {
                             var B = Servicefile.shared.gallerydicarray
@@ -697,7 +697,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"]  as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data, self.img_for)
                         
                         if self.img_for == "Certi" {
@@ -752,7 +752,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
               "bus_user_email": Servicefile.shared.user_email,
               "profile_status": true,
               "profile_verification_status":"Not verified",
-              "bussiness_name":self.textfield_Bus_name.text!,
+              "bussiness_name": Servicefile.shared.checktextfield(textfield: self.textfield_Bus_name.text!),
               "bus_user_phone": Servicefile.shared.user_phone,
               "bus_service_list": Servicefile.shared.servicelistdicarray,
               "bus_spec_list": Servicefile.shared.speclistdicarray,
@@ -818,22 +818,28 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                         Servicefile.shared.speclist.removeAll()
                         for itm in 0..<sertime.count{
                             let sitm = sertime[itm] as! NSDictionary
-                            let slistitm = sitm["time"] as! String
-                            Servicefile.shared.sertime.append(slistitm)
+                            let slistitm = sitm["time"] as? String ?? ""
+                            if slistitm != "" {
+                                Servicefile.shared.sertime.append(slistitm)
+                            }
                         }
                         for itm in 0..<service_list.count{
                             let ditm = service_list[itm] as! NSDictionary
-                            let listitm = ditm["service_list"] as! String
-                            Servicefile.shared.servicelist.append(listitm)
-                            Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
-                            Servicefile.shared.selectedamount.append(0)
-                            self.selservice.append("0")
+                            let listitm = ditm["service_list"] as? String ?? ""
+                            if listitm != "" {
+                                Servicefile.shared.servicelist.append(listitm)
+                                Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
+                                Servicefile.shared.selectedamount.append(0)
+                                self.selservice.append("0")
+                            }
                         }
                         for itm in 0..<Specialization.count{
                             let ditm = Specialization[itm] as! NSDictionary
-                            let listitm = ditm["Specialization"] as! String
-                            Servicefile.shared.speclist.append(listitm)
-                            self.selspec.append("0")
+                            let listitm = ditm["Specialization"] as? String ?? ""
+                            if listitm != "" {
+                                Servicefile.shared.speclist.append(listitm)
+                                self.selspec.append("0")
+                            }
                         }
                         
                         self.coll_speclist.reloadData()
@@ -880,21 +886,21 @@ extension Sp_profile_edit_ViewController {
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         let bus_certif = Data["bus_certif"] as! NSArray
-                        let _id  = Data["_id"] as! String
-                        let bus_profile  = Data["bus_profile"] as! String
-                        let bus_proof  = Data["bus_proof"] as! String
-                        let bus_user_email  = Data["bus_user_email"] as! String
-                        let bus_user_name  = Data["bus_user_name"] as! String
-                        let bus_user_phone  = Data["bus_user_phone"] as! String
-                        let bussiness_name  = Data["bussiness_name"] as! String
-                        let date_and_time  = Data["date_and_time"] as! String
-                        let delete_status  = Data["delete_status"] as! Bool
-                        let profile_status  = Data["profile_status"] as! Bool
-                        let profile_verification_status  = Data["profile_verification_status"] as! String
-                        let sp_lat  = Data["sp_lat"] as! Double
-                        let sp_long  = Data["sp_long"] as! Double
-                        let sp_loc  = Data["sp_loc"] as! String
-                        let user_id  = Data["user_id"] as! String
+                        let _id  = Data["_id"] as? String ?? ""
+                        let bus_profile  = Data["bus_profile"] as? String ?? ""
+                        let bus_proof  = Data["bus_proof"] as? String ?? ""
+                        let bus_user_email  = Data["bus_user_email"] as? String ?? ""
+                        let bus_user_name  = Data["bus_user_name"] as? String ?? ""
+                        let bus_user_phone  = Data["bus_user_phone"] as? String ?? ""
+                        let bussiness_name  = Data["bussiness_name"] as? String ?? ""
+                        let date_and_time  = Data["date_and_time"] as? String ?? ""
+                        let delete_status  = Data["delete_status"] as? Bool ?? false
+                        let profile_status  = Data["profile_status"] as? Bool ?? false
+                        let profile_verification_status  = Data["profile_verification_status"] as? String ?? ""
+                        let sp_lat  = Data["sp_lat"] as? Double ?? 0.0
+                        let sp_long  = Data["sp_long"] as? Double ?? 0.0
+                        let sp_loc  = Data["sp_loc"] as? String ?? ""
+                        let user_id  = Data["user_id"] as? String ?? ""
                         let bus_service_gall = Data["bus_service_gall"] as! NSArray
                         let bus_service_list = Data["bus_service_list"] as! NSArray
                         let bus_spec_list = Data["bus_spec_list"] as! NSArray
@@ -952,10 +958,10 @@ extension Sp_profile_edit_ViewController {
             for Edit_list in 0..<Servicefile.shared.sp_bus_service_list.count {
                 let edit_itm = Servicefile.shared.sp_bus_service_list[Edit_list]
                 let edit_str = edit_itm  as! NSDictionary
-                if edit_str["bus_service_list"] as! String == SP_itm {
+                if edit_str["bus_service_list"] as? String ?? "" == SP_itm {
                     print("data in edit profile",edit_itm)
-                    let amt = edit_str["amount"] as! Int
-                    let time_slots = edit_str["time_slots"] as! String
+                    let amt = edit_str["amount"] as? Int ?? 0
+                    let time_slots = edit_str["time_slots"] as? String ?? ""
                     Servicefile.shared.selectedservice.remove(at: itm)
                     Servicefile.shared.selectedservice.insert(time_slots, at: itm)
                     Servicefile.shared.selectedamount.remove(at: itm)
@@ -971,7 +977,7 @@ extension Sp_profile_edit_ViewController {
             for Edit_speclist in 0..<Servicefile.shared.sp_bus_spec_list.count {
                 let edit_specitm =  Servicefile.shared.sp_bus_spec_list[Edit_speclist]
                 var edit_spestr = edit_specitm as! NSDictionary
-                if  edit_spestr["bus_spec_list"] as! String == SP_itm {
+                if  edit_spestr["bus_spec_list"] as? String ?? "" == SP_itm {
                     self.selspec.remove(at: itme)
                     self.selspec.insert("1", at: itme)
                 }

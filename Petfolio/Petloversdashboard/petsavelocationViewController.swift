@@ -229,8 +229,9 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         "location_lat" : Servicefile.shared.lati,
         "location_long" : Servicefile.shared.long,
         "location_title" : self.isselected,
-        "location_nickname" : self.textfield_pickname.text!,
-        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
+        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+        "default_status": Servicefile.shared.selecteddefaultstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary
@@ -272,7 +273,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         "location_lat" : Servicefile.shared.lati,
         "location_long" : Servicefile.shared.long,
         "location_title" : self.isselected,
-        "location_nickname" : self.textfield_pickname.text!,
+        "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
         "default_status" : true,
         "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {

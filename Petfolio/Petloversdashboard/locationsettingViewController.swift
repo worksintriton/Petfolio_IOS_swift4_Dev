@@ -301,11 +301,11 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
                                                           //print("success data",data)
                                                        let desc = data["predictions"] as! NSArray
                                                        let descvalue = desc[0] as! NSDictionary
-                                                          let value = descvalue["description"] as! String
+                                                          let value = descvalue["description"] as? String ?? ""
                                                           print("Address data",value)
                                                           for item in 0..<desc.count {
                                                         let descvalue = desc[item] as! NSDictionary
-                                                        let value = descvalue["description"] as! String
+                                                        let value = descvalue["description"] as? String ?? ""
                                                             self.searlocation.append(value)
                                                     }
                                                           print("list of address",self.searlocation)

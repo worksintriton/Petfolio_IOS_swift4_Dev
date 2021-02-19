@@ -65,10 +65,11 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func action_email_verify(_ sender: Any) {
         self.view.endEditing(true)
-        if self.isValidEmail(self.textfield_email.text!) == false || self.textfield_email.text! == "" {
+         let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
+        if self.isValidEmail(emailval) == false || emailval == "" {
             self.alert(Message: "Email ID is invalid")
         }else {
-            Servicefile.shared.signupemail = self.textfield_email.text!
+            Servicefile.shared.signupemail = emailval
             self.callemailotpsend()
         }
     }
@@ -84,8 +85,8 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
                            let Data = res["Data"] as! NSDictionary
-                           let otp = Data["otp"] as! Int
-                           Servicefile.shared.otp = String(otp as! Int)
+                           let otp = Data["otp"] as? Int ?? 0
+                        Servicefile.shared.otp = String(otp)
                            Servicefile.shared.email_status = true
                            Servicefile.shared.signupemail = self.textfield_email.text!
                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "emailsignupViewController") as! emailsignupViewController
@@ -94,7 +95,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                        }else{
                            self.stopAnimatingActivityIndicator()
                            print("status code service denied")
-                           let Messages = res["Message"] as! String
+                           let Messages = res["Message"] as? String ?? ""
                            self.alert(Message: Messages)
                        }
                        break
@@ -128,8 +129,9 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
         }else if self.textfield_lastname.text! == "" {
             self.alert(Message: "Please enter the Last name")
         } else {
-            if self.textfield_email.text! != "" {
-                if self.isValidEmail(self.textfield_email.text!) == true  {
+             let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
+            if emailval != "" {
+                if self.isValidEmail(emailval) == true  {
                     if Servicefile.shared.email_status == true {
                         self.callupdate()
                     }else{
@@ -167,9 +169,9 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.update_profile, method: .post, parameters:
             [  "user_id": Servicefile.shared.userid,
-               "first_name": self.textfield_firstname.text!,
-               "last_name": self.textfield_lastname.text!,
-               "user_email": self.textfield_email.text!,
+               "first_name": Servicefile.shared.checktextfield(textfield: self.textfield_firstname.text!),
+               "last_name": Servicefile.shared.checktextfield(textfield: self.textfield_lastname.text!),
+               "user_email": Servicefile.shared.checktextfield(textfield: self.textfield_email.text!),
                "user_email_verification": Servicefile.shared.email_status], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
@@ -178,16 +180,16 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let user_details = res["Data"] as! NSDictionary
-                        Servicefile.shared.first_name = user_details["first_name"] as! String
-                        Servicefile.shared.last_name = user_details["last_name"] as! String
-                        Servicefile.shared.user_email = user_details["user_email"] as! String
-                        Servicefile.shared.user_phone = user_details["user_phone"] as! String
-                        Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                        Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                        Servicefile.shared.userid = user_details["_id"] as! String
-                        Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
-                        Servicefile.shared.userimage = user_details["profile_img"] as! String
+                        Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                        Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                        Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                        Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                        Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                        Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                        Servicefile.shared.userid = user_details["_id"] as? String ?? ""
+                        Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
+                        Servicefile.shared.userimage = user_details["profile_img"] as? String ?? ""
                         
                         UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                         UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")

@@ -117,7 +117,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                         self.petlist.removeAll()
                         for i in 0..<Data.count{
                             let itmval = Data[i] as! NSDictionary
-                            let img = itmval["img_path"] as! String
+                            let img = itmval["img_path"] as? String ?? ""
                             self.petlist.append(img)
                         }
                         print(self.petlist)

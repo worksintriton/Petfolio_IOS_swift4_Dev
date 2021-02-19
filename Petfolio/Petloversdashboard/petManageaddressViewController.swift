@@ -121,6 +121,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.long = Double(Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_long)!
             Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
              Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
+             Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
             self.present(vc, animated: true, completion: nil)
         }else{
@@ -274,19 +275,19 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let idata = Data[itm] as! NSDictionary
-                            let _id = idata["_id"] as! String
-                            let date_and_time = idata["date_and_time"] as! String
-                            let default_status = idata["default_status"] as! Bool
-                            let location_address = idata["location_address"] as! String
-                            let location_city = idata["location_city"] as! String
-                            let location_country = idata["location_country"] as! String
-                            let location_lat = String(Double(idata["location_lat"] as! NSNumber))
-                            let location_long = String(Double(idata["location_long"] as! NSNumber))
-                            let location_nickname = idata["location_nickname"] as! String
-                            let location_pin = idata["location_pin"] as! String
-                            let location_state = idata["location_state"] as! String
-                            let location_title = idata["location_title"] as! String
-                            let user_id = idata["user_id"] as! String
+                            let _id = idata["_id"] as? String ?? ""
+                            let date_and_time = idata["date_and_time"] as? String ?? ""
+                            let default_status = idata["default_status"] as? Bool ?? false
+                            let location_address = idata["location_address"] as? String ?? ""
+                            let location_city = idata["location_city"] as? String ?? ""
+                            let location_country = idata["location_country"] as? String ?? ""
+                            let location_lat = String(Double(truncating: idata["location_lat"] as? NSNumber ?? 0.0))
+                            let location_long = String(Double(truncating: idata["location_long"] as? NSNumber ?? 0.0))
+                            let location_nickname = idata["location_nickname"] as? String ?? ""
+                            let location_pin = idata["location_pin"] as? String ?? ""
+                            let location_state = idata["location_state"] as? String ?? ""
+                            let location_title = idata["location_title"] as? String ?? ""
+                            let user_id = idata["user_id"] as? String ?? ""
                             self.isclickisoption.append("0")
                             self.isorgiclikcopt.append("0")
                             Servicefile.shared.petuserlocaadd.append(locationdetails.init(In_id: _id, In_date_and_time: date_and_time, In_default_status: default_status, In_location_address: location_address, In_location_city: location_city, In_location_country: location_country, In_location_lat: location_lat, In_location_long: location_long, In_location_nickname: location_nickname, In_location_pin: location_pin, In_location_state: location_state, In_location_title: location_title, In_user_id: user_id))

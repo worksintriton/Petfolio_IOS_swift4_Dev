@@ -141,8 +141,8 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
                                                            let Data = res["Data"] as! NSArray
                                                             for itm in 0..<Data.count{
                                                                 let itdata = Data[itm] as! NSDictionary
-                                                                let title = itdata["Title"] as! String
-                                                                let status = itdata["Status"] as! Bool
+                                                                let title = itdata["Title"] as? String ?? ""
+                                                                let status = itdata["Status"] as? Bool ?? false
 //                                                                if false checkbok should allow to click check box else
 //                                                                show edit box
                                                                 var isstatus = "0"

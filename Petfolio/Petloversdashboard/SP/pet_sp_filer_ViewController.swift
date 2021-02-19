@@ -157,9 +157,9 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
                 Servicefile.shared.isspecialza.removeAll()
                 for i in 0..<Data.count{
                     let dataval = Data[i] as! NSDictionary
-                    let Display_text = dataval["Display_text"] as! String
-                    let Count_value_start = dataval["Count_value_start"] as! Int
-                    let Count_value_end = dataval["Count_value_end"] as! Int
+                    let Display_text = dataval["Display_text"] as? String ?? ""
+                    let Count_value_start = dataval["Count_value_start"] as? Int ?? 0
+                    let Count_value_end = dataval["Count_value_end"] as? Int ?? 0
                     Servicefile.shared.SP_filter_price.append(sppricelist.init(IDisplay_text: Display_text, ICount_value_start: Count_value_start, ICount_value_end: Count_value_end))
                  Servicefile.shared.isspecialza.append("0")
                                    }

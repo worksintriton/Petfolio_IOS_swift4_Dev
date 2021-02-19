@@ -149,10 +149,10 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                                               let Data = res["Data"] as! NSArray
                                                             for itm in 0..<Data.count {
                                                                 let itm_val = Data[itm] as! NSDictionary
-                                                                let _id = itm_val["_id"] as! String
-                                                                let image = itm_val["image"] as! String
-                                                                let sub_title = itm_val["sub_title"] as! String
-                                                                let title = itm_val["title"] as! String
+                                                                let _id = itm_val["_id"] as? String ?? ""
+                                                                let image = itm_val["image"] as? String ?? Servicefile.sample_img
+                                                                let sub_title = itm_val["sub_title"] as? String ?? ""
+                                                                let title = itm_val["title"] as? String ?? ""
                                                                 Servicefile.shared.pet_servicecat.append(service_cat.init(I_id: _id, Iimage: image, Isub_title: sub_title, Ititle: title))
                                                             }
                                                             self.coll_servicelist.reloadData()

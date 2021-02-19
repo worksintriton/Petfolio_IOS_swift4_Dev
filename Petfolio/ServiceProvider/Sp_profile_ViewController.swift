@@ -93,7 +93,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
            let img = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
-           let imgval = img["bus_service_gall"] as! String
+           let imgval = img["bus_service_gall"]  as? String ?? Servicefile.sample_img
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
                                   if (error != nil) {
                                       cell.img_banner.image = UIImage(named: "sample")
@@ -149,28 +149,28 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                                                      if Code == 200 {
                                                          let Data = res["Data"] as! NSDictionary
                                                          let bus_certif = Data["bus_certif"] as! NSArray
-                                                         let _id  = Data["_id"] as! String
-                                                         let bus_profile  = Data["bus_profile"] as! String
-                                                         let bus_proof  = Data["bus_proof"] as! String
-                                                         let bus_user_email  = Data["bus_user_email"] as! String
-                                                         let bus_user_name  = Data["bus_user_name"] as! String
-                                                         let bus_user_phone  = Data["bus_user_phone"] as! String
-                                                         let bussiness_name  = Data["bussiness_name"] as! String
-                                                         let date_and_time  = Data["date_and_time"] as! String
-                                                         let delete_status  = Data["delete_status"] as! Bool
-                                                         let profile_status  = Data["profile_status"] as! Bool
-                                                         let profile_verification_status  = Data["profile_verification_status"] as! String
-                                                         let sp_lat  = Data["sp_lat"] as! Double
-                                                         let sp_long  = Data["sp_long"] as! Double
-                                                         let sp_loc  = Data["sp_loc"] as! String
-                                                         let user_id  = Data["user_id"] as! String
+                                                         let _id  = Data["_id"] as? String ?? ""
+                                                         let bus_profile  = Data["bus_profile"] as? String ?? ""
+                                                         let bus_proof  = Data["bus_proof"] as? String ?? ""
+                                                         let bus_user_email  = Data["bus_user_email"] as? String ?? ""
+                                                         let bus_user_name  = Data["bus_user_name"] as? String ?? ""
+                                                         let bus_user_phone  = Data["bus_user_phone"] as? String ?? ""
+                                                         let bussiness_name  = Data["bussiness_name"] as? String ?? ""
+                                                         let date_and_time  = Data["date_and_time"] as? String ?? ""
+                                                         let delete_status  = Data["delete_status"] as? Bool ?? false
+                                                         let profile_status  = Data["profile_status"] as? Bool ?? false
+                                                         let profile_verification_status  = Data["profile_verification_status"] as? String ?? ""
+                                                        let sp_lat  = Data["sp_lat"] as? Double ?? 0.0
+                                                         let sp_long  = Data["sp_long"] as? Double ?? 0.0
+                                                         let sp_loc  = Data["sp_loc"] as? String ?? ""
+                                                         let user_id  = Data["user_id"] as? String ?? ""
                                                          let bus_service_gall = Data["bus_service_gall"] as! NSArray
                                                          let bus_service_list = Data["bus_service_list"] as! NSArray
                                                          let bus_spec_list = Data["bus_spec_list"] as! NSArray
                                                         var serv = ""
                                                         for itm in 0..<bus_service_list.count{
                                                             let datser = bus_service_list[itm] as! NSDictionary
-                                                            let valser = datser["bus_service_list"] as! String
+                                                            let valser = datser["bus_service_list"] as? String ?? ""
                                                             if itm == 0 {
                                                                 serv = valser
                                                             }else{
@@ -181,7 +181,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                                                         var spec = ""
                                                         for itspec in 0..<bus_spec_list.count{
                                                             let datspec = bus_spec_list[itspec] as! NSDictionary
-                                                            let valspec = datspec["bus_spec_list"] as! String
+                                                            let valspec = datspec["bus_spec_list"] as? String ?? ""
                                                             if itspec == 0 {
                                                                 spec = valspec
                                                             }else{

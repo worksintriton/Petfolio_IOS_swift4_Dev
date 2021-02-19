@@ -45,7 +45,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
         let bannerdic = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
-        let image = bannerdic["bus_service_gall"] as! String
+        let image = bannerdic["bus_service_gall"] as? String ?? Servicefile.sample_bannerimg
                    cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                        if (error != nil) {
                            cell.img_banner.image = UIImage(named: "sample")
@@ -110,39 +110,39 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                               if Code == 200 {
                                                                    let Data = res["Data"] as! NSDictionary
                                                                  let bus_certif = Data["bus_certif"] as! NSArray
-                                                                    let _id  = Data["_id"] as! String
-                                                                    let bus_profile  = Data["bus_profile"] as! String
-                                                                    let bus_proof  = Data["bus_proof"] as! String
-                                                                    let bus_user_email  = Data["bus_user_email"] as! String
-                                                                    let bus_user_name  = Data["bus_user_name"] as! String
-                                                                    let bus_user_phone  = Data["bus_user_phone"] as! String
-                                                                    let bussiness_name  = Data["bussiness_name"] as! String
-                                                                    let distance  = Data["distance"] as! Int
-                                                                    let date_and_time  = Data["date_and_time"] as! String
-                                                                    let delete_status  = Data["delete_status"] as! Bool
-                                                                    let profile_status  = Data["profile_status"] as! Bool
-                                                                    let profile_verification_status  = Data["profile_verification_status"] as! String
-                                                                    let sp_lat  = Data["sp_lat"] as! Double
-                                                                    let sp_long  = Data["sp_long"] as! Double
-                                                                    let sp_loc  = Data["sp_loc"] as! String
-                                                                    let user_id  = Data["user_id"] as! String
+                                                                    let _id  = Data["_id"] as? String ?? ""
+                                                                    let bus_profile  = Data["bus_profile"] as? String ?? ""
+                                                                    let bus_proof  = Data["bus_proof"] as? String ?? ""
+                                                                    let bus_user_email  = Data["bus_user_email"] as? String ?? ""
+                                                                    let bus_user_name  = Data["bus_user_name"] as? String ?? ""
+                                                                    let bus_user_phone  = Data["bus_user_phone"] as? String ?? ""
+                                                                    let bussiness_name  = Data["bussiness_name"] as? String ?? ""
+                                                                    let distance  = Data["distance"] as? Int ?? 0
+                                                                    let date_and_time  = Data["date_and_time"] as? String ?? ""
+                                                                    let delete_status  = Data["delete_status"] as? Bool ?? false
+                                                                    let profile_status  = Data["profile_status"] as? Bool ?? false
+                                                                    let profile_verification_status  = Data["profile_verification_status"] as? String ?? ""
+                                                                let sp_lat  = Data["sp_lat"] as? Double ?? 0.0
+                                                                let sp_long  = Data["sp_long"] as! Double ?? 0.0
+                                                                    let sp_loc  = Data["sp_loc"] as? String ?? ""
+                                                                    let user_id  = Data["user_id"] as? String ?? ""
                                                                     let bus_service_gall = Data["bus_service_gall"] as! NSArray
                                                                     let bus_service_list = Data["bus_service_list"] as! NSArray
                                                                 let bus_spec_list = Data["bus_spec_list"] as! NSArray
                                                                 let Details = res["Details"] as! NSDictionary
-                                                                let Sp_comments  = Data["comments"] as! Int
-                                                                let Sp_rating  = Data["rating"] as! Int
+                                                                let Sp_comments  = Data["comments"] as? Int ?? 0
+                                                                let Sp_rating  = Data["rating"] as? Int ?? 0
                                                                 var dicarray = [Any]()
                                                                 dicarray.removeAll()
                                                                 dicarray.append(Data)
                                                                 Servicefile.shared.service_prov_buss_info.removeAll()
                                                                 Servicefile.shared.service_prov_buss_info = dicarray
-                                                                Servicefile.shared.service_id = Details["_id"] as! String
-                                                                Servicefile.shared.service_id_count = Details["count"] as! Int
-                                                                Servicefile.shared.service_id_image_path = Details["image_path"] as! String
-                                                                Servicefile.shared.service_id_title = Details["title"] as! String
-                                                                Servicefile.shared.service_id_amount = Details["amount"] as! Int
-                                                                Servicefile.shared.service_id_time = Details["time"] as! String
+                                                                Servicefile.shared.service_id = Details["_id"] as? String ?? ""
+                                                                Servicefile.shared.service_id_count = Details["count"] as? Int ?? 0
+                                                                Servicefile.shared.service_id_image_path = Details["image_path"] as? String ?? ""
+                                                                Servicefile.shared.service_id_title = Details["title"] as? String ?? ""
+                                                                Servicefile.shared.service_id_amount = Details["amount"] as? Int ?? 0
+                                                                Servicefile.shared.service_id_time = Details["time"] as? String ?? ""
                                                                 
                                                                 
                                                                 

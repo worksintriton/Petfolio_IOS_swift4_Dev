@@ -112,7 +112,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
-                        let Message  = res["Message"] as! String
+                        let Message  = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                     }
                     break
@@ -151,8 +151,8 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
                         let data  = res["Data"] as! NSArray
                         for itm in 0..<data.count{
                             let itdata = data[itm] as! NSDictionary
-                            let id = itdata["_id"] as! String
-                            let date = itdata["Date"] as! String
+                            let id = itdata["_id"] as? String ?? ""
+                            let date = itdata["Date"] as? String ?? ""
                             self.doc_selholiday.append(date)
                             self.docselholidayid.append(id)
                         }
@@ -160,7 +160,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        let Message  = res["Message"] as! String
+                        let Message  = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                         print("status code service denied")
                     }
@@ -181,7 +181,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SP_createholiday, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,
-             "Date" : self.lbl_date.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "Date" : Servicefile.shared.checktextfield(textfield: self.lbl_date.text!)], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -193,7 +193,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
-                        let Message  = res["Message"] as! String
+                        let Message  = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                     }
                     break

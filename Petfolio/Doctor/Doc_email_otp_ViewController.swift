@@ -89,15 +89,17 @@ class Doc_email_otp_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
-        print("user type",Servicefile.shared.user_type)
-        let otptxt = self.textfield_otp.text!
-                   let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
-                   if trimmedString  == Servicefile.shared.otp {
-                    Servicefile.shared.email_status = true
-                    Servicefile.shared.email_status_label = "Verified email"
-                    self.dismiss(animated: true, completion: nil)
-                   }else{
-                     print("verification Not success")
+        if Servicefile.shared.otp != "0" {
+            print("user type",Servicefile.shared.user_type)
+                   let otptxt = self.textfield_otp.text!
+                              let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
+                              if trimmedString  == Servicefile.shared.otp {
+                               Servicefile.shared.email_status = true
+                               Servicefile.shared.email_status_label = "Verified email"
+                               self.dismiss(animated: true, completion: nil)
+                              }else{
+                                print("verification Not success")
+                   }
         }
     }
     
@@ -147,8 +149,8 @@ class Doc_email_otp_ViewController: UIViewController, UITextFieldDelegate {
                                                          let Code  = res["Code"] as! Int
                                                          if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
-                                                           let otp = Data["otp"] as! Int
-                                                           Servicefile.shared.otp = String(otp as! Int)
+                                                           let otp = Data["otp"] as? Int ?? 0
+                                                           Servicefile.shared.otp = String(otp as? Int ?? 0 )
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()

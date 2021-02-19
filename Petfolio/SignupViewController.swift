@@ -72,10 +72,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func action_email_verify(_ sender: Any) {
         self.view.endEditing(true)
-        if self.isValidEmail(self.textfield_email.text!) == false || self.textfield_email.text! == "" {
+        let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
+        if self.isValidEmail(emailval) == false || emailval == "" {
             self.alert(Message: "Email ID is invalid")
         }else {
-            Servicefile.shared.signupemail = self.textfield_email.text!
+            Servicefile.shared.signupemail = emailval
             self.callemailotpsend()
         }
     }
@@ -91,7 +92,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        let otp = Data["otp"] as! Int
+                        let otp = Data["otp"] as? Int ?? 0
                         Servicefile.shared.otp = String(otp as! Int)
                         Servicefile.shared.email_status = true
                         Servicefile.shared.signupemail = self.textfield_email.text!
@@ -101,7 +102,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
-                        let Messages = res["Message"] as! String
+                        let Messages = res["Message"] as? String ?? ""
                         self.alert(Message: Messages)
                     }
                     break
@@ -180,8 +181,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         } else if self.textfield_phno.text! == "" {
             self.alert(Message: "Please enter the Phone number")
         } else {
-            if self.textfield_email.text! != "" {
-                if self.isValidEmail(self.textfield_email.text!) == true  {
+            let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
+            if emailval != "" {
+                if self.isValidEmail(emailval) == true  {
                     if Servicefile.shared.email_status == true {
                         self.callsignup()
                     }else{
@@ -208,10 +210,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     func callsignup(){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.signup, method: .post, parameters:
-            ["first_name": self.textfield_fname.text!,
-             "last_name": self.textfield_lastname.text!,
-             "user_email": self.textfield_email.text!,
-             "user_phone": self.textfield_phno.text!,
+            ["first_name": Servicefile.shared.checktextfield(textfield: self.textfield_fname.text!),
+             "last_name":  Servicefile.shared.checktextfield(textfield: self.textfield_lastname.text!),
+             "user_email": Servicefile.shared.checktextfield(textfield: self.textfield_email.text!),
+             "user_phone": Servicefile.shared.checktextfield(textfield: self.textfield_phno.text!),
              "user_type" : Servicefile.shared.user_type_value,
              "date_of_reg": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
              "mobile_type" : "IOS",
@@ -222,23 +224,27 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        let Data = res["Data"] as! NSDictionary 
                         let user_details = Data["user_details"] as! NSDictionary
-                        Servicefile.shared.first_name = user_details["first_name"] as! String
-                        Servicefile.shared.last_name = user_details["last_name"] as! String
-                        Servicefile.shared.user_email = user_details["user_email"] as! String
-                        Servicefile.shared.user_phone = user_details["user_phone"] as! String
-                        Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                        Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                        Servicefile.shared.userid  = user_details["_id"] as! String
-                        Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
-                        self.present(vc, animated: true, completion: nil)
-                        self.stopAnimatingActivityIndicator()
+                        Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                        Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                        Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                        Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                        Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                        Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                        Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                        Servicefile.shared.userid  = user_details["_id"] as? String ?? ""
+                        Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
+                        if Servicefile.shared.userid != "" {
+                            self.stopAnimatingActivityIndicator()
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
+                            self.present(vc, animated: true, completion: nil)
+                        }else{
+                             self.stopAnimatingActivityIndicator()
+                        }
                     } else {
                         self.stopAnimatingActivityIndicator()
-                        let Messages = res["Message"] as! String
+                        let Messages = res["Message"] as? String ?? ""
                         self.alert(Message: Messages)
                         print("status code service denied")
                     }

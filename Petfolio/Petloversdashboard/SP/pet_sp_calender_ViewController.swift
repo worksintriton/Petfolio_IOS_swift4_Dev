@@ -160,7 +160,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                 let timedic = datadic["Times"] as! NSArray
                                 for timitm in 0..<timedic.count{
                                     let timitmdic = timedic[timitm] as! NSDictionary
-                                    let timval = timitmdic["time"]  as! NSString
+                                    let timval = timitmdic["time"]  as? NSString ?? ""
                                     self.listtime.append(timval as String)
                                     if timitm == 0 {
                                         self.seltime.append("0")
@@ -180,7 +180,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                             self.view_continue.isHidden = true
                             self.stopAnimatingActivityIndicator()
                             print("status code service denied")
-                            let Message = res["Message"] as! String
+                            let Message = res["Message"] as? String ?? ""
                             self.alert(Message: Message)
                         }
                         break
@@ -220,7 +220,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
         //                                                  }else{
         //                                                    self.stopAnimatingActivityIndicator()
         //                                                    print("status code service denied")
-        //                                                      let Message = res["Message"] as! String
+        //                                                      let Message = res["Message"] as? String ?? ""
         //                                                     self.alert(Message: Message)
         //                                                  }
         //                                                break

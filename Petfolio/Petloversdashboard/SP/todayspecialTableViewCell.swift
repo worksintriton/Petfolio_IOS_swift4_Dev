@@ -1,14 +1,14 @@
 //
-//  sp_dash_product_TableViewCell.swift
+//  todayspecialTableViewCell.swift
 //  Petfolio
 //
-//  Created by Admin on 18/02/21.
+//  Created by Admin on 19/02/21.
 //  Copyright © 2021 sriram ramachandran. All rights reserved.
 //
 
 import UIKit
 
-class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var label_cate_value: UILabel!
     
@@ -27,7 +27,7 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details.count
+        return Servicefile.shared.sp_dash_Today_Special.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -38,9 +38,9 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         cell.image_product.dropShadow()
         //cell.image_product.image = UIImage(named: "sample")
          
-        if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img) {
-            print("null value check",Servicefile.shared.sp_dash_Product_details[Servicefile.shared.sp_shop_dash_tbl_index].prod_details[indexPath.row].product_img)
-            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Product_details[Servicefile.shared.sp_shop_dash_tbl_index].prod_details[indexPath.row].product_img)) { (image, error, cache, urls) in
+        if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
+            print("null value check",Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)
+            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
                               cell.image_product.image = UIImage(named: "sample")
                           } else {

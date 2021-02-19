@@ -498,7 +498,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             
             let imgdat = Servicefile.shared.gallerydicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
-            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as! String))) { (image, error, cache, urls) in
+            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.Img_id.image = UIImage(named: "sample")
                 } else {
@@ -689,7 +689,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data)
                         if self.img_for == "Gall" {
                             var B = Servicefile.shared.gallerydicarray
@@ -738,7 +738,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"]  as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data, self.img_for)
                         
                         if self.img_for == "Certi" {
@@ -888,24 +888,30 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                         Servicefile.shared.speclist.removeAll()
                         for itm in 0..<sertime.count{
                             let sitm = sertime[itm] as! NSDictionary
-                            let slistitm = sitm["time"] as! String
-                            Servicefile.shared.sertime.append(slistitm)
+                            let slistitm = sitm["time"] as? String ?? ""
+                            if slistitm  != "" {
+                                Servicefile.shared.sertime.append(slistitm)
+                            }
                         }
                         
                         for itm in 0..<service_list.count{
                             let ditm = service_list[itm] as! NSDictionary
-                            let listitm = ditm["service_list"] as! String
-                            Servicefile.shared.servicelist.append(listitm)
-                            Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
-                            Servicefile.shared.selectedamount.append(0)
-                            self.selservice.append("0")
+                            let listitm = ditm["service_list"] as? String ?? ""
+                            if listitm != "" {
+                                Servicefile.shared.servicelist.append(listitm)
+                                Servicefile.shared.selectedservice.append(Servicefile.shared.sertime[0])
+                                Servicefile.shared.selectedamount.append(0)
+                                self.selservice.append("0")
+                            }
                         }
                         
                         for itm in 0..<Specialization.count{
                             let ditm = Specialization[itm] as! NSDictionary
-                            let listitm = ditm["Specialization"] as! String
-                            Servicefile.shared.speclist.append(listitm)
-                            self.selspec.append("0")
+                            let listitm = ditm["Specialization"] as? String ?? ""
+                            if listitm != "" {
+                                Servicefile.shared.speclist.append(listitm)
+                                self.selspec.append("0")
+                            }
                         }
                         
                         self.coll_speclist.reloadData()

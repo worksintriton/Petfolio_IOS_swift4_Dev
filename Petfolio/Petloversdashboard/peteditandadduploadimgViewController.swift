@@ -18,7 +18,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     @IBOutlet weak var imag_petimag: UIImageView!
     @IBOutlet weak var view_continue: UIView!
      let imagepicker = UIImagePickerController()
-    var uploadimage = "http://mysalveo.com/api/uploads/images.jpeg"
+    var uploadimage = Servicefile.sample_img
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagepicker.delegate = self
@@ -26,7 +26,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
         if Servicefile.shared.pet_status == "edit" {
             uploadimage = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
         }else{
-            uploadimage = "http://mysalveo.com/api/uploads/images.jpeg"
+            uploadimage = Servicefile.sample_img
         }
         self.setimage(strimg: self.uploadimage)
     }
@@ -71,7 +71,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
-                           let Data = res["Data"] as! String
+                           let Data = res["Data"] as? String ?? Servicefile.sample_img
                           print("Uploaded file url:",Data)
                           self.uploadimage = Data
                          self.setimage(strimg: self.uploadimage)

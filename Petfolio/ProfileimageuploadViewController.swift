@@ -124,7 +124,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data)
                         self.imageval = Data
                         self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: self.imageval)) { (image, error, cache, urls) in
@@ -159,8 +159,8 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
                     print("Email success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
                         Servicefile.shared.userimage = self.imageval
+                        UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
                         self.dismiss(animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

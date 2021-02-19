@@ -81,29 +81,31 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
-        let otptxt = self.textfield_otp.text!
-                   let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
-                   if trimmedString  == Servicefile.shared.otp {
-                    print("user id data",Servicefile.shared.userid)
-                    UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
-                    UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
-                    UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
-                    UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
-                    UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
-                    UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
-                    UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
-                    UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
-                    Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                    Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
-                    Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
-                    Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
-                    Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
-                    Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
-                    Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
-                    Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
-                    self.callFCM()
-                   }else{
-                     print("verification Not success")
+        if Servicefile.shared.otp != "0" {
+            let otptxt = self.textfield_otp.text!
+                              let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
+                              if trimmedString  == Servicefile.shared.otp {
+                               print("user id data",Servicefile.shared.userid)
+                               UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
+                               UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                               UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
+                               UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
+                               UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
+                               UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
+                               UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
+                               UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
+                               Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                               Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+                               Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                               Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                               Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                               Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                               Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                               Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
+                               self.callFCM()
+                              }else{
+                                print("verification Not success")
+                   }
         }
     }
     
@@ -150,14 +152,14 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                          if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
                                                            let user_details = Data["User_Details"] as! NSDictionary
-                                                            Servicefile.shared.first_name = user_details["first_name"] as! String
-                                                            Servicefile.shared.last_name = user_details["last_name"] as! String
-                                                            Servicefile.shared.user_email = user_details["user_email"] as! String
-                                                            Servicefile.shared.user_phone = user_details["user_phone"] as! String
-                                                            Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                                                           Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                                                           Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                           let userid = user_details["_id"] as! String
+                                                            Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                                                            Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                                                            Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                                                            Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                                                            Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                                                           Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                                                           Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                                                           let userid = user_details["_id"] as? String ?? ""
                                                            UserDefaults.standard.set(userid, forKey: "userid")
                                                            
                                                             self.stopAnimatingActivityIndicator()

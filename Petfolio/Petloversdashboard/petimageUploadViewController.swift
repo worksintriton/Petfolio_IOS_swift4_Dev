@@ -18,7 +18,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var imag_petimag: UIImageView!
     @IBOutlet weak var view_continue: UIView!
      let imagepicker = UIImagePickerController()
-    var uploadimage = "http://mysalveo.com/api/uploads/images.jpeg"
+    var uploadimage = Servicefile.sample_img
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagepicker.delegate = self
@@ -66,7 +66,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
-                           let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? Servicefile.sample_img
                           print("Uploaded file url:",Data)
                           self.uploadimage = Data
                          self.setimage(strimg: self.uploadimage)

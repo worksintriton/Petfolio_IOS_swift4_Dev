@@ -105,16 +105,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                          if Code == 200 {
                                                            let Data = res["Data"] as! NSDictionary
                                                            let user_details = Data["user_details"] as! NSDictionary
-                                                            Servicefile.shared.first_name = user_details["first_name"] as! String
-                                                            Servicefile.shared.last_name = user_details["last_name"] as! String
-                                                            Servicefile.shared.user_email = user_details["user_email"] as! String
-                                                            Servicefile.shared.user_phone = user_details["user_phone"] as! String
-                                                            Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
-                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as! String
-                                                            Servicefile.shared.otp = String(user_details["otp"] as! Int)
-                                                            Servicefile.shared.userid = user_details["_id"] as! String
-                                                            Servicefile.shared.userimage = user_details["profile_img"] as! String
-                                                            Servicefile.shared.email_status = user_details["user_email_verification"] as! Bool
+                                                            Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                                                            Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                                                            Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                                                            Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                                                            Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                                                            Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                                                            Servicefile.shared.userid = user_details["_id"] as? String ?? ""
+                                                            Servicefile.shared.userimage = user_details["profile_img"] as? String ?? ""
+                                                            Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
                                                             
                                                            print("userid",Servicefile.shared.userid)
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
@@ -122,7 +122,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
-                                                            let Messages = res["Message"] as! String
+                                                            let Messages = res["Message"] as? String ?? ""
                                                             self.alert(Message: Messages)
                                                          }
                                                        break

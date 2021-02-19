@@ -108,7 +108,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()
                                                     print("status code service denied")
-                                                    let Message  = res["Message"] as! String
+                                                    let Message  = res["Message"] as? String ?? ""
                                                     self.alert(Message: Message)
                                                   }
                                                 break
@@ -146,8 +146,8 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                                                           let data  = res["Data"] as! NSArray
                                                             for itm in 0..<data.count{
                                                                 let itdata = data[itm] as! NSDictionary
-                                                                let id = itdata["_id"] as! String
-                                                                let date = itdata["Date"] as! String
+                                                                let id = itdata["_id"] as? String ?? ""
+                                                                let date = itdata["Date"] as? String ?? ""
                                                                 self.doc_selholiday.append(date)
                                                                 self.docselholidayid.append(id)
                                                             }
@@ -155,7 +155,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
-                                                            let Message  = res["Message"] as! String
+                                                            let Message  = res["Message"] as? String ?? ""
                                                             self.alert(Message: Message)
                                                            print("status code service denied")
                                                          }
@@ -176,7 +176,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         self.startAnimatingActivityIndicator()
                if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_createholiday, method: .post, parameters:
                 ["user_id" : Servicefile.shared.userid,
-                 "Date" : self.lbl_date.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                 "Date" : Servicefile.shared.checktextfield(textfield: self.lbl_date.text!)], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                    switch (response.result) {
                                                    case .success:
                                                          let res = response.value as! NSDictionary
@@ -188,7 +188,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
                                                            print("status code service denied")
-                                                            let Message  = res["Message"] as! String
+                                                            let Message  = res["Message"] as? String ?? ""
                                                             self.alert(Message: Message)
                                                          }
                                                        break

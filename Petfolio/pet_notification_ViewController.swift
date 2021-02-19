@@ -155,13 +155,13 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                             self.selcted.append("0")
                             self.orginal.append("0")
                             let notilist = Dat[item] as! NSDictionary
-                            let _id = notilist["_id"] as! String
-                            let user_id = notilist["user_id"] as! String
-                            let notify_title = notilist["notify_title"] as! String
-                            let notify_descri = notilist["notify_descri"] as! String
-                            let notify_img = notilist["notify_img"] as! String
-                            let notify_time = notilist["notify_time"] as! String
-                            let date_and_time = notilist["date_and_time"] as! String
+                            let _id = notilist["_id"] as? String ?? ""
+                            let user_id = notilist["user_id"] as? String ?? ""
+                            let notify_title = notilist["notify_title"] as? String ?? ""
+                            let notify_descri = notilist["notify_descri"] as? String ?? ""
+                            let notify_img = notilist["notify_img"] as? String ?? Servicefile.sample_img
+                            let notify_time = notilist["notify_time"] as? String ?? ""
+                            let date_and_time = notilist["date_and_time"] as? String ?? ""
                             Servicefile.shared.notif_list.append(notificationlist.init(I_id: _id, Iuser_id: user_id, Inotify_title: notify_title, Inotify_descri: notify_descri, Inotify_img: notify_img, Inotify_time: notify_time, Idate_and_time: date_and_time))
                         }
                         self.tbl_notifi_list.reloadData()
@@ -170,7 +170,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                         Servicefile.shared.notif_list.removeAll()
                         self.tbl_notifi_list.reloadData()
                         self.stopAnimatingActivityIndicator()
-                        let Messages = res["Message"] as! String
+                        let Messages = res["Message"] as? String ?? ""
                         self.alert(Message: Messages)
                         print("status code service denied")
                     }

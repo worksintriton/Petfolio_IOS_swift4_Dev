@@ -187,25 +187,25 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                           let Data = res["Data"] as! NSArray
                                                             for itm in 0..<Data.count{
                                                                 let dat = Data[itm] as! NSDictionary
-                                                                let _id = dat["_id"] as! String
-                                                                let amount = String(dat["amount"] as! Int)
-                                                                let clinic_loc = dat["clinic_loc"] as! String
-                                                                let clinic_name = dat["clinic_name"] as! String
-                                                                let communication_type = dat["communication_type"] as! String
-                                                                let distance = dat["distance"] as! String
-                                                                let doctor_img = dat["doctor_img"] as! String
-                                                                let doctor_name = dat["doctor_name"] as! String
-                                                                let dr_title = dat["dr_title"] as! String
-                                                                let review_count = String(dat["review_count"] as! Int)
+                                                                let _id = dat["_id"] as? String ?? ""
+                                                                let amount = String(dat["amount"] as? Int ?? 0)
+                                                                let clinic_loc = dat["clinic_loc"] as? String ?? ""
+                                                                let clinic_name = dat["clinic_name"] as? String ?? ""
+                                                                let communication_type = dat["communication_type"] as? String ?? ""
+                                                                let distance = dat["distance"] as? String ?? ""
+                                                                let doctor_img = dat["doctor_img"] as? String ?? Servicefile.sample_img
+                                                                let doctor_name = dat["doctor_name"] as? String ?? ""
+                                                                let dr_title = dat["dr_title"] as? String ?? ""
+                                                                let review_count = String(dat["review_count"] as? Int ?? 0)
                                                                 let specializations = dat["specialization"] as! NSArray
                                                                 Servicefile.shared.specd.removeAll()
                                                                 for i in 0..<specializations.count{
                                                                     let item = specializations[i] as! NSDictionary
-                                                                    let specialization = item["specialization"] as! String
+                                                                    let specialization = item["specialization"] as? String ?? ""
                                                                     Servicefile.shared.specd.append(spec.init(i_spec: specialization))
                                                                 }
-                                                                let star_count = String(Double(truncating: dat["star_count"] as! NSNumber))
-                                                                let user_id = dat["user_id"] as! String
+                                                                let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0))
+                                                                let user_id = dat["user_id"] as? String ?? ""
                                                                 Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount))
                                                             }
                                                             self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"

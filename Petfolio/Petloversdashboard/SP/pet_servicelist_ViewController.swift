@@ -130,10 +130,10 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         let Service_Details = Data["Service_Details"] as! NSDictionary
-                        let _id = Service_Details["_id"] as! String
-                        let count = Service_Details["count"] as! Int
-                        let image_path = Service_Details["image_path"] as! String
-                        let title = Service_Details["title"] as! String
+                        let _id = Service_Details["_id"] as? String ?? ""
+                        let count = Service_Details["count"] as? Int ?? 0
+                        let image_path = Service_Details["image_path"] as? String ?? Servicefile.sample_img
+                        let title = Service_Details["title"] as? String ?? ""
                         self.label_category.text = title
                         self.image_catimg.sd_setImage(with: Servicefile.shared.StrToURL(url: image_path)) { (image, error, cache, urls) in
                             if (error != nil) {
@@ -147,22 +147,22 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                         Servicefile.shared.pet_SP_service_details.removeAll()
                         for itm in 0..<Service_provider.count{
                             let itmval = Service_provider[itm] as! NSDictionary
-                            let _id = itmval["_id"] as! String
-                            let comments_count = itmval["comments_count"] as! Int
-                            let distance = itmval["distance"] as! Double
-                            let image = itmval["image"] as! String
-                            let rating_count = itmval["rating_count"] as! Int
-                            let service_offer = itmval["service_offer"] as! Int
-                            let service_place = itmval["service_place"] as! String
-                            let service_price = Int(truncating: itmval["service_price"] as! NSNumber)
-                            let service_provider_name = itmval["service_provider_name"] as! String
+                            let _id = itmval["_id"] as? String ?? ""
+                            let comments_count = itmval["comments_count"] as? Int ?? 0
+                            let distance = itmval["distance"] as? Double ?? 0.0
+                            let image = itmval["image"] as? String ?? Servicefile.sample_img
+                            let rating_count = itmval["rating_count"] as? Int ?? 0
+                            let service_offer = itmval["service_offer"] as? Int ?? 0
+                            let service_place = itmval["service_place"] as? String ?? ""
+                            let service_price = Int(truncating: itmval["service_price"] as? NSNumber ?? 0)
+                            let service_provider_name = itmval["service_provider_name"] as? String ?? ""
                             Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name))
                         }
                         if Servicefile.shared.pet_SP_service_details.count > 0 {
                             self.label_nodatafound.isHidden = true
                         }else{
                             self.label_nodatafound.isHidden = false
-                            let msg = res["alert_msg"] as! String
+                            let msg = res["alert_msg"] as? String ?? ""
                             let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 Servicefile.shared.distance = 1

@@ -186,8 +186,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                             let timedic = datadic["Times"] as! NSArray
                             for timitm in 0..<timedic.count{
                                 let timitmdic = timedic[timitm] as! NSDictionary
-                                let timval = timitmdic["time"]  as! NSString
-                                let bookstatus = timitmdic["book_status"]  as! Bool
+                                let timval = timitmdic["time"]  as? NSString ?? ""
+                                let bookstatus = timitmdic["book_status"]  as? Bool ?? false
                                 if bookstatus ==  true {
                                     self.bookstatus.append("1")
                                 }else{
@@ -207,7 +207,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
-                        let Message = res["Message"] as! String
+                        let Message = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                     }
                     break
@@ -251,7 +251,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
-                        let Message = res["Message"] as! String
+                        let Message = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                     }
                     break

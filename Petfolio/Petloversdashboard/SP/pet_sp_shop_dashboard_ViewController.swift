@@ -70,13 +70,15 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! sp_shop_dash_bannerTableViewCell
+            cell.coll_pet_dash_shop_banner.tag = indexPath.row
             cell.coll_pet_dash_shop_banner.reloadData()
             return cell
         }else if indexPath.section == 1 {
-            let cells = tableView.dequeueReusableCell(withIdentifier: "scell", for: indexPath) as! sp_dash_product_TableViewCell
+            let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
             cells.label_cate_value.text = "Todays deal"
             cells.btn_cate_seemore_btn.tag = indexPath.row
             Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
+            cells.coll_cat_prod_list.tag = indexPath.row
             cells.coll_cat_prod_list.reloadData()
             cells.btn_cate_seemore_btn.addTarget(self, action: #selector(action_todaydeal_seemore), for: .touchUpInside)
             return cells
@@ -86,7 +88,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
             cell.btn_cate_seemore_btn.tag = indexPath.row
             cell.btn_cate_seemore_btn.addTarget(self, action: #selector(action_category_seemore), for: .touchUpInside)
-            // cell.coll_cat_prod_list.reloadData()
+            cell.coll_cat_prod_list.tag = indexPath.row
+            cell.coll_cat_prod_list.reloadData()
             return cell
         }
     }
@@ -125,43 +128,43 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                         Servicefile.shared.sp_dash_Today_Special.removeAll()
                         for bann in 0..<Banner_details.count{
                             let idata = Banner_details[bann] as! NSDictionary
-                            let bann_imag = idata["banner_img"] as! String
-                            let banner_title = idata["banner_title"] as! String
+                            let bann_imag = idata["banner_img"] as? String ?? Servicefile.sample_bannerimg
+                            let banner_title = idata["banner_title"] as? String ?? ""
                             Servicefile.shared.sp_dash_Banner_details.append(pet_sp_dash_banner.init(In_banner: bann_imag, In_banner_title: banner_title))
                         }
+                        for itm in 0..<Today_Special.count{
+                                                   let itmdata = Today_Special[itm] as! NSDictionary
+                                                   let id  = itmdata["_id"] as? String ?? ""
+                                                   let product_discount = itmdata["product_discount"] as? Int ?? 0
+                                                   let product_fav = itmdata["product_fav"] as? Bool ?? false
+                                                   let product_img = itmdata["product_img"] as? String ?? Servicefile.sample_img
+                                                   let product_price = itmdata["product_price"] as? Int ?? 0
+                            let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
+                                                   let product_review = String(itmdata["product_review"] as? Int ?? 0)
+                                                   let product_title = itmdata["product_title"] as? String ?? ""
+                                                   Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                                               }
                         for cat_prod_deta in 0..<Product_details.count{
                             let catval = Product_details[cat_prod_deta] as! NSDictionary
-                            let cat_id = catval["cat_id"] as! String
-                            let cat_name = catval["cat_name"] as! String
+                            let cat_id = catval["cat_id"] as? String ?? ""
+                            let cat_name = catval["cat_name"] as? String ?? ""
                             let product_list = catval["product_list"] as! NSArray
                             Servicefile.shared.sp_dash_productdetails.removeAll()
                             for prodi in 0..<product_list.count{
                                 let prodval = product_list[prodi] as! NSDictionary
-                                let id  = prodval["_id"] as! String
-                                let product_discount = prodval["product_discount"] as! Int
-                                let product_fav = prodval["product_fav"] as! Bool
-                                let product_img = prodval["product_img"] as! String
-                                let product_price = prodval["product_price"] as! Int
-                                let product_rating = String(prodval["product_rating"] as! Double)
-                                let product_review = String(prodval["product_review"] as! Int)
-                                let product_title = prodval["product_title"] as! String
+                                let id  = prodval["_id"] as? String ?? ""
+                                let product_discount = prodval["product_discount"] as? Int ?? 0
+                                let product_fav = prodval["product_fav"] as? Bool ?? false
+                                let product_img = prodval["product_img"] as? String ?? Servicefile.sample_img
+                                let product_price = prodval["product_price"] as? Int ?? 0
+                                let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
+                                let product_review = String(prodval["product_review"] as? Int ?? 0)
+                                let product_title = prodval["product_title"] as? String ?? ""
                                 Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0 {
                                Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))
                             }
-                        }
-                        for itm in 0..<Today_Special.count{
-                            let itmdata = Today_Special[itm] as! NSDictionary
-                            let id  = itmdata["_id"] as! String
-                            let product_discount = itmdata["product_discount"] as! Int
-                            let product_fav = itmdata["product_fav"] as! Bool
-                            let product_img = itmdata["product_img"] as! String
-                            let product_price = itmdata["product_price"] as! Int
-                            let product_rating = String(itmdata["product_rating"] as! Double)
-                            let product_review = String(itmdata["product_review"] as! Int)
-                            let product_title = itmdata["product_title"] as! String
-                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
                         self.tbl_dash_list.reloadData()
                         self.stopAnimatingActivityIndicator()

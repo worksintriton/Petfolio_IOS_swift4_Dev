@@ -57,14 +57,19 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! User_typeCollectionViewCell
         
         cell.Img_Select.isHidden = false
-        cell.Img_UT.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.UtypeData[indexPath.row].user_type_img)) { (image, error, cache, urls) in
-                   if (error != nil) {
-                       cell.Img_UT.image = UIImage(named: "044.png")
-                       cell.Img_UT.layer.cornerRadius = 3.0
-                   } else {
-                       cell.Img_UT.image = image
-                   }
-               }
+        if Servicefile.shared.UtypeData[indexPath.row].user_type_img != "" {
+            cell.Img_UT.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.UtypeData[indexPath.row].user_type_img)) { (image, error, cache, urls) in
+                              if (error != nil) {
+                                  cell.Img_UT.image = UIImage(named: "sample")
+                                  cell.Img_UT.layer.cornerRadius = 3.0
+                              } else {
+                                  cell.Img_UT.image = image
+                              }
+                          }
+        }else{
+            cell.Img_UT.image = UIImage(named: "sample")
+        }
+       
         cell.Img_UT.layer.cornerRadius = 10.0
         cell.Lab_UT.text = Servicefile.shared.UtypeData[indexPath.row].user_type_title
         if self.locusel[indexPath.row] == "1"{
@@ -90,10 +95,12 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     @IBAction func action_changeUT(_ sender: Any) {
         if Servicefile.shared.UtypeData[self.selval].user_type_value == 1 || Servicefile.shared.UtypeData[self.selval].user_type_value == 4 || Servicefile.shared.UtypeData[self.selval].user_type_value == 2 {
-            Servicefile.shared.utypesel = self.locusel
-            Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
-            Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
-            self.dismiss(animated: true, completion: nil)
+            if Servicefile.shared.UtypeData[self.selval].user_type_title != "" {
+                Servicefile.shared.utypesel = self.locusel
+                Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
+                Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
+                self.dismiss(animated: true, completion: nil)
+            }
        }
         
     }
@@ -119,10 +126,10 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                         let usertypedata = data["usertypedata"] as! NSArray
                                                         for item in 0..<usertypedata.count{
                                                             let idata = usertypedata[item] as! NSDictionary
-                                                            let id = idata["_id"] as! String
-                                                            let ut_img = idata["user_type_img"] as! String
-                                                            let ut_title = idata["user_type_title"] as! String
-                                                            let ut_value = idata["user_type_value"] as! Int
+                                                            let id = idata["_id"] as? String ?? ""
+                                                            let ut_img = idata["user_type_img"] as? String ?? ""
+                                                            let ut_title = idata["user_type_title"] as? String ?? ""
+                                                            let ut_value = idata["user_type_value"] as? Int ?? 0
                                                             Servicefile.shared.orgiutypesel.append("0")
                                                             if item != 0 {
                                                                  Servicefile.shared.utypesel.append("0")
@@ -157,7 +164,4 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
              }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    
-
 }

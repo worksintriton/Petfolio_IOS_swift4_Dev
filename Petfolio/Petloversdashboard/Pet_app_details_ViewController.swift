@@ -151,7 +151,8 @@ class Pet_app_details_ViewController: UIViewController {
         params = ["_id": Appointmentid,
                   "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                   "appoinment_status" : "Missed",
-                  "appoint_patient_st": "Petowner Cancelled appointment"]
+                  "doc_feedback" : "",
+                  "appoint_patient_st": "Patient Appointment Cancelled"]
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
@@ -212,8 +213,8 @@ class Pet_app_details_ViewController: UIViewController {
                         let data = res["Data"] as! NSDictionary
                         self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-                            self.label_orderdate.text = data["booking_date_time"] as? String
-                            let comm_type = data["communication_type"] as? String
+                            self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                            let comm_type = data["communication_type"] as? String ?? ""
                             if comm_type == "Online" || comm_type == "Online Or Visit"{
                                 if Servicefile.shared.pet_selected_app_list == "current" {
                                     self.view_complete_cancel.isHidden = false
@@ -236,28 +237,28 @@ class Pet_app_details_ViewController: UIViewController {
                             }else{
                                 self.view_confrence.isHidden = true
                             }
-                            self.label_order_id.text = data["payment_id"] as? String
-                            self.label_payment_method.text = data["payment_method"] as? String
-                            self.label_ordercost.text = data["amount"] as? String
+                            self.label_order_id.text = data["payment_id"] as? String ?? ""
+                            self.label_payment_method.text = data["payment_method"] as? String ?? ""
+                            self.label_ordercost.text = data["amount"] as? String ?? ""
                             
                             let pet_id = data["pet_id"] as! NSDictionary
-                            let last_vaccination_date = pet_id["last_vaccination_date"] as! String
-                            if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
+                            let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
+                            if Int(truncating: pet_id["vaccinated"] as? NSNumber ?? 0) == 1 {
                                 self.label_vaccinated.text = "Yes"
                                 self.label_vacindate.text = last_vaccination_date
                             }else{
                                 self.label_vaccinated.text = "No"
                                 self.view_vacc_date.isHidden = true
                             }
-                            self.label_age.text = String(pet_id["pet_age"] as! Int)
-                            self.label_weight.text = String(pet_id["pet_weight"] as! Int)
-                            self.label_color.text = pet_id["pet_color"] as? String
-                            self.label_gender.text = pet_id["pet_gender"] as? String
-                            self.label_breed.text = pet_id["pet_breed"] as? String
-                            self.label_petType.text = pet_id["pet_type"] as? String
-                            self.label_petname_details.text =  pet_id["pet_name"] as? String
-                            let petimage = pet_id["pet_img"] as? String
-                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage!)) { (image, error, cache, urls) in
+                            self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                            self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
+                            self.label_color.text = pet_id["pet_color"] as? String ?? ""
+                            self.label_gender.text = pet_id["pet_gender"] as? String ?? ""
+                            self.label_breed.text = pet_id["pet_breed"] as? String ?? ""
+                            self.label_petType.text = pet_id["pet_type"] as? String ?? ""
+                            self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
+                            let petimage = pet_id["pet_img"] as? String ?? Servicefile.sample_img
+                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_pet_img.image = UIImage(named: "sample")
                                 } else {
@@ -265,21 +266,21 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                             let user_id = data["user_id"] as! NSDictionary
-                            let firstname = user_id["first_name"] as? String
-                            let lastname = user_id["last_name"] as? String
-                            let userimage = user_id["profile_img"] as? String
-                            self.label_holder_name.text = firstname! + " " + lastname!
+                            let firstname = user_id["first_name"] as? String ?? ""
+                            let lastname = user_id["last_name"] as? String ?? ""
+                            let userimage = user_id["profile_img"] as? String ?? ""
+                            self.label_holder_name.text = firstname + " " + lastname
                             //self.label_holder_servie_name.isHidden = true
-                            let amt = data["amount"] as! String
+                            let amt = data["amount"] as? String ?? ""
                             let doc_business_info = data["doc_business_info"] as! NSArray
                             let doc_busi = doc_business_info[0] as! NSDictionary
-                            let clinic_loc  = doc_busi["clinic_loc"] as! String
+                            let clinic_loc  = doc_busi["clinic_loc"] as? String ?? ""
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = clinic_loc
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: "sample")
                             } else {
-                                self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
+                                self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_holder_name.image = UIImage(named: "sample")
                                     } else {
@@ -288,30 +289,30 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                         }else{
-                            self.label_orderdate.text = data["booking_date_time"] as? String
+                            self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
                             self.view_confrence.isHidden = true
-                            self.label_order_id.text = data["payment_id"] as? String
-                            self.label_payment_method.text = data["payment_method"] as? String
-                            self.label_ordercost.text = data["service_amount"] as? String
+                            self.label_order_id.text = data["payment_id"] as? String ?? ""
+                            self.label_payment_method.text = data["payment_method"] as? String ?? ""
+                            self.label_ordercost.text = data["service_amount"] as? String ?? ""
                             
                             let pet_id = data["pet_id"] as! NSDictionary
-                            let last_vaccination_date = pet_id["last_vaccination_date"] as! String
-                            if Int(truncating: pet_id["vaccinated"] as! NSNumber) == 1 {
+                            let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
+                            if Int(truncating: pet_id["vaccinated"] as? NSNumber ?? 0) == 1 {
                                 self.label_vaccinated.text = "Yes"
                                 self.label_vacindate.text = last_vaccination_date
                             }else{
                                 self.label_vaccinated.text = "No"
                                 self.view_vacc_date.isHidden = true
                             }
-                            self.label_age.text = String(pet_id["pet_age"] as! Int)
-                            self.label_weight.text = String(pet_id["pet_weight"] as! Int)
-                            self.label_color.text = pet_id["pet_color"] as? String
-                            self.label_gender.text = pet_id["pet_gender"] as? String
-                            self.label_breed.text = pet_id["pet_breed"] as? String
-                            self.label_petType.text = pet_id["pet_type"] as? String
-                            self.label_petname_details.text =  pet_id["pet_name"] as? String
-                            let petimage = pet_id["pet_img"] as? String
-                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage!)) { (image, error, cache, urls) in
+                            self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                            self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
+                            self.label_color.text = pet_id["pet_color"] as? String ?? ""
+                            self.label_gender.text = pet_id["pet_gender"] as? String ?? ""
+                            self.label_breed.text = pet_id["pet_breed"] as? String ?? ""
+                            self.label_petType.text = pet_id["pet_type"] as? String ?? ""
+                            self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
+                            let petimage = pet_id["pet_img"] as? String ?? Servicefile.sample_img
+                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_pet_img.image = UIImage(named: "sample")
                                 } else {
@@ -319,22 +320,22 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                             let user_id = data["user_id"] as! NSDictionary
-                            let firstname = user_id["first_name"] as? String
-                            let lastname = user_id["last_name"] as? String
-                            let userimage = user_id["profile_img"] as? String
-                            self.label_holder_name.text = firstname! + " " + lastname!
+                            let firstname = user_id["first_name"] as? String ?? ""
+                            let lastname = user_id["last_name"] as? String ?? ""
+                            let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
+                            self.label_holder_name.text = firstname + " " + lastname
                             self.label_Holder_service_name.isHidden = false
-                            self.label_Holder_service_name.text = data["service_name"] as! String
-                            let amt = data["service_amount"] as! String
+                            self.label_Holder_service_name.text = data["service_name"] as? String ?? ""
+                            let amt = data["service_amount"] as? String ?? ""
                             let sp_business_info = data["sp_business_info"] as! NSArray
                             let sp_business = sp_business_info[0] as! NSDictionary
-                            let sp_loc  = sp_business["sp_loc"] as! String
+                            let sp_loc  = sp_business["sp_loc"] as? String ?? ""
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = sp_loc
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: "sample")
                             } else {
-                                self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
+                                self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_holder_name.image = UIImage(named: "sample")
                                     } else {

@@ -287,23 +287,23 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
-                            let id = dataitm["_id"] as! String
-                            let amount = dataitm["service_amount"] as! String
-                            let service_name = dataitm["service_name"] as! String
-                            let booking_date_time = dataitm["booking_date_time"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
+                            let id = dataitm["_id"] as? String ?? ""
+                            let amount = dataitm["service_amount"] as? String ?? ""
+                            let service_name = dataitm["service_name"] as? String ?? ""
+                            let booking_date_time = dataitm["booking_date_time"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let petdetail = dataitm["pet_id"] as! NSDictionary
-                            let petid = petdetail["_id"] as! String
-                            let pet_name = petdetail["pet_name"] as! String
-                            let pet_type = petdetail["pet_type"] as! String
-                            let pet_breed = petdetail["pet_breed"] as! String
-                            let pet_img = petdetail["pet_img"] as! String
-                            let user_id = petdetail["user_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
-                            let appointment_UID = dataitm["appointment_UID"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
+                            let petid = petdetail["_id"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
+                            let pet_breed = petdetail["pet_breed"] as? String ?? ""
+                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let user_id = petdetail["user_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
+                            let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
                            let appoint_patient_st = ""
                            // let appoint_patient_st = dataitm["appoint_patient_st"] as! String
                             Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st))
@@ -350,23 +350,23 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
-                            let id = dataitm["_id"] as! String
-                            let amount = dataitm["service_amount"] as! String
-                            let service_name = dataitm["service_name"] as! String
-                            let booking_date_time = dataitm["booking_date_time"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
+                            let id = dataitm["_id"] as? String ?? ""
+                            let amount = dataitm["service_amount"] as? String ?? ""
+                            let service_name = dataitm["service_name"] as? String ?? ""
+                            let booking_date_time = dataitm["booking_date_time"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let petdetail = dataitm["pet_id"] as! NSDictionary
-                            let petid = petdetail["_id"] as! String
-                            let pet_name = petdetail["pet_name"] as! String
-                            let pet_type = petdetail["pet_type"] as! String
-                            let pet_breed = petdetail["pet_breed"] as! String
-                            let pet_img = petdetail["pet_img"] as! String
-                            let user_id = petdetail["user_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
-                            let appointment_UID = dataitm["appointment_UID"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
+                            let petid = petdetail["_id"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
+                            let pet_breed = petdetail["pet_breed"] as? String ?? ""
+                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let user_id = petdetail["user_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
+                            let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
                             //let appoint_patient_st = dataitm["appoint_patient_st"] as! String
                             let appoint_patient_st = ""
                             Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st))
@@ -412,23 +412,23 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
-                            let id = dataitm["_id"] as! String
-                            let amount = dataitm["service_amount"] as! String
-                            let service_name = dataitm["service_name"] as! String
-                            let booking_date_time = dataitm["booking_date_time"] as! String
-                            let user_rate = dataitm["user_rate"] as! String
-                            let user_feedback = dataitm["user_feedback"] as! String
+                            let id = dataitm["_id"] as? String ?? ""
+                            let amount = dataitm["service_amount"] as? String ?? ""
+                            let service_name = dataitm["service_name"] as? String ?? ""
+                            let booking_date_time = dataitm["booking_date_time"] as? String ?? ""
+                            let user_rate = dataitm["user_rate"] as? String ?? ""
+                            let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let petdetail = dataitm["pet_id"] as! NSDictionary
-                            let petid = petdetail["_id"] as! String
-                            let pet_name = petdetail["pet_name"] as! String
-                            let pet_type = petdetail["pet_type"] as! String
-                            let pet_breed = petdetail["pet_breed"] as! String
-                            let pet_img = petdetail["pet_img"] as! String
-                            let user_id = petdetail["user_id"] as! String
-                            let sp_id = dataitm["sp_id"] as! String
-                            let appointment_UID = dataitm["appointment_UID"] as! String
-                            let completed_at = dataitm["completed_at"] as! String
-                            let missed_at = dataitm["missed_at"] as! String
+                            let petid = petdetail["_id"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
+                            let pet_breed = petdetail["pet_breed"] as? String ?? ""
+                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let user_id = petdetail["user_id"] as? String ?? ""
+                            let sp_id = dataitm["sp_id"] as? String ?? ""
+                            let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
+                            let completed_at = dataitm["completed_at"] as? String ?? ""
+                            let missed_at = dataitm["missed_at"] as? String ?? ""
                            // let appoint_patient_st = dataitm["appoint_patient_st"] as! String
                            let appoint_patient_st = ""
                             Servicefile.shared.SP_Das_petdetails.append(SP_Dash_petdetails.init(in_Appid: id, In_amount: amount, In_appointment_types: "", In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_servicename: service_name, In_sp_id : sp_id, In_appointment_UID: appointment_UID, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st : appoint_patient_st))
@@ -470,7 +470,9 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         }else{
             params = [ "_id": Appointmentid,
                        "missed_at" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-                       "appoinment_status" : "Missed"]
+                       "doc_feedback" : "",
+                       "appoinment_status" : "Missed",
+                       "appoint_patient_st": "Doctor Cancelled appointment"]
         }
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
@@ -520,8 +522,8 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        let profile_status = Data["profile_status"] as! Bool
-                        let calender_status = Data["calender_status"] as! Bool
+                        let profile_status = Data["profile_status"] as? Bool ?? false
+                        let calender_status = Data["calender_status"] as? Bool ?? false
                         print("profile_status",profile_status)
                         if profile_status == false {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
@@ -530,11 +532,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_reg_calender_ViewController") as! Sp_reg_calender_ViewController
                             self.present(vc, animated: true, completion: nil)
                         }else {
-                            let profile_verification_status = Data["profile_verification_status"] as! String
+                            let profile_verification_status = Data["profile_verification_status"]  as? String ?? ""
                             if profile_verification_status == "Not verified" {
                                 self.view_shadow.isHidden = false
                                 self.view_popup.isHidden = false
-                                let Message = res["Message"] as! String
+                                let Message = res["Message"] as? String ?? ""
                                 self.label_failedstatus.text = Message
                             }else{
                                 self.view_shadow.isHidden = true

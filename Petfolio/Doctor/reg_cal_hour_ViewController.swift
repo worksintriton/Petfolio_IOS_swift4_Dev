@@ -129,7 +129,7 @@ class reg_cal_hour_ViewController: UIViewController, UITableViewDelegate, UITabl
                                                              }else{
                                                                self.stopAnimatingActivityIndicator()
                                                                print("status code service denied")
-                                                                 let Message = res["Message"] as! String
+                                                                 let Message = res["Message"] as? String ?? ""
                                                                 self.alert(Message: Message)
                                                              }
                                                            break
@@ -171,9 +171,9 @@ class reg_cal_hour_ViewController: UIViewController, UITableViewDelegate, UITabl
                                                                let Data = res["Data"] as! NSArray
                                                                 for itm in 0..<Data.count{
                                                                     let itdata = Data[itm] as! NSDictionary
-                                                                    let title = itdata["Time"] as! String
-                                                                    let status = itdata["Status"] as! Bool
-                                                                    let forma = itdata["format"] as! String
+                                                                    let title = itdata["Time"] as? String ?? ""
+                                                                    let status = itdata["Status"] as? Bool ?? false
+                                                                    let forma = itdata["format"] as? String ?? ""
     //                                                                if false checkbok should allow to click check box else
     //                                                                show edit box
                                                                     var isstatus = "0"

@@ -351,7 +351,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! String
+                        let Data = res["Data"] as? String ?? ""
                        print("Uploaded file url:",Data)
                         Servicefile.shared.pet_apoint_doc_attched.removeAll()
                         var B = Servicefile.shared.pet_apoint_doc_attched
@@ -367,7 +367,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
-                       let Message  = res["Message"] as! String
+                       let Message  = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                         print("status code service denied")
                     }
@@ -444,7 +444,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
              "sp_feedback" : "",
              "sp_rate" : "",
              "user_feedback" : "",
-             "user_rate" : "",
+             "user_rate" : "0",
              "display_date" : Servicefile.shared.pet_apoint_display_date,
              "server_date_time" : "",
              "payment_id" : Servicefile.shared.pet_apoint_payment_id,
@@ -467,7 +467,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                                        }else{
                                                          self.stopAnimatingActivityIndicator()
                                                          print("status code service denied")
-                                                           let Message = res["Message"] as! String
+                                                           let Message = res["Message"] as? String ?? ""
                                                           self.alert(Message: Message)
                                                        }
                                                      break
@@ -488,13 +488,12 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
          if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
              ["user_id" : Servicefile.shared.userid,
               "pet_img" : self.petimage,
-             "pet_name" : self.textfield_petname.text!,
-             "pet_type" : self.textfield_pettype.text!,
-             "pet_breed" : self.textfield_petbreed.text!,
-             "pet_gender" : self.textfield_petage.text!,
+              "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!) ,
+             "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
+             "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
              "pet_color" : self.textfield_color.text!,
-             "pet_weight" : Int(self.textfield_weight.text!),
-             "pet_age" : Int(self.textfield_petage.text!),
+             "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_weight.text!),
+             "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petage.text!),
              "vaccinated" : false,
              "last_vaccination_date" : "",
              "default_status" : true,
@@ -506,7 +505,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                                        let Code  = res["Code"] as! Int
                                                        if Code == 200 {
                                                          let Data = res["Data"] as! NSDictionary
-                                                          let id = Data["_id"] as! String
+                                                          let id = Data["_id"] as? String ?? ""
                                                           Servicefile.shared.pet_apoint_pet_id = id
                                                           self.showPaymentForm()
                                                           self.stopAnimatingActivityIndicator()
@@ -552,13 +551,17 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["pet_type_title"] as! String
-                            self.pet_type.append(pbv)
+                            let pbv = pb["pet_type_title"] as? String ?? ""
+                            if pbv != "" {
+                                self.pet_type.append(pbv)
+                            }
                         }
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["_id"] as! String
+                            let pbv = pb["_id"] as? String ?? ""
+                            if pbv != "" {
                             self.petid.append(pbv)
+                            }
                         }
                         self.tblview_pettype.reloadData()
                         self.tblview_petbreed.reloadData()
@@ -597,8 +600,10 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                                                  self.Pet_breed.removeAll()
                                                                   for item in 0..<Pet_breed.count{
                                                                       let pb = Pet_breed[item] as! NSDictionary
-                                                                      let pbv = pb["pet_breed"] as! String
-                                                                      self.Pet_breed.append(pbv)
+                                                                      let pbv = pb["pet_breed"] as? String ?? ""
+                                                                    if pbv != "" {
+                                                                        self.Pet_breed.append(pbv)
+                                                                    }  
                                                                   }
                                                                   self.tblview_petbreed.reloadData()
                                                                    self.stopAnimatingActivityIndicator()

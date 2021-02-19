@@ -144,26 +144,26 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                     if Code == 200 {
                         self.clinicpic.removeAll()
                         let Data = res["Data"] as! NSDictionary
-                        self._id = Data["_id"] as! String
-                        self.clinic_name = Data["clinic_name"] as! String
-                        Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as! String
+                        self._id = Data["_id"] as? String ?? ""
+                        self.clinic_name = Data["clinic_name"] as? String ?? ""
+                        Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
                         let clidet = Data["clinic_pic"] as! NSArray
                         
-                        let clicloc =  Data["clinic_loc"] as! String
-                        let amount =  Data["amount"] as! Int
+                        let clicloc =  Data["clinic_loc"] as? String ?? ""
+                        let amount =  Data["amount"] as? Int ?? 0
                         Servicefile.shared.pet_apoint_amount = amount
                         self.label_const_amt.text = " ₹ " + String(Servicefile.shared.pet_apoint_amount)
                         self.label_city.text = clicloc + ". "
                         self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                         for itm in 0..<clidet.count{
                             let dat = clidet[itm] as! NSDictionary
-                            let pic = dat["clinic_pic"] as! String
+                            let pic = dat["clinic_pic"] as? String ?? Servicefile.sample_img
                             self.clinicpic.append(pic)
                         }
                         let educ_details = Data["education_details"] as! NSArray
                         for itm in 0..<educ_details.count{
                             let dat = educ_details[itm] as! NSDictionary
-                            let ed = dat["education"] as! String
+                            let ed = dat["education"] as? String ?? ""
                             if self.edu == "" {
                                 self.edu = ed  + self.edu
                             }else{
@@ -177,7 +177,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         
                         for itm in 0..<spec.count{
                             let dat = spec[itm] as! NSDictionary
-                            let pic = dat["specialization"] as! String
+                            let pic = dat["specialization"] as? String ?? ""
                             if itm == 0 {
                                 specarray =   pic
                             }else{
@@ -187,12 +187,12 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         }
                         
                         self.coll_imgview.reloadData()
-                        self.descri = Data["descri"] as! String
-                        self.dr_name = Data["dr_name"] as! String
-                        self.dr_title = Data["dr_title"] as! String
-                        self.label_yr_exp.text = String(Data["doctor_exp"] as! Int)
-                        let strcount = Data["star_count"] as! Int
-                        let r_count =  Data["review_count"] as! Int
+                        self.descri = Data["descri"] as? String ?? ""
+                        self.dr_name = Data["dr_name"] as? String ?? ""
+                        self.dr_title = Data["dr_title"] as? String ?? ""
+                        self.label_yr_exp.text = String(Data["doctor_exp"] as? Int ?? 0)
+                        let strcount = Data["star_count"] as? Int ?? 0
+                        let r_count =  Data["review_count"] as? Int ?? 0
                         
                         self.star_count = String(strcount)
                         let rcount = String(r_count)
@@ -255,13 +255,17 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["pet_type_title"] as! String
-                            self.pet_type.append(pbv)
+                            let pbv = pb["pet_type_title"] as? String ?? ""
+                            if pbv != "" {
+                                self.pet_type.append(pbv)
+                            }
                         }
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary
-                            let pbv = pb["_id"] as! String
-                            self.petid.append(pbv)
+                            let pbv = pb["_id"] as? String ?? ""
+                            if pbv != "" {
+                                 self.petid.append(pbv)
+                            }
                         }
                         //                self.tblview_pettype.reloadData()
                         //                self.tblview_petbreed.reloadData()
@@ -299,8 +303,10 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_breed.count{
                             let pb = Pet_breed[item] as! NSDictionary
-                            let pbv = pb["pet_breed"] as! String
-                            self.Pet_breed.append(pbv)
+                            let pbv = pb["pet_breed"] as? String ?? ""
+                            if pbv != "" {
+                                 self.Pet_breed.append(pbv)
+                            }
                         }
                         // self.tblview_petbreed.reloadData()
                         self.stopAnimatingActivityIndicator()

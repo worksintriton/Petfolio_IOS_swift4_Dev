@@ -130,7 +130,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
                self.startAnimatingActivityIndicator()
            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Sp_mycalender, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
-            "sp_name":"",
+            "sp_name": Servicefile.shared.first_name ,
             "types" : 1  ], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                    switch (response.result) {
                                                    case .success:
@@ -141,8 +141,8 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
                                                            let Data = res["Data"] as! NSArray
                                                             for itm in 0..<Data.count{
                                                                 let itdata = Data[itm] as! NSDictionary
-                                                                let title = itdata["Title"] as! String
-                                                                let status = itdata["Status"] as! Bool
+                                                                let title = itdata["Title"] as? String ?? ""
+                                                                let status = itdata["Status"] as? Bool ?? false
 //                                                                if false checkbok should allow to click check box else
 //                                                                show edit box
                                                                 var isstatus = "0"

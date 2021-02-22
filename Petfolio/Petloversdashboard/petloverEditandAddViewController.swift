@@ -196,24 +196,92 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_petname == textField {
             if self.textfield_petname.text!.count > 24 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petname.text = string
+                }else{
+                    self.textfield_petname.text = numberFiltered
+                }
                 self.textfield_petname.resignFirstResponder()
             }else{
-                self.textfield_petname.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petname.text = string
+                }else{
+                    self.textfield_petname.text = numberFiltered
+                }
             }
-            if self.textfield_petcolor.text!.count > 24 {
+            if self.textfield_petcolor.text!.count > 14 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petcolor.text = string
+                }else{
+                    self.textfield_petcolor.text = numberFiltered
+                }
                 self.textfield_petcolor.resignFirstResponder()
             }else{
-                self.textfield_petcolor.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petcolor.text = string
+                }else{
+                    self.textfield_petcolor.text = numberFiltered
+                }
             }
             if self.textfield_petweight.text!.count > 4 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petweight.text = string
+                }else{
+                    self.textfield_petweight.text = numberFiltered
+                }
                 self.textfield_petweight.resignFirstResponder()
             }else{
-                self.textfield_petweight.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petweight.text = string
+                }else{
+                    self.textfield_petweight.text = numberFiltered
+                }
             }
-            if self.textfiled_petage.text!.count > 4 {
+            if self.textfiled_petage.text!.count > 1 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfiled_petage.text = string
+                }else{
+                    self.textfiled_petage.text = numberFiltered
+                }
                 self.textfiled_petage.resignFirstResponder()
             }else{
-                self.textfiled_petage.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfiled_petage.text = string
+                }else{
+                    self.textfiled_petage.text = numberFiltered
+                }
             }
         }
     }

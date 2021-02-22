@@ -315,11 +315,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         if self.colleView_banner == collectionView {
             return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
         }else if self.colleView_Doctor == collectionView {
-            return CGSize(width: 188 , height:  161)
+            return CGSize(width: 163 , height:  161)
         }else if self.colleView_Service == collectionView {
             return CGSize(width: 90 , height:  119)
         }else {
-            return CGSize(width: 238 , height:  121)
+            return CGSize(width: 200 , height:  121)
         }
         
     }

@@ -68,9 +68,25 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.textfield_location.text = Servicefile.shared.selectedaddress
         self.label_locaTitle.text = Servicefile.shared.selectedCity
         self.label_locadetail.text = Servicefile.shared.selectedaddress
-       
+        self.textfield_pickname.addTarget(self, action: #selector(textFieldmediTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
+    
+    @objc func textFieldmediTyping(textField:UITextField) {
+          if self.textfield_pickname.text!.count > 24 {
+              let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+              let string = textField.text
+              let compSepByCharInSet = string!.components(separatedBy: aSet)
+              let numberFiltered = compSepByCharInSet.joined(separator: "")
+              if string == numberFiltered {
+                  self.textfield_pickname.text = string
+              }else{
+                  self.textfield_pickname.text = numberFiltered
+              }
+              self.textfield_pickname.resignFirstResponder()
+          }
+      }
+      
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

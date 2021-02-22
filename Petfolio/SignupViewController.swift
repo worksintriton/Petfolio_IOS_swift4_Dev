@@ -62,7 +62,24 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.textfield_phno.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view_details.addGestureRecognizer(tap)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -130,20 +147,72 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_phno == textField {
             if self.textfield_phno.text!.count > 9 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_phno.text = string
+                }else{
+                    self.textfield_phno.text = numberFiltered
+                }
                 self.textfield_phno.resignFirstResponder()
             }else{
-                self.textfield_phno.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_phno.text = string
+                }else{
+                    self.textfield_phno.text = numberFiltered
+                }
             }
         } else if self.textfield_fname == textField {
             if self.textfield_fname.text!.count > 24 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_fname.text = string
+                }else{
+                    self.textfield_fname.text = numberFiltered
+                }
                 self.textfield_fname.resignFirstResponder()
             }else{
-                self.textfield_fname.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_fname.text = string
+                }else{
+                    self.textfield_fname.text = numberFiltered
+                }
             }
         } else if self.textfield_lastname == textField {
             if self.textfield_lastname.text!.count > 24 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_lastname.text = string
+                }else{
+                    self.textfield_lastname.text = numberFiltered
+                }
                 self.textfield_lastname.resignFirstResponder()
             }else{
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_lastname.text = string
+                }else{
+                    self.textfield_lastname.text = numberFiltered
+                }
                 self.textfield_lastname.text = textField.text
             }
         }else if self.textfield_email == textField {
@@ -187,13 +256,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     if Servicefile.shared.email_status == true {
                         self.callsignup()
                     }else{
-                         self.callsignup()
+                        self.callsignup()
                     }
                 }else{
                     self.alert(Message: "Email ID is invalid")
                 }
             }else{
-                 self.callsignup()
+                self.callsignup()
             }
         }
     }
@@ -240,7 +309,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
                             self.present(vc, animated: true, completion: nil)
                         }else{
-                             self.stopAnimatingActivityIndicator()
+                            self.stopAnimatingActivityIndicator()
                         }
                     } else {
                         self.stopAnimatingActivityIndicator()

@@ -31,7 +31,24 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
             view_main.addGestureRecognizer(tap)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+                      }
+            
+
+            @objc func keyboardWillShow(notification: NSNotification) {
+                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    if self.view.frame.origin.y == 0 {
+                        self.view.frame.origin.y -= keyboardSize.height
+                    }
+                }
+            }
+
+            @objc func keyboardWillHide(notification: NSNotification) {
+                if self.view.frame.origin.y != 0 {
+                    self.view.frame.origin.y = 0
+                }
+            }
         
         @objc func dismissKeyboard() {
             view.endEditing(true)
@@ -113,31 +130,6 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         self.counter = 120
         self.textfield_otp.text = ""
         self.callotpresend()
-    }
-    
-    
-    func moveTextField(textField: UITextField, up: Bool){
-         let movementDistance:CGFloat = -260
-        let movementDuration: Double = 0.3
-        var movement:CGFloat = 0
-        if up {
-            movement = movementDistance
-        } else {
-            movement = -movementDistance
-        }
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-             self.moveTextField(textField: textField, up:true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.moveTextField(textField: textField, up:false)
     }
     
     func callotpresend(){

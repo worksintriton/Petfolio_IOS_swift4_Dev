@@ -141,19 +141,19 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.textfield_petname {
-            let aSet = NSCharacterSet(charactersIn:"qwertyuiopasdfghjklzxcvbnm ").inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
         if textField == self.textfield_petweight {
-            let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumberandspecial).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
         if textField == self.textfiled_petage{
-            let aSet = NSCharacterSet(charactersIn:"0123456789.").inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumberandspecial).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
@@ -167,24 +167,92 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_petname == textField {
             if self.textfield_petname.text!.count > 24 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petname.text = string
+                }else{
+                    self.textfield_petname.text = numberFiltered
+                }
                 self.textfield_petname.resignFirstResponder()
             }else{
-                self.textfield_petname.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petname.text = string
+                }else{
+                    self.textfield_petname.text = numberFiltered
+                }
             }
-            if self.textfield_petcolor.text!.count > 24 {
+            if self.textfield_petcolor.text!.count > 14 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petcolor.text = string
+                }else{
+                    self.textfield_petcolor.text = numberFiltered
+                }
                 self.textfield_petcolor.resignFirstResponder()
             }else{
-                self.textfield_petcolor.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petcolor.text = string
+                }else{
+                    self.textfield_petcolor.text = numberFiltered
+                }
             }
             if self.textfield_petweight.text!.count > 4 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petweight.text = string
+                }else{
+                    self.textfield_petweight.text = numberFiltered
+                }
                 self.textfield_petweight.resignFirstResponder()
             }else{
-                self.textfield_petweight.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfield_petweight.text = string
+                }else{
+                    self.textfield_petweight.text = numberFiltered
+                }
             }
-            if self.textfiled_petage.text!.count > 4 {
+            if self.textfiled_petage.text!.count > 1 {
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfiled_petage.text = string
+                }else{
+                    self.textfiled_petage.text = numberFiltered
+                }
                 self.textfiled_petage.resignFirstResponder()
             }else{
-                self.textfiled_petage.text = textField.text
+                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+                let string = textField.text
+                let compSepByCharInSet = string!.components(separatedBy: aSet)
+                let numberFiltered = compSepByCharInSet.joined(separator: "")
+                if string == numberFiltered {
+                    self.textfiled_petage.text = string
+                }else{
+                    self.textfiled_petage.text = numberFiltered
+                }
             }
         }
     }
@@ -396,9 +464,9 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                             let pb = Gender[item] as! NSDictionary
                             let pbv = pb["gender"] as? String ?? ""
                             if pbv != "" {
-                                  self.petgender.append(pbv)
+                                self.petgender.append(pbv)
                             }
-                          
+                            
                         }
                         //                    self.tblview_pettype.reloadData()
                         //                    self.tblview_petbreed.reloadData()
@@ -567,9 +635,9 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                             let pb = Pet_type[item] as! NSDictionary
                             let pbv = pb["pet_type_title"] as? String ?? ""
                             if pbv != ""{
-                                 self.pet_type.append(pbv)
+                                self.pet_type.append(pbv)
                             }
-                           
+                            
                         }
                         for item in 0..<Pet_type.count{
                             let pb = Pet_type[item] as! NSDictionary

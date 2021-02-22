@@ -32,6 +32,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         // Do any additional setup after loading the view.
      let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         self.view_details.addGestureRecognizer(tap)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
                      }
 
                      @objc func dismissKeyboard() {
@@ -139,31 +141,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                    self.alert(Message: "No Intenet Please check and try again ")
                }
            }
-       
-       func moveTextField(textField: UITextField, up: Bool){
-           let movementDistance:CGFloat = -230
-           let movementDuration: Double = 0.3
-           var movement:CGFloat = 0
-           if up {
-               movement = movementDistance
-           } else {
-               movement = -movementDistance
-           }
-           UIView.beginAnimations("animateTextField", context: nil)
-           UIView.setAnimationBeginsFromCurrentState(true)
-           UIView.setAnimationDuration(movementDuration)
-           self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-           UIView.commitAnimations()
-       }
-       
-       func textFieldDidBeginEditing(_ textField: UITextField) {
-                self.moveTextField(textField: textField, up:true)
-       }
     
-       func textFieldDidEndEditing(_ textField: UITextField) {
-        self.moveTextField(textField: textField, up:false)
-        
-       }
+    
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+       
+//       func moveTextField(textField: UITextField, up: Bool){
+//           let movementDistance:CGFloat = -230
+//           let movementDuration: Double = 0.3
+//           var movement:CGFloat = 0
+//           if up {
+//               movement = movementDistance
+//           } else {
+//               movement = -movementDistance
+//           }
+//           UIView.beginAnimations("animateTextField", context: nil)
+//           UIView.setAnimationBeginsFromCurrentState(true)
+//           UIView.setAnimationDuration(movementDuration)
+//           self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//           UIView.commitAnimations()
+//       }
+//
+//       func textFieldDidBeginEditing(_ textField: UITextField) {
+//                self.moveTextField(textField: textField, up:true)
+//       }
+//
+//       func textFieldDidEndEditing(_ textField: UITextField) {
+//        self.moveTextField(textField: textField, up:false)
+//
+//       }
 }
 
 extension UIImage {

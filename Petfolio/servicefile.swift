@@ -21,10 +21,9 @@ class Servicefile {
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
     static let signup = baseurl + "/api/userdetails/create"
     static let verifyemail = baseurl + "/api/userdetails/send/emailotp"
-     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
+    static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let petregister = baseurl + "/api/petdetails/mobile/create"
    
-    
     static let login = baseurl + "/api/userdetails/mobile/login"
     
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
@@ -169,6 +168,7 @@ class Servicefile {
     static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
     static let approvednumber = "1234567890"
     static let approvednumberandspecial = "1234567890."
+    
     var notif_list = [notificationlist]()
     // pet dashboard
     var petid = ""

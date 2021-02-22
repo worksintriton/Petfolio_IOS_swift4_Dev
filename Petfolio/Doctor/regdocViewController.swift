@@ -304,7 +304,21 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                self.view_expire.isHidden = true
     }
     
-    
+     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.textfield_education {
+            let aSet = NSCharacterSet(charactersIn:"qwertyuiopasdfghjklzxcvbnm ").inverted
+            let compSepByCharInSet = string.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            return string == numberFiltered
+        }
+        if textField == self.textfield_exp_company {
+            let aSet = NSCharacterSet(charactersIn:"qwertyuiopasdfghjklzxcvbnm").inverted
+            let compSepByCharInSet = string.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            return string == numberFiltered
+        }
+        return true
+    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if self.textview_clinicaddress.text!.count > 252 {

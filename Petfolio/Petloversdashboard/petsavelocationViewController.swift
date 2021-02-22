@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 
 class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
-
+    
     @IBOutlet weak var view_cityname: UIView!
     @IBOutlet weak var view_location: UIView!
     @IBOutlet weak var view_pincode: UIView!
@@ -45,13 +45,13 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view_change.layer.cornerRadius = 9.0
-         self.view_pincode.layer.cornerRadius = 9.0
-         self.view_location.layer.cornerRadius = 9.0
-         self.view_cityname.layer.cornerRadius = 9.0
-         self.view_pickname.layer.cornerRadius = 9.0
-         self.view_saveview.layer.cornerRadius = 15.0
+        self.view_pincode.layer.cornerRadius = 9.0
+        self.view_location.layer.cornerRadius = 9.0
+        self.view_cityname.layer.cornerRadius = 9.0
+        self.view_pickname.layer.cornerRadius = 9.0
+        self.view_saveview.layer.cornerRadius = 15.0
         self.GMS_mapView.delegate = self
         
         self.textfield_pincode.delegate = self
@@ -75,19 +75,32 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.textfield_location.text = Servicefile.shared.selectedaddress
             self.label_locaTitle.text = Servicefile.shared.selectedCity
             self.label_locadetail.text = Servicefile.shared.selectedaddress
-             self.textfield_pickname.text = Servicefile.shared.selectedpickname
-          
-//            self.textfield_pincode.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
-//            self.textfield_cityname.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
-//            self.textfield_location.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
-//            self.label_locaTitle.text = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
+            self.textfield_pickname.text = Servicefile.shared.selectedpickname
             
-//             
             self.id = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex]._id
             self.isselected = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_title
-             self.changeaddtype(type: self.isselected)
+            self.changeaddtype(type: self.isselected)
+        }
+        self.textfield_pickname.addTarget(self, action: #selector(textFieldmediTyping), for: .editingChanged)
+        // Do any additional setup after loading the view.
+    }
+    
+    @objc func textFieldmediTyping(textField:UITextField) {
+        if self.textfield_pickname.text!.count > 24 {
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+            let string = textField.text
+            let compSepByCharInSet = string!.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            if string == numberFiltered {
+                self.textfield_pickname.text = string
+            }else{
+                self.textfield_pickname.text = numberFiltered
+            }
+            self.textfield_pickname.resignFirstResponder()
         }
     }
+    
+    
     
     @IBAction func action_back(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
@@ -108,14 +121,14 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         self.setmarker(lat: Servicefile.shared.lati, long: Servicefile.shared.long)
+        self.setmarker(lat: Servicefile.shared.lati, long: Servicefile.shared.long)
     }
     
     
     @IBAction func action_changeloca(_ sender: Any) {
         Servicefile.shared.selectedpickname = self.textfield_pickname.text!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
-              self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     func changeaddtype(type: String){
@@ -137,7 +150,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     
     
-   
+    
     
     
     @IBAction func action_home(_ sender: Any) {
@@ -151,56 +164,56 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     }
     
     @IBAction func action_work(_ sender: Any) {
-         self.isselected = "Work"
+        self.isselected = "Work"
         self.changeaddtype(type: self.isselected)
     }
     
     func setmarker(lat: Double,long: Double){
-           marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-           Servicefile.shared.lati = lat
-           Servicefile.shared.long = long
-           self.latitude = lat
-           self.longitude = long
-           marker.title = "Area Details"
-           marker.snippet = "my loc"
-           marker.map = self.GMS_mapView
-           let markerImage = UIImage(named: "location")!
-           let markerView = UIImageView(image: markerImage)
-           markerView.frame = CGRect(x: 0, y: 0, width: 22, height: 30)
-           markerView.tintColor = UIColor.red
-           marker.iconView = markerView
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        Servicefile.shared.lati = lat
+        Servicefile.shared.long = long
+        self.latitude = lat
+        self.longitude = long
+        marker.title = "Area Details"
+        marker.snippet = "my loc"
+        marker.map = self.GMS_mapView
+        let markerImage = UIImage(named: "location")!
+        let markerView = UIImageView(image: markerImage)
+        markerView.frame = CGRect(x: 0, y: 0, width: 22, height: 30)
+        markerView.tintColor = UIColor.red
+        marker.iconView = markerView
         GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
-       }
-       
+    }
+    
     
     func moveTextField(textField: UITextField, up: Bool){
-               let movementDistance:CGFloat = -230
-              let movementDuration: Double = 0.3
-              var movement:CGFloat = 0
-              if up {
-                  movement = movementDistance
-              } else {
-                  movement = -movementDistance
-              }
-              UIView.beginAnimations("animateTextField", context: nil)
-              UIView.setAnimationBeginsFromCurrentState(true)
-              UIView.setAnimationDuration(movementDuration)
-              self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-              UIView.commitAnimations()
-          }
-          
-          func textFieldDidBeginEditing(_ textField: UITextField) {
-           if self.textfield_cityname == textField || self.textfield_pickname == textField{
-                self.moveTextField(textField: textField, up:true)
-           }
-                  
-          }
-          
-          func textFieldDidEndEditing(_ textField: UITextField) {
-          if self.textfield_cityname == textField || self.textfield_pickname == textField{
-                 self.moveTextField(textField: textField, up:false)
-           }
-          }
+        let movementDistance:CGFloat = -230
+        let movementDuration: Double = 0.3
+        var movement:CGFloat = 0
+        if up {
+            movement = movementDistance
+        } else {
+            movement = -movementDistance
+        }
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if self.textfield_cityname == textField || self.textfield_pickname == textField{
+            self.moveTextField(textField: textField, up:true)
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if self.textfield_cityname == textField || self.textfield_pickname == textField{
+            self.moveTextField(textField: textField, up:false)
+        }
+    }
     
     
     @IBAction func action_savelocation(_ sender: Any) {
@@ -208,51 +221,51 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.alert(Message: "Please enter pick a nick name for this location")
         }else{
             if Servicefile.shared.locaaccess == "Add" {
-                        self.calladdlocation()
-                    }else{
-                       self.callupdatelocation()
-                   }
+                self.calladdlocation()
+            }else{
+                self.callupdatelocation()
+            }
         }
         
     }
     
     func callupdatelocation(){
         self.startAnimatingActivityIndicator()
-    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_updateaddress, method: .post, parameters:
-     [ "_id": self.id,
-        "user_id": Servicefile.shared.userid,
-      "location_state" : Servicefile.shared.selectedState,
-        "location_country" : Servicefile.shared.selectedCountry,
-        "location_city" : Servicefile.shared.selectedCity,
-        "location_pin" : Servicefile.shared.selectedPincode,
-        "location_address" : Servicefile.shared.selectedaddress,
-        "location_lat" : Servicefile.shared.lati,
-        "location_long" : Servicefile.shared.long,
-        "location_title" : self.isselected,
-        "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
-        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
-        "default_status": Servicefile.shared.selecteddefaultstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                            switch (response.result) {
-                                            case .success:
-                                                  let res = response.value as! NSDictionary
-                                                  print("success data",res)
-                                                  let Code  = res["Code"] as! Int
-                                                  if Code == 200 {
-                                                    let Data = res["Data"] as! NSDictionary
-                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
-                                                    self.present(vc, animated: true, completion: nil)
-                                                     self.stopAnimatingActivityIndicator()
-                                                  }else{
-                                                    self.stopAnimatingActivityIndicator()
-                                                    print("status code service denied")
-                                                  }
-                                                break
-                                            case .failure(let Error):
-                                                self.stopAnimatingActivityIndicator()
-                                                print("Can't Connect to Server / TimeOut",Error)
-                                                break
-                                            }
-                               }
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_updateaddress, method: .post, parameters:
+            [ "_id": self.id,
+              "user_id": Servicefile.shared.userid,
+              "location_state" : Servicefile.shared.selectedState,
+              "location_country" : Servicefile.shared.selectedCountry,
+              "location_city" : Servicefile.shared.selectedCity,
+              "location_pin" : Servicefile.shared.selectedPincode,
+              "location_address" : Servicefile.shared.selectedaddress,
+              "location_lat" : Servicefile.shared.lati,
+              "location_long" : Servicefile.shared.long,
+              "location_title" : self.isselected,
+              "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
+              "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+              "default_status": Servicefile.shared.selecteddefaultstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+                        self.present(vc, animated: true, completion: nil)
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
@@ -263,40 +276,40 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     func calladdlocation(){
         self.startAnimatingActivityIndicator()
-    if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.addlocation, method: .post, parameters:
-     ["user_id": Servicefile.shared.userid,
-      "location_state" : Servicefile.shared.selectedState,
-        "location_country" : Servicefile.shared.selectedCountry,
-        "location_city" : Servicefile.shared.selectedCity,
-        "location_pin" : Servicefile.shared.selectedPincode,
-        "location_address" : Servicefile.shared.selectedaddress,
-        "location_lat" : Servicefile.shared.lati,
-        "location_long" : Servicefile.shared.long,
-        "location_title" : self.isselected,
-        "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
-        "default_status" : true,
-        "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                            switch (response.result) {
-                                            case .success:
-                                                  let res = response.value as! NSDictionary
-                                                  print("success data",res)
-                                                  let Code  = res["Code"] as! Int
-                                                  if Code == 200 {
-                                                    let Data = res["Data"] as! NSDictionary
-                                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
-                                                    self.present(vc, animated: true, completion: nil)
-                                                     self.stopAnimatingActivityIndicator()
-                                                  }else{
-                                                    self.stopAnimatingActivityIndicator()
-                                                    print("status code service denied")
-                                                  }
-                                                break
-                                            case .failure(let Error):
-                                                self.stopAnimatingActivityIndicator()
-                                                print("Can't Connect to Server / TimeOut",Error)
-                                                break
-                                            }
-                               }
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.addlocation, method: .post, parameters:
+            ["user_id": Servicefile.shared.userid,
+             "location_state" : Servicefile.shared.selectedState,
+             "location_country" : Servicefile.shared.selectedCountry,
+             "location_city" : Servicefile.shared.selectedCity,
+             "location_pin" : Servicefile.shared.selectedPincode,
+             "location_address" : Servicefile.shared.selectedaddress,
+             "location_lat" : Servicefile.shared.lati,
+             "location_long" : Servicefile.shared.long,
+             "location_title" : self.isselected,
+             "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
+             "default_status" : true,
+             "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+                        self.present(vc, animated: true, completion: nil)
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
@@ -305,7 +318,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     func alert(Message: String){
         let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-             }))
+        }))
         self.present(alert, animated: true, completion: nil)
     }
 }

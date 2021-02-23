@@ -32,9 +32,9 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_setloca.layer.cornerRadius = 9.0
-        self.view_searchopt.layer.cornerRadius = 9.0
-        self.view_footer.layer.cornerRadius = 9.0
+        self.view_setloca.view_cornor()
+        self.view_searchopt.view_cornor()
+        self.view_footer.view_cornor()
         self.GMS_mapView.delegate = self
         self.textfield_search.delegate = self
         self.tbl_searchlist.delegate = self

@@ -122,9 +122,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         Servicefile.shared.govdicarray.removeAll()
         Servicefile.shared.photodicarray.removeAll()
         
-        self.view_submit.layer.cornerRadius = 15.0
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_action.layer.cornerRadius = 10.0
+        self.view_submit.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_action.view_cornor()
         self.view_action.dropShadow()
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
@@ -282,10 +282,24 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.view_expire.isHidden = true
     }
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.textfield_clinicname {
+            self.textfield_clinicname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_education {
+            self.textfield_education.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_exp_company {
+            self.textfield_education.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_ser_amt {
+            self.textfield_ser_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 4)
+        }
+        return true
+    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if self.textview_clinicaddress.text!.count > 252 {
+        if self.textview_clinicaddress.text!.count > 149 {
             textview_clinicaddress.resignFirstResponder()
         }else{
             self.textview_clinicaddress.text = textView.text
@@ -302,25 +316,25 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     
     func viewdesign(){
-        self.view_clinic.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_education.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_experience.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_experience_company.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_experience_from.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_experience_to.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_experience_add.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_speciali.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_speciali_textview.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_speciali_add.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_pethandle.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_pethandle_text.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_pethandle_add.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_clinicaddress.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_clinicimgadd.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_certificate.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_govtid.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_photoid.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_submit.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
+        self.view_clinic.view_cornor()
+        self.view_education.view_cornor()
+        self.view_experience.view_cornor()
+        self.view_experience_company.view_cornor()
+        self.view_experience_from.view_cornor()
+        self.view_experience_to.view_cornor()
+        self.view_experience_add.view_cornor()
+        self.view_speciali.view_cornor()
+        self.view_speciali_textview.view_cornor()
+        self.view_speciali_add.view_cornor()
+        self.view_pethandle.view_cornor()
+        self.view_pethandle_text.view_cornor()
+        self.view_pethandle_add.view_cornor()
+        self.view_clinicaddress.view_cornor()
+        self.view_clinicimgadd.view_cornor()
+        self.view_certificate.view_cornor()
+        self.view_govtid.view_cornor()
+        self.view_photoid.view_cornor()
+        self.view_submit.view_cornor()
     }
     
     func textViewShouldReturn(_ textView: UITextView) -> Bool {
@@ -738,7 +752,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         if coll_govtid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "govtid", for: indexPath) as! imgidCollectionViewCell
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 5.0
+            cell.Img_id.layer.cornerRadius = 8.0
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
             return cell
@@ -756,7 +770,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoid", for: indexPath)  as! imgidCollectionViewCell
             
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 5.0
+            cell.Img_id.layer.cornerRadius = 8.0
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_photoid), for: .touchUpInside)
             
@@ -774,7 +788,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 5.0
+            cell.Img_id.layer.cornerRadius = 8.0
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
             return cell
@@ -789,7 +803,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                     cell.Img_id.image = image
                 }
             }
-            cell.Img_id.layer.cornerRadius = 5.0
+            cell.Img_id.layer.cornerRadius = 8.0
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
             return cell

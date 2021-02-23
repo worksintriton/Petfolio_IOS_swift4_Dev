@@ -27,8 +27,8 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     var selnearby = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_apply.layer.cornerRadius = 10.0
-        self.view_clearall.layer.cornerRadius = 10.0
+        self.view_apply.view_cornor()
+        self.view_clearall.view_cornor()
         self.view_apply.dropShadow()
         self.view_clearall.dropShadow()
         self.callpetdetails()

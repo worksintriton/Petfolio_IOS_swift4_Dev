@@ -27,8 +27,8 @@ class viewprescriptionViewController: UIViewController , UITableViewDelegate, UI
         self.tbl_medilist.dataSource = self
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_btn.layer.cornerRadius = 10.0
+        self.view_popup.view_cornor()
+        self.view_btn.view_cornor()
         self.view_btn.dropShadow()
         self.textview_descrip.delegate = self
         self.textview_descrip.isUserInteractionEnabled = false

@@ -35,8 +35,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.label_comm_type.text = "Communication offline "
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
-        self.view_search.layer.cornerRadius = 10.0
-        self.view_footer.layer.cornerRadius = 15.0
+        self.view_search.view_cornor()
+        self.view_footer.view_cornor()
         self.view_search.dropShadow()
         self.view_footer.dropShadow()
     }
@@ -123,8 +123,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         }
         cell.view_book.dropShadow()
         cell.img_doc.dropShadow()
-        cell.img_doc.layer.cornerRadius = 10.0
-        cell.view_book.layer.cornerRadius = 10.0
+        cell.img_doc.layer.cornerRadius = 8.0
+        cell.view_book.layer.cornerRadius = 8.0
         cell.btn_book.tag = indexPath.row
         cell.btn_book.addTarget(self, action: #selector(action_book), for: .touchUpInside)
         return cell
@@ -132,6 +132,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @objc func action_book(sender: UIButton){
         let tag = sender.tag
+        Servicefile.shared.selectedindex = tag
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
         Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[tag].amount)!
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type

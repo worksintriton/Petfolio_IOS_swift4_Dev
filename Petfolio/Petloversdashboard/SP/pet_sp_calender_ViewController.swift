@@ -31,9 +31,9 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
         self.listtime.removeAll()
         self.seltime.removeAll()
         self.view_continue.isHidden = true
-        self.view_continue.layer.cornerRadius = 15.0
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_movetoapp.layer.cornerRadius = 10.0
+        self.view_continue.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_movetoapp.view_cornor()
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.seldate = Servicefile.shared.ddMMyyyystringformat(date: Date())
@@ -77,7 +77,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
             cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
             cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }
-        cell.view_time.layer.cornerRadius = 10.0
+        cell.view_time.layer.cornerRadius = 8.0
         return cell
     }
     

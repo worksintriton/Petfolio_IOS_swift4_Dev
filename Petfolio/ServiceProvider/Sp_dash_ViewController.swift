@@ -43,15 +43,15 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         
         self.label_nodata.isHidden = true
         self.view_popalert.isHidden = true
-        self.view_popalert.layer.cornerRadius = 10.0
-        self.view_btn_yes.layer.cornerRadius = 10.0
-        self.view_btn_no.layer.cornerRadius = 10.0
-        self.view_new.layer.cornerRadius = 9.0
-        self.view_missed.layer.cornerRadius = 9.0
-        self.view_footer.layer.cornerRadius = 15.0
-        self.view_completed.layer.cornerRadius = 9.0
-        self.view_popup.layer.cornerRadius = 9.0
-        self.view_refresh.layer.cornerRadius = 9.0
+        self.view_popalert.view_cornor()
+        self.view_btn_yes.view_cornor()
+        self.view_btn_no.view_cornor()
+        self.view_new.view_cornor()
+        self.view_missed.view_cornor()
+        self.view_footer.view_cornor()
+        self.view_completed.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_refresh.view_cornor()
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.view_completed.layer.borderWidth = 0.5
@@ -151,8 +151,8 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             cell.labe_comMissed.textColor = UIColor.red
         }
         
-        cell.view_completebtn.layer.cornerRadius = 10.0
-        cell.view_cancnel.layer.cornerRadius = 10.0
+        cell.view_completebtn.view_cornor()
+        cell.view_cancnel.view_cornor()
         cell.View_mainview.layer.borderWidth = 0.2
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         cell.label_petname.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_name

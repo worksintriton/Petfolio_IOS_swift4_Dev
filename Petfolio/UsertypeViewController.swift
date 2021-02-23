@@ -70,7 +70,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.Img_UT.image = UIImage(named: "sample")
         }
        
-        cell.Img_UT.layer.cornerRadius = 10.0
+        cell.Img_UT.layer.cornerRadius = 8.0
         cell.Lab_UT.text = Servicefile.shared.UtypeData[indexPath.row].user_type_title
         if self.locusel[indexPath.row] == "1"{
              cell.Img_Select.isHidden = false

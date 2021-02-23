@@ -38,11 +38,11 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view_footer.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_footer.view_cornor()
         self.view_footer.dropShadow()
-        self.view_popup.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        self.view_denypop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_allowpop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
+        self.view_popup.view_cornor()
+        self.view_denypop.view_cornor()
+        self.view_allowpop.view_cornor()
         self.colleView_banner.delegate = self
         self.colleView_banner.dataSource = self
         self.colleView_Doctor.delegate = self
@@ -160,7 +160,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                     cell.img_banner.image = image
                 }
             }
-            cell.img_banner.layer.cornerRadius = 5.0
+            cell.img_banner.layer.cornerRadius = 8.0
            return cell
         }else if self.colleView_Doctor == collectionView {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -171,7 +171,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                     cell.img_doc.image = image
                 }
             }
-            cell.img_doc.layer.cornerRadius = 5.0
+            cell.img_doc.layer.cornerRadius = 8.0
             cell.label_docname.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_rateing.text = String(Servicefile.shared.petdoc[indexPath.row].star_count)

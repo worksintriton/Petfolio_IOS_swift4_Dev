@@ -38,10 +38,10 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         self.label_noofsavedaddress.text = ""
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_footer.layer.cornerRadius = 10.0
-        self.view_yes.layer.cornerRadius = 10.0
-        self.view_no.layer.cornerRadius = 10.0
+        self.view_popup.view_cornor()
+        self.view_footer.view_cornor()
+        self.view_yes.view_cornor()
+        self.view_no.view_cornor()
         // Do any additional setup after loading the view.
     }
     

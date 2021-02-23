@@ -45,12 +45,12 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view_change.layer.cornerRadius = 9.0
-         self.view_pincode.layer.cornerRadius = 9.0
-         self.view_location.layer.cornerRadius = 9.0
-         self.view_cityname.layer.cornerRadius = 9.0
-         self.view_pickname.layer.cornerRadius = 9.0
-         self.view_saveview.layer.cornerRadius = 15.0
+        self.view_change.view_cornor()
+         self.view_pincode.view_cornor()
+         self.view_location.view_cornor()
+         self.view_cityname.view_cornor()
+         self.view_pickname.view_cornor()
+         self.view_saveview.view_cornor()
         self.GMS_mapView.delegate = self
         self.view_change.dropShadow()
         self.view_saveview.dropShadow()
@@ -68,23 +68,17 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.textfield_location.text = Servicefile.shared.selectedaddress
         self.label_locaTitle.text = Servicefile.shared.selectedCity
         self.label_locadetail.text = Servicefile.shared.selectedaddress
-        self.textfield_pickname.addTarget(self, action: #selector(textFieldmediTyping), for: .editingChanged)
+        self.textfield_pickname.addTarget(self, action: #selector(textFieldpickTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
     
-    @objc func textFieldmediTyping(textField:UITextField) {
+    @objc func textFieldpickTyping(textField:UITextField) {
           if self.textfield_pickname.text!.count > 24 {
-              let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-              let string = textField.text
-              let compSepByCharInSet = string!.components(separatedBy: aSet)
-              let numberFiltered = compSepByCharInSet.joined(separator: "")
-              if string == numberFiltered {
-                  self.textfield_pickname.text = string
-              }else{
-                  self.textfield_pickname.text = numberFiltered
-              }
+             self.textfield_pickname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
               self.textfield_pickname.resignFirstResponder()
-          }
+          }else{
+            self.textfield_pickname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+        }
       }
       
     

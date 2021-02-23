@@ -45,11 +45,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view_footer.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_footer.view_cornor()
         self.view_footer.dropShadow()
-        self.view_popup.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        self.view_denypop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_allowpop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
+        self.view_popup.view_cornor()
+        self.view_denypop.view_cornor()
+        self.view_allowpop.view_cornor()
         self.colleView_banner.delegate = self
         self.colleView_banner.dataSource = self
         self.colleView_Doctor.delegate = self
@@ -251,7 +251,12 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_banner.image = image
                 }
             }
-            cell.img_banner.layer.cornerRadius = 10.0
+            cell.img_banner.layer.cornerRadius = 8.0
+            cell.view_banner.layer.cornerRadius = 8.0
+            cell.view_banner.layer.borderWidth = 0.4
+            cell.view_banner.layer.borderColor = UIColor.lightGray.cgColor
+            cell.view_banner.dropShadow()
+            
             return cell
         }else if self.colleView_Doctor == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -262,7 +267,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_doc.image = image
                 }
             }
-            cell.img_doc.layer.cornerRadius = 10.0
+            cell.img_doc.layer.cornerRadius = 8.0
             cell.img_doc.dropShadow()
             cell.img_doc.layer.borderWidth = 0.5
             cell.img_doc.layer.borderColor = UIColor.gray.cgColor
@@ -295,7 +300,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
-            cell.img_prod.layer.cornerRadius = 15.0
+            cell.img_prod.layer.cornerRadius = 8.0
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! petprodCollectionViewCell
@@ -306,7 +311,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
-            cell.img_prod.layer.cornerRadius = 15.0
+            cell.img_prod.layer.cornerRadius = 8.0
             return cell
         }
     }

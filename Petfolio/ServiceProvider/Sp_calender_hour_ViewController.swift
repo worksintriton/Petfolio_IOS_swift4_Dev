@@ -20,7 +20,7 @@ class Sp_calender_hour_ViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         self.callmycalender()
-        self.view_next.layer.cornerRadius = 10.0
+        self.view_next.view_cornor()
         self.view_next.dropShadow()
         self.tbl_horlist.delegate = self
         self.tbl_horlist.dataSource = self

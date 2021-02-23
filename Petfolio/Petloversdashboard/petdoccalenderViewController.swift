@@ -32,9 +32,9 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         self.view_continue.isHidden = true
         self.listtime.removeAll()
         self.seltime.removeAll()
-        self.view_continue.layer.cornerRadius = 15.0
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_movetoapp.layer.cornerRadius = 10.0
+        self.view_continue.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_movetoapp.view_cornor()
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.seldate = Servicefile.shared.ddMMyyyystringformat(date: Date())
@@ -84,18 +84,16 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
             cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
             cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.black)
         }
-        cell.view_time.layer.cornerRadius = 10.0
+        cell.view_time.view_cornor()
         return cell
     }
     
     
     @IBAction func action_bookappoint(_ sender: Any) {
-        
         if Servicefile.shared.pet_apoint_booking_time != "" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
             self.present(vc, animated: true, completion: nil)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

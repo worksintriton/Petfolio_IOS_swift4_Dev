@@ -104,29 +104,17 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.textfield_servicename {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
+            self.textfield_servicename.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
         }
         if textField == self.textfield_Bus_name {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
+            self.textfield_Bus_name.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
         }
         if textField == self.textfield_spec{
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
+             self.textfield_spec.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
         }
         if textField == self.textfield_amt{
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
-        }
+             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 4)
+        }   
         return true
     }
     
@@ -507,7 +495,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_gallary), for: .touchUpInside)
-            cell.Img_id.layer.cornerRadius = 10.0
+            cell.Img_id.layer.cornerRadius = 8.0
             return cell
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell

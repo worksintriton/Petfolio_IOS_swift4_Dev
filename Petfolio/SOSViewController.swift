@@ -35,11 +35,11 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         self.tbl_calllist.delegate = self
         self.tbl_calllist.dataSource = self
-        self.view_main.layer.cornerRadius = 15.0
+        self.view_main.view_cornor()
         self.view_img.dropShadow()
         self.view_img.layer.cornerRadius = self.view_img.frame.width / 2
         self.img_sos.layer.cornerRadius = self.img_sos.frame.width / 2
-        self.view_call.layer.cornerRadius = 15.0
+        self.view_call.view_cornor()
         self.view_call.dropShadow()
     }
     
@@ -70,7 +70,7 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.view_sos.backgroundColor = UIColor.white
             cell.view_sos.removeshadow()
         }
-        cell.view_sos.layer.cornerRadius = 15.0
+        cell.view_sos.view_cornor()
         
         return cell
     }

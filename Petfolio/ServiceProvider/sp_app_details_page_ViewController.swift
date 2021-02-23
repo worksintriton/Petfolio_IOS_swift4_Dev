@@ -48,9 +48,9 @@ class sp_app_details_page_ViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.image_holder_name.layer.cornerRadius = 15.0
-        self.image_pet_img.layer.cornerRadius = 15.0
-        self.view_footer.layer.cornerRadius = 15.0
+        self.image_holder_name.view_cornor()
+        self.image_pet_img.view_cornor()
+        self.view_footer.view_cornor()
         self.view_cancel.view_cornor()
         self.view_complete.view_cornor()
         self.call_getdetails()

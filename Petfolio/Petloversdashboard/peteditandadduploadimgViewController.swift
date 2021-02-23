@@ -22,7 +22,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagepicker.delegate = self
-        self.imag_petimag.layer.cornerRadius = 10.0
+        self.imag_petimag.layer.cornerRadius = 8.0
         if Servicefile.shared.pet_status == "edit" {
             uploadimage = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
         }else{

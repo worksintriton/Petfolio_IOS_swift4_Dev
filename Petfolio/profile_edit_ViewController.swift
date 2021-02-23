@@ -30,13 +30,13 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view_save.layer.cornerRadius = 10.0
-        self.view_firstname.layer.cornerRadius = 10.0
-        self.view_lastname.layer.cornerRadius = 10.0
-        self.view_email.layer.cornerRadius = 10.0
-        self.view_phone.layer.cornerRadius = 10.0
-        self.view_verifyemail.layer.cornerRadius = 10.0
-        self.view_country.layer.cornerRadius = 10.0
+        self.view_save.view_cornor()
+        self.view_firstname.view_cornor()
+        self.view_lastname.view_cornor()
+        self.view_email.view_cornor()
+        self.view_phone.view_cornor()
+        self.view_verifyemail.view_cornor()
+        self.view_country.view_cornor()
         
         self.textfield_email.delegate = self
         self.textfield_firstname.delegate = self

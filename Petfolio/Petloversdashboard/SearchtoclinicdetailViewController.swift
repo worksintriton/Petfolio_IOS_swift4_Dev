@@ -48,8 +48,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.coll_imgview.delegate = self
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
-        self.view_book.layer.cornerRadius = 15.0
-        self.view_footer.layer.cornerRadius = 15.0
+        self.view_book.view_cornor()
+        self.view_footer.view_cornor()
         self.view_footer.dropShadow()
         self.view_book.dropShadow()
         // Do any additional setup after loading the view.
@@ -114,7 +114,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                 cell.img_banner.image = image
             }
         }
-        cell.img_banner.layer.cornerRadius = 15.0
+        cell.img_banner.layer.cornerRadius = 8.0
         return cell
     }
     

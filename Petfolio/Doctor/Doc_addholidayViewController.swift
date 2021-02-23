@@ -25,9 +25,9 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         self.callholidaylist()
-        self.view_submit.layer.cornerRadius = 15.0
+        self.view_submit.view_cornor()
         self.view_submit.dropShadow()
-        self.view_date.layer.cornerRadius = 15.0
+        self.view_date.view_cornor()
         self.view_date.dropShadow()
         self.doc_selholiday.removeAll()
         self.tbl_holidaylist.delegate = self

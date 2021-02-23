@@ -25,7 +25,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         super.viewDidLoad()
         self.coll_clinic.delegate = self
         self.coll_clinic.dataSource = self
-        self.view_footer.layer.cornerRadius = 15.0
+        self.view_footer.view_cornor()
         // Do any additional setup after loading the view.
     }
     
@@ -44,7 +44,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 }
             }
         }
-        self.imag_user.layer.cornerRadius = 10.0
+        self.imag_user.layer.cornerRadius = 8.0
         self.calldetails()
     }
     

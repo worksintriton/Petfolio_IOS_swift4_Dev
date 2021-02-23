@@ -73,8 +73,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                               cell.imag_cat.image = image
                                           }
                                       }
-                    cell.imag_cat.layer.cornerRadius = 10.0
-            cell.view_blur_image.layer.cornerRadius = 10.0
+                    cell.imag_cat.layer.cornerRadius = 8.0
+            cell.view_blur_image.layer.cornerRadius = 8.0
             
                    return cell
         }else if indexPath.row == 1 {
@@ -88,8 +88,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                                  cell.imag_cat.image = image
                                              }
                                          }
-                    cell.imag_cat.layer.cornerRadius = 10.0
-            cell.view_blur_image.layer.cornerRadius = 10.0
+                    cell.imag_cat.layer.cornerRadius = 8.0
+            cell.view_blur_image.layer.cornerRadius = 8.0
                       return cell
         }else if indexPath.row % 2 == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! servicecat_CollectionViewCell
@@ -102,8 +102,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                                  cell.imag_cat.image = image
                                              }
                                          }
-                    cell.imag_cat.layer.cornerRadius = 10.0
-            cell.view_blur_image.layer.cornerRadius = 10.0
+                    cell.imag_cat.layer.cornerRadius = 8.0
+            cell.view_blur_image.layer.cornerRadius = 8.0
                       return cell
            
         }else{
@@ -117,8 +117,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                                    cell.imag_cat.image = image
                                                }
                                            }
-                        cell.imag_cat.layer.cornerRadius = 10.0
-                        cell.view_blur_image.layer.cornerRadius = 10.0
+                        cell.imag_cat.layer.cornerRadius = 8.0
+                        cell.view_blur_image.layer.cornerRadius = 8.0
                         return cell
         }
     }

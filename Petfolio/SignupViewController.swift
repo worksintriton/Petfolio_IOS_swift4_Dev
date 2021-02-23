@@ -34,12 +34,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.checkemailvalid = "signup"
-        self.viewemail.layer.cornerRadius = 15.0
-        self.ViewFname.layer.cornerRadius = 5.0
-        self.ViewLname.layer.cornerRadius = 5.0
-        self.viewemail.layer.cornerRadius = 5.0
-        self.Viewphone.layer.cornerRadius = 5.0
-        self.view_verifyemail.layer.cornerRadius = 5.0
+        self.viewemail.view_cornor()
+        self.ViewFname.view_cornor()
+        self.ViewLname.view_cornor()
+        self.viewemail.view_cornor()
+        self.Viewphone.view_cornor()
+        self.view_verifyemail.view_cornor()
         
         self.view_verifyemail.dropShadow()
         self.viewemail.dropShadow()
@@ -50,8 +50,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.ViewChangeUtype.dropShadow()
         
         self.Viewotp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        self.ViewChangeUtype.layer.cornerRadius = 15.0
-        self.viewcoun.layer.cornerRadius = 5.0
+        self.ViewChangeUtype.view_cornor()
+        self.viewcoun.view_cornor()
         self.textfield_phno.delegate = self
         self.textfield_email.delegate = self
         self.textfield_fname.delegate = self
@@ -147,73 +147,24 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_phno == textField {
             if self.textfield_phno.text!.count > 9 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_phno.text = string
-                }else{
-                    self.textfield_phno.text = numberFiltered
-                }
+                self.textfield_phno.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
                 self.textfield_phno.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_phno.text = string
-                }else{
-                    self.textfield_phno.text = numberFiltered
-                }
+                self.textfield_phno.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
             }
         } else if self.textfield_fname == textField {
             if self.textfield_fname.text!.count > 24 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_fname.text = string
-                }else{
-                    self.textfield_fname.text = numberFiltered
-                }
+                self.textfield_fname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
                 self.textfield_fname.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_fname.text = string
-                }else{
-                    self.textfield_fname.text = numberFiltered
-                }
+                self.textfield_fname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
             }
         } else if self.textfield_lastname == textField {
             if self.textfield_lastname.text!.count > 24 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_lastname.text = string
-                }else{
-                    self.textfield_lastname.text = numberFiltered
-                }
+                self.textfield_lastname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
                 self.textfield_lastname.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_lastname.text = string
-                }else{
-                    self.textfield_lastname.text = numberFiltered
-                }
-                self.textfield_lastname.text = textField.text
+                 self.textfield_lastname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
             }
         }else if self.textfield_email == textField {
             Servicefile.shared.email_status = false

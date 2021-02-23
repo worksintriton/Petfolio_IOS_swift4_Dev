@@ -62,8 +62,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         super.viewDidLoad()
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
-         self.view_popup.layer.cornerRadius = 9.0
-        self.view_btn.layer.cornerRadius = 9.0
+         self.view_popup.view_cornor()
+        self.view_btn.view_cornor()
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
         self.imagepicker.delegate = self
         self.tblview_petdetail.delegate = self
@@ -72,14 +72,14 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.tblview_pettype.dataSource = self
         self.tblview_petbreed.delegate = self
         self.tblview_petbreed.dataSource = self
-        self.view_change.layer.cornerRadius = 15.0
+        self.view_change.view_cornor()
         self.view_change.dropShadow()
-        self.view_selectpet.layer.cornerRadius = 9.0
-        self.view_pattype.layer.cornerRadius = 9.0
-        self.view_petname.layer.cornerRadius = 9.0
-        self.view_petbreed.layer.cornerRadius = 9.0
-        self.view_petalergy.layer.cornerRadius = 9.0
-        self.view_discription.layer.cornerRadius = 9.0
+        self.view_selectpet.view_cornor()
+        self.view_pattype.view_cornor()
+        self.view_petname.view_cornor()
+        self.view_petbreed.view_cornor()
+        self.view_petalergy.view_cornor()
+        self.view_discription.view_cornor()
         
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
@@ -92,9 +92,9 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.tblview_pettype.layer.borderWidth = 0.2
         self.tblview_petdetail.layer.borderWidth = 0.2
         
-        self.tblview_petbreed.layer.cornerRadius = 9.0
-        self.tblview_pettype.layer.cornerRadius = 9.0
-        self.tblview_petdetail.layer.cornerRadius = 9.0
+        self.tblview_petbreed.layer.cornerRadius = 8.0
+        self.tblview_pettype.layer.cornerRadius = 8.0
+        self.tblview_petdetail.layer.cornerRadius = 8.0
         
         self.callpetdetailget()
         self.textfield_color.delegate = self
@@ -125,7 +125,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
        
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-     if self.textview_descrip.text!.count > 252 {
+     if self.textview_descrip.text!.count > 149 {
         self.textview_descrip.resignFirstResponder()
                }else{
                    self.textview_descrip.text = textView.text
@@ -167,7 +167,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                            self.image_petcurrent.image = image
                        }
                    }
-                   self.image_petcurrent.layer.cornerRadius = 15.0
+                   self.image_petcurrent.layer.cornerRadius = 8.0
         }
        
     }

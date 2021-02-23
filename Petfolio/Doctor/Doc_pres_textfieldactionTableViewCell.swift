@@ -33,88 +33,34 @@ class Doc_pres_textfieldactionTableViewCell: UITableViewCell, UITextFieldDelegat
     
     @objc func textFieldmediTyping(textField:UITextField) {
         if self.textfield_medi.text!.count > 24 {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.textfield_medi.text = string
-                Servicefile.shared.medi = self.textfield_medi.text!
-            }else{
-                self.textfield_medi.text = numberFiltered
-                Servicefile.shared.medi = self.textfield_medi.text!
-            }
+            self.textfield_medi.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+             Servicefile.shared.medi = self.textfield_medi.text!
             self.textfield_medi.resignFirstResponder()
         } else {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.textfield_medi.text = string
-                Servicefile.shared.medi = self.textfield_medi.text!
-            }else{
-                self.textfield_medi.text = numberFiltered
-                Servicefile.shared.medi = self.textfield_medi.text!
-            }
+            self.textfield_medi.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+             Servicefile.shared.medi = self.textfield_medi.text!
         }
     }
     
     @objc func textFieldnoofdayTyping(textField:UITextField) {
         if self.textfield_noofdays.text!.count > 2 {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.textfield_noofdays.text = string
-                Servicefile.shared.noofday = self.textfield_noofdays.text!
-            }else{
-                self.textfield_noofdays.text = numberFiltered
-                Servicefile.shared.noofday = self.textfield_noofdays.text!
-            }
+            self.textfield_noofdays.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 2)
+            Servicefile.shared.noofday = self.textfield_noofdays.text!
             self.textfield_noofdays.resignFirstResponder()
         } else {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.textfield_noofdays.text = string
-                Servicefile.shared.noofday = self.textfield_noofdays.text!
-            }else{
-                self.textfield_noofdays.text = numberFiltered
-                Servicefile.shared.noofday = self.textfield_noofdays.text!
-            }
+             self.textfield_noofdays.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 2)
+             Servicefile.shared.noofday = self.textfield_noofdays.text!
         }
     }
     
     @objc func textFieldTyping(textField:UITextField) {
         if self.conspdays.text!.count > 2 {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.conspdays.text = string
-                Servicefile.shared.consdays = self.conspdays.text!
-            }else{
-                self.conspdays.text = numberFiltered
-                Servicefile.shared.consdays = self.conspdays.text!
-            }
+            self.conspdays.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 2)
+            Servicefile.shared.consdays = self.conspdays.text!
             self.conspdays.resignFirstResponder()
         } else {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let string = textField.text
-            let compSepByCharInSet = string!.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            if string == numberFiltered {
-                self.conspdays.text = string
-                Servicefile.shared.consdays = self.conspdays.text!
-            }else{
-                self.conspdays.text = numberFiltered
-                Servicefile.shared.consdays = self.conspdays.text!
-            }
+            self.conspdays.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 2)
+             Servicefile.shared.consdays = self.conspdays.text!
         }
         
     }

@@ -34,8 +34,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_footer.layer.cornerRadius = 15.0
-        self.view_popup.layer.cornerRadius = 10.0
+        self.view_footer.view_cornor()
+        self.view_popup.view_cornor()
         self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2
         self.view_no.layer.cornerRadius = self.view_yes.frame.height / 2
         self.tbl_applist.delegate = self
@@ -46,9 +46,9 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.view_current.layer.cornerRadius = 10.0
-        self.view_cancelled.layer.cornerRadius = 10.0
-        self.view_completed.layer.cornerRadius = 10.0
+        self.view_current.view_cornor()
+        self.view_cancelled.view_cornor()
+        self.view_completed.view_cornor()
         self.view_current.layer.borderWidth = 0.5
         self.view_cancelled.layer.borderWidth = 0.5
         self.view_completed.layer.borderWidth = 0.5
@@ -104,6 +104,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.label_status.isHidden = true
         cell.label_status_val.isHidden = true
         cell.view_pres.isHidden = true
+        cell.view_pres.view_cornor()
         cell.selectionStyle = .none
         cell.selectionStyle = .none
         if self.appointtype == "current" {
@@ -150,7 +151,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                    cell.view_addview.isHidden = true
                                }
             }
-            cell.view_addview.layer.cornerRadius = 10.0
+            cell.view_addview.view_cornor()
             cell.btn_addreview.tag = indexPath.row
             cell.btn_addreview.addTarget(self, action: #selector(action_addreview), for: .touchUpInside)
             //cell.view_pres.isHidden = false
@@ -191,8 +192,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }
         cell.btn_pres.tag = indexPath.row
         cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
-        cell.view_completebtn.layer.cornerRadius = 10.0
-        cell.view_cancnel.layer.cornerRadius = 10.0
+        cell.view_completebtn.view_cornor()
+        cell.view_cancnel.view_cornor()
         cell.View_mainview.layer.borderWidth = 0.2
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {

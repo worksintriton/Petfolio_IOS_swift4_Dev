@@ -41,12 +41,12 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         Servicefile.shared.Doc_dashlist.removeAll()
         self.label_nodata.isHidden = true
-        self.view_new.layer.cornerRadius = 9.0
-        self.view_missed.layer.cornerRadius = 9.0
-        self.view_footer.layer.cornerRadius = 15.0
-        self.view_completed.layer.cornerRadius = 9.0
-        self.view_popup.layer.cornerRadius = 9.0
-        self.view_refresh.layer.cornerRadius = 9.0
+        self.view_new.view_cornor()
+        self.view_missed.view_cornor()
+        self.view_footer.view_cornor()
+        self.view_completed.view_cornor()
+        self.view_popup.view_cornor()
+        self.view_refresh.view_cornor()
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.view_close_btn.isHidden = true
@@ -152,8 +152,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }
         cell.btn_pres.tag = indexPath.row
         cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
-        cell.view_completebtn.layer.cornerRadius = 10.0
-        cell.view_cancnel.layer.cornerRadius = 10.0
+        cell.view_completebtn.view_cornor()
+        cell.view_cancnel.view_cornor()
         cell.View_mainview.layer.borderWidth = 0.2
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         cell.label_petname.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_name

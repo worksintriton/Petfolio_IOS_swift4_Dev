@@ -25,6 +25,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_descrption: UILabel!
     @IBOutlet weak var label_yr_exp: UILabel!
     @IBOutlet weak var label_const_amt: UILabel!
+    @IBOutlet weak var view_footer: UIView!
     
     
     var clinicpic = [""]
@@ -51,6 +52,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
         self.view_book.submit_cornor()
+        self.view_footer.view_cornor()
         self.view_book.dropShadow()
         // Do any additional setup after loading the view.
         print("selected doctor details",Servicefile.shared.petdoc[Servicefile.shared.selectedindex])
@@ -108,7 +110,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                 cell.img_banner.image = image
             }
         }
-        cell.img_banner.layer.cornerRadius = 15.0
+        cell.img_banner.view_cornor()
         
         return cell
     }
@@ -147,7 +149,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self._id = Data["_id"] as? String ?? ""
                         self.clinic_name = Data["clinic_name"] as? String ?? ""
                         Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
-                        let clidet = Data["clinic_pic"] as! NSArray
+                         let clidet = Data["clinic_pic"] as! NSArray
                         
                         let clicloc =  Data["clinic_loc"] as? String ?? ""
                         let amount =  Data["amount"] as? Int ?? 0

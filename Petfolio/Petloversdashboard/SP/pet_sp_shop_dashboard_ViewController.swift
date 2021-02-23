@@ -10,11 +10,17 @@ import UIKit
 import Alamofire
 
 class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tbl_dash_list: UITableView!
+    @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_allcategory: UIView!
+    @IBOutlet weak var view_search: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view_footer.view_cornor()
+        self.view_allcategory.view_cornor()
+        self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
         self.callpetshopdashget()
@@ -23,12 +29,12 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     
     @IBAction func action_home(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                                    self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-                                    self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
@@ -43,9 +49,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if Servicefile.shared.sp_dash_Banner_details.count > 0{
-                 return 1
+                return 1
             }else{
-                 return 0
+                return 0
             }
         }else if section == 1 {
             if Servicefile.shared.sp_dash_Today_Special.count > 0 {
@@ -60,11 +66,11 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     @objc func action_todaydeal_seemore(sender: UIButton){
         let tag = sender.tag
         print("data in index of today deal", tag)
-       }
+    }
     
     @objc func action_category_seemore(sender: UIButton){
-     let tag = sender.tag
-     print("data in index of category", tag)
+        let tag = sender.tag
+        print("data in index of category", tag)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,22 +100,22 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         }
     }
     
-   
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
-                  print("category index value",Servicefile.shared.sp_shop_dash_tbl_index)
+            print("category index value",Servicefile.shared.sp_shop_dash_tbl_index)
         }else{
             print("dashboard banner",indexPath.row)
         }
-      
+        
     }
     
     func callpetshopdashget(){
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() {
-            AF.request(Servicefile.pet_shop_dash, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_shop_dash, method: .post, parameters: ["user_id": Servicefile.shared.userid]
+            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let resp = response.value as! NSDictionary
@@ -120,9 +126,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                         let Banner_details = Data["Banner_details"] as! NSArray
                         let Product_details = Data["Product_details"] as! NSArray
                         let Today_Special = Data["Today_Special"] as! NSArray
-//                        var sp_dash_Banner_details = [pet_sp_dash_banner]()
-//                           var sp_dash_Product_details = [pet_sp_dash_productdetails]()
-//                           var sp_dash_Today_Special = [productdetails]()
+                        //                        var sp_dash_Banner_details = [pet_sp_dash_banner]()
+                        //                           var sp_dash_Product_details = [pet_sp_dash_productdetails]()
+                        //                           var sp_dash_Today_Special = [productdetails]()
                         Servicefile.shared.sp_dash_Banner_details.removeAll()
                         Servicefile.shared.sp_dash_Product_details.removeAll()
                         Servicefile.shared.sp_dash_Today_Special.removeAll()
@@ -133,17 +139,17 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                             Servicefile.shared.sp_dash_Banner_details.append(pet_sp_dash_banner.init(In_banner: bann_imag, In_banner_title: banner_title))
                         }
                         for itm in 0..<Today_Special.count{
-                                                   let itmdata = Today_Special[itm] as! NSDictionary
-                                                   let id  = itmdata["_id"] as? String ?? ""
-                                                   let product_discount = itmdata["product_discount"] as? Int ?? 0
-                                                   let product_fav = itmdata["product_fav"] as? Bool ?? false
-                                                   let product_img = itmdata["product_img"] as? String ?? Servicefile.sample_img
-                                                   let product_price = itmdata["product_price"] as? Int ?? 0
+                            let itmdata = Today_Special[itm] as! NSDictionary
+                            let id  = itmdata["_id"] as? String ?? ""
+                            let product_discount = itmdata["product_discount"] as? Int ?? 0
+                            let product_fav = itmdata["product_fav"] as? Bool ?? false
+                            let product_img = itmdata["product_img"] as? String ?? Servicefile.sample_img
+                            let product_price = itmdata["product_price"] as? Int ?? 0
                             let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
-                                                   let product_review = String(itmdata["product_review"] as? Int ?? 0)
-                                                   let product_title = itmdata["product_title"] as? String ?? ""
-                                                   Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
-                                               }
+                            let product_review = String(itmdata["product_review"] as? Int ?? 0)
+                            let product_title = itmdata["product_title"] as? String ?? ""
+                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                        }
                         for cat_prod_deta in 0..<Product_details.count{
                             let catval = Product_details[cat_prod_deta] as! NSDictionary
                             let cat_id = catval["cat_id"] as? String ?? ""
@@ -163,7 +169,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                                 Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0 {
-                               Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))
+                                Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))
                             }
                         }
                         self.tbl_dash_list.reloadData()
@@ -186,9 +192,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     }
     
     func alert(Message: String){
-           let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                }))
-           self.present(alert, animated: true, completion: nil)
-       }
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

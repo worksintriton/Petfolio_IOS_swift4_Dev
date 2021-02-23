@@ -36,10 +36,10 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         
         self.label_nodata.isHidden = true
         
-        self.view_new.layer.cornerRadius = 9.0
-        self.view_missed.layer.cornerRadius = 9.0
-        self.view_footer.layer.cornerRadius = 15.0
-        self.view_completed.layer.cornerRadius = 9.0
+        self.view_new.layer.cornerRadius = 8.0
+        self.view_missed.layer.cornerRadius = 8.0
+        self.view_footer.layer.cornerRadius = 8.0
+        self.view_completed.layer.cornerRadius = 8.0
         self.view_completed.layer.borderWidth = 0.5
         self.view_missed.layer.borderWidth = 0.5
         self.view_new.layer.borderWidth = 0.5

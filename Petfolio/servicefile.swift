@@ -168,7 +168,9 @@ class Servicefile {
     static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
     static let approvednumber = "1234567890"
     static let approvednumberandspecial = "1234567890."
-    
+    static let approvesymbol = ")}!@#$%^&*({."
+    static let approvedalphanumericsymbol = approvestring + approvednumber + approvesymbol
+    static let approvedalphanumeric = approvestring + approvednumber
     var notif_list = [notificationlist]()
     // pet dashboard
     var petid = ""
@@ -364,6 +366,23 @@ class Servicefile {
     var sp_dash_Today_Special = [productdetails]()
     var sp_dash_productdetails = [productdetails]()
     
+    static func textfieldrestrict(str : String, checkchar: String, textcount: Int) -> String {
+           let aSet = NSCharacterSet(charactersIn: checkchar).inverted
+           let string = str
+           let compSepByCharInSet = string.components(separatedBy: aSet)
+           var textfield = ""
+           let numberFiltered = compSepByCharInSet.joined(separator: "")
+           if string == numberFiltered {
+               textfield = string
+           }else{
+               textfield = numberFiltered
+           }
+           if let t: String = str {
+               textfield = String(t.prefix(textcount))
+           }
+           return textfield
+       }
+    
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if (cString.hasPrefix("#")) {
@@ -400,8 +419,6 @@ class Servicefile {
         }
     }
     
-   
-    
     func checkInttextfield(strtoInt: String)->Int{
         if strtoInt.isEmpty {
              return 0
@@ -425,8 +442,18 @@ class Servicefile {
         let urldat = str
         let data = urldat.replacingOccurrences(of: " ", with: "%20")
         //let data = urldat.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url = URL(string: data)
-        return url!
+        var surl = URL(string: data)
+        if surl == nil {
+             let dataurl = urldat.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            if dataurl == nil {
+                surl = URL(string: Servicefile.sample_img)
+            }else{
+                surl = URL(string: dataurl!)
+            }
+            return surl!
+        }else{
+            return surl!
+        }
     }
     
     func verifyUrl (urlString: String?) -> Bool {

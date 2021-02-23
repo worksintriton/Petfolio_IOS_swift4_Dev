@@ -29,7 +29,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         self.coll_service.delegate = self
         self.coll_service.dataSource = self
         self.image_service.layer.cornerRadius = self.image_service.frame.size.height / 2
-        self.view_book.layer.cornerRadius = 10
+        self.view_book.view_cornor()
     }
     
    
@@ -53,7 +53,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                            cell.img_banner.image = image
                        }
                    }
-                   cell.img_banner.layer.cornerRadius = 5.0
+                   cell.img_banner.layer.cornerRadius = 8.0
         return cell
     }
     

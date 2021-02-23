@@ -28,9 +28,9 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.tbl_medilist.dataSource = self
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
-        self.view_popup.layer.cornerRadius = 10.0
-        self.view_btn.layer.cornerRadius = 10.0
-         self.view_submit.layer.cornerRadius = 10.0
+        self.view_popup.view_cornor()
+        self.view_btn.view_cornor()
+         self.view_submit.view_cornor()
         self.view_submit.dropShadow()
         self.view_btn.dropShadow()
         self.textview_descrip.delegate = self

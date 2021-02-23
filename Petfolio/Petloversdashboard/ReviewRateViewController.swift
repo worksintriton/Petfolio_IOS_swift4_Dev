@@ -23,10 +23,10 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         Cosmos_rate.rating = 4
         Cosmos_rate.settings.fillMode = .full
-        self.view_main.layer.cornerRadius = 15.0
-        self.view_addreview.layer.cornerRadius = 10.0
+        self.view_main.view_cornor()
+        self.view_addreview.view_cornor()
         self.textview_review.delegate = self
-        self.view_textview.layer.cornerRadius = 10.0
+        self.view_textview.view_cornor()
         self.view_textview.dropShadow()
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -46,7 +46,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
            }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-           if self.textview_review.text!.count > 250 {
+           if self.textview_review.text!.count > 149 {
                         textview_review.resignFirstResponder()
                      }else{
                          self.textview_review.text = textView.text

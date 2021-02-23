@@ -61,18 +61,18 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         super.viewDidLoad()
         self.pet_type.removeAll()
         self.Pet_breed.removeAll()
-        self.view_Petname.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petage.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_pettype.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petbreed.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petgender.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petage.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_selectdate.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_pettypeDrop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petbreedDrop.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_petcolor.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_selectdateCalender.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
-        self.view_submit.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_Petname.view_cornor()
+        self.view_petage.view_cornor()
+        self.view_pettype.view_cornor()
+        self.view_petbreed.view_cornor()
+        self.view_petgender.view_cornor()
+        self.view_petage.view_cornor()
+        self.view_selectdate.view_cornor()
+        self.view_pettypeDrop.view_cornor()
+        self.view_petbreedDrop.view_cornor()
+        self.view_petcolor.view_cornor()
+        self.view_selectdateCalender.view_cornor()
+        self.view_submit.view_cornor()
         // Do any additional setup after loading the view.
         self.callpetdetails()
         self.callpetdetailget()
@@ -102,9 +102,9 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         self.tblview_pettype.layer.borderWidth = 0.2
         self.tblview_gender.layer.borderWidth = 0.2
         
-        self.tblview_petbreed.layer.cornerRadius = 9.0
-        self.tblview_pettype.layer.cornerRadius = 9.0
-        self.tblview_gender.layer.cornerRadius = 9.0
+        self.tblview_petbreed.layer.cornerRadius = 8.0
+        self.tblview_pettype.layer.cornerRadius = 8.0
+        self.tblview_gender.layer.cornerRadius = 8.0
         
         self.view_calender.isHidden = true
         self.view_calenderbtn.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
@@ -196,92 +196,28 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_petname == textField {
             if self.textfield_petname.text!.count > 24 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petname.text = string
-                }else{
-                    self.textfield_petname.text = numberFiltered
-                }
+                 self.textfield_petname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
                 self.textfield_petname.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petname.text = string
-                }else{
-                    self.textfield_petname.text = numberFiltered
-                }
+                self.textfield_petname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
             }
             if self.textfield_petcolor.text!.count > 14 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petcolor.text = string
-                }else{
-                    self.textfield_petcolor.text = numberFiltered
-                }
+                self.textfield_petcolor.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
                 self.textfield_petcolor.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petcolor.text = string
-                }else{
-                    self.textfield_petcolor.text = numberFiltered
-                }
+                self.textfield_petcolor.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 14)
             }
             if self.textfield_petweight.text!.count > 4 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petweight.text = string
-                }else{
-                    self.textfield_petweight.text = numberFiltered
-                }
+                self.textfield_petweight.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 5)
                 self.textfield_petweight.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfield_petweight.text = string
-                }else{
-                    self.textfield_petweight.text = numberFiltered
-                }
+                self.textfield_petweight.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 5)
             }
             if self.textfiled_petage.text!.count > 1 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfiled_petage.text = string
-                }else{
-                    self.textfiled_petage.text = numberFiltered
-                }
+                 self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
                 self.textfiled_petage.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.textfiled_petage.text = string
-                }else{
-                    self.textfiled_petage.text = numberFiltered
-                }
+                  self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
             }
         }
     }

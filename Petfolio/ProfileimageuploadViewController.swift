@@ -22,7 +22,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
         super.viewDidLoad()
         self.imagepicker.delegate = self
         self.setimage(strimg: Servicefile.shared.userimage)
-        self.image_profile.layer.cornerRadius = 10.0
+        self.image_profile.layer.cornerRadius = 8.0
         self.image_profile.dropShadow()
     }
     

@@ -28,7 +28,7 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
         self.isavailday.removeAll()
         self.tbl_availdays.delegate = self
         self.tbl_availdays.dataSource = self
-        self.view_next.layer.cornerRadius = 15.0
+        self.view_next.view_cornor()
         self.view_next.dropShadow()
         // Do any additional setup after loading the view.
     }

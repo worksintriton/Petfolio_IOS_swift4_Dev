@@ -24,7 +24,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_footer.layer.cornerRadius = 15.0
+        self.view_footer.view_cornor()
     }
     
     @IBAction func action_care(_ sender: Any) {
@@ -47,7 +47,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
              Servicefile.shared.pet_status = ""
              self.ismenu.removeAll()
              self.isorgi.removeAll()
-             self.view_footer.layer.cornerRadius = 15.0
+             self.view_footer.view_cornor()
              Servicefile.shared.pet_petlist.removeAll()
              self.coll_petlist.delegate = self
              self.coll_petlist.dataSource = self
@@ -68,7 +68,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
         }
-         self.imag_user.layer.cornerRadius = 10.0
+        self.imag_user.layer.cornerRadius = 8.0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

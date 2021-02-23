@@ -29,7 +29,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_footer.layer.cornerRadius = 10.0
+        self.view_footer.view_cornor()
         self.coll_bussi_img.delegate = self
         self.coll_bussi_img.dataSource = self
     }
@@ -62,7 +62,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                        }
                    }
                }
-                self.imag_user.layer.cornerRadius = 10.0
+        self.imag_user.layer.cornerRadius = 8.0
     }
     
     @IBAction func action_upload_image(_ sender: Any) {

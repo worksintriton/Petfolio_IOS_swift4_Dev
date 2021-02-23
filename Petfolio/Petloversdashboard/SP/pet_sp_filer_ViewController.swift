@@ -26,8 +26,8 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
 //    var selspec = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_apply.layer.cornerRadius = 10.0
-        self.view_clearall.layer.cornerRadius = 10.0
+        self.view_apply.view_cornor()
+        self.view_clearall.view_cornor()
         self.view_apply.dropShadow()
         self.view_clearall.dropShadow()
         if Servicefile.shared.SP_filter_price.count == 0 {

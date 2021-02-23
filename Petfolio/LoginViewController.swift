@@ -22,9 +22,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         Servicefile.shared.checkemailvalid = "login"
         Servicefile.shared.email_status = false
         Servicefile.shared.email_status_label = "verify email"
-        self.View_log.layer.cornerRadius = 10.0
-        self.ViewOTPBTN.layer.cornerRadius = 10.0
-        self.View_usercred.layer.cornerRadius = 10.0
+        self.View_log.view_cornor()
+        self.ViewOTPBTN.view_cornor()
+        self.View_usercred.view_cornor()
         self.ViewOTPBTN.dropShadow()
         self.View_usercred.dropShadow()
         self.usercred.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
@@ -49,26 +49,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     @objc func textFieldDidChange(textField : UITextField){
         if self.usercred == textField {
             if self.usercred.text!.count > 9 {
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.usercred.text = string
-                }else{
-                    self.usercred.text = numberFiltered
-                }
+                  self.usercred.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
                 self.usercred.resignFirstResponder()
             }else{
-                let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-                let string = textField.text
-                let compSepByCharInSet = string!.components(separatedBy: aSet)
-                let numberFiltered = compSepByCharInSet.joined(separator: "")
-                if string == numberFiltered {
-                    self.usercred.text = string
-                }else{
-                    self.usercred.text = numberFiltered
-                }
+                 self.usercred.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
             }
         }
     }
@@ -193,14 +177,18 @@ extension UIImage {
             } else {
                 cornerRadius = maxRadius
             }
+            
             UIGraphicsBeginImageContextWithOptions(size, false, scale)
             let rect = CGRect(origin: .zero, size: size)
             UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
             draw(in: rect)
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
+            image?.sd_roundedCornerImage(withRadius: 8.0, corners: .allCorners , borderWidth: 0.2, borderColor: .lightGray)
             return image
         }
+    
+   
 }
 
 extension UIView {
@@ -211,11 +199,11 @@ extension UIView {
     layer.shadowRadius = 3
   }
     func submit_cornor(){
-        layer.cornerRadius = 15.0
+        layer.cornerRadius = 8.0
     }
     
     func view_cornor(){
-        layer.cornerRadius = 10.0
+        layer.cornerRadius = 8.0
     }
     
     func removeshadow(){

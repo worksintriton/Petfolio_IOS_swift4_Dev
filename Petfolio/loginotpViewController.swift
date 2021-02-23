@@ -23,8 +23,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textfield_otp.delegate = self
-        self.Viewotp.layer.cornerRadius = 5.0
-        self.Viewactionotp.layer.cornerRadius = 10.0
+        self.Viewotp.view_cornor()
+        self.Viewactionotp.view_cornor()
         self.Viewactionotp.dropShadow()
         self.Viewotp.dropShadow()
          self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
@@ -55,7 +55,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         }
     
     @objc func updateCounter() {
-      self.secondstext.layer.cornerRadius = 10.0
+        self.secondstext.layer.cornerRadius = 8.0
          if counter > 0 {
              print("\(counter) seconds to the end of the world")
              counter -= 1
@@ -86,14 +86,15 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     
     @objc func textFieldDidChange(textField : UITextField) {
           if self.textfield_otp.text!.count > 6 {
-            let otptxt = self.textfield_otp.text!
+             self.textfield_otp.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
+                       let otptxt = self.textfield_otp.text!
             let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
             if trimmedString  == Servicefile.shared.otp {
                 print("otp matches")
             }
                self.textfield_otp.resignFirstResponder()
            }else{
-               self.textfield_otp.text = textField.text
+               self.textfield_otp.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
            }
     }
     

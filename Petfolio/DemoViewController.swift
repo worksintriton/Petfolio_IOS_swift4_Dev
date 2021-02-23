@@ -21,7 +21,7 @@ class DemoViewController: UIViewController,UICollectionViewDataSource, UICollect
         Servicefile.shared.checkemailvalid = "login"
         self.Democollec.delegate = self
         self.Democollec.dataSource = self
-        self.ViewGetstart.layer.cornerRadius = 10.0
+        self.ViewGetstart.layer.cornerRadius = 8.0
         self.Democollec.isPagingEnabled = true
         // Do any additional setup after loading the view.
     }

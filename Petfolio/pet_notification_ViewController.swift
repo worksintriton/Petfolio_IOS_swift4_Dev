@@ -39,7 +39,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
         if self.selcted[indexPath.row] == "1" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! notification_TableViewCell
             cell.selectionStyle = .none
-            cell.view_main.layer.cornerRadius = 10.0
+            cell.view_main.view_cornor()
             cell.view_main.dropShadow()
             if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
                 cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
@@ -61,7 +61,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! notification_TableViewCell
             cell.selectionStyle = .none
-            cell.view_main.layer.cornerRadius = 10.0
+            cell.view_main.view_cornor()
             cell.view_main.dropShadow()
             if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
                 cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in

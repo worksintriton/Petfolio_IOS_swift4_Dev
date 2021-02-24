@@ -26,6 +26,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_yr_exp: UILabel!
     @IBOutlet weak var label_const_amt: UILabel!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_home: UIView!
     
     
     var clinicpic = [""]
@@ -43,7 +44,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
         self.Pet_breed.removeAll()

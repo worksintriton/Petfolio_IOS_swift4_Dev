@@ -114,7 +114,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(textField : UITextField){
         if self.textfield_email == textField {
             Servicefile.shared.email_status = false
-            Servicefile.shared.email_status_label = "verify email"
+            Servicefile.shared.email_status_label = "Verify email"
             self.label_emailstatus.text = Servicefile.shared.email_status_label
         }
     }
@@ -151,7 +151,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
         if Servicefile.shared.email_status != false {
             Servicefile.shared.email_status_label = "Verified email"
         } else {
-            Servicefile.shared.email_status_label = "verify email"
+            Servicefile.shared.email_status_label = "Verify email"
         }
          self.label_emailstatus.text = Servicefile.shared.email_status_label
     }

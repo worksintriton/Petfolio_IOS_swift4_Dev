@@ -77,7 +77,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
             cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
             cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }
-        cell.view_time.layer.cornerRadius = 8.0
+        cell.view_time.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     

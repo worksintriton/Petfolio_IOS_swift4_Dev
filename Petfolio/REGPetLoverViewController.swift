@@ -104,12 +104,12 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         self.tblview_pettype.layer.borderWidth = 0.2
         self.tblview_gender.layer.borderWidth = 0.2
         
-        self.tblview_petbreed.layer.cornerRadius = 8.0
-        self.tblview_pettype.layer.cornerRadius = 8.0
-        self.tblview_gender.layer.cornerRadius = 8.0
+        self.tblview_petbreed.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.tblview_pettype.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.tblview_gender.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         
         self.view_calender.isHidden = true
-        self.view_calenderbtn.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
+        self.view_calenderbtn.view_cornor()
         self.datepicker_date.datePickerMode = .date
         self.datepicker_date.maximumDate = Date()
         self.textfiled_petage.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)

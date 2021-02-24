@@ -245,7 +245,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                          cell.Img_id.image = image
                                      }
                                  }
-           cell.Img_id.layer.cornerRadius = 8.0
+        cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
            return cell
        }else {
                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell

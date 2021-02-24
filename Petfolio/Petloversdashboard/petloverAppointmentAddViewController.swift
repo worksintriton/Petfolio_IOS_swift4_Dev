@@ -217,7 +217,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                 cell.Img_id.image = image
             }
         }
-        cell.Img_id.layer.cornerRadius = 8.0
+        cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     
@@ -248,7 +248,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                     self.image_petcurrent.image = image
                 }
             }
-            self.image_petcurrent.layer.cornerRadius = 8.0
+            self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         }
         
     }

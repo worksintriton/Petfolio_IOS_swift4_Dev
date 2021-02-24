@@ -732,7 +732,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if coll_govtid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "govtid", for: indexPath) as! imgidCollectionViewCell
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 8.0
+            cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
             return cell
@@ -750,7 +750,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoid", for: indexPath)  as! imgidCollectionViewCell
             
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 8.0
+            cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_photoid), for: .touchUpInside)
             
@@ -768,7 +768,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
             cell.Img_id.image = UIImage(named: "pdf")
-            cell.Img_id.layer.cornerRadius = 8.0
+            cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
             return cell
@@ -783,7 +783,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     cell.Img_id.image = image
                 }
             }
-            cell.Img_id.layer.cornerRadius = 8.0
+            cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
             return cell

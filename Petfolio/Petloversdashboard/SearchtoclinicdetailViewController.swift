@@ -25,6 +25,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_edu_year: UILabel!
     @IBOutlet weak var label_edu: UILabel!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_home: UIView!
     
     var clinicpic = [""]
     var edu = ""
@@ -41,6 +42,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
         self.Pet_breed.removeAll()
@@ -114,7 +116,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                 cell.img_banner.image = image
             }
         }
-        cell.img_banner.layer.cornerRadius = 8.0
+        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     

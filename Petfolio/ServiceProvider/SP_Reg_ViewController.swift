@@ -495,7 +495,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_gallary), for: .touchUpInside)
-            cell.Img_id.layer.cornerRadius = 8.0
+            cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell

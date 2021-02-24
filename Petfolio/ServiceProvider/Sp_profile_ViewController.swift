@@ -62,7 +62,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                        }
                    }
                }
-        self.imag_user.layer.cornerRadius = 8.0
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
     @IBAction func action_upload_image(_ sender: Any) {

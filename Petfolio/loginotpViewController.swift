@@ -55,7 +55,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         }
     
     @objc func updateCounter() {
-        self.secondstext.layer.cornerRadius = 8.0
+        self.secondstext.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
          if counter > 0 {
              print("\(counter) seconds to the end of the world")
              counter -= 1
@@ -65,12 +65,12 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
              print ("\(h) Hours, \(m) Minutes, \(s) Seconds")
              self.secondstext.text = "Resend"+" "+"\(mm):\(ss)"
              self.resendbtn.isHidden = true
-             self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: "#c32126")
+             self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack)
              } else {
              print("(0) seconds to the end of the world")
              self.secondstext.text = "Resend"+" OTP"
              self.resendbtn.isHidden = false
-             self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: "#009674")
+             self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack)
          }
     }
     

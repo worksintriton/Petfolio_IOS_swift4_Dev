@@ -22,9 +22,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var label_comm_type: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
     @IBOutlet weak var view_search: UIView!
+    @IBOutlet weak var view_care: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_care.view_cornor()
         self.callsearchlist()
         self.noofdoc.text = "0"
         self.label_nodata.isHidden = true
@@ -123,8 +125,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         }
         cell.view_book.dropShadow()
         cell.img_doc.dropShadow()
-        cell.img_doc.layer.cornerRadius = 8.0
-        cell.view_book.layer.cornerRadius = 8.0
+        cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_book.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.btn_book.tag = indexPath.row
         cell.btn_book.addTarget(self, action: #selector(action_book), for: .touchUpInside)
         return cell

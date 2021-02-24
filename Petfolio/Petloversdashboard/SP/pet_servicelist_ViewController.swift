@@ -85,8 +85,8 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                 cell.img_sp.image = image
             }
         }
-        cell.img_sp.layer.cornerRadius = 8.0
-        cell.view_book.layer.cornerRadius = 8.0
+        cell.img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_book.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.btn_book.tag = indexPath.row
         cell.btn_book.addTarget(self, action: #selector(action_appointment), for: .touchUpInside)
         return cell

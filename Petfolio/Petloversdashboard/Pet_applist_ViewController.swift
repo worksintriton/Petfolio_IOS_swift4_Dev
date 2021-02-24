@@ -26,6 +26,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_yes: UIView!
     @IBOutlet weak var view_no: UIView!
+    @IBOutlet weak var view_home: UIView!
     
     var appointtype = "current"
     var indextag = 0
@@ -34,6 +35,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.view_footer.view_cornor()
         self.view_popup.view_cornor()
         self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2
@@ -42,6 +44,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.tbl_applist.dataSource = self
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
+        self.label_nodata.text = "No new appointments"
         // Do any additional setup after loading the view.
     }
     
@@ -309,6 +312,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_cancelled(_ sender: Any) {
+        self.label_nodata.text = "No Missed appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_cancelled.backgroundColor = appcolor
         self.label_cancelled.textColor = UIColor.white
@@ -324,6 +328,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_completeappoint(_ sender: Any) {
+        self.label_nodata.text = "No Completed appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor
         self.label_complete.textColor = UIColor.white
@@ -339,6 +344,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_currentappoint(_ sender: Any) {
+        self.label_nodata.text = "No New appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_current.backgroundColor = appcolor
         self.label_current.textColor = UIColor.white

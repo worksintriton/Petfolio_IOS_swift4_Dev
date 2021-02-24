@@ -40,16 +40,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.viewemail.view_cornor()
         self.Viewphone.view_cornor()
         self.view_verifyemail.view_cornor()
-        
-        self.view_verifyemail.dropShadow()
-        self.viewemail.dropShadow()
-        self.ViewFname.dropShadow()
-        self.ViewLname.dropShadow()
-        self.viewemail.dropShadow()
-        self.Viewphone.dropShadow()
         self.ViewChangeUtype.dropShadow()
         
-        self.Viewotp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.Viewotp.view_cornor()
         self.ViewChangeUtype.view_cornor()
         self.viewcoun.view_cornor()
         self.textfield_phno.delegate = self
@@ -168,7 +161,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             }
         }else if self.textfield_email == textField {
             Servicefile.shared.email_status = false
-            Servicefile.shared.email_status_label = "verify email"
+            Servicefile.shared.email_status_label = "Verify email"
             self.label_emailstatus.text = Servicefile.shared.email_status_label
         }
     }

@@ -21,6 +21,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var tbl_searchlist: UITableView!
+    @IBOutlet weak var view_home: UIView!
     
     
     let locationManager = CLLocationManager()
@@ -32,6 +33,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.view_setloca.view_cornor()
         self.view_searchopt.view_cornor()
         self.view_footer.view_cornor()

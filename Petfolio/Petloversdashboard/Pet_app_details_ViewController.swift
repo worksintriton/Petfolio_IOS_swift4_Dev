@@ -42,9 +42,11 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_home: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
         self.view_footer.view_cornor()

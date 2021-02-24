@@ -92,9 +92,9 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.tblview_pettype.layer.borderWidth = 0.2
         self.tblview_petdetail.layer.borderWidth = 0.2
         
-        self.tblview_petbreed.layer.cornerRadius = 8.0
-        self.tblview_pettype.layer.cornerRadius = 8.0
-        self.tblview_petdetail.layer.cornerRadius = 8.0
+        self.tblview_petbreed.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.tblview_pettype.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.tblview_petdetail.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         
         self.callpetdetailget()
         self.textfield_color.delegate = self
@@ -167,7 +167,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                            self.image_petcurrent.image = image
                        }
                    }
-                   self.image_petcurrent.layer.cornerRadius = 8.0
+                   self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         }
        
     }

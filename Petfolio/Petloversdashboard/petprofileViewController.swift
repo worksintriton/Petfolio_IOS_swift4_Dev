@@ -20,10 +20,13 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var label_phono: UILabel!
     @IBOutlet weak var coll_petlist: UICollectionView!
     @IBOutlet weak var view_footer: UIView!
+    
+    @IBOutlet weak var view_home: UIView!
     var ismenu = ["0"]
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.view_footer.view_cornor()
     }
     
@@ -68,7 +71,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
         }
-        self.imag_user.layer.cornerRadius = 8.0
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

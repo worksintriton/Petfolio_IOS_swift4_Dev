@@ -34,7 +34,7 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
         cell.label_prod_title.text = "prod title " + "\(indexPath.row)"
         cell.label_price.text = "₹ 10"+"\(indexPath.row)"
-        cell.image_product.layer.cornerRadius = 8.0
+        cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
         //cell.image_product.image = UIImage(named: "sample")
          

@@ -160,7 +160,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                     cell.img_banner.image = image
                 }
             }
-            cell.img_banner.layer.cornerRadius = 8.0
+            cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
            return cell
         }else if self.colleView_Doctor == collectionView {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -171,7 +171,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                     cell.img_doc.image = image
                 }
             }
-            cell.img_doc.layer.cornerRadius = 8.0
+            cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_docname.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_rateing.text = String(Servicefile.shared.petdoc[indexPath.row].star_count)

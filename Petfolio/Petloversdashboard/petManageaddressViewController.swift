@@ -20,6 +20,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var view_yes: UIView!
     @IBOutlet weak var view_no: UIView!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_home: UIView!
     
     var proc_type = "edit"
     var indextag = 0
@@ -29,6 +30,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         self.isclickisoption.removeAll()
         self.isorgiclikcopt.removeAll()
         Servicefile.shared.petuserlocaadd.removeAll()
@@ -66,6 +68,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! manageaddresslistTableViewCell
+        cell.view_main.view_cornor()
         cell.label_username.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_nickname
         cell.label_address.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_address
         cell.btn_delete.tag = indexPath.row

@@ -28,6 +28,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var view_denypop: UIView!
     @IBOutlet weak var view_allowpop: UIView!
     @IBOutlet weak var pagecontrol: UIPageControl!
+    
+    @IBOutlet weak var view_banner: UIView!
+    @IBOutlet weak var view_service: UIView!
+    @IBOutlet weak var view_doctor: UIView!
+    @IBOutlet weak var view_products: UIView!
+    @IBOutlet weak var view_puppy_love: UIView!
+    @IBOutlet weak var view_home: UIView!
+    
+    
     var doc = 0
     var pro = 0
     var ser = 0
@@ -44,7 +53,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view_home.view_cornor()
         self.view_footer.view_cornor()
         self.view_footer.dropShadow()
         self.view_popup.view_cornor()
@@ -229,15 +238,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.colleView_banner == collectionView {
-            return Servicefile.shared.petbanner.count
+                return Servicefile.shared.petbanner.count
         }else if self.colleView_Doctor == collectionView {
-            return Servicefile.shared.petdoc.count
+                return Servicefile.shared.petdoc.count
         }else if self.colleView_Service == collectionView {
-            return Servicefile.shared.petser.count
+                return Servicefile.shared.petser.count
         }else if self.colleView_puppylove == collectionView {
-            return Servicefile.shared.Petpuppylove.count
+                return Servicefile.shared.Petpuppylove.count
         }else {
-            return Servicefile.shared.petprod.count
+                return Servicefile.shared.petprod.count
         }
     }
     
@@ -251,8 +260,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_banner.image = image
                 }
             }
-            cell.img_banner.layer.cornerRadius = 8.0
-            cell.view_banner.layer.cornerRadius = 8.0
+            cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+            cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_banner.layer.borderWidth = 0.4
             cell.view_banner.layer.borderColor = UIColor.lightGray.cgColor
             cell.view_banner.dropShadow()
@@ -267,7 +276,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_doc.image = image
                 }
             }
-            cell.img_doc.layer.cornerRadius = 8.0
+            cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.img_doc.dropShadow()
             cell.img_doc.layer.borderWidth = 0.5
             cell.img_doc.layer.borderColor = UIColor.gray.cgColor
@@ -300,7 +309,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
-            cell.img_prod.layer.cornerRadius = 8.0
+            cell.img_prod.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! petprodCollectionViewCell
@@ -311,14 +320,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
-            cell.img_prod.layer.cornerRadius = 8.0
+            cell.img_prod.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.colleView_banner == collectionView {
-            return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
+                return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
         }else if self.colleView_Doctor == collectionView {
             return CGSize(width: 163 , height:  161)
         }else if self.colleView_Service == collectionView {

@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.viewDidLoad()
         Servicefile.shared.checkemailvalid = "login"
         Servicefile.shared.email_status = false
-        Servicefile.shared.email_status_label = "verify email"
+        Servicefile.shared.email_status_label = "Verify email"
         self.View_log.view_cornor()
         self.ViewOTPBTN.view_cornor()
         self.View_usercred.view_cornor()
@@ -194,9 +194,9 @@ extension UIImage {
 extension UIView {
   func dropShadow() {
     layer.shadowColor = UIColor.gray.cgColor
-    layer.shadowOpacity = 0.5
+    layer.shadowOpacity = 0.3
     layer.shadowOffset = CGSize.zero
-    layer.shadowRadius = 3
+    layer.shadowRadius = 1.5
   }
     func submit_cornor(){
         layer.cornerRadius = 8.0

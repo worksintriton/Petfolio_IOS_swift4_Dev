@@ -53,7 +53,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                            cell.img_banner.image = image
                        }
                    }
-                   cell.img_banner.layer.cornerRadius = 8.0
+                   cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     

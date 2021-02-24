@@ -19,6 +19,7 @@ class manageaddresslistTableViewCell: UITableViewCell {
     @IBOutlet weak var btn_edit: UIButton!
     @IBOutlet weak var btn_delete: UIButton!
     @IBOutlet weak var img_default: UIImageView!
+    @IBOutlet weak var view_main: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

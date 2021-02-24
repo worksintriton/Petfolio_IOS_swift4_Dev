@@ -144,8 +144,8 @@ class Servicefile {
     var user_type_value = 1
     var usertypetitle = "Pet Lover"
     // Design value
-    var viewcornorradius = 15.0
-    var viewLabelcornorraius = 10.0
+    var viewcornorradius = 5.0
+    var viewLabelcornorraius = 5.0
     // Desing Value
     var locaaccess = ""
     // userdetails
@@ -238,7 +238,8 @@ class Servicefile {
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
-    var black = "#080808"
+    var black = "#444444"
+    static let appblack = "#444444"
     
     var selrate = 0
     var selspec = ""

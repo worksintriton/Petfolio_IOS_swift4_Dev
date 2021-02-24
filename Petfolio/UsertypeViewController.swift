@@ -25,7 +25,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locusel = Servicefile.shared.utypesel
-        self.Viewchange.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.Viewchange.view_cornor()
         self.collec_usertype.delegate = self
         self.collec_usertype.dataSource = self
         if Servicefile.shared.UtypeData.count > 0 {
@@ -70,7 +70,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.Img_UT.image = UIImage(named: "sample")
         }
        
-        cell.Img_UT.layer.cornerRadius = 8.0
+        cell.Img_UT.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.Lab_UT.text = Servicefile.shared.UtypeData[indexPath.row].user_type_title
         if self.locusel[indexPath.row] == "1"{
              cell.Img_Select.isHidden = false
@@ -106,7 +106,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collec_usertype.frame.size.width / 2.2 , height:  self.collec_usertype.frame.size.width / 2)
+        return CGSize(width: self.collec_usertype.frame.size.width / 2 , height:  self.collec_usertype.frame.size.width / 2.2)
     }
     
     func callusertype(){

@@ -33,8 +33,8 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
         cell.img_banner.image = UIImage(named: "sample")
-        cell.view_banner.layer.cornerRadius = 8.0
-        cell.img_banner.layer.cornerRadius = 8.0
+        cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner.dropShadow()
     if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img) {
          print("null value check",Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)

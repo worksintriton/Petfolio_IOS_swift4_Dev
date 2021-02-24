@@ -22,6 +22,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var tbl_searchlist: UITableView!
     
+    @IBOutlet weak var view_home: UIView!
     
     let locationManager = CLLocationManager()
     var latitude : Double!
@@ -32,6 +33,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_home.view_cornor()
         Servicefile.shared.long = 0.0
         Servicefile.shared.lati = 0.0
         self.view_setloca.view_cornor()

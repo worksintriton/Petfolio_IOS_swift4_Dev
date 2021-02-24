@@ -44,7 +44,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 }
             }
         }
-        self.imag_user.layer.cornerRadius = 8.0
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.calldetails()
     }
     

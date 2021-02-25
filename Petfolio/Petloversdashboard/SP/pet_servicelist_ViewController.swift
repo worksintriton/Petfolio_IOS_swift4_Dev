@@ -71,7 +71,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! service_TableViewCell
-        cell.label_distance.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].distance)
+        cell.label_distance.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].distance) + " KM away"
         cell.label_like.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].comments_count)
         cell.label_place.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_place
         cell.label_price.text = "₹ " +  String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_price)

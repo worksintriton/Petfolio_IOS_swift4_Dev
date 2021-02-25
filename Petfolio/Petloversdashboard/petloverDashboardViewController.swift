@@ -53,7 +53,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.view_footer.view_cornor()
         self.view_footer.dropShadow()
         self.view_popup.view_cornor()
@@ -264,8 +264,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_banner.layer.borderWidth = 0.4
             cell.view_banner.layer.borderColor = UIColor.lightGray.cgColor
-            cell.view_banner.dropShadow()
-            
+            cell.view_banner.layer.shadowColor = UIColor.gray.cgColor
+            cell.view_banner.layer.shadowOpacity = 1.0
+            cell.view_banner.layer.shadowOffset = CGSize(width: 0, height: 3)
+            cell.view_banner.layer.shadowRadius = 1.5
             return cell
         }else if self.colleView_Doctor == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -278,7 +280,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }
             cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.img_doc.dropShadow()
-            cell.img_doc.layer.borderWidth = 0.5
+            cell.img_doc.layer.borderWidth = 1.0
             cell.img_doc.layer.borderColor = UIColor.gray.cgColor
             cell.label_docname.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].spec
@@ -297,7 +299,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 }
             }
             cell.img_ser.layer.cornerRadius = cell.img_ser.frame.size.height / 2
-            cell.img_ser.dropShadow()
+            cell.view_img.layer.cornerRadius = cell.view_img.frame.size.height / 2
+            cell.view_img.layer.shadowColor = UIColor.gray.cgColor
+            cell.view_img.layer.shadowOpacity = 1.0
+            cell.view_img.layer.shadowOffset = CGSize.zero
+            cell.view_img.layer.shadowRadius = 3.0
             
             return cell
         }else if self.colleView_puppylove == collectionView{

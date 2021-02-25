@@ -35,7 +35,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.view_footer.view_cornor()
         self.view_popup.view_cornor()
         self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2

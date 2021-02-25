@@ -44,7 +44,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
         self.Pet_breed.removeAll()

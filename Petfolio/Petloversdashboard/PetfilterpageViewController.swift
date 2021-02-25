@@ -29,8 +29,6 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         self.view_apply.view_cornor()
         self.view_clearall.view_cornor()
-        self.view_apply.dropShadow()
-        self.view_clearall.dropShadow()
         self.callpetdetails()
         self.tbl_spec.delegate = self
         self.tbl_spec.dataSource = self

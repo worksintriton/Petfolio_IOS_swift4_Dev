@@ -26,7 +26,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.view_footer.view_cornor()
     }
     
@@ -108,6 +108,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
             }else{
                 cell.View_menu.isHidden = true
             }
+            cell.view_main.view_cornor()
             cell.btn_menu.tag = indexPath.row
             cell.btn_menu.addTarget(self, action: #selector(action_clickmenu), for: .touchUpInside)
             cell.btn_edit.tag = indexPath.row

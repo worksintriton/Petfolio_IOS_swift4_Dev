@@ -14,7 +14,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var tbl_searchlist: UITableView!
     @IBOutlet weak var view_footer: UIView!
     var refreshControl = UIRefreshControl()
-    var comm_type = 1
+    var comm_type = 0
     
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var noofdoc: UILabel!
@@ -26,7 +26,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_care.view_cornor()
+        //self.view_care.view_cornor()
         self.callsearchlist()
         self.noofdoc.text = "0"
         self.label_nodata.isHidden = true
@@ -39,7 +39,6 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
         self.view_footer.view_cornor()
-        self.view_search.dropShadow()
         self.view_footer.dropShadow()
     }
     
@@ -74,11 +73,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_switch(_ sender: UISwitch) {
         if sender.isOn {
-            self.comm_type = 0
+            self.comm_type = 1
             self.callsearchlist()
             self.label_comm_type.text = "Communication online "
         } else {
-            self.comm_type = 1
+            self.comm_type = 0
             self.callsearchlist()
             self.label_comm_type.text = "Communication offline "
         }
@@ -152,7 +151,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 120
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {

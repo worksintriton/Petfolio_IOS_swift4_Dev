@@ -46,7 +46,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
         self.view_footer.view_cornor()

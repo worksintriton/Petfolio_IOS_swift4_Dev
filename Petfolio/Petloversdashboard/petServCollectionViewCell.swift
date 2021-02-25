@@ -11,6 +11,7 @@ import UIKit
 class petServCollectionViewCell: UICollectionViewCell {
     
     
+    @IBOutlet weak var view_img: UIView!
     @IBOutlet weak var view_ser: UIView!
     @IBOutlet weak var img_ser: UIImageView!
     @IBOutlet weak var label_ser: UILabel!

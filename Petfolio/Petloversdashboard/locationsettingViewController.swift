@@ -33,7 +33,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         Servicefile.shared.long = 0.0
         Servicefile.shared.lati = 0.0
         self.view_setloca.view_cornor()

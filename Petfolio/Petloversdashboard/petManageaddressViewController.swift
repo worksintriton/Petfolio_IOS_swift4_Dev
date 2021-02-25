@@ -30,7 +30,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.isclickisoption.removeAll()
         self.isorgiclikcopt.removeAll()
         Servicefile.shared.petuserlocaadd.removeAll()

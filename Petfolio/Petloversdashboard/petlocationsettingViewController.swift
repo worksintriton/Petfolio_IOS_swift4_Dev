@@ -33,7 +33,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_home.view_cornor()
+        //self.view_home.view_cornor()
         self.view_setloca.view_cornor()
         self.view_searchopt.view_cornor()
         self.view_footer.view_cornor()

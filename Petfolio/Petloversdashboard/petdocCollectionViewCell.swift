@@ -16,6 +16,7 @@ class petdocCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_spec: UILabel!
     @IBOutlet weak var label_rateing: UILabel!
     @IBOutlet weak var label_ratedno: UILabel!
+    @IBOutlet weak var view_docimg: UIView!
     
     
     

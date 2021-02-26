@@ -11,6 +11,7 @@ import UIKit
 class petprodCollectionViewCell: UICollectionViewCell {
  
     
+    @IBOutlet weak var view_pord: UIView!
     @IBOutlet weak var img_prod: UIImageView!
     @IBOutlet weak var label_prodtitile: UILabel!
     

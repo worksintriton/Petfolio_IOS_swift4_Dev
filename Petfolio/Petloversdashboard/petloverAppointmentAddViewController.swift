@@ -764,7 +764,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                            "email": Servicefile.shared.user_email
                        ],
                        "theme": [
-                           "color": "#F37254"
+                        "color": Servicefile.shared.appgreen
                        ]
                    ]
                    if let rzp = self.razorpay {

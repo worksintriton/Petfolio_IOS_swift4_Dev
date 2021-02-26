@@ -87,16 +87,16 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }
     }
     
-//    func checklatlong(){
-//        let lat  = String(self.latitude)
-//        let long = String(self.longitude)
-//        if lat == "0.0" & long == "0.0" {
-//            self.callpetdash()
-//        }
-//    }
+    //    func checklatlong(){
+    //        let lat  = String(self.latitude)
+    //        let long = String(self.longitude)
+    //        if lat == "0.0" & long == "0.0" {
+    //            self.callpetdash()
+    //        }
+    //    }
     
     @objc func refresh(_ sender: AnyObject) {
-         self.callpetdash()
+        self.callpetdash()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -118,24 +118,24 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 
                 var addressString : String = ""
                 if placemarks?[0] != nil {
-                if pm.subLocality != nil {
-                    addressString = addressString + pm.subLocality! + ", "
-                }
-                if pm.thoroughfare != nil {
-                    addressString = addressString + pm.thoroughfare! + ", "
-                }
-                if pm.locality != nil {
-                    addressString = addressString + pm.locality! + ", "
-                }
-                if pm.country != nil {
-                    addressString = addressString + pm.country! + ", "
-                }
-                if pm.postalCode != nil {
-                    addressString = addressString + pm.postalCode! + " "
-                }
-                
-                self.locationaddress = addressString
-                self.callpetdash()
+                    if pm.subLocality != nil {
+                        addressString = addressString + pm.subLocality! + ", "
+                    }
+                    if pm.thoroughfare != nil {
+                        addressString = addressString + pm.thoroughfare! + ", "
+                    }
+                    if pm.locality != nil {
+                        addressString = addressString + pm.locality! + ", "
+                    }
+                    if pm.country != nil {
+                        addressString = addressString + pm.country! + ", "
+                    }
+                    if pm.postalCode != nil {
+                        addressString = addressString + pm.postalCode! + " "
+                    }
+                    
+                    self.locationaddress = addressString
+                    self.callpetdash()
                 }
                 print(addressString)
             })
@@ -156,7 +156,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     @IBAction func action_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
-               self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_shop(_ sender: Any) {
@@ -238,15 +238,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.colleView_banner == collectionView {
-                return Servicefile.shared.petbanner.count
+            return Servicefile.shared.petbanner.count
         }else if self.colleView_Doctor == collectionView {
-                return Servicefile.shared.petdoc.count
+            return Servicefile.shared.petdoc.count
         }else if self.colleView_Service == collectionView {
-                return Servicefile.shared.petser.count
+            return Servicefile.shared.petser.count
         }else if self.colleView_puppylove == collectionView {
-                return Servicefile.shared.Petpuppylove.count
+            return Servicefile.shared.Petpuppylove.count
         }else {
-                return Servicefile.shared.petprod.count
+            return Servicefile.shared.petprod.count
         }
     }
     
@@ -262,12 +262,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }
             cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-            cell.view_banner.layer.borderWidth = 0.4
-            cell.view_banner.layer.borderColor = UIColor.lightGray.cgColor
-            cell.view_banner.layer.shadowColor = UIColor.gray.cgColor
-            cell.view_banner.layer.shadowOpacity = 1.0
-            cell.view_banner.layer.shadowOffset = CGSize(width: 0, height: 3)
-            cell.view_banner.layer.shadowRadius = 1.5
+            //cell.view_banner.layer.borderWidth = 0.4
+            //cell.view_banner.layer.shadowColor = UIColor.lightGray.cgColor
+            cell.view_banner.layer.shadowOpacity = 0.6
+            cell.view_banner.layer.shadowOffset = CGSize(width: 3, height: 5)
+            cell.view_banner.layer.shadowRadius = 4.0
             return cell
         }else if self.colleView_Doctor == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -286,6 +285,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.label_spec.text = Servicefile.shared.petdoc[indexPath.row].spec
             cell.label_rateing.text = String(Servicefile.shared.petdoc[indexPath.row].star_count)
             cell.label_ratedno.text = String(Servicefile.shared.petdoc[indexPath.row].review_count)
+            cell.view_docimg.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle : false)
             return cell
         }else if self.colleView_Service == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ser", for: indexPath) as! petServCollectionViewCell
@@ -298,13 +298,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_ser.image = image
                 }
             }
-            cell.img_ser.layer.cornerRadius = cell.img_ser.frame.size.height / 2
-            cell.view_img.layer.cornerRadius = cell.view_img.frame.size.height / 2
-            cell.view_img.layer.shadowColor = UIColor.gray.cgColor
-            cell.view_img.layer.shadowOpacity = 1.0
-            cell.view_img.layer.shadowOffset = CGSize.zero
-            cell.view_img.layer.shadowRadius = 3.0
             
+            cell.img_ser.layer.cornerRadius = cell.img_ser.frame.size.height / 2
+            cell.view_img.View_image_dropshadow(cornordarius: cell.view_img.frame.size.height / 2, iscircle : true)
             return cell
         }else if self.colleView_puppylove == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puppyprod", for: indexPath) as! petprodCollectionViewCell
@@ -315,6 +311,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
+            cell.view_pord.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
             cell.img_prod.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }else {
@@ -326,6 +323,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.img_prod.image = image
                 }
             }
+             cell.view_pord.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
             cell.img_prod.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }
@@ -333,11 +331,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.colleView_banner == collectionView {
-                return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
+            return CGSize(width: self.colleView_banner.frame.size.width , height:  self.colleView_banner.frame.size.height)
         }else if self.colleView_Doctor == collectionView {
             return CGSize(width: 163 , height:  161)
         }else if self.colleView_Service == collectionView {
-            return CGSize(width: 90 , height:  119)
+            return CGSize(width: 90 , height:  129)
         }else {
             return CGSize(width: 200 , height:  121)
         }

@@ -263,9 +263,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             //cell.view_banner.layer.borderWidth = 0.4
-            //cell.view_banner.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.view_banner.layer.shadowOpacity = 0.6
-            cell.view_banner.layer.shadowOffset = CGSize(width: 3, height: 5)
+            cell.view_banner.layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex:  Servicefile.appblack).cgColor
+            cell.view_banner.layer.shadowOpacity = 0.5
+            cell.view_banner.layer.shadowOffset = CGSize(width: 3, height: 4)
             cell.view_banner.layer.shadowRadius = 4.0
             return cell
         }else if self.colleView_Doctor == collectionView {

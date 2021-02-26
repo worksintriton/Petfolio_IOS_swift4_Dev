@@ -200,14 +200,14 @@ extension UIView {
     }
     
     func View_image_dropshadow(cornordarius: CGFloat, iscircle : Bool){
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack).cgColor
         if iscircle {
-            layer.shadowRadius = 6.0
+            layer.shadowRadius = 5.0
         }else{
             layer.shadowRadius = 3.0
         }
         layer.shadowOpacity = 0.6
-        layer.shadowOffset = CGSize(width: 3, height: 3)
+        layer.shadowOffset = CGSize(width: 3, height: 4)
         layer.cornerRadius = cornordarius
     }
     

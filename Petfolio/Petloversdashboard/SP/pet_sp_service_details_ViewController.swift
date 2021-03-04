@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 
-class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var view_img_service: UIView!
     @IBOutlet weak var label_service_com_name: UILabel!
     @IBOutlet weak var label_serview_provider: UILabel!
     @IBOutlet weak var coll_service: UICollectionView!
@@ -29,6 +30,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         self.coll_service.delegate = self
         self.coll_service.dataSource = self
         self.image_service.layer.cornerRadius = self.image_service.frame.size.height / 2
+        self.view_img_service.View_image_dropshadow(cornordarius: self.image_service.frame.size.height / 2, iscircle: true)
         self.view_book.view_cornor()
     }
     
@@ -54,7 +56,12 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                        }
                    }
                    cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.coll_service.frame.size.width , height:  self.coll_service.frame.size.height)
     }
     
     

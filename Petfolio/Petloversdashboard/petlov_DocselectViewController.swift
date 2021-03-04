@@ -112,7 +112,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             }
         }
         cell.img_banner.view_cornor()
-        
+        cell.view_banner_two.view_cornor()
         return cell
     }
     

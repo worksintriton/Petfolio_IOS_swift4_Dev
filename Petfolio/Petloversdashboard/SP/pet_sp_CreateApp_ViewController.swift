@@ -240,7 +240,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_petage.isUserInteractionEnabled = false
             self.textfield_weight.isUserInteractionEnabled = false
             self.textfield_color.isUserInteractionEnabled = false
-            self.petimage = Servicefile.shared.pet_petlist[index].pet_img
+            Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
             self.view_pickupload.isHidden = true
         }else{
             self.view_pickupload.isHidden = false
@@ -255,7 +255,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_petage.isUserInteractionEnabled = true
             self.textfield_weight.isUserInteractionEnabled = true
             self.textfield_color.isUserInteractionEnabled = true
-            self.petimage = ""
+            Servicefile.shared.petlistimg = [Any]()
         }
         self.setuploadimg()
     }

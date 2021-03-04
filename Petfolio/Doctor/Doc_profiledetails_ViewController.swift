@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import SNShadowSDK
 
-class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var label_username: UILabel!
     @IBOutlet weak var label_email: UILabel!
@@ -20,12 +21,14 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var label_clinicaddress: UILabel!
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var imag_user: UIImageView!
+    @IBOutlet weak var view_img_user: SNShadowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.coll_clinic.delegate = self
         self.coll_clinic.dataSource = self
         self.view_footer.view_cornor()
+        self.view_img_user.view_cornor()
         // Do any additional setup after loading the view.
     }
     
@@ -79,8 +82,15 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 cell.img_banner.image = image
             }
         }
+        cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: self.coll_clinic.frame.size.width , height:  self.coll_clinic.frame.size.height)
+     }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

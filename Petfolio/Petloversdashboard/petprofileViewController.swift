@@ -13,6 +13,7 @@ import Alamofire
 class petprofileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
+    @IBOutlet weak var view_img: UIView!
     @IBOutlet weak var View_profile: UIView!
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
@@ -72,6 +73,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
         self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_img.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,17 +93,24 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petloverProfilepetlistCollectionViewCell
             cell.label_petname.text = Servicefile.shared.pet_petlist[indexPath.row].pet_name
-            if Servicefile.shared.pet_petlist[indexPath.row].pet_img == "" {
-                cell.imag_profile.image = UIImage(named: "sample")
-            }else{
-                cell.imag_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_petlist[indexPath.row].pet_img)) { (image, error, cache, urls) in
-                    if (error != nil) {
-                        cell.imag_profile.image = UIImage(named: "sample")
-                    } else {
-                        cell.imag_profile.image = image
+            if Servicefile.shared.pet_petlist[indexPath.row].pet_img.count > 0 {
+                let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as! NSDictionary
+                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                if petimg == "" {
+                    cell.imag_profile.image = UIImage(named: "sample")
+                }else{
+                    cell.imag_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
+                        if (error != nil) {
+                            cell.imag_profile.image = UIImage(named: "sample")
+                        } else {
+                            cell.imag_profile.image = image
+                        }
                     }
                 }
+            }else{
+                cell.imag_profile.image = UIImage(named: "sample")
             }
+            
             cell.imag_profile.layer.cornerRadius =  cell.imag_profile.frame.width / 2
             if self.ismenu[indexPath.row] == "1"{
                cell.View_menu.isHidden = false
@@ -170,7 +179,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
              }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-             return CGSize(width: 128 , height:  151)
+             return CGSize(width: 128 , height:  128)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -323,17 +332,26 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                                let id = Bval["_id"] as? String ?? ""
                                                                let default_status = Bval["default_status"] as? Bool ?? false
                                                                let last_vaccination_date = Bval["last_vaccination_date"] as? String ?? ""
-                                                               let pet_age = Bval["pet_age"] as? Int ?? 0
+                                                               let pet_age = Bval["pet_age"] as? String ?? ""
                                                                let pet_breed = Bval["pet_breed"] as? String ?? ""
                                                                let pet_color = Bval["pet_color"] as? String ?? ""
                                                                let pet_gender = Bval["pet_gender"] as? String ?? ""
-                                                               let pet_img = Bval["pet_img"] as? String ?? Servicefile.sample_img
+                                                                let pet_img = Bval["pet_img"] as! [Any]
                                                                let pet_name = Bval["pet_name"] as? String ?? ""
                                                                let pet_type = Bval["pet_type"] as? String ?? ""
-                                                               let pet_weight = Bval["pet_weight"] as? Int ?? 0
+                                                            let pet_weight = Bval["pet_weight"] as? Double ?? 0.0
                                                                let user_id = Bval["user_id"] as? String ?? ""
                                                                let vaccinated = Bval["vaccinated"] as? Bool ?? false
-                                                               Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id))
+                                                               let pet_frnd_with_cat = Bval["pet_frnd_with_cat"] as? Bool ?? false
+                                                               let pet_frnd_with_dog = Bval["pet_frnd_with_dog"] as? Bool ?? false
+                                                               let pet_frnd_with_kit = Bval["pet_frnd_with_kit"] as? Bool ?? false
+                                                               let pet_microchipped = Bval["pet_microchipped"] as? Bool ?? false
+                                                               let pet_private_part = Bval["pet_private_part"] as? Bool ?? false
+                                                               let pet_purebred = Bval["pet_purebred"] as? Bool ?? false
+                                                               let pet_spayed = Bval["pet_spayed"] as? Bool ?? false
+                                                               let pet_tick_free = Bval["pet_tick_free"] as? Bool ?? false
+                                                               let pet_dob = Bval["pet_dob"] as? String ?? ""
+                                                            Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id, in_pet_frnd_with_cat: pet_frnd_with_cat, in_pet_frnd_with_dog: pet_frnd_with_dog, in_pet_frnd_with_kit: pet_frnd_with_kit, in_pet_microchipped: pet_microchipped, in_pet_private_part: pet_private_part, in_pet_purebred: pet_purebred, in_pet_spayed: pet_spayed, in_pet_tick_free: pet_tick_free, in_pet_dob: pet_dob))
                                                            }
                                                             for itm in 0..<Servicefile.shared.pet_petlist.count{
                                                                        self.ismenu.append("0")

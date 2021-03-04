@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SNShadowSDK
 
 class service_TableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var view_img_sp: UIView!
+    @IBOutlet weak var view_img_sp: SNShadowView!
+    // @IBOutlet weak var view_img_sp: UIView!
     @IBOutlet weak var img_sp: UIImageView!
     @IBOutlet weak var label_place: UILabel!
     @IBOutlet weak var label_distance: UILabel!

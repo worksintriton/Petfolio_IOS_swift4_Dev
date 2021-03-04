@@ -122,7 +122,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                 cell.img_doc.image = image
             }
         }
-        cell.view_img_doc.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
+        cell.view_img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        //cell.view_img_doc.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
         cell.view_book.dropShadow()
         cell.img_doc.dropShadow()
         cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

@@ -96,6 +96,7 @@ PODS:
   - SDWebImage (5.9.2):
     - SDWebImage/Core (= 5.9.2)
   - SDWebImage/Core (5.9.2)
+  - SNShadowSDK (1.0.1)
   - Toucan (1.1.0)
 
 DEPENDENCIES:
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - GooglePlaces
   - NVActivityIndicatorView
   - SDWebImage
+  - SNShadowSDK
   - Toucan
 
 SPEC REPOS:
@@ -134,6 +136,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SDWebImage
+    - SNShadowSDK
     - Toucan
 
 SPEC CHECKSUMS:
@@ -158,8 +161,9 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
+  SNShadowSDK: 47806bf857763d41b8d434e97051fc5b22662f3a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 10073f9dee82a2bb0bc4a39d04e0a77d03429556
+PODFILE CHECKSUM: c4351b6e963b4f4c8da450ded94f9b7b7bf21d63
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

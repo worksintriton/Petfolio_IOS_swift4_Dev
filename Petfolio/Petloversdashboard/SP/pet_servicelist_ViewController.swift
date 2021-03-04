@@ -8,9 +8,11 @@
 
 import UIKit
 import Alamofire
+import SNShadowSDK
 
 class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
+   // @IBOutlet weak var view_image_catimg: SNShadowView!
     @IBOutlet weak var view_image_catimg: UIView!
     @IBOutlet weak var image_catimg: UIImageView!
     @IBOutlet weak var label_Service_count: UILabel!
@@ -23,6 +25,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.view_image_catimg.layer.cornerRadius = self.view_image_catimg.frame.height / 2
         self.view_image_catimg.View_image_dropshadow(cornordarius: self.view_image_catimg.frame.height / 2, iscircle: true)
         self.view_footer.view_cornor()
         self.label_nodatafound.isHidden = true
@@ -87,7 +90,8 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                 cell.img_sp.image = image
             }
         }
-        cell.view_img_sp.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
+        cell.view_img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+       // cell.view_img_sp.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
         cell.img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_book.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.btn_book.tag = indexPath.row

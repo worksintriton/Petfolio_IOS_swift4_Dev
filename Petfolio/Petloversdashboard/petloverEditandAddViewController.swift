@@ -28,6 +28,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     @IBOutlet weak var view_calenderbtn: UIView!
     @IBOutlet weak var view_petcolor: UIView!
     @IBOutlet weak var view_submit: UIView!
+    @IBOutlet weak var view_select_dob: UIView!
     
     
     @IBOutlet weak var textfield_petname: UITextField!
@@ -37,6 +38,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     @IBOutlet weak var textfield_petweight: UITextField!
     @IBOutlet weak var textfiled_petage: UITextField!
     @IBOutlet weak var textfield_selectdate: UITextField!
+     @IBOutlet weak var textfield_DOB: UITextField!
     
     @IBOutlet weak var textfield_petcolor: UITextField!
     @IBOutlet weak var img_novaccine: UIImageView!
@@ -55,6 +57,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     
     var petgender = [""]
     
+    var isdob = false
     var isvaccin = true
     
     override func viewDidLoad() {
@@ -73,6 +76,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         self.view_petcolor.view_cornor()
         self.view_selectdateCalender.view_cornor()
         self.view_submit.view_cornor()
+        self.view_select_dob.view_cornor()
         // Do any additional setup after loading the view.
         self.callpetdetails()
         self.callpetdetailget()
@@ -123,7 +127,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             self.textfiled_petage.text = String(Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_age)
             self.textfield_selectdate.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].last_vaccination_date
             self.isvaccin = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].vaccinated
-            
+            self.textfield_DOB.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_dob
             if  self.isvaccin == true {
                 self.img_novaccine.image = UIImage(named: "Radio")
                 self.img_yesvaccine.image = UIImage(named: "selectedRadio")
@@ -157,7 +161,13 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     @objc func dateChanged(_ sender: UIDatePicker) {
         let senderdate = sender.date
         let sedate = Servicefile.shared.ddMMyyyystringformat(date: senderdate)
-        self.textfield_selectdate.text = sedate
+        if self.isdob {
+            self.textfield_DOB.text = sedate
+            self.textfiled_petage.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
+            print("data in petage",self.textfiled_petage.text!)
+        }else{
+            self.textfield_selectdate.text = sedate
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) -> Bool {
@@ -179,17 +189,17 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.textfield_petweight {
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumberandspecial).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
-        if textField == self.textfiled_petage{
-            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
-        }
+//        if textField == self.textfiled_petage{
+//            let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+//            let compSepByCharInSet = string.components(separatedBy: aSet)
+//            let numberFiltered = compSepByCharInSet.joined(separator: "")
+//            return string == numberFiltered
+//        }
         return true
     }
     
@@ -213,12 +223,12 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             }else{
                 self.textfield_petweight.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 5)
             }
-            if self.textfiled_petage.text!.count > 1 {
-                 self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
-                self.textfiled_petage.resignFirstResponder()
-            }else{
-                  self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
-            }
+//            if self.textfiled_petage.text!.count > 1 {
+//                 self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
+//                self.textfiled_petage.resignFirstResponder()
+//            }else{
+//                  self.textfiled_petage.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 2)
+//            }
         }
     }
     
@@ -317,7 +327,13 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         
     }
     
+    @IBAction func action_showDOBcalender(_ sender: Any) {
+        self.isdob = true
+        self.view_calender.isHidden = false
+    }
+    
     @IBAction func action_showcalender(_ sender: Any) {
+        self.isdob = false
         self.view_calender.isHidden = false
     }
     
@@ -336,19 +352,25 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             self.alert(Message: "Please select Pet gender")
         }else if self.textfield_petcolor.text == "" {
             self.alert(Message: "Please enter Pet color")
-        }else if self.textfiled_petage.text == "" {
-            self.alert(Message: "Please enter Pet age")
+        }else if self.self.textfield_DOB.text == "" {
+            self.alert(Message: "Please enter pet date of birth")
         }else{
             if self.isvaccin != false {
-                if self.textfield_selectdate.text == "" {
-                    self.alert(Message: "Please select vaccinated date")
+                    if self.textfield_selectdate.text == "" {
+                        self.alert(Message: "Please select vaccinated date")
+                    }else{
+                        let birthdate =  Servicefile.shared.ddMMyyyydateformat(date: self.textfield_DOB.text!)
+                        let vacinateddate = Servicefile.shared.ddMMyyyydateformat(date: self.textfield_selectdate.text! )
+                        if  Servicefile.shared.checkdaydiffer(sdate: birthdate, edate: vacinateddate) {
+                        self.calladdpetdetails()
+                        }else{
+                            self.alert(Message: "Please select valid vaccinated date")
+                        }
+                    }
                 }else{
                     self.calladdpetdetails()
                 }
-            }else{
-                self.calladdpetdetails()
             }
-        }
         
     }
     
@@ -446,18 +468,19 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         var params = [String:Any]()
         if Servicefile.shared.pet_status == "edit" {
             urldetails = Servicefile.pet_updateimage
-            setimag = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
+            Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
             Servicefile.shared.petid = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
             params = ["_id" : Servicefile.shared.petid,
                       "user_id": Servicefile.shared.userid,
-                      "pet_img" : setimag,
+                      "pet_img" : Servicefile.shared.petlistimg,
                       "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
                       "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
                       "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
                       "pet_gender" : Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
                       "pet_color" : Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-                      "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-                      "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
+                      "pet_weight" : Servicefile.shared.checkDoubletextfield(strtoDouble: self.textfield_petweight.text!),
+                      "pet_age" : Servicefile.shared.checktextfield(textfield:  self.textfiled_petage.text!),
+                      "pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
                       "vaccinated" : self.isvaccin,
                       "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
                       "default_status" : true,
@@ -467,14 +490,14 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             urldetails = Servicefile.petregister
             setimag = Servicefile.shared.sampleimag
             params = ["user_id": Servicefile.shared.userid,
-                      "pet_img" : setimag,
+                      "pet_img" : Servicefile.shared.petlistimg,
                       "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
                       "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
                       "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
                       "pet_gender" : Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
                       "pet_color" : Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-                      "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-                      "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
+                      "pet_weight" : Servicefile.shared.checkDoubletextfield(strtoDouble: self.textfield_petweight.text!),
+                      "pet_age" : Servicefile.shared.checktextfield(textfield:  self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
                       "vaccinated" : self.isvaccin,
                       "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
                       "default_status" : true,
@@ -482,14 +505,14 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
         }
         
         print("user_id", Servicefile.shared.userid,
-              "pet_img" , setimag,
+              "pet_img" , Servicefile.shared.petlistimg,
               "pet_name" , Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
               "pet_type" , Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
               "pet_breed" , Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
               "pet_gender" , Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
               "pet_color" , Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-              "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),
+              "pet_weight" , Servicefile.shared.checkDoubletextfield(strtoDouble: self.textfield_petweight.text!),
+              "pet_age" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
               "vaccinated" , self.isvaccin,
               "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
               "default_status" , true,
@@ -541,7 +564,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "peteditandadduploadimgViewController") as! peteditandadduploadimgViewController
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_edit_otherinfo_ViewController") as! pet_edit_otherinfo_ViewController
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

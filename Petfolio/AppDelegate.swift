@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 let googleApiKey = "AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc"
 var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
        GMSServices.provideAPIKey(googleApiKey)
             FirebaseApp.configure()
             do {
@@ -131,9 +131,17 @@ var window: UIWindow?
     }
 
 }
+
 extension UIApplication {
+//    var statusBarView: UIView? {
+//        return value(forKey: "statusBar") as? UIView
+//    }
+    //UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
     var statusBarView: UIView? {
-        return value(forKey: "statusBar") as? UIView
-    }
+            if responds(to: Selector(("statusBar"))) {
+                return value(forKey: "statusBar") as? UIView
+            }
+            return nil
+        }
 }
 

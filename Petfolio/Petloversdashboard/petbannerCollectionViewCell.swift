@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import SNShadowSDK
 
 class petbannerCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var view_banner_two: SNShadowView!
     @IBOutlet weak var view_banner: UIView!
     @IBOutlet weak var img_banner: UIImageView!
     

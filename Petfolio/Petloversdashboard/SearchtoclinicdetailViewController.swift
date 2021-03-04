@@ -117,6 +117,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
             }
         }
         cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     

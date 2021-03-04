@@ -198,18 +198,45 @@ extension UIView {
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 1.5
     }
+    func View_imagebanner_dropshadow(cornordarius: CGFloat, iscircle : Bool){
+        layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appgray).cgColor
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: 4, height: 5)
+        layer.cornerRadius = cornordarius
+    }
+    
+    func View_imagebanner_appcolordropshadow(cornordarius: CGFloat, iscircle : Bool){
+        layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen).cgColor
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 0.6
+        layer.shadowOffset = CGSize(width: -3, height: -4)
+        layer.cornerRadius = cornordarius
+    }
     
     func View_image_dropshadow(cornordarius: CGFloat, iscircle : Bool){
         layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack).cgColor
         if iscircle {
-            layer.shadowRadius = 5.0
+            layer.shadowRadius = 4.0
         }else{
             layer.shadowRadius = 3.0
         }
-        layer.shadowOpacity = 0.6
+        layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 3, height: 4)
         layer.cornerRadius = cornordarius
     }
+    
+     func View_image_appcolordropshadow(cornordarius: CGFloat, iscircle : Bool){
+            layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray).cgColor
+            if iscircle {
+                layer.shadowRadius = 5.0
+            }else{
+                layer.shadowRadius = 3.0
+            }
+            layer.shadowOpacity = 0.6
+            layer.shadowOffset = CGSize(width:-3, height: -4)
+            layer.cornerRadius = cornordarius
+        }
     
     func submit_cornor(){
         layer.cornerRadius = 8.0

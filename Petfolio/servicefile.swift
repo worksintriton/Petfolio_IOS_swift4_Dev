@@ -66,6 +66,8 @@ class Servicefile {
     
     static let updateprofileimage = baseurl + "/api/userdetails/mobile/update/profile"
     static let updatestatus =  baseurl + "/api/userdetails/mobile/edit"
+    
+    static let updateotherinfo =  baseurl + "/api/petdetails/edit"
     static let doc_fetchdocdetails  =  baseurl + "/api/doctordetails/fetch_doctor_id"
     static let petbreedid =  baseurl + "/api/breedtype/mobile/getlist_id"
     static let pet_doc_avail_time = baseurl + "/api/new_doctortime/get_doc_new1"
@@ -193,6 +195,7 @@ class Servicefile {
     // see more
     // pet appointment params
     
+    var petlistimg = [Any]()
     var pet_apoint_doctor_id = ""
     var pet_apoint_booking_date = ""
     var pet_apoint_booking_time = ""
@@ -238,9 +241,10 @@ class Servicefile {
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
+    var shadowtop = "#ffffff"
     var black = "#444444"
     static let appblack = "#444444"
-    
+    static let appgray = "#AAAAAA"
     var selrate = 0
     var selspec = ""
     var orgspecialza = [""]
@@ -378,9 +382,9 @@ class Servicefile {
            }else{
                textfield = numberFiltered
            }
-           if let t: String = str {
-               textfield = String(t.prefix(textcount))
-           }
+          
+               textfield = String(str.prefix(textcount))
+           
            return textfield
        }
     
@@ -425,6 +429,15 @@ class Servicefile {
              return 0
         }else{
             let intval = Int(strtoInt) ?? 0
+            return intval
+        }
+    }
+    
+    func checkDoubletextfield(strtoDouble: String)->Double{
+        if strtoDouble.isEmpty {
+             return 0
+        }else{
+            let intval = Double(strtoDouble) ?? 0.0
             return intval
         }
     }
@@ -561,6 +574,13 @@ class Servicefile {
     }
     
     
+    func ddMMyyyydateformat(date: String) -> Date{
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let nextDate = format.date(from: date)
+        return nextDate!
+    }
+    
     func ddMMyyyystringformat(date: Date) -> String{
         let format = DateFormatter()
         format.dateFormat = "dd-MM-yyyy"
@@ -608,6 +628,30 @@ class Servicefile {
         let incdate = date.addingTimeInterval(60 * 60)
         return incdate
     }
+    
+    func checkyearmonthdiffer(sdate: Date, edate: Date)-> String{
+        let differ = edate.timeIntervalSince(sdate)
+        let ti = NSInteger(differ)
+//      let secondsInDays: Double = 86400
+//      let secondsInWeek: Double = 604800
+        let Months  = (ti / 2592000)
+        let Years  = (ti / 31104000)
+        print("DOB differ",Years, Months)
+        let Ystr = Years >= 0 ? String(Years) + " years " : ""
+        let Mstr =  Months >= 0 ? String(Months) + " months" : String(1) + " months"
+        return Ystr + Mstr
+    }
+     func checkdaydiffer(sdate: Date, edate: Date)-> Bool{
+            let differ = edate.timeIntervalSince(sdate)
+            let ti = NSInteger(differ)
+            let day = (ti / 86400)
+            //let secondsInWeek: Double = 604800
+//            let Months  = (ti / 2592000)
+//            let Years  = (ti / 31104000)
+            
+            let status =  day >= 0 ? true : false
+            return status
+        }
     
     func checkdatediffer(ddMMM: String, hhmmain: String, ddMMMout: String,hhmmaout: String)->Int{
         let startdatetime = ddMMM + " " + hhmmain
@@ -805,20 +849,40 @@ struct educat{
 struct petlist{
     var default_status : Bool
     var last_vaccination_date : String
-    var pet_age : Int
+    var pet_age : String
     var pet_breed : String
     var pet_color : String
     var pet_gender : String
-    var pet_img : String
+    var pet_img : [Any]
     var pet_name : String
     var pet_type : String
-    var pet_weight : Int
+    var pet_weight : Double
     var user_id : String
     var vaccinated : Bool
     var id : String
-    init(in_default_status : Bool, in_last_vaccination_date : String, in_pet_age : Int,
-         in_pet_breed : String, in_pet_color : String, in_pet_gender : String, in_pet_img : String,
-         in_pet_name : String, in_pet_type : String, in_pet_weight : Int, in_user_id : String, in_vaccinated : Bool, in_id : String) {
+    
+    var pet_frnd_with_cat : Bool
+    var pet_frnd_with_dog : Bool
+    var pet_frnd_with_kit : Bool
+    var pet_microchipped : Bool
+    var pet_private_part : Bool
+    var pet_purebred : Bool
+    var pet_spayed : Bool
+    var pet_tick_free : Bool
+    var pet_dob : String
+    init(in_default_status : Bool, in_last_vaccination_date : String, in_pet_age : String,
+         in_pet_breed : String, in_pet_color : String, in_pet_gender : String, in_pet_img : [Any],
+         in_pet_name : String, in_pet_type : String, in_pet_weight : Double, in_user_id : String, in_vaccinated : Bool, in_id : String,
+    in_pet_frnd_with_cat : Bool,
+    in_pet_frnd_with_dog : Bool,
+    in_pet_frnd_with_kit : Bool,
+    in_pet_microchipped : Bool,
+    in_pet_private_part : Bool,
+    in_pet_purebred : Bool,
+    in_pet_spayed : Bool,
+    in_pet_tick_free : Bool,
+    in_pet_dob : String
+    ) {
         self.default_status = in_default_status
         self.last_vaccination_date = in_last_vaccination_date
         self.pet_age = in_pet_age
@@ -832,6 +896,15 @@ struct petlist{
         self.user_id = in_user_id
         self.vaccinated = in_vaccinated
         self.id = in_id
+        self.pet_frnd_with_cat = in_pet_frnd_with_cat
+        self.pet_frnd_with_dog = in_pet_frnd_with_dog
+        self.pet_frnd_with_kit = in_pet_frnd_with_kit
+        self.pet_microchipped = in_pet_microchipped
+        self.pet_private_part = in_pet_private_part
+        self.pet_purebred = in_pet_purebred
+        self.pet_spayed = in_pet_spayed
+        self.pet_tick_free = in_pet_tick_free
+        self.pet_dob = in_pet_dob
     }
 }
 

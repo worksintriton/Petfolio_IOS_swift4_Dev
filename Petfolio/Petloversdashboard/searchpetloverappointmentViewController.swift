@@ -282,7 +282,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
             self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
             self.textfield_petname.isUserInteractionEnabled = false
-            self.petimage = Servicefile.shared.pet_petlist[index].pet_img
+            Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
             self.view_pickupload.isHidden = true
         }else{
             self.view_pickupload.isHidden = false
@@ -291,7 +291,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.textfield_pettype.text = ""
             self.textfield_petbreed.text = ""
             self.textfield_petname.isUserInteractionEnabled = true
-            self.petimage = ""
+            Servicefile.shared.petlistimg = [Any]()
         }
         self.setuploadimg()
     }

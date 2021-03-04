@@ -24,9 +24,9 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
         self.imagepicker.delegate = self
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         if Servicefile.shared.pet_status == "edit" {
-            uploadimage = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
+            Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
         }else{
-            uploadimage = Servicefile.sample_img
+            Servicefile.shared.petlistimg = [Any]()
         }
         self.setimage(strimg: self.uploadimage)
     }
@@ -74,6 +74,13 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                            let Data = res["Data"] as? String ?? Servicefile.sample_img
                           print("Uploaded file url:",Data)
                           self.uploadimage = Data
+                        var B = Servicefile.shared.petlistimg
+                        var arr = B
+                        let a = ["pet_img":Data] as NSDictionary
+                        arr.append(a)
+                        B = arr
+                        print(B)
+                        Servicefile.shared.petlistimg = B
                          self.setimage(strimg: self.uploadimage)
                            self.stopAnimatingActivityIndicator()
                        }else{
@@ -127,7 +134,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
            self.startAnimatingActivityIndicator()
        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_updateimage, method: .post, parameters:
         ["_id": Servicefile.shared.petid ,
-         "pet_img": self.uploadimage], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+         "pet_img": Servicefile.shared.petlistimg], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                switch (response.result) {
                                                case .success:
                                                      let res = response.value as! NSDictionary

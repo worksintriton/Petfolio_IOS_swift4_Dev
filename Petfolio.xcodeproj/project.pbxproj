@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		4150FE53863617ABBFFAEAC9 /* Pods_Petfolio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */; };
 		840424FF25D28F6B0064F015 /* sp_app_details_page_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840424FE25D28F6B0064F015 /* sp_app_details_page_ViewController.swift */; };
+		840B74F325EF991E00B7F63B /* pet_other_information_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */; };
+		840B74F525EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */; };
 		8422A98E25DE293C003CB507 /* pet_sp_shop_dashboard_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A98D25DE293C003CB507 /* pet_sp_shop_dashboard_ViewController.swift */; };
 		8422A99025DE33A3003CB507 /* sp_shop_dash_bannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A98F25DE33A3003CB507 /* sp_shop_dash_bannerTableViewCell.swift */; };
 		8422A99225DE33E6003CB507 /* sp_dash_product_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A99125DE33E6003CB507 /* sp_dash_product_TableViewCell.swift */; };
 		8422A99525DE3880003CB507 /* pet_shop_product_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A99425DE3880003CB507 /* pet_shop_product_CollectionViewCell.swift */; };
 		8428E47F25D4EE46004D86B4 /* servicedashfooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428E47E25D4EE46004D86B4 /* servicedashfooterCollectionViewCell.swift */; };
+		842B5D4525EA0D9300D37082 /* testfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B5D4425EA0D9300D37082 /* testfileViewController.swift */; };
 		842B899B25DBF7D0003C7F15 /* pet_vendor_dashboard_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B899A25DBF7D0003C7F15 /* pet_vendor_dashboard_ViewController.swift */; };
 		842EB89825DF743E003CC824 /* todayspecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842EB89725DF743E003CC824 /* todayspecialTableViewCell.swift */; };
 		84860DC325D0F6DD000747A9 /* pet_notification_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84860DC225D0F6DD000747A9 /* pet_notification_ViewController.swift */; };
@@ -199,11 +202,14 @@
 
 /* Begin PBXFileReference section */
 		840424FE25D28F6B0064F015 /* sp_app_details_page_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sp_app_details_page_ViewController.swift; sourceTree = "<group>"; };
+		840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_other_information_ViewController.swift; sourceTree = "<group>"; };
+		840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_edit_otherinfo_ViewController.swift; sourceTree = "<group>"; };
 		8422A98D25DE293C003CB507 /* pet_sp_shop_dashboard_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_shop_dashboard_ViewController.swift; sourceTree = "<group>"; };
 		8422A98F25DE33A3003CB507 /* sp_shop_dash_bannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sp_shop_dash_bannerTableViewCell.swift; sourceTree = "<group>"; };
 		8422A99125DE33E6003CB507 /* sp_dash_product_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sp_dash_product_TableViewCell.swift; sourceTree = "<group>"; };
 		8422A99425DE3880003CB507 /* pet_shop_product_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_shop_product_CollectionViewCell.swift; sourceTree = "<group>"; };
 		8428E47E25D4EE46004D86B4 /* servicedashfooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = servicedashfooterCollectionViewCell.swift; sourceTree = "<group>"; };
+		842B5D4425EA0D9300D37082 /* testfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testfileViewController.swift; sourceTree = "<group>"; };
 		842B899A25DBF7D0003C7F15 /* pet_vendor_dashboard_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_dashboard_ViewController.swift; sourceTree = "<group>"; };
 		842EB89725DF743E003CC824 /* todayspecialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todayspecialTableViewCell.swift; sourceTree = "<group>"; };
 		84860DC225D0F6DD000747A9 /* pet_notification_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_notification_ViewController.swift; sourceTree = "<group>"; };
@@ -300,7 +306,7 @@
 		B08F73182563E1FF00AEB8CC /* petprodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petprodCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08F731A2563EC5000AEB8CC /* petbannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petbannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B09340D3256A5DC6006F7616 /* Petfolio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Petfolio.entitlements; sourceTree = "<group>"; };
-		B094D20E255BDE82008400D6 /* Petfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B094D20E255BDE82008400D6 /* PetFolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetFolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094D211255BDE82008400D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B094D213255BDE82008400D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B094D215255BDE82008400D6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +562,8 @@
 				B01306D025C7F74500B9778B /* Pet_confrence_ViewController.swift */,
 				B0F56E3725C82B0E00B1634F /* Pet_app_details_ViewController.swift */,
 				842B899A25DBF7D0003C7F15 /* pet_vendor_dashboard_ViewController.swift */,
+				840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */,
+				840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -575,7 +583,7 @@
 		B094D20F255BDE82008400D6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B094D20E255BDE82008400D6 /* Petfolio.app */,
+				B094D20E255BDE82008400D6 /* PetFolio.app */,
 				B094D227255BDE89008400D6 /* PetfolioTests.xctest */,
 				B094D232255BDE89008400D6 /* PetfolioUITests.xctest */,
 			);
@@ -625,6 +633,7 @@
 				B013E9E725B718FE00A8E41E /* viewprescriptionViewController.swift */,
 				B019893A25B828FC00A650AD /* emailsignupViewController.swift */,
 				B0BB3B4225C96D72003B9B83 /* ProfileimageuploadViewController.swift */,
+				842B5D4425EA0D9300D37082 /* testfileViewController.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -711,7 +720,7 @@
 			);
 			name = Petfolio;
 			productName = Petfolio;
-			productReference = B094D20E255BDE82008400D6 /* Petfolio.app */;
+			productReference = B094D20E255BDE82008400D6 /* PetFolio.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B094D226255BDE89008400D6 /* PetfolioTests */ = {
@@ -761,7 +770,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "sriram ramachandran";
 				TargetAttributes = {
 					B094D20D255BDE82008400D6 = {
@@ -990,6 +999,7 @@
 				B08C96B125694404003B05B7 /* eduTableViewCell.swift in Sources */,
 				8422A98E25DE293C003CB507 /* pet_sp_shop_dashboard_ViewController.swift in Sources */,
 				B0571C9025624A2000B42719 /* servicefile.swift in Sources */,
+				840B74F525EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift in Sources */,
 				B024F52825A5AFD9004F0CC4 /* pet_servicelist_ViewController.swift in Sources */,
 				B02F7ADA25A73BC1009EC53D /* sp_reg_calender_hour_ViewController.swift in Sources */,
 				8428E47F25D4EE46004D86B4 /* servicedashfooterCollectionViewCell.swift in Sources */,
@@ -1090,12 +1100,14 @@
 				B008C6712588C6AD00B09126 /* filterTableViewCell.swift in Sources */,
 				B0658EC925C2A84B0074C2D1 /* pdfViewController.swift in Sources */,
 				B00AB79C25668D5B0004DB4D /* savelocationViewController.swift in Sources */,
+				840B74F325EF991E00B7F63B /* pet_other_information_ViewController.swift in Sources */,
 				B0E3F43225820A0D00F05D15 /* petloverEditandAddViewController.swift in Sources */,
 				B01DA74625655E9F00B1FA0B /* DocdashboardViewController.swift in Sources */,
 				B021DC322590897100439A22 /* selectedCollectionViewCell.swift in Sources */,
 				84860DC525D100F7000747A9 /* notification_TableViewCell.swift in Sources */,
 				B0F56E3625C820EB00B1634F /* Doc_detailspage_ViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
+				842B5D4525EA0D9300D37082 /* testfileViewController.swift in Sources */,
 				B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */,
 				B094D249255C042E008400D6 /* DemoViewController.swift in Sources */,
 				B02AA439259DEB1100A94990 /* Doc_profiledetails_ViewController.swift in Sources */,
@@ -1186,6 +1198,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1210,7 +1223,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1246,6 +1259,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1264,7 +1278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1288,14 +1302,15 @@
 					"$(PROJECT_DIR)/Petfolio",
 				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = Com.PetFolio.Infinitus;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PetFolio;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";
@@ -1316,13 +1331,14 @@
 					"$(PROJECT_DIR)/Petfolio",
 				);
 				INFOPLIST_FILE = Petfolio/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Com.PetFolio.Infinitus;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PetFolio;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";

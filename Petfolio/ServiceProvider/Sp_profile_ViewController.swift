@@ -9,9 +9,10 @@
 import UIKit
 import Alamofire
 
-class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
+    @IBOutlet weak var view_img_user: UIView!
     @IBOutlet weak var View_profile: UIView!
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
@@ -30,6 +31,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_footer.view_cornor()
+        self.view_img_user.view_cornor()
         self.coll_bussi_img.delegate = self
         self.coll_bussi_img.dataSource = self
     }
@@ -101,10 +103,15 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
                                       cell.img_banner.image = image
                                   }
                               }
+           cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.view_banner.view_cornor()
+        cell.view_banner_two.view_cornor()
            return cell
        }
        
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: self.coll_bussi_img.frame.size.width , height:  self.coll_bussi_img.frame.size.height)
+    }
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController

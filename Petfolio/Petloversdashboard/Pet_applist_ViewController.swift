@@ -283,7 +283,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 218
+        return 188
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -324,7 +324,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_current.backgroundColor = UIColor.white
         self.appointtype = "cancelled"
         self.callmiss()
-        
     }
     
     @IBAction func action_completeappoint(_ sender: Any) {

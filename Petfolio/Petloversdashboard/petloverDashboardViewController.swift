@@ -261,12 +261,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 }
             }
             cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+            //cell.view_banner_two.isHidden = true
             cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-            //cell.view_banner.layer.borderWidth = 0.4
-            cell.view_banner.layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex:  Servicefile.appblack).cgColor
-            cell.view_banner.layer.shadowOpacity = 0.5
-            cell.view_banner.layer.shadowOffset = CGSize(width: 3, height: 4)
-            cell.view_banner.layer.shadowRadius = 4.0
+            //cell.view_banner.View_imagebanner_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
+            //cell.view_banner_two.View_imagebanner_appcolordropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
+            //cell.view_banner_two.isHidden = true
             return cell
         }else if self.colleView_Doctor == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
@@ -359,6 +358,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             print("data in")
         }
     }
+    
+    
     
     func alert(Message: String){
         let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
@@ -491,17 +492,26 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                             let id = Bval["_id"] as? String ?? ""
                             let default_status = Bval["default_status"] as? Bool ?? false
                             let last_vaccination_date = Bval["last_vaccination_date"] as? String ?? ""
-                            let pet_age = Bval["pet_age"] as? Int ?? 0
+                            let pet_age = Bval["pet_age"] as? String ?? ""
                             let pet_breed = Bval["pet_breed"] as? String ?? ""
                             let pet_color = Bval["pet_color"] as? String ?? ""
                             let pet_gender = Bval["pet_gender"] as? String ?? ""
-                            let pet_img = Bval["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = Bval["pet_img"] as! [Any]
                             let pet_name = Bval["pet_name"] as? String ?? ""
                             let pet_type = Bval["pet_type"] as? String ?? ""
-                            let pet_weight = Bval["pet_weight"] as? Int ?? 0
+                            let pet_weight = Bval["pet_weight"] as? Double ?? 0.0
                             let user_id = Bval["user_id"] as? String ?? ""
                             let vaccinated = Bval["vaccinated"] as? Bool ?? false
-                            Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id))
+                            let pet_frnd_with_cat = Bval["pet_frnd_with_cat"] as? Bool ?? false
+                            let pet_frnd_with_dog = Bval["pet_frnd_with_dog"] as? Bool ?? false
+                            let pet_frnd_with_kit = Bval["pet_frnd_with_kit"] as? Bool ?? false
+                            let pet_microchipped = Bval["pet_microchipped"] as? Bool ?? false
+                            let pet_private_part = Bval["pet_private_part"] as? Bool ?? false
+                            let pet_purebred = Bval["pet_purebred"] as? Bool ?? false
+                            let pet_spayed = Bval["pet_spayed"] as? Bool ?? false
+                            let pet_tick_free = Bval["pet_tick_free"] as? Bool ?? false
+                            let pet_dob = Bval["pet_dob"] as? String ?? ""
+                         Servicefile.shared.pet_petlist.append(petlist.init(in_default_status: default_status, in_last_vaccination_date: last_vaccination_date, in_pet_age: pet_age, in_pet_breed: pet_breed, in_pet_color: pet_color, in_pet_gender: pet_gender, in_pet_img: pet_img, in_pet_name: pet_name, in_pet_type: pet_type, in_pet_weight: pet_weight, in_user_id: user_id, in_vaccinated: vaccinated, in_id: id, in_pet_frnd_with_cat: pet_frnd_with_cat, in_pet_frnd_with_dog: pet_frnd_with_dog, in_pet_frnd_with_kit: pet_frnd_with_kit, in_pet_microchipped: pet_microchipped, in_pet_private_part: pet_private_part, in_pet_purebred: pet_purebred, in_pet_spayed: pet_spayed, in_pet_tick_free: pet_tick_free, in_pet_dob: pet_dob))
                         }
                         if  Servicefile.shared.petdoc.count == 0 {
                             //                                                            let alert = UIAlertController(title: "Alert", message: "", preferredStyle: .alert)

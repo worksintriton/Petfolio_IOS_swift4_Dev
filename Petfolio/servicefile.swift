@@ -127,6 +127,16 @@ class Servicefile {
     
     static let Vendor_reg = baseurl + "/api/product_vendor/create"
     static let Vendor_check_status = baseurl + "/api/product_vendor/check_status"
+    static let todaysdeal = baseurl + "/api/product_details/today_deal"
+    static let productdeal = baseurl + "/api/product_details/fetch_product_by_cat"
+    static let product_by_id = baseurl + "/api/product_details/fetch_product_by_id"
+    static let inc_prod_count = baseurl + "/api/product_cart_detail/add_product"
+    static let dec_prod_count = baseurl + "/api/product_cart_detail/remove_product"
+    static let cartdetails = baseurl + "/api/product_cart_detail/fetch_cart_details_by_userid"
+    static let Createproduct = baseurl + "/api/vendor_order_booking/create"
+    static let orderlist = baseurl + "/api/vendor_order_booking/get_order_details_user_id"
+    static let vendor_getlistid = baseurl + "/api/product_vendor/getlist_id"
+    static let vendor_new_orderlist = baseurl + "/api/vendor_order_booking/get_order_details_vendor_id"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -135,11 +145,15 @@ class Servicefile {
     static let sample_bannerimg = "http://52.25.163.13:3000/api/uploads/banner_empty.jpg"
     static let sample_img = "http://52.25.163.13:3000/api/uploads/Pic_empty.jpg"
     // sprint 1
+    
+    let gradientLayer = CAGradientLayer()
+    
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
     var customview = UIView()
     var backview = UIView()
     var loadlabel = UILabel()
+    var gifimg = UIImageView()
     var sampleimag = Servicefile.sample_img
     var FCMtoken = ""
     var usertype = "Pet Lover"
@@ -159,6 +173,7 @@ class Servicefile {
     var user_type = ""
     var otp = ""
     var userid = ""
+    var vendorid = ""
     var userimage = ""
     var selectedindex = 0
     // userdetails
@@ -166,6 +181,7 @@ class Servicefile {
     var UtypeData = [Utype]()
     var utypesel = ["1"]
     var orgiutypesel = ["0"]
+    var loadingcount = 0
     
     static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
     static let approvednumber = "1234567890"
@@ -184,6 +200,7 @@ class Servicefile {
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
     var pet_SP_service_details = [SP_service_details]()
+    var product_id = ""
     // pet dashboard
     // pet service
     var pet_servicecat = [service_cat]()
@@ -192,6 +209,7 @@ class Servicefile {
     var moredocd = [moredoc]()
     var specd = [spec]()
     var sosnumbers = [sosnumber]()
+    
     // see more
     // pet appointment params
     
@@ -271,6 +289,7 @@ class Servicefile {
     var SP_filter_price = [sppricelist]()
     var SP_Das_petdetails = [SP_Dash_petdetails]()
     var pet_applist_do_sp = [pet_applist_doc_sp]()
+    var productidpagedetails = [productdetails]()
     // prescription
     var medi = ""
     var noofday = ""
@@ -353,8 +372,10 @@ class Servicefile {
     // sp update
     
     var sp_shop_dash_tbl_index = 0
+    var sp_shop_dash_tbl_total_index = 0
     var sp_shop_dash_tbl_coll_index = 0
     var sp_shop_dash_tbl_today_val = 0
+    var vendor_catid = ""
     var service_id = ""
     var service_index = 0
     var service_sp_id = ""
@@ -370,6 +391,15 @@ class Servicefile {
     var sp_dash_Product_details = [pet_sp_dash_productdetails]()
     var sp_dash_Today_Special = [productdetails]()
     var sp_dash_productdetails = [productdetails]()
+    var vendor_product_id_details = [productdetails]()
+    var order_productdetail = [order_productdetails]()
+    
+    static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
+    static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor
+    
+    static let gradientColorthree  = UIColor(red: 86.0/255.0, green: 185.0/255.0, blue: 164.0/255.0, alpha: 1.0).cgColor
+    
+    static let gradientColorfour  = UIColor(red: 244.0/255.0, green: 250.0/255.0, blue: 249.0/255.0, alpha: 1.0).cgColor
     
     static func textfieldrestrict(str : String, checkchar: String, textcount: Int) -> String {
            let aSet = NSCharacterSet(charactersIn: checkchar).inverted
@@ -459,7 +489,7 @@ class Servicefile {
         var surl = URL(string: data)
         if surl == nil {
              let dataurl = urldat.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            if dataurl == nil {
+            if dataurl == nil || dataurl == ""  {
                 surl = URL(string: Servicefile.sample_img)
             }else{
                 surl = URL(string: dataurl!)
@@ -601,6 +631,8 @@ class Servicefile {
         let nextDate = format.date(from: date)
         return nextDate!
     }
+    
+    
     
     
     func uploadddmmhhmmastringformat(date: Date) -> String{
@@ -917,7 +949,7 @@ struct doc_Dash_petdetails{
     var doc_attched : String
     var pet_id : String
     var pet_breed : String
-    var pet_img : String
+    var pet_img :  [Any]
     var pet_name : String
     var user_id : String
     var pet_type : String
@@ -930,7 +962,7 @@ struct doc_Dash_petdetails{
     var commtype : String
     var appointment_UID : String
     init(in_Appid : String, In_allergies : String, In_amount : String, In_appointment_types : String,
-         In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : String,
+         In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : [Any],
          In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_Booked_at : String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String, In_commtype : String, In_appointment_UID : String) {
         self.Appid = in_Appid
         self.allergies = In_allergies
@@ -962,7 +994,7 @@ struct SP_Dash_petdetails{
     var appoinment_status : String
     var pet_id : String
     var pet_breed : String
-    var pet_img : String
+    var pet_img : [Any]
     var pet_name : String
     var user_id : String
     var pet_type : String
@@ -975,7 +1007,7 @@ struct SP_Dash_petdetails{
     var missed_at : String
     var appoint_patient_st : String
     init(in_Appid : String, In_amount : String, In_appointment_types : String,
-         In_pet_id : String, In_pet_breed : String, In_pet_img : String,
+         In_pet_id : String, In_pet_breed : String, In_pet_img : [Any],
          In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_servicename: String, In_sp_id : String, In_appointment_UID: String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String) {
         self.Appid = in_Appid
         self.amount = In_amount
@@ -1289,4 +1321,52 @@ struct pet_sp_dash_productdetails {
     }
 }
 
+struct order_productdetails {
+    var _id : String
+    var date_of_booking : String
+    var order_id : String
+    var prodcut_image : String
+    var product_name : String
+    var product_price : Int
+    var product_quantity : Int
+    var status : String
+    var user_cancell_date : String
+    var user_cancell_info : String
+    var vendor_accept_cancel : String
+    var vendor_cancell_date : String
+    var vendor_cancell_info : String
+    var vendor_complete_date : String
+    var vendor_complete_info : String
+    init(In_var _id : String
+         , In_date_of_booking : String
+         , In_order_id : String
+         , In_prodcut_image : String
+         , In_product_name : String
+         , In_product_price : Int
+         , In_product_quantity : Int
+         , In_status : String
+         , In_user_cancell_date : String
+         , In_user_cancell_info : String
+         , In_vendor_accept_cancel : String
+         , In_vendor_cancell_date : String
+         , In_vendor_cancell_info : String
+         , In_vendor_complete_date : String
+         , In_vendor_complete_info : String) {
+        self._id = In_order_id
+        self.date_of_booking = In_date_of_booking
+        self.order_id = In_order_id
+        self.prodcut_image = In_prodcut_image
+        self.product_name = In_product_name
+        self.product_price = In_product_price
+        self.product_quantity = In_product_quantity
+        self.status = In_status
+        self.user_cancell_date = In_user_cancell_date
+        self.user_cancell_info = In_user_cancell_info
+        self.vendor_accept_cancel = In_vendor_accept_cancel
+        self.vendor_cancell_date = In_vendor_cancell_date
+        self.vendor_cancell_info = In_vendor_cancell_info
+        self.vendor_complete_date = In_vendor_complete_date
+        self.vendor_complete_info = In_vendor_complete_info
+    }
+}
 

@@ -94,14 +94,14 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     
     @IBAction func action_changeUT(_ sender: Any) {
-        if Servicefile.shared.UtypeData[self.selval].user_type_value == 1 || Servicefile.shared.UtypeData[self.selval].user_type_value == 4 || Servicefile.shared.UtypeData[self.selval].user_type_value == 2 {
+//        if Servicefile.shared.UtypeData[self.selval].user_type_value == 1 || Servicefile.shared.UtypeData[self.selval].user_type_value == 4 || Servicefile.shared.UtypeData[self.selval].user_type_value == 2 {
             if Servicefile.shared.UtypeData[self.selval].user_type_title != "" {
                 Servicefile.shared.utypesel = self.locusel
                 Servicefile.shared.usertypetitle = Servicefile.shared.UtypeData[self.selval].user_type_title
                 Servicefile.shared.user_type_value = Servicefile.shared.UtypeData[self.selval].user_type_value
                 self.dismiss(animated: true, completion: nil)
             }
-       }
+       //}
         
     }
     

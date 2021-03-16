@@ -768,7 +768,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        _ = res["Data"] as! NSDictionary
                         self.view_shadow.isHidden = false
                         self.view_popup.isHidden = false
                         self.stopAnimatingActivityIndicator()
@@ -976,7 +976,7 @@ extension Sp_profile_edit_ViewController {
             self.selspec.append("0")
             for Edit_speclist in 0..<Servicefile.shared.sp_bus_spec_list.count {
                 let edit_specitm =  Servicefile.shared.sp_bus_spec_list[Edit_speclist]
-                var edit_spestr = edit_specitm as! NSDictionary
+                let edit_spestr = edit_specitm as! NSDictionary
                 if  edit_spestr["bus_spec_list"] as? String ?? "" == SP_itm {
                     self.selspec.remove(at: itme)
                     self.selspec.insert("1", at: itme)

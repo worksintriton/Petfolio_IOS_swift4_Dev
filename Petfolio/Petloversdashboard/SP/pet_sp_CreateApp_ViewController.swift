@@ -15,7 +15,7 @@ import Razorpay
 import SafariServices
 import WebKit
 
-class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
+class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData, UICollectionViewDelegateFlowLayout , UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var textfield_selectpettype: UITextField!
     @IBOutlet weak var textfield_petname: UITextField!
@@ -25,6 +25,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     @IBOutlet weak var textfield_pettype: UITextField!
     @IBOutlet weak var textfield_petage: UITextField!
     
+    @IBOutlet weak var coll_imag: UICollectionView!
     @IBOutlet weak var view_pickupload: UIView!
     @IBOutlet weak var textfield_weight: UITextField!
     @IBOutlet weak var textfield_color: UITextField!
@@ -55,11 +56,16 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     var petid = [""]
     let imagepicker = UIImagePickerController()
     var petimage = ""
+    var timer = Timer()
+    var pagcount = 0
     
     var razorpay: RazorpayCheckout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.coll_imag.delegate = self
+        self.coll_imag.dataSource = self
+        self.coll_imag.isPagingEnabled = true
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
          self.view_popup.view_cornor()
@@ -107,11 +113,66 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.textfield_selectpettype.delegate = self
         self.textview_descrip.delegate = self
         self.textview_descrip.text = "Add comment here.."
-        self.textview_descrip.textColor == UIColor.lightGray
+        self.textview_descrip.textColor = UIColor.lightGray
         self.label_service_title.text = Servicefile.shared.service_id_title
         self.petimage = Servicefile.shared.sampleimag
-        self.setuploadimg()
+        //self.setuploadimg()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer.invalidate()
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+           if Servicefile.shared.petlistimg.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == Servicefile.shared.petlistimg.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+              
+           }
+       }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+           return 1
+       }
+       
+       
+       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+           return  Servicefile.shared.petlistimg.count
+       }
+       
+       
+       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
+           let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
+           let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+           cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
+               if (error != nil) {
+                   cell.img_banner.image = UIImage(named: "b_sample")
+               } else {
+                   cell.img_banner.image = image
+               }
+           }
+           cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+           //cell.view_banner_two.isHidden = true
+           cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+           return cell
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                  return CGSize(width: self.coll_imag.frame.size.width , height:  self.coll_imag.frame.size.height)
+       }
     
    @IBAction func action_sos(_ sender: Any) {
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
@@ -156,21 +217,21 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         return 1
     }
     
-    func setuploadimg(){
-        if self.petimage == "" {
-            self.image_petcurrent.image = UIImage(named: "sample")
-        }else{
-            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
-                       if (error != nil) {
-                           self.image_petcurrent.image = UIImage(named: "sample")
-                       } else {
-                           self.image_petcurrent.image = image
-                       }
-                   }
-                   self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        }
-       
-    }
+//    func setuploadimg(){
+//        if self.petimage == "" {
+//            self.image_petcurrent.image = UIImage(named: "sample")
+//        }else{
+//            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
+//                       if (error != nil) {
+//                           self.image_petcurrent.image = UIImage(named: "sample")
+//                       } else {
+//                           self.image_petcurrent.image = image
+//                       }
+//                   }
+//                   self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+//        }
+//
+//    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -242,6 +303,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_color.isUserInteractionEnabled = false
             Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
             self.view_pickupload.isHidden = true
+            self.coll_imag.reloadData()
+            self.startTimer()
         }else{
             self.view_pickupload.isHidden = false
             self.textfield_selectpettype.text! = ""
@@ -256,8 +319,10 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_weight.isUserInteractionEnabled = true
             self.textfield_color.isUserInteractionEnabled = true
             Servicefile.shared.petlistimg = [Any]()
+            self.coll_imag.reloadData()
+            self.startTimer()
         }
-        self.setuploadimg()
+        //self.setuploadimg()
     }
     
     @IBAction func action_change(_ sender: Any) {
@@ -330,7 +395,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
        }
     
     func upload(imagedata: UIImage) {
-         print("Upload started")
+         print("Upload started",Servicefile.shared.userid +  Servicefile.shared.uploadddmmhhmmastringformat(date: Date()))
             print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
@@ -353,17 +418,15 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                     if Code == 200 {
                         let Data = res["Data"] as? String ?? ""
                        print("Uploaded file url:",Data)
-                        Servicefile.shared.pet_apoint_doc_attched.removeAll()
-                        var B = Servicefile.shared.pet_apoint_doc_attched
-                            var arr = B
-                            let a = ["file":Data] as NSDictionary
-                            arr.append(a)
-                            B = arr
-                             print(B)
-                             Servicefile.shared.pet_apoint_doc_attched = B
-                            print("uploaded data in clinic",Servicefile.shared.pet_apoint_doc_attched)
-                        self.petimage = Data
-                        self.setuploadimg()
+                         var B = Servicefile.shared.petlistimg
+                                               var arr = B
+                                               let a = ["pet_img":Data] as NSDictionary
+                                               arr.append(a)
+                                               B = arr
+                                               print(B)
+                                               Servicefile.shared.petlistimg = B
+                                               self.coll_imag.reloadData()
+                                               self.startTimer()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -406,8 +469,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             format.dateFormat = "dd-MM-yyyy"
             let tformat = DateFormatter()
             tformat.dateFormat = "hh:mm a"
-            var booking_date = format.string(from: date)
-            var booking_time = tformat.string(from: date)
+            _ = format.string(from: date)
+            _ = tformat.string(from: date)
             Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_doc_feedback = ""
             Servicefile.shared.pet_apoint_doc_rate = 0
@@ -487,7 +550,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
              self.startAnimatingActivityIndicator()
          if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
              ["user_id" : Servicefile.shared.userid,
-              "pet_img" : self.petimage,
+              "pet_img" : Servicefile.shared.petlistimg,
               "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!) ,
              "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
              "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
@@ -731,7 +794,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                        }else{
                        }
                        break
-                   case .failure(let Error):
+                   case .failure(_):
                        self.stopAnimatingActivityIndicator()
                        break
                    }

@@ -153,6 +153,21 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
     }
     
+    @objc func scrollAutomatically(_ timer1: Timer) {
+           if Servicefile.shared.petbanner.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == Servicefile.shared.petbanner.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+               self.pagecontrol.currentPage = self.pagcount
+           }
+       }
+    
     
     @IBAction func action_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
@@ -217,20 +232,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     
-    @objc func scrollAutomatically(_ timer1: Timer) {
-        if Servicefile.shared.petbanner.count > 0 {
-            self.pagcount += 1
-            if self.pagcount == Servicefile.shared.petbanner.count {
-                self.pagcount = 0
-                let indexPath = IndexPath(row: pagcount, section: 0)
-                self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
-            }else{
-                let indexPath = IndexPath(row: pagcount, section: 0)
-                self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
-            }
-            self.pagecontrol.currentPage = self.pagcount
-        }
-    }
+   
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

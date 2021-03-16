@@ -9,26 +9,17 @@
 import UIKit
 
 class testfileViewController: UIViewController {
-
+    
     @IBOutlet weak var testview: UIView!
     @IBOutlet weak var testviewgray: UIView!
+    @IBOutlet weak var view_circle: UIView!
     
+    @IBOutlet weak var view_dash1: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.testview.View_image_appcolordropshadow(cornordarius: 10.0, iscircle: false)
-        self.testviewgray.View_image_dropshadow(cornordarius: 10.0, iscircle: false)
+        self.view_circle.startAnimating()
+        self.view_dash1.startAnimating()
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+

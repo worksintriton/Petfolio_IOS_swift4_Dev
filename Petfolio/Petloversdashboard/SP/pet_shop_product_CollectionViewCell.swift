@@ -17,4 +17,11 @@ class pet_shop_product_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_ratting: UILabel!
     @IBOutlet weak var label_likes: UILabel!
     @IBOutlet weak var image_fav: UIImageView!
+    var item: String = ""
+    var delegate: SelectItmDelegate?
+   
 }
+
+protocol SelectItmDelegate {
+          func buttonPressed(passdata: String)
+   }

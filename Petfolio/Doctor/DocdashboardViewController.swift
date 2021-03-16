@@ -161,17 +161,25 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
         
-        if Servicefile.shared.Doc_dashlist[indexPath.row].pet_img == "" {
-            cell.img_petimg.image = UIImage(named: "sample")
+        let petimage = Servicefile.shared.Doc_dashlist[indexPath.row].pet_img
+        if petimage.count > 0 {
+            let petdic = petimage[0] as! NSDictionary
+            let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+            if petimg == "" {
+                       cell.img_petimg.image = UIImage(named: "sample")
+                   }else{
+                       cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
+                           if (error != nil) {
+                               cell.img_petimg.image = UIImage(named: "sample")
+                           } else {
+                               cell.img_petimg.image = image
+                           }
+                       }
+                   }
         }else{
-            cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.Doc_dashlist[indexPath.row].pet_img)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    cell.img_petimg.image = UIImage(named: "sample")
-                } else {
-                    cell.img_petimg.image = image
-                }
-            }
+            cell.img_petimg.image = UIImage(named: "sample")
         }
+       
         return cell
     }
     
@@ -354,7 +362,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let petid = petdetail["_id"] as? String ?? ""
                             let pet_type = petdetail["pet_name"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
                             Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
@@ -427,7 +435,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let petid = petdetail["_id"] as? String ?? ""
                             let pet_type = petdetail["pet_name"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
                             Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
@@ -499,7 +507,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let petid = petdetail["_id"] as? String ?? ""
                             let pet_type = petdetail["pet_name"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
                             Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))

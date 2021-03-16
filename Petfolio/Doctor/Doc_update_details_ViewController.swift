@@ -1156,7 +1156,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                             //
                             for Edit_list in 0..<Servicefile.shared.DOC_specdicarray.count {
                                 let edit_itm = Servicefile.shared.DOC_specdicarray[Edit_list]
-                                var edit_str = edit_itm  as! NSDictionary
+                                let edit_str = edit_itm  as! NSDictionary
                                 if edit_str["specialization"] as? String ?? "" == pbv {
                                     print(edit_itm)
                                     self.isspecialza.remove(at: item)
@@ -1220,7 +1220,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        _ = res["Data"] as! NSDictionary
                         
                         self.callupdatestatus()
                         self.stopAnimatingActivityIndicator()
@@ -1305,7 +1305,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                     print("display data",resp)
                     let Code  = resp["Code"] as! Int
                     if Code == 200 {
-                        let Data = resp["Data"] as! NSDictionary
+                        _ = resp["Data"] as! NSDictionary
                         
                         
                         self.stopAnimatingActivityIndicator()

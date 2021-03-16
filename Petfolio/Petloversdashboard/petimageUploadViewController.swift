@@ -12,18 +12,42 @@ import MobileCoreServices
 import Alamofire
 import SDWebImage
 
-class petimageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class petimageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
     @IBOutlet weak var imag_petimag: UIImageView!
     @IBOutlet weak var view_continue: UIView!
      let imagepicker = UIImagePickerController()
     var uploadimage = Servicefile.sample_img
+    @IBOutlet weak var coll_img_list: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagepicker.delegate = self
         self.setimage(strimg: self.uploadimage)
+        self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        self.view_continue.view_cornor()
+        self.checkimagecontent(intval : 0)
+        self.coll_img_list.delegate = self
+        self.coll_img_list.dataSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    func checkimagecontent(intval : Int){
+        let petimage = Servicefile.shared.petlistimg
+            if petimage.count > 0 {
+                let petdic = petimage[intval] as! NSDictionary
+                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                if petimg == "" {
+                    self.setimage(strimg: petimg)
+            }else{
+                    self.setimage(strimg: petimg)
+            }
+        }else{
+            Servicefile.shared.petlistimg = [Any]()
+               self.imag_petimag.image = UIImage(named: "sample")
+        }
+        self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
     func setimage(strimg : String){
@@ -35,6 +59,49 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
             }
         }
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Servicefile.shared.petlistimg.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagecell", for: indexPath) as!  imgidCollectionViewCell
+        let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
+        let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
+            if (error != nil) {
+                cell.Img_id.image = UIImage(named: "sample")
+            } else {
+                cell.Img_id.image = image
+            }
+        }
+         cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+               cell.view_close.layer.cornerRadius = cell.view_close.frame.height /  2
+                 cell.btn_close.tag = indexPath.row
+                 cell.btn_close.addTarget(self, action: #selector(action_buttonclose), for: .touchUpInside)
+                 return cell
+             }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.checkimagecontent(intval: indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 120 , height:  120)
+    }
+      
+      @objc func action_buttonclose(sender : UIButton) {
+          let tag = sender.tag
+          Servicefile.shared.petlistimg.remove(at: tag)
+          self.coll_img_list.reloadData()
+        self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
+      }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
               if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -76,6 +143,8 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                         B = arr
                         print(B)
                         Servicefile.shared.petlistimg = B
+                        self.coll_img_list.reloadData()
+                        self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
                          self.setimage(strimg: self.uploadimage)
                            self.stopAnimatingActivityIndicator()
                        }else{
@@ -136,7 +205,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                                                      print("success data",res)
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
-                                                       let Data = res["Data"] as! NSDictionary
+                                                        _ = res["Data"] as! NSDictionary
                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                                                        self.present(vc, animated: true, completion: nil)
                                                         self.stopAnimatingActivityIndicator()

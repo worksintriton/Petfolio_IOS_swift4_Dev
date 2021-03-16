@@ -16,6 +16,7 @@ target 'Petfolio' do
   pod 'Cosmos', '~> 23.0'
   pod 'Alamofire', '~> 5.0'
   pod 'SNShadowSDK'
+  pod 'DropDown'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

@@ -21,6 +21,7 @@ class searchlistTableViewCell: UITableViewCell {
     @IBOutlet weak var btn_book: UIButton!
     @IBOutlet weak var view_book: UIView!
     @IBOutlet weak var view_img_doc: SNShadowView!
+    @IBOutlet weak var label_distance: UILabel!
     
     
     override func awakeFromNib() {

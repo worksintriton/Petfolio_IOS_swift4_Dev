@@ -9,7 +9,9 @@
 import UIKit
 import Alamofire
 
-class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate {
+   
+    
     
     @IBOutlet weak var tbl_dash_list: UITableView!
     @IBOutlet weak var view_footer: UIView!
@@ -63,15 +65,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             return Servicefile.shared.sp_dash_Product_details.count
         }
     }
-    @objc func action_todaydeal_seemore(sender: UIButton){
-        let tag = sender.tag
-        print("data in index of today deal", tag)
-    }
-    
-    @objc func action_category_seemore(sender: UIButton){
-        let tag = sender.tag
-        print("data in index of category", tag)
-    }
+   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -81,15 +75,17 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             return cell
         }else if indexPath.section == 1 {
             let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
+            cells.delegate = self
             cells.label_cate_value.text = "Todays deal"
             cells.btn_cate_seemore_btn.tag = indexPath.row
-            Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
+            Servicefile.shared.sp_shop_dash_tbl_total_index = indexPath.row
             cells.coll_cat_prod_list.tag = indexPath.row
             cells.coll_cat_prod_list.reloadData()
             cells.btn_cate_seemore_btn.addTarget(self, action: #selector(action_todaydeal_seemore), for: .touchUpInside)
             return cells
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "scell", for: indexPath) as! sp_dash_product_TableViewCell
+            cell.delegate = self
             cell.label_cate_value.text = "cat "+"\(indexPath.row)"
             Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
             cell.btn_cate_seemore_btn.tag = indexPath.row
@@ -100,17 +96,29 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         }
     }
     
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section > 0 {
-            Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
-            print("category index value",Servicefile.shared.sp_shop_dash_tbl_index)
-        }else{
-            print("dashboard banner",indexPath.row)
-        }
+    func buttonPressed(passdata: String) {
+           print("pass data from protocal",passdata)
         
-    }
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
+                      self.present(vc, animated: true, completion: nil)
+       }
+    
+    @objc func action_todaydeal_seemore(sender: UIButton){
+           let tag = sender.tag
+           print("data in index of today deal", tag)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "todaysdealseemoreViewController") as! todaysdealseemoreViewController
+               self.present(vc, animated: true, completion: nil)
+        
+       }
+       
+       @objc func action_category_seemore(sender: UIButton){
+           let tag = sender.tag
+           print("data in index of category", tag)
+        Servicefile.shared.vendor_catid = Servicefile.shared.sp_dash_Product_details[tag].cat_id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductdealsViewController") as! ProductdealsViewController
+               self.present(vc, animated: true, completion: nil)
+        
+       }
     
     func callpetshopdashget(){
         self.startAnimatingActivityIndicator()
@@ -198,3 +206,5 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+

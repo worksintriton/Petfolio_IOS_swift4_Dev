@@ -34,7 +34,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.tbl_searchlist.dataSource = self
         self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tbl_searchlist.addSubview(refreshControl) // not required when using UITableViewController
-        self.label_comm_type.text = "Communication offline "
+        self.label_comm_type.text = "offline Doctors"
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
@@ -75,11 +75,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         if sender.isOn {
             self.comm_type = 1
             self.callsearchlist()
-            self.label_comm_type.text = "Communication online "
+            self.label_comm_type.text = "online Doctors"
         } else {
             self.comm_type = 0
             self.callsearchlist()
-            self.label_comm_type.text = "Communication offline "
+            self.label_comm_type.text = "offline Doctors"
         }
     }
     
@@ -107,12 +107,15 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
             if itm == 0 {
                   spe = spc
             }else{
-                 spe = spe + ", " + spc
+                // spe = spe + ", " + spc
+                spe =  spc
             }
-          
         }
         cell.label_docSubsci.text = spe
-        cell.label_placeanddis.text = Servicefile.shared.moredocd[indexPath.row].clinic_loc + " . " + Servicefile.shared.moredocd[indexPath.row].distance + " km away"
+        let str = Servicefile.shared.moredocd[indexPath.row].clinic_loc
+        let result = String(str.prefix(8))
+        cell.label_placeanddis.text = result
+        cell.label_distance.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
         cell.label_likes.text = Servicefile.shared.moredocd[indexPath.row].review_count
         cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
         cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
@@ -153,7 +156,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 115
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {

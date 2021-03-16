@@ -15,7 +15,7 @@ import Razorpay
 import SafariServices
 import WebKit
 
-class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
+class searchpetloverappointmentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var textfield_selectpettype: UITextField!
     @IBOutlet weak var textfield_petname: UITextField!
@@ -36,7 +36,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var view_pattype: UIView!
     @IBOutlet weak var view_petname: UIView!
     @IBOutlet weak var view_selectpet: UIView!
-    
+    @IBOutlet weak var coll_imag: UICollectionView!
     @IBOutlet weak var tblview_petdetail: UITableView!
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
@@ -44,7 +44,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var View_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_btn: UIView!
-    
     
     @IBOutlet weak var btn_online: UIButton!
     @IBOutlet weak var btn_visit: UIButton!
@@ -57,11 +56,16 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     var petid = [""]
     let imagepicker = UIImagePickerController()
     var petimage = ""
+    var timer = Timer()
+    var pagcount = 0
     
     var razorpay: RazorpayCheckout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.coll_imag.delegate = self
+        self.coll_imag.dataSource = self
+        self.coll_imag.isPagingEnabled = true
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.view_popup.view_cornor()
@@ -115,6 +119,56 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.setuploadimg()
         print("Communication type",Servicefile.shared.pet_apoint_communication_type)
         self.checkappointmentcommtype()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+           self.timer.invalidate()
+       }
+       
+       func startTimer() {
+           self.timer.invalidate()
+           timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+       }
+       
+       @objc func scrollAutomatically(_ timer1: Timer) {
+              if Servicefile.shared.petlistimg.count > 0 {
+                  self.pagcount += 1
+                  if self.pagcount == Servicefile.shared.petlistimg.count {
+                      self.pagcount = 0
+                      let indexPath = IndexPath(row: pagcount, section: 0)
+                      self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                  }else{
+                      let indexPath = IndexPath(row: pagcount, section: 0)
+                      self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                  }
+                 
+              }
+          }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return  Servicefile.shared.petlistimg.count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
+        let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
+        let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
+            if (error != nil) {
+                cell.img_banner.image = UIImage(named: "b_sample")
+            } else {
+                cell.img_banner.image = image
+            }
+        }
+        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        //cell.view_banner_two.isHidden = true
+        cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+               return CGSize(width: self.coll_imag.frame.size.width , height:  self.coll_imag.frame.size.height)
     }
     
     func checkappointmentcommtype() {
@@ -205,18 +259,18 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     func setuploadimg(){
-        if self.petimage == "" {
-            self.image_petcurrent.image = UIImage(named: "sample")
-        }else{
-            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    self.image_petcurrent.image = UIImage(named: "sample")
-                } else {
-                    self.image_petcurrent.image = image
-                }
-            }
-            self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        }
+//        if self.petimage == "" {
+//            self.image_petcurrent.image = UIImage(named: "sample")
+//        }else{
+//            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
+//                if (error != nil) {
+//                    self.image_petcurrent.image = UIImage(named: "sample")
+//                } else {
+//                    self.image_petcurrent.image = image
+//                }
+//            }
+//            self.image_petcurrent.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+//        }
         
     }
     
@@ -284,6 +338,8 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.textfield_petname.isUserInteractionEnabled = false
             Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
             self.view_pickupload.isHidden = true
+            self.coll_imag.reloadData()
+            self.startTimer()
         }else{
             self.view_pickupload.isHidden = false
             self.textfield_selectpettype.text! = ""
@@ -292,8 +348,10 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.textfield_petbreed.text = ""
             self.textfield_petname.isUserInteractionEnabled = true
             Servicefile.shared.petlistimg = [Any]()
+            self.coll_imag.reloadData()
+            self.startTimer()
         }
-        self.setuploadimg()
+       // self.setuploadimg()
     }
     
     @IBAction func action_change(_ sender: Any) {
@@ -399,17 +457,15 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                     if Code == 200 {
                         let Data = res["Data"] as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data)
-                        Servicefile.shared.pet_apoint_doc_attched.removeAll()
-                        var B = Servicefile.shared.pet_apoint_doc_attched
+                        var B = Servicefile.shared.petlistimg
                         var arr = B
-                        let a = ["file":Data] as NSDictionary
+                        let a = ["pet_img":Data] as NSDictionary
                         arr.append(a)
                         B = arr
                         print(B)
-                        Servicefile.shared.pet_apoint_doc_attched = B
-                        print("uploaded data in clinic",Servicefile.shared.pet_apoint_doc_attched)
-                        self.petimage = Data
-                        self.setuploadimg()
+                        Servicefile.shared.petlistimg = B
+                        self.coll_imag.reloadData()
+                        self.startTimer()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -537,7 +593,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,
-             "pet_img" : self.petimage,
+             "pet_img" : Servicefile.shared.petlistimg,
              "pet_name" : self.textfield_petname.text!,
              "pet_type" : self.textfield_pettype.text!,
              "pet_breed" : self.textfield_petbreed.text!,

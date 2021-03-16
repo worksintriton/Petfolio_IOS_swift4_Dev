@@ -160,10 +160,14 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.SP_Das_petdetails[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].sername
-        if Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img == "" {
+        
+        if Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img.count > 0 {
+        let petdic = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img[0] as! NSDictionary
+        let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+        if petimg == "" {
             cell.img_petimg.image = UIImage(named: "sample")
         }else{
-            cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img)) { (image, error, cache, urls) in
+            cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_petimg.image = UIImage(named: "sample")
                 } else {
@@ -171,6 +175,10 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                 }
             }
         }
+        }else{
+            cell.img_petimg.image = UIImage(named: "sample")
+        }
+           
         cell.selectionStyle = .none
         return cell
     }
@@ -298,7 +306,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             let pet_name = petdetail["pet_name"] as? String ?? ""
                             let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let sp_id = dataitm["sp_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
@@ -361,7 +369,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             let pet_name = petdetail["pet_name"] as? String ?? ""
                             let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let sp_id = dataitm["sp_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
@@ -423,7 +431,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             let pet_name = petdetail["pet_name"] as? String ?? ""
                             let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
-                            let pet_img = petdetail["pet_img"] as? String ?? Servicefile.sample_img
+                            let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let sp_id = dataitm["sp_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
@@ -595,7 +603,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                     }else{
                     }
                     break
-                case .failure(let Error):
+                case .failure(let _):
                     self.stopAnimatingActivityIndicator()
                     
                     break

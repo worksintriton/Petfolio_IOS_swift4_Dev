@@ -134,8 +134,8 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
                     if Code == 200 {
                         let Data = resp["Data"] as! NSDictionary
                         let specialzation = Data["specialzation"] as! NSArray
-                        let pet_handle = Data["pet_handle"] as! NSArray
-                        let comm_type_arr = Data["communication_type"] as! NSArray
+                        _ = Data["pet_handle"] as! NSArray
+                        _ = Data["communication_type"] as! NSArray
                         self.specialza.removeAll()
                         self.isspecialza.removeAll()
                         for item in 0..<specialzation.count{

@@ -242,13 +242,19 @@ class Doc_detailspage_ViewController: UIViewController {
                         self.label_breed.text = pet_id["pet_breed"] as? String ?? ""
                         self.label_petType.text = pet_id["pet_type"] as? String ?? ""
                         self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
-                        let petimage = pet_id["pet_img"] as? String ?? Servicefile.sample_img
-                        self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
-                            if (error != nil) {
-                                self.image_pet_img.image = UIImage(named: "sample")
-                            } else {
-                                self.image_pet_img.image = image
+                        let petimage = pet_id["pet_img"] as! [Any]
+                        if petimage.count > 0 {
+                            let petdic = petimage[0] as! NSDictionary
+                            let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
+                                if (error != nil) {
+                                    self.image_pet_img.image = UIImage(named: "sample")
+                                } else {
+                                    self.image_pet_img.image = image
+                                }
                             }
+                        }else{
+                            self.image_pet_img.image = UIImage(named: "sample")
                         }
                         let user_id = data["user_id"] as! NSDictionary
                         let firstname = user_id["first_name"] as? String

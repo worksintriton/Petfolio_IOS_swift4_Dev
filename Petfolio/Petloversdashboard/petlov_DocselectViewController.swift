@@ -142,7 +142,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
-                    print("success data",res)
+                    print("doc success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         self.clinicpic.removeAll()

@@ -14,7 +14,7 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     
     @IBOutlet weak var btn_cate_seemore_btn: UIButton!
     @IBOutlet weak var coll_cat_prod_list: UICollectionView!
-    
+     var delegate: SelectItmDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,15 +32,13 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
-        cell.label_prod_title.text = "prod title " + "\(indexPath.row)"
-        cell.label_price.text = "₹ 10"+"\(indexPath.row)"
+        cell.label_prod_title.text = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_title
+        cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_price)
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
-        //cell.image_product.image = UIImage(named: "sample")
-         
-        if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img) {
-            print("null value check",Servicefile.shared.sp_dash_Product_details[Servicefile.shared.sp_shop_dash_tbl_index].prod_details[indexPath.row].product_img)
-            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Product_details[Servicefile.shared.sp_shop_dash_tbl_index].prod_details[indexPath.row].product_img)) { (image, error, cache, urls) in
+        if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img) {
+            print("null value check",Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img)
+            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
                               cell.image_product.image = UIImage(named: "sample")
                           } else {
@@ -50,7 +48,6 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         }else{
             cell.image_product.image = UIImage(named: "sample")
         }
-      
         return cell
     }
     
@@ -58,6 +55,8 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         Servicefile.shared.sp_shop_dash_tbl_coll_index = indexPath.row
         print("service category index",Servicefile.shared.sp_shop_dash_tbl_index)
         print("service product index",Servicefile.shared.sp_shop_dash_tbl_coll_index)
+        Servicefile.shared.product_id = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row]._id
+        delegate?.buttonPressed(passdata: Servicefile.shared.product_id)
     }
     
     

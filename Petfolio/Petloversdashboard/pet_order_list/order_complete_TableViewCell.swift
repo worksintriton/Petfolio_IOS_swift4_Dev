@@ -10,6 +10,20 @@ import UIKit
 
 class order_complete_TableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var view_main: UIView!
+    @IBOutlet weak var image_order: UIImageView!
+    @IBOutlet weak var label_orderID: UILabel!
+    @IBOutlet weak var label_product_title: UILabel!
+    @IBOutlet weak var label_cost: UILabel!
+    @IBOutlet weak var label_prod_ord_datetime: UILabel!
+    @IBOutlet weak var btn_addreview: UIButton!
+    @IBOutlet weak var view_addreview: UIView!
+    
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

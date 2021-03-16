@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Foundation
 
 class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+    
 
     @IBOutlet weak var label_cate_value: UILabel!
     
     @IBOutlet weak var btn_cate_seemore_btn: UIButton!
     @IBOutlet weak var coll_cat_prod_list: UICollectionView!
+    var delegate: SelectItmDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +35,8 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
-        cell.label_prod_title.text = "prod title " + "\(indexPath.row)"
-        cell.label_price.text = "₹ 10"+"\(indexPath.row)"
+        cell.label_prod_title.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_title
+        cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
         //cell.image_product.image = UIImage(named: "sample")
@@ -58,7 +61,11 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         Servicefile.shared.sp_shop_dash_tbl_coll_index = indexPath.row
         print("service category index",Servicefile.shared.sp_shop_dash_tbl_index)
         print("service product index",Servicefile.shared.sp_shop_dash_tbl_coll_index)
+         Servicefile.shared.product_id = Servicefile.shared.sp_dash_Today_Special[indexPath.row]._id
+        delegate?.buttonPressed(passdata:  Servicefile.shared.product_id)
+        
     }
+    
     
     
 
@@ -68,4 +75,8 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         // Configure the view for the selected state
     }
 
+   
+    
 }
+
+

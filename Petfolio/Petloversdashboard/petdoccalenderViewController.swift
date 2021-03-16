@@ -236,7 +236,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
                     Servicefile.shared.pet_apoint_booking_time = ""
                     if Code == 200 {
                         self.seltime.removeAll()
-                        for timitm in 0..<self.listtime.count{
+                        for _ in 0..<self.listtime.count{
                             self.seltime.append("0")
                         }
                         self.seltime.remove(at: index)

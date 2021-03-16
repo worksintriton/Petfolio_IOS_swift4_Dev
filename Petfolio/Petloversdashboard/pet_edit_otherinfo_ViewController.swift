@@ -50,6 +50,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Servicefile.shared.pet_petlist.count > 0 {
+            Servicefile.shared.pet_status = "edit"
             self.isspay = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_spayed
             self.ispurebreed = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_purebred
             self.isfriend_dog = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_frnd_with_dog

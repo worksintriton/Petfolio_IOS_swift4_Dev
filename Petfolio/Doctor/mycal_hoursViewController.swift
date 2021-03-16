@@ -122,7 +122,7 @@ class mycal_hoursViewController: UIViewController, UITableViewDelegate, UITableV
                                                              let Code  = res["Code"] as! Int
                                                             
                                                              if Code == 200 {
-                                                               let Data = res["Data"] as! NSDictionary
+                                                                _ = res["Data"] as! NSDictionary
                                                                 self.dismiss(animated: true, completion: nil)
                                                                 self.stopAnimatingActivityIndicator()
                                                              }else{

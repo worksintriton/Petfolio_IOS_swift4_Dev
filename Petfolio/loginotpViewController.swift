@@ -193,6 +193,9 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                        } else if Servicefile.shared.user_type == "2" {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                                                             self.present(vc, animated: true, completion: nil)
+                                                        }else if Servicefile.shared.user_type == "3" {
+                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
+                                                            self.present(vc, animated: true, completion: nil)
                                                         }
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{

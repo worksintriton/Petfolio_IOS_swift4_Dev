@@ -245,7 +245,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        _ = res["Data"] as! NSDictionary
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
@@ -289,7 +289,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        _ = res["Data"] as! NSDictionary
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()

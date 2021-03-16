@@ -9,6 +9,7 @@
 import UIKit
 
 class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+   
     
 
     
@@ -52,6 +53,11 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
     
     return cell
    }
+    
+    
+       
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("service dashboard banner index",indexPath.row)

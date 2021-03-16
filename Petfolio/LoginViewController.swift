@@ -196,7 +196,7 @@ extension UIView {
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = 1.5
+        layer.shadowRadius = 1.8
     }
     func View_imagebanner_dropshadow(cornordarius: CGFloat, iscircle : Bool){
         layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appgray).cgColor
@@ -236,7 +236,7 @@ extension UIView {
             layer.shadowOpacity = 0.6
             layer.shadowOffset = CGSize(width:-3, height: -4)
             layer.cornerRadius = cornordarius
-        }
+    }
     
     func submit_cornor(){
         layer.cornerRadius = 8.0
@@ -252,4 +252,40 @@ extension UIView {
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 0
     }
+    
+    func startAnimating() {
+           
+        Servicefile.shared.gradientLayer.frame = self.bounds
+        Servicefile.shared.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        Servicefile.shared.gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        Servicefile.shared.gradientLayer.cornerRadius = 5.0
+        Servicefile.shared.gradientLayer.colors = [Servicefile.gradientColorOne,Servicefile.gradientColorTwo,   Servicefile.gradientColorOne]
+        Servicefile.shared.gradientLayer.locations = [0.0, 0.2, 1.0]
+           let animation = CABasicAnimation(keyPath: "locations")
+           animation.fromValue = [-1.0, -0.5, 0.0]
+           animation.toValue = [1.0, 1.5, 2.0]
+           animation.repeatCount = .infinity
+           animation.duration = 2.0
+        Servicefile.shared.gradientLayer.add(animation, forKey: animation.keyPath)
+           self.layer.addSublayer(Servicefile.shared.gradientLayer)
+           self.layer.cornerRadius = 8.0
+       }
+    
+    func startAnimatings() {
+           let gradientLayer = CAGradientLayer()
+           gradientLayer.frame = self.bounds
+           gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+           gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+           gradientLayer.cornerRadius = 5.0
+           gradientLayer.colors = [Servicefile.gradientColorOne,Servicefile.gradientColorTwo,   Servicefile.gradientColorOne]
+           gradientLayer.locations = [0.0, 0.2, 1.0]
+           let animation = CABasicAnimation(keyPath: "locations")
+           animation.fromValue = [-1.0, -0.5, 0.0]
+           animation.toValue = [1.0, 1.5, 2.0]
+           animation.repeatCount = .infinity
+           animation.duration = 2.0
+           gradientLayer.add(animation, forKey: animation.keyPath)
+           self.layer.addSublayer(gradientLayer)
+           self.layer.cornerRadius = 8.0
+       }
 }

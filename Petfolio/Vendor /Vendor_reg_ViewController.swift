@@ -20,9 +20,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    let imagepicker = UIImagePickerController()
    var Img_uploadarea = "clinic"
    var locationaddress = ""
+    
    @IBOutlet weak var view_Bus_name: UIView!
-    
-    
     
     @IBOutlet weak var view_submit: UIView!
     @IBOutlet weak var view_bus_email: UIView!
@@ -36,8 +35,6 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var textfield_business: UITextField!
     @IBOutlet weak var textfield_bus_phno: UITextField!
     @IBOutlet weak var textfield_bus_reg: UITextField!
-    
-    
     
    @IBOutlet weak var coll_galary_img: UICollectionView!
    @IBOutlet weak var coll_certificate: UICollectionView!
@@ -324,7 +321,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
              if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                  let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-              self.upload(imagedata: reimage!)
+                self.upload(imagedata: pickedImg)
              }
                dismiss(animated: true, completion: nil)
          }

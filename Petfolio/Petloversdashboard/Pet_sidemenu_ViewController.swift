@@ -52,8 +52,12 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if self.labelmenu[indexPath.row] == "My Appointment"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Orders"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Petlover_myorder_ViewController") as! Petlover_myorder_ViewController
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")

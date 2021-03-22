@@ -27,15 +27,10 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var label_completed: UILabel!
     @IBOutlet weak var label_missed: UILabel!
     
-    
-    
-    
-    var ordertype = "current"
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.callnew()
+        Servicefile.shared.ordertype = "current"
         self.label_nodata.isHidden = true
-        
         self.view_new.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.view_missed.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.view_footer.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -53,11 +48,20 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        // Do any additional setup after loading the view.
-        //self.callcheckstatus()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.ordertype == "current" {
+            self.callnew()
+        }else if Servicefile.shared.ordertype == "current"{
+            self.callcomm()
+        }else{
+            self.callmissed()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        Servicefile.shared.ordertype = "current"
+    }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -72,7 +76,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if  self.ordertype == "Complete" {
+        if  Servicefile.shared.ordertype == "Complete" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "comcell", for: indexPath) as! order_complete_TableViewCell
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
                 if (error != nil) {
@@ -81,6 +85,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                     cell.image_order.image = image
                 }
             }
+            cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
@@ -89,8 +94,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.view_main.view_cornor()
             cell.view_addreview.view_cornor()
             cell.view_addreview.dropShadow()
+            cell.selectionStyle = .none
+            cell.btn_order_details.tag = indexPath.row
+            cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
-        } else {
+        } else if  Servicefile.shared.ordertype == "current"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! order_curretn_TableViewCell
             
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
@@ -100,15 +108,55 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                     cell.image_order.image = image
                 }
             }
+            cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
+            cell.btn_order_details.tag = indexPath.row
+            cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+            cell.btn_cancel_order.tag = indexPath.row
+            cell.selectionStyle = .none
+            cell.btn_cancel_order.addTarget(self, action: #selector(cancelorder), for: .touchUpInside)
+            return cell
+        }  else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "miscell", for: indexPath) as! order_cancel_TableViewCell
+            
+            cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    cell.image_order.image = UIImage(named: "sample")
+                } else {
+                    cell.image_order.image = image
+                }
+            }
+            cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+            cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
+            cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
+            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+            cell.btn_order_details.tag = indexPath.row
+            cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+            cell.view_main.dropShadow()
+            cell.view_main.view_cornor()
+            cell.selectionStyle = .none
             return cell
         }
-        
+    }
+    
+    @objc func orderdetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlistdetailsViewController") as! orderlistdetailsViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func cancelorder(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlist_cancel_ViewController") as! orderlist_cancel_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -126,7 +174,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_completed.backgroundColor = UIColor.white
         self.view_new.layer.borderColor = appcolor.cgColor
         self.view_new.backgroundColor = UIColor.white
-        self.ordertype = "cancelled"
+        
+        Servicefile.shared.ordertype = "cancelled"
         self.tblview_applist.reloadData()
         self.callmissed()
     }
@@ -140,7 +189,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.label_missed.textColor = appcolor
         self.view_new.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        self.ordertype = "Complete"
+        
+        Servicefile.shared.ordertype = "Complete"
         self.tblview_applist.reloadData()
         self.callcomm()
         
@@ -155,7 +205,9 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.label_missed.textColor = appcolor
         self.view_completed.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        self.ordertype = "current"
+        Servicefile.shared.ordertype = "current"
+        
+        
         self.tblview_applist.reloadData()
         self.callnew()
         
@@ -185,7 +237,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Int ?? 0
+                            let product_price = itmval["product_price"]  as? Double ?? 0.0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -195,7 +247,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -236,7 +288,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Int ?? 0
+                            let product_price = itmval["product_price"]  as? Double ?? 0.0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -246,7 +298,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -287,7 +339,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Int ?? 0
+                            let product_price = itmval["product_price"]  as? Double ?? 0.0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -297,7 +349,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -364,8 +416,6 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-    
-    
     func alert(Message: String){
         let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -373,5 +423,4 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.present(alert, animated: true, completion: nil)
     }
     
-   
 }

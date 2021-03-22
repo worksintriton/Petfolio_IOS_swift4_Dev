@@ -7,7 +7,6 @@ import Foundation
 import Alamofire
 import UIKit
 import NVActivityIndicatorView
-import AAMaterialSpinner
 
 class Servicefile {
     
@@ -137,6 +136,10 @@ class Servicefile {
     static let orderlist = baseurl + "/api/vendor_order_booking/get_order_details_user_id"
     static let vendor_getlistid = baseurl + "/api/product_vendor/getlist_id"
     static let vendor_new_orderlist = baseurl + "/api/vendor_order_booking/get_order_details_vendor_id"
+    static let vendor_status_orderlist = baseurl + "/api/vendor_order_booking/fetch_order_details_id"
+    
+    static let vendor_cancel_status = baseurl + "/api/vendor_order_booking/cancel_status"
+    static let vendor_cancel = baseurl + "/api/vendor_order_booking/update_status_cancel"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -174,6 +177,7 @@ class Servicefile {
     var otp = ""
     var userid = ""
     var vendorid = ""
+    var orderid = ""
     var userimage = ""
     var selectedindex = 0
     // userdetails
@@ -255,6 +259,7 @@ class Servicefile {
     var selectedstate = ""
     var selectedState = ""
     var selecteddefaultstatus = false
+    var ordertype = "current"
     
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
@@ -393,6 +398,7 @@ class Servicefile {
     var sp_dash_productdetails = [productdetails]()
     var vendor_product_id_details = [productdetails]()
     var order_productdetail = [order_productdetails]()
+    var vendor_orderstatuss = [vendor_orderstatus]()
     
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
     static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor
@@ -1321,13 +1327,29 @@ struct pet_sp_dash_productdetails {
     }
 }
 
+
+struct vendor_orderstatus {
+    var Status : Bool
+    var date : String
+    var id : Int
+    var title : String
+    init(In_Status: Bool, In_date: String, In_id: Int,In_title: String ) {
+        self.Status = In_Status
+        self.date = In_date
+        self.id = In_id
+        self.title = In_title
+    }
+}
+
+
+
 struct order_productdetails {
     var _id : String
     var date_of_booking : String
     var order_id : String
     var prodcut_image : String
     var product_name : String
-    var product_price : Int
+    var product_price : Double
     var product_quantity : Int
     var status : String
     var user_cancell_date : String
@@ -1337,12 +1359,12 @@ struct order_productdetails {
     var vendor_cancell_info : String
     var vendor_complete_date : String
     var vendor_complete_info : String
-    init(In_var _id : String
+    init(In_var_id : String
          , In_date_of_booking : String
          , In_order_id : String
          , In_prodcut_image : String
          , In_product_name : String
-         , In_product_price : Int
+         , In_product_price : Double
          , In_product_quantity : Int
          , In_status : String
          , In_user_cancell_date : String
@@ -1352,7 +1374,7 @@ struct order_productdetails {
          , In_vendor_cancell_info : String
          , In_vendor_complete_date : String
          , In_vendor_complete_info : String) {
-        self._id = In_order_id
+        self._id = In_var_id
         self.date_of_booking = In_date_of_booking
         self.order_id = In_order_id
         self.prodcut_image = In_prodcut_image

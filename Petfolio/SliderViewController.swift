@@ -14,13 +14,13 @@ import WebKit
 import SDWebImage
 
 class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
-
+    
     @IBOutlet weak var view_skip_btn: UIView!
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
     var petlist = [""]
     var demodata = [{}]
-     var razorpay: RazorpayCheckout!
+    var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
@@ -33,8 +33,8 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Do any additional setup after loading the view.
     }
     
-   
-
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -48,28 +48,28 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.pettitle.text = ""
         print("image path",self.petlist[indexPath.row])
         cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
-                       if (error != nil) {
-                           cell.petimage.image = UIImage(named: "sample")
-                       } else {
-                           cell.petimage.image = image
-                       }
-                   }
+            if (error != nil) {
+                cell.petimage.image = UIImage(named: "sample")
+            } else {
+                cell.petimage.image = image
+            }
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: self.view.frame.size.width , height:  self.view.frame.size.height)
-       }
-       
+        return CGSize(width: self.view.frame.size.width , height:  self.view.frame.size.height)
+    }
+    
     func movetestpayment(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "paymentpageViewController") as! paymentpageViewController
-                                                                self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func skipaction(_ sender: Any) {
         // self.showPaymentForm()
         if  UserDefaults.standard.string(forKey: "usertype") != nil {
-              if  UserDefaults.standard.string(forKey: "usertype") != "" {
+            if  UserDefaults.standard.string(forKey: "usertype") != "" {
                 Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                 Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                 Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
@@ -78,7 +78,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                 Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                 
-                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.user_type == "1" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                     self.present(vc, animated: true, completion: nil)
@@ -92,12 +92,12 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
                     self.present(vc, animated: true, completion: nil)
                 }
-
+                
             }else{
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 self.present(vc, animated: true, completion: nil)
             }
-
+            
         }else{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.present(vc, animated: true, completion: nil)
@@ -105,7 +105,8 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func getdemo() {
-        AF.request(Servicefile.slider, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() {
+            AF.request(Servicefile.slider, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let resp = response.value as! NSDictionary
@@ -127,57 +128,68 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     }
                     break
                 case .failure(let Error):
-                   
                     print("Can't Connect to Server / TimeOut",Error)
                     break
-                }        }
-    
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
         }
+    }
+    
+    func alert(Message: String){
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     
     func showPaymentForm(){
-         self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
         let options: [String:Any] = [
-                    "amount": "100", //This is in currency subunits. 100 = 100 paise= INR 1.
-                    "currency": "INR",//We support more that 92 international currencies.
-                    "description": "some some",
-                    "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                    "name": "sriram",
-                    "prefill": [
-                        "contact": "9003525711",
-                        "email": "sriramchanr@gmail.com.com"
-                    ],
-                    "theme": [
-                        "color": "#F37254"
-                    ]
-                ]
-
+            "amount": "100", //This is in currency subunits. 100 = 100 paise= INR 1.
+            "currency": "INR",//We support more that 92 international currencies.
+            "description": "some some",
+            "image": "http://52.25.163.13:3000/api/uploads/template.png",
+            "name": "sriram",
+            "prefill": [
+                "contact": "9003525711",
+                "email": "sriramchanr@gmail.com.com"
+            ],
+            "theme": [
+                "color": "#F37254"
+            ]
+        ]
+        
         if let rzp = self.razorpay {
-                   rzp.open(options)
-               } else {
-                   print("Unable to initialize")
-               }
+            rzp.open(options)
+        } else {
+            print("Unable to initialize")
+        }
     }
     
     func onPaymentError(_ code: Int32, description str: String) {
-            print("Payment failed with code")
-       }
-       
-       func onPaymentSuccess(_ payment_id: String) {
-             print("Payment Success payment")
-       }
+        print("Payment failed with code")
+    }
+    
+    func onPaymentSuccess(_ payment_id: String) {
+        print("Payment Success payment")
+    }
     
     func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
-           print("error: ", code)
-          
-       }
-       
-       func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
-           print("success: ", payment_id)
-           
-       }
+        print("error: ", code)
+        
+    }
     
-     
+    func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
+        print("success: ", payment_id)
+        
+    }
+    
+    
 }
 extension UIViewController  {
     
@@ -198,14 +210,14 @@ extension UIViewController  {
         //Servicefile.shared.gifimg.image = UIImage(named: "doganimate.gif")
         let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "doganimate", withExtension: "gif")!)
         Servicefile.shared.gifimg.image = UIImage.sd_image(withGIFData: imageData)
-//        Servicefile.shared.loadlabel.textAlignment = .center
-//        Servicefile.shared.loadlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-//        Servicefile.shared.loadlabel.textColor = UIColor.red
+        //        Servicefile.shared.loadlabel.textAlignment = .center
+        //        Servicefile.shared.loadlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //        Servicefile.shared.loadlabel.textColor = UIColor.red
         Servicefile.shared.gifimg.center = Servicefile.shared.customview.center
         Servicefile.shared.customview.addSubview(Servicefile.shared.backview)
         Servicefile.shared.customview.addSubview(Servicefile.shared.gifimg)
         self.view.addSubview(Servicefile.shared.customview)
-
+        
     }
     
     func stopAnimatingActivityIndicator() {
@@ -216,5 +228,5 @@ extension UIViewController  {
         
     }
     
-   
+    
 }

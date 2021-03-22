@@ -23,7 +23,6 @@ class DemoViewController: UIViewController,UICollectionViewDataSource, UICollect
         self.Democollec.dataSource = self
         self.ViewGetstart.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.Democollec.isPagingEnabled = true
-        // Do any additional setup after loading the view.
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

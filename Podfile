@@ -9,14 +9,13 @@ target 'Petfolio' do
   pod 'SDWebImage'
   pod 'Toucan'
   pod 'NVActivityIndicatorView'
-  pod 'AAMaterialSpinner', '0.1.2'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'FSCalendar'
   pod 'Cosmos', '~> 23.0'
   pod 'Alamofire', '~> 5.0'
   pod 'SNShadowSDK'
-  pod 'DropDown'
+  pod 'iOSDropDown'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

@@ -18,6 +18,8 @@ class vendor_new_TableViewCell: UITableViewCell {
     @IBOutlet weak var label_prod_ord_datetime: UILabel!
     @IBOutlet weak var view_update_status: UIView!
     @IBOutlet weak var btn_update_status: UIButton!
+    @IBOutlet weak var btn_order_details: UIButton!
+    @IBOutlet weak var btn_track_order: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

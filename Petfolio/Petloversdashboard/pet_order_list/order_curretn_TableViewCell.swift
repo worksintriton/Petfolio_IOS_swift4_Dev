@@ -17,6 +17,9 @@ class order_curretn_TableViewCell: UITableViewCell {
     @IBOutlet weak var label_product_title: UILabel!
     @IBOutlet weak var label_cost: UILabel!
     @IBOutlet weak var label_prod_ord_datetime: UILabel!
+    @IBOutlet weak var btn_order_details: UIButton!
+    @IBOutlet weak var btn_track_order: UIButton!
+    @IBOutlet weak var btn_cancel_order: UIButton!
     
     
     

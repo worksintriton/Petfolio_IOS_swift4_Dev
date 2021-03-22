@@ -107,21 +107,17 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100 , height:  35)
+        return CGSize(width: 70 , height:  28)
     }
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        
         let nextstrDate = formatter.string(from: date)
         let currstrdate = formatter.string(from: Date())
-        
         let nextDate = formatter.date(from: nextstrDate)
         let currdate = formatter.date(from: currstrdate)
-        
-        
         if currdate! > nextDate! {
             return false
         } else {
@@ -137,6 +133,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
             self.callgetdatedetails()
             return true
         }
+        
     }
     
     

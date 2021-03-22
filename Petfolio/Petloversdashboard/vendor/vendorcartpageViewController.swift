@@ -34,13 +34,21 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     var labelamt_subtotal = 0
     var labelsubtotal_itmcount = 0
      var razorpay: RazorpayCheckout!
+    
+    @IBOutlet weak var view_shadow: UIView!
+    @IBOutlet weak var view_alert: UIView!
+    @IBOutlet weak var view_btn_alert: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_shadow.isHidden = true
+        self.view_alert.isHidden = true
+        self.view_alert.view_cornor()
+        self.view_btn_alert.view_cornor()
         self.view_proceedtobuy.view_cornor()
         self.tbl_productlist.delegate = self
         self.tbl_productlist.dataSource = self
         self.callcartdetails()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +57,11 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewWillDisappear(_ animated: Bool) {
         
+    }
+    
+    @IBAction func action_continue(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -237,6 +250,7 @@ extension vendorcartpageViewController {
              "date_of_booking" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
              "prodouct_total": self.labelamt_subtotal,
              "shipping_charge": self.labelamt_shipping,
+             "shipping_details_id": "60587225344d9b55ceeec259",
              "coupon_code" : "",
              "discount_price": self.labelamt_discount,
              "shipping_address_id" : "",
@@ -251,6 +265,8 @@ extension vendorcartpageViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         Servicefile.shared.pet_apoint_payment_id = ""
+                        self.view_shadow.isHidden = false
+                        self.view_alert.isHidden = false
                         self.stopAnimatingActivityIndicator()
                     }else{
                         

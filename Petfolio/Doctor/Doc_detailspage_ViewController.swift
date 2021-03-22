@@ -506,6 +506,7 @@ class Doc_detailspage_ViewController: UIViewController {
                        }
                        break
                    case .failure(let Error):
+                    print(Error)
                        self.stopAnimatingActivityIndicator()
                        
                        break

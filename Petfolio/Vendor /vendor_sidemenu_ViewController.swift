@@ -71,7 +71,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 55
     }
 
    

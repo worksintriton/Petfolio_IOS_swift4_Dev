@@ -74,7 +74,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_notification(_ sender: Any) {
@@ -91,7 +92,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_home(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+        self.present(vc, animated: true, completion: nil)
         
     }
     
@@ -99,6 +101,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_petcares(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+        self.present(vc, animated: true, completion: nil)
         
     }
     
@@ -107,7 +111,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_dec(_ sender: Any) {
-        if self.product_cart_count > 0 {
+        if self.product_cart_count > 0 || self.product_cart_count <= Int(self.threshould)! {
             self.calldectheproductcount()
             self.label_cartcount.text = String(self.product_cart_count)
         }

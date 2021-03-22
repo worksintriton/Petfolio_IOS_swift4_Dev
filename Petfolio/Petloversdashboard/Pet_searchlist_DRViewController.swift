@@ -34,7 +34,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.tbl_searchlist.dataSource = self
         self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tbl_searchlist.addSubview(refreshControl) // not required when using UITableViewController
-        self.label_comm_type.text = "offline Doctors"
+        self.label_comm_type.text = "Offline Doctors"
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
@@ -42,6 +42,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.dropShadow()
     }
     
+    @IBAction func action_shop(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func action_pet_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
@@ -75,11 +79,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         if sender.isOn {
             self.comm_type = 1
             self.callsearchlist()
-            self.label_comm_type.text = "online Doctors"
+            self.label_comm_type.text = "Online Doctors"
         } else {
             self.comm_type = 0
             self.callsearchlist()
-            self.label_comm_type.text = "offline Doctors"
+            self.label_comm_type.text = "Offline Doctors"
         }
     }
     

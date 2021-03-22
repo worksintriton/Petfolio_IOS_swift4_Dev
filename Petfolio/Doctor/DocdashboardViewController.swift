@@ -342,8 +342,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-                            let comm_type = dataitm["communication_type"] as? String ?? ""
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+//                            let comm_type = dataitm["communication_type"] as? String ?? ""
+//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
@@ -415,8 +415,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-                            let comm_type = dataitm["communication_type"] as? String ?? ""
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+//                            let comm_type = dataitm["communication_type"] as? String ?? ""
+//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
@@ -487,8 +487,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-                            let comm_type = dataitm["communication_type"] as? String ?? ""
-                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+//                            let comm_type = dataitm["communication_type"] as? String ?? ""
+//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
@@ -676,6 +676,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                     }
                     break
                 case .failure(let Error):
+                    print(Error)
                     self.stopAnimatingActivityIndicator()
                     
                     break

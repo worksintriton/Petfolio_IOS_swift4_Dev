@@ -151,24 +151,49 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
+//        let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
+//        let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+//        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                cell.img_banner.image = UIImage(named: "b_sample")
+//            } else {
+//                cell.img_banner.image = image
+//            }
+//        }
+//        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+//        //cell.view_banner_two.isHidden = true
+//        cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+//        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagecell", for: indexPath)  as! imgidCollectionViewCell
         let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
         let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
-        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
+        cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.img_banner.image = UIImage(named: "b_sample")
+                cell.Img_id.image = UIImage(named: "b_sample")
             } else {
-                cell.img_banner.image = image
+                cell.Img_id.image = image
             }
         }
-        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        //cell.view_banner_two.isHidden = true
-        cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        if self.textfield_selectpettype.text! == "" {
+            cell.view_close.isHidden = false
+        }else{
+            cell.view_close.isHidden = true
+        }
+        cell.btn_close.tag = indexPath.row
+        cell.btn_close.addTarget(self, action: #selector(action_close), for: .touchUpInside)
         return cell
     }
     
+    @objc func action_close(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.petlistimg.remove(at: tag)
+        self.coll_imag.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-               return CGSize(width: self.coll_imag.frame.size.width , height:  self.coll_imag.frame.size.height)
+               return CGSize(width: 100 , height:  100)
     }
     
     func checkappointmentcommtype() {

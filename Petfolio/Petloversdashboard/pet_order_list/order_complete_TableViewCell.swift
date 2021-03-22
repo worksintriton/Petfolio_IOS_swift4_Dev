@@ -20,6 +20,9 @@ class order_complete_TableViewCell: UITableViewCell {
     @IBOutlet weak var btn_addreview: UIButton!
     @IBOutlet weak var view_addreview: UIView!
     
+    @IBOutlet weak var btn_order_details: UIButton!
+    @IBOutlet weak var btn_track_order: UIButton!
+    @IBOutlet weak var btn_return_order: UIButton!
     
     
     

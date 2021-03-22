@@ -53,6 +53,14 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_shop(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

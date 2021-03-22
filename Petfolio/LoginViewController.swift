@@ -254,7 +254,6 @@ extension UIView {
     }
     
     func startAnimating() {
-           
         Servicefile.shared.gradientLayer.frame = self.bounds
         Servicefile.shared.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
         Servicefile.shared.gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)

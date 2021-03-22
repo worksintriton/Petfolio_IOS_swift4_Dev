@@ -110,6 +110,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.view_pres.view_cornor()
         cell.selectionStyle = .none
         cell.selectionStyle = .none
+        cell.View_mainview.dropShadow()
         if self.appointtype == "current" {
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].communication_type != "Visit" {
                 cell.view_online.isHidden = false
@@ -222,6 +223,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
         }
+        cell.img_petimg.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
     }
     
@@ -283,7 +285,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 188
+        return 148
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -647,6 +649,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     }
                     break
                 case .failure(let Error):
+                    print(Error)
                     self.stopAnimatingActivityIndicator()
                     
                     break
@@ -676,6 +679,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     }
                     break
                 case .failure(let Error):
+                    print(Error)
                     self.stopAnimatingActivityIndicator()
                     
                     break

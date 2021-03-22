@@ -29,6 +29,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         // Do any additional setup after loading the view.
     }
     
+    
+    
     @IBAction func action_home(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
         self.present(vc, animated: true, completion: nil)
@@ -43,6 +45,12 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
         self.present(vc, animated: true, completion: nil)
     }
+    
+    @IBAction func action_sidemenu(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -72,6 +80,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! sp_shop_dash_bannerTableViewCell
             cell.coll_pet_dash_shop_banner.tag = indexPath.row
             cell.coll_pet_dash_shop_banner.reloadData()
+            cell.selectionStyle = .none
             return cell
         }else if indexPath.section == 1 {
             let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
@@ -82,6 +91,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             cells.coll_cat_prod_list.tag = indexPath.row
             cells.coll_cat_prod_list.reloadData()
             cells.btn_cate_seemore_btn.addTarget(self, action: #selector(action_todaydeal_seemore), for: .touchUpInside)
+            cells.selectionStyle = .none
             return cells
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "scell", for: indexPath) as! sp_dash_product_TableViewCell
@@ -92,6 +102,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             cell.btn_cate_seemore_btn.addTarget(self, action: #selector(action_category_seemore), for: .touchUpInside)
             cell.coll_cat_prod_list.tag = indexPath.row
             cell.coll_cat_prod_list.reloadData()
+            cell.selectionStyle = .none
             return cell
         }
     }

@@ -1,5 +1,4 @@
 PODS:
-  - AAMaterialSpinner (0.1.2)
   - Alamofire (5.4.0)
   - Cosmos (23.0.0)
   - DropDown (2.3.13)
@@ -101,7 +100,6 @@ PODS:
   - Toucan (1.1.0)
 
 DEPENDENCIES:
-  - AAMaterialSpinner (= 0.1.2)
   - Alamofire (~> 5.0)
   - Cosmos (~> 23.0)
   - DropDown
@@ -117,7 +115,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AAMaterialSpinner
     - Alamofire
     - Cosmos
     - DropDown
@@ -143,7 +140,6 @@ SPEC REPOS:
     - Toucan
 
 SPEC CHECKSUMS:
-  AAMaterialSpinner: deae5c969a5e13ba096e65561d4e57dfd541d5fa
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
@@ -168,6 +164,6 @@ SPEC CHECKSUMS:
   SNShadowSDK: 47806bf857763d41b8d434e97051fc5b22662f3a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: ffcd21ee5996dac3ad43d6776fe41e89b0f949c8
+PODFILE CHECKSUM: 11506989ef7c7474f39c3083d8f8e69fdb962dd4
 
 COCOAPODS: 1.10.1

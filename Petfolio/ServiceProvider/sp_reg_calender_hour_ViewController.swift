@@ -209,11 +209,6 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
                    }
                }
         
-        func alert(Message: String){
-            let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                 }))
-            self.present(alert, animated: true, completion: nil)
-        }
+       
         
 }

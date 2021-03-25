@@ -206,11 +206,6 @@ class reg_cal_hour_ViewController: UIViewController, UITableViewDelegate, UITabl
                    }
                }
         
-        func alert(Message: String){
-            let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                 }))
-            self.present(alert, animated: true, completion: nil)
-        }
+      
         
 }

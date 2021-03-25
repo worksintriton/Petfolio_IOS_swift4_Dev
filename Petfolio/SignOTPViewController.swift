@@ -244,10 +244,5 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+   
 }

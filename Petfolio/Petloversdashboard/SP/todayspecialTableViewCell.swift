@@ -42,7 +42,7 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         //cell.image_product.image = UIImage(named: "sample")
          
         if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
-            print("null value check",Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)
+           
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
                               cell.image_product.image = UIImage(named: "sample")

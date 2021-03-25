@@ -205,6 +205,22 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_clinicaddress.text!.count > 49 {
+            textview_clinicaddress.resignFirstResponder()
+        }else{
+            self.textview_clinicaddress.text = textView.text
+        }
+        if(text == "\n") {
+            textview_clinicaddress.resignFirstResponder()
+            return false
+        }
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
+        self.view_expire.isHidden = true
+        return true
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.locationManager.requestAlwaysAuthorization()
@@ -320,21 +336,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         return true
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if self.textview_clinicaddress.text!.count > 49 {
-            textview_clinicaddress.resignFirstResponder()
-        }else{
-            self.textview_clinicaddress.text = textView.text
-        }
-        if(text == "\n") {
-            textview_clinicaddress.resignFirstResponder()
-            return false
-        }
-        self.view_edudate.isHidden = true
-        self.tbl_commtype.isHidden = true
-        self.view_expire.isHidden = true
-        return true
-    }
+   
     
     
     func viewdesign(){
@@ -1071,12 +1073,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
     
     func callpetdetails(){
         self.startAnimatingActivityIndicator()

@@ -113,12 +113,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         self.present(vc, animated: true, completion: nil)
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+   
     
     func calldetails(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!

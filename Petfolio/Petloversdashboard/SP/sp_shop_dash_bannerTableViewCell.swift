@@ -65,7 +65,7 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
         cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner.dropShadow()
     if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img) {
-         print("null value check",Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)
+         
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_banner.image = UIImage(named: "sample")
@@ -76,7 +76,7 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
     }else{
          cell.img_banner.image = UIImage(named: "sample")
     }
-    print("null value check",Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)
+   
     
     return cell
    }

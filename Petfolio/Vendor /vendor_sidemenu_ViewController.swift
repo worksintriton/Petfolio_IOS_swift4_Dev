@@ -16,8 +16,8 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-     var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons","Settings", "Logout"]
-       var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Setting", "Exit"]
+     var labelmenu = ["Customer  Orders","Manage Product","My Orders","Favourities","My Coupons","Report","Settings", "Logout"]
+       var imgmenu = ["myOrder", "shop-1", "myOrder", "Like", "Discount","Report", "Setting", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,8 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.labelmenu[indexPath.row] == "Mcalender" {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
+        if self.labelmenu[indexPath.row] == "Manage Product" {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_manage_product_ViewController") as! vendor_manage_product_ViewController
         self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")

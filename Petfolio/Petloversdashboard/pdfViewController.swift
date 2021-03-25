@@ -14,7 +14,6 @@ import Alamofire
 class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var pdfview: UIView!
-    
     @IBOutlet weak var docname: UILabel!
 //    @IBOutlet weak var webview: UIWebView!
     var webView : WKWebView!
@@ -90,12 +89,7 @@ class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegat
             }
         }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-             }))
-        self.present(alert, animated: true, completion: nil)
-    }
+    
     
      func loadFileSync(url: URL, completion: @escaping (String?, Error?) -> Void)
      {

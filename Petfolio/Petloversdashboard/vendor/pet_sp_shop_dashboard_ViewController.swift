@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate {
+class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate, UITextFieldDelegate {
    
     
     
@@ -17,18 +17,41 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var view_allcategory: UIView!
     @IBOutlet weak var view_search: UIView!
+    @IBOutlet weak var textfield_search: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textfield_search.delegate = self
         self.view_footer.view_cornor()
         self.view_allcategory.view_cornor()
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
-        self.callpetshopdashget()
+        
         // Do any additional setup after loading the view.
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Servicefile.shared.pet_shop_search = self.textfield_search.text!
+        self.view.endEditing(true)
+        self.textfield_search.text = ""
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shop_search_ViewController") as! pet_vendor_shop_search_ViewController
+        self.present(vc, animated: true, completion: nil)
+        
+        return true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.callpetshopdashget()
+    }
+    
+    @IBAction func action_search(_ sender: Any) {
+        Servicefile.shared.pet_shop_search = self.textfield_search.text!
+        self.view.endEditing(true)
+        self.textfield_search.text = ""
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shop_search_ViewController") as! pet_vendor_shop_search_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
     @IBAction func action_home(_ sender: Any) {
@@ -109,14 +132,12 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     
     func buttonPressed(passdata: String) {
            print("pass data from protocal",passdata)
-        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
                       self.present(vc, animated: true, completion: nil)
        }
     
     @objc func action_todaydeal_seemore(sender: UIButton){
            let tag = sender.tag
-           print("data in index of today deal", tag)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "todaysdealseemoreViewController") as! todaysdealseemoreViewController
                self.present(vc, animated: true, completion: nil)
         
@@ -124,11 +145,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
        
        @objc func action_category_seemore(sender: UIButton){
            let tag = sender.tag
-           print("data in index of category", tag)
         Servicefile.shared.vendor_catid = Servicefile.shared.sp_dash_Product_details[tag].cat_id
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductdealsViewController") as! ProductdealsViewController
                self.present(vc, animated: true, completion: nil)
-        
        }
     
     func callpetshopdashget(){
@@ -210,12 +229,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+    
 }
 
 

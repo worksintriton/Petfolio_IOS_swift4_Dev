@@ -652,12 +652,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.present(vc, animated: true, completion: nil)
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+   
     func callDocappcancel(){
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_notification, method: .post, parameters:
            ["appointment_UID": Servicefile.shared.Doc_dashlist[self.tag_val].appointment_UID,

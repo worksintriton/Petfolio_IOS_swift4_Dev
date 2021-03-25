@@ -161,7 +161,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
-                   print("null value check",Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)
+                   
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
                            cell.image_product.image = UIImage(named: "sample")
@@ -290,9 +290,8 @@ extension productdetailsViewController {
                        }
                        break
                    case .failure(let Error):
-                       
+                       print(Error)
                        self.stopAnimatingActivityIndicator()
-                       
                        break
                    }
                }
@@ -332,10 +331,5 @@ extension productdetailsViewController {
                  self.alert(Message: "No Intenet Please check and try again ")
              }
          }
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+   
 }

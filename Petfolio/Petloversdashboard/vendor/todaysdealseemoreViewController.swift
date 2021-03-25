@@ -97,7 +97,7 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
             //cell.image_product.image = UIImage(named: "sample")
             
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
-                print("null value check",Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)
+                
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_product.image = UIImage(named: "sample")
@@ -117,6 +117,7 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Servicefile.shared.product_id = Servicefile.shared.sp_dash_Today_Special[indexPath.row]._id
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as!  productdetailsViewController
         self.present(vc, animated: true, completion: nil)
     }
@@ -172,10 +173,5 @@ extension todaysdealseemoreViewController {
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+  
 }

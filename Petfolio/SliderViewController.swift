@@ -138,12 +138,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+  
     
     
     
@@ -227,6 +222,12 @@ extension UIViewController  {
         //        Servicefile.shared.activity.stopAnimating()
         
     }
-    
+  
+    func alert(Message: String){
+        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }

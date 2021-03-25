@@ -97,6 +97,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.selectionStyle = .none
             cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+            cell.btn_return_order.tag = indexPath.row
+            cell.btn_return_order.addTarget(self, action: #selector(returndetails), for: .touchUpInside)
             return cell
         } else if  Servicefile.shared.ordertype == "current"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! order_curretn_TableViewCell
@@ -144,6 +146,16 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             return cell
         }
     }
+    
+    @objc func returndetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.service_index = tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_order_reject_ViewController") as! pet_order_reject_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     
     @objc func orderdetails(sender: UIButton){
         let tag = sender.tag
@@ -247,7 +259,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -298,7 +314,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -349,7 +369,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -416,11 +440,5 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+  
 }

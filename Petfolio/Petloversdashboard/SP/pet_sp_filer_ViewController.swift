@@ -186,10 +186,5 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    func alert(Message: String){
-              let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                   }))
-              self.present(alert, animated: true, completion: nil)
-          }
+   
 }

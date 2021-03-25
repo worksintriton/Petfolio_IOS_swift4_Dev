@@ -137,9 +137,18 @@ class Servicefile {
     static let vendor_getlistid = baseurl + "/api/product_vendor/getlist_id"
     static let vendor_new_orderlist = baseurl + "/api/vendor_order_booking/get_order_details_vendor_id"
     static let vendor_status_orderlist = baseurl + "/api/vendor_order_booking/fetch_order_details_id"
+    static let vendor_update_status_accept_return = baseurl + "/api/vendor_order_booking/update_status_accept_return"
+    
     
     static let vendor_cancel_status = baseurl + "/api/vendor_order_booking/cancel_status"
     static let vendor_cancel = baseurl + "/api/vendor_order_booking/update_status_cancel"
+    static let vendor_return = baseurl + "/api/vendor_order_booking/update_status_return"
+    static let vendor_update_status_accept = baseurl + "/api/vendor_order_booking/update_status_accept"
+    static let vendor_update_status_dispatch = baseurl + "/api/vendor_order_booking/update_status_dispatch"
+    static let vendor_update_status_vendor_cancel = baseurl + "/api/vendor_order_booking/update_status_vendor_cancel"
+    static let vendor_manage_product = baseurl + "/api/product_details/mobile/getlist_from_vendor_id1"
+    static let pet_vendor_manage_search = baseurl + "/api/product_details/text_search"
+    
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -180,6 +189,7 @@ class Servicefile {
     var orderid = ""
     var userimage = ""
     var selectedindex = 0
+    var pet_shop_search = ""
     // userdetails
     var DemoData = [demodat]()
     var UtypeData = [Utype]()
@@ -395,6 +405,7 @@ class Servicefile {
     var sp_dash_Banner_details = [pet_sp_dash_banner]()
     var sp_dash_Product_details = [pet_sp_dash_productdetails]()
     var sp_dash_Today_Special = [productdetails]()
+    var sp_dash_search = [productdetails]()
     var sp_dash_productdetails = [productdetails]()
     var vendor_product_id_details = [productdetails]()
     var order_productdetail = [order_productdetails]()
@@ -1359,6 +1370,9 @@ struct order_productdetails {
     var vendor_cancell_info : String
     var vendor_complete_date : String
     var vendor_complete_info : String
+    var user_return_date : String
+    var user_return_info : String
+    var user_return_pic : String
     init(In_var_id : String
          , In_date_of_booking : String
          , In_order_id : String
@@ -1373,7 +1387,10 @@ struct order_productdetails {
          , In_vendor_cancell_date : String
          , In_vendor_cancell_info : String
          , In_vendor_complete_date : String
-         , In_vendor_complete_info : String) {
+         , In_vendor_complete_info : String
+         , In_user_return_date : String
+         , In_user_return_info : String
+         , In_user_return_pic : String) {
         self._id = In_var_id
         self.date_of_booking = In_date_of_booking
         self.order_id = In_order_id
@@ -1389,6 +1406,9 @@ struct order_productdetails {
         self.vendor_cancell_info = In_vendor_cancell_info
         self.vendor_complete_date = In_vendor_complete_date
         self.vendor_complete_info = In_vendor_complete_info
+        self.user_return_info = In_user_return_info
+        self.user_return_date = In_user_return_date
+        self.user_return_pic = In_user_return_pic
     }
 }
 

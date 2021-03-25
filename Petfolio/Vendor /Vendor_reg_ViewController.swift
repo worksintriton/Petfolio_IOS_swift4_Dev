@@ -433,12 +433,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                      }
                  }
              }
-   func alert(Message: String){
-               let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                    }))
-               self.present(alert, animated: true, completion: nil)
-           }
+  
    
    func callvendorreg(){
     print("details in vendor registration",Servicefile.shared.gallerydicarray,Servicefile.shared.certifdicarray,self.image_photo,self.image_govid)

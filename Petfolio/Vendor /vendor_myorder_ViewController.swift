@@ -64,7 +64,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         // Do any additional setup after loading the view.
-        self.callcheckstatus()
+        
         
     }
     
@@ -74,6 +74,10 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func action_refresh(_ sender: Any) {
+        self.callcheckstatus()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.callcheckstatus()
     }
     
@@ -104,9 +108,9 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         cell.view_main.dropShadow()
         //cell.view_update_status.startAnimating()
             cell.btn_order_details.tag = indexPath.row
-            cell.btn_track_order.tag = indexPath.row
+            cell.btn_update_status.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-            cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
+            cell.btn_update_status.addTarget(self, action: #selector(updatestatusorderdetails), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         } else  if  Servicefile.shared.ordertype == "Complete"{
@@ -132,26 +136,79 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 
             return cell
         } else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "miscell", for: indexPath) as! vendor_missed_TableViewCell
-            cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    cell.image_order.image = UIImage(named: "sample")
-                } else {
-                    cell.image_order.image = image
+            if Servicefile.shared.order_productdetail[indexPath.row].user_return_info != "" &&  Servicefile.shared.order_productdetail[indexPath.row].vendor_accept_cancel == ""{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "retcell", for: indexPath) as! vendor_return_TableViewCell
+                cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.image_order.image = UIImage(named: "sample")
+                    } else {
+                        cell.image_order.image = image
+                    }
                 }
+                cell.selectionStyle = .none
+                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
+                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
+                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+                cell.btn_order_details.tag = indexPath.row
+                cell.btn_track_order.tag = indexPath.row
+                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
+                cell.view_main.dropShadow()
+                cell.btn_reject.tag = indexPath.row
+                cell.btn_reject.addTarget(self, action: #selector(Rejectdetails), for: .touchUpInside)
+                cell.btn_accept.tag = indexPath.row
+                cell.btn_accept.addTarget(self, action: #selector(Acceptdetails), for: .touchUpInside)
+                cell.view_accept.view_cornor()
+                cell.view_reject.view_cornor()
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "miscell", for: indexPath) as! vendor_missed_TableViewCell
+                cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.image_order.image = UIImage(named: "sample")
+                    } else {
+                        cell.image_order.image = image
+                    }
+                }
+                cell.selectionStyle = .none
+                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
+                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
+                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+                cell.btn_order_details.tag = indexPath.row
+                cell.btn_track_order.tag = indexPath.row
+                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
+                cell.view_main.dropShadow()
+                return cell
             }
-            cell.selectionStyle = .none
-            cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
-            cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
-            cell.btn_order_details.tag = indexPath.row
-            cell.btn_track_order.tag = indexPath.row
-            cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-            cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-            cell.view_main.dropShadow()
-            return cell
+            
         }
+    }
+    
+    @objc func Acceptdetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let alert = UIAlertController(title: "Are you sure need to accept order", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.callacceptorderreturn()
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    @objc func Rejectdetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let alert = UIAlertController(title: "Are you sure need to reject order", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.callreturnorderreturn()
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func orderdetails(sender: UIButton){
@@ -165,9 +222,16 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @objc func trackorderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorTrackorderViewController") as! vendorTrackorderViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    @objc func updatestatusorderdetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_orderstatus_ViewController") as! vendor_orderstatus_ViewController
         self.present(vc, animated: true, completion: nil)
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[indexPath.row]._id
@@ -229,6 +293,77 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func action_logout(_ sender: Any) {
         
     }
+    
+    func callacceptorderreturn(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_update_status_accept_return, method: .post, parameters:
+                                                                    [ "_id": Servicefile.shared.orderid,
+              "activity_id": 6,
+              "activity_title": "Vendor Accept Return",
+              "activity_date": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+              "vendor_accept_cancel": "Ok I will accept the Return",
+              "vendor_accept_cancel_date": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callcancelled()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func callreturnorderreturn(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_update_status_accept_return, method: .post, parameters:
+                                                                    [ "_id": Servicefile.shared.orderid,
+              "activity_id": 7,
+              "activity_title": "Vendor Reject Return",
+              "activity_date": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+              "vendor_accept_cancel": "Ok I will Reject the Return",
+              "vendor_accept_cancel_date": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callcancelled()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
     
     
     func callgetlist(){
@@ -297,7 +432,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -349,7 +488,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -401,7 +544,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let vendor_cancell_info = itmval["vendor_cancell_info"] as? String ?? ""
                             let vendor_complete_date = itmval["vendor_complete_date"] as? String ?? ""
                             let vendor_complete_info = itmval["vendor_complete_info"] as? String ?? ""
-                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info))
+                            let user_return_date = itmval["user_return_date"] as? String ?? ""
+                            let user_return_info = itmval["user_return_info"] as? String ?? ""
+                            let user_return_pic = itmval["user_return_pic"] as? String ?? ""
+                            
+                            Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -515,12 +662,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
-    func alert(Message: String){
-        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
+   
     
     @IBAction func actionl_ogout(_ sender: Any) {
         UserDefaults.standard.set("", forKey: "userid")

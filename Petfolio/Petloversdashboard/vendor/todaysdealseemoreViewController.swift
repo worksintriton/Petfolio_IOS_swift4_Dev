@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
     @IBOutlet weak var coll_prodlist: UICollectionView!
     var loadcount = 0
@@ -18,9 +18,13 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var view_sortby: UIView!
     @IBOutlet weak var view_filter: UIView!
     @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var Textfield_search: UITextField!
+    @IBOutlet weak var label_noproduct: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.label_noproduct.isHidden = true
+        self.Textfield_search.delegate = self
         self.view_search.view_cornor()
         self.view_sortby.view_cornor()
         self.view_filter.view_cornor()
@@ -28,7 +32,34 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
         Servicefile.shared.sp_dash_Today_Special.removeAll()
         self.coll_prodlist.delegate = self
         self.coll_prodlist.dataSource = self
+        Servicefile.shared.productsearchpage = "todaysdeal"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.calltotaldeal()
+    }
+    
+    @IBAction func action_sortby(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_total_sortbyViewController") as! pet_vendor_total_sortbyViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Servicefile.shared.pet_shop_search = self.Textfield_search.text!
+        self.view.endEditing(true)
+        return true
+    }
+    
+    @IBAction func action_search(_ sender: Any) {
+        Servicefile.shared.pet_shop_search = self.Textfield_search.text!
+        self.view.endEditing(true)
+        self.callsearch()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        Servicefile.shared.pet_shop_search = self.Textfield_search.text!
+        self.callsearch()
+        return true
     }
     
     @IBAction func action_home(_ sender: Any) {
@@ -71,11 +102,11 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if Servicefile.shared.loadingcount != 0 {
-            return 10
-        }else{
+//        if Servicefile.shared.loadingcount != 0 {
+//            return 10
+//        }else{
             return Servicefile.shared.sp_dash_Today_Special.count
-        }
+        //}
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,8 +121,8 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
-            cell.label_prod_title.text = "prod title " + "\(indexPath.row)"
-            cell.label_price.text = "₹ 10"+"\(indexPath.row)"
+            cell.label_prod_title.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_title
+            cell.label_price.text = "₹ "+String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             //cell.image_product.image = UIImage(named: "sample")
@@ -129,7 +160,7 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
 extension todaysdealseemoreViewController {
     
     func calltotaldeal(){
-        Servicefile.shared.loadingcount = 1
+        self.startAnimatingActivityIndicator()
         self.loadcount = self.loadcount + 1
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.todaysdeal, method: .post, parameters:
             [ "skip_count": self.loadcount ,
@@ -137,7 +168,7 @@ extension todaysdealseemoreViewController {
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
-                    print("success data",res)
+                    print("success data todaysdealseemoreViewController",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Today_Special = res["Data"] as! NSArray
@@ -154,14 +185,18 @@ extension todaysdealseemoreViewController {
                             let product_title = itmdata["product_title"] as? String ?? ""
                             Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
-                        Servicefile.shared.loadingcount = 0
+                        if Servicefile.shared.sp_dash_Today_Special.count > 0{
+                            self.label_noproduct.isHidden = true
+                        }else{
+                            self.label_noproduct.isHidden = false
+                        }
+                        self.stopAnimatingActivityIndicator()
                         self.coll_prodlist.reloadData()
                     }else{
-                        Servicefile.shared.loadingcount = 0
+                        self.stopAnimatingActivityIndicator()
                     }
                     break
                 case .failure(let Error):
-                    Servicefile.shared.loadingcount = 0
                     self.stopAnimatingActivityIndicator()
                     
                     break
@@ -173,5 +208,57 @@ extension todaysdealseemoreViewController {
         }
     }
     
+    func callsearch(){
+//        Servicefile.shared.loadingcount = 1
+//        self.loadcount = self.loadcount + 1
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_total_search, method: .post, parameters:
+                                                                    ["search_string": Servicefile.shared.pet_shop_search], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    self.label_noproduct.isHidden = true
+                    if Code == 200 {
+                        let search_val = res["Data"] as! NSArray
+                        Servicefile.shared.sp_dash_search.removeAll()
+                        for itm in 0..<search_val.count{
+                            let itmdata = search_val[itm] as! NSDictionary
+                            let id  = itmdata["_id"] as? String ?? ""
+                            let product_discount = itmdata["product_discount"] as? Int ?? 0
+                            let product_fav = itmdata["product_fav"] as? Bool ?? false
+                            let product_img = itmdata["product_img"] as? String ?? Servicefile.sample_img
+                            let product_price = itmdata["product_price"] as? Int ?? 0
+                            let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
+                            let product_review = String(itmdata["product_review"] as? Int ?? 0)
+                            let product_title = itmdata["product_title"] as? String ?? ""
+                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                        }
+                        if Servicefile.shared.sp_dash_search.count > 0{
+                            self.label_noproduct.isHidden = true
+                        }else{
+                            self.label_noproduct.isHidden = false
+                        }
+                        //Servicefile.shared.loadingcount = 0
+                        self.stopAnimatingActivityIndicator()
+                        self.coll_prodlist.reloadData()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        //Servicefile.shared.loadingcount = 0
+                    }
+                    break
+                case .failure(let Error):
+                    //Servicefile.shared.loadingcount = 0
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
   
 }

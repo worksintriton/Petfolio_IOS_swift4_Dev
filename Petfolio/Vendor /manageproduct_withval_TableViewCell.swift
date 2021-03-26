@@ -10,6 +10,7 @@ import UIKit
 
 class manageproduct_withval_TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var image_ischeck: UIImageView!
     @IBOutlet weak var btn_ischeck: UIButton!
     @IBOutlet weak var btn_side_menu: UIButton!
     @IBOutlet weak var btn_hide: UIButton!

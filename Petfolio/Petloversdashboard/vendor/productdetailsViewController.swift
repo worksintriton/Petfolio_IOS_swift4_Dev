@@ -30,7 +30,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var label_description: UILabel!
     @IBOutlet weak var label_cartcount: UILabel!
     
-    
+    @IBOutlet weak var View_outofstock: UIView!
+    @IBOutlet weak var view_isqualityprod: UIView!
     
     var _id = ""
     var ca_id = ""
@@ -49,6 +50,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.View_outofstock.isHidden = true
+        self.view_isqualityprod.isHidden = true
+        self.view_addtocart.isHidden = true
         self.view_dec.layer.cornerRadius =  self.view_dec.frame.height / 2
         self.view_inc.layer.cornerRadius =  self.view_inc.frame.height / 2
         self.view_addtocart.view_cornor()
@@ -111,15 +115,19 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_dec(_ sender: Any) {
-        if self.product_cart_count > 0 || self.product_cart_count <= Int(self.threshould)! {
-            self.calldectheproductcount()
-            self.label_cartcount.text = String(self.product_cart_count)
+        if self.product_cart_count > 0  {
+            if  self.product_cart_count <= Int(self.threshould)! {
+                self.calldectheproductcount()
+                self.label_cartcount.text = String(self.product_cart_count)
+            }
         }
     }
     
     @IBAction func action_inc(_ sender: Any) {
+        if  self.product_cart_count < Int(self.threshould)! {
         self.callinctheproductcount()
         self.label_cartcount.text = String(self.product_cart_count)
+        }
     }
     
     
@@ -232,8 +240,16 @@ extension productdetailsViewController {
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription
                         self.label_cartcount.text = String(self.product_cart_count)
-                        
-                        
+                        let quantity = Int(self.threshould) ?? 0
+                        if quantity > 0 {
+                            self.View_outofstock.isHidden = true
+                            self.view_isqualityprod.isHidden = false
+                            self.view_addtocart.isHidden = false
+                        }else{
+                            self.View_outofstock.isHidden = false
+                            self.view_isqualityprod.isHidden = true
+                            self.view_addtocart.isHidden = true
+                        }
                         
                         Servicefile.shared.vendor_product_id_details.removeAll()
                         for prodi in 0..<product_related.count{

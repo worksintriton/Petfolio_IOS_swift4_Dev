@@ -148,6 +148,9 @@ class Servicefile {
     static let vendor_update_status_vendor_cancel = baseurl + "/api/vendor_order_booking/update_status_vendor_cancel"
     static let vendor_manage_product = baseurl + "/api/product_details/mobile/getlist_from_vendor_id1"
     static let pet_vendor_manage_search = baseurl + "/api/product_details/text_search"
+    static let pet_vendor_cat_search = baseurl + "/api/product_details/cat_text_search"
+    static let pet_vendor_total_search = baseurl + "/api/product_details/todaydeal_text_search"
+    static let pet_vendor_sortby = baseurl + "/api/product_details/sort"
     
     // Signup page
     var email_status = false
@@ -156,6 +159,7 @@ class Servicefile {
     // Signup page
     static let sample_bannerimg = "http://52.25.163.13:3000/api/uploads/banner_empty.jpg"
     static let sample_img = "http://52.25.163.13:3000/api/uploads/Pic_empty.jpg"
+    
     // sprint 1
     
     let gradientLayer = CAGradientLayer()
@@ -215,6 +219,7 @@ class Servicefile {
     var petuserlocaadd = [locationdetails]()
     var pet_SP_service_details = [SP_service_details]()
     var product_id = ""
+    var manageproductDic = [Any]()
     // pet dashboard
     // pet service
     var pet_servicecat = [service_cat]()
@@ -410,6 +415,10 @@ class Servicefile {
     var vendor_product_id_details = [productdetails]()
     var order_productdetail = [order_productdetails]()
     var vendor_orderstatuss = [vendor_orderstatus]()
+    var data = ["Recent products","Highest discount","Best sellers","Price - High to Low","Price - Low to High"]
+    var isdata = ["0","0","0","0","0"]
+    var isdataval = ["0","0","0","0","0"]
+    var productsearchpage = ""
     
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
     static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor

@@ -27,8 +27,6 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
-        
-        // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -37,7 +35,6 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.textfield_search.text = ""
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shop_search_ViewController") as! pet_vendor_shop_search_ViewController
         self.present(vc, animated: true, completion: nil)
-        
         return true
     }
     
@@ -116,7 +113,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
             cells.btn_cate_seemore_btn.addTarget(self, action: #selector(action_todaydeal_seemore), for: .touchUpInside)
             cells.selectionStyle = .none
             return cells
-        }else{
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "scell", for: indexPath) as! sp_dash_product_TableViewCell
             cell.delegate = self
             cell.label_cate_value.text = "cat "+"\(indexPath.row)"

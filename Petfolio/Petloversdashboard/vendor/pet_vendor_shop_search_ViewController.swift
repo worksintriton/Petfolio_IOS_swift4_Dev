@@ -32,7 +32,6 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
-        self.callsearch()
         return true
     }
     

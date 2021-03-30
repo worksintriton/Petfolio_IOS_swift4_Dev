@@ -88,7 +88,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
@@ -113,7 +113,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
@@ -136,7 +136,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items"
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
             cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)

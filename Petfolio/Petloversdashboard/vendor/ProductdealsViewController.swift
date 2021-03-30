@@ -23,6 +23,9 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.label_noproduct.text = "No products available"
+        self.label_noproduct.isHidden = true
+        self.textfield_search.text = ""
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
         self.view_sortby.view_cornor()
@@ -32,17 +35,24 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
         self.coll_prodlist.delegate = self
         self.coll_prodlist.dataSource = self
         Servicefile.shared.productsearchpage = "Productdeal"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         self.callproddeal()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.coll_prodlist.reloadData()
+    }
+    
     @IBAction func action_sortby(_ sender: Any) {
+        self.textfield_search.text = ""
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_total_sortbyViewController") as! pet_vendor_total_sortbyViewController
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_filer(_ sender: Any) {
+        self.textfield_search.text = ""
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorfilterViewController") as!  vendorfilterViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
@@ -95,11 +105,11 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if Servicefile.shared.loadingcount != 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prodload", for: indexPath) as! ProductshimmerCollectionViewCell
-            cell.view_img.startAnimating()
-            cell.view_wish.startAnimating()
-            cell.view_title.startAnimating()
-            cell.view_cot.startAnimating()
-            cell.view_rate.startAnimating()
+            cell.view_img.startAnimatings()
+            cell.view_wish.startAnimatings()
+            cell.view_title.startAnimatings()
+            cell.view_cot.startAnimatings()
+            cell.view_rate.startAnimatings()
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
@@ -165,6 +175,12 @@ extension ProductdealsViewController {
                             let product_title = prodval["product_title"] as? String ?? ""
                             Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
+                        if Servicefile.shared.sp_dash_productdetails.count > 0 {
+                            self.label_noproduct.isHidden = true
+                        }else{
+                            self.label_noproduct.isHidden = false
+                        }
+                           
                         Servicefile.shared.loadingcount = 0
                         self.coll_prodlist.reloadData()
                     }else{
@@ -199,7 +215,7 @@ extension ProductdealsViewController {
                     self.label_noproduct.isHidden = true
                     if Code == 200 {
                         let search_val = res["Data"] as! NSArray
-                        Servicefile.shared.sp_dash_search.removeAll()
+                        Servicefile.shared.sp_dash_productdetails.removeAll()
                         for itm in 0..<search_val.count{
                             let itmdata = search_val[itm] as! NSDictionary
                             let id  = itmdata["_id"] as? String ?? ""
@@ -212,7 +228,7 @@ extension ProductdealsViewController {
                             let product_title = itmdata["product_title"] as? String ?? ""
                             Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
-                        if Servicefile.shared.sp_dash_search.count > 0{
+                        if Servicefile.shared.sp_dash_productdetails.count > 0{
                             self.label_noproduct.isHidden = true
                         }else{
                             self.label_noproduct.isHidden = false

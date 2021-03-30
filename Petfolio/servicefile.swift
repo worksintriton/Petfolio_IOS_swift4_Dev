@@ -151,6 +151,7 @@ class Servicefile {
     static let pet_vendor_cat_search = baseurl + "/api/product_details/cat_text_search"
     static let pet_vendor_total_search = baseurl + "/api/product_details/todaydeal_text_search"
     static let pet_vendor_sortby = baseurl + "/api/product_details/sort"
+    static let pet_vendor_filter = baseurl + "/api/product_details/filter"
     
     // Signup page
     var email_status = false
@@ -415,6 +416,14 @@ class Servicefile {
     var vendor_product_id_details = [productdetails]()
     var order_productdetail = [order_productdetails]()
     var vendor_orderstatuss = [vendor_orderstatus]()
+    var vendor_fstatus = [vendor_filterstatus]()
+    var vendor_fdata = [vendor_filterdata]()
+    var vendor_orgifdata = [vendor_filterdata]()
+    var today_deals_status = false
+    var vendor_filter_pet_type_id = ""
+    var vendor_filter_pet_breed_id =  ""
+    var vendor_filter_discount = ""
+    var vendor_filter_catid = ""
     var data = ["Recent products","Highest discount","Best sellers","Price - High to Low","Price - Low to High"]
     var isdata = ["0","0","0","0","0"]
     var isdataval = ["0","0","0","0","0"]
@@ -570,6 +579,20 @@ class Servicefile {
         format.dateFormat = "yyyy-MM-dd"
         let nextDate = format.string(from: date)
         return nextDate
+    }
+    
+    func yyyystringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "yyyy"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
+    func yyyyDateformat(date: String) -> Date{
+        let format = DateFormatter()
+        format.dateFormat = "yyyy"
+        let nextDate = format.date(from: date)
+        return nextDate!
     }
     
     func ddmmyyyystringformat(date: Date) -> String{
@@ -1358,6 +1381,28 @@ struct vendor_orderstatus {
         self.date = In_date
         self.id = In_id
         self.title = In_title
+    }
+}
+
+struct vendor_filterstatus {
+    var id : String
+    var title : String
+    var isselect : Bool
+    init(In_id: String,In_title: String, In_isselect : Bool) {
+        self.id = In_id
+        self.title = In_title
+        self.isselect = In_isselect
+    }
+}
+
+struct vendor_filterdata{
+    var sectionname: String
+    var row_val : [vendor_filterstatus]
+    var isselect : Bool
+    init(In_sectionname: String,In_row_val: [vendor_filterstatus], In_isselect: Bool) {
+        self.sectionname = In_sectionname
+        self.row_val = In_row_val
+        self.isselect = In_isselect
     }
 }
 

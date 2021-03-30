@@ -45,6 +45,7 @@
 		84B1DA1A2602066A00AEEB2C /* vendor_orderstatus_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B1DA192602066A00AEEB2C /* vendor_orderstatus_ViewController.swift */; };
 		84C46CF725F7412200808FBB /* ProductdealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C46CF625F7412200808FBB /* ProductdealsViewController.swift */; };
 		84D56A7B2609F0BF00C3CE9E /* vendor_return_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D56A7A2609F0BF00C3CE9E /* vendor_return_TableViewCell.swift */; };
+		84DBE6442612F88D0052E981 /* vendorfilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE6432612F88D0052E981 /* vendorfilterViewController.swift */; };
 		84DD2D7F26046C39008EF44B /* orderdetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD2D7E26046C39008EF44B /* orderdetailsViewController.swift */; };
 		84DD2DD72604B82F008EF44B /* orderlist_cancel_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD2DD62604B82F008EF44B /* orderlist_cancel_ViewController.swift */; };
 		84E7BB2A25F652ED009634ED /* todaysdealseemoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */; };
@@ -266,6 +267,7 @@
 		84B1DA192602066A00AEEB2C /* vendor_orderstatus_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_orderstatus_ViewController.swift; sourceTree = "<group>"; };
 		84C46CF625F7412200808FBB /* ProductdealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductdealsViewController.swift; sourceTree = "<group>"; };
 		84D56A7A2609F0BF00C3CE9E /* vendor_return_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_return_TableViewCell.swift; sourceTree = "<group>"; };
+		84DBE6432612F88D0052E981 /* vendorfilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendorfilterViewController.swift; sourceTree = "<group>"; };
 		84DD2D7E26046C39008EF44B /* orderdetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderdetailsViewController.swift; sourceTree = "<group>"; };
 		84DD2DD62604B82F008EF44B /* orderlist_cancel_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderlist_cancel_ViewController.swift; sourceTree = "<group>"; };
 		84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todaysdealseemoreViewController.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				8451A91C260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift */,
 				842C8B2E260DB7E200B32331 /* pet_vendor_total_sortbyViewController.swift */,
 				842C8B32260DB9CB00B32331 /* isselectionTableViewCell.swift */,
+				84DBE6432612F88D0052E981 /* vendorfilterViewController.swift */,
 			);
 			path = vendor;
 			sourceTree = "<group>";
@@ -1238,6 +1241,7 @@
 				B0E98F7325A80D58005C0EF9 /* Sp_mycalender_ViewController.swift in Sources */,
 				B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */,
 				B0228C8D2579FC1F00E16FD7 /* Doc_prescriptionViewController.swift in Sources */,
+				84DBE6442612F88D0052E981 /* vendorfilterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

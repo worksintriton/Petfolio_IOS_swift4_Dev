@@ -190,7 +190,6 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
                } else {
                    print("Unable to initialize")
                }
-               
                //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
                //               let options: [AnyHashable:Any] = [
                //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.

@@ -116,7 +116,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "scell", for: indexPath) as! sp_dash_product_TableViewCell
             cell.delegate = self
-            cell.label_cate_value.text = "cat "+"\(indexPath.row)"
+            cell.label_cate_value.text = Servicefile.shared.sp_dash_Product_details[indexPath.row].cat_name
             Servicefile.shared.sp_shop_dash_tbl_index = indexPath.row
             cell.btn_cate_seemore_btn.tag = indexPath.row
             cell.btn_cate_seemore_btn.addTarget(self, action: #selector(action_category_seemore), for: .touchUpInside)
@@ -135,6 +135,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     
     @objc func action_todaydeal_seemore(sender: UIButton){
            let tag = sender.tag
+        Servicefile.shared.today_deals_status = true
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "todaysdealseemoreViewController") as! todaysdealseemoreViewController
                self.present(vc, animated: true, completion: nil)
         
@@ -142,6 +143,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
        
        @objc func action_category_seemore(sender: UIButton){
            let tag = sender.tag
+        Servicefile.shared.today_deals_status = false
         Servicefile.shared.vendor_catid = Servicefile.shared.sp_dash_Product_details[tag].cat_id
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductdealsViewController") as! ProductdealsViewController
                self.present(vc, animated: true, completion: nil)

@@ -23,6 +23,8 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.Textfield_search.text = ""
+        self.label_noproduct.text = "No products available"
         self.label_noproduct.isHidden = true
         self.Textfield_search.delegate = self
         self.view_search.view_cornor()
@@ -33,16 +35,27 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
         self.coll_prodlist.delegate = self
         self.coll_prodlist.dataSource = self
         Servicefile.shared.productsearchpage = "todaysdeal"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         self.calltotaldeal()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.coll_prodlist.reloadData()
+    }
+    
     @IBAction func action_sortby(_ sender: Any) {
+        self.Textfield_search.text = ""
+        self.view.endEditing(true)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_total_sortbyViewController") as! pet_vendor_total_sortbyViewController
         self.present(vc, animated: true, completion: nil)
     }
+    
+    @IBAction func action_filer(_ sender: Any) {
+        self.Textfield_search.text = ""
+        self.view.endEditing(true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorfilterViewController") as!  vendorfilterViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+   
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         Servicefile.shared.pet_shop_search = self.Textfield_search.text!
@@ -235,7 +248,7 @@ extension todaysdealseemoreViewController {
                             let product_title = itmdata["product_title"] as? String ?? ""
                             Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
-                        if Servicefile.shared.sp_dash_search.count > 0{
+                        if Servicefile.shared.sp_dash_Today_Special.count > 0{
                             self.label_noproduct.isHidden = true
                         }else{
                             self.label_noproduct.isHidden = false

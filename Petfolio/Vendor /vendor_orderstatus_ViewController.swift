@@ -156,6 +156,14 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
         self.view_status_alpha.addGestureRecognizer(tap)
     }
     
+    @objc func hidetbl() {
+        self.tbl_status.isHidden = true
+        self.view_status_alpha.isHidden = true
+        self.view_status_popup.isHidden = true
+        self.textview_status_reason.resignFirstResponder()
+        self.Label_status.text = "Select Order Status"
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
             if let firstVC = presentingViewController as? vendor_myorder_ViewController {
@@ -166,14 +174,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
        }
    
     
-    @objc func hidetbl() {
-        self.tbl_status.isHidden = true
-        self.view_status_alpha.isHidden = true
-        self.view_status_popup.isHidden = true
-        self.textview_status_reason.resignFirstResponder()
-        self.Label_status.text = "Select Order Status"
-    }
-    
+   
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

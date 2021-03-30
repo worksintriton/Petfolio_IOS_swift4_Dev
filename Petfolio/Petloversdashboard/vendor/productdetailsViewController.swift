@@ -235,7 +235,7 @@ extension productdetailsViewController {
                         self.label_product_title.text = self.product_cate
                         self.label_likes.text = self.product_review
                         self.label_rating.text = self.product_rating
-                        self.label_product_cost.text = String(self.product_price)
+                        self.label_product_cost.text = "₹ " + String(self.product_price)
                         self.label_discount.text = String(self.product_discount)
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription

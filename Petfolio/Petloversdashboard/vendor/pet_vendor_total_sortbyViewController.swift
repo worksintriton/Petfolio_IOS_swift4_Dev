@@ -88,13 +88,27 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
     func callsortby(){
 //        Servicefile.shared.loadingcount = 1
 //        self.loadcount = self.loadcount + 1
+        var params  = [String:Any]()
+        if Servicefile.shared.today_deals_status {
+            params = [ "recent": Servicefile.shared.isdata[0],
+                       "high_discount": Servicefile.shared.isdata[1],
+                       "best_sellers": Servicefile.shared.isdata[2],
+                       "high_to_low": Servicefile.shared.isdata[3],
+                       "low_to_high": Servicefile.shared.isdata[4],
+                       "cat_id" : "",
+                       "today_deals" : Servicefile.shared.today_deals_status]
+        }else{
+            params = [ "recent": Servicefile.shared.isdata[0],
+                       "high_discount": Servicefile.shared.isdata[1],
+                       "best_sellers": Servicefile.shared.isdata[2],
+                       "high_to_low": Servicefile.shared.isdata[3],
+                       "low_to_high": Servicefile.shared.isdata[4],
+                       "cat_id" : Servicefile.shared.vendor_catid,
+                       "today_deals" : Servicefile.shared.today_deals_status]
+        }
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_sortby, method: .post, parameters:
-                                                                    [ "recent": Servicefile.shared.isdata[0],
-                                                                      "high_discount": Servicefile.shared.isdata[1],
-                                                                      "best_sellers": Servicefile.shared.isdata[2],
-                                                                      "high_to_low": Servicefile.shared.isdata[3],
-                                                                      "low_to_high": Servicefile.shared.isdata[4]], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    params, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -103,7 +117,7 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
                     
                     if Code == 200 {
                         let search_val = res["Data"] as! NSArray
-                        if Servicefile.shared.productsearchpage == "todaysdeal" {
+                        if Servicefile.shared.today_deals_status {
                             Servicefile.shared.sp_dash_Today_Special.removeAll()
                         }else{
                             Servicefile.shared.sp_dash_productdetails.removeAll()
@@ -118,7 +132,7 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
                             let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
-                            if Servicefile.shared.productsearchpage == "todaysdeal" {
+                            if Servicefile.shared.today_deals_status {
                                 Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                             }else{
                                 Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))

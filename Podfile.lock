@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (5.4.0)
   - Cosmos (23.0.0)
-  - DropDown (2.3.13)
   - Firebase/Analytics (6.33.0):
     - Firebase/Core
   - Firebase/Core (6.33.0):
@@ -83,6 +82,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
+  - iOSDropDown (0.3.4)
+  - JJFloatingActionButton (2.5.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -102,12 +103,13 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.0)
   - Cosmos (~> 23.0)
-  - DropDown
   - Firebase/Analytics
   - Firebase/Messaging
   - FSCalendar
   - GoogleMaps
   - GooglePlaces
+  - iOSDropDown
+  - JJFloatingActionButton
   - NVActivityIndicatorView
   - SDWebImage
   - SNShadowSDK
@@ -117,7 +119,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Cosmos
-    - DropDown
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -131,6 +132,8 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - GoogleUtilities
+    - iOSDropDown
+    - JJFloatingActionButton
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
@@ -142,7 +145,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
-  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
   FirebaseAnalytics: 5dd088bd2e67bb9d13dbf792d1164ceaf3052193
   FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
@@ -156,6 +158,8 @@ SPEC CHECKSUMS:
   GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
   GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
+  JJFloatingActionButton: fdc3aefb0f28f04d0f988fa25d5fac97028a9ea7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   NVActivityIndicatorView: 738e843cb8924e9e4fc3e559d0728031624bf860
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
@@ -164,6 +168,6 @@ SPEC CHECKSUMS:
   SNShadowSDK: 47806bf857763d41b8d434e97051fc5b22662f3a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 11506989ef7c7474f39c3083d8f8e69fdb962dd4
+PODFILE CHECKSUM: 5669e2889ecc02afd39111dbcaf7878a87d6fa76
 
 COCOAPODS: 1.10.1

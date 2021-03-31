@@ -36,17 +36,24 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_price)
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
+        if Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_fav {
+            cell.image_fav.image = UIImage(named: imagelink.favtrue)
+        }else{
+            cell.image_fav.image = UIImage(named: imagelink.favfalse)
+        }
+       
+        
         if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img) {
            
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
-                              cell.image_product.image = UIImage(named: "sample")
+                            cell.image_product.image = UIImage(named: imagelink.sample)
                           } else {
                               cell.image_product.image = image
                           }
                       }
         }else{
-            cell.image_product.image = UIImage(named: "sample")
+            cell.image_product.image = UIImage(named: imagelink.sample)
         }
         return cell
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import JJFloatingActionButton
 
 class vendor_manage_product_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
@@ -31,6 +32,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_datepicker: UIView!
     @IBOutlet weak var datepicker_date: UIDatePicker!
     
+    @IBOutlet weak var view_manage: UIView!
     @IBOutlet weak var view_discount_unit: UIView!
     @IBOutlet weak var view_deal_price: UIView!
     @IBOutlet weak var view_discount_details: UIView!
@@ -51,9 +53,19 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_fistview: UIView!
     @IBOutlet weak var view_lastview: UIView!
     
+    
+    var discount = 0
+    var dis_amt = 0
+    var textdiscount = ""
+    var textamt = ""
+    
+    let actionButton = JJFloatingActionButton()
+    var applylabelval = "Apply Deal"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.label_apply_status.text = "Apply Deal"
+        self.view_app_deal.isHidden = false
+        self.label_apply_status.text = applylabelval
         self.view_discount_details.isHidden = true
         self.view_stackview.layer.cornerRadius = 10.0
         self.view_datepicker.view_cornor()
@@ -85,7 +97,79 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.datepicker_date.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         self.datepicker_date.minimumDate = Date()
         self.discounttextfielddelegate()
+        self.floatbtn()
+        self.actionButton.isHidden = true
+        self.textfield_discount_perunit.addTarget(self, action: #selector(textFielddiscount_perunit), for: .editingChanged)
+        self.textfield_deal_price.addTarget(self, action: #selector(textFielddeal_price), for: .editingChanged)
     }
+    
+    @objc func textFielddiscount_perunit(textField:UITextField) {
+        if textField == self.textfield_discount_perunit {
+            self.textfield_deal_price.text = ""
+            self.textfield_discount_perunit.text = textField.text
+            if self.textfield_discount_perunit.text == "" {
+                self.view_discount_details.isHidden = true
+            }
+            if self.self.isselectval.count == 0 {
+                print("if text empty")
+            }else if self.isselectval.count == 1  {
+                print("if one data present")
+                self.callsinglediscount()
+            }else{
+                print("if more data present")
+            }
+        }
+    }
+    
+    @objc func textFielddeal_price(textField:UITextField) {
+        if textField == self.textfield_deal_price {
+            self.textfield_discount_perunit.text = ""
+            self.textfield_deal_price.text = textField.text
+            if self.textfield_deal_price.text == "" {
+                self.view_discount_details.isHidden = true
+            }
+            if self.self.isselectval.count == 0 {
+                print("if text empty")
+            }else if self.isselectval.count == 1  {
+                print("if one data present")
+                self.callsingleamount()
+            }else{
+                print("if more data present")
+            }
+        }
+    }
+    
+    
+    
+    func floatbtn(){
+        actionButton.addItem(title: "Discard", image: UIImage(named: "047")?.withRenderingMode(.alwaysTemplate)) { item in
+          // do something
+            self.isselectval.removeAll()
+            self.singleselect = ""
+            self.isselect = self.orgiselect
+            self.isappdeal = false
+            self.view_discard.isHidden = true
+            self.view_app_deal.isHidden = false
+            self.actionButton.isHidden = true
+            self.tbl_manage_product.reloadData()
+            self.hidediscount()
+        }
+        actionButton.addItem(title: applylabelval, image: UIImage(named: "047")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.isappdeal = true
+            self.tbl_manage_product.reloadData()
+            if self.isselectval.count > 0  || self.singleselect != ""{
+                self.showdiscount()
+            }
+        }
+        self.view.addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -68).isActive = true
+        actionButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        actionButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+    }
+    
+   
     
     @objc func dateChanged(_ sender: UIDatePicker) {
         if isstart {
@@ -104,11 +188,16 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             self.view_datepicker.isHidden = true
         }
     }
-    
-   
-    
     @objc func hidetbl() {
         self.hidediscount()
+        self.discount = 0
+        self.dis_amt = 0
+        self.textfield_deal_price.text = ""
+        self.textfield_discount_perunit.text = ""
+        self.view_discount_details.isHidden = true
+        self.view_datepicker.isHidden = true
+        self.textfield_startdate.text = ""
+        self.textfield_expirydate.text = ""
     }
     
     func discounttextfielddelegate(){
@@ -119,7 +208,6 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     }
     
     func showdiscount(){
-    
         self.view_shadow.isHidden = false
         self.view_prod_selected.isHidden = false
         
@@ -151,25 +239,45 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     
     
     @IBAction func action_update_discount(_ sender: Any) {
+        self.textdiscount = self.textfield_discount_perunit.text!
+        self.textamt = self.textfield_deal_price.text!
         
-    }
-    
-    @IBAction func action_appdeal(_ sender: Any) {
-        self.isappdeal = true
-        self.view_discard.isHidden = false
-        self.tbl_manage_product.reloadData()
-        if self.isselectval.count > 0  || singleselect != ""{
-            self.showdiscount()
+       if self.textfield_startdate.text == "" &&  self.textfield_expirydate.text == ""{
+            self.alert(Message: "Please enter the Discount or  Amount")
+        }else if self.textfield_startdate.text == ""{
+            self.alert(Message: "Please select the start date")
+        }else if self.textfield_expirydate.text == ""{
+            self.alert(Message: "Please select the end date")
+        }else if self.isselectval.count == 1  {
+            print("if one data present")
+            self.callsinglesubmit()
+        }else{
+            print("if more data present")
+            self.callmultisubmit()
         }
     }
     
-    @IBAction func action_discard(_ sender: Any) {
-        self.isselectval.removeAll()
-        self.singleselect = ""
-        self.isselect = self.orgiselect
-        self.isappdeal = false
-        self.view_discard.isHidden = true
+    @IBAction func action_appdeal(_ sender: Any) {
+        self.view_app_deal.isHidden = true
+        self.actionButton.isHidden = false
+        self.isappdeal = true
         self.tbl_manage_product.reloadData()
+//        self.view_discard.isHidden = false
+//        self.tbl_manage_product.reloadData()
+//        if self.isselectval.count > 0  || singleselect != ""{
+//            self.showdiscount()
+//        }
+    }
+    
+    @IBAction func action_discard(_ sender: Any) {
+        self.view_app_deal.isHidden = false
+        self.actionButton.isHidden = true
+        self.isappdeal = false
+        self.tbl_manage_product.reloadData()
+        if self.isselectval.count > 0  || singleselect != ""{
+            self.tbl_manage_product.reloadData()
+            self.showdiscount()
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -370,11 +478,13 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             self.tbl_manage_product.reloadData()
         }
         
-        if self.isselectval.count > 0 {
-            self.label_apply_status.text = "Submit"
-        }else{
-            self.label_apply_status.text = "Apply Deal"
-        }
+//        if self.isselectval.count > 0 {
+//            self.label_apply_status.text = "Submit"
+//            self.view_discard.isHidden = false
+//        }else{
+//            self.label_apply_status.text = "Apply Deal"
+//            self.view_discard.isHidden = true
+//        }
         print("ischeck final",self.isselectval,"selected", selectdata)
     }
     
@@ -473,6 +583,153 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                          self.orgiDrop = self.isDrop
                         self.orgiselect = self.isselect
                         self.tbl_manage_product.reloadData()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func callsinglediscount(){
+        let discount = Int(self.textdiscount) ?? 0
+        let cost = Int(self.textamt) ?? 0
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_discountsingle, method: .post, parameters:
+                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":true], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data in manage product",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        self.discount = Data["discount"] as? Int ?? 0
+                        self.dis_amt = Data["cost"] as? Int ?? 0
+                        self.label_discount_val.text = String(self.discount) + " %"
+                        self.label_cost.text = "₹" + String(self.dis_amt)
+                        if self.textfield_discount_perunit.text! != "" {
+                            self.view_discount_details.isHidden = false
+                        }else{
+                            self.view_discount_details.isHidden = true
+                        }
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    func callsingleamount(){
+        let discount = Int(self.textdiscount) ?? 0
+        let cost = Int(self.textamt) ?? 0
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_discountsingle, method: .post, parameters:
+                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data in manage product",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        self.discount = Data["discount"] as? Int ?? 0
+                        self.dis_amt = Data["cost"] as? Int ?? 0
+                        self.label_discount_val.text = String(self.discount) + " %"
+                        self.label_cost.text = "₹" + String(self.dis_amt)
+                        if self.textfield_deal_price.text! != "" {
+                            self.view_discount_details.isHidden = false
+                        }else{
+                            self.view_discount_details.isHidden = true
+                        }
+                        
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func callsinglesubmit(){
+        let discount = Int(self.textdiscount) ?? 0
+        let cost = Int(self.textamt) ?? 0
+        print("single submit","_id", self.singleselect,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",false)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitsingle, method: .post,
+                                                                 parameters: ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data in manage product",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        //let Data = res["Data"] as! NSDictionary
+                       
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    
+    
+    func callmultisubmit(){
+        let discount = Int(self.textdiscount) ?? 0
+        let cost = Int(self.textamt) ?? 0
+        print("single submit","_id", self.isselectval,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",true)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitmultiple, method: .post, parameters:["_id": self.isselectval,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":true], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data in manage product",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        //let Data = res["Data"] as! NSArray
+                        
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -169,8 +169,9 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
             Servicefile.shared.vendor_fdata[tag].isselect = true
         }
         self.tbl_sortlist.reloadData()
-        
     }
+    
+    
     
     @objc func action_isselect(sender : Int, section: Int){
         

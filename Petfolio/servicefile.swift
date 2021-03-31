@@ -8,6 +8,13 @@ import Alamofire
 import UIKit
 import NVActivityIndicatorView
 
+class imagelink{
+    static let link = imagelink()
+    static let favtrue = "Like 3"
+    static let favfalse = "Like 2"
+    static let sample = "sample"
+}
+
 class Servicefile {
     
     static let shared = Servicefile()
@@ -152,7 +159,11 @@ class Servicefile {
     static let pet_vendor_total_search = baseurl + "/api/product_details/todaydeal_text_search"
     static let pet_vendor_sortby = baseurl + "/api/product_details/sort"
     static let pet_vendor_filter = baseurl + "/api/product_details/filter"
+    static let pet_vendor_manage_discountsingle = baseurl + "/api/product_details/cal_discount_single"
     
+    static let pet_vendor_manage_discountmultiple = baseurl + "/api/product_details/discount_multi"
+    static let pet_vendor_manage_submitsingle = baseurl + "/api/product_details/discount_single"
+    static let pet_vendor_manage_submitmultiple = baseurl + "/api/product_details/discount_multi"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -164,7 +175,7 @@ class Servicefile {
     // sprint 1
     
     let gradientLayer = CAGradientLayer()
-    
+    var ruppesymbol = "₹ "
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
     var customview = UIView()

@@ -40,20 +40,22 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
         //cell.image_product.image = UIImage(named: "sample")
-         
+        if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_fav {
+            cell.image_fav.image = UIImage(named: imagelink.favtrue)
+        }else{
+            cell.image_fav.image = UIImage(named: imagelink.favfalse)
+        }
         if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
-           
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
                               cell.image_product.image = UIImage(named: "sample")
                           } else {
                               cell.image_product.image = image
                           }
-                      }
+          }
         }else{
             cell.image_product.image = UIImage(named: "sample")
         }
-      
         return cell
     }
     

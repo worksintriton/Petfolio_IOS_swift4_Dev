@@ -16,6 +16,7 @@ target 'Petfolio' do
   pod 'Alamofire', '~> 5.0'
   pod 'SNShadowSDK'
   pod 'iOSDropDown'
+  pod 'JJFloatingActionButton'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

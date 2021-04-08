@@ -13,6 +13,9 @@ class imagelink{
     static let favtrue = "Like 3"
     static let favfalse = "Like 2"
     static let sample = "sample"
+    static let selectedRadio = "selectedRadio"
+    static let Radio = "Radio"
+    
     
     
 }
@@ -163,6 +166,12 @@ class Servicefile {
     static let pet_vendor_manage_discountmultiple = baseurl + "/api/product_details/discount_multi"
     static let pet_vendor_manage_submitsingle = baseurl + "/api/product_details/discount_single"
     static let pet_vendor_manage_submitmultiple = baseurl + "/api/product_details/discount_multi"
+    static let pet_vendor_shiping_address_submit = baseurl + "/api/shipping_address/create"
+    static let pet_vendor_shiping_address_list = baseurl + "/api/shipping_address/fetch_by_userid"
+    static let pet_vendor_editshiping_address_list = baseurl + "/api/shipping_address/listing_address_by_userid"
+    static let pet_vendor_mark_shiping_address_list = baseurl + "/api/shipping_address/mark_used_address"
+    static let pet_vendor_delete_shiping_address_list = baseurl + "/api/shipping_address/delete"
+    static let pet_vendor_update_shiping_address_list = baseurl + "/api/shipping_address/edit"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -438,6 +447,15 @@ class Servicefile {
     var isdata = ["0","0","0","0","0"]
     var isdataval = ["0","0","0","0","0"]
     var productsearchpage = ""
+    var shipaddresslist = [Any]()
+    var shipaddresslist_index = 0
+    var  shipaddresslist_isedit = false
+    var cartdata = [Any]()
+    var labelamt_total = 0
+    var labelamt_discount = 0
+    var labelamt_shipping = 0
+    var labelamt_subtotal = 0
+    var labelsubtotal_itmcount = 0
     
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
     static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor

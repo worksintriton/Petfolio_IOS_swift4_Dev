@@ -134,6 +134,8 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
             }else{
                 cell.image_product.image = UIImage(named: "sample")
             }
+            cell.label_ratting.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_rating
+            cell.label_likes.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_review
             return cell
         }
     }

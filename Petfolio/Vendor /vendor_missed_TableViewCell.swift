@@ -18,6 +18,8 @@ class vendor_missed_TableViewCell: UITableViewCell {
     @IBOutlet weak var label_prod_ord_datetime: UILabel!
     @IBOutlet weak var btn_order_details: UIButton!
     @IBOutlet weak var btn_track_order: UIButton!
+    @IBOutlet weak var label_order_status: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -33,6 +33,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var View_outofstock: UIView!
     @IBOutlet weak var view_isqualityprod: UIView!
+    @IBOutlet weak var view_rating: UIView!
     
     var _id = ""
     var ca_id = ""
@@ -58,6 +59,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.view_dec.layer.cornerRadius =  self.view_dec.frame.height / 2
         self.view_inc.layer.cornerRadius =  self.view_inc.frame.height / 2
         self.view_addtocart.view_cornor()
+        self.view_rating.view_cornor()
         self.view_footer.view_cornor()
         self.view_addtocart.view_cornor()
         self.view_select_count.view_cornor()
@@ -66,7 +68,6 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.coll_product_img.dataSource = self
         self.coll_productlist.delegate = self
         self.coll_productlist.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -193,6 +194,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                }else{
                    cell.image_product.image = UIImage(named: "sample")
                }
+                cell.label_ratting.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating
+                cell.label_likes.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_review
                return cell
             }
         }
@@ -245,14 +248,14 @@ extension productdetailsViewController {
                         self.product_review = String(data["product_review"] as? Int ?? 0)
                         self.product_title = data["product_title"] as! String
                         self.threshould = data["threshould"] as! String
-                        
-                        self.label_product_title.text = self.product_cate
+                        self.label_product_title.text = self.product_title
                         self.label_likes.text = self.product_review
                         self.label_rating.text = self.product_rating
                         self.label_product_cost.text = "₹ " + String(self.product_price)
                         self.label_discount.text = String(self.product_discount)
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription
+                        self.label_description.sizeToFit()
                         self.label_cartcount.text = String(self.product_cart_count)
                         let quantity = Int(self.threshould) ?? 0
                         if quantity > 0 {

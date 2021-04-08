@@ -89,7 +89,7 @@ class vendorTrackorderViewController: UIViewController {
     var vendor_cancell_info = ""
     var vendor_complete_date = ""
     var vendor_complete_info = ""
-    
+    var confirmdate = ""
     
     
     override func viewDidLoad() {
@@ -103,8 +103,8 @@ class vendorTrackorderViewController: UIViewController {
         self.image_transit.image = UIImage(named: "")
         self.image_return.image = UIImage(named: "")
         self.image_return_status.image = UIImage(named: "")
-        
-        
+        self.label_confrim_date.text = ""
+        self.label_confrim_details.text = ""
         self.image_transit.layer.cornerRadius =  self.image_transit.frame.height / 2
         self.image_dispatched.layer.cornerRadius =  self.image_dispatched.frame.height / 2
         self.image_confrim_status.layer.cornerRadius =  self.image_confrim_status.frame.height / 2
@@ -139,9 +139,16 @@ class vendorTrackorderViewController: UIViewController {
     func isconfirmorder(status: Bool, bookval : String, details: String, other: Bool){
         self.view_confirmation.isHidden = false
         self.view_confrim_pathline.isHidden = false
-        self.label_confrim_date.text = bookval
-        self.label_confrim_details.text = details
+        
         print("confirm status",status)
+        if bookval != ""{
+            self.label_confrim_date.text = bookval
+            
+        }
+        if details != "" {
+            self.label_confrim_details.text = details
+        }
+       
 //        if status {
 //            self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
 //        }else{
@@ -171,7 +178,10 @@ class vendorTrackorderViewController: UIViewController {
     func isdispatchorder(status: Bool, bookval : String, details: String){
         print("dispatched status",status)
         self.view_dispatched.isHidden = false
-        self.label_dispatch_details.text = details
+        if details != "" {
+            self.label_dispatch_details.text = details
+            self.label_confrim_details.text = ""
+        }
         self.label_dispatch_date.text = bookval
         self.label_transit_date.text = bookval
         self.view_dispatch_pathline.isHidden = false

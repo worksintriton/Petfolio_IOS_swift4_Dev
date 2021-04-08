@@ -23,7 +23,13 @@ class orderdetailsViewController: UIViewController {
     @IBOutlet weak var label_paymentmethod: UILabel!
     @IBOutlet weak var label_ordertotal: UILabel!
     @IBOutlet weak var label_quality: UILabel!
-    @IBOutlet weak var label_shipping_address: UILabel!
+    //@IBOutlet weak var label_shipping_address: UILabel!
+    
+    @IBOutlet weak var label_ship_name: UILabel!
+    @IBOutlet weak var label_address: UILabel!
+    @IBOutlet weak var label_city_state_pincode: UILabel!
+    @IBOutlet weak var label_landmark: UILabel!
+    @IBOutlet weak var label_phoneno: UILabel!
     
     var _id = ""
     var billing_address = ""
@@ -76,7 +82,7 @@ class orderdetailsViewController: UIViewController {
     @IBAction func action_bag(_ sender: Any) {
     }
     
-    func callgetstatuslist(){
+    func callgetstatuslist() {
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_status_orderlist, method: .post, parameters:
@@ -148,24 +154,40 @@ class orderdetailsViewController: UIViewController {
                             if Servicefile.shared.ordertype == "Complete" {
                                 if title == "Order Dispatch" {
                                     self.label_status_date.text = date
-                                    self.Label_status.text = "Delivered"
+                                    self.Label_status.text = "Delivered on"
                                 }
                             }else if Servicefile.shared.ordertype == "current"{
                                 if title == "Order Booked" {
-                                    self.Label_status.text = "Booked"
+                                    self.Label_status.text = "Booked on"
                                     self.label_status_date.text = date
                                 }
                                 self.image_status.image = UIImage(named: "Radio")
                             }else{
                                 if title == "Order Cancelled" || title == "Vendor cancelled"{
-                                    self.Label_status.text = "Cancelled"
+                                    self.Label_status.text = "Cancelled on"
                                     self.label_status_date.text = date
                                 }
                                 self.image_status.image = UIImage(named: "047")
                             }
                         }
+                        let shipping_details_id = Data["shipping_details_id"] as? NSDictionary ?? ["":""]
+                        let city =  shipping_details_id["user_city"] as? String ?? ""
+                        let Fname =  shipping_details_id["user_first_name"] as? String ?? ""
+                        let lname =  shipping_details_id["user_last_name"] as? String ?? ""
+                        let Doorno =  shipping_details_id["user_flat_no"] as? String ?? ""
+                        let user_stree =  shipping_details_id["user_stree"] as? String ?? ""
+                        let user_mobile =  shipping_details_id["user_mobile"] as? String ?? ""
+                        let user_picocode =  shipping_details_id["user_picocode"] as? String ?? ""
+                        let user_state =  shipping_details_id["user_state"] as? String ?? ""
+                        let user_landmark =  shipping_details_id["user_landmark"] as? String ?? ""
+                        self.label_ship_name.text = Fname + " " + lname
+                        self.label_address.text = Doorno +  ", " + user_stree +  ", "
+                        self.label_city_state_pincode.text = city +  ", " + user_state +  ", " +  user_picocode + ". "
+                        self.label_landmark.text = "landmark : " + " " + user_landmark + ". "
+                        self.label_phoneno.text = "Phone : " + " " + user_mobile + ". "
                         self.image_status.image = UIImage(named: "success")
-                        self.label_shipping_address.text = self.shipping_address
+                        self.image_status.image = UIImage(named: "success")
+                        //self.label_shipping_address.text = self.shipping_address
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

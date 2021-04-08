@@ -61,6 +61,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     
     let actionButton = JJFloatingActionButton()
     var applylabelval = "Apply Deal"
+    var disstatus = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +105,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     }
     
     @objc func textFielddiscount_perunit(textField:UITextField) {
+        self.disstatus = true
         if textField == self.textfield_discount_perunit {
             self.textfield_deal_price.text = ""
             self.textfield_discount_perunit.text = textField.text
@@ -123,6 +125,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     }
     
     @objc func textFielddeal_price(textField:UITextField) {
+        self.disstatus = false
         if textField == self.textfield_deal_price {
             self.textfield_discount_perunit.text = ""
             self.textfield_deal_price.text = textField.text
@@ -313,11 +316,11 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             let cell = tableView.dequeueReusableCell(withIdentifier: "unhide", for: indexPath) as! manageproduct_withval_TableViewCell
             let data = Servicefile.shared.manageproductDic[indexPath.row] as! NSDictionary
             cell.label_product_title.text = data["product_name"] as? String ?? ""
-            cell.label_pettype.text = data["product_name"] as? String ?? ""
-            cell.label_breed.text = data["product_name"] as? String ?? ""
+            cell.label_amt.text = data["product_price"] as? String ?? ""
             let age = data["pet_age"] as! NSArray
             let pet_breed = data["pet_breed"] as! NSArray
             let pet_prod_img = data["products_image"] as! NSArray
+            let pet_type = data["pet_type"] as! NSArray
             
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Arraytoimage(arr: pet_prod_img))) { (image, error, cache, urls) in
                     if (error != nil) {
@@ -326,6 +329,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         cell.image_product.image = image
                     }
                 }
+            cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
             let pet_prod_status = data["today_deal"] as! Bool
             cell.label_deal_status.isHidden = true
             if pet_prod_status {
@@ -336,6 +340,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
             cell.label_breed.text = Arraytobreed(arr: pet_breed)
             cell.label_age.text = Arraytostring(arr: age)
+            cell.label_pettype.text = Arraytotype(arr: pet_type)
             cell.label_threshold.text = data["pet_threshold"] as? String ?? ""
             cell.selectionStyle = .none
             if self.isselect[indexPath.row] == "0"{
@@ -382,6 +387,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                 cell.btn_ischeck.isHidden = true
             }
             cell.label_product_title.text = data["product_name"] as? String ?? ""
+            cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
             cell.btn_hide.tag = indexPath.row
             cell.btn_hide.addTarget(self, action: #selector(ishide), for: .touchUpInside)
             cell.btn_ischeck.tag = indexPath.row
@@ -408,6 +414,20 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         for i in 0..<arr.count{
             let breed = arr[i] as! NSDictionary
             let val = breed["pet_breed"] as? String ?? ""
+            if i == 0 {
+                agedata = val
+            }else{
+                agedata = agedata + ", " +  val
+            }
+        }
+        return agedata
+    }
+    
+    func Arraytotype(arr: NSArray) -> String{
+        var agedata = ""
+        for i in 0..<arr.count{
+            let breed = arr[i] as! NSDictionary
+            let val = breed["pet_type_title"] as? String ?? ""
             if i == 0 {
                 agedata = val
             }else{
@@ -608,7 +628,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         let cost = Int(self.textamt) ?? 0
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_discountsingle, method: .post, parameters:
-                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":true], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":self.disstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -643,11 +663,12 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         }
     }
     func callsingleamount(){
+        self.disstatus =  false
         let discount = Int(self.textdiscount) ?? 0
         let cost = Int(self.textamt) ?? 0
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_discountsingle, method: .post, parameters:
-                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_status":self.disstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -686,10 +707,10 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     func callsinglesubmit(){
         let discount = Int(self.textdiscount) ?? 0
         let cost = Int(self.textamt) ?? 0
-        print("single submit","_id", self.singleselect,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",false)
+        print("single submit","_id", self.singleselect,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",self.disstatus)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitsingle, method: .post,
-                                                                 parameters: ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                 parameters: ["_id": self.singleselect,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":self.disstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -730,9 +751,9 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     func callmultisubmit(){
         let discount = Int(self.textdiscount) ?? 0
         let cost = Int(self.textamt) ?? 0
-        print("single submit","_id", self.isselectval,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",true)
+        print("single submit","_id", self.isselectval,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",self.disstatus)
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitmultiple, method: .post, parameters:["_id": self.isselectval,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":true], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitmultiple, method: .post, parameters:["_id": self.isselectval,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":self.disstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

@@ -11,8 +11,6 @@ import Alamofire
 
 class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate, UITextFieldDelegate {
    
-    
-    
     @IBOutlet weak var tbl_dash_list: UITableView!
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var view_allcategory: UIView!
@@ -42,7 +40,6 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
         self.present(vc, animated: true, completion: nil)
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         self.callpetshopdashget()

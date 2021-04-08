@@ -115,6 +115,8 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_status_popup.view_cornor()
+        self.textview_status_reason.layer.cornerRadius = 8.0
         self.textview_status_reason.delegate = self
         self.status_arr.removeAll()
         self.tbl_status.delegate = self
@@ -355,7 +357,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                 "activity_id" : 5,
                 "activity_title" : "Vendor cancelled",
                 "activity_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-                "order_status" : "cancelled",
+                "order_status" : "Cancelled",
                 "vendor_cancell_info" : self.textview_status_reason.text!,
                 "vendor_cancell_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
             Servicefile.shared.ordertype = "cancelled"

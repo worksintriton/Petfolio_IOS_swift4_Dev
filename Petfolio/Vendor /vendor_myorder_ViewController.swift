@@ -107,6 +107,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
         cell.view_update_status.view_cornor()
         cell.view_main.dropShadow()
+            cell.image_order.layer.cornerRadius = 8.0
         //cell.view_update_status.startAnimating()
             cell.btn_order_details.tag = indexPath.row
             cell.btn_update_status.tag = indexPath.row
@@ -123,11 +124,13 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                     cell.image_order.image = image
                 }
             }
+            cell.image_order.layer.cornerRadius = 8.0
             cell.selectionStyle = .none
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+            
+            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].vendor_complete_date
             
             cell.view_main.dropShadow()
             cell.btn_order_details.tag = indexPath.row
@@ -146,6 +149,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 //                        cell.image_order.image = image
 //                    }
 //                }
+//                    cell.image_order.layer.cornerRadius = 8.0
 //                cell.selectionStyle = .none
 //                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
 //                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
@@ -172,11 +176,22 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         cell.image_order.image = image
                     }
                 }
+                cell.image_order.layer.cornerRadius = 8.0
                 cell.selectionStyle = .none
                 cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
                 cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
                 cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+            if Servicefile.shared.order_productdetail[indexPath.row].vendor_cancell_date != "" {
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].vendor_cancell_date
+                cell.label_order_status.text = "Cancelled on"
+            }else if Servicefile.shared.order_productdetail[indexPath.row].user_cancell_date != "" {
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].user_cancell_date
+                cell.label_order_status.text = "Cancelled on"
+            }else if Servicefile.shared.order_productdetail[indexPath.row].user_return_date != "" {
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].user_return_date
+                cell.label_order_status.text = "Retured on"
+            }
+           
                 cell.btn_order_details.tag = indexPath.row
                 
                 cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)

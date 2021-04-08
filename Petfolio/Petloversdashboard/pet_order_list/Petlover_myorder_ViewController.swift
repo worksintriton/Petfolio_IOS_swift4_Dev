@@ -45,7 +45,6 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
-        
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
     }
@@ -53,14 +52,17 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         if Servicefile.shared.ordertype == "current" {
             self.callnew()
-        }else if Servicefile.shared.ordertype == "current"{
+            self.design_set_newapp()
+        }else if Servicefile.shared.ordertype == "Complete"{
             self.callcomm()
+            self.design_set_complete()
         }else{
             self.callmissed()
+            self.desing_set_mis()
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
-        Servicefile.shared.ordertype = "current"
+        
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -89,7 +91,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].vendor_complete_date
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
             cell.view_addreview.view_cornor()
@@ -141,7 +143,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+            if Servicefile.shared.order_productdetail[indexPath.row].user_return_date != "" {
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].user_return_date
+            }else{
+                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].user_cancell_date
+            }
             cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.view_main.dropShadow()
@@ -190,6 +196,13 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     
     
     @IBAction func action_missed(_ sender: Any) {
+        self.desing_set_mis()
+        Servicefile.shared.ordertype = "cancelled"
+        self.tblview_applist.reloadData()
+        self.callmissed()
+    }
+    
+    func desing_set_mis(){
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_missed.backgroundColor = appcolor
         self.label_missed.textColor = UIColor.white
@@ -199,12 +212,19 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_completed.backgroundColor = UIColor.white
         self.view_new.layer.borderColor = appcolor.cgColor
         self.view_new.backgroundColor = UIColor.white
-        
-        Servicefile.shared.ordertype = "cancelled"
-        self.tblview_applist.reloadData()
-        self.callmissed()
     }
+    
+    
+    
     @IBAction func action_completeappoint(_ sender: Any) {
+        self.design_set_complete()
+        Servicefile.shared.ordertype = "Complete"
+        self.tblview_applist.reloadData()
+        self.callcomm()
+        
+    }
+    
+    func design_set_complete(){
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor
         self.label_completed.textColor = UIColor.white
@@ -214,13 +234,16 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.label_missed.textColor = appcolor
         self.view_new.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        
-        Servicefile.shared.ordertype = "Complete"
-        self.tblview_applist.reloadData()
-        self.callcomm()
-        
     }
+    
     @IBAction func action_newappoint(_ sender: Any) {
+        self.design_set_newapp()
+        Servicefile.shared.ordertype = "current"
+        self.tblview_applist.reloadData()
+        self.callnew()
+    }
+    
+    func design_set_newapp(){
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_new.backgroundColor = appcolor
         self.label_new.textColor = UIColor.white
@@ -230,12 +253,6 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.label_missed.textColor = appcolor
         self.view_completed.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        Servicefile.shared.ordertype = "current"
-        
-        
-        self.tblview_applist.reloadData()
-        self.callnew()
-        
     }
     
     @IBAction func action_logout(_ sender: Any) {

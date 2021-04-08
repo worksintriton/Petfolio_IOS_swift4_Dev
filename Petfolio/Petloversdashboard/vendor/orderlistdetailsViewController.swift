@@ -25,7 +25,13 @@ class orderlistdetailsViewController: UIViewController {
     @IBOutlet weak var label_paymentmethod: UILabel!
     @IBOutlet weak var label_ordertotal: UILabel!
     @IBOutlet weak var label_quality: UILabel!
-    @IBOutlet weak var label_shipping_address: UILabel!
+    //@IBOutlet weak var label_shipping_address: UILabel!
+    
+    @IBOutlet weak var label_ship_name: UILabel!
+    @IBOutlet weak var label_doorno_street: UILabel!
+    @IBOutlet weak var label_city_state: UILabel!
+    @IBOutlet weak var label_phone: UILabel!
+    
     
     var _id = ""
     var billing_address = ""
@@ -119,6 +125,7 @@ class orderlistdetailsViewController: UIViewController {
                         self.product_quantity = Data["product_quantity"] as! Int
                         self.shipping_address = Data["shipping_details"] as! String
                         self.shipping_address_id = Data["shipping_address_id"] as! String
+                        
                         self.shipping_charge = Data["shipping_charge"] as! Int
                         self.status = Data["status"] as! String
                         self.user_cancell_date = Data["user_cancell_date"] as! String
@@ -137,14 +144,13 @@ class orderlistdetailsViewController: UIViewController {
                                 self.image_product.image = image
                             }
                         }
-                        
                         self.view_status.isHidden = false
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"
                         self.label_ordertotal.text = "₹" + String(self.grand_total)
                         self.Label_product_amt.text = "₹" + String(self.grand_total)
-                        self.label_quality.text = "₹" + String(self.product_quantity)
+                        self.label_quality.text = String(self.product_quantity)
                         if Servicefile.shared.ordertype == "" {
                             self.image_status.image = UIImage(named: "success")
                         }else{
@@ -156,28 +162,38 @@ class orderlistdetailsViewController: UIViewController {
                             let date = itdata["date"] as! String
                             let id = itdata["id"] as! Int
                             let title = itdata["title"] as! String
-                           
                             if Servicefile.shared.ordertype == "Complete" {
                                 if title == "Order Dispatch" {
                                     self.label_status_date.text = date
-                                    self.Label_status.text = "Delivered"
+                                    self.Label_status.text = "Delivered on"
                                 }
                             }else if Servicefile.shared.ordertype == "current"{
                                 if title == "Order Booked" {
-                                    self.Label_status.text = "Booked"
+                                    self.Label_status.text = "Booked on"
                                     self.label_status_date.text = date
                                 }
                                 
                             }else{
                                 if title == "Order Cancelled" || title == "Vendor cancelled"{
-                                    self.Label_status.text = "Cancelled"
+                                    self.Label_status.text = "Cancelled on"
                                     self.label_status_date.text = date
                                 }
                                 
                             }
                         }
+                        let shipping_details_id = Data["shipping_details_id"] as? NSDictionary ?? ["":""]
+                        let city =  shipping_details_id["user_city"] as? String ?? ""
+                        let Fname =  shipping_details_id["user_first_name"] as? String ?? ""
+                        let lname =  shipping_details_id["user_last_name"] as? String ?? ""
+                        let Doorno =  shipping_details_id["user_flat_no"] as? String ?? ""
+                        let user_stree =  shipping_details_id["user_stree"] as? String ?? ""
+                        let user_mobile =  shipping_details_id["user_mobile"] as? String ?? ""
+                        let user_picocode =  shipping_details_id["user_picocode"] as? String ?? ""
+                        let user_state =  shipping_details_id["user_state"] as? String ?? ""
+                        self.label_city_state.text = city + ", " + user_state +  ", " + user_picocode + ". "
+                        self.label_phone.text = "Phone : " + " " + user_mobile + ". "
                         self.image_status.image = UIImage(named: "success")
-                        self.label_shipping_address.text = self.shipping_address
+                        //self.label_shipping_address.text = self.shipping_address
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -38,6 +38,12 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         return true
     }
     
+    @IBAction func action_cartpage(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         self.callpetshopdashget()
     }

@@ -44,7 +44,9 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    @IBOutlet weak var view_shadow: UIView!
    @IBOutlet weak var view_popup: UIView!
    @IBOutlet weak var view_btn_ok: UIView!
-   
+    @IBOutlet weak var view_photoid_btn: UIView!
+    @IBOutlet weak var view_govid_btn: UIView!
+    
    var selservice = ["0"]
    var selspec = ["0"]
    var added_service = [""]
@@ -53,20 +55,17 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    var image_govid = ""
    var img_for = "Gall" // Photo or Gov or Certi
    
-   
    override func viewDidLoad() {
        super.viewDidLoad()
        self.call_protocals()
        self.added_service.removeAll()
        self.added_spec.removeAll()
-       
    }
    
    func call_protocals(){
        self.call_delegates()
        self.viewcornordadius()
        self.setimag()
-       
    }
    
    func call_delegates(){
@@ -80,6 +79,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     self.textfield_bus_reg.delegate = self
     self.collectiondelegate()
    }
+    
+    
    
    func collectiondelegate(){
     self.coll_galary_img.delegate = self
@@ -145,7 +146,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    
    
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       self.textfield_resign()
+    self.view.endEditing(true)
        return true
    }
    
@@ -243,16 +244,30 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                      }
                                  }
         cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        cell.btn_close.tag = indexPath.row
+        cell.btn_close.addTarget(self, action: #selector(action_gallrydic_close), for: .touchUpInside)
            return cell
        }else {
                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
            
-            cell.Img_id.image = UIImage(named: "sample")
+            cell.Img_id.image = UIImage(named: "pdf")
+        cell.btn_close.tag = indexPath.row
+        cell.btn_close.addTarget(self, action: #selector(action_certificate_close), for: .touchUpInside)
                return cell
        }
    }
    
   
+    @objc func action_gallrydic_close(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.gallerydicarray.remove(at: tag)
+        self.coll_galary_img.reloadData()
+    }
+    @objc func action_certificate_close(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.certifdicarray.remove(at: tag)
+        self.coll_certificate.reloadData()
+    }
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
@@ -260,20 +275,38 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    
    func setimag(){
        if self.image_photo != "" {
+            self.view_photoid_btn.isHidden = false
             self.image_photo_id.isHidden = false
-             self.image_photo_id.image = UIImage(named: "sample")
+             self.image_photo_id.image = UIImage(named: "pdf")
        }else{
+        self.view_photoid_btn.isHidden = true
             self.image_photo_id.isHidden = true
        }
        
        if self.image_govid != "" {
+        self.view_govid_btn.isHidden = false
             self.image_gov.isHidden = false
-            self.image_gov.image = UIImage(named: "sample")
+            self.image_gov.image = UIImage(named: "pdf")
               }else{
                    self.image_gov.isHidden = true
+                self.view_govid_btn.isHidden = true
               }
+    self.view_govid_btn.view_cornor()
+    self.view_photoid_btn.view_cornor()
+    self.image_gov.layer.cornerRadius = 8.0
+    self.image_photo_id.layer.cornerRadius = 8.0
    }
-   
+    
+    @IBAction func action_clear_govid(_ sender: Any) {
+        self.image_govid = ""
+        self.setimag()
+    }
+    
+    @IBAction func action_clear_photoid(_ sender: Any) {
+        self.image_photo = ""
+        self.setimag()
+    }
+    
    func callDocprocess(){
          let types = [kUTTypePDF]
          let importMenu = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
@@ -340,7 +373,6 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
           },
               to: Servicefile.imageupload, method: .post , headers: headers)
               .responseJSON { resp in
-                  
                   switch (resp.result) {
                   case .success:
                       let res = resp.value as! NSDictionary
@@ -497,7 +529,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                                          let Code  = res["Code"] as! Int
                                                          if Code == 200 {
                                                             self.view_popup.isHidden = false
-                                                          self.view_shadow.isHidden = false
+                                                            self.view_shadow.isHidden = false
                                                             self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
@@ -516,7 +548,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    }
    
    @IBAction func action_register_success(_ sender: Any) {
-       let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+       let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
                                                          self.present(vc, animated: true, completion: nil)
    }
    

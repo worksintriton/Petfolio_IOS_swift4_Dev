@@ -13,6 +13,8 @@ class imagelink{
     static let favtrue = "Like 3"
     static let favfalse = "Like 2"
     static let sample = "sample"
+    
+    
 }
 
 class Servicefile {
@@ -81,11 +83,9 @@ class Servicefile {
     static let pet_dov_check_time = baseurl + "/api/appointments/check"
     static let pet_doc_createappointm = baseurl + "/api/appointments/mobile/create"
     static let pet_sp_createappointm = baseurl + "/api/sp_appointments/mobile/create"
-    
     // static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp"
     // static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp"
     // static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp"
-    
     static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp1"
     static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp1"
     static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp1"
@@ -101,7 +101,6 @@ class Servicefile {
     static let pet_deletedetails =  baseurl + "/api/petdetails/delete"
     static let pet_updateimage =  baseurl + "/api/petdetails/edit"
     static let pet_search = baseurl + "/api/doctordetails/text_search"
-    
     static let filter = baseurl + "/api/doctordetails/filter_doctor"
     static let SP_filter = baseurl + "/api/doctordetails/filter_doctor"
     static let sp_dropdown = baseurl + "/api/service_provider/sp_dropdown"
@@ -787,7 +786,6 @@ class Servicefile {
         }else{
             return false
         }
-        
     }
     
 }

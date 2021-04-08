@@ -117,7 +117,7 @@ class orderlistdetailsViewController: UIViewController {
                         self.product_name = Data["product_name"] as? String ?? ""
                         self.product_price = Data["product_price"] as? Int ?? 0
                         self.product_quantity = Data["product_quantity"] as! Int
-                        self.shipping_address = Data["shipping_address"] as! String
+                        self.shipping_address = Data["shipping_details"] as! String
                         self.shipping_address_id = Data["shipping_address_id"] as! String
                         self.shipping_charge = Data["shipping_charge"] as! Int
                         self.status = Data["status"] as! String
@@ -156,6 +156,7 @@ class orderlistdetailsViewController: UIViewController {
                             let date = itdata["date"] as! String
                             let id = itdata["id"] as! Int
                             let title = itdata["title"] as! String
+                           
                             if Servicefile.shared.ordertype == "Complete" {
                                 if title == "Order Dispatch" {
                                     self.label_status_date.text = date
@@ -166,16 +167,17 @@ class orderlistdetailsViewController: UIViewController {
                                     self.Label_status.text = "Booked"
                                     self.label_status_date.text = date
                                 }
-                                self.image_status.image = UIImage(named: "Radio")
+                                
                             }else{
                                 if title == "Order Cancelled" || title == "Vendor cancelled"{
                                     self.Label_status.text = "Cancelled"
                                     self.label_status_date.text = date
                                 }
-                                self.image_status.image = UIImage(named: "047")
+                                
                             }
                         }
-                        self.label_shipping_address.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                        self.image_status.image = UIImage(named: "success")
+                        self.label_shipping_address.text = self.shipping_address
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -44,6 +44,9 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
         }
        }
     
+    @IBAction func action_filter(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @objc func hidetbl() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -99,7 +102,7 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 48
+        return 35
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -146,6 +149,15 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let vw = UIView()
         let arrowLabel = UIImageView()
+        let arrowLabel1 = UIImageView()
+        vw.addSubview(arrowLabel1)
+        arrowLabel1.image = UIImage(named: "")
+        arrowLabel1.backgroundColor = .clear
+        arrowLabel1.translatesAutoresizingMaskIntoConstraints = false
+        arrowLabel1.topAnchor.constraint(equalTo: vw.topAnchor).isActive = true
+        arrowLabel1.trailingAnchor.constraint(equalTo: vw.trailingAnchor).isActive = true
+        arrowLabel1.widthAnchor.constraint(equalToConstant: 7).isActive = true
+        arrowLabel1.leadingAnchor.constraint(equalTo: vw.leadingAnchor).isActive = true
         vw.addSubview(arrowLabel)
         arrowLabel.image = UIImage(named: "dotted black")
         arrowLabel.backgroundColor = .clear
@@ -158,7 +170,7 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 3
+        return 10
     }
     
     @objc func issection(sender: UIButton){

@@ -14,7 +14,6 @@ class vendorTrackorderViewController: UIViewController {
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var product_title: UILabel!
     
-    
     @IBOutlet weak var label_orderdate: UILabel!
     @IBOutlet weak var label_id: UILabel!
     @IBOutlet weak var label_paymentmethod: UILabel!
@@ -141,12 +140,13 @@ class vendorTrackorderViewController: UIViewController {
         self.view_confirmation.isHidden = false
         self.view_confrim_pathline.isHidden = false
         self.label_confrim_date.text = bookval
+        self.label_confrim_details.text = details
         print("confirm status",status)
-        if status {
-            self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        }else{
-            self.view_pathline.backgroundColor = UIColor.gray
-        }
+//        if status {
+//            self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//        }else{
+//            self.view_pathline.backgroundColor = UIColor.gray
+//        }
     }
     
 //    func isrejectedorder(status: Bool, bookval : String, details: String){
@@ -176,14 +176,13 @@ class vendorTrackorderViewController: UIViewController {
         self.label_transit_date.text = bookval
         self.view_dispatch_pathline.isHidden = false
         self.view_confrim_pathline.isHidden = false
-        
-        if status {
-            self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        }else{
-            self.view_dispatch_pathline.backgroundColor = UIColor.gray
-            self.view_confrim_pathline.backgroundColor = UIColor.gray
-        }
+//        if status {
+//            self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//            self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//        }else{
+//            self.view_dispatch_pathline.backgroundColor = UIColor.gray
+//            self.view_confrim_pathline.backgroundColor = UIColor.gray
+//        }
     }
     
     func istransitorder(status: Bool, bookval : String){
@@ -257,19 +256,46 @@ class vendorTrackorderViewController: UIViewController {
                             let title = itdata["title"] as! String
                             if title == "Order Booked" {
                                 self.isbookstatus(status: Status, bookval : date)
+                                
                             }else if title == "Order Accept" {
                                 self.isconfirmorder(status: Status, bookval : date, details: self.vendor_complete_info, other: false)
+                                if Status {
+                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    self.image_confrim_status.image = UIImage(named: "success")
+                                }
                             }else if title == "Order Dispatch" {
                                 self.isdispatchorder(status: Status, bookval : date, details: self.vendor_complete_info)
+                                if Status {
+                                self.image_dispatched.image = UIImage(named: "success")
+                                self.image_transit.image = UIImage(named: "success")
+                                self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    
+                                }
+                               
                             }else if title == "Order Cancelled" {
-                                self.isconfirmorder(status: Status, bookval : date, details: self.vendor_complete_info, other: Status)
+                                self.isconfirmorder(status: Status, bookval : date, details: self.user_cancell_info, other: Status)
+                                if Status {
+                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    self.image_confrim_status.image = UIImage(named: "047")
+                                    self.image_confrim_status.backgroundColor = .clear
+                                    
+                                }
+                                
                             }else if title == "Vendor cancelled" {
-                                self.isconfirmorder(status: Status, bookval : date, details: self.vendor_complete_info, other: Status)
+                                    self.isconfirmorder(status: Status, bookval : date, details: self.vendor_cancell_info, other: Status)
+                                if Status {
+                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    self.image_confrim_status.image = UIImage(named: "047")
+                                    self.image_confrim_status.backgroundColor = .clear
+                                   
+                                }
                             }else{
                                 self.istransitorder(status: Status, bookval : date)
+                                
                             }
                             Servicefile.shared.vendor_orderstatuss.append(vendor_orderstatus.init(In_Status: Status, In_date: date, In_id: id, In_title: title))
                         }
+                       
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -288,7 +314,7 @@ class vendorTrackorderViewController: UIViewController {
         }
     }
     
-    
+   
     
     
 }

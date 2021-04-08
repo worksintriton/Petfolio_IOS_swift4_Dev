@@ -81,6 +81,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.callcheckstatus()
     }
     
+   
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -136,33 +137,33 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 
             return cell
         } else{
-            if Servicefile.shared.order_productdetail[indexPath.row].user_return_info != "" &&  Servicefile.shared.order_productdetail[indexPath.row].vendor_accept_cancel == ""{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "retcell", for: indexPath) as! vendor_return_TableViewCell
-                cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
-                    if (error != nil) {
-                        cell.image_order.image = UIImage(named: "sample")
-                    } else {
-                        cell.image_order.image = image
-                    }
-                }
-                cell.selectionStyle = .none
-                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
-                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
-                cell.btn_order_details.tag = indexPath.row
-                cell.btn_track_order.tag = indexPath.row
-                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-                cell.view_main.dropShadow()
-                cell.btn_reject.tag = indexPath.row
-                cell.btn_reject.addTarget(self, action: #selector(Rejectdetails), for: .touchUpInside)
-                cell.btn_accept.tag = indexPath.row
-                cell.btn_accept.addTarget(self, action: #selector(Acceptdetails), for: .touchUpInside)
-                cell.view_accept.view_cornor()
-                cell.view_reject.view_cornor()
-                return cell
-            }else{
+//            if Servicefile.shared.order_productdetail[indexPath.row].user_return_info != "" &&  Servicefile.shared.order_productdetail[indexPath.row].vendor_accept_cancel == ""{
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "retcell", for: indexPath) as! vendor_return_TableViewCell
+//                cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
+//                    if (error != nil) {
+//                        cell.image_order.image = UIImage(named: "sample")
+//                    } else {
+//                        cell.image_order.image = image
+//                    }
+//                }
+//                cell.selectionStyle = .none
+//                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
+//                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
+//                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+//                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
+//                cell.btn_order_details.tag = indexPath.row
+//                cell.btn_track_order.tag = indexPath.row
+//                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+//                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
+//                cell.view_main.dropShadow()
+//                cell.btn_reject.tag = indexPath.row
+//                cell.btn_reject.addTarget(self, action: #selector(Rejectdetails), for: .touchUpInside)
+//                cell.btn_accept.tag = indexPath.row
+//                cell.btn_accept.addTarget(self, action: #selector(Acceptdetails), for: .touchUpInside)
+//                cell.view_accept.view_cornor()
+//                cell.view_reject.view_cornor()
+//                return cell
+//            }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "miscell", for: indexPath) as! vendor_missed_TableViewCell
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
                     if (error != nil) {
@@ -177,13 +178,13 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
                 cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
                 cell.btn_order_details.tag = indexPath.row
-                cell.btn_track_order.tag = indexPath.row
+                
                 cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+            cell.btn_track_order.tag = indexPath.row
                 cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
                 cell.view_main.dropShadow()
                 return cell
-            }
-            
+//            }
         }
     }
     
@@ -245,21 +246,36 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     
     @IBAction func action_missed(_ sender: Any) {
-        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.view_missed.backgroundColor = appcolor
-        self.label_missed.textColor = UIColor.white
-        self.view_new.backgroundColor = UIColor.white
-        self.label_new.textColor = appcolor
-        self.label_completed.textColor = appcolor
-        self.view_completed.backgroundColor = UIColor.white
-        self.view_new.layer.borderColor = appcolor.cgColor
-        self.view_new.backgroundColor = UIColor.white
+        self.missed_btn()
         Servicefile.shared.ordertype = "cancelled"
         self.tblview_applist.reloadData()
         self.callcancelled()
         
     }
+    
+    
+    
     @IBAction func action_completeappoint(_ sender: Any) {
+        self.complete_btn()
+        Servicefile.shared.ordertype = "Complete"
+        self.tblview_applist.reloadData()
+        self.callcomm()
+        
+    }
+    
+    func call_by_status(){
+        if Servicefile.shared.ordertype == "current" {
+            self.new_btn()
+            self.callnew()
+        }else if Servicefile.shared.ordertype == "Complete" {
+            self.complete_btn()
+            self.callcomm()
+        }else{
+            self.missed_btn()
+            self.callcancelled()
+        }
+    }
+    func complete_btn(){
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor
         self.label_completed.textColor = UIColor.white
@@ -269,12 +285,21 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.label_missed.textColor = appcolor
         self.view_new.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        Servicefile.shared.ordertype = "Complete"
-        self.tblview_applist.reloadData()
-        self.callcomm()
-        
     }
-    @IBAction func action_newappoint(_ sender: Any) {
+    
+    func missed_btn(){
+        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view_missed.backgroundColor = appcolor
+        self.label_missed.textColor = UIColor.white
+        self.view_new.backgroundColor = UIColor.white
+        self.label_new.textColor = appcolor
+        self.label_completed.textColor = appcolor
+        self.view_completed.backgroundColor = UIColor.white
+        self.view_new.layer.borderColor = appcolor.cgColor
+        self.view_new.backgroundColor = UIColor.white
+    }
+    
+    func new_btn(){
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_new.backgroundColor = appcolor
         self.label_new.textColor = UIColor.white
@@ -284,6 +309,13 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.label_missed.textColor = appcolor
         self.view_completed.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
+    }
+    
+    
+    
+    
+    @IBAction func action_newappoint(_ sender: Any) {
+        self.new_btn()
         Servicefile.shared.ordertype = "current"
         self.tblview_applist.reloadData()
         self.callnew()
@@ -364,8 +396,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
-    
-    
+   
     func callgetlist(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
@@ -381,7 +412,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         let Data = res["Data"] as! NSDictionary
                         Servicefile.shared.vendorid = Data["_id"] as? String ?? ""
                         print("vendor id data",Servicefile.shared.vendorid)
-                        self.callnew()
+                        self.call_by_status()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -400,6 +431,8 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+   
+    
     
     func callnew(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -417,7 +450,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let itmval = Data[itm] as! NSDictionary
-                            let _id = itmval["_id"] as! String
+                            let _id = itmval["_id"] as? String ?? ""
                             let date_of_booking = itmval["date_of_booking"] as? String ?? ""
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
@@ -473,7 +506,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let itmval = Data[itm] as! NSDictionary
-                            let _id = itmval["_id"] as! String
+                            let _id = itmval["_id"] as? String ?? ""
                             let date_of_booking = itmval["date_of_booking"] as? String ?? ""
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
@@ -529,7 +562,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let itmval = Data[itm] as! NSDictionary
-                            let _id = itmval["_id"] as! String
+                            let _id = itmval["_id"] as? String ?? ""
                             let date_of_booking = itmval["date_of_booking"] as? String ?? ""
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img

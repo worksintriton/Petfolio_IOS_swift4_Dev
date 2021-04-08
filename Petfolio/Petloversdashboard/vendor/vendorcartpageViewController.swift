@@ -24,7 +24,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var label_amt_shipping: UILabel!
     @IBOutlet weak var label_amt_total: UILabel!
     @IBOutlet weak var label_coupon: UILabel!
-    
+    @IBOutlet weak var view_cart_empty: UIView!
     @IBOutlet weak var view_proceedtobuy: UIView!
     var cartdata = [Any]()
     
@@ -41,6 +41,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_cart_empty.isHidden = true
         self.view_shadow.isHidden = true
         self.view_alert.isHidden = true
         self.view_alert.view_cornor()
@@ -314,6 +315,11 @@ extension vendorcartpageViewController {
                         self.label_amt_shipping.text = String(self.labelamt_shipping)
                         self.label_amt_subtotal.text = String(self.labelamt_subtotal)
                         self.label_subtotal_itmcount.text = "Subtotal (" + String(self.labelsubtotal_itmcount) + ")"
+                        if self.cartdata.count > 0{
+                            self.view_cart_empty.isHidden = true
+                        }else{
+                            self.view_cart_empty.isHidden = false
+                        }
                         self.tbl_productlist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{

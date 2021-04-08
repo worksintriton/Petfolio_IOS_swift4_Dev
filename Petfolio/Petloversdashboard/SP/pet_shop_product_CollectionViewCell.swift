@@ -17,6 +17,7 @@ class pet_shop_product_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_ratting: UILabel!
     @IBOutlet weak var label_likes: UILabel!
     @IBOutlet weak var image_fav: UIImageView!
+    @IBOutlet weak var label_offer: UILabel!
     var item: String = ""
     var delegate: SelectItmDelegate?
    

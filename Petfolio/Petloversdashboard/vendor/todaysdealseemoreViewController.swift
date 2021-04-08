@@ -139,7 +139,11 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             //cell.image_product.image = UIImage(named: "sample")
-            
+            cell.label_offer.isHidden = true
+            if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount > 0 {
+                cell.label_offer.isHidden = false
+                cell.label_offer.text = String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount) + " % off"
+            }
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
                 
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in

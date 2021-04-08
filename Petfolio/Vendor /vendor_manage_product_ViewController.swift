@@ -107,6 +107,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         if textField == self.textfield_discount_perunit {
             self.textfield_deal_price.text = ""
             self.textfield_discount_perunit.text = textField.text
+            self.textdiscount = self.textfield_discount_perunit.text!
             if self.textfield_discount_perunit.text == "" {
                 self.view_discount_details.isHidden = true
             }
@@ -125,6 +126,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         if textField == self.textfield_deal_price {
             self.textfield_discount_perunit.text = ""
             self.textfield_deal_price.text = textField.text
+            self.textamt = textField.text!
             if self.textfield_deal_price.text == "" {
                 self.view_discount_details.isHidden = true
             }
@@ -695,7 +697,16 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         //let Data = res["Data"] as! NSDictionary
-                       
+                        self.isselectval.removeAll()
+                        self.singleselect = ""
+                        self.isselect = self.orgiselect
+                        self.isappdeal = false
+                        self.view_discard.isHidden = true
+                        self.view_app_deal.isHidden = false
+                        self.actionButton.isHidden = true
+                        self.tbl_manage_product.reloadData()
+                        self.hidediscount()
+                        self.callgetproductdetails()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -729,7 +740,16 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         //let Data = res["Data"] as! NSArray
-                        
+                        self.isselectval.removeAll()
+                        self.singleselect = ""
+                        self.isselect = self.orgiselect
+                        self.isappdeal = false
+                        self.view_discard.isHidden = true
+                        self.view_app_deal.isHidden = false
+                        self.actionButton.isHidden = true
+                        self.tbl_manage_product.reloadData()
+                        self.hidediscount()
+                        self.callgetproductdetails()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

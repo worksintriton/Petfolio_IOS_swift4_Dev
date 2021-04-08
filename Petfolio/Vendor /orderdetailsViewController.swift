@@ -11,10 +11,8 @@ import Alamofire
 
 class orderdetailsViewController: UIViewController {
 
-    
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var product_title: UILabel!
-    
     @IBOutlet weak var Label_status: UILabel!
     @IBOutlet weak var image_status: UIImageView!
     @IBOutlet weak var label_status_date: UILabel!
@@ -62,9 +60,6 @@ class orderdetailsViewController: UIViewController {
         super.viewDidLoad()
         self.view_status.isHidden = true
         self.callgetstatuslist()
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -72,9 +67,12 @@ class orderdetailsViewController: UIViewController {
     }
     
     @IBAction func action_bel(_ sender: Any) {
+        
     }
+    
     @IBAction func action_profile(_ sender: Any) {
     }
+    
     @IBAction func action_bag(_ sender: Any) {
     }
     
@@ -90,27 +88,27 @@ class orderdetailsViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        self._id = Data["_id"] as! String
-                        self.billing_address = Data["billing_address"] as! String
-                        self.billling_address_id = Data["billling_address_id"] as! String
-                        self.coupon_code = Data["coupon_code"] as! String
-                        self.date_of_booking = Data["date_of_booking"] as! String
-                        self.date_of_booking_display = Data["date_of_booking_display"] as! String
-                        self.delivery_date = Data["delivery_date"] as! String
-                        self.delivery_date_display = Data["delivery_date_display"] as! String
-                        self.discount_price = Data["discount_price"] as! Int
-                        self.grand_total = Data["grand_total"] as! Int
-                        self.order_id = Data["order_id"] as! String;
-                        self.order_status = Data["order_status"] as! String
-                        self.over_all_total = Data["over_all_total"] as! Int
-                        self.payment_id = Data["payment_id"] as! String
+                        self._id = Data["_id"] as? String ?? ""
+                        self.billing_address = Data["billing_address"] as? String ?? ""
+                        self.billling_address_id = Data["billling_address_id"] as? String ?? ""
+                        self.coupon_code = Data["coupon_code"] as? String ?? ""
+                        self.date_of_booking = Data["date_of_booking"] as? String ?? ""
+                        self.date_of_booking_display = Data["date_of_booking_display"] as? String ?? ""
+                        self.delivery_date = Data["delivery_date"] as? String ?? ""
+                        self.delivery_date_display = Data["delivery_date_display"] as? String ?? ""
+                        self.discount_price = Data["discount_price"] as? Int ?? 0
+                        self.grand_total = Data["grand_total"] as? Int ?? 0
+                        self.order_id = Data["order_id"] as? String ?? ""
+                        self.order_status = Data["order_status"] as? String ?? ""
+                        self.over_all_total = Data["over_all_total"] as? Int ?? 0
+                        self.payment_id = Data["payment_id"] as? String ?? ""
                         self.prodcut_image = Data["prodcut_image"] as? String ?? Servicefile.sample_img
-                        self.prodouct_total = Data["prodouct_total"] as! Int
+                        self.prodouct_total = Data["prodouct_total"] as? Int ?? 0
                         self.product_name = Data["product_name"] as? String ?? ""
                         self.product_price = Data["product_price"] as? Int ?? 0
-                        self.product_quantity = Data["product_quantity"] as! Int
-                        self.shipping_address = Data["shipping_address"] as! String
-                        self.shipping_address_id = Data["shipping_address_id"] as! String
+                        self.product_quantity = Data["product_quantity"] as? Int ?? 0
+                        self.shipping_address = Data["shipping_details"] as? String ?? ""
+                        self.shipping_address_id = Data["shipping_address_id"] as? String ?? ""
                         self.shipping_charge = Data["shipping_charge"] as! Int
                         self.status = Data["status"] as! String
                         self.user_cancell_date = Data["user_cancell_date"] as! String
@@ -136,11 +134,11 @@ class orderdetailsViewController: UIViewController {
                         self.label_paymentmethod.text = "Online"
                         self.label_ordertotal.text = "₹" + String(self.grand_total)
                         self.label_quality.text = "₹" + String(self.product_quantity)
-                        if Servicefile.shared.ordertype == "" {
-                            self.image_status.image = UIImage(named: "success")
-                        }else{
-                            self.image_status.image = UIImage(named: "047")
-                        }
+//                        if Servicefile.shared.ordertype == "" {
+//                            self.image_status.image = UIImage(named: "success")
+//                        }else{
+//                            self.image_status.image = UIImage(named: "047")
+//                        }
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary
                             let Status = itdata["Status"] as! Bool
@@ -166,7 +164,8 @@ class orderdetailsViewController: UIViewController {
                                 self.image_status.image = UIImage(named: "047")
                             }
                         }
-                        self.label_shipping_address.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                        self.image_status.image = UIImage(named: "success")
+                        self.label_shipping_address.text = self.shipping_address
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -184,7 +183,4 @@ class orderdetailsViewController: UIViewController {
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
-    
-  
-
 }

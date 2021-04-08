@@ -39,6 +39,12 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
+        cell.label_offer.isHidden = true
+        if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount > 0 {
+            cell.label_offer.isHidden = false
+            cell.label_offer.text = String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount) + " % off"
+        }
+        
         //cell.image_product.image = UIImage(named: "sample")
         if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_fav {
             cell.image_fav.image = UIImage(named: imagelink.favtrue)

@@ -94,6 +94,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.view_main.view_cornor()
             cell.view_addreview.view_cornor()
             cell.view_addreview.dropShadow()
+            cell.btn_track_order.tag = indexPath.row
+                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
             cell.selectionStyle = .none
             cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
@@ -117,6 +119,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
+            cell.btn_track_order.tag = indexPath.row
+                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
             cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.btn_cancel_order.tag = indexPath.row
@@ -142,9 +146,18 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.view_main.dropShadow()
             cell.view_main.view_cornor()
+            cell.btn_track_order.tag = indexPath.row
+                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         }
+    }
+    
+    @objc func trackorderdetails(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag]._id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_trackorderViewController") as! pet_vendor_trackorderViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func returndetails(sender: UIButton){

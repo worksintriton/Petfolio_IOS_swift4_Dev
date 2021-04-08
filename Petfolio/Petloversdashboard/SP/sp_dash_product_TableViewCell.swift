@@ -41,7 +41,11 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         }else{
             cell.image_fav.image = UIImage(named: imagelink.favfalse)
         }
-       
+        cell.label_offer.isHidden = true
+        if Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_discount > 0 {
+            cell.label_offer.isHidden = false
+            cell.label_offer.text = String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_discount) + " % off"
+        }
         
         if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_img) {
            

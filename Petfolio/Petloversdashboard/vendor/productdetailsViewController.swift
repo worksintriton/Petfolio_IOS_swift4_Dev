@@ -18,6 +18,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var view_addtocart: UIView!
     @IBOutlet weak var view_footer: UIView!
     
+    @IBOutlet weak var view_select_count: UIView!
     @IBOutlet weak var coll_product_img: UICollectionView!
     @IBOutlet weak var coll_productlist: UICollectionView!
     
@@ -53,10 +54,13 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.View_outofstock.isHidden = true
         self.view_isqualityprod.isHidden = true
         self.view_addtocart.isHidden = true
+        self.view_select_count.isHidden = true
         self.view_dec.layer.cornerRadius =  self.view_dec.frame.height / 2
         self.view_inc.layer.cornerRadius =  self.view_inc.frame.height / 2
         self.view_addtocart.view_cornor()
         self.view_footer.view_cornor()
+        self.view_addtocart.view_cornor()
+        self.view_select_count.view_cornor()
         self.callproddeal()
         self.coll_product_img.delegate = self
         self.coll_product_img.dataSource = self
@@ -87,9 +91,13 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_bag(_ sender: Any) {
-        
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        self.present(vc, animated: true, completion: nil)
     }
+    
+   
+      
+   
     
     @IBAction func action_profile(_ sender: Any) {
         
@@ -166,6 +174,11 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                cell.label_offer.isHidden = true
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
+                    cell.label_offer.isHidden = false
+                    cell.label_offer.text = String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + " % off"
+                }
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
@@ -195,6 +208,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
              if coll_product_img != collectionView {
+                Servicefile.shared.product_id = Servicefile.shared.vendor_product_id_details[indexPath.row]._id
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as!  productdetailsViewController
             self.present(vc, animated: true, completion: nil)
             }
@@ -245,10 +259,12 @@ extension productdetailsViewController {
                             self.View_outofstock.isHidden = true
                             self.view_isqualityprod.isHidden = false
                             self.view_addtocart.isHidden = false
+                            self.view_select_count.isHidden = false
                         }else{
                             self.View_outofstock.isHidden = false
                             self.view_isqualityprod.isHidden = true
                             self.view_addtocart.isHidden = true
+                            self.view_select_count.isHidden = true
                         }
                         
                         Servicefile.shared.vendor_product_id_details.removeAll()
@@ -320,7 +336,8 @@ extension productdetailsViewController {
     func calldectheproductcount(){
              print("product_id", Servicefile.shared.product_id,"user_id",Servicefile.shared.userid)
              self.startAnimatingActivityIndicator()
-             if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.dec_prod_count, method: .post, parameters:
+             if Servicefile.shared.updateUserInterface() {
+                AF.request(Servicefile.dec_prod_count, method: .post, parameters:
                  ["product_id": Servicefile.shared.product_id,"user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                      switch (response.result) {
                      case .success:
@@ -336,9 +353,7 @@ extension productdetailsViewController {
                          }
                          break
                      case .failure(let Error):
-                         
                          self.stopAnimatingActivityIndicator()
-                         
                          break
                      }
                  }

@@ -338,6 +338,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                      "activity_id" : 1,
                      "activity_title" : "Order Accept",
                      "activity_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
+            Servicefile.shared.ordertype = "current"
         }else if self.Label_status.text == "Order Dispatched"{
             url = Servicefile.vendor_update_status_dispatch
             params = ["_id" : Servicefile.shared.orderid,
@@ -347,6 +348,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                           "vendor_complete_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                           "vendor_complete_info" : self.textview_status_reason.text!,
                           "order_status" : "Complete"]
+            Servicefile.shared.ordertype = "Complete"
         }else if self.Label_status.text == "Order Cancellation"{
             url = Servicefile.vendor_update_status_vendor_cancel
             params = ["_id" : Servicefile.shared.orderid,
@@ -356,6 +358,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                 "order_status" : "cancelled",
                 "vendor_cancell_info" : self.textview_status_reason.text!,
                 "vendor_cancell_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
+            Servicefile.shared.ordertype = "cancelled"
         }
         
         
@@ -456,7 +459,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                                 self.isbookstatus(status: Status, bookval : date)
                                 if Status {
                                 self.status_arr = self.new_status_arr
-                                self.tbl_status.reloadData()
+                                
                                 }
                             }else if title == "Order Accept" {
                                 self.isconfirmorder(status: Status, bookval : date, details: self.vendor_complete_info, other: false)
@@ -464,7 +467,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                                     self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                                     self.image_confrim_status.image = UIImage(named: "success")
                                     self.status_arr = self.copnfirm_status_arr
-                                    self.tbl_status.reloadData()
+                                   
                                 }
                             }else if title == "Order Dispatch" {
                                 self.isdispatchorder(status: Status, bookval : date, details: self.vendor_complete_info)
@@ -476,6 +479,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                                     self.view_drop.isHidden = true
                                     self.view_tbl_backview.isHidden = true
                                 }
+                               
                             }else if title == "Order Cancelled" {
                                 self.isconfirmorder(status: Status, bookval : date, details: self.user_cancell_info, other: Status)
                                 if Status {
@@ -486,6 +490,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                                     self.view_drop.isHidden = true
                                     self.view_tbl_backview.isHidden = true
                                 }
+                                
                             }else if title == "Vendor cancelled" {
                                 self.isconfirmorder(status: Status, bookval : date, details: self.vendor_cancell_info, other: Status)
                                 if Status {
@@ -506,6 +511,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                             }
                             Servicefile.shared.vendor_orderstatuss.append(vendor_orderstatus.init(In_Status: Status, In_date: date, In_id: id, In_title: title))
                         }
+                        self.tbl_status.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -134,6 +134,7 @@ class Servicefile {
     static let pet_shop_dash = baseurl + "/api/product_details/getproductdetails_list"
     
     static let Vendor_reg = baseurl + "/api/product_vendor/create"
+    static let Vendor_edit_reg = baseurl + "/api/product_vendor/edit"
     static let Vendor_check_status = baseurl + "/api/product_vendor/check_status"
     static let todaysdeal = baseurl + "/api/product_details/today_deal"
     static let productdeal = baseurl + "/api/product_details/fetch_product_by_cat"
@@ -443,9 +444,9 @@ class Servicefile {
     var vendor_filter_pet_breed_id =  ""
     var vendor_filter_discount = ""
     var vendor_filter_catid = ""
-    var data = ["Recent products","Highest discount","Best sellers","Price - High to Low","Price - Low to High"]
-    var isdata = ["0","0","0","0","0"]
-    var isdataval = ["0","0","0","0","0"]
+    var data = ["Recent products","Highest discount","Price - Low to High","Price - High to Low"] // ,"Best sellers"
+    var isdata = ["0","0","0","0"] // ,"0"
+    var isdataval = ["0","0","0","0"] // ,"0"
     var productsearchpage = ""
     var shipaddresslist = [Any]()
     var shipaddresslist_index = 0
@@ -457,6 +458,7 @@ class Servicefile {
     var labelamt_subtotal = 0
     var labelsubtotal_itmcount = 0
     
+    var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
     static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor
     
@@ -1441,7 +1443,7 @@ struct order_productdetails {
     var order_id : String
     var prodcut_image : String
     var product_name : String
-    var product_price : Double
+    var product_price : Int
     var product_quantity : Int
     var status : String
     var user_cancell_date : String
@@ -1459,7 +1461,7 @@ struct order_productdetails {
          , In_order_id : String
          , In_prodcut_image : String
          , In_product_name : String
-         , In_product_price : Double
+         , In_product_price : Int
          , In_product_quantity : Int
          , In_status : String
          , In_user_cancell_date : String

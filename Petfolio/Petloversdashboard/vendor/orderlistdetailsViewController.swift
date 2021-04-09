@@ -32,6 +32,7 @@ class orderlistdetailsViewController: UIViewController {
     @IBOutlet weak var label_city_state: UILabel!
     @IBOutlet weak var label_phone: UILabel!
     
+    @IBOutlet weak var label_landmark: UILabel!
     
     var _id = ""
     var billing_address = ""
@@ -189,8 +190,13 @@ class orderlistdetailsViewController: UIViewController {
                         let user_stree =  shipping_details_id["user_stree"] as? String ?? ""
                         let user_mobile =  shipping_details_id["user_mobile"] as? String ?? ""
                         let user_picocode =  shipping_details_id["user_picocode"] as? String ?? ""
+                        let user_landmark =  shipping_details_id["user_landmark"] as? String ?? ""
                         let user_state =  shipping_details_id["user_state"] as? String ?? ""
-                        self.label_city_state.text = city + ", " + user_state +  ", " + user_picocode + ". "
+                        self.label_ship_name.text = Fname + " " + lname
+                        self.label_doorno_street.text = Doorno + ", " + user_stree +  ", "
+                        self.label_city_state.text = city + ", " + user_state +  " - " + user_picocode + ". "
+                        
+                        self.label_landmark.text = "Landmark : " + " " + user_landmark + ". "
                         self.label_phone.text = "Phone : " + " " + user_mobile + ". "
                         self.image_status.image = UIImage(named: "success")
                         //self.label_shipping_address.text = self.shipping_address

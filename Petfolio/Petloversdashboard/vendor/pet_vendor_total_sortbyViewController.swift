@@ -92,17 +92,17 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
         if Servicefile.shared.today_deals_status {
             params = [ "recent": Servicefile.shared.isdata[0],
                        "high_discount": Servicefile.shared.isdata[1],
-                       "best_sellers": Servicefile.shared.isdata[2],
+                       "best_sellers": "0",
                        "high_to_low": Servicefile.shared.isdata[3],
-                       "low_to_high": Servicefile.shared.isdata[4],
+                       "low_to_high": Servicefile.shared.isdata[2],
                        "cat_id" : "",
                        "today_deals" : Servicefile.shared.today_deals_status]
         }else{
             params = [ "recent": Servicefile.shared.isdata[0],
                        "high_discount": Servicefile.shared.isdata[1],
-                       "best_sellers": Servicefile.shared.isdata[2],
+                       "best_sellers": "0",
                        "high_to_low": Servicefile.shared.isdata[3],
-                       "low_to_high": Servicefile.shared.isdata[4],
+                       "low_to_high": Servicefile.shared.isdata[2],
                        "cat_id" : Servicefile.shared.vendor_catid,
                        "today_deals" : Servicefile.shared.today_deals_status]
         }

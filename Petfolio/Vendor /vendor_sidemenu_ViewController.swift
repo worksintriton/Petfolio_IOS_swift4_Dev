@@ -51,7 +51,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! menuTableViewCell
         cell.Img_menu.image = UIImage(named: self.imgmenu[indexPath.row])
         cell.label_menu.text = self.labelmenu[indexPath.row]
-        
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -74,8 +74,6 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }
-
-   
 }
 
 extension vendor_sidemenu_ViewController {

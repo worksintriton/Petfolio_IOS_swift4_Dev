@@ -23,6 +23,7 @@ class orderdetailsViewController: UIViewController {
     @IBOutlet weak var label_paymentmethod: UILabel!
     @IBOutlet weak var label_ordertotal: UILabel!
     @IBOutlet weak var label_quality: UILabel!
+    @IBOutlet weak var label_product_amt: UILabel!
     //@IBOutlet weak var label_shipping_address: UILabel!
     
     @IBOutlet weak var label_ship_name: UILabel!
@@ -133,18 +134,14 @@ class orderdetailsViewController: UIViewController {
                                 self.image_product.image = image
                             }
                         }
-                        
+                        self.label_product_amt.text = "₹" + String(self.product_price)
                         self.view_status.isHidden = false
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"
                         self.label_ordertotal.text = "₹" + String(self.grand_total)
-                        self.label_quality.text = "₹" + String(self.product_quantity)
-//                        if Servicefile.shared.ordertype == "" {
-//                            self.image_status.image = UIImage(named: "success")
-//                        }else{
-//                            self.image_status.image = UIImage(named: "047")
-//                        }
+                        self.label_quality.text =  String(self.product_quantity)
+                       
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary
                             let Status = itdata["Status"] as! Bool
@@ -182,11 +179,14 @@ class orderdetailsViewController: UIViewController {
                         let user_landmark =  shipping_details_id["user_landmark"] as? String ?? ""
                         self.label_ship_name.text = Fname + " " + lname
                         self.label_address.text = Doorno +  ", " + user_stree +  ", "
-                        self.label_city_state_pincode.text = city +  ", " + user_state +  ", " +  user_picocode + ". "
+                        self.label_city_state_pincode.text = city +  ", " + user_state +  " - " +  user_picocode + ". "
                         self.label_landmark.text = "landmark : " + " " + user_landmark + ". "
                         self.label_phoneno.text = "Phone : " + " " + user_mobile + ". "
-                        self.image_status.image = UIImage(named: "success")
-                        self.image_status.image = UIImage(named: "success")
+                        if Servicefile.shared.ordertype == "cancelled" {
+                            self.image_status.image = UIImage(named: "redcross")
+                        }else{
+                            self.image_status.image = UIImage(named: "success")
+                        }
                         //self.label_shipping_address.text = self.shipping_address
                         self.stopAnimatingActivityIndicator()
                     }else{

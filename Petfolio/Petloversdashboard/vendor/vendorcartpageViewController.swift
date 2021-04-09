@@ -154,15 +154,30 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let cartlist =  Servicefile.shared.cartdata[tag] as! NSDictionary
         let productdata = cartlist["product_id"] as! NSDictionary
         Servicefile.shared.product_id = productdata["_id"] as! String
-        self.callinctheproductcount()
+        let cartcount = cartlist["product_count"] as? Int ?? 0
+        let product_name = cartlist["product_name"] as? String ?? ""
+        let threshould = productdata["threshould"] as? String ?? "0"
+        if cartcount < Int(threshould)! {
+            self.callinctheproductcount()
+        }else{
+            self.alert(Message: "You can buy only up to "+threshould+" quantity of this "+product_name)
+        }
+       
     }
     
     @objc func action_decreament(sender: UIButton){
          let tag = sender.tag
         let cartlist =  Servicefile.shared.cartdata[tag] as! NSDictionary
                let productdata = cartlist["product_id"] as! NSDictionary
-               Servicefile.shared.product_id = productdata["_id"] as! String
-        self.calldectheproductcount()
+        let cartcount = cartlist["product_count"] as? Int ?? 0
+        let threshould = productdata["threshould"] as? String ?? "0"
+        Servicefile.shared.product_id = productdata["_id"] as! String
+        if cartcount > 0  {
+            if  cartcount <= Int(threshould)! {
+            self.calldectheproductcount()
+            }
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -245,11 +260,17 @@ extension vendorcartpageViewController {
                         Servicefile.shared.labelamt_shipping = shipping_charge
                         Servicefile.shared.labelamt_subtotal = prodouct_total
                         Servicefile.shared.labelsubtotal_itmcount = prodcut_item_count
-                        self.label_amt_total.text = "₹ " + String(Servicefile.shared.labelamt_total)
-                        self.label_amt_discount.text = "₹ " + String(Servicefile.shared.labelamt_discount)
-                        self.label_amt_shipping.text = "₹ " + String(Servicefile.shared.labelamt_shipping)
-                        self.label_amt_subtotal.text = "₹ " + String(Servicefile.shared.labelamt_subtotal)
-                        self.label_subtotal_itmcount.text = "Subtotal (" + String(Servicefile.shared.labelsubtotal_itmcount) + ")"
+                        self.label_amt_total.text = String(Servicefile.shared.labelamt_total) + " ₹"
+                        self.label_amt_discount.text = String(Servicefile.shared.labelamt_discount) + " ₹"
+                        self.label_amt_shipping.text = String(Servicefile.shared.labelamt_shipping) + " ₹"
+                        self.label_amt_subtotal.text = String(Servicefile.shared.labelamt_subtotal) + " ₹"
+                        var item = " item"
+                        if Servicefile.shared.labelsubtotal_itmcount == 1 {
+                            item = " item"
+                        }else{
+                            item = " items"
+                        }
+                        self.label_subtotal_itmcount.text = "Subtotal (" + String(Servicefile.shared.labelsubtotal_itmcount) + item + ")"
                         if Servicefile.shared.cartdata.count > 0{
                             self.view_cart_empty.isHidden = true
                         }else{

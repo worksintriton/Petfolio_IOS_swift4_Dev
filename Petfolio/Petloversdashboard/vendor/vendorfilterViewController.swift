@@ -23,8 +23,10 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
         self.view_clearall.view_cornor()
         self.view_apply.view_cornor()
         self.view_sortby.view_cornor()
+        
         self.tbl_sortlist.delegate = self
         self.tbl_sortlist.dataSource = self
+        
         self.callpetdetailget()
     }
     

@@ -13,6 +13,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var product_title: UILabel!
+    @IBOutlet weak var label_product_amt: UILabel!
     
     @IBOutlet weak var Label_status: UILabel!
     @IBOutlet weak var dropDownIconImageView: UIImageView!
@@ -115,6 +116,8 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_drop.view_cornor()
+        self.view_update.view_cornor()
         self.view_status_popup.view_cornor()
         self.textview_status_reason.layer.cornerRadius = 8.0
         self.textview_status_reason.delegate = self
@@ -156,6 +159,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
         self.callgetstatuslist()
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
         self.view_status_alpha.addGestureRecognizer(tap)
+        self.label_confrim_date.text = ""
     }
     
     @objc func hidetbl() {
@@ -223,7 +227,9 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     func isconfirmorder(status: Bool, bookval : String, details: String, other: Bool){
         self.view_confirmation.isHidden = false
         self.view_confrim_pathline.isHidden = false
-        self.label_confrim_date.text = bookval
+        if bookval != "" {
+            self.label_confrim_date.text = bookval
+        }
         self.label_confrim_details.text = details
         print("confirm status",status)
 //        if status {
@@ -425,6 +431,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                         self.prodouct_total = Data["prodouct_total"] as? Int ?? 0
                         self.product_name = Data["product_name"] as? String ?? ""
                         self.product_price = Data["product_price"] as? Int ?? 0
+                        self.label_product_amt.text =  String(self.product_price)
                         self.product_quantity = Data["product_quantity"] as? Int ?? 0
                         self.shipping_address = Data["shipping_address"] as? String ?? ""
                         self.shipping_address_id = Data["shipping_address_id"] as? String ?? ""

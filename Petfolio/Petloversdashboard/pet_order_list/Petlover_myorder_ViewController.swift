@@ -45,6 +45,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
+        self.view_missed.layer.borderColor = appgree.cgColor
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
     }
@@ -279,7 +280,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -334,7 +335,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -389,7 +390,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""

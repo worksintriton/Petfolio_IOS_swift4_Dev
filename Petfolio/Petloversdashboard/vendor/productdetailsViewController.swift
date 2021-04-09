@@ -18,6 +18,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var view_addtocart: UIView!
     @IBOutlet weak var view_footer: UIView!
     
+    @IBOutlet weak var view_cart_main: UIView!
     @IBOutlet weak var view_select_count: UIView!
     @IBOutlet weak var coll_product_img: UICollectionView!
     @IBOutlet weak var coll_productlist: UICollectionView!
@@ -56,6 +57,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.view_isqualityprod.isHidden = true
         self.view_addtocart.isHidden = true
         self.view_select_count.isHidden = true
+        self.view_cart_main.isHidden = true
         self.view_dec.layer.cornerRadius =  self.view_dec.frame.height / 2
         self.view_inc.layer.cornerRadius =  self.view_inc.frame.height / 2
         self.view_addtocart.view_cornor()
@@ -136,6 +138,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         if  self.product_cart_count < Int(self.threshould)! {
         self.callinctheproductcount()
         self.label_cartcount.text = String(self.product_cart_count)
+        }else{
+            self.alert(Message: "You can buy only up to "+self.threshould+" quantity of this "+self.product_title)
         }
     }
     
@@ -263,11 +267,13 @@ extension productdetailsViewController {
                             self.view_isqualityprod.isHidden = false
                             self.view_addtocart.isHidden = false
                             self.view_select_count.isHidden = false
+                            self.view_cart_main.isHidden = false
                         }else{
                             self.View_outofstock.isHidden = false
                             self.view_isqualityprod.isHidden = true
                             self.view_addtocart.isHidden = true
                             self.view_select_count.isHidden = true
+                            self.view_cart_main.isHidden = true
                         }
                         
                         Servicefile.shared.vendor_product_id_details.removeAll()

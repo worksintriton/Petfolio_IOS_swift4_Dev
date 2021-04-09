@@ -242,6 +242,7 @@ extension todaysdealseemoreViewController {
                     if Code == 200 {
                         let search_val = res["Data"] as! NSArray
                         Servicefile.shared.sp_dash_search.removeAll()
+                        Servicefile.shared.sp_dash_Today_Special.removeAll()
                         for itm in 0..<search_val.count{
                             let itmdata = search_val[itm] as! NSDictionary
                             let id  = itmdata["_id"] as? String ?? ""

@@ -89,13 +89,13 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
        }
        
        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return Servicefile.shared.sp_bus_service_galldicarray.count
+           return Servicefile.shared.vendor_gallary_img.count
        }
        
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
-           let img = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
-           let imgval = img["bus_service_gall"]  as? String ?? Servicefile.sample_img
+           let img = Servicefile.shared.vendor_gallary_img[indexPath.row] as! NSDictionary
+           let imgval = img["bussiness_gallery"]  as? String ?? Servicefile.sample_img
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
                                   if (error != nil) {
                                       cell.img_banner.image = UIImage(named: "sample")
@@ -126,7 +126,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     
    
     @IBAction func action_bussi_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_edit_profile_ViewController") as! vendor_edit_profile_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -158,14 +158,11 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
                                                         let id =  Data["_id"] as? String ?? ""
                                                         let business_reg =  Data["business_reg"] as? String ?? ""
                                                         let bussiness =  Data["bussiness"] as? String ?? ""
-                                                        
                                                         let bus_service_gall = Data["bussiness_gallery"] as! NSArray
+                                                        Servicefile.shared.vendor_gallary_img = bus_service_gall as! [Any]
                                                         let bussiness_lat = Data["bussiness_lat"] as? String ?? ""
                                                         let bussiness_long = Data["bussiness_long"] as? String ?? ""
                                                         let bussiness_loc = Data["bussiness_loc"] as? String ?? ""
-                                                        
-                                                        
-                                                        
                                                         let bus_certif = Data["certifi"] as! NSArray
                                                         let date_and_time = Data["date_and_time"] as? String ?? ""
                                                         let delete_status = Data["delete_status"] as? String ?? ""
@@ -178,10 +175,10 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
                                                         let user_id = Data["user_id"] as? String ?? ""
                                                         let user_name = Data["user_name"] as? String ?? ""
                                                         
-                                                        self.label_sp_bussinessname.text = Data["bussiness_name"] as? String ?? ""
+                                                        self.label_bussiness.text = Data["bussiness"] as? String ?? ""
                                                         self.label_business_email.text =  Data["bussiness_email"] as? String ?? ""
                                                         self.label_business_phone.text = Data["bussiness_phone"] as? String ?? ""
-                                                        
+                                                        self.coll_bussi_img.reloadData()
                                                       self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

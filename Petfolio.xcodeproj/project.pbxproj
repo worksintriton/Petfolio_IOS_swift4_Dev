@@ -38,6 +38,9 @@
 		842E27A8260B6D030026D7B6 /* mangeproduct_withoutvalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E27A7260B6D030026D7B6 /* mangeproduct_withoutvalTableViewCell.swift */; };
 		842EB89825DF743E003CC824 /* todayspecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842EB89725DF743E003CC824 /* todayspecialTableViewCell.swift */; };
 		843F7146261DCBFE003A5731 /* vendor_profile_view_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F7145261DCBFE003A5731 /* vendor_profile_view_ViewController.swift */; };
+		844169BB261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */; };
+		844169FA261EF970001B9A2A /* petowner_footerview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169F9261EF970001B9A2A /* petowner_footerview.swift */; };
+		84416A1D261F06E6001B9A2A /* petowner_footerview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84416A1C261F06E6001B9A2A /* petowner_footerview.xib */; };
 		8451A91D260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451A91C260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift */; };
 		8457F12B2609B63A005B66DD /* pet_order_reject_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457F12A2609B63A005B66DD /* pet_order_reject_ViewController.swift */; };
 		8457F12F2609C2E8005B66DD /* selectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457F12E2609C2E8005B66DD /* selectionTableViewCell.swift */; };
@@ -269,6 +272,9 @@
 		842E27A7260B6D030026D7B6 /* mangeproduct_withoutvalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mangeproduct_withoutvalTableViewCell.swift; sourceTree = "<group>"; };
 		842EB89725DF743E003CC824 /* todayspecialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todayspecialTableViewCell.swift; sourceTree = "<group>"; };
 		843F7145261DCBFE003A5731 /* vendor_profile_view_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_profile_view_ViewController.swift; sourceTree = "<group>"; };
+		844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_edit_profile_ViewController.swift; sourceTree = "<group>"; };
+		844169F9261EF970001B9A2A /* petowner_footerview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petowner_footerview.swift; sourceTree = "<group>"; };
+		84416A1C261F06E6001B9A2A /* petowner_footerview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = petowner_footerview.xib; sourceTree = "<group>"; };
 		8451A91C260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_shop_search_ViewController.swift; sourceTree = "<group>"; };
 		8457F12A2609B63A005B66DD /* pet_order_reject_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_order_reject_ViewController.swift; sourceTree = "<group>"; };
 		8457F12E2609C2E8005B66DD /* selectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -546,6 +552,15 @@
 			path = vendor;
 			sourceTree = "<group>";
 		};
+		844169F8261EF935001B9A2A /* modelview */ = {
+			isa = PBXGroup;
+			children = (
+				844169F9261EF970001B9A2A /* petowner_footerview.swift */,
+				84416A1C261F06E6001B9A2A /* petowner_footerview.xib */,
+			);
+			path = modelview;
+			sourceTree = "<group>";
+		};
 		845C10992601AFAD0003A038 /* otherFramewoks */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +741,7 @@
 		B094D210255BDE82008400D6 /* Petfolio */ = {
 			isa = PBXGroup;
 			children = (
+				844169F8261EF935001B9A2A /* modelview */,
 				84056648261862D80099A26D /* Customcell */,
 				845C10992601AFAD0003A038 /* otherFramewoks */,
 				B09340D3256A5DC6006F7616 /* Petfolio.entitlements */,
@@ -829,6 +845,7 @@
 				842E27A3260B6CE30026D7B6 /* manageproduct_withval_TableViewCell.swift */,
 				842E27A7260B6D030026D7B6 /* mangeproduct_withoutvalTableViewCell.swift */,
 				843F7145261DCBFE003A5731 /* vendor_profile_view_ViewController.swift */,
+				844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */,
 			);
 			path = "Vendor ";
 			sourceTree = "<group>";
@@ -974,6 +991,7 @@
 				B094D219255BDE82008400D6 /* Main.storyboard in Resources */,
 				B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */,
 				B094D26F255D6221008400D6 /* Futura Heavy font.ttf in Resources */,
+				84416A1D261F06E6001B9A2A /* petowner_footerview.xib in Resources */,
 				B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */,
 				B094D268255D6221008400D6 /* Futura Light font.ttf in Resources */,
 				B094D26D255D6221008400D6 /* Futura Book Italic font.ttf in Resources */,
@@ -1180,6 +1198,7 @@
 				B02E7A5B25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift in Sources */,
 				B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */,
 				B0E3F43625823FEE00F05D15 /* peteditandadduploadimgViewController.swift in Sources */,
+				844169BB261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift in Sources */,
 				B02D3A8D259350270010A4B6 /* Sp_profile_edit_ViewController.swift in Sources */,
 				B0431DA425A330C2000424E9 /* Doc_update_details_ViewController.swift in Sources */,
 				B0E98F7525A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift in Sources */,
@@ -1192,6 +1211,7 @@
 				B021DC342591BE0A00439A22 /* Sp_dash_ViewController.swift in Sources */,
 				B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */,
 				B0FF1AF22580C897006227E4 /* petsavelocationViewController.swift in Sources */,
+				844169FA261EF970001B9A2A /* petowner_footerview.swift in Sources */,
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				845C10B82601C5630003A038 /* vendor_complete_TableViewCell.swift in Sources */,
 				B02AA43B259E03CE00A94990 /* profile_edit_ViewController.swift in Sources */,

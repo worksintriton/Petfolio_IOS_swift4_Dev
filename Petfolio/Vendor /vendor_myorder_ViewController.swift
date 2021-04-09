@@ -60,6 +60,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
+        self.view_new.layer.borderColor = appgree.cgColor
         
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
@@ -103,10 +104,15 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }
         cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
         cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-        cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+        let quantity = Servicefile.shared.order_productdetail[indexPath.row].product_quantity
+        if quantity == 1 {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) item)"
+        }else {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+        }
         cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
-        cell.view_update_status.view_cornor()
-        cell.view_main.dropShadow()
+        cell.view_update_status.layer.cornerRadius = 4.0
+        //cell.view_main.dropShadow()
             cell.image_order.layer.cornerRadius = 8.0
         //cell.view_update_status.startAnimating()
             cell.btn_order_details.tag = indexPath.row
@@ -128,11 +134,15 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-            
+            let quantity = Servicefile.shared.order_productdetail[indexPath.row].product_quantity
+            if quantity == 1 {
+                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) item)"
+            }else {
+                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+            }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].vendor_complete_date
             
-            cell.view_main.dropShadow()
+           // cell.view_main.dropShadow()
             cell.btn_order_details.tag = indexPath.row
             cell.btn_track_order.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
@@ -180,7 +190,14 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 cell.selectionStyle = .none
                 cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
                 cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
+                let quantity = Servicefile.shared.order_productdetail[indexPath.row].product_quantity
+            if quantity == 1 {
+                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) item)"
+            }else {
                 cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
+            }
+               
+            
             if Servicefile.shared.order_productdetail[indexPath.row].vendor_cancell_date != "" {
                 cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].vendor_cancell_date
                 cell.label_order_status.text = "Cancelled on"
@@ -197,7 +214,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.btn_track_order.tag = indexPath.row
                 cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-                cell.view_main.dropShadow()
+                //cell.view_main.dropShadow()
                 return cell
 //            }
         }
@@ -470,7 +487,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -485,6 +502,12 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let user_return_pic = itmval["user_return_pic"] as? String ?? ""
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
+                        }
+                        self.label_nodata.text = "No new orders"
+                        if Servicefile.shared.order_productdetail.count > 0 {
+                            self.label_nodata.isHidden = true
+                        }else{
+                            self.label_nodata.isHidden = false
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -526,7 +549,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -541,6 +564,12 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let user_return_pic = itmval["user_return_pic"] as? String ?? ""
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
+                        }
+                        self.label_nodata.text = "No completed orders"
+                        if Servicefile.shared.order_productdetail.count > 0 {
+                            self.label_nodata.isHidden = true
+                        }else{
+                            self.label_nodata.isHidden = false
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -582,7 +611,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let order_id = itmval["order_id"] as? String ?? ""
                             let prodcut_image = itmval["prodcut_image"] as? String ?? Servicefile.sample_img
                             let product_name = itmval["product_name"]  as? String ?? ""
-                            let product_price = itmval["product_price"]  as? Double ?? 0.0
+                            let product_price = itmval["product_price"]  as? Int ?? 0
                             let product_quantity = itmval["product_quantity"] as? Int ?? 0
                             let status = itmval["status"] as? String ?? ""
                             let user_cancell_date = itmval["user_cancell_date"] as? String ?? ""
@@ -597,6 +626,13 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let user_return_pic = itmval["user_return_pic"] as? String ?? ""
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_var_id: _id, In_date_of_booking: date_of_booking, In_order_id: order_id, In_prodcut_image: prodcut_image, In_product_name: product_name, In_product_price: product_price, In_product_quantity: product_quantity, In_status: status, In_user_cancell_date: user_cancell_date, In_user_cancell_info: user_cancell_info, In_vendor_accept_cancel: vendor_accept_cancel, In_vendor_cancell_date: vendor_cancell_date, In_vendor_cancell_info: vendor_cancell_info, In_vendor_complete_date: vendor_complete_date, In_vendor_complete_info: vendor_complete_info, In_user_return_date: user_return_date, In_user_return_info: user_return_info, In_user_return_pic: user_return_pic))
+                            self.label_nodata.text = "No cancelled orders"
+                            if Servicefile.shared.order_productdetail.count > 0 {
+                                self.label_nodata.isHidden = true
+                            }else{
+                                self.label_nodata.isHidden = false
+                            }
+                            
                         }
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()

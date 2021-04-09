@@ -108,7 +108,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         }else if indexPath.section == 1 {
             let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
             cells.delegate = self
-            cells.label_cate_value.text = "Todays deal"
+            cells.label_cate_value.text = "Today's deal"
             cells.btn_cate_seemore_btn.tag = indexPath.row
             Servicefile.shared.sp_shop_dash_tbl_total_index = indexPath.row
             cells.coll_cat_prod_list.tag = indexPath.row

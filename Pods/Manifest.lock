@@ -1,4 +1,5 @@
 PODS:
+  - AASignatureView (1.0)
   - Alamofire (5.4.0)
   - Cosmos (23.0.0)
   - Firebase/Analytics (6.33.0):
@@ -101,6 +102,7 @@ PODS:
   - Toucan (1.1.0)
 
 DEPENDENCIES:
+  - AASignatureView
   - Alamofire (~> 5.0)
   - Cosmos (~> 23.0)
   - Firebase/Analytics
@@ -117,6 +119,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AASignatureView
     - Alamofire
     - Cosmos
     - Firebase
@@ -143,6 +146,7 @@ SPEC REPOS:
     - Toucan
 
 SPEC CHECKSUMS:
+  AASignatureView: f092f7f063ee37b5baf6f4e8ee2f848833cc70aa
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
@@ -168,6 +172,6 @@ SPEC CHECKSUMS:
   SNShadowSDK: 47806bf857763d41b8d434e97051fc5b22662f3a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 5669e2889ecc02afd39111dbcaf7878a87d6fa76
+PODFILE CHECKSUM: 7c71ae8da0c461f6984534bd6ea9dc5a35ffedbb
 
 COCOAPODS: 1.10.1

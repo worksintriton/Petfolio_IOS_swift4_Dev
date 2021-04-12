@@ -11,6 +11,7 @@ import Alamofire
 import Toucan
 import MobileCoreServices
 import CoreLocation
+import AASignatureView
 
 class regdocViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
     
@@ -35,6 +36,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var view_submit: UIView!
     @IBOutlet weak var view_ser_amt: UIView!
     
+    @IBOutlet weak var view_signature_lib: AASignatureView!
     
     
     @IBOutlet weak var coll_photoid: UICollectionView!
@@ -62,11 +64,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var Img_clinic: UIImageView!
     @IBOutlet weak var view_edudate: UIView!
     @IBOutlet weak var datepicker_date: UIDatePicker!
+    @IBOutlet weak var image_signature: UIImageView!
     
-    
+    @IBOutlet weak var view_close: UIView!
+    @IBOutlet weak var view_signature: UIView!
     @IBOutlet weak var view_expire: UIView!
     @IBOutlet weak var datepicker_expdate: UIDatePicker!
     
+    
+    var issubmit = false
     
     
     var specialza = [""]
@@ -98,6 +104,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     var seldate = "F"
     var clinicpic = ""
     var Img_uploadarea = ""
+    var digisignature = ""
     
     let locationManager = CLLocationManager()
     var latitude : Double!
@@ -108,13 +115,21 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var view_action: UIView!
     @IBOutlet weak var view_communi: UIView!
     
+    @IBOutlet weak var view_clear_signature: UIView!
+    @IBOutlet weak var view_get_sign: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.digisignature = ""
+        self.set_signa_image(strimage: self.digisignature)
+         
+        self.view_signature.isHidden = true
         self.view_clinic.view_cornor()
         self.view_communi.view_cornor()
-        
+        self.view_clear_signature.view_cornor()
+        self.view_signature.view_cornor()
+        self.view_get_sign.view_cornor()
+        self.view_signature_lib.view_cornor()
         
         self.specialza.removeAll()
         self.pethandle.removeAll()
@@ -188,8 +203,22 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
         self.textview_clinicaddress.text = "Write here.."
-        self.textview_clinicaddress.textColor == UIColor.lightGray
+        self.textview_clinicaddress.textColor = UIColor.lightGray
         //self.setclinicimag()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
+        self.view_shadow.addGestureRecognizer(tap)
+        
+    }
+    
+   
+    
+    @objc func hidetbl() {
+        if  self.issubmit {
+            self.view_shadow.isHidden = false
+        }else{
+            self.view_shadow.isHidden = true
+            self.view_signature.isHidden = true
+        }
     }
     
     
@@ -267,8 +296,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
-        
         self.latitude = locValue.latitude
         self.longitude = locValue.longitude
         self.locationManager.stopUpdatingLocation()
@@ -539,7 +566,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func action_addclinicimg(_ sender: Any) {
         self.Img_uploadarea = "clinic"
         if Servicefile.shared.clinicdicarray.count < 3 {
-            self.callgalaryprocess()
+            self.callgalaryimageprocess()
         }else{
             self.alert(Message: "You can upload only 3 Photo")
         }
@@ -549,7 +576,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func action_addcertifiimg(_ sender: Any) {
         self.Img_uploadarea = "certif"
         if Servicefile.shared.certifdicarray.count < 3 {
-            self.callDocprocess()
+            self.callgalaryprocess()
         }else{
             self.alert(Message: "You can upload only 3 File")
         }
@@ -558,8 +585,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func action_addgovimg(_ sender: Any) {
         self.Img_uploadarea = "gov"
-        if Servicefile.shared.certifdicarray.count < 3 {
-            self.callDocprocess()
+        if Servicefile.shared.govdicarray.count < 3 {
+            self.callgalaryprocess()
         }else{
             self.alert(Message: "You can upload only 3 File")
         }
@@ -570,13 +597,57 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func action_photoimg(_ sender: Any) {
         self.Img_uploadarea = "photo"
         if Servicefile.shared.photodicarray.count < 3 {
-            self.callDocprocess()
+            self.callgalaryprocess()
         }else{
             self.alert(Message: "You can upload 3 File")
         }
         self.tbl_commtype.isHidden = true
     }
     
+    
+    @IBAction func action_clear_signature(_ sender: Any) {
+        self.view_signature_lib.clear()
+    }
+    
+    @IBAction func action_view_signature(_ sender: Any) {
+        self.view_signature.isHidden = false
+        self.view_shadow.isHidden = false
+    }
+    
+    @IBAction func action_close_signature(_ sender: Any) {
+        self.digisignature = ""
+        self.set_signa_image(strimage: self.digisignature)
+    }
+    
+    @IBAction func action_get_signature(_ sender: Any) {
+        if let setimage = view_signature_lib.signature {
+            //self.image_signature.image = setimage
+            self.Img_uploadarea = "sign"
+            self.upload(imagedata: setimage)
+        }
+        self.view_signature.isHidden = true
+        self.view_shadow.isHidden = true
+    }
+    
+    func set_signa_image(strimage: String){
+        self.image_signature.sd_setImage(with: Servicefile.shared.StrToURL(url: strimage)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.image_signature.image = UIImage(named: "sample")
+            } else {
+                self.image_signature.image = image
+            }
+        }
+        self.image_signature.layer.borderWidth = 0.5
+        self.view_close.layer.borderWidth = 0.5
+        self.image_signature.layer.borderColor = UIColor.lightGray.cgColor
+        self.view_close.layer.cornerRadius = self.view_close.frame.height / 2
+        self.image_signature.layer.cornerRadius = 8.0
+        if self.digisignature == "" {
+            self.view_close.isHidden = true
+        }else{
+            self.view_close.isHidden = false
+        }
+    }
     
     @IBAction func action_submit(_ sender: Any) {
         self.tbl_commtype.isHidden = true
@@ -604,6 +675,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "Please select the photo")
         }else if  self.textfield_ser_amt.text == "" {
             self.alert(Message: "please enter the Service amount")
+        }else if  self.digisignature == "" {
+            self.alert(Message: "please upload the digital signature")
         } else {
             print("user_id" , Servicefile.shared.userid,
                   "communication_type",self.textfield_commtype.text!,
@@ -730,10 +803,31 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    func spilit_string_data(array_string: String)-> String{
+        var str = array_string.split(separator: ".")
+        if str.last == "pdf" {
+            return "pdf"
+        }else{
+            return ""
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if coll_govtid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "govtid", for: indexPath) as! imgidCollectionViewCell
-            cell.Img_id.image = UIImage(named: "pdf")
+            let imgdat = Servicefile.shared.govdicarray[indexPath.row] as! NSDictionary
+            let strdat = imgdat["govt_id_pic"] as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        cell.Img_id.image = image
+                    }
+                }
+            }else{
+                cell.Img_id.image = UIImage(named: "pdf")
+            }
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
@@ -742,16 +836,29 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pettype", for: indexPath) as! checkupCollectionViewCell
             print("is pethandle",self.ispethandle[indexPath.row])
             if self.ispethandle[indexPath.row] != "0" {
-                cell.img_check.image = UIImage(named: " checkbox-1")
+                cell.img_check.image = UIImage(named: imagelink.checkbox_1)
             } else{
-                cell.img_check.image = UIImage(named: " checkbox")
+                cell.img_check.image = UIImage(named: imagelink.checkbox)
             }
             cell.title.text = self.pethandle[indexPath.row]
             return cell
         }else if coll_photoid == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoid", for: indexPath)  as! imgidCollectionViewCell
-            
-            cell.Img_id.image = UIImage(named: "pdf")
+            let imgdat = Servicefile.shared.photodicarray[indexPath.row] as! NSDictionary
+            let strdat = imgdat["photo_id_pic"] as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        cell.Img_id.image = image
+                    }
+                }
+            }else{
+                cell.Img_id.image = UIImage(named: "pdf")
+            }
+            let val = Servicefile.shared.certifdicarray[indexPath.row]
+            print("certificate val",val)
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_photoid), for: .touchUpInside)
@@ -761,15 +868,29 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciali", for: indexPath) as! checkupCollectionViewCell
             print("is spec",self.isspecialza[indexPath.row])
             if self.isspecialza[indexPath.row] != "0" {
-                cell.img_check.image = UIImage(named: " checkbox-1")
+                cell.img_check.image = UIImage(named: imagelink.checkbox_1)
             } else{
-                cell.img_check.image = UIImage(named: " checkbox")
+                cell.img_check.image = UIImage(named: imagelink.checkbox)
             }
             cell.title.text = self.specialza[indexPath.row]
             return cell
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certificate", for: indexPath)  as! imgidCollectionViewCell
-            cell.Img_id.image = UIImage(named: "pdf")
+            let imgdat = Servicefile.shared.certifdicarray[indexPath.row] as! NSDictionary
+            let strdat = imgdat["certificate_pic"] as? String ?? Servicefile.sample_img
+            print("details",self.spilit_string_data(array_string: strdat))
+            if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        cell.Img_id.image = image
+                    }
+                }
+            }else{
+                cell.Img_id.image = UIImage(named: "pdf")
+            }
+            
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
@@ -778,13 +899,14 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clinic", for: indexPath)  as! imgidCollectionViewCell
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
-            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["clinic_pic"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
-                if (error != nil) {
-                    cell.Img_id.image = UIImage(named: "sample")
-                } else {
-                    cell.Img_id.image = image
+            let strdat = imgdat["clinic_pic"] as? String ?? Servicefile.sample_img
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: "pdf")
+                    } else {
+                        cell.Img_id.image = image
+                    }
                 }
-            }
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
@@ -908,6 +1030,25 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         present(importMenu, animated: true)
     }
     
+    func callgalaryimageprocess(){
+        let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .camera
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .photoLibrary
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+       
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            print("ok")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
@@ -919,6 +1060,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Document", style: UIAlertAction.Style.default, handler: { action in
+            self.callDocprocess()
         }))
         alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
             print("ok")
@@ -971,7 +1115,42 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                             print(B)
                             Servicefile.shared.clinicdicarray = B
                             print("uploaded data in clinic",Servicefile.shared.clinicdicarray)
+                        }else if self.Img_uploadarea == "certif" {
+                            var B = Servicefile.shared.certifdicarray
+                            var arr = B
+                            let a = ["certificate_pic":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.certifdicarray = B
+                            print("uploaded data in certifi",Servicefile.shared.certifdicarray)
+                        }else if self.Img_uploadarea == "gov" {
+                            var B = Servicefile.shared.govdicarray
+                            var arr = B
+                            let a = ["govt_id_pic":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.govdicarray = B
+                            print("uploaded data in govt_id_pic",Servicefile.shared.govdicarray)
+                        }else if self.Img_uploadarea == "photo" {
+                            var B = Servicefile.shared.photodicarray
+                            var arr = B
+                            let a = ["photo_id_pic":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.photodicarray = B
+                            print("uploaded data in photodicarray",Servicefile.shared.photodicarray)
+                        } else if self.Img_uploadarea == "sign" {
+                            print("Uploaded file digital sign url:",Data)
+                            self.digisignature = Data
+                            self.set_signa_image(strimage: Data)
+                            self.view_signature_lib.clear()
                         }
+                        self.coll_certificate.reloadData()
+                        self.coll_govtid.reloadData()
+                        self.coll_photoid.reloadData()
                         self.coll_clinicpic.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -1070,7 +1249,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             self.Img_clinic.image = UIImage(named: "sample")
         }
-        
     }
     
     
@@ -1170,13 +1348,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
              "profile_verification_status" : "Not verified",
              "consultancy_fees" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_ser_amt.text!),
              "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
-             "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "mobile_type" : "IOS",
+             "signature": self.digisignature], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
+                        self.issubmit = true
                         //let Data = res["Data"] as! NSDictionary
                         self.view_popup.isHidden = false
                         self.view_shadow.isHidden = false

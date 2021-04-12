@@ -77,9 +77,9 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Mycal_edit_availdayTableViewCell
         if self.isavailday[indexPath.row] != "0" {
-        cell.img_check.image = UIImage(named: " checkbox-1")
+        cell.img_check.image = UIImage(named: imagelink.checkbox_1)
                } else{
-                   cell.img_check.image = UIImage(named: " checkbox")
+                   cell.img_check.image = UIImage(named: imagelink.checkbox)
                }
         cell.label_weekday.text! = self.availday[indexPath.row]
         if self.isedit[indexPath.row] == "1" {

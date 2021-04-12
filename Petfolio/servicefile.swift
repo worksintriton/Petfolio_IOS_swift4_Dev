@@ -15,6 +15,8 @@ class imagelink{
     static let sample = "sample"
     static let selectedRadio = "selectedRadio"
     static let Radio = "Radio"
+    static let checkbox = "checkbox"
+    static let checkbox_1 = "checkbox-1"
     
     
     
@@ -44,7 +46,7 @@ class Servicefile {
     
     static let petdetailget = baseurl + "/api/pettype/mobile/getlist"
     static let addlocation = baseurl + "/api/locationdetails/create"
-    static let imageupload = baseurl + "/upload"
+    static let imageupload = baseurl + "/upload1"
     static let docbusscreate = baseurl + "/api/doctordetails/create"
     static let docbussedit = baseurl + "/api/doctordetails/edit"
     
@@ -385,6 +387,7 @@ class Servicefile {
     var Doc_loc = ""
     var Doc_long = 0.0
     var Doc_user_id = ""
+    var Doc_signature = ""
     // doc update
     // sp update
     var sp_id = ""

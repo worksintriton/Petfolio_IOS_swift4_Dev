@@ -344,9 +344,9 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             cell.label_threshold.text = data["pet_threshold"] as? String ?? ""
             cell.selectionStyle = .none
             if self.isselect[indexPath.row] == "0"{
-                cell.image_ischeck.image = UIImage(named: "checkbox")
+                cell.image_ischeck.image = UIImage(named: imagelink.checkbox)
             }else{
-                cell.image_ischeck.image = UIImage(named: "checkbox-1")
+                cell.image_ischeck.image = UIImage(named: imagelink.checkbox_1)
             }
             
             if self.isappdeal {
@@ -375,9 +375,9 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                     }
             }
             if self.isselect[indexPath.row] == "0"{
-                cell.image_ischeck.image = UIImage(named: "checkbox")
+                cell.image_ischeck.image = UIImage(named: imagelink.checkbox)
             }else{
-                cell.image_ischeck.image = UIImage(named: "checkbox-1")
+                cell.image_ischeck.image = UIImage(named: imagelink.checkbox_1)
             }
             if self.isappdeal {
                 cell.image_ischeck.isHidden = false

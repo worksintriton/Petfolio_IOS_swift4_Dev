@@ -141,6 +141,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                         let dr_title = Data["dr_title"] as? String ?? ""
                         let profile_status = Data["profile_status"] as? Bool ?? false
                         let profile_verification_status = Data["profile_verification_status"] as? String ?? ""
+                        let signature = Data["signature"] as? String ?? ""
                         let user_id = Data["user_id"] as? String ?? ""
                         let govt_id_pic = Data["govt_id_pic"] as! NSArray
                         let mobile_type = Data["mobile_type"] as? String ?? ""
@@ -172,6 +173,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                         Servicefile.shared.Doc_loc = clinic_loc
                         Servicefile.shared.Doc_long = clinic_long
                         Servicefile.shared.Doc_user_id = user_id
+                        Servicefile.shared.Doc_signature = signature
                         var petdata = ""
                         for itm in 0..<Servicefile.shared.DOC_pethandicarray.count{
                             let pethandle_data = Servicefile.shared.DOC_pethandicarray[itm] as! NSDictionary

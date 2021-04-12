@@ -428,11 +428,11 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! service_select_TableViewCell
         cell.label_service.text = Servicefile.shared.servicelist[indexPath.row]
         if self.selservice[indexPath.row] != "0" {
-            cell.imag_check.image = UIImage(named: " checkbox-1")
+            cell.imag_check.image = UIImage(named: imagelink.checkbox_1)
             cell.view_time.isHidden = false
             cell.view_amt.isHidden = false
         } else{
-            cell.imag_check.image = UIImage(named: " checkbox")
+            cell.imag_check.image = UIImage(named: imagelink.checkbox)
             cell.view_time.isHidden = true
             cell.view_amt.isHidden = true
         }
@@ -507,9 +507,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spec", for: indexPath) as! checkupCollectionViewCell
             cell.title.text = Servicefile.shared.speclist[indexPath.row]
             if self.selspec[indexPath.row] != "0" {
-                cell.img_check.image = UIImage(named: " checkbox-1")
+                cell.img_check.image = UIImage(named: imagelink.checkbox_1)
             } else{
-                cell.img_check.image = UIImage(named: " checkbox")
+                cell.img_check.image = UIImage(named: imagelink.checkbox)
             }
             return cell
         } else if coll_selservice == collectionView{

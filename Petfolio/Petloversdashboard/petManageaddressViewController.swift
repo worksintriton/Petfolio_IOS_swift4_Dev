@@ -69,21 +69,24 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! manageaddresslistTableViewCell
         cell.view_main.view_cornor()
-        cell.label_username.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_nickname
+        cell.label_username.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_title
         cell.label_address.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_address
+        
         cell.btn_delete.tag = indexPath.row
         cell.btn_edit.tag = indexPath.row
         cell.btn_isshowOption.tag = indexPath.row
-        cell.label_locationTitle.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_title
+        cell.label_locationTitle.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_nickname
         if self.isclickisoption[indexPath.row] == "1" {
             cell.view_option.isHidden = false
         }else{
             cell.view_option.isHidden = true
         }
+        cell.img_default.isHidden = true
+        cell.view_default.view_cornor()
         if Servicefile.shared.petuserlocaadd[indexPath.row].default_status != false {
-            cell.img_default.isHidden = false
+            cell.view_default.isHidden = false
         }else{
-            cell.img_default.isHidden = true
+            cell.view_default.isHidden = true
         }
         cell.btn_isshowOption.addTarget(self, action: #selector(action_optionvisible), for: .touchUpInside)
         cell.btn_edit.addTarget(self, action: #selector(action_edit), for: .touchUpInside)
@@ -314,7 +317,4 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
-    
-    
-    
 }

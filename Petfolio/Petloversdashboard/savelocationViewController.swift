@@ -30,6 +30,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     @IBOutlet weak var textfield_cityname: UITextField!
     @IBOutlet weak var textfield_pickname: UITextField!
     
+    @IBOutlet weak var switch_default: UISwitch!
     
     @IBOutlet weak var img_other: UIImageView!
     @IBOutlet weak var img_work: UIImageView!
@@ -41,10 +42,11 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     let marker = GMSMarker()
     
     var isselected = "Home"
+    var defaultstatus = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.switch_default.isOn = self.defaultstatus
         self.view_change.view_cornor()
          self.view_pincode.view_cornor()
          self.view_location.view_cornor()
@@ -70,6 +72,14 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.label_locadetail.text = Servicefile.shared.selectedaddress
         self.textfield_pickname.addTarget(self, action: #selector(textFieldpickTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func action_switch(_ sender: UISwitch) {
+        if sender.isOn {
+            self.defaultstatus = true
+        } else {
+            self.defaultstatus = false
+        }
     }
     
     @objc func textFieldpickTyping(textField:UITextField) {
@@ -198,7 +208,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         "location_long" : Servicefile.shared.long,
         "location_title" : self.isselected,
         "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
-        "default_status" : true,
+        "default_status" : self.defaultstatus,
         "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
         "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {

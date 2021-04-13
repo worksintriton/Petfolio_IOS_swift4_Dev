@@ -19,6 +19,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var label_coupon: UILabel!
     @IBOutlet weak var view_cart_empty: UIView!
     @IBOutlet weak var view_proceedtobuy: UIView!
+    @IBOutlet weak var view_movetoshop: UIView!
     
     
     
@@ -31,6 +32,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_movetoshop.view_cornor()
         Servicefile.shared.labelamt_total = 0
         Servicefile.shared.labelamt_discount = 0
         Servicefile.shared.labelamt_shipping = 0
@@ -47,6 +49,23 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         self.tbl_productlist.dataSource = self
         self.callcartdetails()
     }
+    
+    @IBAction func action_empty_cart(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure need to Empty the Cart", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.callDeleteoverallproduct()
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func action_movetoshop(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -144,9 +163,26 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         
         cell.btn_decrement.tag = indexPath.row
         cell.btn_increament.tag = indexPath.row
+        cell.btn_delete.tag = indexPath.row
+        cell.btn_delete.addTarget(self, action: #selector(action_delete), for: .touchUpInside)
         cell.btn_decrement.addTarget(self, action: #selector(action_decreament), for: .touchUpInside)
         cell.btn_increament.addTarget(self, action: #selector(action_insert), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func action_delete(sender: UIButton){
+        let tag = sender.tag
+        let cartlist =  Servicefile.shared.cartdata[tag] as! NSDictionary
+        let productdata = cartlist["product_id"] as! NSDictionary
+        Servicefile.shared.product_id = productdata["_id"] as! String
+        let alert = UIAlertController(title: "Are you sure need to delete the product", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.callDeletetheproductcount()
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+       
     }
     
     @objc func action_insert(sender: UIButton){
@@ -301,6 +337,67 @@ extension vendorcartpageViewController {
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.inc_prod_count, method: .post, parameters:
             ["product_id": Servicefile.shared.product_id,"user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callcartdetails()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        
+                        self.stopAnimatingActivityIndicator()
+                    }
+                    break
+                case .failure( _):
+                    
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    func callDeletetheproductcount(){
+        print("product_id", Servicefile.shared.product_id,"user_id",Servicefile.shared.userid)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_delete_single_cart, method: .post, parameters:
+            ["product_id": Servicefile.shared.product_id,"user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callcartdetails()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        
+                        self.stopAnimatingActivityIndicator()
+                    }
+                    break
+                case .failure( _):
+                    
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    func callDeleteoverallproduct(){
+        print("user_id",Servicefile.shared.userid)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_delete_overall_cart, method: .post, parameters:
+            ["user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

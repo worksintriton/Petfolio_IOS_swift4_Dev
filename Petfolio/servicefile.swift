@@ -175,6 +175,8 @@ class Servicefile {
     static let pet_vendor_mark_shiping_address_list = baseurl + "/api/shipping_address/mark_used_address"
     static let pet_vendor_delete_shiping_address_list = baseurl + "/api/shipping_address/delete"
     static let pet_vendor_update_shiping_address_list = baseurl + "/api/shipping_address/edit"
+    static let pet_vendor_delete_single_cart = baseurl + "/api/product_cart_detail/remove_single_products"
+    static let pet_vendor_delete_overall_cart = baseurl + "/api/product_cart_detail/remove_overall_products"
     // Signup page
     var email_status = false
     var signupemail = ""

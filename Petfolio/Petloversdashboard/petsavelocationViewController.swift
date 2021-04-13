@@ -30,6 +30,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     @IBOutlet weak var textfield_cityname: UITextField!
     @IBOutlet weak var textfield_pickname: UITextField!
     
+    @IBOutlet weak var switch_default: UISwitch!
     
     @IBOutlet weak var img_other: UIImageView!
     @IBOutlet weak var img_work: UIImageView!
@@ -42,6 +43,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     var isselected = "Home"
     var id = ""
+    var defaultstatus = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +71,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.textfield_location.text = Servicefile.shared.selectedaddress
             self.label_locaTitle.text = Servicefile.shared.selectedCity
             self.label_locadetail.text = Servicefile.shared.selectedaddress
+            self.switch_default.isOn = false
         }else{
             self.textfield_pincode.text = Servicefile.shared.selectedPincode
             self.textfield_cityname.text = Servicefile.shared.selectedCity
@@ -76,13 +79,24 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.label_locaTitle.text = Servicefile.shared.selectedCity
             self.label_locadetail.text = Servicefile.shared.selectedaddress
             self.textfield_pickname.text = Servicefile.shared.selectedpickname
-            
+            self.switch_default.isOn = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
+            if Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status {
+                self.switch_default.isUserInteractionEnabled = false
+            }
             self.id = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex]._id
             self.isselected = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_title
             self.changeaddtype(type: self.isselected)
         }
         self.textfield_pickname.addTarget(self, action: #selector(textFieldpicknameTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func action_switch(_ sender: UISwitch) {
+            if sender.isOn {
+                self.defaultstatus = true
+            } else {
+                self.defaultstatus = false
+            }
     }
     
     @objc func textFieldpicknameTyping(textField:UITextField) {
@@ -220,7 +234,6 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                 self.callupdatelocation()
             }
         }
-        
     }
     
     func callupdatelocation(){
@@ -238,7 +251,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
               "location_title" : self.isselected,
               "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
               "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
-              "default_status": Servicefile.shared.selecteddefaultstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+              "default_status": self.defaultstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -281,7 +294,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
              "location_long" : Servicefile.shared.long,
              "location_title" : self.isselected,
              "location_nickname" : Servicefile.shared.checktextfield(textfield: self.textfield_pickname.text!),
-             "default_status" : true,
+             "default_status" : self.defaultstatus,
              "date_and_time" :  Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()), "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:

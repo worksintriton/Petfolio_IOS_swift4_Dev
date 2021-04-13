@@ -11,6 +11,7 @@ import UIKit
 class manageaddresslistTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var view_default: UIView!
     @IBOutlet weak var label_locationTitle: UILabel!
     @IBOutlet weak var label_username: UILabel!
     @IBOutlet weak var label_address: UILabel!

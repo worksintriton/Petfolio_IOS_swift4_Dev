@@ -1027,13 +1027,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func callgalaryimageprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process, Please Rotate your device to landscape for taking picture for better quality", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            if UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft || UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft {
+//            if UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft || UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft {
                             self.imagepicker.allowsEditing = false
                             self.imagepicker.sourceType = .camera
                             self.present(self.imagepicker, animated: true, completion: nil)
-            } else {
-                self.alert(Message: "Please Rotate your device to landscape")
-            }
+//            } else {
+//                self.alert(Message: "Please Rotate your device to landscape")
+//            }
 //            if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
 //                self.imagepicker.allowsEditing = false
 //                self.imagepicker.sourceType = .camera

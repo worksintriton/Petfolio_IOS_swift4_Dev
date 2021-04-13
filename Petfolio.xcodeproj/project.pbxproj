@@ -17,6 +17,8 @@
 		840566682618946A0099A26D /* editshipaddresslistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840566662618946A0099A26D /* editshipaddresslistTableViewCell.xib */; };
 		8405666C261897600099A26D /* pet_vendor_editshiplistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405666B261897600099A26D /* pet_vendor_editshiplistViewController.swift */; };
 		8409722C2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409722B2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift */; };
+		840A79AB26258CAE000A735D /* myaddresslistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79AA26258CAE000A735D /* myaddresslistViewController.swift */; };
+		840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */; };
 		840B74F325EF991E00B7F63B /* pet_other_information_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */; };
 		840B74F525EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */; };
 		84140A5526007C40007B554F /* vendor_new_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84140A5426007C40007B554F /* vendor_new_TableViewCell.swift */; };
@@ -251,6 +253,8 @@
 		840566662618946A0099A26D /* editshipaddresslistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = editshipaddresslistTableViewCell.xib; sourceTree = "<group>"; };
 		8405666B261897600099A26D /* pet_vendor_editshiplistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_editshiplistViewController.swift; sourceTree = "<group>"; };
 		8409722B2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_trackorderViewController.swift; sourceTree = "<group>"; };
+		840A79AA26258CAE000A735D /* myaddresslistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myaddresslistViewController.swift; sourceTree = "<group>"; };
+		840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myaddress_create_address_ViewController.swift; sourceTree = "<group>"; };
 		840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_other_information_ViewController.swift; sourceTree = "<group>"; };
 		840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_edit_otherinfo_ViewController.swift; sourceTree = "<group>"; };
 		84140A5426007C40007B554F /* vendor_new_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_new_TableViewCell.swift; sourceTree = "<group>"; };
@@ -712,6 +716,8 @@
 				842B899A25DBF7D0003C7F15 /* pet_vendor_dashboard_ViewController.swift */,
 				840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */,
 				840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */,
+				840A79AA26258CAE000A735D /* myaddresslistViewController.swift */,
+				840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -1287,8 +1293,10 @@
 				B084F10D25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift in Sources */,
 				B02D3A8B259342F00010A4B6 /* sp_side_menuViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
+				840A79AB26258CAE000A735D /* myaddresslistViewController.swift in Sources */,
 				B0F56E3825C82B0E00B1634F /* Pet_app_details_ViewController.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
+				840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,
 				B0FF1AF02580C85F006227E4 /* petlocationsettingViewController.swift in Sources */,
 				B02D74652599B0DE0033D2D0 /* vendor_myorder_ViewController.swift in Sources */,

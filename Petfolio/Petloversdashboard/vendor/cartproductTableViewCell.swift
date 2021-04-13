@@ -21,6 +21,7 @@ class cartproductTableViewCell: UITableViewCell {
     @IBOutlet weak var label_product_cart_count: UILabel!
     @IBOutlet weak var view_inc: UIView!
     @IBOutlet weak var view_dec: UIView!
+    @IBOutlet weak var btn_delete: UIButton!
     
     
     override func awakeFromNib() {

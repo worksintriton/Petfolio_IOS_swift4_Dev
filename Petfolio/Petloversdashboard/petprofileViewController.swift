@@ -192,6 +192,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_myaddress(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "myaddresslistViewController") as!  myaddresslistViewController
+        self.present(vc, animated: true, completion: nil)
+       
+    }
     
     @IBAction func action_manageaddress(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController

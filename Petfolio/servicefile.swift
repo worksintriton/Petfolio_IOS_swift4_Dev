@@ -122,6 +122,7 @@ class Servicefile {
     static let pet_spreview_update = baseurl + "/api/sp_appointments/reviews/update"
     static let doc_start_appointment = baseurl + "/api/appointments/edit"
     static let doc_cancel_appointment = baseurl + "/api/appointments/edit"
+    static let pet_doc_app_reshedule = baseurl + "/api/appointments/reshedule_appointment"
     
     static let Doc_fetch_appointment_id = baseurl + "/api/appointments/mobile/fetch_appointment_id"
     static let SP_fetch_appointment_id = baseurl + "/api/sp_appointments/mobile/fetch_appointment_id"
@@ -165,7 +166,7 @@ class Servicefile {
     static let pet_vendor_sortby = baseurl + "/api/product_details/sort"
     static let pet_vendor_filter = baseurl + "/api/product_details/filter"
     static let pet_vendor_manage_discountsingle = baseurl + "/api/product_details/cal_discount_single"
-    
+    static let pet_vendor_productdetauils_gotocart = baseurl + "/api/product_cart_detail/cart_add_product"
     static let pet_vendor_manage_discountmultiple = baseurl + "/api/product_details/discount_multi"
     static let pet_vendor_manage_submitsingle = baseurl + "/api/product_details/discount_single"
     static let pet_vendor_manage_submitmultiple = baseurl + "/api/product_details/discount_multi"
@@ -369,6 +370,9 @@ class Servicefile {
     var DOC_govdicarray = [Any]()
     var DOC_photodicarray = [Any]()
     // DOc update
+    var doc_detail_id = ""
+    var doc_details_date = ""
+    var Doc_details_app_id = ""
     var Doc_id = ""
     var Doc_bus_certifdicarray = [Any]()
     var Doc_bus_profile = ""

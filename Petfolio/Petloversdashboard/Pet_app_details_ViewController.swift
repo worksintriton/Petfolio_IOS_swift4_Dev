@@ -43,10 +43,13 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_vacc_date: UIView!
     @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var view_home: UIView!
+    @IBOutlet weak var view_reshedule: UIView!
+    @IBOutlet weak var view_btn_shedule: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view_home.view_cornor()
+        
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
         self.view_footer.view_cornor()
@@ -54,6 +57,8 @@ class Pet_app_details_ViewController: UIViewController {
         self.view_complete.view_cornor()
         self.view_cancel.dropShadow()
         self.view_complete.dropShadow()
+        self.view_btn_shedule.view_cornor()
+        self.view_reshedule.isHidden = true
         self.view_confrence.isHidden = true
         self.view_complete.isHidden = true
          self.view_cancel.isHidden = true
@@ -95,11 +100,13 @@ class Pet_app_details_ViewController: UIViewController {
             }
             
         }
-        
-        
-        
         self.call_getdetails()
         
+    }
+    
+    @IBAction func action_reshedule(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_app_details_doc_calender_ViewController") as! pet_app_details_doc_calender_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_start_confrence(_ sender: Any) {
@@ -210,7 +217,9 @@ class Pet_app_details_ViewController: UIViewController {
                         let data = res["Data"] as! NSDictionary
                         self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                            Servicefile.shared.Doc_details_app_id = data["_id"] as? String ?? ""
                             self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                            Servicefile.shared.doc_details_date = self.label_orderdate.text!
                             let comm_type = data["communication_type"] as? String ?? ""
                             if comm_type == "Online" || comm_type == "Online Or Visit"{
                                 if Servicefile.shared.pet_selected_app_list == "current" {
@@ -262,6 +271,16 @@ class Pet_app_details_ViewController: UIViewController {
                                     self.image_pet_img.image = image
                                 }
                             }
+                            self.view_reshedule.isHidden = true
+                            let appoinment_status = data["appoinment_status"] as? String ?? ""
+                            if appoinment_status == "Incomplete" {
+                                let reshedule_status = data["reshedule_status"] as? String ?? ""
+                                if reshedule_status == "" {
+                                    self.view_reshedule.isHidden = false
+                                }else{
+                                    self.view_reshedule.isHidden = true
+                                }
+                            }
                             let user_id = data["user_id"] as! NSDictionary
                             let firstname = user_id["first_name"] as? String ?? ""
                             let lastname = user_id["last_name"] as? String ?? ""
@@ -272,6 +291,11 @@ class Pet_app_details_ViewController: UIViewController {
                             let doc_business_info = data["doc_business_info"] as! NSArray
                             let doc_busi = doc_business_info[0] as! NSDictionary
                             let clinic_loc  = doc_busi["clinic_loc"] as? String ?? ""
+                            let doctor_id = data["doctor_id"] as! NSDictionary
+                            
+                            let _id  = doctor_id["_id"] as? String ?? ""
+                            
+                            Servicefile.shared.doc_detail_id = _id
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = clinic_loc
                             if userimage == "" {
@@ -405,7 +429,7 @@ class Pet_app_details_ViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    /// used for get the details from this function
     func callspappcancel(){
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
             ["appointment_UID": Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].Booking_Id,

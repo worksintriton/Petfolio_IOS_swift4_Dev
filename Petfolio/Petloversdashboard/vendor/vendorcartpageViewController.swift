@@ -20,7 +20,10 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var view_cart_empty: UIView!
     @IBOutlet weak var view_proceedtobuy: UIView!
     @IBOutlet weak var view_movetoshop: UIView!
+    @IBOutlet weak var view_cart_count: UIView!
     
+    @IBOutlet weak var view_empty_cart: UIView!
+    @IBOutlet weak var label_cart_count: UILabel!
     
     
     // var razorpay: RazorpayCheckout!
@@ -30,8 +33,12 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var view_btn_alert: UIView!
     @IBOutlet weak var view_coupon: UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_cart_count.isHidden = true
+        self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2
+        self.label_cart_count.text = "0"
         self.view_movetoshop.view_cornor()
         Servicefile.shared.labelamt_total = 0
         Servicefile.shared.labelamt_discount = 0
@@ -139,7 +146,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let product_img = productdata["product_img"] as! NSArray
         cell.label_product_title.text = productdata["product_name"] as? String ?? ""
         cell.label_product_cart_count.text = String(cartlist["product_count"] as? Int ?? 0)
-        
+        cell.selectionStyle = .none
         if String(productdata["discount"] as? Int ?? 0) != "0" {
             cell.label_offer.text = String(productdata["discount"] as? Int ?? 0) + " % off"
         }else{
@@ -160,7 +167,6 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         }
-        
         cell.btn_decrement.tag = indexPath.row
         cell.btn_increament.tag = indexPath.row
         cell.btn_delete.tag = indexPath.row
@@ -168,6 +174,15 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         cell.btn_decrement.addTarget(self, action: #selector(action_decreament), for: .touchUpInside)
         cell.btn_increament.addTarget(self, action: #selector(action_insert), for: .touchUpInside)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cartlist = Servicefile.shared.cartdata[indexPath.row] as! NSDictionary
+        let productdata = cartlist["product_id"] as! NSDictionary
+        let product_id = productdata["_id"] as? String ?? ""
+        Servicefile.shared.product_id = product_id
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_delete(sender: UIButton){
@@ -309,9 +324,14 @@ extension vendorcartpageViewController {
                         self.label_subtotal_itmcount.text = "Subtotal (" + String(Servicefile.shared.labelsubtotal_itmcount) + item + ")"
                         if Servicefile.shared.cartdata.count > 0{
                             self.view_cart_empty.isHidden = true
+                            self.view_cart_count.isHidden = false
+                            self.label_cart_count.text = String(Servicefile.shared.cartdata.count)
                         }else{
                             self.view_cart_empty.isHidden = false
+                            self.view_cart_count.isHidden = true
+                            self.label_cart_count.text = "0"
                         }
+                       
                         self.tbl_productlist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{

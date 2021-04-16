@@ -23,6 +23,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var coll_product_img: UICollectionView!
     @IBOutlet weak var coll_productlist: UICollectionView!
     
+    @IBOutlet weak var image_like: UIImageView!
     @IBOutlet weak var label_product_title: UILabel!
     @IBOutlet weak var label_likes: UILabel!
     @IBOutlet weak var label_rating: UILabel!
@@ -31,16 +32,18 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var label_quantity: UILabel!
     @IBOutlet weak var label_description: UILabel!
     @IBOutlet weak var label_cartcount: UILabel!
+    @IBOutlet weak var label_addtocart: UILabel!
     
     @IBOutlet weak var View_outofstock: UIView!
     @IBOutlet weak var view_isqualityprod: UIView!
     @IBOutlet weak var view_rating: UIView!
+    @IBOutlet weak var pagecontroller: UIPageControl!
     
     var _id = ""
     var ca_id = ""
     var cat_img_path = ""
     var product_cate = ""
-    var product_cart_count = 0
+    var product_cart_count = 1
     var product_discount = 0
     var product_discription = ""
     var product_fav = false
@@ -50,9 +53,12 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     var product_review = ""
     var product_title = ""
     var threshould = ""
+    var timer = Timer()
+    var pagcount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.image_like.isHidden = true
         self.View_outofstock.isHidden = true
         self.view_isqualityprod.isHidden = true
         self.view_addtocart.isHidden = true
@@ -70,15 +76,39 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.coll_product_img.dataSource = self
         self.coll_productlist.delegate = self
         self.coll_productlist.dataSource = self
+        self.startTimer()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer.invalidate()
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+           if self.product_img.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == self.product_img.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_product_img.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_product_img.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+           self.pagecontroller.currentPage = self.pagcount
+              
+           }
+       }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-    }
+   
 
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -126,17 +156,22 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_dec(_ sender: Any) {
-        if self.product_cart_count > 0  {
+        if self.product_cart_count > 1  {
+            self.label_addtocart.text = "Go to cart"
             if  self.product_cart_count <= Int(self.threshould)! {
-                self.calldectheproductcount()
+                self.product_cart_count -= 1
                 self.label_cartcount.text = String(self.product_cart_count)
             }
+        }else{
+            self.label_addtocart.text = "Add to cart"
         }
     }
     
     @IBAction func action_inc(_ sender: Any) {
         if  self.product_cart_count < Int(self.threshould)! {
-        self.callinctheproductcount()
+        //self.callinctheproductcount()
+        self.product_cart_count += 1
+            self.label_addtocart.text = "Add to cart"
         self.label_cartcount.text = String(self.product_cart_count)
         }else{
             self.alert(Message: "You can buy only up to "+self.threshould+" quantity of this "+self.product_title)
@@ -145,8 +180,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     
     @IBAction func action_addtocart(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as!  vendorcartpageViewController
-               self.present(vc, animated: true, completion: nil)
+        self.callgotocart()
     }
     
      func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -186,6 +220,12 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 }
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
+                    cell.image_fav.image = UIImage(named: imagelink.favtrue)
+                }else{
+                    cell.image_fav.image = UIImage(named: imagelink.favfalse)
+                }
+                
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
                    
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
@@ -245,7 +285,14 @@ extension productdetailsViewController {
                         self.product_discount = data["product_discount"] as! Int
                         self.product_discription = data["product_discription"] as! String
                         self.product_fav = data["product_fav"] as? Bool ?? false
+                        self.image_like.isHidden = false
+                        if self.product_fav {
+                            self.image_like.image = UIImage(named: imagelink.favtrue)
+                        }else{
+                            self.image_like.image = UIImage(named: imagelink.favfalse)
+                        }
                         self.product_img = data["product_img"] as! [String]
+                        self.pagecontroller.numberOfPages = self.product_img.count
                         self.product_price = data["product_price"] as? Int ?? 0
                         self.product_rating = String(data["product_rating"] as? Double ?? 0.0)
                         let product_related = data["product_related"] as! NSArray
@@ -312,6 +359,8 @@ extension productdetailsViewController {
     }
     
     
+    
+    
     func callinctheproductcount(){
            print("product_id", Servicefile.shared.product_id,"user_id",Servicefile.shared.userid)
            self.startAnimatingActivityIndicator()
@@ -324,6 +373,38 @@ extension productdetailsViewController {
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
                             self.callproddeal()
+                           self.stopAnimatingActivityIndicator()
+                       }else{
+                           
+                           self.stopAnimatingActivityIndicator()
+                       }
+                       break
+                   case .failure(let Error):
+                       print(Error)
+                       self.stopAnimatingActivityIndicator()
+                       break
+                   }
+               }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
+    
+    
+   
+    func callgotocart(){
+           self.startAnimatingActivityIndicator()
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_productdetauils_gotocart, method: .post, parameters:
+                                                                        ["product_id": Servicefile.shared.product_id,"user_id":Servicefile.shared.userid,"count" : self.product_cart_count], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   switch (response.result) {
+                   case .success:
+                       let res = response.value as! NSDictionary
+                       print("success data",res)
+                       let Code  = res["Code"] as! Int
+                       if Code == 200 {
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as!  vendorcartpageViewController
+                               self.present(vc, animated: true, completion: nil)
                            self.stopAnimatingActivityIndicator()
                        }else{
                            

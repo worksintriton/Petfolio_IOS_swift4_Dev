@@ -402,6 +402,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! service_select_TableViewCell
         cell.label_service.text = Servicefile.shared.servicelist[indexPath.row]
+        cell.selectionStyle = .none
         if self.selservice[indexPath.row] != "0" {
             cell.imag_check.image = UIImage(named: imagelink.checkbox_1)
             cell.view_time.isHidden = false

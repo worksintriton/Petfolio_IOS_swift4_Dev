@@ -50,6 +50,7 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
         }
         cell.label_weekday.text! = self.availhour[indexPath.row]
         cell.view_edit.isHidden = true
+        cell.selectionStyle = .none
         return cell
     }
     

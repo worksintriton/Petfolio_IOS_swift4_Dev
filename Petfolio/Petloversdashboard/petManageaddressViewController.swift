@@ -71,7 +71,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         cell.view_main.view_cornor()
         cell.label_username.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_title
         cell.label_address.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_address
-        
+        cell.selectionStyle = .none
         cell.btn_delete.tag = indexPath.row
         cell.btn_edit.tag = indexPath.row
         cell.btn_isshowOption.tag = indexPath.row

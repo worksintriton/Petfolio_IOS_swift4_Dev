@@ -90,6 +90,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                 cell.img_sp.image = image
             }
         }
+        cell.selectionStyle = .none
         cell.view_img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
        // cell.view_img_sp.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
         cell.img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

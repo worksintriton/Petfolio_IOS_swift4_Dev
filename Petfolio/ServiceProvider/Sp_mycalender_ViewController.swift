@@ -87,6 +87,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
         } else {
             cell.view_edit.isHidden = false
         }
+        cell.selectionStyle = .none
         cell.btn_availcheck.tag = indexPath.row
         cell.btn_edit.tag = indexPath.row
         cell.btn_edit.addTarget(self, action: #selector(action_btnedit), for: .touchUpInside)

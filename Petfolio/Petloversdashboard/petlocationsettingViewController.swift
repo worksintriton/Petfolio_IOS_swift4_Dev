@@ -123,6 +123,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! locationdetailsTableViewCell
         cell.Label_location.text = self.searlocation[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     

@@ -202,12 +202,23 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
-        self.textview_clinicaddress.text = "Write here.."
-        self.textview_clinicaddress.textColor = UIColor.lightGray
+//        self.textview_clinicaddress.text = "Write here.."
+//        self.textview_clinicaddress.textColor = UIColor.lightGray
         //self.setclinicimag()
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
         self.view_shadow.addGestureRecognizer(tap)
+        self.calllocationcheck()
         
+    }
+    
+    func calllocationcheck(){
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
     
    
@@ -249,16 +260,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_expire.isHidden = true
         return true
     }
-    
+
     
     override func viewWillAppear(_ animated: Bool) {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
+        print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
+        self.textview_clinicaddress.text = Servicefile.shared.Doc_loc
     }
     
     
@@ -296,9 +302,35 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        self.latitude = locValue.latitude
-        self.longitude = locValue.longitude
+       
+        Servicefile.shared.Doc_lat = locValue.latitude
+        Servicefile.shared.Doc_long = locValue.longitude
+        
+        self.findareabylatlong()
         self.locationManager.stopUpdatingLocation()
+    }
+    
+    func findareabylatlong(){
+       
+        let latlng = String(Servicefile.shared.Doc_lat)+","+String(Servicefile.shared.Doc_long)
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            switch (response.result) {
+            case .success:
+                let data = response.value as! NSDictionary
+                let area = data["results"] as! NSArray
+                let areadetails = area[0] as! NSDictionary
+                Servicefile.shared.Doc_loc = (areadetails["formatted_address"] as? String)!
+                _ = areadetails["address_components"] as! NSArray
+                self.textview_clinicaddress.text! = Servicefile.shared.Doc_loc
+                break
+            case .failure(let Error):
+                print("Can't Connect to Server / TimeOut",Error)
+                break
+            }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     
@@ -683,9 +715,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                   "dr_title" , "",
                   "dr_name" , "",
                   "clinic_name" , self.textfield_clinicname.text!,
-                  "clinic_loc" , self.textview_clinicaddress.text!,
-                  "clinic_lat" , String(self.latitude),
-                  "clinic_long" , String(self.longitude),
+                  "clinic_loc" , Servicefile.shared.Doc_loc,
+                  "clinic_lat" , String(Servicefile.shared.Doc_lat),
+                  "clinic_long" , String(Servicefile.shared.Doc_long),
                   "education_details" , Servicefile.shared.edudicarray,
                   "experience_details" , Servicefile.shared.expdicarray,
                   "specialization" , Servicefile.shared.specdicarray,
@@ -700,6 +732,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                   "consultancy_fees" , "200")
             self.callDocreg()
         }
+       
         
         print("spec details", Servicefile.shared.specdicarray)
         print("pet details",self.pethandle, Servicefile.shared.pethandicarray)
@@ -707,7 +740,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_backtologin(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -736,12 +769,14 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let expval = Servicefile.shared.expdicarray[indexPath.row] as! NSDictionary
             cell.Label_company.text = (expval["company"]  as? String ?? "")
             cell.Label_fromto.text = (expval["from"]  as? String ?? "") + " - " + (expval["to"]  as? String ?? "")
+            cell.selectionStyle = .none
             cell.BTN_expclose.tag = indexPath.row
             cell.BTN_expclose.addTarget(self, action: #selector(closeexp), for: .touchUpInside)
             return cell
         } else if self.tbl_commtype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = self.comm_type[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "edu", for: indexPath) as! eduTableViewCell
@@ -750,6 +785,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             cell.label_yoc.text = (eduval["year"]  as? String ?? "")
             cell.BTN_close.tag = indexPath.row
             cell.BTN_close.addTarget(self, action: #selector(closeedu), for: .touchUpInside)
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -1252,6 +1288,13 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    @IBAction func action_change_location(_ sender: Any) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     func callpetdetails(){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() {
@@ -1324,6 +1367,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    //        Servicefile.shared.Doc_lat
+    //        Servicefile.shared.Doc_loc
+    //        Servicefile.shared.Doc_long
+    
     func callDocreg(){
         self.textfield_ser_amt.resignFirstResponder()
         self.startAnimatingActivityIndicator()
@@ -1333,9 +1380,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
              "dr_name" : Servicefile.shared.first_name,
              "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
              "communication_type": Servicefile.shared.checktextfield(textfield: self.textfield_commtype.text!),
-             "clinic_loc" : Servicefile.shared.checktextfield(textfield: self.textview_clinicaddress.text!),
-             "clinic_lat" : self.latitude!,
-             "clinic_long" : self.longitude!,
+             "clinic_loc" : Servicefile.shared.checktextfield(textfield: Servicefile.shared.Doc_loc),
+             "clinic_lat" : Servicefile.shared.Doc_lat,
+             "clinic_long" : Servicefile.shared.Doc_long,
              "education_details" : Servicefile.shared.edudicarray,
              "experience_details" : Servicefile.shared.expdicarray,
              "specialization" : Servicefile.shared.specdicarray,

@@ -125,13 +125,16 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             } else {
                 cell.view_cancnel.isHidden = true
             }
+            cell.selectionStyle = .none
         }else if self.appointtype == "Complete"{
+            cell.selectionStyle = .none
             cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].completed_at
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
+            cell.selectionStyle = .none
             cell.label_status.isHidden = true
             cell.label_status_val.isHidden = true
 //            if  Servicefile.shared.SP_Das_petdetails[indexPath.row].appoint_patient_st == "Doctor Cancelled appointment" {

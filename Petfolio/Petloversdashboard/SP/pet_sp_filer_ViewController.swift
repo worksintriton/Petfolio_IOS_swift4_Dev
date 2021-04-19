@@ -53,6 +53,7 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
         }else{
              cell.img_radio.image = UIImage(named: "Radio")
         }
+        cell.selectionStyle = .none
         cell.label_spec.text = Servicefile.shared.SP_filter_price[indexPath.row].Display_text
         return cell
     }

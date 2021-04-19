@@ -84,6 +84,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         cell.lab_title.text = self.doc_selholiday[indexPath.row]
         cell.btn_delete.tag = indexPath.row
         cell.btn_delete.addTarget(self, action: #selector(act_deleteholiday), for: .touchUpInside)
+        cell.selectionStyle = .none
         return cell
     }
     

@@ -253,17 +253,20 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             }else{
                   cell.textLabel?.text = "Select pet name"
             }
+            cell.selectionStyle = .none
             cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                    return cell
         } else if self.tblview_pettype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
             cell.textLabel?.text = self.pet_type[indexPath.row]
+            cell.selectionStyle = .none
             cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
             cell.textLabel?.text = self.Pet_breed[indexPath.row]
             cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.selectionStyle = .none
             return cell
         }
         

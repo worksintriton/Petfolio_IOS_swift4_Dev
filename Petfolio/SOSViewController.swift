@@ -63,12 +63,14 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.label_phno.text = Servicefile.shared.sosnumbers[indexPath.row].number
             cell.view_sos.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: "#ED3558")
             cell.view_sos.dropShadow()
+            cell.selectionStyle = .none
         }else{
             cell.label_contact.textColor = UIColor.black
              cell.label_phno.textColor = UIColor.black
             cell.label_phno.text = Servicefile.shared.sosnumbers[indexPath.row].number
             cell.view_sos.backgroundColor = UIColor.white
             cell.view_sos.removeshadow()
+            cell.selectionStyle = .none
         }
         cell.view_sos.view_cornor()
         

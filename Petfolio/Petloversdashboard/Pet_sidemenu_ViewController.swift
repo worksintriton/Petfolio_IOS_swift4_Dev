@@ -47,7 +47,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! menuTableViewCell
         cell.Img_menu.image = UIImage(named: self.imgmenu[indexPath.row])
         cell.label_menu.text = self.labelmenu[indexPath.row]
-        
+        cell.selectionStyle = .none
         return cell
     }
     

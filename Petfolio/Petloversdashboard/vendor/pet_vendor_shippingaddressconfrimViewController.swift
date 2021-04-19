@@ -240,6 +240,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
         cell.view_main.view_cornor()
         cell.view_add_type.view_cornor()
         cell.view_add_type.layer.borderWidth = 0.5
+        cell.selectionStyle = .none
         cell.view_add_type.layer.borderColor = UIColor.lightGray.cgColor
                 return cell
     }

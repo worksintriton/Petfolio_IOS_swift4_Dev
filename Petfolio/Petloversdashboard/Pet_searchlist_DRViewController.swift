@@ -115,6 +115,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                 spe =  spc
             }
         }
+        cell.selectionStyle = .none
         cell.label_docSubsci.text = spe
         let str = Servicefile.shared.moredocd[indexPath.row].clinic_loc
         let result = String(str.prefix(8))

@@ -84,6 +84,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                       cell.textfield_medi.text = ""
                       cell.textfield_noofdays.text = ""
                       cell.conspdays.text = ""
+                      cell.selectionStyle = .none
                       cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
                                      return cell
                }else{

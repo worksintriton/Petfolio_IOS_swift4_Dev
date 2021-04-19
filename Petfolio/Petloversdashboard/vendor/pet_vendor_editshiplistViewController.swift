@@ -109,6 +109,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         }else{
             cell.image_isselect.setimage(name: imagelink.Radio)
         }
+        cell.selectionStyle = .none
         cell.btn_isselect.tag = indexPath.row
         cell.btn_isselect.addTarget(self, action: #selector(call_set_marked), for: .touchUpInside)
         cell.btn_edit.tag = indexPath.row

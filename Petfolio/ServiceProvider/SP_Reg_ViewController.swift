@@ -436,6 +436,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             cell.view_time.isHidden = true
             cell.view_amt.isHidden = true
         }
+        cell.selectionStyle = .none
         cell.label_amt.text = "₹ " + String(Servicefile.shared.selectedamount[indexPath.row])
         cell.label_time.text = Servicefile.shared.selectedservice[indexPath.row]
         cell.btn_drop.tag = indexPath.row

@@ -67,6 +67,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
             cell.image_isselect.image = UIImage(named: "selectedRadio")
             
         }
+        cell.selectionStyle = .none
         if self.selval == "Other" {
             self.view_others.isHidden = false
         }else{

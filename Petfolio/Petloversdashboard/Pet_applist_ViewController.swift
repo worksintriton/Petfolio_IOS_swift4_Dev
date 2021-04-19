@@ -109,7 +109,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.view_pres.isHidden = true
         cell.view_pres.view_cornor()
         cell.selectionStyle = .none
-        cell.selectionStyle = .none
         cell.View_mainview.dropShadow()
         if self.appointtype == "current" {
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].communication_type != "Visit" {
@@ -155,6 +154,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                    cell.view_addview.isHidden = true
                                }
             }
+            cell.selectionStyle = .none
             cell.view_addview.view_cornor()
             cell.btn_addreview.tag = indexPath.row
             cell.btn_addreview.addTarget(self, action: #selector(action_addreview), for: .touchUpInside)
@@ -194,6 +194,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             cell.image_emergnecy.isHidden = true
         }
+        cell.selectionStyle = .none
         cell.btn_pres.tag = indexPath.row
         cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
         cell.view_completebtn.view_cornor()

@@ -123,7 +123,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.comm_type.removeAll()
         self.comm_type_Value.removeAll()
         self.callpetdetails()
-        print("lat long",self.latitude, self.longitude)
+        print("lat long",Servicefile.shared.Doc_lat, Servicefile.shared.Doc_long)
         Servicefile.shared.edudicarray.removeAll()
         Servicefile.shared.clinicdicarray.removeAll()
         Servicefile.shared.certifdicarray.removeAll()
@@ -256,14 +256,14 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+        override func viewWillAppear(_ animated: Bool) {
+            print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
+            self.textview_clinicaddress.text = Servicefile.shared.Doc_loc
         }
+    
+    @IBAction func action_change_location(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -281,10 +281,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
-        
-        self.latitude = locValue.latitude
-        self.longitude = locValue.longitude
+        Servicefile.shared.Doc_lat = locValue.latitude
+        Servicefile.shared.Doc_long = locValue.longitude
         self.locationManager.stopUpdatingLocation()
     }
     
@@ -640,9 +638,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                   "dr_title" , "",
                   "dr_name" , "",
                   "clinic_name" , self.textfield_clinicname.text!,
-                  "clinic_loc" , self.textview_clinicaddress.text!,
-                  "clinic_lat" , String(self.latitude),
-                  "clinic_long" , String(self.longitude),
+                  "clinic_loc" , Servicefile.shared.Doc_loc,
+                  "clinic_lat" , String(Servicefile.shared.Doc_lat),
+                  "clinic_long" , String(Servicefile.shared.Doc_long),
                   "education_details" , Servicefile.shared.edudicarray,
                   "experience_details" , Servicefile.shared.expdicarray,
                   "specialization" , Servicefile.shared.specdicarray,
@@ -737,11 +735,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             cell.Label_company.text = (expval["company"]  as? String ?? "")
             cell.Label_fromto.text = (expval["from"]  as? String ?? "") + " - " + (expval["to"]  as? String ?? "")
             cell.BTN_expclose.tag = indexPath.row
+            cell.selectionStyle = .none
             cell.BTN_expclose.addTarget(self, action: #selector(closeexp), for: .touchUpInside)
             return cell
         } else if self.tbl_commtype == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = self.comm_type[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "edu", for: indexPath) as! eduTableViewCell
@@ -750,6 +750,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             cell.label_yoc.text = (eduval["year"]  as? String ?? "")
             cell.BTN_close.tag = indexPath.row
             cell.BTN_close.addTarget(self, action: #selector(closeedu), for: .touchUpInside)
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -804,6 +805,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func spilit_string_data(array_string: String)-> String{
         var str = array_string.split(separator: ".")
         if str.last == "pdf" {
+            return "pdf"
+        }else if str.last == "PDF" {
             return "pdf"
         }else{
             return ""
@@ -1365,9 +1368,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
              "dr_name" : Servicefile.shared.first_name,
              "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
              "communication_type": Servicefile.shared.checktextfield(textfield: self.textfield_commtype.text!),
-             "clinic_loc" : Servicefile.shared.checktextfield(textfield: self.textview_clinicaddress.text!),
-             "clinic_lat" : self.latitude!,
-             "clinic_long" : self.longitude!,
+             "clinic_loc" : Servicefile.shared.checktextfield(textfield: Servicefile.shared.Doc_loc),
+             "clinic_lat" : Servicefile.shared.Doc_lat,
+             "clinic_long" : Servicefile.shared.Doc_long,
              "education_details" : Servicefile.shared.edudicarray,
              "experience_details" : Servicefile.shared.expdicarray,
              "specialization" : Servicefile.shared.specdicarray,

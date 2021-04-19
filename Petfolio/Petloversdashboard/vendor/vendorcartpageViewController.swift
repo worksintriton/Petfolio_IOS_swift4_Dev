@@ -152,7 +152,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         }else{
             cell.label_offer.isHidden = true
         }
-        
+        cell.selectionStyle = .none
         let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))

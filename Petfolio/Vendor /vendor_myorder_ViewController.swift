@@ -95,6 +95,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  Servicefile.shared.ordertype == "current" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
+            cell.selectionStyle = .none
         cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: "sample")

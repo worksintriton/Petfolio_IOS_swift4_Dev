@@ -81,6 +81,7 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
                } else{
                    cell.img_check.image = UIImage(named: imagelink.checkbox)
                }
+        cell.selectionStyle = .none
         cell.label_weekday.text! = self.availday[indexPath.row]
         if self.isedit[indexPath.row] == "1" {
             cell.view_edit.isHidden = true

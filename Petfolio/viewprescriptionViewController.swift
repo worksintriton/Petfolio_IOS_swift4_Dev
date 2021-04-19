@@ -53,6 +53,7 @@ class viewprescriptionViewController: UIViewController , UITableViewDelegate, UI
         cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
         cell.label_consp.text = presdata["consumption"] as? String ?? ""
         cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
+        cell.selectionStyle = .none
         return cell
     }
     

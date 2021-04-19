@@ -50,6 +50,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         }else{
             cell.img_radio.image = UIImage(named: "Radio")
         }
+        cell.selectionStyle = .none
         cell.label_spec.text = self.specialza[indexPath.row]
         return cell
     }

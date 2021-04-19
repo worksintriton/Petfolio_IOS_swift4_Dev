@@ -82,6 +82,7 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
                    cell.img_check.image = UIImage(named: imagelink.checkbox)
                }
         cell.label_weekday.text! = self.availday[indexPath.row]
+        cell.selectionStyle = .none
         if self.isedit[indexPath.row] == "1" {
             cell.view_edit.isHidden = true
         } else {

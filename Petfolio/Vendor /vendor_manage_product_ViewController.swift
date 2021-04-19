@@ -317,6 +317,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             let data = Servicefile.shared.manageproductDic[indexPath.row] as! NSDictionary
             cell.label_product_title.text = data["product_name"] as? String ?? ""
             cell.label_amt.text = data["product_price"] as? String ?? ""
+            cell.selectionStyle = .none
             let age = data["pet_age"] as! NSArray
             let pet_breed = data["pet_breed"] as! NSArray
             let pet_prod_img = data["products_image"] as! NSArray

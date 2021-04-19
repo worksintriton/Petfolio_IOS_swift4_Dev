@@ -88,6 +88,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                     cell.image_order.image = image
                 }
             }
+            cell.selectionStyle = .none
             cell.image_order.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name

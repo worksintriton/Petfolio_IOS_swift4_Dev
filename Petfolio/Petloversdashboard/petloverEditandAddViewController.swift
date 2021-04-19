@@ -255,16 +255,19 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate, U
             let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
             cell.textLabel?.text = self.pet_type[indexPath.row]
              cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.selectionStyle = .none
             return cell
         }else if self.tblview_gender == tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "gender", for: indexPath)
             cell.textLabel?.text = self.petgender[indexPath.row]
              cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.selectionStyle = .none
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
             cell.textLabel?.text = self.Pet_breed[indexPath.row]
              cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.selectionStyle = .none
             return cell
         }
         

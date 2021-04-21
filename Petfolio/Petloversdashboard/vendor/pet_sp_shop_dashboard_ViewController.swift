@@ -134,6 +134,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
            print("pass data from protocal",passdata)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
                       self.present(vc, animated: true, completion: nil)
+        
+       
        }
     
     @objc func action_todaydeal_seemore(sender: UIButton){

@@ -315,7 +315,8 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                                                             let specialization = Bval["specialization"] as! NSArray
                                                             let Dicspec = specialization[specialization.count-1] as! NSDictionary
                                                             var spec = Dicspec["specialization"] as? String ?? ""
-                                                            Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec,idistance: distance))
+                                                            let clinic_name = Bval["clinic_name"] as? String ?? ""
+                                                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name))
                                                         }
                                                         Servicefile.shared.petprod.removeAll()
                                                         let Products_details = dash["Products_details"] as! NSArray

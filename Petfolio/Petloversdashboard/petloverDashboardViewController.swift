@@ -12,7 +12,7 @@ import Toucan
 import SDWebImage
 import CoreLocation
 
-class petloverDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+class petloverDashboardViewController1: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
     
     
@@ -59,6 +59,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.view_popup.view_cornor()
         self.view_denypop.view_cornor()
         self.view_allowpop.view_cornor()
+        self.view_denypop.dropShadow()
+        self.view_allowpop.dropShadow()
+        
         self.colleView_banner.delegate = self
         self.colleView_banner.dataSource = self
         self.colleView_Doctor.delegate = self
@@ -71,10 +74,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.colleView_puppylove.dataSource = self
         self.colleView_banner.isPagingEnabled = true
         self.callpetdash()
-        self.view_denypop.dropShadow()
-        self.view_allowpop.dropShadow()
-        self.view_popup.isHidden = true
-        self.view_shadow.isHidden = true
+        
+        
         // Do any additional setup after loading the view.
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         scrollview.addSubview(refreshControl) // not required when using UITableViewController
@@ -361,24 +362,17 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }
     }
     
-    
-    
-   
-    
-    
     func callpetdash(){
-        
         Servicefile.shared.pet_dash_lati = self.latitude
         Servicefile.shared.pet_dash_long = self.longitude
         Servicefile.shared.pet_dash_address = self.locationaddress
-        
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,
-             "lat" : self.latitude,
-             "long" : self.longitude,
+             "lat" : Servicefile.shared.pet_dash_lati,
+             "long" : Servicefile.shared.pet_dash_long,
              "user_type" : 1 ,
-             "address" : self.locationaddress,
+             "address" : Servicefile.shared.pet_dash_address,
              "Doctor": self.doc,
              "Product" : self.pro,
              "service" : self.ser], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -434,7 +428,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                             let specialization = Bval["specialization"] as! NSArray
                             let Dicspec = specialization[specialization.count-1] as! NSDictionary
                             let spec = Dicspec["specialization"] as? String ?? ""
-                            Servicefile.shared.petdoc.append(Petdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count,ispec: spec,idistance: distance))
+                            let clinic_name = Bval["clinic_name"] as? String ?? ""
+                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name))
                         }
                         Servicefile.shared.petprod.removeAll()
                         let Products_details = dash["Products_details"] as! NSArray

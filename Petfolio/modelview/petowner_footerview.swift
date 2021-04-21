@@ -52,7 +52,6 @@ class petowner_footerview: UIView {
     private func configureView() {
         if let view = self.loadNib(nibname: "petowner_footerview") {
             view.frame = self.bounds
-            view.layer.cornerRadius = 15
             view.layer.masksToBounds = true
             self.addSubview(view)
         }

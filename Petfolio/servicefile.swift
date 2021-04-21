@@ -18,7 +18,37 @@ class imagelink{
     static let checkbox = "checkbox"
     static let checkbox_1 = "checkbox-1"
     
+    // footer image
     
+    static let Home_gray = "Home_gray"
+    static let home_blue = "home_blue"
+    
+    static let petcare_gray = "petcare_gray"
+    static let petcare_blue = "petcare_blue"
+    
+    static let shop_blue = "shop_blue"
+    static let shop_gray = "shop_gray"
+    
+    static let pet_service_gray = "Foot_print_gray"
+    static let pet_service_blue = "foot_print_blue"
+    
+    static let SOS = "Group59"
+    
+    // footer image
+    
+    // Header side menu
+    
+    static let sidemenu = "Group55"
+    static let Icon_map_pin = "Icon_map_pin"
+    static let Drop_down = "Path76"
+    
+}
+
+class colorpickert{
+    static let link = colorpickert()
+    
+    static let footer_blue = "#408DCC"
+    static let footer_gray = "#aaa"
     
 }
 
@@ -41,6 +71,7 @@ class Servicefile {
     
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard1"
+    static let petdashboard_new = baseurl + "/api/userdetails/petlove/mobile/dashboardtest"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
     static let pet_sp_filter = baseurl + "/api/service_provider/filter_price_list"
     
@@ -237,9 +268,12 @@ class Servicefile {
     // pet dashboard
     var petid = ""
     var petbanner = [Petdashbanner]()
-    var petdoc = [Petdashdoc]()
+    var petshopbanner = [Petdashbanner]()
+    var petdoc = [Petnewdashdoc]()
+    var Petnewdoc = [Petnewdashdoc]()
     var petser = [Petdashservice]()
     var petprod = [Petdashproduct]()
+    var petnewprod = [Petnewdashproduct]()
     var Petpuppylove = [Petdashpuppylove]()
     var pet_petlist = [petlist]()
     var petuserlocaadd = [locationdetails]()
@@ -852,30 +886,32 @@ struct Petdashservice{
     }
 }
 
-//
-//struct Petdashproduct{
-//    var _id : String
-//    var product_fav_status : Bool
-//    var product_offer_status : Bool
-//    var product_offer_value : Int
-//    var product_prices : Int
-//    var product_rate : String
-//    var product_title : String
-//    var products_img : String
-//    var review_count : Int
-//    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int) {
-//        self._id = UID
-//        self.product_fav_status = product_fav_status
-//        self.product_offer_status = product_offer_status
-//        self.product_offer_value = product_offer_value
-//        self.product_prices = product_prices
-//        self.product_rate = product_rate
-//        self.product_title = product_title
-//        self.products_img = products_img
-//        self.review_count = review_count
-//
-//    }
-//}
+
+struct Petnewdashproduct{
+    var _id : String
+    var product_fav_status : Bool
+    var product_offer_status : Bool
+    var product_offer_value : Int
+    var product_prices : Int
+    var product_rate : String
+    var product_title : String
+    var cat_names : String
+    var products_img : String
+    var review_count : Int
+    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int, cat_name: String) {
+        self._id = UID
+        self.product_fav_status = product_fav_status
+        self.product_offer_status = product_offer_status
+        self.product_offer_value = product_offer_value
+        self.product_prices = product_prices
+        self.product_rate = product_rate
+        self.product_title = product_title
+        self.products_img = products_img
+        self.review_count = review_count
+        self.cat_names = cat_name
+
+    }
+}
 
 struct Petdashproduct{
     var _id : String
@@ -923,7 +959,26 @@ struct Petdashpuppylove{
     }
 }
 
-
+struct Petnewdashdoc{
+    var _id : String
+    var doctor_img : String
+    var doctor_name : String
+    var clinic_name : String
+    var review_count : Int
+    var star_count : Int
+    var spec : String
+    var distance : String
+    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String, idistance : String, Iclinic_name : String) {
+        self._id = UID
+        self.doctor_img = doctor_img
+        self.doctor_name = doctor_name
+        self.review_count = review_count
+        self.star_count = star_count
+        self.spec = ispec
+        self.distance =  idistance
+        self.clinic_name = Iclinic_name
+    }
+}
 
 struct Petdashdoc{
     var _id : String

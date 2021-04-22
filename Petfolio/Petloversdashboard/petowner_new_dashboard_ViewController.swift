@@ -77,7 +77,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     func intial_setup_action(){
-        
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
@@ -87,16 +86,34 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else{
             img = Servicefile.sample_img
         }
-        self.view_header.image_profile.image = UIImage(named: img)
+        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.view_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.view_header.image_profile.image = image
+            }
+        }
+        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
     // header action
-
     // footer action
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(button2), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(button5), for: .touchUpInside)
-    // footer action
         
+        self.view_footer.image_Fprocess_one.image = UIImage(named: imagelink.home_blue)
+        self.view_footer.image_Fprocess_two.image = UIImage(named: imagelink.petcare_gray)
+        self.view_footer.image_Fprocess_four.image = UIImage(named: imagelink.pet_service_gray)
+        self.view_footer.image_Fprocess_five.image = UIImage(named: imagelink.shop_gray)
+        
+        self.view_footer.label_Fprocess_one.text = "Home"
+        self.view_footer.label_Fprocess_two.text = "Pet Care"
+        self.view_footer.label_Fprocess_three.text = "SOS"
+        self.view_footer.label_Fprocess_four.text = "Pet Service"
+        self.view_footer.label_Fprocess_five.text = "Shop"
+        
+        
+    // footer action
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -348,7 +365,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
         self.present(vc, animated: true, completion: nil)
     }
-    
 }
 
 extension petloverDashboardViewController {
@@ -566,6 +582,14 @@ extension petloverDashboardViewController {
                             //                                                                self.callpetdash()
                             //                                                                 }))
                             //                                                            self.present(alert, animated: true, completion: nil)
+                        }
+                        let location_details = Data["LocationDetails"] as! NSArray
+                        if location_details.count > 0 {
+                            let city_list = location_details[0] as! NSDictionary
+                            let city = city_list["location_city"] as? String ?? ""
+                            self.view_header.label_location.text = city
+                        }else{
+                            self.view_header.label_location.text = ""
                         }
                         self.pagecontrol.numberOfPages = Servicefile.shared.petbanner.count
                         self.col_banner.reloadData()

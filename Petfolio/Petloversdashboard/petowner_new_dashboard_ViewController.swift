@@ -96,23 +96,12 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
     // header action
     // footer action
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(button2), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(button3), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(button4), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(button5), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.image_Fprocess_one.image = UIImage(named: imagelink.home_blue)
-        self.view_footer.image_Fprocess_two.image = UIImage(named: imagelink.petcare_gray)
-        self.view_footer.image_Fprocess_four.image = UIImage(named: imagelink.pet_service_gray)
-        self.view_footer.image_Fprocess_five.image = UIImage(named: imagelink.shop_gray)
-        
-        self.view_footer.label_Fprocess_one.text = "Home"
-        self.view_footer.label_Fprocess_two.text = "Pet Care"
-        self.view_footer.label_Fprocess_three.text = "SOS"
-        self.view_footer.label_Fprocess_four.text = "Pet Service"
-        self.view_footer.label_Fprocess_five.text = "Shop"
-        
-        
+        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
     // footer action
     }
     
@@ -367,7 +356,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
 }
 
-extension petloverDashboardViewController {
+extension UIViewController {
     
     @objc func button1(sender: UIButton){
         

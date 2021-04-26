@@ -101,7 +101,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    
    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
                 guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-                print("locations = \(locValue.latitude) \(locValue.longitude)")
+//                print("locations = \(locValue.latitude) \(locValue.longitude)")
              
              
           self.latitude = locValue.latitude
@@ -342,7 +342,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
          }
          let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
          self.PDFupload(dat: myURL)
-         print("import result : \(myURL)","name of file ",filename)
+//         print("import result : \(myURL)","name of file ",filename)
      }
 
 

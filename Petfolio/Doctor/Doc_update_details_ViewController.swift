@@ -280,7 +280,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
         Servicefile.shared.Doc_lat = locValue.latitude
         Servicefile.shared.Doc_long = locValue.longitude
         self.locationManager.stopUpdatingLocation()
@@ -295,7 +295,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
         
         self.PDFupload(dat: myURL)
-        print("import result : \(myURL)","name of file ",filename)
+//        print("import result : \(myURL)","name of file ",filename)
     }
     
     

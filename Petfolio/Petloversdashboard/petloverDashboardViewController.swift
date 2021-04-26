@@ -102,7 +102,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
         self.latitude = locValue.latitude
         self.longitude = locValue.longitude
         self.latLong(lat: self.latitude,long: self.longitude)

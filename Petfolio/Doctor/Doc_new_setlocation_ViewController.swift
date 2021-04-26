@@ -140,7 +140,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
             Servicefile.shared.lati = locValue.latitude
             Servicefile.shared.long = locValue.longitude
             self.setmarker(lat: locValue.latitude,long: locValue.longitude)
@@ -194,7 +194,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
     // gms move marker work
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
-        print("You tapped at \(coordinate)")
+//        print("You tapped at \(coordinate)")
         self.tbl_searchlist.isHidden = true
         self.view.endEditing(true)
         marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -231,28 +231,28 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
                         Servicefile.shared.selectedCountry = country
                     }
                     if let city = placeMark.addressDictionary!["City"] as? String {
-                        print("Newuserpickuplocation line 106 City :- \(city)")
+//                        print("Newuserpickuplocation line 106 City :- \(city)")
                         Servicefile.shared.selectedCity = city
                         
                         
                     }
                     
                     if let state = placeMark.addressDictionary!["State"] as? String{
-                        print("State :- \(state)")
+//                        print("State :- \(state)")
                         Servicefile.shared.selectedState = state
                         // Street
                     }
                     if let zip = placeMark.addressDictionary!["ZIP"] as? String{
-                        print("ZIP :- \(zip)")
+//                        print("ZIP :- \(zip)")
                         Servicefile.shared.selectedPincode = zip
                         // Location name
                     }
                     if let locationName = placeMark?.addressDictionary?["Name"] as? String {
-                        print("Location Name :- \(locationName)")
+//                        print("Location Name :- \(locationName)")
                         // Street address
                     }
                     if let thoroughfare = placeMark?.addressDictionary!["Thoroughfare"] as? NSString {
-                        print("Thoroughfare :- \(thoroughfare)")
+//                        print("Thoroughfare :- \(thoroughfare)")
                         
                     }}
             })

@@ -114,7 +114,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
                  guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-                 print("locations = \(locValue.latitude) \(locValue.longitude)")
+//                 print("locations = \(locValue.latitude) \(locValue.longitude)")
               
               
            self.latitude = locValue.latitude
@@ -355,7 +355,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
           }
           let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
           self.PDFupload(dat: myURL)
-          print("import result : \(myURL)","name of file ",filename)
+//          print("import result : \(myURL)","name of file ",filename)
       }
 
 

@@ -49,6 +49,7 @@ class colorpickert{
     
     static let footer_blue = "#408DCC"
     static let footer_gray = "#aaa"
+    static let orange_color = "#E8571E"
     
 }
 
@@ -177,10 +178,16 @@ class Servicefile {
     static let dec_prod_count = baseurl + "/api/product_cart_detail/remove_product"
     static let cartdetails = baseurl + "/api/product_cart_detail/fetch_cart_details_by_userid"
     static let Createproduct = baseurl + "/api/vendor_order_booking/create"
-    static let orderlist = baseurl + "/api/vendor_order_booking/get_order_details_user_id"
+    //static let orderlist = baseurl + "/api/vendor_order_booking/get_order_details_user_id"
+    static let orderlist = baseurl + "/api/petlover_order_group/get_grouped_order_by_petlover"
     static let vendor_getlistid = baseurl + "/api/product_vendor/getlist_id"
-    static let vendor_new_orderlist = baseurl + "/api/vendor_order_booking/get_order_details_vendor_id"
-    static let vendor_status_orderlist = baseurl + "/api/vendor_order_booking/fetch_order_details_id"
+    //static let vendor_new_orderlist = baseurl + "/api/vendor_order_booking/get_order_details_vendor_id"
+    static let vendor_new_orderlist = baseurl + "/api/vendor_order_group/get_grouped_order_by_vendor"
+    //static let vendor_status_orderlist = baseurl + "/api/vendor_order_booking/fetch_order_details_id"
+    static let vendor_status_orderlist = baseurl + "/api/vendor_order_group/get_product_list_by_vendor"
+    
+    static let petlover_status_orderlist = baseurl + "/api/petlover_order_group/get_product_list_by_petlover"
+    static let vendor_product_order_status_list = baseurl + "/api/petlover_order_group/fetch_single_product_detail"
     static let vendor_update_status_accept_return = baseurl + "/api/vendor_order_booking/update_status_accept_return"
     
     
@@ -209,6 +216,10 @@ class Servicefile {
     static let pet_vendor_update_shiping_address_list = baseurl + "/api/shipping_address/edit"
     static let pet_vendor_delete_single_cart = baseurl + "/api/product_cart_detail/remove_single_products"
     static let pet_vendor_delete_overall_cart = baseurl + "/api/product_cart_detail/remove_overall_products"
+    
+    static let vendor_order_details_confirm = baseurl + "/api/vendor_order_group/update_vendor_status1"
+    static let vendor_order_details_dispatch = baseurl + "/api/vendor_order_group/update_vendor_status2"
+    static let vendor_order_details_reject = baseurl + "/api/vendor_order_group/update_vendor_status3"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -343,6 +354,7 @@ class Servicefile {
     var black = "#444444"
     static let appblack = "#444444"
     static let appgray = "#AAAAAA"
+    static let appred = "#FF0000"
     var selrate = 0
     var selspec = ""
     var orgspecialza = [""]
@@ -478,10 +490,12 @@ class Servicefile {
     var sp_dash_productdetails = [productdetails]()
     var vendor_product_id_details = [productdetails]()
     var order_productdetail = [order_productdetails]()
+    var order_list_productdetails = [orderlist_productdetails]()
     var vendor_orderstatuss = [vendor_orderstatus]()
     var vendor_fstatus = [vendor_filterstatus]()
     var vendor_fdata = [vendor_filterdata]()
     var vendor_orgifdata = [vendor_filterdata]()
+    var orderdetail_prod = [orderdetails_prod]()
     var today_deals_status = false
     var vendor_filter_pet_type_id = ""
     var vendor_filter_pet_breed_id =  ""
@@ -500,6 +514,12 @@ class Servicefile {
     var labelamt_shipping = 0
     var labelamt_subtotal = 0
     var labelsubtotal_itmcount = 0
+    var productid = 0
+    var product_price = 0
+    var date_of_booking = ""
+    var product_quantity = 0
+    var order_id = ""
+    var product_title = ""
     
     var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
@@ -998,6 +1018,45 @@ struct Petdashdoc{
         self.distance =  idistance
     }
 }
+
+struct orderdetails_prod{
+    var product_booked : String
+    var product_count : Int
+    var product_discount : Int
+    var product_id : Int
+    var product_image : String
+    var product_name : String
+    var product_price : Int
+    var product_stauts : String
+    var product_total_discount : Int
+    var product_total_price  : Int
+    init(In_product_booked : String
+         , In_product_count : Int
+         , In_product_discount : Int
+         , In_product_id : Int
+         , In_product_image : String
+         , In_product_name : String
+         , In_product_price : Int
+         , In_product_stauts : String
+         , In_product_total_discount : Int
+         , In_product_total_price  : Int) {
+        self.product_booked = In_product_booked
+        self.product_count = In_product_count
+        self.product_discount = In_product_discount
+        self.product_id = In_product_id
+        self.product_image = In_product_image
+        self.product_name = In_product_name
+        self.product_price = In_product_price
+        self.product_stauts = In_product_stauts
+        self.product_total_discount = In_product_total_discount
+        self.product_total_price = In_product_total_price
+    }
+
+}
+
+
+
+
 
 struct Petdashbanner{
     var _id : String
@@ -1499,9 +1558,57 @@ struct vendor_filterdata{
     }
 }
 
-
-
 struct order_productdetails {
+    let v_order_booked_on : String
+    let v_order_id : String
+    let v_order_image : String
+    let v_order_price : Int
+    let v_order_product_count : Int
+    let v_order_status : String
+    let v_order_text : String
+    let v_payment_id : String
+    let v_shipping_address : String
+    let v_user_id : String
+    let v_vendor_id : String
+    let v_cancelled_date : String
+    let v_completed_date : String
+    let v_user_feedback : String
+    let v_user_rate : Int
+    init(In_v_order_booked_on : String,
+         In_v_order_id : String,
+         In_v_order_image : String,
+         In_v_order_price : Int,
+         In_v_order_product_count : Int,
+         In_v_order_status : String,
+         In_v_order_text : String,
+         In_v_payment_id : String,
+         In_v_shipping_address : String,
+         In_v_user_id : String,
+         In_v_vendor_id : String,
+         In_v_cancelled_date : String,
+         In_v_completed_date : String,
+         In_v_user_feedback : String,
+         In_v_user_rate : Int) {
+        self.v_order_booked_on = In_v_order_booked_on
+        self.v_order_id = In_v_order_id
+        self.v_order_image = In_v_order_image
+        self.v_order_price = In_v_order_price
+        self.v_order_product_count = In_v_order_product_count
+        self.v_order_status = In_v_order_status
+        self.v_order_text = In_v_order_text
+        self.v_payment_id = In_v_payment_id
+        self.v_shipping_address = In_v_shipping_address
+        self.v_user_id = In_v_user_id
+        self.v_vendor_id = In_v_vendor_id
+        self.v_cancelled_date = In_v_cancelled_date
+        self.v_completed_date = In_v_completed_date
+        self.v_user_feedback = In_v_user_feedback
+        self.v_user_rate = In_v_user_rate
+    }
+}
+
+
+struct orderlist_productdetails {
     var _id : String
     var date_of_booking : String
     var order_id : String

@@ -37,16 +37,16 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
         self.textview_other_reason.text = "Write here.."
         self.textview_other_reason.textColor = UIColor.lightGray
         self.view_others.isHidden = true
-        self.product_title.text = Servicefile.shared.order_productdetail[Servicefile.shared.service_index].product_name
-        self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[Servicefile.shared.service_index].prodcut_image)) { (image, error, cache, urls) in
+        self.product_title.text = Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_text
+        self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.image_product.image = UIImage(named: "sample")
             } else {
                 self.image_product.image = image
             }
         }
-        self.Label_product_amt.text = "₹ " +   String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].product_price)
-        self.Label_status.text = "Delivered on : " +  String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].date_of_booking)
+        self.Label_product_amt.text = "₹ " +   String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_price)
+        self.Label_status.text = "Delivered on : " +  String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_booked_on)
         
     }
     

@@ -496,7 +496,7 @@ extension petloverDashboardViewController {
                             let product_offer_status = false
                             let product_fav_status = Bval["product_fav"] as? Bool ?? false
                             let products_img = Bval["product_img"] as? String ?? ""
-                            let product_prices = Bval["product_img"] as? Int ?? 0
+                            let product_prices = Bval["product_price"] as? Int ?? 0
                             let product_rate = String(Bval["product_rating"] as? Float ?? 0.0) //?? ""
                             let review_count = Bval["product_review"] as? Int ?? 0
                             let product_title = Bval["product_title"] as? String ?? ""

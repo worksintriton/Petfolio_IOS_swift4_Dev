@@ -21,6 +21,8 @@ class petowner_header: UIView {
     @IBOutlet weak var view_profile: UIView!
     @IBOutlet weak var btn_location: UIButton!
     @IBOutlet weak var view_location: UIView!
+    @IBOutlet weak var view_btn_process: UIView!
+    @IBOutlet weak var btn_button2: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

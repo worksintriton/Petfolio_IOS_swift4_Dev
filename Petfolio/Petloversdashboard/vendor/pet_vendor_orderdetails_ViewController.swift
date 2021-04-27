@@ -89,10 +89,6 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_footer.view_cornor()
-        self.isconfirmed.removeAll()
-        self.isrejected.removeAll()
-        self.isdispatched.removeAll()
-        
         self.label_confirmall.text = "Confirm All"
         self.order_change_status.removeAll()
         self.orgi_order_change_status.removeAll()
@@ -150,7 +146,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.btn_trackorder.addTarget(self, action: #selector(action_btn_trackorder), for: .touchUpInside)
             
             cell.btn_cancel_order.tag = indexPath.row
-            cell.btn_cancel_order.addTarget(self, action: #selector(action_btn_trackorder), for: .touchUpInside)
+            cell.btn_cancel_order.addTarget(self, action: #selector(action_btn_cancelorder), for: .touchUpInside)
+            
             return cell
             
             //
@@ -194,6 +191,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         var index_result = 0
         if Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Booked" || Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Accept" || Servicefile.shared.orderdetail_prod[index].product_stauts ==  "Order Dispatch" {
             index_result = 0 // vendor_orderDetails_neworder_TableViewCell
+            self.view_confirmall.isHidden = false
         }else {
             index_result = 1
         }
@@ -215,8 +213,10 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             return false
         }else{
             if Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Booked" {
+                self.view_confirmall.isHidden = false
                 return true
             }else if Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Accept" {
+                self.view_confirmall.isHidden = false
                 return true // vendor_orderdetails_dispathorder_TableViewCell
             }else {
                 isprod_status =  false
@@ -225,57 +225,28 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         }
     }
     
-    @objc func action_btn_confrim(sender: UIButton){
-        let tag = sender.tag
-        print("confrim action",self.order_change_status[tag])
-        if self.order_change_status[tag] == "1" {
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("3", at: tag)
-        }else{
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("1", at: tag)
-        }
-        self.tbl_prod_details.reloadData()
-       
-    }
     
-    @objc func action_btn_reject(sender: UIButton){
-        let tag = sender.tag
-        print("reject action",self.order_change_status[tag])
-        if self.order_change_status[tag] == "3" {
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("1", at: tag)
-        }else{
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("3", at: tag)
-        }
-        self.tbl_prod_details.reloadData()
-       
-    }
-    
-    @objc func action_btn_dispatch(sender: UIButton){
-        let tag = sender.tag
-        print("dispatch action",self.order_change_status[tag])
-        if self.order_change_status[tag] == "2" {
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("0", at: tag)
-        }else{
-            self.order_change_status.remove(at: tag)
-            self.order_change_status.insert("2", at: tag)
-        }
-        self.tbl_prod_details.reloadData()
-        
-    }
     
     @objc func action_btn_trackorder(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_orderstatus_ViewController") as! vendor_orderstatus_ViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_trackorderViewController") as! pet_vendor_trackorderViewController
               self.present(vc, animated: true, completion: nil)
     }
     
+    @objc func action_btn_cancelorder(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.iscancelselect.removeAll()
+        Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
+        Servicefile.shared.iscancelselect.append(Servicefile.shared.productid)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlist_cancel_ViewController") as! orderlist_cancel_ViewController
+              self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 160
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -305,28 +276,14 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     }
     
     @IBAction func action_comfirm_all(_ sender: Any) {
-        if self.isconfirm {
-            self.order_change_status = self.orgi_order_change_status
-            self.isconfirm = false
-            self.label_confirmall.text = "Confirm All"
-            
-        }else{
-            self.order_change_status.removeAll()
-            for i in 0..<Servicefile.shared.orderdetail_prod.count{
-                print(Servicefile.shared.orderdetail_prod[i].product_stauts)
-                if Servicefile.shared.orderdetail_prod[i].product_stauts == "Order Booked" {
-                    self.order_change_status.append("1")
-                }else if  Servicefile.shared.orderdetail_prod[i].product_stauts == "Order Accept" {
-                    self.order_change_status.append("0")
-                }else{
-                    self.order_change_status.append("4")
-                }
-                self.label_confirmall.text = "Clear All"
+        Servicefile.shared.iscancelselect.removeAll()
+        for i in 0..<self.order_change_status.count{
+            if self.order_change_status[i] == "0"{
+                Servicefile.shared.iscancelselect.append(Servicefile.shared.orderdetail_prod[i].product_id)
             }
-            self.isconfirm = true
-            
         }
-        self.tbl_prod_details.reloadData()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlist_cancel_ViewController") as! orderlist_cancel_ViewController
+              self.present(vc, animated: true, completion: nil)
        
     }
     

@@ -32,6 +32,9 @@ class imagelink{
     static let pet_service_gray = "Foot_print_gray"
     static let pet_service_blue = "foot_print_blue"
     
+    static let pet_community_gray = "commu"
+    static let pet_community_blue = "commu1"
+    
     static let SOS = "Group59"
     
     // footer image
@@ -217,6 +220,10 @@ class Servicefile {
     static let pet_vendor_delete_single_cart = baseurl + "/api/product_cart_detail/remove_single_products"
     static let pet_vendor_delete_overall_cart = baseurl + "/api/product_cart_detail/remove_overall_products"
     
+    static let pet_vendor_cancel_single = baseurl + "/api/vendor_order_group/update_vendor_status5"
+    static let pet_vendor_cancel_overall = baseurl + "/api/vendor_order_group/update_vendor_status4"
+    
+    
     static let vendor_order_details_confirm = baseurl + "/api/vendor_order_group/update_vendor_status1"
     static let vendor_order_details_dispatch = baseurl + "/api/vendor_order_group/update_vendor_status2"
     static let vendor_order_details_reject = baseurl + "/api/vendor_order_group/update_vendor_status3"
@@ -302,7 +309,7 @@ class Servicefile {
     
     // see more
     // pet appointment params
-    
+    var pet_header_city = ""
     var petlistimg = [Any]()
     var pet_apoint_doctor_id = ""
     var pet_apoint_booking_date = ""
@@ -520,6 +527,7 @@ class Servicefile {
     var product_quantity = 0
     var order_id = ""
     var product_title = ""
+    var iscancelselect = [0]
     
     var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor

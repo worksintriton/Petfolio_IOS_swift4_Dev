@@ -89,7 +89,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var view_tbl_backview: UIView!
     
     
-    
+    var rejectOrcancel = false
     var _id = ""
     var billing_address = ""
     var billling_address_id = ""
@@ -513,18 +513,14 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
 
                             }else if title == "Order Cancelled" {
                                // self.isrejectedorder(status: Status, bookval : date, details: self.vendor_cancell_info)
-                                if Status {
-                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-                                    self.image_confrim_status.image = UIImage(named: "047")
-                                    self.image_confrim_status.backgroundColor = .clear
-                                    self.view_update.isHidden = true
-                                    self.view_drop.isHidden = true
-                                    self.view_tbl_backview.isHidden = true
-                                }
-
-                            }else if title == "Vendor cancelled" {
-                               
-                                //self.isconfirmorder(status: Status, bookval : date, details: self.vendor_cancell_info, other: Status)
+//                                if Status {
+//                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//                                    self.image_confrim_status.image = UIImage(named: "047")
+//                                    self.image_confrim_status.backgroundColor = .clear
+//                                    self.view_update.isHidden = true
+//                                    self.view_drop.isHidden = true
+//                                    self.view_tbl_backview.isHidden = true
+//                                }
                                 if Status {
                                     self.isrejectedorder(status: Status, bookval : date, details: text)
                                     self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -539,6 +535,29 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                                     self.view_pathline.isHidden = false
                                 }else{
                                     self.isrejectedorder(status: Status, bookval : date, details: text)
+                                }
+
+                            }else if title == "Vendor cancelled" {
+                               
+                                //self.isconfirmorder(status: Status, bookval : date, details: self.vendor_cancell_info, other: Status)
+                                if self.rejectOrcancel {
+                                    
+                                }else {
+                                if Status {
+                                    self.isrejectedorder(status: Status, bookval : date, details: text)
+                                    self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                    self.image_rejected_status.image = UIImage(named: "047")
+                                    self.image_rejected_status.backgroundColor = .clear
+                                    self.view_update.isHidden = true
+                                    self.view_rejected.isHidden = false
+                                    self.view_drop.isHidden = true
+                                    self.view_tbl_backview.isHidden = true
+                                    self.view_confrim_pathline.isHidden = false
+                                    self.view_pathline.isHidden = false
+                                }else{
+                                    self.isrejectedorder(status: Status, bookval : date, details: text)
+                                }
                                 }
                             }else{
                                 self.istransitorder(status: Status, bookval : date)

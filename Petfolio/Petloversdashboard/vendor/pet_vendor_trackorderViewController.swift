@@ -9,10 +9,11 @@
 import UIKit
 import Alamofire
 
-class pet_vendor_trackorderViewController: UIViewController {
+class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var product_title: UILabel!
+    @IBOutlet weak var label_product_amt: UILabel!
     
     @IBOutlet weak var label_orderdate: UILabel!
     @IBOutlet weak var label_id: UILabel!
@@ -26,16 +27,28 @@ class pet_vendor_trackorderViewController: UIViewController {
     @IBOutlet weak var view_pathline: UIView!
     @IBOutlet weak var image_booked_status: UIImageView!
     // booked
+    
     // confirmation
     @IBOutlet weak var view_confirmation: UIView!
     @IBOutlet weak var label_confrim_date: UILabel!
     @IBOutlet weak var view_confrim_pathline: UIView!
     @IBOutlet weak var image_confrim_status: UIImageView!
     @IBOutlet weak var label_confrim_details: UILabel!
-    
     // confirmation
-   
+ 
+     // vendor rejected
+    @IBOutlet weak var lable_orderrejCancelstatus: UILabel!
+    @IBOutlet weak var view_rejected: UIView!
+     @IBOutlet weak var label_rejected_date: UILabel!
+     @IBOutlet weak var view_rejected_pathline: UIView!
+     @IBOutlet weak var image_rejected_status: UIImageView!
+     @IBOutlet weak var label_rejected_details: UILabel!
+     // vendor rejected
+    
+    
+    
     // dispatched
+    //@IBOutlet weak var label_dispatch: UILabel!
     @IBOutlet weak var view_dispatched: UIView!
     @IBOutlet weak var label_dispatch_details: UILabel!
     @IBOutlet weak var label_dispatch_date: UILabel!
@@ -43,6 +56,7 @@ class pet_vendor_trackorderViewController: UIViewController {
     @IBOutlet weak var image_dispatched: UIImageView!
     
     // dispatched
+   // @IBOutlet weak var label_intransit: UILabel!
     @IBOutlet weak var view_intransit: UIView!
     @IBOutlet weak var label_transit_date: UILabel!
     @IBOutlet weak var image_transit: UIImageView!
@@ -58,7 +72,18 @@ class pet_vendor_trackorderViewController: UIViewController {
     @IBOutlet weak var label_return: UILabel!
     @IBOutlet weak var image_return: UIImageView!
     @IBOutlet weak var view_return_pathline: UIView!
+//    @IBOutlet weak var tbl_status: UITableView!
+//
+//    @IBOutlet weak var view_status_popup: UIView!
+//    @IBOutlet weak var textview_status_reason: UITextView!
+//    @IBOutlet weak var view_update: UIView!
+//
+//    @IBOutlet weak var view_submit_reason: UIView!
+//
+//    @IBOutlet weak var view_tbl_backview: UIView!
     
+    
+    var rejectOrcancel = false
     var _id = ""
     var billing_address = ""
     var billling_address_id = ""
@@ -89,22 +114,30 @@ class pet_vendor_trackorderViewController: UIViewController {
     var vendor_cancell_info = ""
     var vendor_complete_date = ""
     var vendor_complete_info = ""
+   
+    var status_arr =  [""]
+    var new_status_arr = ["Select Order Status", "Order Confirmation","Order Cancellation"]
     
+    var copnfirm_status_arr = ["Select Order Status","Order Cancellation", "Order Dispatched"]
     
+    var statusurl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.status_arr.removeAll()
         self.view_intransit_pathline.isHidden = true
         self.view_return.isHidden = true
         self.view_return_status.isHidden = true
         self.view_return_status_pathline.isHidden = true
+        self.view_rejected.isHidden = true
         self.image_confrim_status.image = UIImage(named: "")
         self.image_dispatched.image = UIImage(named: "")
         self.image_transit.image = UIImage(named: "")
         self.image_return.image = UIImage(named: "")
         self.image_return_status.image = UIImage(named: "")
-        self.label_confrim_date.text = ""
-        self.label_confrim_details.text = ""
+        
         self.image_transit.layer.cornerRadius =  self.image_transit.frame.height / 2
         self.image_dispatched.layer.cornerRadius =  self.image_dispatched.frame.height / 2
         self.image_confrim_status.layer.cornerRadius =  self.image_confrim_status.frame.height / 2
@@ -118,12 +151,48 @@ class pet_vendor_trackorderViewController: UIViewController {
         self.image_return.backgroundColor = UIColor.gray
         self.image_return_status.backgroundColor = UIColor.gray
         
-        self.view_pathline.backgroundColor = UIColor.gray
-        self.view_confrim_pathline.backgroundColor = UIColor.gray
-        self.view_dispatch_pathline.backgroundColor = UIColor.gray
-        self.view_intransit_pathline.backgroundColor = UIColor.gray
-        self.view_return_pathline.backgroundColor = UIColor.gray
+        self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+        self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+        self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+        self.view_intransit_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+        self.view_return_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
         self.callgetstatuslist()
+        
+        self.label_confrim_date.text = ""
+    }
+    
+    
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? vendor_myorder_ViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+       }
+   
+    
+   
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.status_arr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = self.status_arr[indexPath.row]
+        cell.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+        cell.selectionStyle = .none
+        cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -139,31 +208,25 @@ class pet_vendor_trackorderViewController: UIViewController {
     func isconfirmorder(status: Bool, bookval : String, details: String, other: Bool){
         self.view_confirmation.isHidden = false
         self.view_confrim_pathline.isHidden = false
-        print("confirm status",status)
-        
-        print("confirm status",status)
-        if bookval != ""{
+        if bookval != "" {
             self.label_confrim_date.text = bookval
-            
         }
-        if details != "" {
-            self.label_confrim_details.text = details
-        }
-//        if status {
-//            self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-//        }else{
-//            self.view_pathline.backgroundColor = UIColor.gray
-//        }
+        self.label_confrim_details.text = details
+        print("confirm status",status)
     }
     
-//    func isrejectedorder(status: Bool, bookval : String, details: String){
-//        self.view_rejected.isHidden = status
-//        self.label_rejected_details.text = details
-//        self.label_rejected_date.text = bookval
-//        self.view_confrim_pathline.isHidden = false
-//        self.view_rejected_pathline.isHidden = false
-//        self.view_pathline.isHidden = false
-//    }
+    func isrejectedorder(status: Bool, bookval : String, details: String){
+        if status {
+            self.view_rejected.isHidden = false
+        }else{
+            self.view_rejected.isHidden = true
+        }
+        self.label_rejected_details.text = details
+        self.label_rejected_date.text = bookval
+        self.view_confrim_pathline.isHidden = false
+        self.view_rejected_pathline.isHidden = false
+        self.view_pathline.isHidden = false
+    }
 //
 //    func iscancelorder(status: Bool, bookval : String, details: String){
 //        self.view_cancelled.isHidden = status
@@ -174,25 +237,23 @@ class pet_vendor_trackorderViewController: UIViewController {
 //        self.view_pathline.isHidden = false
 //
 //    }
+   
     
     func isdispatchorder(status: Bool, bookval : String, details: String){
         print("dispatched status",status)
         self.view_dispatched.isHidden = false
-        if details != "" {
-            self.label_dispatch_details.text = details
-            self.label_confrim_details.text = ""
-        }
+        self.label_dispatch_details.text = details
         self.label_dispatch_date.text = bookval
         self.label_transit_date.text = bookval
         self.view_dispatch_pathline.isHidden = false
         self.view_confrim_pathline.isHidden = false
-//        if status {
-//            self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-//            self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-//        }else{
-//            self.view_dispatch_pathline.backgroundColor = UIColor.gray
-//            self.view_confrim_pathline.backgroundColor = UIColor.gray
-//        }
+        if status {
+            self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        }else{
+            self.view_dispatch_pathline.backgroundColor = UIColor.gray
+            self.view_confrim_pathline.backgroundColor = UIColor.gray
+        }
     }
     
     func istransitorder(status: Bool, bookval : String){
@@ -201,38 +262,25 @@ class pet_vendor_trackorderViewController: UIViewController {
         self.label_transit_date.text = bookval
     }
     
-    @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    @IBAction func action_shop(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-        self.present(vc, animated: true, completion: nil)
-    }
+   
     
     
-    @IBAction func action_care(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-        self.present(vc, animated: true, completion: nil)
-    }
     
-    @IBAction func action_petservice(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
-    }
+    
+   
+    
+    
+    
+   
     
     
     func callgetstatuslist(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        print("product id",Servicefile.shared.productid,"order id", Servicefile.shared.orderid)
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_status_orderlist, method: .post, parameters:
-            ["_id": Servicefile.shared.orderid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_product_order_status_list, method: .post, parameters:
+            ["order_id": Servicefile.shared.orderid,
+                "product_order_id": Servicefile.shared.productid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -240,7 +288,7 @@ class pet_vendor_trackorderViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
-                        self._id = Data["_id"] as! String
+                        self._id = Data["_id"] as? String ?? ""
                         self.billing_address = Data["billing_address"] as? String ?? ""
                         self.billling_address_id = Data["billling_address_id"]  as? String ?? ""
                         self.coupon_code = Data["coupon_code"] as? String ?? ""
@@ -254,22 +302,23 @@ class pet_vendor_trackorderViewController: UIViewController {
                         self.order_status = Data["order_status"] as? String ?? ""
                         self.over_all_total = Data["over_all_total"] as? Int ?? 0
                         self.payment_id = Data["payment_id"] as? String ?? ""
-                        self.prodcut_image = Data["prodcut_image"] as? String ?? Servicefile.sample_img
-                        self.prodouct_total = Data["prodouct_total"] as? Int ?? 0
+                        self.prodcut_image = Data["product_image"] as? String ?? Servicefile.sample_img
+                        self.prodouct_total = Data["product_total_price"] as? Int ?? 0
                         self.product_name = Data["product_name"] as? String ?? ""
                         self.product_price = Data["product_price"] as? Int ?? 0
-                        self.product_quantity = Data["product_quantity"] as? Int ?? 0
+                        self.label_product_amt.text = "₹ " +  String(self.prodouct_total)
+                        self.product_quantity = Data["product_count"] as? Int ?? 0
                         self.shipping_address = Data["shipping_address"] as? String ?? ""
                         self.shipping_address_id = Data["shipping_address_id"] as? String ?? ""
                         self.shipping_charge = Data["shipping_charge"] as? Int ?? 0
                         self.status = Data["status"] as? String ?? ""
-                        self.user_cancell_date = Data["user_cancell_date"] as? String ?? ""
-                        self.user_cancell_info = Data["user_cancell_info"] as? String ?? ""
-                        self.vendor_accept_cancel = Data["vendor_accept_cancel"] as? String ?? ""
-                        self.vendor_cancell_date = Data["vendor_cancell_date"] as? String ?? ""
-                        self.vendor_cancell_info = Data["vendor_cancell_info"] as? String ?? ""
-                        self.vendor_complete_date = Data["vendor_complete_date"] as? String ?? ""
-                        self.vendor_complete_info = Data["vendor_complete_info"] as? String ?? ""
+//                        self.user_cancell_date = Data["user_cancell_date"] as? String ?? ""
+//                        self.user_cancell_info = Data["user_cancell_info"] as? String ?? ""
+//                        self.vendor_accept_cancel = Data["vendor_accept_cancel"] as? String ?? ""
+//                        self.vendor_cancell_date = Data["vendor_cancell_date"] as? String ?? ""
+//                        self.vendor_cancell_info = Data["vendor_cancell_info"] as? String ?? ""
+//                        self.vendor_complete_date = Data["vendor_complete_date"] as? String ?? ""
+//                        self.vendor_complete_info = Data["vendor_complete_info"] as? String ?? ""
                         let prodcut_track_details = Data["prodcut_track_details"] as! NSArray
                         self.product_title.text = self.product_name
                         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
@@ -279,51 +328,65 @@ class pet_vendor_trackorderViewController: UIViewController {
                                 self.image_product.image = image
                             }
                         }
-                        self.label_orderdate.text = self.date_of_booking
-                        self.label_id.text = self.order_id
+
+                        self.label_orderdate.text = Servicefile.shared.date_of_booking
+                        self.label_id.text = Servicefile.shared.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹" + String(self.grand_total)
+                        self.label_ordertotal.text = "₹" + String(self.prodouct_total)
                         self.label_quality.text = String(self.product_quantity)
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary
                             let Status = itdata["Status"] as! Bool
                             let date = itdata["date"] as! String
                             let id = itdata["id"] as! Int
+                            let text = itdata["text"] as! String
                             let title = itdata["title"] as! String
                             if title == "Order Booked" {
                                 self.isbookstatus(status: Status, bookval : date)
-                                
+                                if Status {
+                                self.status_arr = self.new_status_arr
+
+                                }
                             }else if title == "Order Accept" {
-                                self.isconfirmorder(status: Status, bookval : date, details: self.vendor_complete_info, other: false)
+                                self.isconfirmorder(status: Status, bookval : date, details: text, other: false)
                                 if Status {
                                     self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                                     self.image_confrim_status.image = UIImage(named: "success")
+                                    self.status_arr = self.copnfirm_status_arr
+
                                 }
                             }else if title == "Order Dispatch" {
-                                self.isdispatchorder(status: Status, bookval : date, details: self.vendor_complete_info)
+                                self.isdispatchorder(status: Status, bookval : date, details: text)
                                 if Status {
                                 self.image_dispatched.image = UIImage(named: "success")
                                 self.image_transit.image = UIImage(named: "success")
                                 self.view_dispatch_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                                     
                                 }
-                               
-                            }else if title == "Order Cancelled" {
-                                self.isconfirmorder(status: Status, bookval : date, details: self.user_cancell_info, other: Status)
-                                if Status {
-                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-                                    self.image_confrim_status.image = UIImage(named: "047")
-                                    self.image_confrim_status.backgroundColor = .clear
+
+                            }else if title == "Order Cancelled" || title == "Vendor cancelled" {
+                                if self.rejectOrcancel {
                                     
-                                }
-                                
-                            }else if title == "Vendor cancelled" {
-                                    self.isconfirmorder(status: Status, bookval : date, details: self.vendor_cancell_info, other: Status)
-                                if Status {
-                                    self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-                                    self.image_confrim_status.image = UIImage(named: "047")
-                                    self.image_confrim_status.backgroundColor = .clear
-                                   
+                                }else {
+                                    if Status {
+                                        if title == "Order Cancelled" {
+                                            self.lable_orderrejCancelstatus.text = "Order Cancelled"
+                                        }else{
+                                            self.lable_orderrejCancelstatus.text = "Order Rejected"
+                                        }
+                                        
+                                        self.isrejectedorder(status: Status, bookval : date, details: text)
+                                        self.view_confrim_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                        self.view_pathline.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                                        self.image_rejected_status.image = UIImage(named: "047")
+                                        self.image_rejected_status.backgroundColor = .clear
+                                        self.view_rejected.isHidden = false
+                                        self.view_confrim_pathline.isHidden = false
+                                        self.view_pathline.isHidden = false
+                                        self.rejectOrcancel = true
+                                    }else{
+                                        self.isrejectedorder(status: Status, bookval : date, details: text)
+                                    }
                                 }
                             }else{
                                 self.istransitorder(status: Status, bookval : date)
@@ -331,7 +394,6 @@ class pet_vendor_trackorderViewController: UIViewController {
                             }
                             Servicefile.shared.vendor_orderstatuss.append(vendor_orderstatus.init(In_Status: Status, In_date: date, In_id: id, In_title: title))
                         }
-                       
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

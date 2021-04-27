@@ -96,12 +96,13 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
     // header action
     // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
     // footer action
     }
     
@@ -359,27 +360,32 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
 extension UIViewController {
     
     @objc func button1(sender: UIButton){
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+        self.present(vc, animated: true, completion: nil)
+       
     }
     
     @objc func button2(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    @objc func button3(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    @objc func button4(sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     
-    @objc func button5(sender: UIButton){
+    @objc func button3(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+        self.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    @objc func button4(sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
         self.present(vc, animated: true, completion: nil)
+       
+    }
+//    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+//    self.present(vc, animated: true, completion: nil)
+    
+    @objc func button5(sender: UIButton){
+       
     }
     
     func setup_footer_image(){
@@ -576,9 +582,11 @@ extension petloverDashboardViewController {
                         if location_details.count > 0 {
                             let city_list = location_details[0] as! NSDictionary
                             let city = city_list["location_city"] as? String ?? ""
-                            self.view_header.label_location.text = city
+                            Servicefile.shared.pet_header_city = city
+                            self.view_header.label_location.text = Servicefile.shared.pet_header_city
                         }else{
-                            self.view_header.label_location.text = ""
+                            Servicefile.shared.pet_header_city = ""
+                            self.view_header.label_location.text = Servicefile.shared.pet_header_city
                         }
                         self.pagecontrol.numberOfPages = Servicefile.shared.petbanner.count
                         self.col_banner.reloadData()

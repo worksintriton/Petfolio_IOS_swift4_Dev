@@ -99,6 +99,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
+        dismissKeyboard()
         if Servicefile.shared.otp != "0" {
             let otptxt = self.textfield_otp.text!
                               let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
@@ -134,6 +135,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     }
     
     func callotpresend(){
+        dismissKeyboard()
                self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.resend, method: .post, parameters:
             [   "user_phone": Servicefile.shared.user_phone], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in

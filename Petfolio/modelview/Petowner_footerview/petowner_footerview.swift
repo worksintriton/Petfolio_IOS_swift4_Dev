@@ -59,47 +59,47 @@ class petowner_footerview: UIView {
     
     
     func setup(b1: Bool, b2: Bool, b3: Bool, b4: Bool, b5: Bool){
-        if b1 {
-            self.image_Fprocess_one.image = UIImage(named: imagelink.home_blue)
-            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
-        }else{
-            self.image_Fprocess_one.image = UIImage(named: imagelink.Home_gray)
-            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
-        }
-        if b2 {
-            self.image_Fprocess_two.image = UIImage(named: imagelink.petcare_blue)
-            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
-        }else{
-            self.image_Fprocess_two.image = UIImage(named: imagelink.petcare_gray)
-            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
-        }
         if b3 {
-            self.image_Fprocess_three.image = UIImage(named: imagelink.SOS)
+            self.image_Fprocess_three.image = UIImage(named: imagelink.home_blue)
             self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
         }else{
-            self.image_Fprocess_three.image = UIImage(named: imagelink.SOS)
+            self.image_Fprocess_three.image = UIImage(named: imagelink.Home_gray)
             self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
-        if b4 {
-            self.image_Fprocess_four.image = UIImage(named: imagelink.pet_service_blue)
-            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+        if b1 {
+            self.image_Fprocess_one.image = UIImage(named: imagelink.petcare_blue)
+            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
         }else{
-            self.image_Fprocess_four.image = UIImage(named: imagelink.pet_service_gray)
-            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
+            self.image_Fprocess_one.image = UIImage(named: imagelink.petcare_gray)
+            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
         if b5 {
-            self.image_Fprocess_five.image = UIImage(named: imagelink.shop_blue)
+            self.image_Fprocess_five.image = UIImage(named: imagelink.pet_community_blue)
             self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
         }else{
-            self.image_Fprocess_five.image = UIImage(named: imagelink.shop_gray)
+            self.image_Fprocess_five.image = UIImage(named: imagelink.pet_community_gray)
             self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
+        if b2 {
+            self.image_Fprocess_two.image = UIImage(named: imagelink.pet_service_blue)
+            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+        }else{
+            self.image_Fprocess_two.image = UIImage(named: imagelink.pet_service_gray)
+            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
+        }
+        if b4 {
+            self.image_Fprocess_four.image = UIImage(named: imagelink.shop_blue)
+            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+        }else{
+            self.image_Fprocess_four.image = UIImage(named: imagelink.shop_gray)
+            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
+        }
         
-        self.label_Fprocess_one.text = "Home"
-        self.label_Fprocess_two.text = "Pet Care"
-        self.label_Fprocess_three.text = "SOS"
-        self.label_Fprocess_four.text = "Pet Service"
-        self.label_Fprocess_five.text = "Shop"
+        self.label_Fprocess_one.text = "Pet Care" // 1
+        self.label_Fprocess_two.text = "Pet Service" // 2
+        self.label_Fprocess_three.text = "Home" // 3
+        self.label_Fprocess_four.text = "Shop" // 4
+        self.label_Fprocess_five.text = "Community" // 5
     }
 }
 

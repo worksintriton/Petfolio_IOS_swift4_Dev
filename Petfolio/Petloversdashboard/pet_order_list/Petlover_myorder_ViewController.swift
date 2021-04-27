@@ -132,7 +132,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
         }  else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in

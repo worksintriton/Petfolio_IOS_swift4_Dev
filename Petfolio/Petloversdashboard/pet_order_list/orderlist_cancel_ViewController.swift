@@ -34,7 +34,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewWillDisappear(_ animated: Bool) {
         self.cancellistval.removeAll()
-        if let firstVC = presentingViewController as? Petlover_myorder_ViewController {
+        if let firstVC = presentingViewController as? pet_vendor_orderdetails_ViewController {
             DispatchQueue.main.async {
                 firstVC.viewWillAppear(true)
             }
@@ -66,7 +66,8 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_cancel_order(_ sender: Any) {
         if self.selval != "Select an issue" {
-            self.call_submit_cancel()
+            self.call_submit_cancel_new()
+            print("cancel data",Servicefile.shared.iscancelselect)
         }else{
             self.alert(Message: "please select the issue for cancellation")
         }
@@ -82,6 +83,49 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func call_submit_cancel_new(){
+        var params = [String:Any]()
+        var url = ""
+        if Servicefile.shared.iscancelselect.count > 1 { // calls multi cancel api and params
+             params = ["order_id": Servicefile.shared.orderid,
+                        "product_id": Servicefile.shared.iscancelselect,
+                          "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
+             url = Servicefile.pet_vendor_cancel_overall
+        }else if Servicefile.shared.iscancelselect.count > 0 || Servicefile.shared.iscancelselect.count == 1 {  // calls single cancel api and params
+            params = ["order_id": Servicefile.shared.orderid,
+                         "product_id": Servicefile.shared.iscancelselect[0],
+                         "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
+            url = Servicefile.pet_vendor_cancel_single
+        }
+        
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(url, method: .post, parameters: params
+        , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            switch (response.result) {
+            case .success:
+                let res = response.value as! NSDictionary
+                print("success data",res)
+                let Code  = res["Code"] as! Int
+                if Code == 200 {
+                    self.dismiss(animated: true, completion: nil)
+                    self.stopAnimatingActivityIndicator()
+                }else{
+                    self.stopAnimatingActivityIndicator()
+                    print("status code service denied")
+                }
+                break
+            case .failure(let Error):
+                self.stopAnimatingActivityIndicator()
+                print("Can't Connect to Server / TimeOut",Error)
+                break
+            }
+        }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     func call_submit_cancel(){

@@ -12,7 +12,10 @@ import Alamofire
 class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var tbl_searchlist: UITableView!
-    @IBOutlet weak var view_footer: UIView!
+   // @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_footer: petowner_footerview!
+    @IBOutlet weak var view_header: petowner_header!
+    
     var refreshControl = UIRefreshControl()
     var comm_type = 0
     
@@ -38,8 +41,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
-        self.view_footer.view_cornor()
-        self.view_footer.dropShadow()
+        self.intial_setup_action()
+        
     }
     
     @IBAction func action_shop(_ sender: Any) {
@@ -246,6 +249,36 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
               }
           }
     
-    
+    func intial_setup_action(){
+    // header action
+        self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        self.view_header.label_location.text = Servicefile.shared.pet_header_city
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.view_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.view_header.image_profile.image = image
+            }
+        }
+        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+    // header action
+    // footer action
+        //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
+    // footer action
+    }
+   
 
 }

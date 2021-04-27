@@ -12,17 +12,52 @@ import Alamofire
 class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     
-    @IBOutlet weak var view_footer: UIView!
+    
     
     @IBOutlet weak var coll_servicelist: UICollectionView!
     
+     @IBOutlet weak var view_header: petowner_header!
+     @IBOutlet weak var view_footer: petowner_footerview!
+     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_footer.view_cornor()
+        self.intial_setup_action()
         self.coll_servicelist.delegate = self
         self.coll_servicelist.dataSource = self
         self.call_service_cat()
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        self.view_header.label_location.text = Servicefile.shared.pet_header_city
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.view_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.view_header.image_profile.image = image
+            }
+        }
+        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+
+        self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -137,7 +172,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 1.8)
+        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 3.2)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -186,6 +221,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                    self.alert(Message: "No Intenet Please check and try again ")
                }
            }
+    
    
     
 }

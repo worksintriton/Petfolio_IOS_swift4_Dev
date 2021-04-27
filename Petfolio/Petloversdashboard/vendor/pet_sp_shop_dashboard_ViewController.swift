@@ -12,19 +12,54 @@ import Alamofire
 class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate, UITextFieldDelegate {
    
     @IBOutlet weak var tbl_dash_list: UITableView!
-    @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_footer: petowner_footerview!
+    @IBOutlet weak var view_header: petowner_header!
+    
     @IBOutlet weak var view_allcategory: UIView!
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var textfield_search: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.textfield_search.delegate = self
-        self.view_footer.view_cornor()
+        
         self.view_allcategory.view_cornor()
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        self.view_header.label_location.text = Servicefile.shared.pet_header_city
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.view_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.view_header.image_profile.image = image
+            }
+        }
+        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
+    // footer action
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

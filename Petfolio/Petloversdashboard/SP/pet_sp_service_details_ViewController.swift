@@ -23,9 +23,12 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     @IBOutlet weak var image_service: UIImageView!
     @IBOutlet weak var label_service: UILabel!
     @IBOutlet weak var view_book: UIView!
+    @IBOutlet weak var view_footer: petowner_footerview!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.call_ser_details()
         self.coll_service.delegate = self
         self.coll_service.dataSource = self
@@ -34,7 +37,26 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         self.view_book.view_cornor()
     }
     
-   
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = ""
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Servicefile.shared.sp_bus_service_galldicarray.count

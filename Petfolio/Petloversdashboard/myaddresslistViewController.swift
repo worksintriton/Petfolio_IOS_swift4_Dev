@@ -11,7 +11,6 @@ import Alamofire
 
 class myaddresslistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var tbl_addresslist: UITableView!
     @IBOutlet weak var label_noofsavedaddress: UILabel!
     @IBOutlet weak var view_shadow: UIView!
@@ -19,10 +18,10 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var label_alertMSG: UILabel!
     @IBOutlet weak var view_yes: UIView!
     @IBOutlet weak var view_no: UIView!
-    @IBOutlet weak var view_footer: UIView!
-    @IBOutlet weak var view_home: UIView!
     @IBOutlet weak var label_noaddress: UILabel!
     
+    @IBOutlet weak var view_footer: petowner_footerview!
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     var proc_type = "edit"
     var indextag = 0
     
@@ -35,9 +34,9 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.view_popup.view_cornor()
         self.label_noaddress.isHidden = true
-        self.view_footer.view_cornor()
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         Servicefile.shared.shipaddresslist_isedit = false
@@ -50,6 +49,27 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "My Addresses"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.call_list_shipping_address()
     }
@@ -59,6 +79,11 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func action_back(_ sender: Any) {
+        Servicefile.shared.shipaddresslist_isedit = false
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func back(){
         Servicefile.shared.shipaddresslist_isedit = false
         self.dismiss(animated: true, completion: nil)
     }

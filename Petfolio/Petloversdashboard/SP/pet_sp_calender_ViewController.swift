@@ -24,10 +24,12 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     var seltime = [""]
     var selectedtime = ""
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var view_continue: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.listtime.removeAll()
         self.seltime.removeAll()
         self.view_continue.isHidden = true
@@ -42,6 +44,19 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
         self.calender_cal.delegate = self
         self.callgetdatedetails()
         self.calender_cal.scope = .week
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+   
     }
     
     @IBAction func action_sos(_ sender: Any) {

@@ -17,12 +17,15 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var view_sortby: UIView!
     @IBOutlet weak var view_filter: UIView!
-    @IBOutlet weak var view_footer: UIView!
+    
     @IBOutlet weak var Textfield_search: UITextField!
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var label_noproduct: UILabel!
+    @IBOutlet weak var view_footer: petowner_footerview!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.Textfield_search.text = ""
         self.label_noproduct.text = "No products available"
         self.label_noproduct.isHidden = true
@@ -30,12 +33,32 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
         self.view_search.view_cornor()
         self.view_sortby.view_cornor()
         self.view_filter.view_cornor()
-        self.view_footer.view_cornor()
         Servicefile.shared.sp_dash_Today_Special.removeAll()
         self.coll_prodlist.delegate = self
         self.coll_prodlist.dataSource = self
         Servicefile.shared.productsearchpage = "todaysdeal"
         self.calltotaldeal()
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Shop"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -80,6 +80,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        self.view_header.btn_button2.addTarget(self, action: #selector(action_notifi), for: .touchUpInside)
         var img = Servicefile.shared.userimage
         if img != "" {
             img = Servicefile.shared.userimage
@@ -400,6 +401,30 @@ extension UIViewController {
     @objc func profile(sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func notification(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func action_cart(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func action_sos(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func action_notifi(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func action_back(sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

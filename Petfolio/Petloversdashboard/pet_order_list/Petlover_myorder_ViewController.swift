@@ -18,17 +18,20 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var view_new: UIView!
     @IBOutlet weak var view_completed: UIView!
     @IBOutlet weak var view_missed: UIView!
-    @IBOutlet weak var view_footer: UIView!
     
+    
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var label_new: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var tblview_applist: UITableView!
     @IBOutlet weak var label_completed: UILabel!
     @IBOutlet weak var label_missed: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
          self.tblview_applist.register(UINib(nibName: "pet_vendor_new_myorder_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         Servicefile.shared.ordertype = "current"
         self.label_nodata.isHidden = true
@@ -50,6 +53,27 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "My orders"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     override func viewWillAppear(_ animated: Bool) {

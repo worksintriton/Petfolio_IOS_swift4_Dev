@@ -50,6 +50,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
     @IBOutlet weak var label_service_title: UITextField!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     var Pet_breed = [""]
     var pet_type = [""]
@@ -63,6 +64,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self
         self.coll_imag.isPagingEnabled = true
@@ -117,6 +119,19 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.label_service_title.text = Servicefile.shared.service_id_title
         self.petimage = Servicefile.shared.sampleimag
         //self.setuploadimg()
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+   
     }
     
     override func viewWillDisappear(_ animated: Bool) {

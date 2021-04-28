@@ -41,6 +41,12 @@ class imagelink{
     
     // Header side menu
     
+//    static let image_sos = "sos1"
+//    static let image_bel = "bell1"
+//    static let image_bag = "cart1"
+//    static let image_profile = "user"
+    static let image_back = "back1"
+    
     static let sidemenu = "Group55"
     static let Icon_map_pin = "Icon_map_pin"
     static let Drop_down = "Path76"
@@ -190,7 +196,8 @@ class Servicefile {
     static let vendor_status_orderlist = baseurl + "/api/vendor_order_group/get_product_list_by_vendor"
     
     static let petlover_status_orderlist = baseurl + "/api/petlover_order_group/get_product_list_by_petlover"
-    static let vendor_product_order_status_list = baseurl + "/api/petlover_order_group/fetch_single_product_detail"
+    static let vendor_product_order_status_list = baseurl + "/api/vendor_order_group/fetch_single_product_detail"
+    static let pet_product_order_status_list = baseurl + "/api/petlover_order_group/fetch_single_product_detail"
     static let vendor_update_status_accept_return = baseurl + "/api/vendor_order_booking/update_status_accept_return"
     
     

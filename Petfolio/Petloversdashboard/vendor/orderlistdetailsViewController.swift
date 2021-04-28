@@ -27,12 +27,14 @@ class orderlistdetailsViewController: UIViewController {
     @IBOutlet weak var label_quality: UILabel!
     //@IBOutlet weak var label_shipping_address: UILabel!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var label_ship_name: UILabel!
     @IBOutlet weak var label_doorno_street: UILabel!
     @IBOutlet weak var label_city_state: UILabel!
     @IBOutlet weak var label_phone: UILabel!
     
     @IBOutlet weak var label_landmark: UILabel!
+    @IBOutlet weak var view_footer: petowner_footerview!
     
     var _id = ""
     var billing_address = ""
@@ -67,6 +69,7 @@ class orderlistdetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.label_orderdate.text = ""
         self.label_id.text = ""
         self.label_paymentmethod.text = ""
@@ -80,6 +83,27 @@ class orderlistdetailsViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Order details"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_back(_ sender: Any) {

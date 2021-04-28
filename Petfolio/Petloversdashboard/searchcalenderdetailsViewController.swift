@@ -18,6 +18,7 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
     @IBOutlet weak var View_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_movetoapp: UIView!
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     var seldate = ""
     var listtime = [""]
@@ -29,6 +30,7 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.intial_setup_action()
             self.view_continue.isHidden = true
             self.listtime.removeAll()
             self.seltime.removeAll()
@@ -45,6 +47,19 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
             self.calender_cal.scope = .week
             
         }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Appointment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+   
+    }
         
         @IBAction func action_sos(_ sender: Any) {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController

@@ -50,6 +50,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var image_visit: UIImageView!
     @IBOutlet weak var image_online: UIImageView!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     var Pet_breed = [""]
     var pet_type = [""]
@@ -63,6 +64,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self
         self.coll_imag.isPagingEnabled = true
@@ -119,6 +121,19 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.setuploadimg()
         print("Communication type",Servicefile.shared.pet_apoint_communication_type)
         self.checkappointmentcommtype()
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+   
     }
     
     override func viewWillDisappear(_ animated: Bool) {

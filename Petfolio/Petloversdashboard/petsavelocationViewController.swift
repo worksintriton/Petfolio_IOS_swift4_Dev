@@ -36,6 +36,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     @IBOutlet weak var img_work: UIImageView!
     @IBOutlet weak var img_home: UIImageView!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     let locationManager = CLLocationManager()
     var latitude : Double!
     var longitude : Double!
@@ -47,7 +48,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.intial_setup_action()
         self.view_change.view_cornor()
         self.view_pincode.view_cornor()
         self.view_location.view_cornor()
@@ -89,6 +90,18 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         }
         self.textfield_pickname.addTarget(self, action: #selector(textFieldpicknameTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Pickup Location"
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+   
     }
     
     @IBAction func action_switch(_ sender: UISwitch) {

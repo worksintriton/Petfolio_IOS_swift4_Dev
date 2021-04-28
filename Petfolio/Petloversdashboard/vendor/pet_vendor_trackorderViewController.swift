@@ -21,6 +21,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
     @IBOutlet weak var label_ordertotal: UILabel!
     @IBOutlet weak var label_quality: UILabel!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     // booked
     @IBOutlet weak var view_booked: UIView!
     @IBOutlet weak var label_bookeddate: UILabel!
@@ -68,6 +69,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
     @IBOutlet weak var view_return_status_pathline: UIView!
     @IBOutlet weak var image_return_status: UIImageView!
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var view_return: UIView!
     @IBOutlet weak var label_return: UILabel!
     @IBOutlet weak var image_return: UIImageView!
@@ -125,7 +127,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.intial_setup_action()
         self.status_arr.removeAll()
         self.view_intransit_pathline.isHidden = true
         self.view_return.isHidden = true
@@ -159,6 +161,27 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
         self.callgetstatuslist()
         
         self.label_confrim_date.text = ""
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Track order"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     
@@ -278,7 +301,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         print("product id",Servicefile.shared.productid,"order id", Servicefile.shared.orderid)
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_product_order_status_list, method: .post, parameters:
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_product_order_status_list, method: .post, parameters:
             ["order_id": Servicefile.shared.orderid,
                 "product_order_id": Servicefile.shared.productid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {

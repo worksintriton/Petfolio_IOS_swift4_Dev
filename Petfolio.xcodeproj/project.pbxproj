@@ -85,6 +85,8 @@
 		84E7BB2A25F652ED009634ED /* todaysdealseemoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */; };
 		84E7BB2C25F656D3009634ED /* ProductshimmerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7BB2B25F656D3009634ED /* ProductshimmerCollectionViewCell.swift */; };
 		84EECF662628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EECF652628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift */; };
+		84F4281B26392E2700880D76 /* petowner_otherpage_header.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F4281A26392E2700880D76 /* petowner_otherpage_header.xib */; };
+		84F4282126392EA600880D76 /* petowner_otherpage_header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F4282026392EA600880D76 /* petowner_otherpage_header.swift */; };
 		B001EC582589CE1000AA63DA /* ReviewRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001EC572589CE0F00AA63DA /* ReviewRateViewController.swift */; };
 		B008C66D25889AF500B09126 /* searchpetloverappointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66C25889AF500B09126 /* searchpetloverappointmentViewController.swift */; };
 		B008C66F2588C49C00B09126 /* PetfilterpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008C66E2588C49C00B09126 /* PetfilterpageViewController.swift */; };
@@ -342,6 +344,8 @@
 		84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todaysdealseemoreViewController.swift; sourceTree = "<group>"; };
 		84E7BB2B25F656D3009634ED /* ProductshimmerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductshimmerCollectionViewCell.swift; sourceTree = "<group>"; };
 		84EECF652628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_details_doc_calender_ViewController.swift; sourceTree = "<group>"; };
+		84F4281A26392E2700880D76 /* petowner_otherpage_header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = petowner_otherpage_header.xib; sourceTree = "<group>"; };
+		84F4282026392EA600880D76 /* petowner_otherpage_header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petowner_otherpage_header.swift; sourceTree = "<group>"; };
 		910CD289095552E1350FAF4A /* Pods-Petfolio-PetfolioUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.debug.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		98E98523AB8FEFCD7E5EEF6E /* Pods-Petfolio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio.release.xcconfig"; path = "Target Support Files/Pods-Petfolio/Pods-Petfolio.release.xcconfig"; sourceTree = "<group>"; };
 		9F85BB794F4841A788F72AE1 /* Pods-Petfolio-PetfolioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petfolio-PetfolioUITests.release.xcconfig"; path = "Target Support Files/Pods-Petfolio-PetfolioUITests/Pods-Petfolio-PetfolioUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -625,7 +629,8 @@
 		844169F8261EF935001B9A2A /* modelview */ = {
 			isa = PBXGroup;
 			children = (
-				847194392631B0D600FEA91E /* petowner_headerview */,
+				84F4281926392DF800880D76 /* petowner_subpage_header */,
+				847194392631B0D600FEA91E /* petowner_mainpages_headerview */,
 				847194382631B0C000FEA91E /* Petowner_footerview */,
 			);
 			path = modelview;
@@ -677,13 +682,22 @@
 			path = Petowner_footerview;
 			sourceTree = "<group>";
 		};
-		847194392631B0D600FEA91E /* petowner_headerview */ = {
+		847194392631B0D600FEA91E /* petowner_mainpages_headerview */ = {
 			isa = PBXGroup;
 			children = (
 				84188988262D4BB400CA9A13 /* petowner_header.xib */,
 				8418898C262D520300CA9A13 /* petowner_header.swift */,
 			);
-			path = petowner_headerview;
+			path = petowner_mainpages_headerview;
+			sourceTree = "<group>";
+		};
+		84F4281926392DF800880D76 /* petowner_subpage_header */ = {
+			isa = PBXGroup;
+			children = (
+				84F4281A26392E2700880D76 /* petowner_otherpage_header.xib */,
+				84F4282026392EA600880D76 /* petowner_otherpage_header.swift */,
+			);
+			path = petowner_subpage_header;
 			sourceTree = "<group>";
 		};
 		B01DA74425655E8500B1FA0B /* Doctor */ = {
@@ -1115,6 +1129,7 @@
 				847194332631AD7300FEA91E /* vendor_orderdetails_status_TableViewCell.xib in Resources */,
 				84416A1D261F06E6001B9A2A /* petowner_footerview.xib in Resources */,
 				B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */,
+				84F4281B26392E2700880D76 /* petowner_otherpage_header.xib in Resources */,
 				B094D268255D6221008400D6 /* Futura Light font.ttf in Resources */,
 				B094D26D255D6221008400D6 /* Futura Book Italic font.ttf in Resources */,
 				840566682618946A0099A26D /* editshipaddresslistTableViewCell.xib in Resources */,
@@ -1443,6 +1458,7 @@
 				84860DC525D100F7000747A9 /* notification_TableViewCell.swift in Sources */,
 				B0F56E3625C820EB00B1634F /* Doc_detailspage_ViewController.swift in Sources */,
 				B00AB79A25666FE20004DB4D /* locationsettingViewController.swift in Sources */,
+				84F4282126392EA600880D76 /* petowner_otherpage_header.swift in Sources */,
 				842B5D4525EA0D9300D37082 /* testfileViewController.swift in Sources */,
 				B0E98F7725A80DA6005C0EF9 /* SP_mycal_addholiday_ViewController.swift in Sources */,
 				84096EA3262FE37300BB2EAF /* pet_dashboard_Service_CollectionViewCell.swift in Sources */,

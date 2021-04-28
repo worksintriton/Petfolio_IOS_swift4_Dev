@@ -25,9 +25,9 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_descrption: UILabel!
     @IBOutlet weak var label_yr_exp: UILabel!
     @IBOutlet weak var label_const_amt: UILabel!
-    @IBOutlet weak var view_footer: UIView!
-    @IBOutlet weak var view_home: UIView!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: petowner_footerview!
     
     var clinicpic = [""]
     var edu = ""
@@ -44,6 +44,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         //self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
@@ -53,12 +54,29 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
         self.view_book.submit_cornor()
-        self.view_footer.view_cornor()
         self.view_book.dropShadow()
         // Do any additional setup after loading the view.
         print("selected doctor details",Servicefile.shared.petdoc[Servicefile.shared.selectedindex])
         // Do any additional setup after loading the view.
         self.calldocdetails()
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_notificati(_ sender: Any) {

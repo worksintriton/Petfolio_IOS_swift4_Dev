@@ -13,20 +13,34 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     
     @IBOutlet weak var coll_prodlist: UICollectionView!
     @IBOutlet weak var view_search: UIView!
-    @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var textfield_search: UITextField!
+    
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var label_noproduct: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.label_noproduct.isHidden = true
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
-        self.view_footer.view_cornor()
         Servicefile.shared.sp_dash_Today_Special.removeAll()
         self.coll_prodlist.delegate = self
         self.coll_prodlist.dataSource = self
         self.callsearch()
+    }
+    
+    func intial_setup_action(){
+    
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

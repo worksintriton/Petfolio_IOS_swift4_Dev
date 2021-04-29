@@ -41,15 +41,20 @@ class imagelink{
     
     // Header side menu
     
-//    static let image_sos = "sos1"
-//    static let image_bel = "bell1"
-//    static let image_bag = "cart1"
-//    static let image_profile = "user"
+    static let image_sos = "sos1"
+    static let image_bel = "bell1"
+    static let image_bag = "cart1"
+    static let image_profile = "user"
     static let image_back = "back1"
     
     static let sidemenu = "Group55"
     static let Icon_map_pin = "Icon_map_pin"
     static let Drop_down = "Path76"
+    
+    static let cat1 = "cat_walk1"
+    static let cat2 = "catwalk2"
+    static let dog1 = "doganimate"
+    
     
 }
 
@@ -186,7 +191,7 @@ class Servicefile {
     static let inc_prod_count = baseurl + "/api/product_cart_detail/add_product"
     static let dec_prod_count = baseurl + "/api/product_cart_detail/remove_product"
     static let cartdetails = baseurl + "/api/product_cart_detail/fetch_cart_details_by_userid"
-    static let Createproduct = baseurl + "/api/vendor_order_booking/create"
+    static let Createproduct = baseurl + "/api/vendor_order_booking/create1"
     //static let orderlist = baseurl + "/api/vendor_order_booking/get_order_details_user_id"
     static let orderlist = baseurl + "/api/petlover_order_group/get_grouped_order_by_petlover"
     static let vendor_getlistid = baseurl + "/api/product_vendor/getlist_id"
@@ -535,6 +540,7 @@ class Servicefile {
     var order_id = ""
     var product_title = ""
     var iscancelselect = [0]
+    var iscancelmulti = false
     
     var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor

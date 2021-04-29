@@ -19,8 +19,9 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var label_alertMSG: UILabel!
     @IBOutlet weak var view_yes: UIView!
     @IBOutlet weak var view_no: UIView!
-    @IBOutlet weak var view_footer: UIView!
-    @IBOutlet weak var view_home: UIView!
+    
+    @IBOutlet weak var view_footer: petowner_footerview!
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     var proc_type = "edit"
     var indextag = 0
@@ -30,6 +31,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         //self.view_home.view_cornor()
         self.isclickisoption.removeAll()
         self.isorgiclikcopt.removeAll()
@@ -41,10 +43,30 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.view_popup.view_cornor()
-        self.view_footer.view_cornor()
         self.view_yes.view_cornor()
         self.view_no.view_cornor()
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Set Locations"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_care(_ sender: Any) {

@@ -21,6 +21,7 @@ class vendor_new_TableViewCell: UITableViewCell {
     @IBOutlet weak var btn_order_details: UIButton!
     @IBOutlet weak var btn_track_order: UIButton!
     
+    @IBOutlet weak var label_ord_date_title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

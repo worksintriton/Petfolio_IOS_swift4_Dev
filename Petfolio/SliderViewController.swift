@@ -92,7 +92,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
                     self.present(vc, animated: true, completion: nil)
                 }
-                
             }else{
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 self.present(vc, animated: true, completion: nil)
@@ -105,6 +104,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func getdemo() {
+        startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() {
             AF.request(Servicefile.slider, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
@@ -121,14 +121,18 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                             let img = itmval["img_path"] as? String ?? ""
                             self.petlist.append(img)
                         }
+                        
                         print(self.petlist)
                         self.dogshowcoll.reloadData()
+                        self.stopAnimatingActivityIndicator()
                     }else{
                         print("status code service denied")
+                        self.stopAnimatingActivityIndicator()
                     }
                     break
                 case .failure(let Error):
                     print("Can't Connect to Server / TimeOut",Error)
+                    self.stopAnimatingActivityIndicator()
                     break
                 }
             }
@@ -204,6 +208,27 @@ extension UIViewController  {
         Servicefile.shared.gifimg.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
         //Servicefile.shared.gifimg.image = UIImage(named: "doganimate.gif")
         let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "doganimate", withExtension: "gif")!)
+        Servicefile.shared.gifimg.image = UIImage.sd_image(withGIFData: imageData)
+        //        Servicefile.shared.loadlabel.textAlignment = .center
+        //        Servicefile.shared.loadlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //        Servicefile.shared.loadlabel.textColor = UIColor.red
+        Servicefile.shared.gifimg.center = Servicefile.shared.customview.center
+        Servicefile.shared.customview.addSubview(Servicefile.shared.backview)
+        Servicefile.shared.customview.addSubview(Servicefile.shared.gifimg)
+        self.view.addSubview(Servicefile.shared.customview)
+        
+    }
+    
+    func startAnimatingActivityIndicator_gif(named: String) {
+        Servicefile.shared.customview.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        Servicefile.shared.customview.backgroundColor = UIColor.clear        //give color to the view
+        Servicefile.shared.customview.center = self.view.center
+        Servicefile.shared.backview.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        Servicefile.shared.backview.backgroundColor = UIColor.black
+        Servicefile.shared.backview.alpha = 0.4
+        Servicefile.shared.gifimg.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+        //Servicefile.shared.gifimg.image = UIImage(named: "doganimate.gif")
+        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "cat_walk1", withExtension: "gif")!)
         Servicefile.shared.gifimg.image = UIImage.sd_image(withGIFData: imageData)
         //        Servicefile.shared.loadlabel.textAlignment = .center
         //        Servicefile.shared.loadlabel.font = UIFont.boldSystemFont(ofSize: 16.0)

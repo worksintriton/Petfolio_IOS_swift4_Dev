@@ -180,7 +180,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
     // footer action
     }
     
@@ -359,11 +359,11 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
                         self.label_quality.text = String(self.product_quantity)
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary
-                            let Status = itdata["Status"] as! Bool
-                            let date = itdata["date"] as! String
-                            let id = itdata["id"] as! Int
-                            let text = itdata["text"] as! String
-                            let title = itdata["title"] as! String
+                            let Status = itdata["Status"] as? Bool ?? false
+                            let date = itdata["date"] as? String ?? ""
+                            let id = itdata["id"] as? Int ?? 0
+                            let text = itdata["text"] as? String ?? ""
+                            let title = itdata["title"] as? String ?? ""
                             if title == "Order Booked" {
                                 self.isbookstatus(status: Status, bookval : date)
                                 if Status {

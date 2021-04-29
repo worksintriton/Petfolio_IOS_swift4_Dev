@@ -38,10 +38,10 @@ class petowner_otherpage_header: UIView {
         if let view = self.loadNib(nibname: "petowner_otherpage_header") {
             view.frame = self.bounds
             view.layer.masksToBounds = true
-//            self.image_sos.image = UIImage(named: imagelink.image_sos)
-//            self.image_bel.image = UIImage(named: imagelink.image_bel)
-//            self.image_bag.image = UIImage(named: imagelink.image_bag)
-//            self.image_profile.image = UIImage(named: imagelink.image_profile)
+            self.image_sos.image = UIImage(named: imagelink.image_sos)
+            self.image_bel.image = UIImage(named: imagelink.image_bel)
+            self.image_bag.image = UIImage(named: imagelink.image_bag)
+            self.image_profile.image = UIImage(named: imagelink.image_profile)
             self.image_back.image = UIImage(named: imagelink.image_back)
             self.addSubview(view)
         }

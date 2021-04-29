@@ -424,7 +424,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
         print("product id",Servicefile.shared.productid,"order id", Servicefile.shared.orderid)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_product_order_status_list, method: .post, parameters:
-            ["order_id": Servicefile.shared.orderid,
+            ["vendor_id": Servicefile.shared.vendorid,"order_id": Servicefile.shared.orderid,
                 "product_order_id": Servicefile.shared.productid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:

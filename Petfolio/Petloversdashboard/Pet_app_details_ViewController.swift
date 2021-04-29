@@ -41,18 +41,20 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var label_Holder_cost: UILabel!
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
-    @IBOutlet weak var view_footer: UIView!
-    @IBOutlet weak var view_home: UIView!
+    
+    @IBOutlet weak var view_footer: petowner_footerview!
+    
     @IBOutlet weak var view_reshedule: UIView!
     @IBOutlet weak var view_btn_shedule: UIView!
+    
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view_home.view_cornor()
-        
+        self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
-        self.view_footer.view_cornor()
         self.view_cancel.view_cornor()
         self.view_complete.view_cornor()
         self.view_cancel.dropShadow()
@@ -102,6 +104,28 @@ class Pet_app_details_ViewController: UIViewController {
         }
         self.call_getdetails()
         
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "My Appointment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_reshedule(_ sender: Any) {

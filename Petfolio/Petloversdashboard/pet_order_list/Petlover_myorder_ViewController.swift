@@ -49,7 +49,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
-        self.view_missed.layer.borderColor = appgree.cgColor
+        self.view_new.layer.borderColor = appgree.cgColor
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         
@@ -72,7 +72,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
     // footer action
     }
     
@@ -124,11 +124,13 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }else {
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
-            cell.label_cost.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
+          
       
             cell.selectionStyle = .none
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
             cell.label_prod_date_title.text = "Delivered on : "
+            cell.btn_order_details.tag = indexPath.row
+            
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
         } else if  Servicefile.shared.ordertype == "current"{
@@ -151,7 +153,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
-            cell.label_cost.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
+            cell.btn_order_details.tag = indexPath.row
             cell.label_prod_date_title.text = "Booked on : "
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
@@ -176,6 +178,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
             cell.label_prod_date_title.text = "Cancelled on : "
+            cell.btn_order_details.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
         }
@@ -187,6 +190,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     
     @objc func orderdetails(sender: UIButton){
         let tag = sender.tag
+        Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_orderdetails_ViewController") as! pet_vendor_orderdetails_ViewController
         self.present(vc, animated: true, completion: nil)
@@ -218,14 +222,11 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_new.backgroundColor = UIColor.white
     }
     
-    
-    
     @IBAction func action_completeappoint(_ sender: Any) {
         self.design_set_complete()
         Servicefile.shared.ordertype = "Complete"
         self.tblview_applist.reloadData()
         self.callcomm()
-        
     }
     
     func design_set_complete(){

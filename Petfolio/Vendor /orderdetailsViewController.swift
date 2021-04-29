@@ -471,7 +471,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_status_orderlist, method: .post, parameters:
-            ["order_id": Servicefile.shared.orderid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            ["vendor_id": Servicefile.shared.vendorid,"order_id": Servicefile.shared.orderid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -612,7 +612,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
             self.view_shadow.isHidden = false
             self.view_popup.isHidden = false
         }else if self.isdispatched.count > 0{
-            self.rejectDispatchstatus.text = "Distach Track ID"
+            self.rejectDispatchstatus.text = "Dispatch Track ID"
             self.view_shadow.isHidden = false
             self.view_popup.isHidden = false
         }
@@ -625,23 +625,35 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func action_popup_update(_ sender: Any) {
         let str = self.textview_popup.text!
         let trimmed = str.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed == "" {
-            self.alert(Message: "Please enter the details")
-        }else if self.rejectDispatchstatus.text == "Reject reason" {
+        let checkdata =  self.rejectDispatchstatus.text!
+        print("checkdata")
+         if checkdata == "Reject reason" {
+            print("Rejected")
+            if trimmed == "" {
+                self.alert(Message: "Please enter the details")
+            }else{
+                self.callreject()
+            }
             self.textview_popup.text = "Write here..."
             self.textview_popup.textColor = .gray
-            self.callreject()
-        }else if self.rejectDispatchstatus.text == "Dispatch Track ID"{
-            self.textview_popup.text = "Write here..."
-            self.textview_popup.textColor = .gray
-            self.calldispatch()
+            self.view_popup.isHidden = true
+            self.view_shadow.isHidden = true
+           
+        } else if checkdata == "Dispatch Track ID"{
+            print("dispatch")
+            if trimmed == "" {
+                self.alert(Message: "Please enter the details")
+            }else{
+                self.calldispatch()
+            }
         }
     }
     
     func callconfirm() {
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_order_details_confirm , method: .post, parameters:
-            ["order_id": Servicefile.shared.order_id,
+            ["vendor_id": Servicefile.shared.vendorid,
+             "order_id": Servicefile.shared.order_id,
              "product_id": self.isconfirmed,
              "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
@@ -688,10 +700,11 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
        
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_order_details_reject, method: .post, parameters:
-            ["order_id": Servicefile.shared.order_id,
+            ["vendor_id": Servicefile.shared.vendorid,
+             "order_id": Servicefile.shared.order_id,
                "product_id": self.isrejected,
                "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-               "reject_reason" : "we are not having the product currently"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+               "reject_reason" : self.textview_popup.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -706,6 +719,10 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                             self.view_shadow.isHidden = false
                             self.view_popup.isHidden = false
                         }else{
+                            self.textview_popup.text = "Write here..."
+                            self.textview_popup.textColor = .gray
+                            self.view_popup.isHidden = true
+                            self.view_shadow.isHidden = true
                             self.callgetstatuslist()
                         }
                         self.stopAnimatingActivityIndicator()
@@ -730,7 +747,8 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
        
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_order_details_dispatch, method: .post, parameters:
-            ["order_id": Servicefile.shared.order_id,
+            ["vendor_id": Servicefile.shared.vendorid,
+             "order_id": Servicefile.shared.order_id,
                "product_id": self.isdispatched,
                "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                "track_id" : self.textview_popup.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -743,6 +761,8 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                         let Data = res["Data"] as! NSDictionary
                         self.textview_popup.text = "Write here..."
                         self.textview_popup.textColor = .gray
+                        self.view_popup.isHidden = true
+                        self.view_shadow.isHidden = true
                         self.callgetstatuslist()
                         self.stopAnimatingActivityIndicator()
                     }else{

@@ -52,7 +52,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
     // footer action
     }
     
@@ -112,16 +112,20 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     func call_submit_cancel_new(){
         var params = [String:Any]()
         var url = ""
-        if Servicefile.shared.iscancelselect.count > 1 { // calls multi cancel api and params
+        if Servicefile.shared.iscancelmulti { // calls multi cancel api and params
              params = ["order_id": Servicefile.shared.orderid,
                         "product_id": Servicefile.shared.iscancelselect,
+                        "reject_reason":self.selval,
                           "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
              url = Servicefile.pet_vendor_cancel_overall
-        }else if Servicefile.shared.iscancelselect.count > 0 || Servicefile.shared.iscancelselect.count == 1 {  // calls single cancel api and params
-            params = ["order_id": Servicefile.shared.orderid,
-                         "product_id": Servicefile.shared.iscancelselect[0],
-                         "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
-            url = Servicefile.pet_vendor_cancel_single
+        }else{
+            if Servicefile.shared.iscancelselect.count > 0 || Servicefile.shared.iscancelselect.count == 1 {  // calls single cancel api and params
+                params = ["order_id": Servicefile.shared.orderid,
+                          "reject_reason":self.selval,
+                             "product_id": Servicefile.shared.iscancelselect[0],
+                             "date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
+                url = Servicefile.pet_vendor_cancel_single
+            }
         }
         
         self.startAnimatingActivityIndicator()

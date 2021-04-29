@@ -111,6 +111,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }else {
             cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
+            
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
         cell.view_update_status.layer.cornerRadius = 4.0
         //cell.view_main.dropShadow()
@@ -121,103 +122,68 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.btn_update_status.addTarget(self, action: #selector(updatestatusorderdetails), for: .touchUpInside)
             cell.selectionStyle = .none
+            cell.label_ord_date_title.text = "Booked on : "
             return cell
         } else  if  Servicefile.shared.ordertype == "Complete"{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "comcell", for: indexPath) as! vendor_complete_TableViewCell
-            cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    cell.image_order.image = UIImage(named: "sample")
-                } else {
-                    cell.image_order.image = image
-                }
-            }
-            cell.image_order.layer.cornerRadius = 8.0
+            let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
+            if (error != nil) {
+                cell.image_order.image = UIImage(named: "sample")
+            } else {
+                cell.image_order.image = image
+            }
+        }
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
-            let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
-            if quantity == 1 {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
-            }else {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
-            }
-            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
-            
-           // cell.view_main.dropShadow()
+        let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
+        if quantity == 1 {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+        }else {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+        }
+            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_completed_date
+        cell.view_update_status.layer.cornerRadius = 4.0
+        //cell.view_main.dropShadow()
+            cell.image_order.layer.cornerRadius = 8.0
+        //cell.view_update_status.startAnimating()
             cell.btn_order_details.tag = indexPath.row
-            cell.btn_track_order.tag = indexPath.row
+            cell.btn_update_status.tag = indexPath.row
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-            cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-
+            cell.btn_update_status.addTarget(self, action: #selector(updatestatusorderdetails), for: .touchUpInside)
+            cell.selectionStyle = .none
+            cell.label_ord_date_title.text = "Delivered on : "
             return cell
         } else{
-//            if Servicefile.shared.order_productdetail[indexPath.row].user_return_info != "" &&  Servicefile.shared.order_productdetail[indexPath.row].vendor_accept_cancel == ""{
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "retcell", for: indexPath) as! vendor_return_TableViewCell
-//                cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].prodcut_image)) { (image, error, cache, urls) in
-//                    if (error != nil) {
-//                        cell.image_order.image = UIImage(named: "sample")
-//                    } else {
-//                        cell.image_order.image = image
-//                    }
-//                }
-//                    cell.image_order.layer.cornerRadius = 8.0
-//                cell.selectionStyle = .none
-//                cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].order_id
-//                cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].product_name
-//                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].product_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].product_quantity)) items)"
-//                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].date_of_booking
-//                cell.btn_order_details.tag = indexPath.row
-//                cell.btn_track_order.tag = indexPath.row
-//                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-//                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-//                cell.view_main.dropShadow()
-//                cell.btn_reject.tag = indexPath.row
-//                cell.btn_reject.addTarget(self, action: #selector(Rejectdetails), for: .touchUpInside)
-//                cell.btn_accept.tag = indexPath.row
-//                cell.btn_accept.addTarget(self, action: #selector(Acceptdetails), for: .touchUpInside)
-//                cell.view_accept.view_cornor()
-//                cell.view_reject.view_cornor()
-//                return cell
-//            }else{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "miscell", for: indexPath) as! vendor_missed_TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
+            cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
-                    if (error != nil) {
-                        cell.image_order.image = UIImage(named: "sample")
-                    } else {
-                        cell.image_order.image = image
-                    }
-                }
-                cell.image_order.layer.cornerRadius = 8.0
-                cell.selectionStyle = .none
+            if (error != nil) {
+                cell.image_order.image = UIImage(named: "sample")
+            } else {
+                cell.image_order.image = image
+            }
+        }
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
-            let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
-            if quantity == 1 {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
-            }else {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
-            }
-               
-            
-            if Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on != "" {
-                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
-                cell.label_order_status.text = "Cancelled on"
-            }else if Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on != "" {
-                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
-                cell.label_order_status.text = "Cancelled on"
-            }else if Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on != "" {
-                cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
-                cell.label_order_status.text = "Retured on"
-            }
-           
-                cell.btn_order_details.tag = indexPath.row
-                
-                cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
-            cell.btn_track_order.tag = indexPath.row
-                cell.btn_track_order.addTarget(self, action: #selector(trackorderdetails), for: .touchUpInside)
-                //cell.view_main.dropShadow()
-                return cell
-//            }
+        let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
+        if quantity == 1 {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+        }else {
+            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+        }
+            cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_cancelled_date
+        cell.view_update_status.layer.cornerRadius = 4.0
+        //cell.view_main.dropShadow()
+            cell.image_order.layer.cornerRadius = 8.0
+        //cell.view_update_status.startAnimating()
+            cell.btn_order_details.tag = indexPath.row
+            cell.btn_update_status.tag = indexPath.row
+            cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
+            cell.btn_update_status.addTarget(self, action: #selector(updatestatusorderdetails), for: .touchUpInside)
+            cell.selectionStyle = .none
+            cell.label_ord_date_title.text = "Cancelled on : "
+            return cell
         }
     }
     
@@ -253,12 +219,12 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         
     }
     
-    @objc func trackorderdetails(sender: UIButton){
-        let tag = sender.tag
-        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorTrackorderViewController") as! vendorTrackorderViewController
-        self.present(vc, animated: true, completion: nil)
-    }
+//    @objc func trackorderdetails(sender: UIButton){
+//        let tag = sender.tag
+//        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorTrackorderViewController") as! vendorTrackorderViewController
+//        self.present(vc, animated: true, completion: nil)
+//    }
     @objc func updatestatusorderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id

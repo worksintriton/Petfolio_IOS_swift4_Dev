@@ -23,6 +23,7 @@ class petowner_header: UIView {
     @IBOutlet weak var view_location: UIView!
     @IBOutlet weak var view_btn_process: UIView!
     @IBOutlet weak var btn_button2: UIButton!
+    @IBOutlet weak var image_button2: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

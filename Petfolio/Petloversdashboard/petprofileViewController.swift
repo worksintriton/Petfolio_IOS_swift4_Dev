@@ -13,6 +13,7 @@ import Alamofire
 class petprofileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var view_img: UIView!
     @IBOutlet weak var View_profile: UIView!
     @IBOutlet weak var imag_user: UIImageView!
@@ -20,15 +21,34 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var label_email: UILabel!
     @IBOutlet weak var label_phono: UILabel!
     @IBOutlet weak var coll_petlist: UICollectionView!
-    @IBOutlet weak var view_footer: UIView!
     
-    @IBOutlet weak var view_home: UIView!
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     var ismenu = ["0"]
     var isorgi = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view_home.view_cornor()
-        self.view_footer.view_cornor()
+        self.intial_setup_action()
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Profile"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backpage), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+    // footer action
     }
     
     @IBAction func action_care(_ sender: Any) {
@@ -181,6 +201,12 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
              return CGSize(width: 128 , height:  128)
     }
+    
+    @objc func backpage(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+         self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @IBAction func action_back(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController

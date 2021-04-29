@@ -77,7 +77,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
     // footer action
     }
     

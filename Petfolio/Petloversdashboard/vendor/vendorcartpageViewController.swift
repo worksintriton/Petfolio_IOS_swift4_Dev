@@ -25,6 +25,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var view_empty_cart: UIView!
     @IBOutlet weak var label_cart_count: UILabel!
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     
     // var razorpay: RazorpayCheckout!
     
@@ -36,6 +37,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.view_cart_count.isHidden = true
         self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2
         self.label_cart_count.text = "0"
@@ -55,6 +57,20 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         self.tbl_productlist.delegate = self
         self.tbl_productlist.dataSource = self
         self.callcartdetails()
+    }
+    
+    
+    func intial_setup_action(){
+    
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
+    // footer action
     }
     
     @IBAction func action_empty_cart(_ sender: Any) {

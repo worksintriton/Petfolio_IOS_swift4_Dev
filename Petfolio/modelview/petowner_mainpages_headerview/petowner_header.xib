@@ -15,6 +15,7 @@
                 <outlet property="btn_location" destination="8Sn-Kn-N3b" id="I8K-sA-YWI"/>
                 <outlet property="btn_profile" destination="V2E-x1-atT" id="qRB-t8-dur"/>
                 <outlet property="btn_sidemenu" destination="tpH-8o-ouf" id="nH1-J9-SSq"/>
+                <outlet property="image_button2" destination="209-tH-AOb" id="ssM-zc-egz"/>
                 <outlet property="image_drop_down" destination="tQ7-ss-Sa8" id="2IL-BR-vnP"/>
                 <outlet property="image_profile" destination="7EX-xu-auY" id="hrR-Me-LL4"/>
                 <outlet property="image_sidemenu" destination="kfo-ux-wvd" id="AgH-Ub-i6e"/>

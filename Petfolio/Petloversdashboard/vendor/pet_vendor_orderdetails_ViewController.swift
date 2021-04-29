@@ -92,21 +92,25 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         super.viewDidLoad()
         self.intial_setup_action()
         self.view_footer.view_cornor()
-        self.label_confirmall.text = "Confirm All"
+        self.label_confirmall.text = "Cancel All"
         self.order_change_status.removeAll()
         self.orgi_order_change_status.removeAll()
         Servicefile.shared.orderdetail_prod.removeAll()
         self.view_status.isHidden = true
         self.view_shipingaddress.isHidden = true
         self.view_orderdetails.isHidden = true
-        self.tbl_prod_details.register(UINib(nibName: "vendor_orderdetails_status_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        self.tbl_prod_details.register(UINib(nibName: "pet_vendor_orderdetails_cancel_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell1")
+        self.tbl_prod_details.register(UINib(nibName: "vendor_orderdetails_status_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell1")
+        self.tbl_prod_details.register(UINib(nibName: "pet_vendor_orderdetails_cancel_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.tbl_prod_details.delegate = self
         self.tbl_prod_details.dataSource = self
-        self.callgetstatuslist()
         self.view_confirmall.isHidden = true
        
        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.callgetstatuslist()
     }
     
    
@@ -127,7 +131,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
     // footer action
     }
     
@@ -143,7 +147,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         
         if self.check_vendor_details(index : indexPath.row) == 0{
             
-            let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! pet_vendor_orderdetails_cancel_TableViewCell
+            let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_orderdetails_cancel_TableViewCell
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
@@ -156,9 +160,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
             if Servicefile.shared.orderdetail_prod[indexPath.row].product_count > 1{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) products)"
+                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
             }else{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) product)"
+                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
             }
             cell.label_bookdate.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_booked
             cell.label_orderdatetitle.text = self.check_order_details_status()
@@ -176,7 +180,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             
           
         }else{
-            let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! vendor_orderdetails_status_TableViewCell
+            let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! vendor_orderdetails_status_TableViewCell
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
@@ -211,7 +215,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     
     func check_vendor_details(index : Int)->Int{
         var index_result = 0
-        if Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Booked" || Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Accept" || Servicefile.shared.orderdetail_prod[index].product_stauts ==  "Order Dispatch" {
+        if Servicefile.shared.orderdetail_prod[index].product_stauts == "Order Booked"  {
             index_result = 0 // vendor_orderDetails_neworder_TableViewCell
             self.view_confirmall.isHidden = false
         }else {
@@ -257,6 +261,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     }
     
     @objc func action_btn_cancelorder(sender: UIButton){
+        Servicefile.shared.iscancelmulti = false
         let tag = sender.tag
         Servicefile.shared.iscancelselect.removeAll()
         Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
@@ -298,6 +303,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     }
     
     @IBAction func action_comfirm_all(_ sender: Any) {
+        Servicefile.shared.iscancelmulti = true
         Servicefile.shared.iscancelselect.removeAll()
         for i in 0..<self.order_change_status.count{
             if self.order_change_status[i] == "0"{
@@ -335,7 +341,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petlover_status_orderlist, method: .post, parameters:
-            ["order_id": Servicefile.shared.orderid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            ["vendor_id": Servicefile.shared.vendorid,"order_id": Servicefile.shared.orderid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

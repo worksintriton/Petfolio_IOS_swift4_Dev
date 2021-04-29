@@ -20,14 +20,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var label_current: UILabel!
     @IBOutlet weak var label_complete: UILabel!
     @IBOutlet weak var label_cancelled: UILabel!
-    @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var label_nodata: UILabel!
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_yes: UIView!
     @IBOutlet weak var view_no: UIView!
-    @IBOutlet weak var view_home: UIView!
+    @IBOutlet weak var view_footer: petowner_footerview!
     
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     var appointtype = "current"
     var indextag = 0
     
@@ -35,8 +35,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         //self.view_home.view_cornor()
-        self.view_footer.view_cornor()
         self.view_popup.view_cornor()
         self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2
         self.view_no.layer.cornerRadius = self.view_yes.frame.height / 2
@@ -46,6 +46,27 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_popup.isHidden = true
         self.label_nodata.text = "No new appointments"
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "My Appointment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+    // header action
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
+    // footer action
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -307,6 +328,11 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func action_no(_ sender: Any) {
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
+    }
+    
+    @objc func backaction() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_backaction(_ sender: Any) {

@@ -23,8 +23,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         super.viewDidLoad()
         self.intial_setup_action()
         self.textfield_search.delegate = self
-        
         self.view_allcategory.view_cornor()
+        self.view_allcategory.isHidden = true
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
@@ -35,6 +35,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
+        self.view_header.image_button2.image = UIImage(named: "Bag")
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         var img = Servicefile.shared.userimage
         if img != "" {

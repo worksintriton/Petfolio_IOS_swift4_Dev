@@ -50,6 +50,10 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var view_photo_id_close: UIView!
     @IBOutlet weak var view_govid_close: UIView!
     
+    @IBOutlet weak var textview_spaddress: UITextView!
+    
+    @IBOutlet weak var view_clinicaddress: UIView!
+    
     var selservice = ["0"]
     var selspec = ["0"]
     var added_service = [""]
@@ -62,6 +66,8 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textview_spaddress.delegate = self
+        self.calllocationcheck()
         self.cleardata()
         self.call_protocals()
         self.callSP_Ser_Spec_get()
@@ -71,6 +77,18 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view_govid_close.isHidden = true
         self.view_photo_id_close.layer.cornerRadius =  self.view_photo_id_close.frame.size.height / 2
         self.view_govid_close.layer.cornerRadius =  self.view_govid_close.frame.size.height / 2
+       
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        Servicefile.shared.lati = locValue.latitude
+        Servicefile.shared.long = locValue.longitude
+        Servicefile.shared.sp_lat = Servicefile.shared.lati
+        Servicefile.shared.sp_long = Servicefile.shared.long
+        self.findareabylatlong()
+        self.locationManager.stopUpdatingLocation()
     }
     
     func cleardata(){
@@ -166,56 +184,40 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
+        print("location",Servicefile.shared.sp_loc, Servicefile.shared.sp_lat,Servicefile.shared.sp_long)
+        self.textview_spaddress.text = Servicefile.shared.sp_loc
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
-        
-        self.latitude = locValue.latitude
-        self.longitude = locValue.longitude
-        self.latLong(lat: self.latitude,long: self.longitude)
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    func latLong(lat: Double,long: Double)  {
-        if Servicefile.shared.updateUserInterface(){
-            let geoCoder = CLGeocoder()
-            let location = CLLocation(latitude: lat , longitude: long)
-            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-                var pm: CLPlacemark!
-                pm = placemarks?[0]
-                var addressString : String = ""
-                if pm.subLocality != nil {
-                    addressString = addressString + pm.subLocality! + ", "
-                }
-                if pm.thoroughfare != nil {
-                    addressString = addressString + pm.thoroughfare! + ", "
-                }
-                if pm.locality != nil {
-                    addressString = addressString + pm.locality! + ", "
-                }
-                if pm.country != nil {
-                    addressString = addressString + pm.country! + ", "
-                }
-                if pm.postalCode != nil {
-                    addressString = addressString + pm.postalCode! + " "
-                }
-                
-                self.locationaddress = addressString
-                print(addressString)
-            })
-        }
-        
-    }
+//    func latLong(lat: Double,long: Double)  {
+//        if Servicefile.shared.updateUserInterface(){
+//            let geoCoder = CLGeocoder()
+//            let location = CLLocation(latitude: lat , longitude: long)
+//            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+//                var pm: CLPlacemark!
+//                pm = placemarks?[0]
+//                var addressString : String = ""
+//                if pm.subLocality != nil {
+//                    addressString = addressString + pm.subLocality! + ", "
+//                }
+//                if pm.thoroughfare != nil {
+//                    addressString = addressString + pm.thoroughfare! + ", "
+//                }
+//                if pm.locality != nil {
+//                    addressString = addressString + pm.locality! + ", "
+//                }
+//                if pm.country != nil {
+//                    addressString = addressString + pm.country! + ", "
+//                }
+//                if pm.postalCode != nil {
+//                    addressString = addressString + pm.postalCode! + " "
+//                }
+//
+//                self.locationaddress = addressString
+//                print(addressString)
+//            })
+//        }
+//
+//    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -243,19 +245,19 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.alert(Message: "You can upload only 3 pictures for clinic")
         }else{
             self.img_for = "Gall"
-            self.callgalaryprocess()
+            self.callgalaryimageprocess()
         }
     }
     
     @IBAction func action_photo_upload(_ sender: Any) {
         self.img_for = "Photo"
-        self.callDocprocess()
+        self.callgalaryprocess()
     }
     
     @IBAction func action_gov_upload(_ sender: Any) {
         
         self.img_for = "Gov"
-        self.callDocprocess()
+        self.callgalaryprocess()
     }
     
     @IBAction func action_certificate_upload(_ sender: Any) {
@@ -264,7 +266,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.alert(Message: "You can upload only 3 PDF for Certificate")
         }else{
             self.img_for = "Certi"
-            self.callDocprocess()
+            self.callgalaryprocess()
         }
     }
     
@@ -494,6 +496,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     cell.Img_id.image = image
                 }
             }
+            cell.btn_close.tag = indexPath.row
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_gallary), for: .touchUpInside)
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -501,8 +504,21 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
-            cell.Img_id.image = UIImage(named: "pdf")
+            let imgdat = Servicefile.shared.certifdicarray[indexPath.row] as! NSDictionary
+            let strdat = imgdat["bus_certif"] as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        cell.Img_id.image = image
+                    }
+                }
+            }else{
+                cell.Img_id.image = UIImage(named: "pdf")
+            }
             return cell
         }else if coll_speclist == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spec", for: indexPath) as! checkupCollectionViewCell
@@ -588,7 +604,19 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     func setimag(){
         if self.image_photo != "" {
             self.image_photo_id.isHidden = false
-            self.image_photo_id.image = UIImage(named: "pdf")
+            let strdat = self.image_photo as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_photo_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_photo_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_photo_id.image = image
+                    }
+                }
+            }else{
+                self.image_photo_id.image = UIImage(named: "pdf")
+            }
+            
             self.view_photo_id_close.isHidden = false
         }else{
             self.image_photo_id.isHidden = true
@@ -597,6 +625,18 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         if self.image_govid != "" {
             self.image_gov.isHidden = false
+            let strdat = self.image_govid as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_gov.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_gov.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_gov.image = image
+                    }
+                }
+            }else{
+                self.image_gov.image = UIImage(named: "pdf")
+            }
             self.image_gov.image = UIImage(named: "pdf")
             self.view_govid_close.isHidden = false
         }else{
@@ -616,6 +656,27 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         present(importMenu, animated: true)
     }
     
+   
+    
+    func callgalaryimageprocess(){
+        let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .camera
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .photoLibrary
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+       
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            print("ok")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
@@ -627,6 +688,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Document", style: UIAlertAction.Style.default, handler: { action in
+            self.callDocprocess()
         }))
         alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
             print("ok")
@@ -690,9 +754,30 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                             Servicefile.shared.gallerydicarray = B
                             print("uploaded data in certifi",Servicefile.shared.gallerydicarray)
                         }
+                        
+                        if self.img_for == "Certi" {
+                            var B = Servicefile.shared.certifdicarray
+                            var arr = B
+                            let a = ["bus_certif":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.certifdicarray = B
+                            print("uploaded data in certifi",Servicefile.shared.certifdicarray)
+                        }
+                        
+                        if self.img_for == "Gov" {
+                            self.image_govid = Data
+                        }
+                        
+                        if self.img_for == "Photo" {
+                            self.image_photo = Data
+                        }
+                        
                         self.setimag()
                         self.stopAnimatingActivityIndicator()
                         self.coll_galary_img.reloadData()
+                        self.coll_certificate.reloadData()
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
@@ -920,6 +1005,82 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    @IBAction func action_change_location(_ sender: Any) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func calllocationcheck(){
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func spilit_string_data(array_string: String)-> String{
+        var str = array_string.split(separator: ".")
+        if str.last == "pdf" {
+            return "pdf"
+        }else{
+            return ""
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textview_spaddress == textView  {
+            if textView.text == "Write here.." {
+                textView.text = ""
+                if textView.textColor == UIColor.lightGray {
+                    textView.text = nil
+                    textView.textColor = UIColor.black
+                }
+            }
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_spaddress.text!.count > 49 {
+            textview_spaddress.resignFirstResponder()
+        }else{
+            self.textview_spaddress.text = textView.text
+        }
+        if(text == "\n") {
+            textview_spaddress.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func findareabylatlong(){
+        
+        let latlng = String(Servicefile.shared.sp_lat)+","+String(Servicefile.shared.sp_long)
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            switch (response.result) {
+            case .success:
+                let data = response.value as! NSDictionary
+                let area = data["results"] as! NSArray
+                if area.count > 0 {
+                    let areadetails = area[0] as! NSDictionary
+                    Servicefile.shared.sp_loc = (areadetails["formatted_address"] as? String)!
+                    _ = areadetails["address_components"] as! NSArray
+                    self.textview_spaddress.text! = Servicefile.shared.sp_loc
+                }
+                break
+            case .failure(let Error):
+                print("Can't Connect to Server / TimeOut",Error)
+                break
+            }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
 }
+
 
 

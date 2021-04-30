@@ -41,10 +41,10 @@ class imagelink{
     
     // Header side menu
     
-    static let image_sos = "sos1"
-    static let image_bel = "bell1"
-    static let image_bag = "cart1"
-    static let image_profile = "user"
+    static let image_sos = "sos2"
+    static let image_bel = "bell2"
+    static let image_bag = "cart2"
+    static let image_profile = "user2"
     static let image_back = "back1"
     
     static let sidemenu = "Group55"
@@ -397,6 +397,7 @@ class Servicefile {
     var Doc_selected_app_list = ""
     var Doc_dashlist = [doc_Dash_petdetails]()
     // Doctor
+    var SP_selected_app_list = ""
     var SP_filter_price = [sppricelist]()
     var SP_Das_petdetails = [SP_Dash_petdetails]()
     var pet_applist_do_sp = [pet_applist_doc_sp]()

@@ -33,6 +33,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     fileprivate var jitsiMeetView: JitsiMeetView?
     
+    var refreshControl = UIRefreshControl()
     var appointtype = "New"
     var app_id = ""
     var tag_val = 0
@@ -56,11 +57,15 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        self.callcheckstatus()
     }
     
+    @objc func refresh(){
+        self.callcheckstatus()
+        self.refreshControl.endRefreshing()
+    }
     
     @IBAction func action_refresh(_ sender: Any) {
         self.callcheckstatus()
@@ -622,7 +627,14 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             }else{
                                 self.view_shadow.isHidden = true
                                 self.view_popup.isHidden = true
-                                self.callnew()
+                                
+                                if self.appointtype == "New" {
+                                    self.callnew()
+                                }else if self.appointtype == "Complete"{
+                                    self.callcom()
+                                }else{
+                                    self.callmiss()
+                                }
                             }
                         }
                         self.stopAnimatingActivityIndicator()

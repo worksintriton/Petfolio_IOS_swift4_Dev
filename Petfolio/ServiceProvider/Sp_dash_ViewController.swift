@@ -33,7 +33,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var label_popalert_details: UILabel!
     @IBOutlet weak var view_btn_yes: UIView!
     @IBOutlet weak var view_btn_no: UIView!
-    
+    var refreshControl = UIRefreshControl()
     var indextag = 0
     var statussel = ""
     
@@ -60,11 +60,17 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.layer.borderColor = appgree.cgColor
         self.view_missed.layer.borderColor = appgree.cgColor
-        
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        self.tblview_applist.refreshControl = refreshControl
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         // Do any additional setup after loading the view.
         
+    }
+    
+    @objc func refresh(){
+            self.callcheckstatus()
+        self.refreshControl.endRefreshing()
     }
     
     @IBAction func action_profile(_ sender: Any) {
@@ -187,7 +193,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Servicefile.shared.Doc_selected_app_list = self.appointtype
+        Servicefile.shared.SP_selected_app_list = self.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_app_details_page_ViewController") as! sp_app_details_page_ViewController
@@ -552,7 +558,14 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             }else{
                                 self.view_shadow.isHidden = true
                                 self.view_popup.isHidden = true
-                                self.callnew()
+                                if self.appointtype == "New" {
+                                    self.callnew()
+                                }else if self.appointtype == "Complete"{
+                                    self.callcom()
+                                }else{
+                                    self.callmiss()
+                                }
+                               
                             }
                         }
                         self.stopAnimatingActivityIndicator()

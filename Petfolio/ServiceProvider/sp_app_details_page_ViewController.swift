@@ -56,9 +56,9 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.call_getdetails()
         self.view_confrence.isHidden = true
         self.image_holder_name.image = UIImage(named: "sample")
-        if Servicefile.shared.Doc_selected_app_list == "New" {
+        if Servicefile.shared.SP_selected_app_list == "New" {
             self.view_complete_cancel.isHidden = false
-        }else if Servicefile.shared.Doc_selected_app_list == "Complete" {
+        }else if Servicefile.shared.SP_selected_app_list == "Complete" {
             self.view_complete_cancel.isHidden = true
         }else{
             self.view_complete_cancel.isHidden = true

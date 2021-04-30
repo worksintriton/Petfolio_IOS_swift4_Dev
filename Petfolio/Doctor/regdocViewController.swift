@@ -208,20 +208,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
         self.view_shadow.addGestureRecognizer(tap)
         self.calllocationcheck()
-        
     }
-    
-    func calllocationcheck(){
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-   
     
     @objc func hidetbl() {
         if  self.issubmit {
@@ -231,36 +218,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.view_signature.isHidden = true
         }
     }
-    
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.textview_clinicaddress == textView  {
-            if textView.text == "Write here.." {
-                textView.text = ""
-                if textView.textColor == UIColor.lightGray {
-                    textView.text = nil
-                    textView.textColor = UIColor.black
-                }
-            }
-        }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if self.textview_clinicaddress.text!.count > 49 {
-            textview_clinicaddress.resignFirstResponder()
-        }else{
-            self.textview_clinicaddress.text = textView.text
-        }
-        if(text == "\n") {
-            textview_clinicaddress.resignFirstResponder()
-            return false
-        }
-        self.view_edudate.isHidden = true
-        self.tbl_commtype.isHidden = true
-        self.view_expire.isHidden = true
-        return true
-    }
-
     
     override func viewWillAppear(_ animated: Bool) {
         print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
@@ -298,41 +255,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func sidemenu(_ sender: Any) {
         
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
-       
-        Servicefile.shared.Doc_lat = locValue.latitude
-        Servicefile.shared.Doc_long = locValue.longitude
-        
-        self.findareabylatlong()
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    func findareabylatlong(){
-       
-        let latlng = String(Servicefile.shared.Doc_lat)+","+String(Servicefile.shared.Doc_long)
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-            switch (response.result) {
-            case .success:
-                let data = response.value as! NSDictionary
-                let area = data["results"] as! NSArray
-                let areadetails = area[0] as! NSDictionary
-                Servicefile.shared.Doc_loc = (areadetails["formatted_address"] as? String)!
-                _ = areadetails["address_components"] as! NSArray
-                self.textview_clinicaddress.text! = Servicefile.shared.Doc_loc
-                break
-            case .failure(let Error):
-                print("Can't Connect to Server / TimeOut",Error)
-                break
-            }
-            }
-        }else{
-            self.alert(Message: "No Intenet Please check and try again ")
-        }
-    }
-    
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let myURL = urls.first else {
@@ -760,8 +682,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.tbl_experience == tableView {
@@ -1512,3 +1432,79 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
 }
 
+extension regdocViewController { // location setup
+    
+    func calllocationcheck(){
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textview_clinicaddress == textView  {
+            if textView.text == "Write here.." {
+                textView.text = ""
+                if textView.textColor == UIColor.lightGray {
+                    textView.text = nil
+                    textView.textColor = UIColor.black
+                }
+            }
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_clinicaddress.text!.count > 49 {
+            textview_clinicaddress.resignFirstResponder()
+        }else{
+            self.textview_clinicaddress.text = textView.text
+        }
+        if(text == "\n") {
+            textview_clinicaddress.resignFirstResponder()
+            return false
+        }
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
+        self.view_expire.isHidden = true
+        return true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+       
+        Servicefile.shared.Doc_lat = locValue.latitude
+        Servicefile.shared.Doc_long = locValue.longitude
+        
+        self.findareabylatlong()
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    func findareabylatlong(){
+       
+        let latlng = String(Servicefile.shared.Doc_lat)+","+String(Servicefile.shared.Doc_long)
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            switch (response.result) {
+            case .success:
+                let data = response.value as! NSDictionary
+                let area = data["results"] as! NSArray
+                let areadetails = area[0] as! NSDictionary
+                Servicefile.shared.Doc_loc = (areadetails["formatted_address"] as? String)!
+                _ = areadetails["address_components"] as! NSArray
+                self.textview_clinicaddress.text! = Servicefile.shared.Doc_loc
+                break
+            case .failure(let Error):
+                print("Can't Connect to Server / TimeOut",Error)
+                break
+            }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+}

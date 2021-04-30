@@ -129,6 +129,18 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
                   }
               }
         
+        if let firstVC = presentingViewController as? SP_Reg_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        
+        if let firstVC = presentingViewController as? Sp_profile_edit_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        
        }
    
     @IBAction func action_change_location(_ sender: Any) {
@@ -273,6 +285,11 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
                     self.textfield_search.text = areadetails["formatted_address"] as? String ?? ""
                     _ = areadetails["address_components"] as! NSArray
                     Servicefile.shared.Doc_loc = self.textfield_search.text!
+                    Servicefile.shared.Doc_lat = Servicefile.shared.lati
+                    Servicefile.shared.Doc_long = Servicefile.shared.long
+                    Servicefile.shared.sp_loc  =  Servicefile.shared.Doc_loc
+                    Servicefile.shared.sp_lat = Servicefile.shared.lati
+                    Servicefile.shared.sp_long = Servicefile.shared.long
                     print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
                 }
                 

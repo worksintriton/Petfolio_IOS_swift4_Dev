@@ -62,8 +62,16 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     var timeindex = 0
     var tblindex = 0
     
+    
+    @IBOutlet weak var textview_spaddress: UITextView!
+    
+    @IBOutlet weak var view_clinicaddress: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textview_spaddress.delegate = self
+        self.textview_spaddress.isUserInteractionEnabled = false
         self.call_protocals()
         self.callSP_Ser_Spec_get()
         self.added_service.removeAll()
@@ -155,13 +163,14 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
+        print("location",Servicefile.shared.sp_loc, Servicefile.shared.sp_lat,Servicefile.shared.sp_long)
+        self.textview_spaddress.text = Servicefile.shared.sp_loc
+    }
+    
+    
+    @IBAction func action_change_location(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -229,23 +238,23 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     @IBAction func action_gallary_pic_upload(_ sender: Any) {
         self.img_for = "Gall"
-        self.callgalaryprocess()
+        self.callgalaryimageprocess()
     }
     
     @IBAction func action_photo_upload(_ sender: Any) {
         self.img_for = "Photo"
-        self.callDocprocess()
+        self.callgalaryprocess()
     }
     
     @IBAction func action_gov_upload(_ sender: Any) {
         
         self.img_for = "Gov"
-        self.callDocprocess()
+        self.callgalaryprocess()
     }
     
     @IBAction func action_certificate_upload(_ sender: Any) {
         self.img_for = "Certi"
-        self.callDocprocess()
+        self.callgalaryprocess()
     }
     
     @IBAction func action_add_servicename(_ sender: Any) {
@@ -470,14 +479,28 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                 }
             }
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(action_close_gallary), for: .touchUpInside)
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             return cell
         }else if coll_certificate == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
+            cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
-            cell.Img_id.image = UIImage(named: "pdf")
+            let imgdat = Servicefile.shared.certifdicarray[indexPath.row] as! NSDictionary
+            let strdat = imgdat["bus_certif"] as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        cell.Img_id.image = image
+                    }
+                }
+            }else{
+                cell.Img_id.image = UIImage(named: "pdf")
+            }
             return cell
         }else if coll_speclist == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spec", for: indexPath) as! checkupCollectionViewCell
@@ -560,19 +583,58 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     
     
+    func spilit_string_data(array_string: String)-> String{
+        var str = array_string.split(separator: ".")
+        if str.last == "pdf" {
+            return "pdf"
+        }else if str.last == "PDF" {
+            return "pdf"
+        }else{
+            return ""
+        }
+    }
+    
     func setimag(){
         if self.image_photo != "" {
             self.image_photo_id.isHidden = false
-            self.image_photo_id.image = UIImage(named: "pdf")
+            let strdat = self.image_photo as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_photo_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_photo_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_photo_id.image = image
+                    }
+                }
+            }else{
+                self.image_photo_id.image = UIImage(named: "pdf")
+            }
+            
+            self.view_photo_id_close.isHidden = false
         }else{
             self.image_photo_id.isHidden = true
+            self.view_photo_id_close.isHidden = true
         }
         
         if self.image_govid != "" {
             self.image_gov.isHidden = false
+            let strdat = self.image_govid as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_gov.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_gov.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_gov.image = image
+                    }
+                }
+            }else{
+                self.image_gov.image = UIImage(named: "pdf")
+            }
             self.image_gov.image = UIImage(named: "pdf")
+            self.view_govid_close.isHidden = false
         }else{
             self.image_gov.isHidden = true
+            self.view_govid_close.isHidden = true
         }
     }
     
@@ -587,6 +649,25 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         present(importMenu, animated: true)
     }
     
+    func callgalaryimageprocess(){
+        let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .camera
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .photoLibrary
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+       
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            print("ok")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
@@ -598,6 +679,9 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Document", style: UIAlertAction.Style.default, handler: { action in
+            self.callDocprocess()
         }))
         alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
             print("ok")
@@ -661,9 +745,30 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                             Servicefile.shared.gallerydicarray = B
                             print("uploaded data in certifi",Servicefile.shared.gallerydicarray)
                         }
+                        
+                        if self.img_for == "Certi" {
+                            var B = Servicefile.shared.certifdicarray
+                            var arr = B
+                            let a = ["bus_certif":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.certifdicarray = B
+                            print("uploaded data in certifi",Servicefile.shared.certifdicarray)
+                        }
+                        
+                        if self.img_for == "Gov" {
+                            self.image_govid = Data
+                        }
+                        
+                        if self.img_for == "Photo" {
+                            self.image_photo = Data
+                        }
+                        
                         self.setimag()
                         self.stopAnimatingActivityIndicator()
                         self.coll_galary_img.reloadData()
+                        self.coll_certificate.reloadData()
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
@@ -741,9 +846,9 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_Profile_edit, method: .post, parameters:
             [ "_id" : Servicefile.shared.sp_id,
               "user_id": Servicefile.shared.userid,
-              "sp_loc": self.locationaddress,
-              "sp_lat": self.latitude!,
-              "sp_long": self.longitude!,
+              "sp_loc": Servicefile.shared.sp_loc,
+              "sp_lat": Servicefile.shared.sp_lat,
+              "sp_long": Servicefile.shared.sp_long,
               "bus_user_name": Servicefile.shared.first_name,
               "bus_user_email": Servicefile.shared.user_email,
               "profile_status": true,
@@ -922,6 +1027,7 @@ extension Sp_profile_edit_ViewController {
                         Servicefile.shared.sp_profile_verification_status = profile_verification_status
                         Servicefile.shared.sp_lat = sp_lat
                         Servicefile.shared.sp_loc = sp_loc
+                        self.textview_spaddress.text = Servicefile.shared.sp_loc
                         Servicefile.shared.sp_long = sp_long
                         Servicefile.shared.sp_user_id = user_id
                         print("Details in certificate",Servicefile.shared.Sp_bus_certifdicarray)
@@ -992,5 +1098,10 @@ extension Sp_profile_edit_ViewController {
         self.coll_certificate.reloadData()
         self.textfield_Bus_name.text = Servicefile.shared.sp_bussiness_name
     }
+    
+    
+    
+  
+  
     
 }

@@ -8,19 +8,17 @@
 
 import UIKit
 import Alamofire
-import Razorpay
 import SafariServices
 import WebKit
 import SDWebImage
 
-class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
+class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet weak var view_skip_btn: UIView!
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
     var petlist = [""]
     var demodata = [{}]
-    var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
@@ -59,11 +57,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.size.width , height:  self.view.frame.size.height)
-    }
-    
-    func movetestpayment(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "paymentpageViewController") as! paymentpageViewController
-        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func skipaction(_ sender: Any) {
@@ -121,7 +114,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                             let img = itmval["img_path"] as? String ?? ""
                             self.petlist.append(img)
                         }
-                        
                         print(self.petlist)
                         self.dogshowcoll.reloadData()
                         self.stopAnimatingActivityIndicator()
@@ -141,54 +133,6 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
-    
-  
-    
-    
-    
-    func showPaymentForm(){
-        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-        let options: [String:Any] = [
-            "amount": "100", //This is in currency subunits. 100 = 100 paise= INR 1.
-            "currency": "INR",//We support more that 92 international currencies.
-            "description": "some some",
-            "image": "http://52.25.163.13:3000/api/uploads/template.png",
-            "name": "sriram",
-            "prefill": [
-                "contact": "9003525711",
-                "email": "sriramchanr@gmail.com.com"
-            ],
-            "theme": [
-                "color": "#F37254"
-            ]
-        ]
-        
-        if let rzp = self.razorpay {
-            rzp.open(options)
-        } else {
-            print("Unable to initialize")
-        }
-    }
-    
-    func onPaymentError(_ code: Int32, description str: String) {
-        print("Payment failed with code")
-    }
-    
-    func onPaymentSuccess(_ payment_id: String) {
-        print("Payment Success payment")
-    }
-    
-    func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
-        print("error: ", code)
-        
-    }
-    
-    func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
-        print("success: ", payment_id)
-        
-    }
-    
-    
 }
 extension UIViewController  {
     
@@ -242,10 +186,6 @@ extension UIViewController  {
     
     func stopAnimatingActivityIndicator() {
         Servicefile.shared.customview.removeFromSuperview()
-        //        self.dismiss(animated: false, completion: nil)
-        //        self.stopAnimating()
-        //        Servicefile.shared.activity.stopAnimating()
-        
     }
   
     func alert(Message: String){

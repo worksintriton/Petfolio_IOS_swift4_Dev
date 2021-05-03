@@ -259,8 +259,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.view_new.backgroundColor = UIColor.white
         self.appointtype = "Missed"
         self.callmiss()
-        
     }
+    
     @IBAction func action_completeappoint(_ sender: Any) {
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor

@@ -375,6 +375,14 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         cell.image_product.image = image
                     }
             }
+            let pet_prod_status = data["today_deal"] as! Bool
+            cell.label_deal_status.isHidden = true
+            if pet_prod_status {
+                cell.label_deal_status.isHidden = false
+                cell.label_deal_status.text = "Today deal"
+            }else{
+                cell.label_deal_status.isHidden = true
+            }
             if self.isselect[indexPath.row] == "0"{
                 cell.image_ischeck.image = UIImage(named: imagelink.checkbox)
             }else{

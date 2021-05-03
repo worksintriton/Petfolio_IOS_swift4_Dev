@@ -17,6 +17,7 @@ class mangeproduct_withoutvalTableViewCell: UITableViewCell {
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var label_product_title: UILabel!
     @IBOutlet weak var label_amt: UILabel!
+    @IBOutlet weak var label_deal_status: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

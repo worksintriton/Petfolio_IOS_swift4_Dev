@@ -34,13 +34,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXj-Rf-rwU">
-                                <rect key="frame" x="30" y="80" width="260" height="19"/>
+                                <rect key="frame" x="30" y="63" width="260" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ESD-0r-PSi">
-                                <rect key="frame" x="30" y="103" width="260" height="19"/>
+                                <rect key="frame" x="30" y="86" width="260" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSs-oc-0sH">
-                                <rect key="frame" x="30" y="152" width="260" height="33"/>
+                                <rect key="frame" x="30" y="134.5" width="260" height="33"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCX-8w-y5H">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="33"/>
@@ -143,8 +143,8 @@
                                     <constraint firstItem="tLT-2x-2IU" firstAttribute="centerY" secondItem="jCX-8w-y5H" secondAttribute="centerY" id="o1c-um-eJq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwb-yU-thM">
-                                <rect key="frame" x="30" y="125" width="260" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwb-yU-thM">
+                                <rect key="frame" x="30" y="108" width="260" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -182,7 +182,7 @@
                             <constraint firstItem="Rrt-hy-1Sk" firstAttribute="leading" secondItem="DpL-xT-8z1" secondAttribute="leading" constant="4" id="GcJ-Qp-Fxo"/>
                             <constraint firstItem="ESD-0r-PSi" firstAttribute="leading" secondItem="WXj-Rf-rwU" secondAttribute="leading" id="JEw-FP-7NT"/>
                             <constraint firstItem="Ry5-x1-IWG" firstAttribute="height" secondItem="DpL-xT-8z1" secondAttribute="height" multiplier="0.13" id="LYK-mR-mVw"/>
-                            <constraint firstItem="WXj-Rf-rwU" firstAttribute="top" secondItem="1n4-5l-b1l" secondAttribute="bottom" constant="21" id="NGr-SN-F6k"/>
+                            <constraint firstItem="WXj-Rf-rwU" firstAttribute="top" secondItem="1n4-5l-b1l" secondAttribute="bottom" constant="4" id="NGr-SN-F6k"/>
                             <constraint firstItem="eSs-oc-0sH" firstAttribute="leading" secondItem="Hwb-yU-thM" secondAttribute="leading" id="RBs-Ev-vmd"/>
                             <constraint firstItem="Scg-CX-MMg" firstAttribute="top" secondItem="DpL-xT-8z1" secondAttribute="top" constant="10" id="Rcs-Ft-5Ba"/>
                             <constraint firstItem="Rrt-hy-1Sk" firstAttribute="top" secondItem="DpL-xT-8z1" secondAttribute="top" constant="10" id="Rdr-po-Nnb"/>

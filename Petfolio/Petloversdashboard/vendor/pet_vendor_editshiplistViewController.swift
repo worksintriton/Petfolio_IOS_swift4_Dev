@@ -53,21 +53,22 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func action_addaddress(_ sender: Any) {
-        Servicefile.shared.shipaddresslist.removeAll()
-        Servicefile.shared.shipaddresslist_isedit = false
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shippingaddressViewController") as! pet_vendor_shippingaddressViewController
+        Servicefile.shared.long = 0.0
+        Servicefile.shared.lati = 0.0
+        Servicefile.shared.locaaccess = "Add"
+        Servicefile.shared.ishiping = "ship"
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
         self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Servicefile.shared.shipaddresslist.count
+        return Servicefile.shared.petuserlocaadd.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: editshipaddresslistTableViewCell = tableView.dequeueReusableCell(withIdentifier: "listaddress", for: indexPath) as! editshipaddresslistTableViewCell
                 
-        let details = Servicefile.shared.shipaddresslist[indexPath.row] as! NSDictionary
-//        "_id": "605a4b9cbaeb4c22731c9248",
+//        "_id": "605a4b9cbaeb4c22731c9248",Servicefile.shared.petuserlocaadd[indexPath.row].location_title
 //                "user_id": "604081d12c2b43125f8cb840",
 //                "user_first_name": "SandySan",
 //                "user_last_name": "Kumar",
@@ -85,26 +86,20 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
 //                "updatedAt": "2021-03-23T20:19:20.031Z",
 //                "createdAt": "2021-03-23T20:12:12.991Z",
 //                "__v": 0
-        let fname  = details["user_first_name"] as? String ?? ""
-        let lname  = details["user_last_name"] as? String ?? ""
-        let flatno = details["user_flat_no"] as? String ?? "" + ", "
-        let street = details["user_stree"] as? String ?? "" + ", "
-        let city =  details["user_city"] as? String ?? ""
-        let state =  details["user_state"] as? String ?? "" + ", "
-        let pincode =  details["user_picocode"] as? String ?? ""
-        let user_address_stauts =  details["user_address_stauts"] as? String ?? ""
-        cell.label_name.text = fname + " " + lname
-        cell.label_mobileno.text = details["user_mobile"] as? String ?? ""
-        cell.label_addressline1.text = flatno
-        cell.label_addressline2.text = street
-        cell.label_addressline3.text = city + ", " + state + ", " + pincode
-        cell.label_add_type.text = details["user_address_type"] as? String ?? ""
+        //self.selectedid = details["_id"] as? String ?? ""
+        
+        cell.label_name.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_nickname
+        cell.label_mobileno.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_title
+        cell.label_addressline1.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_city
+        cell.label_addressline2.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_state + ", " + Servicefile.shared.petuserlocaadd[indexPath.row].location_country
+        cell.label_addressline3.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_address
+        cell.label_add_type.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_title
         cell.view_main.view_cornor()
         cell.view_add_type.view_cornor()
         cell.view_add_type.layer.borderWidth = 0.5
         cell.view_add_type.layer.borderColor = UIColor.lightGray.cgColor
-        if self.isselect[indexPath.row] == "1" {
-            self.add_id  = details["_id"] as? String ?? ""
+        if  Servicefile.shared.petuserlocaadd[indexPath.row].default_status {
+            self.add_id  = Servicefile.shared.petuserlocaadd[indexPath.row]._id
             cell.image_isselect.setimage(name: imagelink.selectedRadio)
         }else{
             cell.image_isselect.setimage(name: imagelink.Radio)
@@ -125,27 +120,44 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     
     @objc func call_edit(sender: UIButton){
         let tag = sender.tag
-        Servicefile.shared.shipaddresslist_index = tag
-        Servicefile.shared.shipaddresslist_isedit = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shippingaddressViewController") as! pet_vendor_shippingaddressViewController
+        Servicefile.shared.selectedindex = tag
+//        Servicefile.shared.shipaddresslist_index = tag
+//        Servicefile.shared.shipaddresslist_isedit = true
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shippingaddressViewController") as! pet_vendor_shippingaddressViewController
+//        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.locaaccess = "update"
+        Servicefile.shared.selectedPincode = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
+        Servicefile.shared.selectedCity = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
+        Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
+        Servicefile.shared.lati = Double(Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_lat)!
+        Servicefile.shared.long = Double(Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_long)!
+        Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
+         Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
+         Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func call_delete(sender: UIButton){
         let tag = sender.tag
-        let details = Servicefile.shared.shipaddresslist[tag] as! NSDictionary
-        self.add_id  = details["_id"] as? String ?? ""
-        call_delete_shipping_address(id: self.add_id)
+        print("defaulst address status",Servicefile.shared.petuserlocaadd[tag].default_status)
+        if Servicefile.shared.petuserlocaadd[tag].default_status == false {
+            self.add_id  = Servicefile.shared.petuserlocaadd[tag]._id
+            call_delete_shipping_address(id: self.add_id)
+        }else{
+            self.alert(Message: "Default address can't be deleted")
+        }
+       
     }
     
     @objc func call_set_marked(sender: UIButton){
-        let tag = sender.tag
-        self.isselect = self.orgisselect
-        self.isselect.remove(at: tag)
-        self.isselect.insert("1", at: tag)
-        let details = Servicefile.shared.shipaddresslist[tag] as! NSDictionary
-        self.add_id  = details["_id"] as? String ?? ""
-        self.tableview_list_address.reloadData()
+//        let tag = sender.tag
+//        if Servicefile.shared.petuserlocaadd[tag].default_status {
+//            Servicefile.shared.petuserlocaadd[tag].default_status = false
+//        }else{
+//            Servicefile.shared.petuserlocaadd[tag].default_status = true
+//        }
+//        self.tableview_list_address.reloadData()
     }
     
     @IBAction func action_cancel(_ sender: Any) {
@@ -159,7 +171,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     
     func call_list_shipping_address(){
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_editshiping_address_list, method: .post, parameters:
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_getAddresslist, method: .post, parameters:
                                                                     ["user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                                         switch (response.result) {
                                                                         case .success:
@@ -167,19 +179,29 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
                                                                             print("success data",res)
                                                                             let Code  = res["Code"] as! Int
                                                                             if Code == 200 {
-                                                                                Servicefile.shared.shipaddresslist.removeAll()
-                                                                                let data = res["Data"] as! NSArray
-                                                                                Servicefile.shared.shipaddresslist = data as! [Any]
-                                                                                self.isselect.removeAll()
-                                                                                for i in 0..<Servicefile.shared.shipaddresslist.count{
-                                                                                    let details = Servicefile.shared.shipaddresslist[i] as! NSDictionary
-                                                                                    let user_address_stauts =  details["user_address_stauts"] as? String ?? ""
-                                                                                    if user_address_stauts == "Last Used" {
-                                                                                        self.isselect.append("1")
-                                                                                    }else{
-                                                                                        self.isselect.append("0")
-                                                                                    }
-                                                                                    self.orgisselect.append("0")
+                                                                               
+                                                                                Servicefile.shared.petuserlocaadd.removeAll()
+                                                                                let Data = res["Data"] as! NSArray
+                                                                                for itm in 0..<Data.count{
+                                                                                    let idata = Data[itm] as! NSDictionary
+                                                                                    let _id = idata["_id"] as? String ?? ""
+                                                                                    let date_and_time = idata["date_and_time"] as? String ?? ""
+                                                                                    let default_status = idata["default_status"] as? Bool ?? false
+                                                                                    let location_address = idata["location_address"] as? String ?? ""
+                                                                                    let location_city = idata["location_city"] as? String ?? ""
+                                                                                    let location_country = idata["location_country"] as? String ?? ""
+                                                                                    let location_lat = String(Double(truncating: idata["location_lat"] as? NSNumber ?? 0.0))
+                                                                                    let location_long = String(Double(truncating: idata["location_long"] as? NSNumber ?? 0.0))
+                                                                                    let location_nickname = idata["location_nickname"] as? String ?? ""
+                                                                                    let location_pin = idata["location_pin"] as? String ?? ""
+                                                                                    let location_state = idata["location_state"] as? String ?? ""
+                                                                                    let location_title = idata["location_title"] as? String ?? ""
+                                                                                    let user_id = idata["user_id"] as? String ?? ""
+//                                                                                    self.isclickisoption.append("0")
+//                                                                                    self.isorgiclikcopt.append("0")
+                                                                                   
+                                                                                    
+                                                                                    Servicefile.shared.petuserlocaadd.append(locationdetails.init(In_id: _id, In_date_and_time: date_and_time, In_default_status: default_status, In_location_address: location_address, In_location_city: location_city, In_location_country: location_country, In_location_lat: location_lat, In_location_long: location_long, In_location_nickname: location_nickname, In_location_pin: location_pin, In_location_state: location_state, In_location_title: location_title, In_user_id: user_id))
                                                                                 }
                                                                                 
                                                                                 self.tableview_list_address.reloadData()

@@ -46,7 +46,6 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
         self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
     // footer action
     }
@@ -219,8 +218,8 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func action_myaddress(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "myaddresslistViewController") as!  myaddresslistViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "myaddresslistViewController") as!  myaddresslistViewController
+//        self.present(vc, animated: true, completion: nil)
        
     }
     

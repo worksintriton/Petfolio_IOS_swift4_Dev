@@ -22,6 +22,11 @@ class manageproduct_withval_TableViewCell: UITableViewCell {
     @IBOutlet weak var label_breed: UILabel!
     @IBOutlet weak var label_threshold: UILabel!
     @IBOutlet weak var label_deal_status: UILabel!
+    @IBOutlet weak var view_menu: UIView!
+    @IBOutlet weak var view_edit: UIView!
+    @IBOutlet weak var btn_edit: UIButton!
+    @IBOutlet weak var btn_clear_deals: UIButton!
+    @IBOutlet weak var view_clear_deals: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

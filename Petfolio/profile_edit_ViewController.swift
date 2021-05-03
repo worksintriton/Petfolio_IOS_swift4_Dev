@@ -12,7 +12,6 @@ import Alamofire
 class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     
-    
     @IBOutlet weak var textfield_firstname: UITextField!
     @IBOutlet weak var textfield_lastname: UITextField!
     @IBOutlet weak var textfield_email: UITextField!

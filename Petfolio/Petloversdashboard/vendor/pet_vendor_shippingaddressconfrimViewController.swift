@@ -50,6 +50,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        Servicefile.shared.shipaddresslist.removeAll()
         self.tableview_list_address.reloadData()
         self.call_list_shipping_address()
     }
@@ -205,6 +206,8 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: shipingaddressTableViewCell = tableView.dequeueReusableCell(withIdentifier: "listaddress", for: indexPath) as! shipingaddressTableViewCell
         let details = Servicefile.shared.shipaddresslist[indexPath.row] as! NSDictionary
+        let user_det = details["user_id"] as! NSDictionary
+        
 //        "_id": "605a4b9cbaeb4c22731c9248",
 //                "user_id": "604081d12c2b43125f8cb840",
 //                "user_first_name": "SandySan",
@@ -223,25 +226,26 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
 //                "updatedAt": "2021-03-23T20:19:20.031Z",
 //                "createdAt": "2021-03-23T20:12:12.991Z",
 //                "__v": 0
-        let fname  = details["user_first_name"] as? String ?? ""
-        let lname  = details["user_last_name"] as? String ?? ""
-        let flatno = details["user_flat_no"] as? String ?? "" + ", "
-        let street = details["user_stree"] as? String ?? "" + ", "
-        let city =  details["user_city"] as? String ?? ""
-        let state =  details["user_state"] as? String ?? "" + ", "
-        let pincode =  details["user_picocode"] as? String ?? ""
+        let fname  = user_det["first_name"] as? String ?? ""
+        let lname  = user_det["last_name"] as? String ?? ""
+        let user_phone = user_det["user_phone"] as? String ?? "" + ", "
+        let location_nickname = details["location_nickname"] as? String ?? "" + ", "
+        let location_city =  details["location_city"] as? String ?? ""
         self.selectedid = details["_id"] as? String ?? ""
         cell.label_name.text = fname + " " + lname
-        cell.label_mobileno.text = details["user_mobile"] as? String ?? ""
-        cell.label_addressline1.text = flatno
-        cell.label_addressline2.text = street
-        cell.label_addressline3.text = city + ", " + state + ", " + pincode
-        cell.label_add_type.text = details["user_address_type"] as? String ?? ""
+        cell.label_mobileno.text = user_phone
+        cell.label_addressline1.text = location_nickname
+        cell.label_addressline2.text = location_city
+        cell.label_addressline3.text = details["location_address"] as? String ?? ""
+        cell.label_add_type.text = details["location_title"] as? String ?? ""
         cell.view_main.view_cornor()
         cell.view_add_type.view_cornor()
         cell.view_add_type.layer.borderWidth = 0.5
         cell.selectionStyle = .none
         cell.view_add_type.layer.borderColor = UIColor.lightGray.cgColor
+        cell.btn_delete.tag = indexPath.row
+        cell.btn_edit.tag = indexPath.row
+        
                 return cell
     }
     

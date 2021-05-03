@@ -265,10 +265,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
                     if let city = placeMark.addressDictionary!["City"] as? String {
                         print("Newuserpickuplocation line 106 City :- \(city)")
                         Servicefile.shared.selectedCity = city
-                        
-                        
                     }
-                    
                     if let state = placeMark.addressDictionary!["State"] as? String{
                         print("State :- \(state)")
                         Servicefile.shared.selectedState = state

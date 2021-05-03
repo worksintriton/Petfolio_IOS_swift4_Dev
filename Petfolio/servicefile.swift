@@ -224,7 +224,7 @@ class Servicefile {
     static let pet_vendor_manage_submitsingle = baseurl + "/api/product_details/discount_single"
     static let pet_vendor_manage_submitmultiple = baseurl + "/api/product_details/discount_multi"
     static let pet_vendor_shiping_address_submit = baseurl + "/api/shipping_address/create"
-    static let pet_vendor_shiping_address_list = baseurl + "/api/shipping_address/fetch_by_userid"
+    static let pet_vendor_shiping_address_list = baseurl + "/api/shipping_address/fetch_by_userid1"
     static let pet_vendor_editshiping_address_list = baseurl + "/api/shipping_address/listing_address_by_userid"
     static let pet_vendor_mark_shiping_address_list = baseurl + "/api/shipping_address/mark_used_address"
     static let pet_vendor_delete_shiping_address_list = baseurl + "/api/shipping_address/delete"
@@ -234,7 +234,8 @@ class Servicefile {
     
     static let pet_vendor_cancel_single = baseurl + "/api/vendor_order_group/update_vendor_status5"
     static let pet_vendor_cancel_overall = baseurl + "/api/vendor_order_group/update_vendor_status4"
-    
+    static let vendor_mark_deal = baseurl + "/api/product_details/mark_deal"
+    static let vendor_edit_product = baseurl + "/api/product_details/mobile/edit_product"
     
     static let vendor_order_details_confirm = baseurl + "/api/vendor_order_group/update_vendor_status1"
     static let vendor_order_details_dispatch = baseurl + "/api/vendor_order_group/update_vendor_status2"
@@ -287,6 +288,7 @@ class Servicefile {
     var utypesel = ["1"]
     var orgiutypesel = ["0"]
     var loadingcount = 0
+    var ishiping = ""
     
     static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
     static let approvednumber = "1234567890"

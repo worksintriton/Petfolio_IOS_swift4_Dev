@@ -17,6 +17,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var textfield_search: UITextField!
     var isselect = [""]
     var orgiselect = [""]
+    var ismenu = [""]
     var isDrop = [""]
     var orgiDrop = [""]
     var isselectval = [""]
@@ -90,7 +91,6 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.orgiselect = self.isselect
         self.orgiDrop = self.isDrop
         self.textfield_search.delegate = self
-        self.callgetproductdetails()
         self.tbl_manage_product.delegate = self
         self.tbl_manage_product.dataSource = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
@@ -102,6 +102,22 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.actionButton.isHidden = true
         self.textfield_discount_perunit.addTarget(self, action: #selector(textFielddiscount_perunit), for: .editingChanged)
         self.textfield_deal_price.addTarget(self, action: #selector(textFielddeal_price), for: .editingChanged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.isselect.removeAll()
+        self.orgiselect.removeAll()
+        self.ismenu.removeAll()
+        self.isDrop.removeAll()
+        self.orgiDrop.removeAll()
+        self.isselectval.removeAll()
+        self.singleselect = ""
+        self.isappdeal = false
+        self.sdate = ""
+        self.expdate = ""
+        self.isstart = true
+        Servicefile.shared.manageproductDic.removeAll()
+        self.callgetproductdetails()
     }
     
     @objc func textFielddiscount_perunit(textField:UITextField) {
@@ -336,8 +352,10 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             if pet_prod_status {
                 cell.label_deal_status.isHidden = false
                 cell.label_deal_status.text = "Today deal"
+                cell.view_clear_deals.isHidden = false
             }else{
                 cell.label_deal_status.isHidden = true
+                cell.view_clear_deals.isHidden = true
             }
             cell.label_breed.text = Arraytobreed(arr: pet_breed)
             cell.label_age.text = Arraytostring(arr: age)
@@ -357,11 +375,21 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                 cell.image_ischeck.isHidden = true
                 cell.btn_ischeck.isHidden = true
             }
-           
+            if self.ismenu[indexPath.row] == "1"{
+                cell.view_menu.isHidden = false
+            }else{
+                cell.view_menu.isHidden = true
+            }
+            cell.btn_edit.tag = indexPath.row
+            cell.btn_edit.addTarget(self, action: #selector(edit_product), for: .touchUpInside)
+            cell.btn_clear_deals.tag = indexPath.row
+            cell.btn_clear_deals.addTarget(self, action: #selector(clear_deal_product), for: .touchUpInside)
             cell.btn_hide.tag = indexPath.row
             cell.btn_hide.addTarget(self, action: #selector(ishide), for: .touchUpInside)
             cell.btn_ischeck.tag = indexPath.row
             cell.btn_ischeck.addTarget(self, action: #selector(ischeck), for: .touchUpInside)
+            cell.btn_side_menu.tag = indexPath.row
+            cell.btn_side_menu.addTarget(self, action: #selector(btn_menu), for: .touchUpInside)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "hide", for: indexPath) as! mangeproduct_withoutvalTableViewCell
@@ -380,8 +408,10 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             if pet_prod_status {
                 cell.label_deal_status.isHidden = false
                 cell.label_deal_status.text = "Today deal"
+                cell.view_clear_deals.isHidden = false
             }else{
                 cell.label_deal_status.isHidden = true
+                cell.view_clear_deals.isHidden = true
             }
             if self.isselect[indexPath.row] == "0"{
                 cell.image_ischeck.image = UIImage(named: imagelink.checkbox)
@@ -395,13 +425,58 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                 cell.image_ischeck.isHidden = true
                 cell.btn_ischeck.isHidden = true
             }
+            print("data in menu",self.ismenu[indexPath.row])
+            if self.ismenu[indexPath.row] == "1"{
+                cell.view_menu.isHidden = false
+            }else{
+                cell.view_menu.isHidden = true
+            }
             cell.label_product_title.text = data["product_name"] as? String ?? ""
             cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
             cell.btn_hide.tag = indexPath.row
             cell.btn_hide.addTarget(self, action: #selector(ishide), for: .touchUpInside)
             cell.btn_ischeck.tag = indexPath.row
             cell.btn_ischeck.addTarget(self, action: #selector(ischeck), for: .touchUpInside)
+            cell.btn_edit.tag = indexPath.row
+            cell.btn_edit.addTarget(self, action: #selector(edit_product), for: .touchUpInside)
+            cell.btn_clear_deals.tag = indexPath.row
+            cell.btn_clear_deals.addTarget(self, action: #selector(clear_deal_product), for: .touchUpInside)
+            cell.btn_side_menu.tag = indexPath.row
+            cell.btn_side_menu.addTarget(self, action: #selector(btn_menu), for: .touchUpInside)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.ismenu =  self.orgiselect
+        self.tbl_manage_product.reloadData()
+    }
+    
+    @objc func edit_product(sender: UIButton){
+        let tag = sender.tag
+        Servicefile.shared.selectedindex = tag
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "dealupdateViewController") as! dealupdateViewController
+        self.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    @objc func clear_deal_product(sender: UIButton){
+        let tag = sender.tag
+        let data = Servicefile.shared.manageproductDic[tag] as! NSDictionary
+        let val_id = data["product_id"] as? String ?? ""
+        self.callcleardealsubmit(id: val_id)
+    }
+    
+    @objc func btn_menu(sender: UIButton){
+        let tag = sender.tag
+        if self.ismenu[tag] == "1"{
+            self.ismenu =  self.orgiselect
+            self.tbl_manage_product.reloadData()
+        }else{
+            self.ismenu = self.orgiselect
+            self.ismenu.remove(at: tag)
+            self.ismenu.insert("1", at: tag)
+            self.tbl_manage_product.reloadData()
         }
     }
     
@@ -458,6 +533,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     }
     
     @objc func ishide(sender: UIButton){
+        self.ismenu = self.orgiselect
         let tag = sender.tag
         if self.isDrop[tag] == "1"{
             self.isDrop =  self.orgiDrop
@@ -575,6 +651,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         }
                          self.orgiDrop = self.isDrop
                         self.orgiselect = self.isselect
+                        self.ismenu = self.orgiselect
                         self.tbl_manage_product.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -755,14 +832,54 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         }
     }
     
-    
-    
     func callmultisubmit(){
         let discount = Int(self.textdiscount) ?? 0
         let cost = Int(self.textamt) ?? 0
         print("single submit","_id", self.isselectval,"discount",discount,"discount_amount",cost,"discount_end_date",self.textfield_expirydate.text!,"discount_start_date",self.textfield_startdate.text!,"discount_status",self.disstatus)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_manage_submitmultiple, method: .post, parameters:["_id": self.isselectval,"discount":discount,"discount_amount":cost,"discount_end_date":self.textfield_expirydate.text!,"discount_start_date":self.textfield_startdate.text!,"discount_status":self.disstatus], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data in manage product",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        //let Data = res["Data"] as! NSArray
+                        self.isselectval.removeAll()
+                        self.singleselect = ""
+                        self.isselect = self.orgiselect
+                        self.isappdeal = false
+                        self.view_discard.isHidden = true
+                        self.view_app_deal.isHidden = false
+                        self.actionButton.isHidden = true
+                        self.tbl_manage_product.reloadData()
+                        self.hidediscount()
+                        self.callgetproductdetails()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+   
+    
+    
+    func callcleardealsubmit(id: String){
+        
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_mark_deal, method: .post, parameters:["_id":id,"status":false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

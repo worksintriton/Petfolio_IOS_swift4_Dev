@@ -367,6 +367,7 @@ class Servicefile {
     var selectedState = ""
     var selecteddefaultstatus = false
     var ordertype = "current"
+    var islocationget = false
     
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"

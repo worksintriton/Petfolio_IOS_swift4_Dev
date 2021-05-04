@@ -63,27 +63,27 @@
                                     <constraint firstAttribute="bottom" secondItem="yiy-xc-k70" secondAttribute="bottom" constant="2" id="rbz-vS-0eK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYf-uq-Six">
-                                <rect key="frame" x="10" y="134.5" width="280" height="28"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYf-uq-Six">
+                                <rect key="frame" x="10" y="134.5" width="280" height="2"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEn-4M-0Ay">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="28"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="2"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="650194" translatesAutoresizingMaskIntoConstraints="NO" id="zAQ-T4-Udv">
-                                                <rect key="frame" x="0.0" y="6.5" width="13" height="15"/>
+                                                <rect key="frame" x="0.0" y="-6.5" width="13" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="13" id="w33-UE-Sce"/>
                                                     <constraint firstAttribute="height" constant="15" id="xlR-KO-U6i"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-B9-omo">
-                                                <rect key="frame" x="21" y="3.5" width="27" height="21"/>
+                                                <rect key="frame" x="21" y="-9.5" width="27" height="21"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUS-AS-6Ie">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65" height="2"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,7 +100,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Woz-bl-ccD">
-                                        <rect key="frame" x="75" y="-1" width="65" height="30"/>
+                                        <rect key="frame" x="75" y="-14" width="65" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete" translatesAutoresizingMaskIntoConstraints="NO" id="egk-fC-FK2">
                                                 <rect key="frame" x="0.0" y="7.5" width="15" height="15"/>
@@ -135,7 +135,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="57c-9r-Oou"/>
+                                    <constraint firstAttribute="height" constant="2" id="57c-9r-Oou"/>
                                     <constraint firstItem="dEn-4M-0Ay" firstAttribute="leading" secondItem="uYf-uq-Six" secondAttribute="leading" id="Lib-ey-y7V"/>
                                     <constraint firstItem="Woz-bl-ccD" firstAttribute="leading" secondItem="dEn-4M-0Ay" secondAttribute="trailing" constant="10" id="aAe-51-SRi"/>
                                     <constraint firstItem="Woz-bl-ccD" firstAttribute="centerY" secondItem="dEn-4M-0Ay" secondAttribute="centerY" id="kMp-TM-TB6"/>

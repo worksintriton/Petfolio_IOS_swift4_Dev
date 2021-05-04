@@ -21,7 +21,6 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var tbl_searchlist: UITableView!
-    @IBOutlet weak var view_home: UIView!
     
     @IBOutlet weak var view_footer: petowner_footerview!
     
@@ -167,7 +166,6 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
         }else{
             self.alert(Message: "please select the location")
         }
-        
     }
     
     

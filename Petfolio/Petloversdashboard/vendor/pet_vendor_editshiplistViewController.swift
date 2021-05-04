@@ -21,6 +21,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.petuserlocaadd.removeAll()
         Servicefile.shared.shipaddresslist_isedit = false
         self.view_selectaddress.view_cornor()
         self.isselect.removeAll()
@@ -57,7 +58,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         Servicefile.shared.lati = 0.0
         Servicefile.shared.locaaccess = "Add"
         Servicefile.shared.ishiping = "ship"
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -98,7 +99,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         cell.view_add_type.view_cornor()
         cell.view_add_type.layer.borderWidth = 0.5
         cell.view_add_type.layer.borderColor = UIColor.lightGray.cgColor
-        if  Servicefile.shared.petuserlocaadd[indexPath.row].default_status {
+        if  self.isselect[indexPath.row] == "1" {
             self.add_id  = Servicefile.shared.petuserlocaadd[indexPath.row]._id
             cell.image_isselect.setimage(name: imagelink.selectedRadio)
         }else{
@@ -121,11 +122,10 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     @objc func call_edit(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.selectedindex = tag
-//        Servicefile.shared.shipaddresslist_index = tag
-//        Servicefile.shared.shipaddresslist_isedit = true
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shippingaddressViewController") as! pet_vendor_shippingaddressViewController
-//        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.islocationget = true
         Servicefile.shared.locaaccess = "update"
+        Servicefile.shared.selectedCountry = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_country
+        Servicefile.shared.selectedState = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_state
         Servicefile.shared.selectedPincode = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_pin
         Servicefile.shared.selectedCity = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_city
         Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
@@ -134,7 +134,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
          Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
          Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -143,7 +143,12 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         print("defaulst address status",Servicefile.shared.petuserlocaadd[tag].default_status)
         if Servicefile.shared.petuserlocaadd[tag].default_status == false {
             self.add_id  = Servicefile.shared.petuserlocaadd[tag]._id
-            call_delete_shipping_address(id: self.add_id)
+            let alert = UIAlertController(title: "Are you sure need to delete the address", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.call_delete_shipping_address(id: self.add_id)
+            }))
+            self.present(alert, animated: true, completion: nil)
+           
         }else{
             self.alert(Message: "Default address can't be deleted")
         }
@@ -151,13 +156,11 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     }
     
     @objc func call_set_marked(sender: UIButton){
-//        let tag = sender.tag
-//        if Servicefile.shared.petuserlocaadd[tag].default_status {
-//            Servicefile.shared.petuserlocaadd[tag].default_status = false
-//        }else{
-//            Servicefile.shared.petuserlocaadd[tag].default_status = true
-//        }
-//        self.tableview_list_address.reloadData()
+        let tag = sender.tag
+        self.isselect = self.orgisselect
+        self.isselect.remove(at: tag)
+        self.isselect.insert("1", at: tag)
+        self.tableview_list_address.reloadData()
     }
     
     @IBAction func action_cancel(_ sender: Any) {
@@ -182,6 +185,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
                                                                                
                                                                                 Servicefile.shared.petuserlocaadd.removeAll()
                                                                                 let Data = res["Data"] as! NSArray
+                                                                                self.isselect.removeAll()
                                                                                 for itm in 0..<Data.count{
                                                                                     let idata = Data[itm] as! NSDictionary
                                                                                     let _id = idata["_id"] as? String ?? ""
@@ -197,10 +201,13 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
                                                                                     let location_state = idata["location_state"] as? String ?? ""
                                                                                     let location_title = idata["location_title"] as? String ?? ""
                                                                                     let user_id = idata["user_id"] as? String ?? ""
-//                                                                                    self.isclickisoption.append("0")
-//                                                                                    self.isorgiclikcopt.append("0")
+                                                                                    if default_status {
+                                                                                        self.isselect.append("1")
+                                                                                    }else{
+                                                                                        self.isselect.append("0")
+                                                                                    }
+                                                                                    self.orgisselect.append("0")
                                                                                    
-                                                                                    
                                                                                     Servicefile.shared.petuserlocaadd.append(locationdetails.init(In_id: _id, In_date_and_time: date_and_time, In_default_status: default_status, In_location_address: location_address, In_location_city: location_city, In_location_country: location_country, In_location_lat: location_lat, In_location_long: location_long, In_location_nickname: location_nickname, In_location_pin: location_pin, In_location_state: location_state, In_location_title: location_title, In_user_id: user_id))
                                                                                 }
                                                                                 
@@ -225,10 +232,10 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     
     func call_select_shipping_address(id: String){
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_mark_shiping_address_list, method: .post, parameters:
-                                                                    ["user_id":Servicefile.shared.userid,
-                                                                     "user_address_stauts" : "Last Used",
-                                                                     "_id": id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_defaultaddress, method: .post, parameters:
+                                                                    ["user_id" : Servicefile.shared.userid,
+                                                                     "_id": id,
+                                                                     "default_status" : true], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                                         switch (response.result) {
                                                                         case .success:
                                                                             let res = response.value as! NSDictionary
@@ -256,7 +263,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
   
     func call_delete_shipping_address(id: String){
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_delete_shiping_address_list, method: .post, parameters:
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_deleteaddress, method: .post, parameters:
                                                                     ["_id": id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                                         switch (response.result) {
                                                                         case .success:

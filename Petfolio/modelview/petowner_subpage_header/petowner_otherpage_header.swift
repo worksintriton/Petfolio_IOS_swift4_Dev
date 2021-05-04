@@ -22,6 +22,10 @@ class petowner_otherpage_header: UIView {
     @IBOutlet weak var image_bag: UIImageView!
     @IBOutlet weak var image_profile: UIImageView!
     @IBOutlet weak var btn_profile: UIButton!
+    @IBOutlet weak var view_sos: UIView!
+    @IBOutlet weak var view_bel: UIView!
+    @IBOutlet weak var view_bag: UIView!
+    @IBOutlet weak var view_profile: UIView!
     
     
     override init(frame: CGRect) {
@@ -45,5 +49,13 @@ class petowner_otherpage_header: UIView {
             self.image_back.image = UIImage(named: imagelink.image_back)
             self.addSubview(view)
         }
+    }
+    
+    func sethide_view(b1: Bool, b2: Bool, b3: Bool, b4: Bool){
+        self.view_sos.isHidden = b1
+        self.view_bel.isHidden = b2
+        self.view_bag.isHidden = b3
+        self.view_profile.isHidden = b4
+        
     }
 }

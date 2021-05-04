@@ -78,6 +78,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     func intial_setup_action(){
     // header action
+        self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.btn_button2.addTarget(self, action: #selector(action_notifi), for: .touchUpInside)
@@ -95,6 +96,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }
         }
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -395,6 +397,11 @@ extension UIViewController {
     
     @objc func sidemenu(sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func manageaddress(sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
         self.present(vc, animated: true, completion: nil)
     }
     

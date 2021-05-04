@@ -48,6 +48,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
             }
         }
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        self.view_header.label_location.text = Servicefile.shared.pet_header_city
+        self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

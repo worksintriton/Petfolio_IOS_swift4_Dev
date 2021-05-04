@@ -305,7 +305,7 @@ extension productdetailsViewController {
                         self.ca_id = cat_details["_id"] as! String
                         self.cat_img_path = cat_details["img_path"] as? String ?? Servicefile.sample_img
                         self.product_cate = cat_details["product_cate"] as! String
-                        self.product_cart_count = data["product_cart_count"] as! Int
+                        //self.product_cart_count = data["product_cart_count"] as! Int
                         self.product_discount = data["product_discount"] as! Int
                         self.product_discription = data["product_discription"] as! String
                         self.product_fav = data["product_fav"] as? Bool ?? false

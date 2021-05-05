@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell2" id="gTV-IL-0wX" customClass="pet_handle_details_CollectionViewCell" customModule="PetFolio" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N25-wZ-LRg">
+                        <rect key="frame" x="0.0" y="0.0" width="63" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jb-oU-Wgw">
+                                <rect key="frame" x="10.5" y="0.0" width="42" height="50"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.3411764706" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7Jb-oU-Wgw" secondAttribute="width" multiplier="1.5" id="Dn6-Wg-MGl"/>
+                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="centerX" secondItem="N25-wZ-LRg" secondAttribute="centerX" id="EMN-xu-284"/>
+                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="top" secondItem="N25-wZ-LRg" secondAttribute="top" id="RpB-RW-h8L"/>
+                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="centerY" secondItem="N25-wZ-LRg" secondAttribute="centerY" id="Tdk-Xx-FZW"/>
+                            <constraint firstAttribute="bottom" secondItem="7Jb-oU-Wgw" secondAttribute="bottom" id="zH9-74-Y8U"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="N25-wZ-LRg" secondAttribute="bottom" id="77b-nb-jXm"/>
+                <constraint firstItem="N25-wZ-LRg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pch-ab-aSN"/>
+                <constraint firstItem="N25-wZ-LRg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vqi-iq-aul"/>
+            </constraints>
+            <size key="customSize" width="203" height="50"/>
+            <connections>
+                <outlet property="label_pet_handle" destination="7Jb-oU-Wgw" id="5Jz-Mb-0Ef"/>
+                <outlet property="view_pethandle" destination="N25-wZ-LRg" id="49e-kn-thP"/>
+            </connections>
+            <point key="canvasLocation" x="248.55072463768118" y="66.964285714285708"/>
+        </collectionViewCell>
+    </objects>
+</document>

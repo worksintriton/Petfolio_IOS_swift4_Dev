@@ -58,7 +58,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.view_allowpop.dropShadow()
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
-        
         self.view_banner.layer.cornerRadius = 20.0
         self.view_service_more.layer.cornerRadius = self.view_service_more.frame.height / 2
         self.view_vet_seemore.layer.cornerRadius = self.view_service_more.frame.height / 2
@@ -73,7 +72,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        
     }
     
     func intial_setup_action(){
@@ -104,7 +102,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         //self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
         self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
     // footer action
     }

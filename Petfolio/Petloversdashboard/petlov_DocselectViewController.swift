@@ -176,16 +176,11 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         }else{
             return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
         }
-        
-        
     }
     
     @IBAction func action_share(_ sender: Any) {
         
     }
-    
-    
-    
     
     @IBAction func action_book(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petdoccalenderViewController") as! petdoccalenderViewController

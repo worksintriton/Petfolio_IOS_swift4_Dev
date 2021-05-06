@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Cosmos
 
 class productdetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -17,18 +18,16 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var view_inc: UIView!
     @IBOutlet weak var view_addtocart: UIView!
    
-    @IBOutlet weak var view_footer: petowner_footerview!
-    
-    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
+   
     @IBOutlet weak var view_cart_main: UIView!
     @IBOutlet weak var view_select_count: UIView!
     @IBOutlet weak var coll_product_img: UICollectionView!
     @IBOutlet weak var coll_productlist: UICollectionView!
     
+    @IBOutlet weak var view_rate: CosmosView!
     @IBOutlet weak var image_like: UIImageView!
     @IBOutlet weak var label_product_title: UILabel!
-    @IBOutlet weak var label_likes: UILabel!
-    @IBOutlet weak var label_rating: UILabel!
+    
     @IBOutlet weak var label_product_cost: UILabel!
     @IBOutlet weak var label_discount: UILabel!
     @IBOutlet weak var label_quantity: UILabel!
@@ -38,9 +37,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var View_outofstock: UIView!
     @IBOutlet weak var view_isqualityprod: UIView!
-    @IBOutlet weak var view_rating: UIView!
     @IBOutlet weak var pagecontroller: UIPageControl!
     
+    @IBOutlet weak var view_off: UIView!
     var _id = ""
     var ca_id = ""
     var cat_img_path = ""
@@ -50,8 +49,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     var product_discription = ""
     var product_fav = false
     var product_img = [""]
+    var product_vendor_list = [""]
     var product_price = 0
-    var product_rating = ""
+    var product_rating = 0.0
     var product_review = ""
     var product_title = ""
     var threshould = ""
@@ -60,7 +60,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.intial_setup_action()
+        let nibName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
+        self.coll_productlist.register(nibName, forCellWithReuseIdentifier: "cell")
         self.image_like.isHidden = true
         self.View_outofstock.isHidden = true
         self.view_isqualityprod.isHidden = true
@@ -70,11 +71,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.view_dec.layer.cornerRadius =  self.view_dec.frame.height / 2
         self.view_inc.layer.cornerRadius =  self.view_inc.frame.height / 2
         self.view_addtocart.view_cornor()
-        self.view_rating.view_cornor()
-        self.view_footer.view_cornor()
+        self.view_off.view_cornor()
         self.view_addtocart.view_cornor()
         self.view_select_count.view_cornor()
-        self.callproddeal()
         self.coll_product_img.delegate = self
         self.coll_product_img.dataSource = self
         self.coll_productlist.delegate = self
@@ -82,26 +81,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.startTimer()
     }
     
-    func intial_setup_action(){
-    // header action
-        self.view_subpage_header.label_header_title.text = "Product Details"
-        self.view_subpage_header.label_header_title.textColor = .white
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
-        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
-        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
-        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-    // header action
-    // footer action
-        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
-        self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
-    // footer action
-    }
+  
     
     override func viewWillDisappear(_ animated: Bool) {
         self.timer.invalidate()
@@ -129,7 +109,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
        }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.callproddeal()
+        self.product_vendor_list.removeAll()
+        Servicefile.shared.vendor_product_id_details.removeAll()
     }
     
    
@@ -233,14 +215,15 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                 return cell
             }else{
-               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
-                
+               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+                cell.view_main.view_cornor()
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
-                cell.label_offer.isHidden = true
-                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
-                    cell.label_offer.isHidden = false
-                    cell.label_offer.text = String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + " % off"
+                
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
+                    cell.image_fav.image = UIImage(named: imagelink.favtrue)
+                }else{
+                    cell.image_fav.image = UIImage(named: imagelink.favfalse)
                 }
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
@@ -262,8 +245,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                }else{
                    cell.image_product.image = UIImage(named: "sample")
                }
-                cell.label_ratting.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating
-                cell.label_likes.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_review
+                cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
+                cell.label_vendor.text = self.product_cate
                return cell
             }
         }
@@ -272,7 +255,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
             if coll_product_img == collectionView {
                 return CGSize(width: self.coll_product_img.frame.size.width, height: self.coll_product_img.frame.size.height)
             }else{
-                return CGSize(width: self.coll_productlist.frame.size.width/2.1, height: self.coll_productlist.frame.size.width/2.1)
+                return CGSize(width: 160, height: 260)
             }
             
         }
@@ -318,16 +301,16 @@ extension productdetailsViewController {
                         self.product_img = data["product_img"] as! [String]
                         self.pagecontroller.numberOfPages = self.product_img.count
                         self.product_price = data["product_price"] as? Int ?? 0
-                        self.product_rating = String(data["product_rating"] as? Double ?? 0.0)
+                        self.product_rating = data["product_rating"] as? Double ?? 0.0
                         let product_related = data["product_related"] as! NSArray
                         self.product_review = String(data["product_review"] as? Int ?? 0)
                         self.product_title = data["product_title"] as! String
                         self.threshould = data["threshould"] as! String
-                        self.label_product_title.text = self.product_title
-                        self.label_likes.text = self.product_review
-                        self.label_rating.text = self.product_rating
+                        //self.label_likes.text = self.product_review
+                       
+                        self.view_rate.rating = self.product_rating
                         self.label_product_cost.text = "₹ " + String(self.product_price)
-                        self.label_discount.text = String(self.product_discount)
+                        self.label_discount.text = String(self.product_discount) + "% off"
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription
                         self.label_description.sizeToFit()
@@ -347,6 +330,8 @@ extension productdetailsViewController {
                             self.view_cart_main.isHidden = true
                         }
                         
+                        
+                        
                         Servicefile.shared.vendor_product_id_details.removeAll()
                         for prodi in 0..<product_related.count{
                             let prodval = product_related[prodi] as! NSDictionary
@@ -358,8 +343,11 @@ extension productdetailsViewController {
                             let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
                             let product_review = String(prodval["product_review"] as? Int ?? 0)
                             let product_title = prodval["product_title"] as? String ?? ""
+                            self.label_product_title.text =  product_title
                             Servicefile.shared.vendor_product_id_details.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
                         }
+                        
+                       
                         
                         self.coll_productlist.reloadData()
                         self.coll_product_img.reloadData()

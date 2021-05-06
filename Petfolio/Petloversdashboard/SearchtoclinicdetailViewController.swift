@@ -8,16 +8,19 @@
 
 import UIKit
 import Alamofire
+import Cosmos
+import GoogleMaps
 
-class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GMSMapViewDelegate  {
     
+    @IBOutlet weak var GMS_mapView: GMSMapView!
     @IBOutlet weak var label_clinicname: UILabel!
     @IBOutlet weak var label_clinicdetails: UILabel!
     @IBOutlet weak var coll_imgview: UICollectionView!
     @IBOutlet weak var label_city: UILabel!
-    @IBOutlet weak var label_Noofcomments: UILabel!
-    @IBOutlet weak var Label_ratingval: UILabel!
-    @IBOutlet weak var label_specdetails: UILabel!
+//    @IBOutlet weak var label_Noofcomments: UILabel!
+//    @IBOutlet weak var Label_ratingval: UILabel!
+//    @IBOutlet weak var label_specdetails: UILabel!
     @IBOutlet weak var view_book: UIView!
     @IBOutlet weak var label_descrption: UILabel!
     @IBOutlet weak var label_distance: UILabel!
@@ -25,9 +28,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_edu_year: UILabel!
     @IBOutlet weak var label_edu: UILabel!
     
-    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
-    @IBOutlet weak var view_footer: petowner_footerview!
-    
+   
     var clinicpic = [""]
     var edu = ""
     var _id = ""
@@ -41,9 +42,44 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     var petid = [""]
     var Pet_breed = [""]
     
+    var pet_spec = [""]
+    var pet_handle = [""]
+    var latitude : Double!
+    var longitude : Double!
+    let marker = GMSMarker()
+    
+    @IBOutlet weak var view_location: UIView!
+    @IBOutlet weak var view_experience: UIView!
+    @IBOutlet weak var view_fee: UIView!
+    
+    @IBOutlet weak var col_pet_handle: UICollectionView!
+    @IBOutlet weak var col_sepc_list: UICollectionView!
+    @IBOutlet weak var view_back: UIView!
+    @IBOutlet weak var view_main: UIView!
+    @IBOutlet weak var ratingval: CosmosView!
+    var pagcount = 0
+    var timer = Timer()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.intial_setup_action()
+        self.pet_handle.removeAll()
+        self.pet_spec.removeAll()
+        let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
+        let nibName = UINib(nibName: "pet_handle_details_CollectionViewCell", bundle:nil)
+        self.col_sepc_list.register(spec_nibName, forCellWithReuseIdentifier: "cell1")
+        self.col_pet_handle.register(nibName, forCellWithReuseIdentifier: "cell2")
+        self.GMS_mapView.delegate = self
+        self.GMS_mapView.view_cornor()
+        self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
+        self.view_main.layer.cornerRadius = 20.0
+        self.view_fee.layer.cornerRadius = 38.0
+        self.view_location.layer.cornerRadius = 38.0
+        self.view_experience.layer.cornerRadius = 38.0
+        self.view_fee.dropShadow()
+        self.view_location.dropShadow()
+        self.view_experience.dropShadow()
+       
         //self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
@@ -53,33 +89,44 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
         self.view_book.view_cornor()
-        self.view_footer.view_cornor()
-        self.view_footer.dropShadow()
+        
         self.view_book.dropShadow()
+        self.col_pet_handle.delegate = self
+        self.col_pet_handle.dataSource = self
+        self.col_sepc_list.delegate = self
+        self.col_sepc_list.dataSource = self
+        self.coll_imgview.isPagingEnabled = true
         // Do any additional setup after loading the view.
         print("selected doctor details",Servicefile.shared.sear_Docapp_id)
         // Do any additional setup after loading the view.
         self.calldocdetails()
     }
     
-    func intial_setup_action(){
-    // header action
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
-        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
-        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
-        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-    // header action
-    // footer action
-        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
-        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
-    // footer action
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer.invalidate()
     }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        if self.clinicpic.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == self.clinicpic.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+              
+           }
+    }
+   
     
     @IBAction func action_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
@@ -124,28 +171,50 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.clinicpic.count
+        if col_sepc_list == collectionView {
+            return self.pet_spec.count
+        }else if col_pet_handle == collectionView {
+            return self.pet_handle.count
+        }else{
+            return self.clinicpic.count
+        }
+      
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
-        
-        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:self.clinicpic[indexPath.row])) { (image, error, cache, urls) in
-            if (error != nil) {
-                cell.img_banner.image = UIImage(named: "sample")
-            } else {
-                cell.img_banner.image = image
+        if col_sepc_list == collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as!  spec_details_page_CollectionViewCell
+            cell.label_spec.text = self.pet_spec[indexPath.row]
+            
+            return cell
+        }else if col_pet_handle == collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as!  pet_handle_details_CollectionViewCell
+            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
+            cell.view_pethandle.view_cornor()
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
+            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:self.clinicpic[indexPath.row])) { (image, error, cache, urls) in
+                if (error != nil) {
+                    cell.img_banner.image = UIImage(named: "sample")
+                } else {
+                    cell.img_banner.image = image
+                }
             }
+            cell.img_banner.view_cornor()
+            cell.view_banner_two.view_cornor()
+            return cell
         }
-        cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
-        
+        if col_sepc_list == collectionView {
+            return CGSize(width: col_sepc_list.frame.width / 2.1, height:  30)
+        }else if col_pet_handle == collectionView {
+            return CGSize(width: self.pet_handle[indexPath.row].count * 10 + 20 , height:  30)
+        }else{
+            return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
+        }
     }
     
     @IBAction func action_share(_ sender: Any) {
@@ -199,10 +268,11 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         self.label_edu.text = self.edu
                         var specarray = ""
                         let spec =  Data["specialization"] as! NSArray
-                        
+                        self.pet_spec.removeAll()
                         for itm in 0..<spec.count{
                             let dat = spec[itm] as! NSDictionary
                             let pic = dat["specialization"] as? String ?? ""
+                            self.pet_spec.append(pic)
                             if itm == 0 {
                                 specarray =   pic
                             }else{
@@ -210,6 +280,17 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                 specarray = val + pic
                             }
                         }
+                        print("pet handle",self.pet_spec)
+                        self.col_sepc_list.reloadData()
+                        self.pet_handle.removeAll()
+                        let pet_ha =  Data["pet_handled"] as! NSArray
+                        for itm in 0..<pet_ha.count{
+                            let dat = pet_ha[itm] as! NSDictionary
+                            let pic = dat["pet_handled"] as? String ?? ""
+                            self.pet_handle.append(pic)
+                        }
+                        print("pet handle",self.pet_handle)
+                        self.col_pet_handle.reloadData()
                         self.coll_imgview.reloadData()
                         self.descri = Data["descri"] as? String ?? ""
                         self.dr_name = Data["dr_name"] as? String ?? ""
@@ -217,23 +298,27 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         let strcount = Data["star_count"] as? Int ?? 0
                         let r_count =  Data["review_count"] as? Int ?? 0
                         self.star_count = String(strcount)
+                        
                         let rcount = String(r_count)
                         if self.star_count == "" {
-                            self.Label_ratingval.text = "0"
+                            self.ratingval.rating = 0.0
                         }else{
-                            self.Label_ratingval.text = self.star_count
+                            self.ratingval.rating = Double(strcount)
                         }
-                        if rcount == "" {
-                            self.label_Noofcomments.text = "0"
-                        }else{
-                            self.label_Noofcomments.text = rcount
-                        }
-                        
+//                        if rcount == "" {
+//                            self.label_Noofcomments.text = "0"
+//                        }else{
+//                            self.label_Noofcomments.text = rcount
+//                        }
+                        self.latitude = Data["clinic_lat"] as? Double ?? 0.0
+                        self.longitude = Data["clinic_long"] as? Double ?? 0.0
+                        self.setmarker(lat: self.latitude, long: self.longitude)
                         self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
                         self.label_clinicname.text = self.clinic_name
                         
-                        self.label_specdetails.text = specarray
+                        //self.label_specdetails.text = specarray
                         self.label_descrption.text = self.descri
+                        self.startTimer()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -342,5 +427,21 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
+    }
+    func setmarker(lat: Double,long: Double){
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        Servicefile.shared.lati = lat
+        Servicefile.shared.long = long
+        self.latitude = lat
+        self.longitude = long
+        marker.title = "Area Details"
+        marker.snippet = "my loc"
+        marker.map = self.GMS_mapView
+        let markerImage = UIImage(named: "location")!
+        let markerView = UIImageView(image: markerImage)
+        markerView.frame = CGRect(x: 0, y: 0, width: 22, height: 30)
+        markerView.tintColor = UIColor.red
+        marker.iconView = markerView
+        GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
     }
 }

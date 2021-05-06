@@ -18,11 +18,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var coll_imgview: UICollectionView!
     @IBOutlet weak var label_city: UILabel!
     
-    @IBOutlet weak var view_location: UIView!
-    @IBOutlet weak var view_experience: UIView!
-    @IBOutlet weak var view_fee: UIView!
-    @IBOutlet weak var view_main: UIView!
-    @IBOutlet weak var ratingval: CosmosView!
+   
+   
     @IBOutlet weak var label_doc_edu: UILabel!
     @IBOutlet weak var label_distance: UILabel!
     @IBOutlet weak var label_specdetails: UILabel!
@@ -31,7 +28,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_yr_exp: UILabel!
     @IBOutlet weak var label_const_amt: UILabel!
     
-    @IBOutlet weak var view_back: UIView!
+   
+    
     var clinicpic = [""]
     var edu = ""
     var _id = ""
@@ -43,14 +41,24 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     var pet_type = [""]
     var petid = [""]
     var Pet_breed = [""]
+    
     var pet_spec = [""]
     var pet_handle = [""]
     var latitude : Double!
     var longitude : Double!
     let marker = GMSMarker()
     
+    @IBOutlet weak var view_location: UIView!
+    @IBOutlet weak var view_experience: UIView!
+    @IBOutlet weak var view_fee: UIView!
+    
     @IBOutlet weak var col_pet_handle: UICollectionView!
     @IBOutlet weak var col_sepc_list: UICollectionView!
+    @IBOutlet weak var view_back: UIView!
+    @IBOutlet weak var view_main: UIView!
+    @IBOutlet weak var ratingval: CosmosView!
+    var pagcount = 0
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +98,30 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         // Do any additional setup after loading the view.
         self.calldocdetails()
        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer.invalidate()
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        if self.clinicpic.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == self.clinicpic.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+              
+           }
     }
     
     
@@ -165,7 +197,6 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             cell.view_banner_two.view_cornor()
             return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -280,6 +311,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.label_clinicname.text = self.clinic_name
                         self.label_specdetails.text = specarray
                         self.label_descrption.text = self.descri
+                        self.startTimer()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

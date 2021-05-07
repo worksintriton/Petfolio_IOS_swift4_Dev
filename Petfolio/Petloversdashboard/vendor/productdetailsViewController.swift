@@ -35,6 +35,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var label_cartcount: UILabel!
     @IBOutlet weak var label_addtocart: UILabel!
     
+    @IBOutlet weak var label_categ: UILabel!
+    @IBOutlet weak var view_back: UIView!
     @IBOutlet weak var View_outofstock: UIView!
     @IBOutlet weak var view_isqualityprod: UIView!
     @IBOutlet weak var pagecontroller: UIPageControl!
@@ -60,6 +62,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
+        
+        self.label_cartcount.layer.cornerRadius = 10.0
         let nibName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
         self.coll_productlist.register(nibName, forCellWithReuseIdentifier: "cell")
         self.image_like.isHidden = true
@@ -288,8 +293,14 @@ extension productdetailsViewController {
                         self.ca_id = cat_details["_id"] as! String
                         self.cat_img_path = cat_details["img_path"] as? String ?? Servicefile.sample_img
                         self.product_cate = cat_details["product_cate"] as! String
+                        self.label_categ.text =   self.product_cate
                         //self.product_cart_count = data["product_cart_count"] as! Int
-                        self.product_discount = data["product_discount"] as! Int
+                        self.product_discount = data["product_discount"] as? Int ?? 0
+                        if self.product_discount != 0 {
+                            self.label_discount.text =  String(self.product_discount) + "% off"
+                        }else{
+                            self.view_off.isHidden = true
+                        }
                         self.product_discription = data["product_discription"] as! String
                         self.product_fav = data["product_fav"] as? Bool ?? false
                         self.image_like.isHidden = false

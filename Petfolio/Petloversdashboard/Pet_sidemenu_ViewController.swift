@@ -59,6 +59,9 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Petlover_myorder_ViewController") as! Petlover_myorder_ViewController
             self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Medical History"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_medical_history_ViewController") as! pet_medical_history_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
             UserDefaults.standard.set("", forKey: "usertype")

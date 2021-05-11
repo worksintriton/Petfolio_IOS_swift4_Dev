@@ -201,8 +201,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                     cell.img_banner.image = image
                 }
             }
-            cell.img_banner.view_cornor()
-            cell.view_banner_two.view_cornor()
+//            cell.img_banner.view_cornor()
+//            cell.view_banner_two.view_cornor()
             return cell
         }
     }
@@ -246,7 +246,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         let clicloc =  Data["clinic_loc"] as? String ?? ""
                         let amount =  Data["amount"] as? Int ?? 0
                         Servicefile.shared.pet_apoint_amount = amount
-                        self.label_cont_amt.text = " ₹ " + String(Servicefile.shared.pet_apoint_amount)
+                        self.label_cont_amt.text = " INR " + String(Servicefile.shared.pet_apoint_amount)
                         self.label_city.text = clicloc + ". "
                         self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
                         for itm in 0..<clidet.count{
@@ -310,6 +310,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
 //                        }else{
 //                            self.label_Noofcomments.text = rcount
 //                        }
+                        
+                        self.label_edu_year.text = String(Data["doctor_exp"] as? Int ?? 0) + " Year"
                         self.latitude = Data["clinic_lat"] as? Double ?? 0.0
                         self.longitude = Data["clinic_long"] as? Double ?? 0.0
                         self.setmarker(lat: self.latitude, long: self.longitude)

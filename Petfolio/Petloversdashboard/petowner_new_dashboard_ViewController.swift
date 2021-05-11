@@ -235,7 +235,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.image_banner.image = image
                 }
             }
-            cell.image_banner.contentMode = .scaleAspectFit
+            //cell.image_banner.contentMode = .scaleAspectFit
             cell.label_banner.text = Servicefile.shared.petbanner[indexPath.row].title
             return cell
         }else if self.col_service == collectionView {

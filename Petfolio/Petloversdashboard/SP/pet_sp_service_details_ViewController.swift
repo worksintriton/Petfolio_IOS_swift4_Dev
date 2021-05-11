@@ -8,58 +8,64 @@
 
 import UIKit
 import Alamofire
+import Cosmos
+import GoogleMaps
 
-class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , GMSMapViewDelegate {
+   
+    @IBOutlet weak var GMS_mapView: GMSMapView!
+    @IBOutlet weak var view_rate: CosmosView!
     @IBOutlet weak var view_img_service: UIView!
     @IBOutlet weak var label_service_com_name: UILabel!
     @IBOutlet weak var label_serview_provider: UILabel!
     @IBOutlet weak var coll_service: UICollectionView!
     @IBOutlet weak var label_location: UILabel!
     @IBOutlet weak var label_distance: UILabel!
-    @IBOutlet weak var label_nooflikes: UILabel!
-    @IBOutlet weak var label_rating: UILabel!
     @IBOutlet weak var label_description: UILabel!
     @IBOutlet weak var image_service: UIImageView!
     @IBOutlet weak var label_service: UILabel!
     @IBOutlet weak var view_book: UIView!
-    @IBOutlet weak var view_footer: petowner_footerview!
     
-    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
+    @IBOutlet weak var view_back: UIView!
+    @IBOutlet weak var label_fee: UILabel!
+    @IBOutlet weak var view_location: UIView!
+    @IBOutlet weak var view_fee: UIView!
+    
+    @IBOutlet weak var view_rate_back: UIView!
+    @IBOutlet weak var col_pet_ser: UICollectionView!
+    var latitude : Double!
+    var longitude : Double!
+    let marker = GMSMarker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.intial_setup_action()
+        self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
+        let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
+        self.view_rate_back.layer.cornerRadius = 30.0
+        self.col_pet_ser.register(spec_nibName, forCellWithReuseIdentifier: "cell1")
+        self.view_fee.layer.cornerRadius = 30.0
+        self.view_location.layer.cornerRadius = 30.0
+        self.view_rate.rating = 0.0
         self.call_ser_details()
         self.coll_service.delegate = self
         self.coll_service.dataSource = self
+        self.col_pet_ser.delegate = self
+        self.col_pet_ser.dataSource = self
         self.image_service.layer.cornerRadius = self.image_service.frame.size.height / 2
         self.view_img_service.View_image_dropshadow(cornordarius: self.image_service.frame.size.height / 2, iscircle: true)
         self.view_book.view_cornor()
     }
     
-    func intial_setup_action(){
-    // header action
-        self.view_subpage_header.label_header_title.text = ""
-        self.view_subpage_header.label_header_title.textColor = .white
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
-        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
-        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
-        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-    // header action
-    // footer action
-        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
-        self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
-    // footer action
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Servicefile.shared.sp_bus_service_galldicarray.count
+        if col_pet_ser == collectionView {
+            return Servicefile.shared.sp_bus_service_list.count
+        }else{
+            return Servicefile.shared.sp_bus_service_galldicarray.count
+        }
+       
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -67,6 +73,15 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if col_pet_ser == collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as!  spec_details_page_CollectionViewCell
+            
+            let ser = Servicefile.shared.sp_bus_spec_list[indexPath.row] as! NSDictionary
+            
+            cell.label_spec.text = ser["bus_spec_list"] as? String ?? ""
+            
+            return cell
+        }else{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
         let bannerdic = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
         let image = bannerdic["bus_service_gall"] as? String ?? Servicefile.sample_bannerimg
@@ -78,12 +93,18 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                        }
                    }
                    cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+//        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.coll_service.frame.size.width , height:  self.coll_service.frame.size.height)
+        if self.col_pet_ser == collectionView {
+            return CGSize(width: col_pet_ser.frame.width / 2.1, height:  30)
+        }else{
+            return CGSize(width: self.coll_service.frame.size.width , height:  self.coll_service.frame.size.height)
+        }
+       
     }
     
     
@@ -154,6 +175,9 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 let sp_lat  = Data["sp_lat"] as? Double ?? 0.0
                                                                 let sp_long  = Data["sp_long"] as! Double ?? 0.0
                                                                     let sp_loc  = Data["sp_loc"] as? String ?? ""
+                                                                self.latitude = sp_lat
+                                                                self.longitude = sp_long
+                                                                self.setmarker(lat: self.latitude, long: self.longitude)
                                                                     let user_id  = Data["user_id"] as? String ?? ""
                                                                     let bus_service_gall = Data["bus_service_gall"] as! NSArray
                                                                     let bus_service_list = Data["bus_service_list"] as! NSArray
@@ -172,7 +196,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 Servicefile.shared.service_id_title = Details["title"] as? String ?? ""
                                                                 Servicefile.shared.service_id_amount = Details["amount"] as? Int ?? 0
                                                                 Servicefile.shared.service_id_time = Details["time"] as? String ?? ""
-                                                                
+                                                                self.label_fee.text = "INR " +  String(Servicefile.shared.service_id_amount)
                                                                 
                                                                 
                                                                 self.label_service.text = Servicefile.shared.service_id_title
@@ -211,12 +235,12 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                     Servicefile.shared.sp_distance = String(distance)
                                                                 Servicefile.shared.Sp_comments = String(Sp_comments)
                                                                 Servicefile.shared.Sp_rating = String(Sp_rating)
+                                                                self.view_rate.rating = Double(Sp_rating)
                                                                 self.label_service_com_name.text = Servicefile.shared.sp_bussiness_name
                                                                 self.label_serview_provider.text = bus_user_name
                                                                 self.label_location.text = Servicefile.shared.sp_loc
                                                                 self.label_distance.text = Servicefile.shared.sp_distance + " Km away"
-                                                                self.label_nooflikes.text = Servicefile.shared.Sp_comments
-                                                                self.label_rating.text = Servicefile.shared.Sp_rating
+                                                                self.col_pet_ser.reloadData()
                                                                 //self.label_description.text = ""
                                                                 self.coll_service.reloadData()
                                                                 self.stopAnimatingActivityIndicator()
@@ -237,6 +261,22 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                     }
                 }
        
+    func setmarker(lat: Double,long: Double){
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        Servicefile.shared.lati = lat
+        Servicefile.shared.long = long
+        self.latitude = lat
+        self.longitude = long
+        marker.title = "Area Details"
+        marker.snippet = "my loc"
+        marker.map = self.GMS_mapView
+        let markerImage = UIImage(named: "location")!
+        let markerView = UIImageView(image: markerImage)
+        markerView.frame = CGRect(x: 0, y: 0, width: 22, height: 30)
+        markerView.tintColor = UIColor.red
+        marker.iconView = markerView
+        GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
+    }
 
 }
 

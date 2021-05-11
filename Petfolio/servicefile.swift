@@ -240,6 +240,8 @@ class Servicefile {
     static let vendor_order_details_confirm = baseurl + "/api/vendor_order_group/update_vendor_status1"
     static let vendor_order_details_dispatch = baseurl + "/api/vendor_order_group/update_vendor_status2"
     static let vendor_order_details_reject = baseurl + "/api/vendor_order_group/update_vendor_status3"
+    
+    static let pet_sidemenu_medicalhistory = baseurl + "/api/appointments/medical_history"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -519,6 +521,7 @@ class Servicefile {
     var vendor_fdata = [vendor_filterdata]()
     var vendor_orgifdata = [vendor_filterdata]()
     var orderdetail_prod = [orderdetails_prod]()
+    var pet_medi_detail = [pet_medi_details]()
     var today_deals_status = false
     var vendor_filter_pet_type_id = ""
     var vendor_filter_pet_breed_id =  ""
@@ -1101,6 +1104,66 @@ struct educat{
     init(ieducation : String, iyear: String) {
         self.education = ieducation
         self.year = iyear
+    }
+}
+
+
+//allergies = "injection ";
+//"appointement_id" = 6051f4068cc11a28db0583ed;
+//"appointment_date" = "17-03-2021 06:15 PM";
+//"communication_type" = Online;
+//"pet_id" = 6040dfcb2c2b43125f8cb8b5;
+//"pet_name" = "jimmy ";
+//"prescrip_type" = PDF;
+//vacination = 1;
+//"vet_image" = "http://54.212.108.156:3000/api/uploads/1614842236226.jpg";
+//"vet_name" = "Dr .Albert Doctor";
+//"vet_spec" =             (
+//                    {
+//        specialization = Surgeon;
+//    },
+//                    {
+//        specialization = "Internal Medicine Physician";
+//    }
+//);
+
+struct pet_medi_details {
+    var allergies : String
+    var appointement_id : String
+    var appointment_date : String
+    var communication_type : String
+    var pet_id : String
+    var pet_name : String
+    var prescrip_type : String
+    var vacination : Bool
+    var vet_image : String
+    var vet_name : String
+    var vet_spec : [Any]
+    var isselct : String
+    init(In_allergies : String
+         , In_appointement_id : String
+         , In_appointment_date : String
+         , In_communication_type : String
+         , In_pet_id : String
+         , In_pet_name : String
+         , In_prescrip_type : String
+         , In_vacination : Bool
+         , In_vet_image : String
+         , In_vet_name : String
+         , In_vet_spec : [Any]
+         , In_isselct : String) {
+        self.allergies = In_allergies
+        self.appointement_id = In_appointement_id
+        self.appointment_date = In_appointment_date
+        self.communication_type = In_communication_type
+        self.pet_id = In_pet_id
+        self.pet_name = In_pet_name
+        self.prescrip_type = In_prescrip_type
+        self.vacination = In_vacination
+        self.vet_image = In_vet_image
+        self.vet_name = In_vet_name
+        self.vet_spec = In_vet_spec
+        self.isselct = In_isselct
     }
 }
 

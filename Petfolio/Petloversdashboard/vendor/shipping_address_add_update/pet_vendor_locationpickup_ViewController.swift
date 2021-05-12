@@ -55,7 +55,6 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
         self.view_subpage_header.sethide_view(b1: true, b2: true, b3: true, b4: true)
     // header action
-   
     }
     
     override func viewWillDisappear(_ animated: Bool) {

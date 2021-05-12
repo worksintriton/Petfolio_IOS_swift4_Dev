@@ -55,12 +55,15 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         cell.selectionStyle = .none
         return cell
     }
-    
+    //doc_myorderdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycalenderViewController") as! mycalenderViewController
         self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Logout"{
+        }else if self.labelmenu[indexPath.row] == "My Orders" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_myorderdetails_ViewController") as! doc_myorderdetails_ViewController
+            self.present(vc, animated: true, completion: nil)
+            }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
                    Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!

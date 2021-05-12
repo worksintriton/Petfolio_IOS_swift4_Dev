@@ -62,6 +62,10 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_manageaddress(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     //
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

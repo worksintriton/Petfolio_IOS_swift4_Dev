@@ -13,10 +13,10 @@ import WebKit
 
 class DocdashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,JitsiMeetViewDelegate {
     
+    @IBOutlet weak var doc_header: petowner_header!
     @IBOutlet weak var view_new: UIView!
     @IBOutlet weak var view_completed: UIView!
     @IBOutlet weak var view_missed: UIView!
-    @IBOutlet weak var view_footer: UIView!
     
     @IBOutlet weak var label_new: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
@@ -31,6 +31,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var view_close_btn: UIView!
     
+    @IBOutlet weak var view_footer: doc_footer!
     fileprivate var jitsiMeetView: JitsiMeetView?
     
     var refreshControl = UIRefreshControl()
@@ -40,11 +41,12 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         Servicefile.shared.Doc_dashlist.removeAll()
         self.label_nodata.isHidden = true
         self.view_new.view_cornor()
         self.view_missed.view_cornor()
-        self.view_footer.view_cornor()
+        //self.view_footer.view_cornor()
         self.view_completed.view_cornor()
         self.view_popup.view_cornor()
         self.view_refresh.view_cornor()
@@ -60,6 +62,28 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
+    }
+    
+    func inital_setup(){
+        self.doc_header.btn_sidemenu.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.doc_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.doc_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.doc_header.image_profile.image = image
+            }
+        }
+        self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
+        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     }
     
     @objc func refresh(){
@@ -78,8 +102,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
+//        self.present(vc, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -693,5 +717,28 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
+    }
+}
+
+
+extension UIViewController {
+    @objc func docsidemenu(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func doccartpage(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_vendorcartpageViewController") as! doc_vendorcartpageViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func docshop(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_shop_dashboardViewController") as! doc_shop_dashboardViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func docDashboard(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        self.present(vc, animated: true, completion: nil)
     }
 }

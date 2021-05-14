@@ -15,8 +15,8 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-     var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons","Settings", "Logout"]
-       var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Setting", "Exit"]
+     var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons", "Logout"]
+       var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +52,15 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         cell.selectionStyle = .none
         return cell
     }
+   
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
         self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Manage Services" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
@@ -76,8 +80,5 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
    
 }
 
-extension sp_side_menuViewController {
-    
-   
-}
+
 

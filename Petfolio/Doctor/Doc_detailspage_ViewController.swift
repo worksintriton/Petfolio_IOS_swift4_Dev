@@ -23,6 +23,7 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var view_address_details: UIView!
     @IBOutlet weak var label_address_details: UILabel!
     @IBOutlet weak var view_address: UIView!
+    @IBOutlet weak var label_home_address_details: UILabel!
     
     @IBOutlet weak var label_orderdate: UILabel!
     @IBOutlet weak var label_order_id: UILabel!
@@ -39,15 +40,20 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var label_petname_details: UILabel!
     
     @IBOutlet weak var view_complete_cancel: UIView!
-    @IBOutlet weak var view_footer: UIView!
     
     @IBOutlet weak var label_holder_servie_name: UILabel!
     @IBOutlet weak var label_holder_cost: UILabel!
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_home_address: UIView!
+    @IBOutlet weak var view_data_home_address: UIView!
+    @IBOutlet weak var view_footer: doc_footer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
         self.view_footer.view_cornor()
@@ -67,7 +73,27 @@ class Doc_detailspage_ViewController: UIViewController {
         }
         self.view_address.isHidden = true
         self.view_address_details.isHidden = true
+        self.view_home_address.isHidden = true
+        self.view_data_home_address.isHidden = true
        
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_header_title.text = "My Appointment"
+        self.view_header.label_header_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_header.view_profile.isHidden = true
+        self.view_header.view_sos.isHidden = true
+        self.view_header.view_bel.isHidden = true
+        self.view_header.view_bag.isHidden = true
+    // header action
+    // footer action
+        self.view_footer.setup(b1: false, b2: false, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+    // footer action
     }
     
     @IBAction func action_notific(_ sender: Any) {
@@ -274,6 +300,25 @@ class Doc_detailspage_ViewController: UIViewController {
                                     self.image_holder_name.image = image
                                 }
                             }
+                        }
+                        let visit_type = data["visit_type"] as? String ?? ""
+                        self.view_address.isHidden = false
+                        self.view_address_details.isHidden = false
+                        let doc_business_info = data["doc_business_info"] as! NSArray
+                        if doc_business_info.count > 0 {
+                            let doc_info = doc_business_info[0] as! NSDictionary
+                            self.label_address_details.text = doc_info["clinic_loc"] as? String ?? ""
+                        }
+                        
+                        if visit_type == "Home"  {
+                            self.view_home_address.isHidden = false
+                            self.view_data_home_address.isHidden = false
+                            let visit_type_data = res["Address"] as! NSDictionary
+                             let location = visit_type_data["location_address"] as? String ?? ""
+                            self.label_home_address_details.text = location
+                        }else{
+                            self.view_home_address.isHidden = true
+                            self.view_data_home_address.isHidden = true
                         }
                         
                         //                        {

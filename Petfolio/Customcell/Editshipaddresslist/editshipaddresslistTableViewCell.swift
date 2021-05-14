@@ -25,6 +25,7 @@ class editshipaddresslistTableViewCell: UITableViewCell {
     @IBOutlet weak var label_add_type: UILabel!
     @IBOutlet weak var view_add_type: UIView!
     
+    @IBOutlet weak var view_edit_delete: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

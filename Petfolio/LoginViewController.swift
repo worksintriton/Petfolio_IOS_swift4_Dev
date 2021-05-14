@@ -221,6 +221,14 @@ extension UIView {
         layer.cornerRadius = cornordarius
     }
     
+    func View_dropshadow(cornordarius: CGFloat, iscircle : Bool){
+        layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack).cgColor
+        layer.shadowRadius = 1.5
+        layer.shadowOpacity = 1.8
+        layer.shadowOffset = CGSize(width: 0.4, height: 0.6)
+        layer.cornerRadius = cornordarius
+    }
+    
      func View_image_appcolordropshadow(cornordarius: CGFloat, iscircle : Bool){
             layer.shadowColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray).cgColor
             if iscircle {

@@ -45,9 +45,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
                   }
        }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+  
     
     @IBAction func action_back(_ sender: Any) {
         Servicefile.shared.shipaddresslist_isedit = false
@@ -60,6 +58,10 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         Servicefile.shared.ishiping = "ship"
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

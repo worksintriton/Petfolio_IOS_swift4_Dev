@@ -223,6 +223,7 @@
                 <outlet property="label_mobileno" destination="1n4-5l-b1l" id="bGS-by-nfV"/>
                 <outlet property="label_name" destination="Scg-CX-MMg" id="FDH-5O-pIS"/>
                 <outlet property="view_add_type" destination="Xf0-DP-ipe" id="jAV-5C-cdw"/>
+                <outlet property="view_edit_delete" destination="eSs-oc-0sH" id="0Du-Za-AYs"/>
                 <outlet property="view_main" destination="DpL-xT-8z1" id="lci-iE-Rba"/>
             </connections>
             <point key="canvasLocation" x="87" y="93"/>

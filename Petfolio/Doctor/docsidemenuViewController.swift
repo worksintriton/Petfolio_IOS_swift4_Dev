@@ -17,8 +17,8 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
 //    var labelmenu = ["My calender", "Logout"]
 //    var imgmenu = ["Calendar", "Exit"]
     
-    var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons","Settings", "Logout"]
-    var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Setting", "Exit"]
+    var labelmenu = ["My Appointment","Notification","My calender","Manage Services","My Orders","Favourities","My Coupons", "Logout"]
+    var imgmenu = ["Calendar","Bell","calender-menu", "manage", "myOrder", "Like", "Discount", "Exit"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +55,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         cell.selectionStyle = .none
         return cell
     }
+    
     //doc_myorderdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
@@ -63,7 +64,13 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_myorderdetails_ViewController") as! doc_myorderdetails_ViewController
             self.present(vc, animated: true, completion: nil)
-            }else if self.labelmenu[indexPath.row] == "Logout"{
+        }else if self.labelmenu[indexPath.row] == "Notification"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Manage Services" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_update_details_ViewController") as! Doc_update_details_ViewController
+            self.present(vc, animated: true, completion: nil)
+                }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")
                    UserDefaults.standard.set("", forKey: "usertype")
                    Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!

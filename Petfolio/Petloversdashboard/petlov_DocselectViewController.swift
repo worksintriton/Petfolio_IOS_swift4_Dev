@@ -19,7 +19,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var label_city: UILabel!
     
    
-   
+    @IBOutlet weak var image_fav: UIImageView!
+    
     @IBOutlet weak var label_doc_edu: UILabel!
     @IBOutlet weak var label_distance: UILabel!
     @IBOutlet weak var label_specdetails: UILabel!
@@ -147,6 +148,43 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func action_fav_unfav(_ sender: Any) {
+        self.callfav()
+    }
+    
+    func callfav(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_fav, method: .post, parameters:
+            ["doctor_id": Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+             "user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.clinicpic.removeAll()
+                        
+                        self.calldocdetails()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
     @IBAction func action_profile(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
         self.present(vc, animated: true, completion: nil)
@@ -181,7 +219,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             return cell
         }else if col_pet_handle == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as!  pet_handle_details_CollectionViewCell
-            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
+            cell.label_pet_handle.text = " " + self.pet_handle[indexPath.row]
             cell.view_pethandle.view_cornor()
             return cell
         }else{
@@ -203,7 +241,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         if col_sepc_list == collectionView {
             return CGSize(width: col_sepc_list.frame.width / 2.1, height:  30)
         }else if col_pet_handle == collectionView {
-            return CGSize(width: self.pet_handle[indexPath.row].count * 10 + 20 , height:  30)
+            return CGSize(width: 100 , height:  30)
         }else{
             return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
         }
@@ -222,7 +260,8 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_fetchdocdetails, method: .post, parameters:
-            ["user_id": Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            ["doctor_id": Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+             "user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -281,6 +320,12 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                             let dat = pet_ha[itm] as! NSDictionary
                             let pic = dat["pet_handled"] as? String ?? ""
                             self.pet_handle.append(pic)
+                        }
+                        let fav = Data["fav"] as? Bool ?? false
+                        if fav {
+                            self.image_fav.image = UIImage(named: imagelink.fav_true)
+                        }else {
+                            self.image_fav.image = UIImage(named: imagelink.fav_false)
                         }
                         print("pet handle",self.pet_handle)
                         self.col_pet_handle.reloadData()

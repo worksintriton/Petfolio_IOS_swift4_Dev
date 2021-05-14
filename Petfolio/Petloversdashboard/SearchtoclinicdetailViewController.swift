@@ -28,7 +28,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_edu_year: UILabel!
     @IBOutlet weak var label_edu: UILabel!
     
-   
+    @IBOutlet weak var image_fav: UIImageView!
+    
     var clinicpic = [""]
     var edu = ""
     var _id = ""
@@ -165,6 +166,10 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func action_fav_unfav(_ sender: Any) {
+        self.callfav()
+    }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -230,7 +235,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_fetchdocdetails, method: .post, parameters:
-            ["user_id": Servicefile.shared.sear_Docapp_id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+            ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -264,6 +269,12 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                 self.edu =  self.edu + ", " +  ed
                             }
                             
+                        }
+                        let fav = Data["fav"] as? Bool ?? false
+                        if fav {
+                            self.image_fav.image = UIImage(named: imagelink.fav_true)
+                        }else {
+                            self.image_fav.image = UIImage(named: imagelink.fav_false)
                         }
                         self.label_edu.text = self.edu
                         var specarray = ""
@@ -339,6 +350,37 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         }
     }
     
+    func callfav(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_fav, method: .post, parameters:
+            ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.clinicpic.removeAll()
+                        
+                        self.calldocdetails()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
     
     
     

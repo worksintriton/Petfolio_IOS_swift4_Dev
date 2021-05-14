@@ -20,5 +20,6 @@ class pet_dashboard_shop_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_category: UILabel!
     @IBOutlet weak var view_rating_shop: CosmosView!
     @IBOutlet weak var label_price: UILabel!
+    @IBOutlet weak var image_fav: UIImageView!
     
 }

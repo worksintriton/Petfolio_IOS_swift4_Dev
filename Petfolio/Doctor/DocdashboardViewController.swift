@@ -62,6 +62,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
+        self.callcheckstatus()
     }
     
     func inital_setup(){
@@ -79,6 +80,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                 self.doc_header.image_profile.image = image
             }
         }
+        self.doc_header.label_location.text = Servicefile.shared.shiplocation
         self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
         self.doc_header.btn_profile.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
@@ -718,6 +720,43 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    func call_list_shipping_address(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_shiping_address_list, method: .post, parameters:
+                                                                    ["user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                Servicefile.shared.shipaddresslist.removeAll()
+                                                                                let data = res["Data"] as! NSDictionary
+                                                                                let id = data["_id"] as? String ?? ""
+                                                                                if id != "" {
+                                                                                    let location_city =  data["location_city"] as? String ?? ""
+                                                                                    Servicefile.shared.shiplocation = location_city
+                                                                                    self.doc_header.label_location.text = Servicefile.shared.shiplocation
+                                                                                }
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }
+                                                                            break
+                                                                        case .failure(let _):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            
+                                                                            break
+                                                                        }
+                                                                     }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+        
+    }
+  
 }
 
 

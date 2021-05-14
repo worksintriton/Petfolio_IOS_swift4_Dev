@@ -19,17 +19,37 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var label_spec: UILabel!
     @IBOutlet weak var label_pethandle: UILabel!
     @IBOutlet weak var label_clinicaddress: UILabel!
-    @IBOutlet weak var view_footer: UIView!
+    
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var view_img_user: SNShadowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.coll_clinic.delegate = self
         self.coll_clinic.dataSource = self
         self.view_footer.view_cornor()
         self.view_img_user.view_cornor()
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_header_title.text = "Profile"
+        self.view_header.label_header_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_header.view_profile.isHidden = true
+        self.view_header.view_sos.isHidden = true
+        self.view_header.view_bel.isHidden = true
+        self.view_header.view_bag.isHidden = true
+    // header action
+    // footer action
+        self.view_footer.setup(b1: false, b2: true, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+    // footer action
     }
     
     override func viewWillAppear(_ animated: Bool) {

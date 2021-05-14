@@ -17,7 +17,8 @@ class imagelink{
     static let Radio = "Radio"
     static let checkbox = "checkbox"
     static let checkbox_1 = "checkbox-1"
-    
+    static let fav_true = "heart_read"
+    static let fav_false = "heart_gray"
     // footer image
     
     static let Home_gray = "Home_gray"
@@ -242,6 +243,14 @@ class Servicefile {
     static let vendor_order_details_reject = baseurl + "/api/vendor_order_group/update_vendor_status3"
     
     static let pet_sidemenu_medicalhistory = baseurl + "/api/appointments/medical_history"
+    
+    static let pet_doc_fav = baseurl + "/api/doctor_fav/create"
+    static let pet_shop_fav = baseurl + "/api/product_fav/create"
+    static let pet_sp_fav = baseurl + "/api/sp_fav/create"
+    
+    static let pet_fav_doc = baseurl + "/api/doctor_fav/getlist_id"
+    static let pet_fav_service = baseurl + "/api/sp_fav/getlist_id"
+    static let pet_fav_product = baseurl + "/api/product_fav/getlist_id"
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -332,6 +341,8 @@ class Servicefile {
     var pet_apoint_booking_time = ""
     var pet_apoint_booking_date_time = ""
     var pet_apoint_communication_type = ""
+    var pet_apoint_visit_type = ""
+    var pet_apoint_location_id = ""
     var pet_apoint_video_id = ""
     var pet_apoint_user_id = ""
     var pet_apoint_pet_id = ""
@@ -374,6 +385,7 @@ class Servicefile {
     var appgreen = "#56B9A4"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
+    var extralightgray = "#f0f0f0"
     var shadowtop = "#ffffff"
     var black = "#444444"
     static let appblack = "#444444"
@@ -532,6 +544,7 @@ class Servicefile {
     var isdataval = ["0","0","0","0"] // ,"0"
     var productsearchpage = ""
     var shipaddresslist = [Any]()
+    var shiplocation = ""
     var shipaddresslist_index = 0
     var  shipaddresslist_isedit = false
     var cartdata = [Any]()
@@ -1016,7 +1029,8 @@ struct Petnewdashdoc{
     var star_count : Int
     var spec : String
     var distance : String
-    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String, idistance : String, Iclinic_name : String) {
+    var fav : Bool
+    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String, idistance : String, Iclinic_name : String, Ifav : Bool) {
         self._id = UID
         self.doctor_img = doctor_img
         self.doctor_name = doctor_name
@@ -1025,6 +1039,7 @@ struct Petnewdashdoc{
         self.spec = ispec
         self.distance =  idistance
         self.clinic_name = Iclinic_name
+        self.fav = Ifav
     }
 }
 

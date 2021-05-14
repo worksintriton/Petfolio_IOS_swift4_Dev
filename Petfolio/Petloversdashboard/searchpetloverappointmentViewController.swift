@@ -45,6 +45,12 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_btn: UIView!
     
+    @IBOutlet weak var view_visit: UIView!
+    @IBOutlet weak var image_clinic: UIImageView!
+    @IBOutlet weak var btn_clinic: UIButton!
+    @IBOutlet weak var image_home: UIImageView!
+    @IBOutlet weak var btn_home: UIButton!
+    
     @IBOutlet weak var btn_online: UIButton!
     @IBOutlet weak var btn_visit: UIButton!
     @IBOutlet weak var image_visit: UIImageView!
@@ -211,23 +217,37 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                return CGSize(width: 100 , height:  100)
     }
     
-    func checkappointmentcommtype() {
+    func checkappointmentcommtype(){
         if Servicefile.shared.pet_apoint_communication_type == "Online Or Visit" {
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = false
             self.btn_online.isHidden = false
+            self.view_visit.isHidden = true
             Servicefile.shared.pet_apoint_communication_type = "Online"
         }else if Servicefile.shared.pet_apoint_communication_type == "Online" {
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = true
             self.btn_online.isHidden = true
+            self.view_visit.isHidden = true
         }else if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             self.image_visit.image = UIImage(named: "selectedRadio")
             self.image_online.image = UIImage(named: "Radio")
             self.btn_visit.isHidden = true
             self.btn_online.isHidden = true
+            self.view_visit.isHidden = false
+        }
+        
+        if Servicefile.shared.pet_apoint_visit_type == "" {
+            self.image_home.image = UIImage(named: "Radio")
+            self.image_clinic.image = UIImage(named: "Radio")
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+            self.image_home.image = UIImage(named: "selectedRadio")
+            self.image_clinic.image = UIImage(named: "Radio")
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+            self.image_home.image = UIImage(named: "Radio")
+            self.image_clinic.image = UIImage(named: "selectedRadio")
         }
     }
     
@@ -237,25 +257,59 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = false
             self.btn_online.isHidden = false
+            self.view_visit.isHidden = true
             Servicefile.shared.pet_apoint_communication_type = "Online"
         }else if Servicefile.shared.pet_apoint_communication_type == "Online" {
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
+            self.view_visit.isHidden = true
         }else if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             self.image_visit.image = UIImage(named: "selectedRadio")
             self.image_online.image = UIImage(named: "Radio")
+            self.view_visit.isHidden = false
+        }
+        
+        if Servicefile.shared.pet_apoint_visit_type == "" {
+            self.image_home.image = UIImage(named: "Radio")
+            self.image_clinic.image = UIImage(named: "Radio")
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+            self.image_home.image = UIImage(named: "selectedRadio")
+            self.image_clinic.image = UIImage(named: "Radio")
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+            self.image_home.image = UIImage(named: "Radio")
+            self.image_clinic.image = UIImage(named: "selectedRadio")
         }
     }
     
     @IBAction func action_visit(_ sender: Any) {
         Servicefile.shared.pet_apoint_communication_type = "Visit"
+        Servicefile.shared.pet_apoint_visit_type = ""
+        Servicefile.shared.pet_apoint_location_id = ""
         self.checkcommtype()
     }
     
     @IBAction func action_online(_ sender: Any) {
         Servicefile.shared.pet_apoint_communication_type = "Online"
+        Servicefile.shared.pet_apoint_visit_type = ""
+        Servicefile.shared.pet_apoint_location_id = ""
         self.checkcommtype()
     }
+    
+    
+     @IBAction func action_Home(_ sender: Any) {
+         Servicefile.shared.pet_apoint_visit_type = "Home"
+         self.checkcommtype()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_app_select_address_ViewController") as! pet_app_select_address_ViewController
+        self.present(vc, animated: true, completion: nil)
+        
+     }
+     
+     
+     @IBAction func action_clinic(_ sender: Any) {
+         Servicefile.shared.pet_apoint_visit_type = "Clinic"
+         self.checkcommtype()
+     }
+     
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
@@ -602,7 +656,9 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
               "amount" : Servicefile.shared.pet_apoint_amount,
               "mobile_type" : "IOS",
               "service_name" : "",
-              "service_amount": ""], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+              "service_amount": "",
+              "location_id": Servicefile.shared.pet_apoint_location_id,
+              "visit_type": Servicefile.shared.pet_apoint_visit_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

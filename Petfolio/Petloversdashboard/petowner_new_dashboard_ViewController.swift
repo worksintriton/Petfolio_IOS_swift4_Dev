@@ -248,7 +248,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.image_service.image = image
                 }
             }
-            cell.view_service.dropShadow()
+            //cell.view_service.dropShadow()
+            cell.view_service.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
             cell.view_service.layer.cornerRadius = 40.0
             print("service title",Servicefile.shared.petser[indexPath.row].service_title)
             cell.label_service.text = Servicefile.shared.petser[indexPath.row].service_title
@@ -275,6 +276,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.image_vet.image = image
                 }
             }
+            if Servicefile.shared.petdoc[indexPath.row].fav {
+                cell.image_fav.image = UIImage(named: imagelink.fav_true)
+            }else {
+                cell.image_fav.image = UIImage(named: imagelink.fav_false)
+            }
+//            let fav = Data["fav"] as? Bool ?? false
+//            if fav {
+//
+//            cell.image_fav.image = Servicefile.shared.petdoc[indexPath.row].
             cell.view_main.dropShadow()
             cell.label_DR.text = Servicefile.shared.petdoc[indexPath.row].doctor_name
             cell.label_clinic.text = Servicefile.shared.petdoc[indexPath.row].clinic_name
@@ -294,6 +304,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.image_shop.image = image
                 }
             }
+            if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
+                cell.image_fav.image = UIImage(named: imagelink.fav_true)
+            }else {
+                cell.image_fav.image = UIImage(named: imagelink.fav_false)
+            }
             cell.view_main.dropShadow()
             cell.label_product.text = Servicefile.shared.petnewprod[indexPath.row].product_title
             cell.label_category.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
@@ -312,7 +327,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         if self.col_banner == collectionView {
             return CGSize(width: self.view.frame.size.width , height:  100)
         }else if self.col_service == collectionView {
-            return CGSize(width: 100 , height:  100)
+            return CGSize(width: 110 , height:  110)
         }else if self.col_shop_banner == collectionView {
             return CGSize(width: 260 , height:  80)
         }else if self.col_vet == collectionView {
@@ -513,7 +528,8 @@ extension petloverDashboardViewController {
                             let Dicspec = specialization[specialization.count-1] as! NSDictionary
                             let spec = Dicspec["specialization"] as? String ?? ""
                             let clinic_name = Bval["clinic_name"] as? String ?? ""
-                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name))
+                            let fav = Bval["fav"] as? Bool ?? false
+                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name, Ifav : fav))
                         }
                         Servicefile.shared.petnewprod.removeAll()
                         let Products_details = dash["Products_details"] as! NSArray

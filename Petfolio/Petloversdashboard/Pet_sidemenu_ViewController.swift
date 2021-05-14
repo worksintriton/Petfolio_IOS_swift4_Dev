@@ -15,8 +15,8 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
     
-    var labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Settings", "Logout"]
-    var imgmenu = ["Like","Doc","Calendar","Discount","Medical History","Setting", "Exit"]
+    var labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Settings", "Logout"]
+    var imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","Setting", "Exit"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +58,12 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Petlover_myorder_ViewController") as! Petlover_myorder_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Notification"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Favorities"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sidemenu_favlist_ViewController") as! pet_sidemenu_favlist_ViewController
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Medical History"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_medical_history_ViewController") as! pet_medical_history_ViewController

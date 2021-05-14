@@ -116,7 +116,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="rwB-vV-kGF" secondAttribute="bottom" constant="120" id="0vR-fd-anu"/>
                             <constraint firstItem="Tph-n1-2UU" firstAttribute="top" secondItem="mKr-LW-K9w" secondAttribute="top" constant="8" id="3PC-Rh-Xd4"/>
@@ -154,6 +154,11 @@
             <point key="canvasLocation" x="242.0289855072464" y="150.66964285714286"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="fXC-k3-A66">
+            <size key="intrinsicContentSize" width="80" height="12"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="grey_paw" width="12" height="10"/>

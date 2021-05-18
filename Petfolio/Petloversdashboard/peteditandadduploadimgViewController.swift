@@ -23,6 +23,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     var uploadimage = Servicefile.sample_img
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_continue.view_cornor()
         Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
         self.coll_img_list.delegate = self
         self.coll_img_list.dataSource = self
@@ -105,8 +106,8 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
               if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                  let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-               self.upload(imagedata: reimage!)
+                  //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
+               self.upload(imagedata: pickedImg)
               }
                 dismiss(animated: true, completion: nil)
           }

@@ -17,17 +17,17 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var view_skip_btn: UIView!
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
-    var petlist = [""]
+    var petlist = ["1","2","3"]
     var demodata = [{}]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
-        self.petlist.removeAll()
+        //self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
-        self.getdemo()
+        //self.getdemo()
         // Do any additional setup after loading the view.
     }
     
@@ -45,13 +45,14 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
         cell.pettitle.text = ""
         print("image path",self.petlist[indexPath.row])
-        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
-            if (error != nil) {
-                cell.petimage.image = UIImage(named: "sample")
-            } else {
-                cell.petimage.image = image
-            }
-        }
+//        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
+//            if (error != nil) {
+                cell.petimage.image = UIImage(named: "logo")
+                cell.petimage.contentMode = .scaleAspectFit
+//            } else {
+//                cell.petimage.image = image
+//            }
+//        }
         return cell
     }
     
@@ -70,6 +71,15 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                 Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
+                    if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
+                    Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                    }else{
+                        Servicefile.shared.my_ref_code = ""
+                    }
+                }else{
+                    Servicefile.shared.my_ref_code = ""
+                }
                 
                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.user_type == "1" {

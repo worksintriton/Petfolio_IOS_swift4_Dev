@@ -16,7 +16,6 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var view_new: UIView!
     @IBOutlet weak var view_completed: UIView!
     @IBOutlet weak var view_missed: UIView!
-    @IBOutlet weak var view_footer: UIView!
     
     @IBOutlet weak var label_new: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
@@ -29,6 +28,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var view_refresh: UIView!
     @IBOutlet weak var label_failedstatus: UILabel!
     
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var view_popalert: UIView!
     @IBOutlet weak var label_popalert_details: UILabel!
     @IBOutlet weak var view_btn_yes: UIView!
@@ -37,10 +37,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     var indextag = 0
     var statussel = ""
     
+    @IBOutlet weak var sp_header: petowner_header!
     var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.inital_setup()
         self.label_nodata.isHidden = true
         self.view_popalert.isHidden = true
         self.view_popalert.view_cornor()
@@ -66,6 +67,29 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.tblview_applist.dataSource = self
         // Do any additional setup after loading the view.
         
+    }
+    
+    func inital_setup(){
+        self.sp_header.btn_sidemenu.addTarget(self, action: #selector(self.spsidemenu), for: .touchUpInside)
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.sp_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.sp_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.sp_header.image_profile.image = image
+            }
+        }
+        self.sp_header.label_location.text = Servicefile.shared.shiplocation
+        self.sp_header.image_profile.layer.cornerRadius = self.sp_header.image_profile.frame.height / 2
+        self.sp_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     }
     
     @objc func refresh(){
@@ -625,5 +649,32 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             self.alert(Message: "No Intenet Please check and try again ")
         }
         
+    }
+}
+
+extension UIViewController {
+    @objc func spsidemenu(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func spcartpage(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_vendorcartpage_ViewController") as! sp_vendorcartpage_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func spshop(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_shop_dashboard_ViewController") as! sp_shop_dashboard_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func spDashboard(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func spprofile(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
 }

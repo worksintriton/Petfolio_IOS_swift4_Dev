@@ -15,18 +15,25 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-     var labelmenu = ["My Appointment","My calender","Manage Services","My Orders","Favourities","My Coupons", "Logout"]
-       var imgmenu = ["Calendar", "calender-menu", "manage", "myOrder", "Like", "Discount", "Exit"]
+     var labelmenu = [""]
+       var imgmenu = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Servicefile.shared.my_ref_code != "" {
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+        }else{
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit"]
+        }
+        
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
     
        @IBAction func action_edit(_ sender: Any) {
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
@@ -58,8 +65,14 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
         self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Orders" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_myorder_ViewController") as! sp_myorder_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Manage Services" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Notification"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             UserDefaults.standard.set("", forKey: "userid")

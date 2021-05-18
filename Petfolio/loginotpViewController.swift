@@ -154,6 +154,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                             Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
                                                            Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
                                                            Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                                                            Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
                                                            let userid = user_details["_id"] as? String ?? ""
                                                            UserDefaults.standard.set(userid, forKey: "userid")
                                                            
@@ -186,6 +187,26 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                      print("success data",res)
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
+                                                        let user_details = res["Data"] as! NSDictionary
+                                                         Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                                                         Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                                                         Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                                                         Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                                                         Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                                                         Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                                                         Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                                                         Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
+                                                        UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
+                                                        UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
+                                                        UserDefaults.standard.set(Servicefile.shared.last_name, forKey: "last_name")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_email, forKey: "user_email")
+                                                        UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
+                                                        UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
+                                                        UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
+                                                        UserDefaults.standard.set(Servicefile.shared.my_ref_code, forKey: "my_ref_code")
+                                                        let userid = user_details["_id"] as? String ?? ""
+                                                        UserDefaults.standard.set(userid, forKey: "userid")
                                                        if Servicefile.shared.user_type == "1" {
                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
                                                                                       self.present(vc, animated: true, completion: nil)

@@ -16,11 +16,18 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
-     var labelmenu = ["Customer  Orders","Manage Product","My Orders","Favourities","My Coupons","Report","Settings", "Logout"]
-       var imgmenu = ["myOrder", "shop-1", "myOrder", "Like", "Discount","Report", "Setting", "Exit"]
+     var labelmenu = [""]
+       var imgmenu = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Servicefile.shared.my_ref_code != "" {
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+        }else{
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit"]
+        }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self

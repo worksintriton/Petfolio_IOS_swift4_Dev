@@ -251,6 +251,12 @@ class Servicefile {
     static let pet_fav_doc = baseurl + "/api/doctor_fav/getlist_id"
     static let pet_fav_service = baseurl + "/api/sp_fav/getlist_id"
     static let pet_fav_product = baseurl + "/api/product_fav/getlist_id"
+    
+    static let Doc_fav_product = baseurl + "/api/doctor_fav/getlist_id"
+    
+    static let pet_payment_details = baseurl + "/api/appointments/doctor/petlover_payment"
+    static let doc_payment_details = baseurl + "/api/appointments/doctor_payment"
+    
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -285,6 +291,7 @@ class Servicefile {
     var user_email = ""
     var user_phone = ""
     var date_of_reg = ""
+    var my_ref_code = ""
     var user_type = ""
     var otp = ""
     var userid = ""

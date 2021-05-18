@@ -29,6 +29,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.moredocd.removeAll()
         //self.view_care.view_cornor()
         self.callsearchlist()
         self.noofdoc.text = "0"
@@ -184,6 +185,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callsearchlist(){
+        Servicefile.shared.moredocd.removeAll()
       print("user_id" , Servicefile.shared.userid,
         "search_string", self.textfield_search.text!,
          "communication_type", self.comm_type)
@@ -233,11 +235,21 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                             self.refreshControl.endRefreshing()
                                                            self.stopAnimatingActivityIndicator()
                                                         }else{
+                                                            if  Servicefile.shared.moredocd.count ==  0{
+                                                                 self.label_nodata.isHidden = false
+                                                            }else{
+                                                                 self.label_nodata.isHidden = true
+                                                            }
                                                           self.stopAnimatingActivityIndicator()
                                                           print("status code service denied")
                                                         }
                                                       break
                                                   case .failure(let Error):
+                                                    if  Servicefile.shared.moredocd.count ==  0{
+                                                         self.label_nodata.isHidden = false
+                                                    }else{
+                                                         self.label_nodata.isHidden = true
+                                                    }
                                                       self.stopAnimatingActivityIndicator()
                                                       print("Can't Connect to Server / TimeOut",Error)
                                                       break

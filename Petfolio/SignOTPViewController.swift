@@ -137,6 +137,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                         Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
                         Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                       
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -167,6 +168,19 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
+                    let user_details = res["Data"] as! NSDictionary
+                   // let user_details = Data["user_details"] as! NSDictionary
+                    Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
+                    Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
+                    Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""
+                    Servicefile.shared.user_phone = user_details["user_phone"] as? String ?? ""
+                    Servicefile.shared.user_type = String(user_details["user_type"] as? Int ?? 0)
+                    Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
+                    Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
+                    Servicefile.shared.userid  = user_details["_id"] as? String ?? ""
+                    Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
+                    Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
+                    
                     UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                     UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                     UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
@@ -175,6 +189,9 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(Servicefile.shared.user_phone, forKey: "user_phone")
                     UserDefaults.standard.set(Servicefile.shared.userimage, forKey: "user_image")
                     UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
+                    UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
+                    UserDefaults.standard.set(Servicefile.shared.my_ref_code, forKey: "my_ref_code")
+                    
                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                     Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                     Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
@@ -183,6 +200,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                     Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                     Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
+                    Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
                     self.callSkipupdatestatus()
                     self.stopAnimatingActivityIndicator()
                 }else{

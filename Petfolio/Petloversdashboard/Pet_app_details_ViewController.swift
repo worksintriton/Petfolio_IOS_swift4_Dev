@@ -19,6 +19,8 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_confrence: UIView!
     @IBOutlet weak var image_pet_img: UIImageView!
     
+    @IBOutlet weak var label_visittype: UILabel!
+    @IBOutlet weak var image_emergency: UIImageView!
     @IBOutlet weak var view_address_details: UIView!
     @IBOutlet weak var label_address_details: UILabel!
     @IBOutlet weak var view_address: UIView!
@@ -42,15 +44,20 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     
+    @IBOutlet weak var label_pethandle: UILabel!
     @IBOutlet weak var view_footer: petowner_footerview!
     
     @IBOutlet weak var view_reshedule: UIView!
     @IBOutlet weak var view_btn_shedule: UIView!
     
+    @IBOutlet weak var view_home_address: UIView!
+    @IBOutlet weak var view_data_home_address: UIView!
+    @IBOutlet weak var label_home_address_details: UILabel!
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.image_emergency.isHidden = true
         //self.view_home.view_cornor()
         self.intial_setup_action()
         self.image_holder_name.view_cornor()
@@ -296,6 +303,24 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                             self.view_reshedule.isHidden = true
+                            let appointment_types = data["appointment_types"] as? String ?? ""
+                            if appointment_types == "Emergency" {
+                                self.image_emergency.isHidden = false
+                            }else{
+                                self.image_emergency.isHidden = true
+                            }
+                            let visit_type = data["visit_type"] as? String ?? ""
+                            self.label_visittype.text =  visit_type
+                            if visit_type == "Home"  {
+                                self.view_home_address.isHidden = false
+                                self.view_data_home_address.isHidden = false
+                                let visit_type_data = res["Address"] as! NSDictionary
+                                 let location = visit_type_data["location_address"] as? String ?? ""
+                                self.label_home_address_details.text = location
+                            }else{
+                                self.view_home_address.isHidden = true
+                                self.view_data_home_address.isHidden = true
+                            }
                             let appoinment_status = data["appoinment_status"] as? String ?? ""
                             if appoinment_status == "Incomplete" {
                                 let reshedule_status = data["reshedule_status"] as? String ?? ""
@@ -316,7 +341,27 @@ class Pet_app_details_ViewController: UIViewController {
                             let doc_busi = doc_business_info[0] as! NSDictionary
                             let clinic_loc  = doc_busi["clinic_loc"] as? String ?? ""
                             let doctor_id = data["doctor_id"] as! NSDictionary
-                            
+                            let pet_handle = doc_busi["pet_handled"] as! NSArray
+                            var petha = ""
+                            for i in 0..<pet_handle.count{
+                                let pethan = pet_handle[i] as! NSDictionary
+                                let val = pethan["pet_handled"] as? String ?? ""
+                                if i == 0 {
+                                    if i == pet_handle.count-1 {
+                                        petha = val + "."
+                                    }else{
+                                        petha = val + ", "
+                                    }
+                                    
+                                }else  if i == pet_handle.count-1 {
+                                    petha = petha + val + "."
+                                }else{
+                                    petha = petha + ", " + val
+                                }
+                                
+                            }
+                            self.label_pethandle.text = petha
+                            self.label_pethandle.sizeToFit()
                             let _id  = doctor_id["_id"] as? String ?? ""
                             
                             Servicefile.shared.doc_detail_id = _id

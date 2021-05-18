@@ -156,6 +156,43 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
         self.callgotocart()
     }
     
+    
+    @IBAction func action_fav_unfav(_ sender: Any) {
+        self.callfav()
+    }
+    
+    
+    func callfav(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_shop_fav, method: .post, parameters:
+            ["product_id": Servicefile.shared.product_id,"user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.callproddeal()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
+    
      func numberOfSections(in collectionView: UICollectionView) -> Int {
             return 1
         }
@@ -267,9 +304,9 @@ extension Doc_productdetails_ViewController {
                         self.product_fav = data["product_fav"] as? Bool ?? false
                         self.image_like.isHidden = false
                         if self.product_fav {
-                            self.image_like.image = UIImage(named: imagelink.favtrue)
+                            self.image_like.image = UIImage(named: imagelink.fav_true)
                         }else{
-                            self.image_like.image = UIImage(named: imagelink.favfalse)
+                            self.image_like.image = UIImage(named: imagelink.fav_false)
                         }
                         self.product_img = data["product_img"] as! [String]
                         self.pagecontroller.numberOfPages = self.product_img.count

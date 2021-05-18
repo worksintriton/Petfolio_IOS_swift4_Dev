@@ -1030,8 +1030,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: reimage!)
+            //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
+            self.upload(imagedata: pickedImg)
         }
         dismiss(animated: true, completion: nil)
     }

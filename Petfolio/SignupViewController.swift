@@ -19,6 +19,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ViewChangeUtype: UIView!
     @IBOutlet weak var viewcoun: UIView!
     
+    @IBOutlet weak var textfield_refrealcode: UITextField!
     @IBOutlet weak var usertypetitle: UILabel!
     @IBOutlet weak var textfield_fname: UITextField!
     @IBOutlet weak var textfield_lastname: UITextField!
@@ -45,6 +46,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.Viewotp.view_cornor()
         self.ViewChangeUtype.view_cornor()
         self.viewcoun.view_cornor()
+        self.textfield_refrealcode.delegate = self
         self.textfield_phno.delegate = self
         self.textfield_email.delegate = self
         self.textfield_fname.delegate = self
@@ -163,6 +165,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             Servicefile.shared.email_status = false
             Servicefile.shared.email_status_label = "Verify email"
             self.label_emailstatus.text = Servicefile.shared.email_status_label
+        }else if self.textfield_refrealcode == textField {
+            if self.textfield_refrealcode.text!.count > 6 {
+                self.textfield_refrealcode.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 6)
+                self.self.textfield_refrealcode.resignFirstResponder()
+            }else{
+                 self.self.textfield_refrealcode.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
+            }
         }
     }
     
@@ -223,6 +232,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
              "user_phone": Servicefile.shared.checktextfield(textfield: self.textfield_phno.text!),
              "user_type" : Servicefile.shared.user_type_value,
              "date_of_reg": Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
+             "ref_code" : self.textfield_refrealcode.text!,
              "mobile_type" : "IOS",
              "user_email_verification": Servicefile.shared.email_status], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
@@ -242,6 +252,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
                         Servicefile.shared.userid  = user_details["_id"] as? String ?? ""
                         Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
+                       
                         if Servicefile.shared.userid != "" {
                             self.stopAnimatingActivityIndicator()
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController

@@ -715,8 +715,8 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: reimage!)
+            //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
+            self.upload(imagedata: pickedImg)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -856,8 +856,8 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_register, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
              "sp_loc": self.locationaddress,
-             "sp_lat": self.latitude!,
-             "sp_long": self.longitude!,
+             "sp_lat": Servicefile.shared.sp_lat,
+             "sp_long": Servicefile.shared.sp_long,
              "bus_user_name": Servicefile.shared.first_name,
              "bus_user_email": Servicefile.shared.user_email,
              "profile_status": true,

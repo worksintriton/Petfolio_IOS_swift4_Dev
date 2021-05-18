@@ -72,6 +72,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        print("referal code :",Servicefile.shared.my_ref_code)
     }
     
     func intial_setup_action(){
@@ -205,6 +206,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.col_vet.dataSource = self
         self.col_shop.delegate = self
         self.col_shop.dataSource = self
+        self.col_banner.isPagingEnabled = true
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

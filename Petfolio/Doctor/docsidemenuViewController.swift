@@ -17,11 +17,18 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
 //    var labelmenu = ["My calender", "Logout"]
 //    var imgmenu = ["Calendar", "Exit"]
     
-    var labelmenu = ["My Appointment","Notification","My calender","Manage Services","My Orders","Favourities","My Coupons", "Logout"]
-    var imgmenu = ["Calendar","Bell","calender-menu", "manage", "myOrder", "Like", "Discount", "Exit"]
+    var labelmenu = [""]
+    var imgmenu = [""]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Servicefile.shared.my_ref_code != "" {
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+        }else{
+            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout"]
+            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit"]
+        }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         
@@ -64,8 +71,14 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_myorderdetails_ViewController") as! doc_myorderdetails_ViewController
             self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Favourities"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_favlist_ViewController") as! doc_favlist_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Payment Details"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_paymentdetilsViewController") as! doc_paymentdetilsViewController
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Manage Services" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_update_details_ViewController") as! Doc_update_details_ViewController

@@ -46,6 +46,7 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     
+    @IBOutlet weak var label_visittype: UILabel!
     @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var view_home_address: UIView!
     @IBOutlet weak var view_data_home_address: UIView!
@@ -301,7 +302,7 @@ class Doc_detailspage_ViewController: UIViewController {
                                 }
                             }
                         }
-                        let visit_type = data["visit_type"] as? String ?? ""
+                       
                         self.view_address.isHidden = false
                         self.view_address_details.isHidden = false
                         let doc_business_info = data["doc_business_info"] as! NSArray
@@ -309,7 +310,8 @@ class Doc_detailspage_ViewController: UIViewController {
                             let doc_info = doc_business_info[0] as! NSDictionary
                             self.label_address_details.text = doc_info["clinic_loc"] as? String ?? ""
                         }
-                        
+                        let visit_type = data["visit_type"] as? String ?? ""
+                        self.label_visittype.text =  visit_type
                         if visit_type == "Home"  {
                             self.view_home_address.isHidden = false
                             self.view_data_home_address.isHidden = false

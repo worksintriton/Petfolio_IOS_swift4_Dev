@@ -28,7 +28,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             
             override func viewDidLoad() {
                 super.viewDidLoad()
-                intial_setup_action()
+                self.intial_setup_action()
                 self.view_shadow.isHidden = true
                 self.view_alert.isHidden = true
                 self.view_alert.view_cornor()

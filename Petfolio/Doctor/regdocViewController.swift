@@ -662,8 +662,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_backtologin(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(vc, animated: true, completion: nil)
+        self.pushtologin()
     }
     
     

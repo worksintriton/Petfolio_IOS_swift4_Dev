@@ -180,8 +180,4 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
             self.alert(Message: "No Intenet Please check and try again ")
         }
     }
-    
-    
-    
-   
 }

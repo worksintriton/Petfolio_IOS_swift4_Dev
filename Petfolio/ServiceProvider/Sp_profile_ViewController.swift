@@ -22,7 +22,8 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var label_special: UILabel!
     @IBOutlet weak var label_myservices: UILabel!
     
-    @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var coll_bussi_img: UICollectionView!
     
     var ismenu = ["0"]
@@ -30,16 +31,32 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.view_footer.view_cornor()
         self.view_img_user.view_cornor()
         self.coll_bussi_img.delegate = self
         self.coll_bussi_img.dataSource = self
     }
     
-    @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
-                                 self.present(vc, animated: true, completion: nil)
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_header_title.text = "Profile"
+        self.view_header.label_header_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.view_profile.isHidden = true
+        self.view_header.view_sos.isHidden = true
+        self.view_header.view_bel.isHidden = true
+        self.view_header.view_bag.isHidden = true
+    // header action
+    // footer action
+        self.view_footer.setup(b1: false, b2: true, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
+    // footer action
     }
+    
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,7 +156,8 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     @IBAction func action_manageaddress(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_manageaddressViewController") as! sp_manageaddressViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     func callSp_details(){

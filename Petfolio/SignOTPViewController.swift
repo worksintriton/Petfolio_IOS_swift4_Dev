@@ -33,7 +33,10 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
               }
     
-
+    @IBAction func action_back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {

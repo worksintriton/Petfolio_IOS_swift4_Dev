@@ -53,7 +53,7 @@ class doc_ProductdealsViewController: UIViewController , UICollectionViewDelegat
     // header action
     // footer action
         self.view_footer.setup(b1: false, b2: true, b3: false)
-        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     // footer action
     }

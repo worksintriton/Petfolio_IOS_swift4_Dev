@@ -66,7 +66,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
         // Do any additional setup after loading the view.
-        
+       
     }
     
     func inital_setup(){
@@ -566,6 +566,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         let profile_status = Data["profile_status"] as? Bool ?? false
                         let calender_status = Data["calender_status"] as? Bool ?? false
                         print("profile_status",profile_status)
+                        
                         if profile_status == false {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
                             self.present(vc, animated: true, completion: nil)
@@ -580,6 +581,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                 let Message = res["Message"] as? String ?? ""
                                 self.label_failedstatus.text = Message
                             }else{
+                                self.call_list_shipping_address()
                                 self.view_shadow.isHidden = true
                                 self.view_popup.isHidden = true
                                 if self.appointtype == "New" {
@@ -644,6 +646,42 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                     break
                 }
             }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+        
+    }
+    
+    func call_list_shipping_address(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_shiping_address_list, method: .post, parameters:
+                                                                    ["user_id":Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                Servicefile.shared.shipaddresslist.removeAll()
+                                                                                let data = res["Data"] as! NSDictionary
+                                                                                let id = data["_id"] as? String ?? ""
+                                                                                if id != "" {
+                                                                                    let location_city =  data["location_city"] as? String ?? ""
+                                                                                    Servicefile.shared.shiplocation = location_city
+                                                                                    self.sp_header.label_location.text = Servicefile.shared.shiplocation
+                                                                                }
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }
+                                                                            break
+                                                                        case .failure(let _):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            
+                                                                            break
+                                                                        }
+                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")

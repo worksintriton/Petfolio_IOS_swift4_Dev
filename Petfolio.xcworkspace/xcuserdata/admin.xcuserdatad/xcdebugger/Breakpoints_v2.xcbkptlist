@@ -190,8 +190,8 @@
             filePath = "Petfolio/Petloversdashboard/SP/pet_sp_CreateApp_ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
             landmarkName = "checkappointdetails()"
             landmarkType = "7">
          </BreakpointContent>
@@ -530,6 +530,86 @@
             endingLineNumber = "43"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC7B0F59-AC10-4C2C-857F-6B9748AD44B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/ServiceProvider/sp_shop_shippingaddressViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B6CB2B0-EBDF-4C00-996B-E36C5F2B4F97"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/ServiceProvider/sp_editshippingaddress_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/ServiceProvider/Sp_profile_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "action_manageaddress(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b453"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetFolio.Sp_profile_ViewController.action_manageaddress(Any) -&gt; ()"
+                  moduleName = "PetFolio"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/R&amp;D/Petfolio/Petfolio/ServiceProvider/Sp_profile_ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b453"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetFolio.Sp_profile_ViewController.action_manageaddress(Any) -&gt; ()"
+                  moduleName = "PetFolio"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/R&amp;D/Petfolio/Petfolio/ServiceProvider/Sp_profile_ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "368">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

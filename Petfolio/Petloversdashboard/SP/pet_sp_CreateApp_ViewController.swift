@@ -312,7 +312,12 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_petname.text = Servicefile.shared.pet_petlist[index].pet_name
             self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
             self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
-            self.textfield_petage.text = String(Servicefile.shared.pet_petlist[index].pet_age)
+            let age = String(Servicefile.shared.pet_petlist[index].pet_age)
+            if age != "" {
+                self.textfield_petage.text = String(Servicefile.shared.pet_petlist[index].pet_age)
+            }else{
+                self.textfield_petage.text = "0"
+            }
             self.textfield_weight.text = String(Servicefile.shared.pet_petlist[index].pet_weight)
             self.textfield_color.text = String(Servicefile.shared.pet_petlist[index].pet_color)
             self.textfield_petname.isUserInteractionEnabled = false

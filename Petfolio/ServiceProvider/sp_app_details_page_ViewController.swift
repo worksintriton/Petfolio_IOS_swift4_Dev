@@ -29,6 +29,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     @IBOutlet weak var label_payment_method: UILabel!
     @IBOutlet weak var label_ordercost: UILabel!
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var label_vaccinated: UILabel!
     @IBOutlet weak var label_age: UILabel!
     @IBOutlet weak var label_weight: UILabel!
@@ -39,7 +40,8 @@ class sp_app_details_page_ViewController: UIViewController  {
     @IBOutlet weak var label_petname_details: UILabel!
     
     @IBOutlet weak var view_complete_cancel: UIView!
-    @IBOutlet weak var view_footer: UIView!
+    
+    @IBOutlet weak var view_footer: doc_footer!
     
     @IBOutlet weak var label_holder_servie_name: UILabel!
     @IBOutlet weak var label_holder_cost: UILabel!
@@ -48,6 +50,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
         self.view_footer.view_cornor()
@@ -66,6 +69,23 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.view_address.isHidden = true
         self.view_address_details.isHidden = true
        
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_header_title.text = "My Appointment"
+        self.view_header.label_header_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.view_profile.isHidden = true
+        self.view_header.view_sos.isHidden = true
+        self.view_header.view_bel.isHidden = true
+        self.view_header.view_bag.isHidden = true
+    // header action
+    // footer action
+        self.view_footer.setup(b1: false, b2: true, b3: false)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
+    // footer action
     }
    
     

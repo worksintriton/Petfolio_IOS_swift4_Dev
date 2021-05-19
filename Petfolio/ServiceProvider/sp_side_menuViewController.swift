@@ -65,6 +65,9 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         if self.labelmenu[indexPath.row] == "My calender" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
         self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Favorities" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_favlist_ViewController") as! sp_favlist_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_myorder_ViewController") as! sp_myorder_ViewController
             self.present(vc, animated: true, completion: nil)

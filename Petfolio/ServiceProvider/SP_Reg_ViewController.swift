@@ -22,6 +22,8 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var Img_uploadarea = "clinic"
     var locationaddress = ""
     
+    
+    @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var view_Bus_name: UIView!
     @IBOutlet weak var view_addservice: UIView!
     @IBOutlet weak var view_Service_Btn_add: UIView!
@@ -51,7 +53,14 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var view_govid_close: UIView!
     
     @IBOutlet weak var textview_spaddress: UITextView!
+    @IBOutlet weak var view_add_service: UIView!
+    @IBOutlet weak var view_certifi: UIView!
     
+    @IBOutlet weak var view_govid: UIView!
+    @IBOutlet weak var view_photoid: UIView!
+    @IBOutlet weak var view_gallary_img: UIView!
+    @IBOutlet weak var view_add_spec: UIView!
+    @IBOutlet weak var view_spece: UIView!
     @IBOutlet weak var view_clinicaddress: UIView!
     
     var selservice = ["0"]
@@ -66,6 +75,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.callcornor()
         self.textview_spaddress.delegate = self
         self.calllocationcheck()
         self.cleardata()
@@ -78,6 +88,31 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view_photo_id_close.layer.cornerRadius =  self.view_photo_id_close.frame.size.height / 2
         self.view_govid_close.layer.cornerRadius =  self.view_govid_close.frame.size.height / 2
        
+    }
+    
+    func callcornor(){
+        self.intial_setup_action()
+        self.view_Bus_name.view_cornor()
+        self.view_addservice.view_cornor()
+        self.view_add_service.view_cornor()
+        self.view_spece.view_cornor()
+        self.view_add_spec.view_cornor()
+        self.view_clinicaddress.view_cornor()
+        self.view_gallary_img.view_cornor()
+        self.view_photoid.view_cornor()
+        self.view_govid.view_cornor()
+        self.view_certifi.view_cornor()
+        self.view_submit.view_cornor()
+    }
+    
+    //Service provider business
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Service provider Business"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
+    // header action
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -138,22 +173,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     @IBAction func action_back(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "userid")
-        UserDefaults.standard.set("", forKey: "usertype")
-        UserDefaults.standard.set("", forKey: "userid")
-        UserDefaults.standard.set("", forKey: "usertype")
-        UserDefaults.standard.set("", forKey: "first_name")
-        UserDefaults.standard.set("", forKey: "last_name")
-        UserDefaults.standard.set("", forKey: "user_email")
-        UserDefaults.standard.set("", forKey: "user_phone")
-        UserDefaults.standard.set("", forKey: "user_image")
-        UserDefaults.standard.set("", forKey: "user_image")
-        UserDefaults.standard.set(false, forKey: "email_status")
-        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
-        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(vc, animated: true, completion: nil)
-        
+        self.pushtologin()
     }
     
     func collectiondelegate(){

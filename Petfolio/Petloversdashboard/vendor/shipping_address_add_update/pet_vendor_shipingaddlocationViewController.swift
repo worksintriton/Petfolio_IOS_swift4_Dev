@@ -111,6 +111,18 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
                    firstVC.viewWillAppear(true)
                   }
               }
+        
+        if let firstVC = presentingViewController as? doc_editshippingaddressViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        
+        if let firstVC = presentingViewController as? sp_editshippingaddress_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
     }
     
     @IBAction func action_switch(_ sender: UISwitch) {

@@ -206,13 +206,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     @IBAction func action_back(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "userid")
-        UserDefaults.standard.set("", forKey: "usertype")
-        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
-        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(vc, animated: true, completion: nil)
-        
+        self.pushtologin()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -677,4 +671,24 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         }
     }
     
+}
+
+extension UIViewController {
+    func pushtologin(){
+        UserDefaults.standard.set("", forKey: "userid")
+        UserDefaults.standard.set("", forKey: "usertype")
+        UserDefaults.standard.set("", forKey: "userid")
+        UserDefaults.standard.set("", forKey: "usertype")
+        UserDefaults.standard.set("", forKey: "first_name")
+        UserDefaults.standard.set("", forKey: "last_name")
+        UserDefaults.standard.set("", forKey: "user_email")
+        UserDefaults.standard.set("", forKey: "user_phone")
+        UserDefaults.standard.set("", forKey: "user_image")
+        UserDefaults.standard.set("", forKey: "user_image")
+        UserDefaults.standard.set(false, forKey: "email_status")
+        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(vc, animated: true, completion: nil)
+    }
 }

@@ -93,6 +93,8 @@
 		845C10B82601C5630003A038 /* vendor_complete_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C10B72601C5630003A038 /* vendor_complete_TableViewCell.swift */; };
 		845C10BC2601C5840003A038 /* vendor_missed_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C10BB2601C5840003A038 /* vendor_missed_TableViewCell.swift */; };
 		845C10FA2601E03B0003A038 /* order_cancel_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C10F92601E03B0003A038 /* order_cancel_TableViewCell.swift */; };
+		846EF11A2655305100EEF4DA /* header_title.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846EF1192655305100EEF4DA /* header_title.xib */; };
+		846EF11E2655307D00EEF4DA /* header_title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846EF11D2655307D00EEF4DA /* header_title.swift */; };
 		847194162631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847194142631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.swift */; };
 		847194172631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847194152631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.xib */; };
 		847194202631ACDE00FEA91E /* vendor_orderdetails_dispathorder_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8471941E2631ACDE00FEA91E /* vendor_orderdetails_dispathorder_TableViewCell.swift */; };
@@ -417,6 +419,8 @@
 		845C10B72601C5630003A038 /* vendor_complete_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_complete_TableViewCell.swift; sourceTree = "<group>"; };
 		845C10BB2601C5840003A038 /* vendor_missed_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_missed_TableViewCell.swift; sourceTree = "<group>"; };
 		845C10F92601E03B0003A038 /* order_cancel_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = order_cancel_TableViewCell.swift; sourceTree = "<group>"; };
+		846EF1192655305100EEF4DA /* header_title.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = header_title.xib; sourceTree = "<group>"; };
+		846EF11D2655307D00EEF4DA /* header_title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = header_title.swift; sourceTree = "<group>"; };
 		847194142631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_orderDetails_neworder_TableViewCell.swift; sourceTree = "<group>"; };
 		847194152631AC1000FEA91E /* vendor_orderDetails_neworder_TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vendor_orderDetails_neworder_TableViewCell.xib; sourceTree = "<group>"; };
 		8471941E2631ACDE00FEA91E /* vendor_orderdetails_dispathorder_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_orderdetails_dispathorder_TableViewCell.swift; sourceTree = "<group>"; };
@@ -832,6 +836,7 @@
 		844169F8261EF935001B9A2A /* modelview */ = {
 			isa = PBXGroup;
 			children = (
+				846EF1182655301F00EEF4DA /* header_alone_with_back */,
 				8402B9CA264A87AC009DDFC0 /* Doctor_footer */,
 				84F4281926392DF800880D76 /* petowner_subpage_header */,
 				847194392631B0D600FEA91E /* petowner_mainpages_headerview */,
@@ -857,6 +862,15 @@
 				B0658EBC25C27CA10074C2D1 /* WebRTC.xcframework */,
 			);
 			path = otherFramewoks;
+			sourceTree = "<group>";
+		};
+		846EF1182655301F00EEF4DA /* header_alone_with_back */ = {
+			isa = PBXGroup;
+			children = (
+				846EF1192655305100EEF4DA /* header_title.xib */,
+				846EF11D2655307D00EEF4DA /* header_title.swift */,
+			);
+			path = header_alone_with_back;
 			sourceTree = "<group>";
 		};
 		8471941C2631AC9F00FEA91E /* vendor_orderDetails_neworder */ = {
@@ -1443,6 +1457,7 @@
 				8413E95F2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.xib in Resources */,
 				847194332631AD7300FEA91E /* vendor_orderdetails_status_TableViewCell.xib in Resources */,
 				84416A1D261F06E6001B9A2A /* petowner_footerview.xib in Resources */,
+				846EF11A2655305100EEF4DA /* header_title.xib in Resources */,
 				B094D272255D6221008400D6 /* Futura XBlk BT.ttf in Resources */,
 				8402B9B5264A439F009DDFC0 /* select_medi_TableViewCell.xib in Resources */,
 				84F4281B26392E2700880D76 /* petowner_otherpage_header.xib in Resources */,
@@ -1660,6 +1675,7 @@
 				84096EA7262FE4CE00BB2EAF /* pet_dashboard_shop_banner_CollectionViewCell.swift in Sources */,
 				84B1DA1A2602066A00AEEB2C /* vendor_orderstatus_ViewController.swift in Sources */,
 				843387FF264BA046001443EC /* doc_manageaddress_ViewController.swift in Sources */,
+				846EF11E2655307D00EEF4DA /* header_title.swift in Sources */,
 				B02D3A8F259359080010A4B6 /* Sp_profile_ViewController.swift in Sources */,
 				B020D0AA25878641008F5C7B /* SOSViewController.swift in Sources */,
 				B02AA437259D97EC00A94990 /* pet_new_dashboard_ViewController.swift in Sources */,

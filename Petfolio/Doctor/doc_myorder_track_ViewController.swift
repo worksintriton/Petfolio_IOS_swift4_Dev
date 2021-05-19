@@ -177,13 +177,10 @@ class doc_myorder_track_ViewController: UIViewController, UITableViewDelegate, U
     // header action
     // footer action
         self.view_footer.setup(b1: false, b2: true, b3: false)
-        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     // footer action
     }
-    
-    
-    
     
     override func viewWillDisappear(_ animated: Bool) {
             if let firstVC = presentingViewController as? vendor_myorder_ViewController {
@@ -191,9 +188,7 @@ class doc_myorder_track_ViewController: UIViewController, UITableViewDelegate, U
                        firstVC.viewWillAppear(true)
                       }
                   }
-       }
-   
-    
+    }
    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

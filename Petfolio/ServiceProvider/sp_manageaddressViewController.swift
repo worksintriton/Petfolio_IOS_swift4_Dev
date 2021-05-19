@@ -49,9 +49,9 @@ class sp_manageaddressViewController: UIViewController, UITableViewDelegate, UIT
         
         func intial_setup_action(){
         // header action
-            self.view_subpage_header.label_header_title.text = "Shop"
+            self.view_subpage_header.label_header_title.text = "Manage Address"
             self.view_subpage_header.label_header_title.textColor = .white
-            self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+            self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
             self.view_subpage_header.view_profile.isHidden = true
             self.view_subpage_header.view_sos.isHidden = true
             self.view_subpage_header.view_bel.isHidden = true
@@ -59,8 +59,8 @@ class sp_manageaddressViewController: UIViewController, UITableViewDelegate, UIT
         // header action
         // footer action
             self.view_footer.setup(b1: false, b2: true, b3: false)
-            self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
-            self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
         // footer action
         }
         
@@ -194,7 +194,7 @@ class sp_manageaddressViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.long = 0.0
             Servicefile.shared.lati = 0.0
             Servicefile.shared.locaaccess = "Add"
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doclocationsettingViewController") as! doclocationsettingViewController
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_locationsetting_ViewController") as! sp_locationsetting_ViewController
             self.present(vc, animated: true, completion: nil)
         }
         

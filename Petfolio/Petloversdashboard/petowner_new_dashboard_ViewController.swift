@@ -447,6 +447,9 @@ extension UIViewController {
     @objc func action_back(sender: UIButton){
         self.dismiss(animated: true, completion: nil)
     }
+    @objc func action_backlogin(sender: UIButton){
+        self.pushtologin()
+    }
 }
 
 

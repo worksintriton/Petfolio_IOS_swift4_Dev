@@ -170,12 +170,7 @@ class pet_other_information_ViewController: UIViewController {
         self.callSkipupdatestatus()
     }
     @IBAction func action_back(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "userid")
-        UserDefaults.standard.set("", forKey: "usertype")
-        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
-        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(vc, animated: true, completion: nil)
+        self.pushtologin()
         
     }
     

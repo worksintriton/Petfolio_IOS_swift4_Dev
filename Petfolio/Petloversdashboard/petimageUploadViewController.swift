@@ -33,6 +33,9 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func action_back(_ sender: Any) {
+        self.pushtologin()
+    }
     func checkimagecontent(intval : Int){
         let petimage = Servicefile.shared.petlistimg
             if petimage.count > 0 {

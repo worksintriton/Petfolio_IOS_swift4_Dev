@@ -50,15 +50,20 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_reshedule: UIView!
     @IBOutlet weak var view_btn_shedule: UIView!
     
+    @IBOutlet weak var view_prescription: UIView!
+    @IBOutlet weak var view_main_prescrip: UIView!
     @IBOutlet weak var view_home_address: UIView!
     @IBOutlet weak var view_data_home_address: UIView!
     @IBOutlet weak var label_home_address_details: UILabel!
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
+    @IBOutlet weak var label_app_bookAndTime: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.image_emergency.isHidden = true
+        self.view_main_prescrip.isHidden = true
         //self.view_home.view_cornor()
+        self.view_prescription.view_cornor()
         self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
@@ -110,7 +115,7 @@ class Pet_app_details_ViewController: UIViewController {
             
         }
         self.call_getdetails()
-        
+        print("pet image")
     }
     
     
@@ -139,6 +144,13 @@ class Pet_app_details_ViewController: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_app_details_doc_calender_ViewController") as! pet_app_details_doc_calender_ViewController
         self.present(vc, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func action_prescription(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @IBAction func action_start_confrence(_ sender: Any) {
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].start_appointment_status == "In-Progress" {
@@ -248,7 +260,9 @@ class Pet_app_details_ViewController: UIViewController {
                         let data = res["Data"] as! NSDictionary
                         self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                            Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
                             Servicefile.shared.Doc_details_app_id = data["_id"] as? String ?? ""
+                            self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
                             self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
                             Servicefile.shared.doc_details_date = self.label_orderdate.text!
                             let comm_type = data["communication_type"] as? String ?? ""
@@ -294,14 +308,7 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_breed.text = pet_id["pet_breed"] as? String ?? ""
                             self.label_petType.text = pet_id["pet_type"] as? String ?? ""
                             self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
-                            let petimage = pet_id["pet_img"] as? String ?? Servicefile.sample_img
-                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
-                                if (error != nil) {
-                                    self.image_pet_img.image = UIImage(named: "sample")
-                                } else {
-                                    self.image_pet_img.image = image
-                                }
-                            }
+                            
                             self.view_reshedule.isHidden = true
                             let appointment_types = data["appointment_types"] as? String ?? ""
                             if appointment_types == "Emergency" {
@@ -310,14 +317,16 @@ class Pet_app_details_ViewController: UIViewController {
                                 self.image_emergency.isHidden = true
                             }
                             let visit_type = data["visit_type"] as? String ?? ""
-                            self.label_visittype.text =  visit_type
+                            
                             if visit_type == "Home"  {
+                                self.label_visittype.text =  visit_type
                                 self.view_home_address.isHidden = false
                                 self.view_data_home_address.isHidden = false
                                 let visit_type_data = res["Address"] as! NSDictionary
                                  let location = visit_type_data["location_address"] as? String ?? ""
                                 self.label_home_address_details.text = location
                             }else{
+                                self.label_visittype.text =  "Online"
                                 self.view_home_address.isHidden = true
                                 self.view_data_home_address.isHidden = true
                             }
@@ -330,17 +339,26 @@ class Pet_app_details_ViewController: UIViewController {
                                     self.view_reshedule.isHidden = true
                                 }
                             }
-                            let user_id = data["user_id"] as! NSDictionary
-                            let firstname = user_id["first_name"] as? String ?? ""
-                            let lastname = user_id["last_name"] as? String ?? ""
-                            let userimage = user_id["profile_img"] as? String ?? ""
-                            self.label_holder_name.text = firstname + " " + lastname
+                            
+                            self.view_main_prescrip.isHidden = true
+                            if appoinment_status == "Completed" {
+                                self.view_main_prescrip.isHidden = false
+                            }else{
+                                self.view_main_prescrip.isHidden = true
+                            }
+                          
+                            
                             //self.label_holder_servie_name.isHidden = true
                             let amt = data["amount"] as? String ?? ""
                             let doc_business_info = data["doc_business_info"] as! NSArray
                             let doc_busi = doc_business_info[0] as! NSDictionary
                             let clinic_loc  = doc_busi["clinic_loc"] as? String ?? ""
                             let doctor_id = data["doctor_id"] as! NSDictionary
+                           
+                            let firstname = doctor_id["first_name"] as? String ?? ""
+                            let lastname = doctor_id["last_name"] as? String ?? ""
+                            let userimage = doctor_id["profile_img"] as? String ?? ""
+                            self.label_holder_name.text = firstname + " " + lastname
                             let pet_handle = doc_busi["pet_handled"] as! NSArray
                             var petha = ""
                             for i in 0..<pet_handle.count{
@@ -359,6 +377,21 @@ class Pet_app_details_ViewController: UIViewController {
                                     petha = petha + ", " + val
                                 }
                                 
+                            }
+                            let petimage = pet_id["pet_img"] as! NSArray
+                            if petimage.count > 0 {
+                                let petdic = petimage[0] as! NSDictionary
+                                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                                
+                                self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
+                                    if (error != nil) {
+                                        self.image_pet_img.image = UIImage(named: "sample")
+                                    } else {
+                                        self.image_pet_img.image = image
+                                    }
+                                }
+                            }else{
+                                self.image_pet_img.image = UIImage(named: "sample")
                             }
                             self.label_pethandle.text = petha
                             self.label_pethandle.sizeToFit()
@@ -379,6 +412,7 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                         }else{
+                            self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
                             self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
                             self.view_confrence.isHidden = true
                             self.label_order_id.text = data["payment_id"] as? String ?? ""
@@ -394,20 +428,27 @@ class Pet_app_details_ViewController: UIViewController {
                                 self.label_vaccinated.text = "No"
                                 self.view_vacc_date.isHidden = true
                             }
-                            self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                            self.label_age.text = pet_id["pet_age"] as? String ?? "0"
                             self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
                             self.label_color.text = pet_id["pet_color"] as? String ?? ""
                             self.label_gender.text = pet_id["pet_gender"] as? String ?? ""
                             self.label_breed.text = pet_id["pet_breed"] as? String ?? ""
                             self.label_petType.text = pet_id["pet_type"] as? String ?? ""
                             self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
-                            let petimage = pet_id["pet_img"] as? String ?? Servicefile.sample_img
-                            self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
-                                if (error != nil) {
-                                    self.image_pet_img.image = UIImage(named: "sample")
-                                } else {
-                                    self.image_pet_img.image = image
+                            let petimage = pet_id["pet_img"] as! NSArray
+                            if petimage.count > 0 {
+                                let petdic = petimage[0] as! NSDictionary
+                                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                                
+                                self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
+                                    if (error != nil) {
+                                        self.image_pet_img.image = UIImage(named: "sample")
+                                    } else {
+                                        self.image_pet_img.image = image
+                                    }
                                 }
+                            }else{
+                                self.image_pet_img.image = UIImage(named: "sample")
                             }
                             let user_id = data["user_id"] as! NSDictionary
                             let firstname = user_id["first_name"] as? String ?? ""

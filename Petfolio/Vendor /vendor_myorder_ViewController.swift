@@ -18,8 +18,10 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var view_new: UIView!
     @IBOutlet weak var view_completed: UIView!
     @IBOutlet weak var view_missed: UIView!
-    @IBOutlet weak var view_footer: UIView!
+   
     
+    @IBOutlet weak var view_header: vendor_header!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var label_new: UILabel!
     @IBOutlet weak var label_nodata: UILabel!
     
@@ -38,6 +40,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         Servicefile.shared.ordertype = "current"
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
@@ -67,6 +70,32 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         // Do any additional setup after loading the view.
         
         
+    }
+    
+    func inital_setup(){
+        self.view_header.btn_sidemenu.addTarget(self, action: #selector(self.vendorsidemenu), for: .touchUpInside)
+        var img = Servicefile.shared.userimage
+        if img != "" {
+            img = Servicefile.shared.userimage
+        }else{
+            img = Servicefile.sample_img
+        }
+        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.view_header.image_profile.image = UIImage(named: "b_sample")
+            } else {
+                self.view_header.image_profile.image = image
+            }
+        }
+        self.view_header.label_title.text = "My Orders"
+        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        self.view_header.view_profile.layer.cornerRadius = self.view_header.view_profile.frame.height / 2
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.label_Fprocess_two.text = "Products"
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
@@ -777,6 +806,22 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+extension UIViewController {
+    @objc func vendorsidemenu(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_sidemenu_ViewController") as! vendor_sidemenu_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func vendorprofile(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_sidemenu_ViewController") as! vendor_sidemenu_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func vendorproduct(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_manage_product_ViewController") as! vendor_manage_product_ViewController
         self.present(vc, animated: true, completion: nil)
     }
 }

@@ -27,6 +27,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         self.Viewactionotp.view_cornor()
         self.Viewactionotp.dropShadow()
         self.Viewotp.dropShadow()
+        self.textfield_otp.addDoneButtonToKeyboard(myAction: #selector(self.textfield_otp.resignFirstResponder))
          self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))

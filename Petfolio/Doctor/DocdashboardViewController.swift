@@ -25,7 +25,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var label_completed: UILabel!
     @IBOutlet weak var label_missed: UILabel!
     @IBOutlet weak var view_shadow: UIView!
-    @IBOutlet weak var view_popup: UIView!
+    @IBOutlet weak var view_popp: UIView!
     @IBOutlet weak var view_refresh: UIView!
     @IBOutlet weak var label_failedstatus: UILabel!
     
@@ -48,10 +48,10 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.view_missed.view_cornor()
         //self.view_footer.view_cornor()
         self.view_completed.view_cornor()
-        self.view_popup.view_cornor()
+        self.view_popp.view_cornor()
         self.view_refresh.view_cornor()
         self.view_shadow.isHidden = true
-        self.view_popup.isHidden = true
+        self.view_popp.isHidden = true
         self.view_close_btn.isHidden = true
         self.view_completed.layer.borderWidth = 0.5
         self.view_missed.layer.borderWidth = 0.5
@@ -81,11 +81,14 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
         self.doc_header.label_location.text = Servicefile.shared.shiplocation
+        
         self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
-        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
+        self.doc_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
+        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
        // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     @objc func refresh(){
@@ -98,7 +101,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_close(_ sender: Any) {
-        self.view_popup.isHidden = true
+        self.view_popp.isHidden = true
         self.view_shadow.isHidden = true
     }
     
@@ -139,11 +142,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_complete.addTarget(self, action: #selector(action_complete), for: .touchUpInside)
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
             cell.btn_online.addTarget(self, action: #selector(action_online), for: .touchUpInside)
-            if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
-                cell.image_emergnecy.isHidden = false
-            }else{
-                cell.image_emergnecy.isHidden = true
-            }
+            
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].Booked_at
             cell.labe_comMissed.text = "Booked on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -168,7 +167,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                 cell.label_status_val.isHidden = true
             } else if  Servicefile.shared.Doc_dashlist[indexPath.row].appoint_patient_st == "Patient Not Available" {
                 cell.label_status_val.text = "No show"
-            } else if  Servicefile.shared.Doc_dashlist[indexPath.row].appoint_patient_st == "Petowner Cancelled appointment" {
+            } else if  Servicefile.shared.Doc_dashlist[indexPath.row].appoint_patient_st == "Patient Appointment Cancelled" {
                 cell.label_status_val.text = "Not available"
             } else {
                  cell.label_status_val.text = "Not available"
@@ -181,8 +180,14 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             cell.label_completedon.textColor = UIColor.red
             cell.labe_comMissed.textColor = UIColor.red
         }
+        if Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status == "Emergency" {
+            cell.image_emergnecy.isHidden = false
+        }else{
+            cell.image_emergnecy.isHidden = true
+        }
         cell.btn_pres.tag = indexPath.row
         cell.btn_pres.addTarget(self, action: #selector(action_pres), for: .touchUpInside)
+        cell.view_pres.view_cornor()
         cell.view_completebtn.view_cornor()
         cell.view_cancnel.view_cornor()
         cell.View_mainview.layer.borderWidth = 0.2
@@ -191,7 +196,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
         cell.img_petimg.image = UIImage(named: "sample")
         cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
-        
+        cell.label_servicename.text = Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
         let petimage = Servicefile.shared.Doc_dashlist[indexPath.row].pet_img
         if petimage.count > 0 {
             let petdic = petimage[0] as! NSDictionary
@@ -210,7 +215,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             cell.img_petimg.image = UIImage(named: "sample")
         }
-       
+        cell.View_mainview.view_cornor()
+        cell.img_petimg.view_cornor()
         return cell
     }
     
@@ -373,13 +379,13 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-//                            let comm_type = dataitm["communication_type"] as? String ?? ""
-//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let comm_type = dataitm["communication_type"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
                             var docimg = ""
-                            var pet_name = ""
+                            //var pet_name = ""
                             if doc_business_info.count > 0 {
                                 let doc_business = doc_business_info[0] as! NSDictionary
                                 let clinic_pic = doc_business["clinic_pic"] as! NSArray
@@ -387,16 +393,17 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                     let imgdata = clinic_pic[0] as! NSDictionary
                                     docimg = imgdata["clinic_pic"] as? String ?? Servicefile.sample_img
                                 }
-                                pet_name = doc_business["clinic_name"] as? String ?? ""
+                               // pet_name = doc_business["clinic_name"] as? String ?? ""
                             }
                             let petdetail = dataitm["pet_id"] as! NSDictionary
                             let petid = petdetail["_id"] as? String ?? ""
-                            let pet_type = petdetail["pet_name"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -446,13 +453,13 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-//                            let comm_type = dataitm["communication_type"] as? String ?? ""
-//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let comm_type = dataitm["communication_type"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
                             var docimg = ""
-                            var pet_name = ""
+                           // var pet_name = ""
                             if doc_business_info.count > 0 {
                                 let doc_business = doc_business_info[0] as! NSDictionary
                                 let clinic_pic = doc_business["clinic_pic"] as! NSArray
@@ -460,16 +467,17 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                     let imgdata = clinic_pic[0] as! NSDictionary
                                     docimg = imgdata["clinic_pic"] as? String ?? Servicefile.sample_img
                                 }
-                                pet_name = doc_business["clinic_name"] as? String ?? ""
+                                //pet_name = doc_business["clinic_name"] as? String ?? ""
                             }
                             let petdetail = dataitm["pet_id"] as! NSDictionary
                             let petid = petdetail["_id"] as? String ?? ""
-                            let pet_type = petdetail["pet_name"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -518,13 +526,13 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let completed_at = dataitm["completed_at"] as? String ?? ""
                             let missed_at = dataitm["missed_at"] as? String ?? ""
                             let appointment_types = dataitm["appointment_types"] as? String ?? ""
-//                            let comm_type = dataitm["communication_type"] as? String ?? ""
-//                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
+                            let comm_type = dataitm["communication_type"] as? String ?? ""
+                            let appoint_patient_st = dataitm["appoint_patient_st"] as? String ?? ""
                             let user_rate = dataitm["user_rate"] as? String ?? ""
                             let user_feedback = dataitm["user_feedback"] as? String ?? ""
                             let doc_business_info = dataitm["doc_business_info"] as! NSArray
                             var docimg = ""
-                            var pet_name = ""
+                            // var pet_name = ""
                             if doc_business_info.count > 0 {
                                 let doc_business = doc_business_info[0] as! NSDictionary
                                 let clinic_pic = doc_business["clinic_pic"] as! NSArray
@@ -532,16 +540,17 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                     let imgdata = clinic_pic[0] as! NSDictionary
                                     docimg = imgdata["clinic_pic"] as? String ?? Servicefile.sample_img
                                 }
-                                pet_name = doc_business["clinic_name"] as? String ?? ""
+                                // pet_name = doc_business["clinic_name"] as? String ?? ""
                             }
                             let petdetail = dataitm["pet_id"] as! NSDictionary
                             let petid = petdetail["_id"] as? String ?? ""
-                            let pet_type = petdetail["pet_name"] as? String ?? ""
+                            let pet_name = petdetail["pet_name"] as? String ?? ""
+                            let pet_type = petdetail["pet_type"] as? String ?? ""
                             let pet_breed = petdetail["pet_breed"] as? String ?? ""
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: "", In_commtype : "", In_appointment_UID : appointment_UID))
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : "", In_appointment_UID : appointment_UID))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -641,19 +650,19 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let profile_verification_status = Data["profile_verification_status"] as? String ?? ""
                             if profile_verification_status == "Not verified" {
                                 self.view_shadow.isHidden = false
-                                self.view_popup.isHidden = false
+                                self.view_popp.isHidden = false
                                 let Message = res["Message"] as? String ?? ""
                                 self.label_failedstatus.text = Message
                             }else if profile_verification_status == "profile updated" {
                                 self.view_shadow.isHidden = false
-                                self.view_popup.isHidden = false
+                                self.view_popp.isHidden = false
                                 self.view_close_btn.isHidden = false
                                 let Message = res["Message"] as? String ?? ""
                                 self.label_failedstatus.text = Message
                             }else{
                                 self.view_shadow.isHidden = true
-                                self.view_popup.isHidden = true
-                                
+                                self.view_popp.isHidden = true
+                                self.call_list_shipping_address()
                                 if self.appointtype == "New" {
                                     self.callnew()
                                 }else if self.appointtype == "Complete"{
@@ -763,6 +772,16 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
 extension UIViewController {
     @objc func docsidemenu(sender : UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func docprofile(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func docmanageaddress(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
         self.present(vc, animated: true, completion: nil)
     }
     

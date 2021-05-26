@@ -87,9 +87,12 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.sp_header.label_location.text = Servicefile.shared.shiplocation
         self.sp_header.image_profile.layer.cornerRadius = self.sp_header.image_profile.frame.height / 2
         self.sp_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+        self.sp_header.btn_location.addTarget(self, action: #selector(self.spmanageaddress), for: .touchUpInside)
+        self.sp_header.btn_button2.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
        // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     @objc func refresh(){
@@ -566,7 +569,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         let profile_status = Data["profile_status"] as? Bool ?? false
                         let calender_status = Data["calender_status"] as? Bool ?? false
                         print("profile_status",profile_status)
-                        
+                        self.call_list_shipping_address()
                         if profile_status == false {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
                             self.present(vc, animated: true, completion: nil)
@@ -693,6 +696,11 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 extension UIViewController {
     @objc func spsidemenu(sender : UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func spmanageaddress(sender : UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_manageaddressViewController") as! sp_manageaddressViewController
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -50,7 +50,8 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         }
         self.view_header.label_location.text = Servicefile.shared.shiplocation
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
-        self.view_header.btn_profile.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
+        self.view_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
         self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.view_header.btn_button2.addTarget(self, action: #selector(self.doccartpage), for: .touchUpInside)
         

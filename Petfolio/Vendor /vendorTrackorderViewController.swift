@@ -54,6 +54,8 @@ class vendorTrackorderViewController: UIViewController {
     @IBOutlet weak var view_return_status_pathline: UIView!
     @IBOutlet weak var image_return_status: UIImageView!
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var view_return: UIView!
     @IBOutlet weak var label_return: UILabel!
     @IBOutlet weak var image_return: UIImageView!
@@ -94,6 +96,7 @@ class vendorTrackorderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         self.view_intransit_pathline.isHidden = true
         self.view_return.isHidden = true
         self.view_return_status.isHidden = true
@@ -124,6 +127,23 @@ class vendorTrackorderViewController: UIViewController {
         self.view_intransit_pathline.backgroundColor = UIColor.gray
         self.view_return_pathline.backgroundColor = UIColor.gray
         self.callgetstatuslist()
+    }
+    
+    func inital_setup(){
+        // header action
+            self.view_header.label_header_title.text = "Track Order"
+            self.view_header.label_header_title.textColor = .white
+            self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+            self.view_header.view_sos.isHidden = true
+            self.view_header.view_bag.isHidden = true
+        // header action
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.label_Fprocess_two.text = "Products"
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     @IBAction func action_back(_ sender: Any) {

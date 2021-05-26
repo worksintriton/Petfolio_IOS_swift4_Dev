@@ -105,7 +105,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view_submit.view_cornor()
     }
     
-    //Service provider business
+   
     
     func intial_setup_action(){
     // header action

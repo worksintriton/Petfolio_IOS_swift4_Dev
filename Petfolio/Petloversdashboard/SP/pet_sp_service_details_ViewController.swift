@@ -62,7 +62,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if col_pet_ser == collectionView {
-            return Servicefile.shared.sp_bus_service_list.count
+            return Servicefile.shared.sp_bus_spec_list.count
         }else{
             return Servicefile.shared.sp_bus_service_galldicarray.count
         }
@@ -93,6 +93,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                            cell.img_banner.image = image
                        }
                    }
+            
                    cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
 //        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell

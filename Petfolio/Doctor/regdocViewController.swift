@@ -71,6 +71,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var view_expire: UIView!
     @IBOutlet weak var datepicker_expdate: UIDatePicker!
     
+    @IBOutlet weak var view_txt_educa: UIView!
     
     var issubmit = false
     
@@ -110,16 +111,22 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     var latitude : Double!
     var longitude : Double!
     
+    @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_action: UIView!
     @IBOutlet weak var view_communi: UIView!
     
+    @IBOutlet weak var view_digital: UIView!
+    @IBOutlet weak var view_add_edu: UIView!
+    @IBOutlet weak var view_date_edu: UIView!
     @IBOutlet weak var view_clear_signature: UIView!
     @IBOutlet weak var view_get_sign: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setdesign()
+        self.intial_setup_action()
         self.digisignature = ""
         self.set_signa_image(strimage: self.digisignature)
          
@@ -210,6 +217,36 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.calllocationcheck()
     }
     
+    func setdesign(){
+        self.view_edudate.view_cornor()
+        self.view_education.view_cornor()
+        self.view_txt_educa.view_cornor()
+        self.view_date_edu.view_cornor()
+        self.view_add_edu.view_cornor()
+        self.view_experience.view_cornor()
+        self.view_experience_company.view_cornor()
+        self.view_experience_from.view_cornor()
+        self.view_experience_to.view_cornor()
+        self.view_experience_add.view_cornor()
+        self.view_speciali.view_cornor()
+        self.view_pethandle.view_cornor()
+        self.view_clinicaddress.view_cornor()
+        self.view_clinic.view_cornor()
+        self.view_certificate.view_cornor()
+        self.view_govtid.view_cornor()
+        self.view_photoid.view_cornor()
+        self.view_digital.view_cornor()
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Doctor Business Info"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
+    // header action
+    }
+    
     @objc func hidetbl() {
         if  self.issubmit {
             self.view_shadow.isHidden = false
@@ -248,7 +285,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     
@@ -666,6 +702,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    @IBAction func action_movetocalender(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -758,14 +798,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    func spilit_string_data(array_string: String)-> String{
-        var str = array_string.split(separator: ".")
-        if str.last == "pdf" {
-            return "pdf"
-        }else{
-            return ""
-        }
-    }
+   
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if coll_govtid == collectionView {
@@ -1324,9 +1357,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     if Code == 200 {
                         self.issubmit = true
                         //let Data = res["Data"] as! NSDictionary
-                        self.view_popup.isHidden = false
-                        self.view_shadow.isHidden = false
-                        //self.callupdatestatus()
+                        self.callupdatestatus()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -1345,6 +1376,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func spilit_string_data(array_string: String)-> String{
+        var str = array_string.split(separator: ".")
+        if str.last == "pdf" {
+            return "pdf"
+        }else{
+            return ""
+        }
+    }
+    
     func callupdatestatus(){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.updatestatus, method: .post, parameters:
@@ -1356,7 +1396,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        
+                        self.view_popup.isHidden = false
+                        self.view_shadow.isHidden = false
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -1507,3 +1548,4 @@ extension regdocViewController { // location setup
     }
     
 }
+

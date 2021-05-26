@@ -52,7 +52,7 @@ class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegat
              Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.view_prescription_create, method: .post, parameters: [
-        "Appointment_ID": Servicefile.shared.pet_apoint_id ]
+        "Appointment_ID": Servicefile.shared.pet_apoint_id]
            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                 switch (response.result) {
                                                 case .success:
@@ -60,7 +60,7 @@ class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegat
                                                       print("success data",res)
                                                       let Code  = res["Code"] as! Int
                                                       if Code == 200 {
-                                                         let Data = res["Data"] as! NSDictionary
+                                                        let Data = res["Data"] as? NSDictionary ?? ["":""]
                                                         let Prescription_data = Data["PDF_format"] as? String ?? ""
                                                         let str = Prescription_data
                                                         let myBlog = str

@@ -80,6 +80,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var view_return_pathline: UIView!
     @IBOutlet weak var tbl_status: UITableView!
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var view_status_popup: UIView!
     @IBOutlet weak var textview_status_reason: UITextView!
     @IBOutlet weak var view_update: UIView!
@@ -120,7 +121,8 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     var vendor_cancell_info = ""
     var vendor_complete_date = ""
     var vendor_complete_info = ""
-    @IBOutlet weak var view_footer: UIView!
+    
+    @IBOutlet weak var view_footer: doc_footer!
     
     @IBOutlet weak var view_status_alpha: UIView!
     var status_arr =  [""]
@@ -132,6 +134,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         self.view_footer.view_cornor()
         self.view_drop.view_cornor()
         self.view_update.view_cornor()
@@ -188,6 +191,24 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
         self.Label_status.text = "Select Order Status"
     }
     
+    
+    
+    func inital_setup(){
+        // header action
+            self.view_header.label_header_title.text = "Update status"
+            self.view_header.label_header_title.textColor = .white
+            self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+            self.view_header.view_sos.isHidden = true
+            self.view_header.view_bag.isHidden = true
+        // header action
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.label_Fprocess_two.text = "Products"
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
             if let firstVC = presentingViewController as? vendor_myorder_ViewController {

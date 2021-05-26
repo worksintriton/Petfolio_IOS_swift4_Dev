@@ -41,7 +41,7 @@
                                 <color key="textColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="order id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSG-Av-6EJ">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="order id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSG-Av-6EJ">
                                 <rect key="frame" x="109" y="10" width="240" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -53,14 +53,14 @@
                                 <color key="textColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdr-rn-a17">
-                                <rect key="frame" x="109" y="33.5" width="240" height="13"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="10"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdr-rn-a17">
+                                <rect key="frame" x="109" y="10" width="240" height="16"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                 <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="800 (2 items)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBR-Ht-waw">
-                                <rect key="frame" x="109" y="51.5" width="240" height="13"/>
+                                <rect key="frame" x="109" y="31" width="240" height="13"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -108,7 +108,6 @@
                             <constraint firstItem="C5D-KA-6M3" firstAttribute="centerY" secondItem="HMl-k0-e2x" secondAttribute="centerY" id="G0g-5o-YLc"/>
                             <constraint firstItem="gdr-rn-a17" firstAttribute="trailing" secondItem="DSG-Av-6EJ" secondAttribute="trailing" id="Kbz-jD-e8v"/>
                             <constraint firstItem="Cfs-FZ-fLh" firstAttribute="height" secondItem="AS1-cp-BLV" secondAttribute="height" id="NY7-yh-gYG"/>
-                            <constraint firstItem="gdr-rn-a17" firstAttribute="top" secondItem="DSG-Av-6EJ" secondAttribute="bottom" constant="5" id="NrX-MP-rMf"/>
                             <constraint firstItem="dum-Cl-dgE" firstAttribute="height" secondItem="gaJ-UG-dde" secondAttribute="height" id="P7h-3H-wYj"/>
                             <constraint firstItem="obQ-qq-GKK" firstAttribute="bottom" secondItem="1Zs-Kg-PfO" secondAttribute="bottom" id="RMi-cE-tTh"/>
                             <constraint firstItem="Cfs-FZ-fLh" firstAttribute="centerX" secondItem="AS1-cp-BLV" secondAttribute="centerX" id="Rgl-Tt-UmW"/>
@@ -132,6 +131,7 @@
                             <constraint firstItem="Lbq-Hn-IXV" firstAttribute="centerY" secondItem="HMl-k0-e2x" secondAttribute="centerY" id="sRw-2X-UaV"/>
                             <constraint firstAttribute="height" constant="140" id="vHe-Tn-Gep"/>
                             <constraint firstItem="1Zs-Kg-PfO" firstAttribute="leading" secondItem="gaJ-UG-dde" secondAttribute="leading" id="wCZ-rH-En5"/>
+                            <constraint firstItem="gdr-rn-a17" firstAttribute="top" secondItem="gaJ-UG-dde" secondAttribute="top" id="xCu-HK-4V8"/>
                             <constraint firstItem="C5D-KA-6M3" firstAttribute="height" secondItem="HMl-k0-e2x" secondAttribute="height" id="xLg-QE-LKM"/>
                             <constraint firstItem="obQ-qq-GKK" firstAttribute="centerY" secondItem="1Zs-Kg-PfO" secondAttribute="centerY" id="zWu-iC-NZ4"/>
                         </constraints>

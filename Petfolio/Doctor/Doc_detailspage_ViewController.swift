@@ -25,11 +25,14 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var view_address: UIView!
     @IBOutlet weak var label_home_address_details: UILabel!
     
+    @IBOutlet weak var label_pet_handle: UILabel!
     @IBOutlet weak var label_orderdate: UILabel!
     @IBOutlet weak var label_order_id: UILabel!
     @IBOutlet weak var label_payment_method: UILabel!
     @IBOutlet weak var label_ordercost: UILabel!
     
+    @IBOutlet weak var view_main_prescrip: UIView!
+    @IBOutlet weak var view_prescription: UIView!
     @IBOutlet weak var label_vaccinated: UILabel!
     @IBOutlet weak var label_age: UILabel!
     @IBOutlet weak var label_weight: UILabel!
@@ -39,21 +42,28 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var label_petType: UILabel!
     @IBOutlet weak var label_petname_details: UILabel!
     
+    @IBOutlet weak var label_pethandle: UILabel!
     @IBOutlet weak var view_complete_cancel: UIView!
     
+    @IBOutlet weak var view_emergency: UIView!
     @IBOutlet weak var label_holder_servie_name: UILabel!
     @IBOutlet weak var label_holder_cost: UILabel!
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     
+    @IBOutlet weak var label_app_bookAndTime: UILabel!
     @IBOutlet weak var label_visittype: UILabel!
     @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var view_home_address: UIView!
     @IBOutlet weak var view_data_home_address: UIView!
     @IBOutlet weak var view_footer: doc_footer!
+    @IBOutlet weak var view_home_dotted_line: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_emergency.isHidden = true
+        self.view_main_prescrip.isHidden = true
+        self.view_prescription.view_cornor()
         self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
@@ -108,6 +118,10 @@ class Doc_detailspage_ViewController: UIViewController {
     }
     
     
+    @IBAction func action_prescrption(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
     @IBAction func action_Start_confrence(_ sender: Any) {
@@ -241,14 +255,36 @@ class Doc_detailspage_ViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let data = res["Data"] as! NSDictionary
-                        
+                        Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
+                       
                         self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                        self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""
-                        if comm_type == "Online" || comm_type == "Online Or Visit"{
-                            self.view_confrence.isHidden = false
+                        let appoinment_status = data["appoinment_status"] as? String ?? ""
+                        if appoinment_status == "Incomplete" {
+                            if comm_type == "Online" || comm_type == "Online Or Visit"{
+                                self.view_confrence.isHidden = false
+                            }else{
+                                self.view_confrence.isHidden = true
+                            }
                         }else{
                             self.view_confrence.isHidden = true
                         }
+                        self.view_main_prescrip.isHidden = true
+                        if appoinment_status == "Completed" {
+                            self.view_main_prescrip.isHidden = false
+                        }else{
+                            self.view_main_prescrip.isHidden = true
+                        }
+                        
+                        self.view_emergency.isHidden = true
+                        let appointment_types = data["appointment_types"] as? String ?? ""
+                        if appointment_types == "Emergency" {
+                            self.view_emergency.isHidden = false
+                        }else{
+                            self.view_emergency.isHidden = true
+                        }
+                       
                         self.label_order_id.text = data["payment_id"] as? String ?? ""
                         self.label_payment_method.text = data["payment_method"] as? String ?? ""
                         self.label_ordercost.text = data["amount"] as? String ?? ""
@@ -262,7 +298,7 @@ class Doc_detailspage_ViewController: UIViewController {
                             self.label_vaccinated.text = "No"
                             self.view_vacc_date.isHidden = true
                         }
-                        self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                        self.label_age.text = pet_id["pet_age"] as? String ?? "0"
                         self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
                         self.label_color.text = pet_id["pet_color"] as? String ?? ""
                         self.label_gender.text = pet_id["pet_gender"] as? String ?? ""
@@ -309,19 +345,46 @@ class Doc_detailspage_ViewController: UIViewController {
                         if doc_business_info.count > 0 {
                             let doc_info = doc_business_info[0] as! NSDictionary
                             self.label_address_details.text = doc_info["clinic_loc"] as? String ?? ""
+                            let pet_handle = doc_info["pet_handled"] as! NSArray
+                            var petha = ""
+                            for i in 0..<pet_handle.count{
+                                let pethan = pet_handle[i] as! NSDictionary
+                                let val = pethan["pet_handled"] as? String ?? ""
+                                if i == 0 {
+                                    if i == pet_handle.count-1 {
+                                        petha = val + "."
+                                    }else{
+                                        petha = val + ", "
+                                    }
+                                    
+                                }else  if i == pet_handle.count-1 {
+                                    petha = petha + val + "."
+                                }else{
+                                    petha = petha + ", " + val
+                                }
+                                
+                            }
+                            self.label_pethandle.text = petha
+                            self.label_pethandle.sizeToFit()
                         }
+                      
                         let visit_type = data["visit_type"] as? String ?? ""
-                        self.label_visittype.text =  visit_type
+                       
                         if visit_type == "Home"  {
+                            self.label_visittype.text =  visit_type
                             self.view_home_address.isHidden = false
+                            self.view_home_dotted_line.isHidden = false
                             self.view_data_home_address.isHidden = false
                             let visit_type_data = res["Address"] as! NSDictionary
                              let location = visit_type_data["location_address"] as? String ?? ""
                             self.label_home_address_details.text = location
                         }else{
+                            self.label_visittype.text =  "Online"
                             self.view_home_address.isHidden = true
                             self.view_data_home_address.isHidden = true
+                            self.view_home_dotted_line.isHidden = true
                         }
+                        
                         
                         //                        {
                         //                            "__v" = 0;

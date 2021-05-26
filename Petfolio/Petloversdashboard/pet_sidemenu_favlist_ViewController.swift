@@ -46,6 +46,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -185,6 +186,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_vets.view_cornor()
             cell.image_vet.view_cornor()
             cell.view_main.view_cornor()
+            cell.view_main.layer.borderWidth = 0.3
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
             return cell
@@ -207,7 +209,9 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
 //
 //            cell.image_fav.image = Servicefile.shared.petdoc[indexPath.row].
             cell.view_main.dropShadow()
+            
             cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
+            cell.view_main.layer.borderWidth = 0.3
             cell.label_DR.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name
             cell.label_clinic.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_place
             cell.view_rating.rating = Double(Servicefile.shared.pet_SP_service_details[indexPath.row].rating_count)
@@ -225,7 +229,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_main.layer.borderColor = color.cgColor
          cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
          cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
          
             if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
              cell.image_fav.image = UIImage(named: imagelink.favtrue)
@@ -255,6 +259,9 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_rating.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate)!
          cell.label_vendor.text = ""
             cell.view_main.view_cornor()
+            cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
+            cell.contentView.layer.borderWidth = 0.3
+            cell.contentView.view_cornor()
         return cell
         }
     }

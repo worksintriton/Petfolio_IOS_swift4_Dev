@@ -46,7 +46,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    @IBOutlet weak var view_btn_ok: UIView!
     @IBOutlet weak var view_photoid_btn: UIView!
     @IBOutlet weak var view_govid_btn: UIView!
-    
+    @IBOutlet weak var view_header: header_title!
    var selservice = ["0"]
    var selspec = ["0"]
    var added_service = [""]
@@ -57,10 +57,19 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    
    override func viewDidLoad() {
        super.viewDidLoad()
+       self.intial_setup_action()
        self.call_protocals()
        self.added_service.removeAll()
        self.added_spec.removeAll()
    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Vendor Business Info"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
+    // header action
+    }
    
    func call_protocals(){
        self.call_delegates()
@@ -163,23 +172,23 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    
    @IBAction func action_gallary_pic_upload(_ sender: Any) {
         self.img_for = "Gall"
-       self.callgalaryprocess()
+       self.callgalaryimageprocess()
    }
    
    @IBAction func action_photo_upload(_ sender: Any) {
         self.img_for = "Photo"
-       self.callDocprocess()
+       self.callgalaryprocess()
    }
    
    @IBAction func action_gov_upload(_ sender: Any) {
        
         self.img_for = "Gov"
-        self.callDocprocess()
+    self.callgalaryprocess()
    }
    
    @IBAction func action_certificate_upload(_ sender: Any) {
        self.img_for = "Certi"
-        self.callDocprocess()
+    self.callgalaryprocess()
    }
    
   
@@ -248,9 +257,22 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         cell.btn_close.addTarget(self, action: #selector(action_gallrydic_close), for: .touchUpInside)
            return cell
        }else {
-               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
-           
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "certifi", for: indexPath) as! imgidCollectionViewCell
+        let imgdat = Servicefile.shared.certifdicarray[indexPath.row] as! NSDictionary
+        let strdat = imgdat["bus_certif"] as? String ?? Servicefile.sample_img
+        print("details",self.spilit_string_data(array_string: strdat))
+        if self.spilit_string_data(array_string: strdat) == "" {
+            cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    cell.Img_id.image = UIImage(named: Servicefile.sample_img)
+                } else {
+                    cell.Img_id.image = image
+                }
+            }
+        }else{
             cell.Img_id.image = UIImage(named: "pdf")
+        }
+        cell.view_close.layer.cornerRadius = cell.view_close.frame.height / 2
         cell.btn_close.tag = indexPath.row
         cell.btn_close.addTarget(self, action: #selector(action_certificate_close), for: .touchUpInside)
                return cell
@@ -274,23 +296,51 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
    }
    
    func setimag(){
-       if self.image_photo != "" {
-            self.view_photoid_btn.isHidden = false
-            self.image_photo_id.isHidden = false
-             self.image_photo_id.image = UIImage(named: "pdf")
-       }else{
+    //
+    if self.image_photo != "" {
+        self.image_photo_id.isHidden = false
+        let strdat = self.image_photo as? String ?? Servicefile.sample_img
+        if self.spilit_string_data(array_string: strdat) == "" {
+            self.image_photo_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.image_photo_id.image = UIImage(named: Servicefile.sample_img)
+                } else {
+                    self.image_photo_id.image = image
+                }
+            }
+        }else{
+            self.image_photo_id.image = UIImage(named: "pdf")
+        }
+        
+        self.view_photoid_btn.isHidden = false
+    }else{
+        self.image_photo_id.isHidden = true
         self.view_photoid_btn.isHidden = true
-            self.image_photo_id.isHidden = true
-       }
-       
-       if self.image_govid != "" {
-        self.view_govid_btn.isHidden = false
-            self.image_gov.isHidden = false
+    }
+    
+    if self.image_govid != "" {
+        self.image_gov.isHidden = false
+        let strdat = self.image_govid as? String ?? Servicefile.sample_img
+        if self.spilit_string_data(array_string: strdat) == "" {
+            self.image_gov.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.image_gov.image = UIImage(named: Servicefile.sample_img)
+                } else {
+                    self.image_gov.image = image
+                }
+            }
+        }else{
             self.image_gov.image = UIImage(named: "pdf")
-              }else{
-                   self.image_gov.isHidden = true
-                self.view_govid_btn.isHidden = true
-              }
+        }
+        self.image_gov.image = UIImage(named: "pdf")
+        self.view_govid_btn.isHidden = false
+    }else{
+        self.image_gov.isHidden = true
+        self.view_govid_btn.isHidden = true
+    }
+    
+    //
+    
     self.view_govid_btn.view_cornor()
     self.view_photoid_btn.view_cornor()
     self.image_gov.layer.cornerRadius = 8.0
@@ -318,7 +368,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
          present(importMenu, animated: true)
    }
    
-   func callgalaryprocess(){
+   func callgalaryimageprocess(){
        let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
              alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
                  self.imagepicker.allowsEditing = false
@@ -335,6 +385,36 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
              }))
              self.present(alert, animated: true, completion: nil)
    }
+    
+    func callgalaryprocess(){
+        let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .camera
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+            self.imagepicker.allowsEditing = false
+            self.imagepicker.sourceType = .photoLibrary
+            self.present(self.imagepicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Pick from Document", style: UIAlertAction.Style.default, handler: { action in
+            self.callDocprocess()
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            print("ok")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func spilit_string_data(array_string: String)-> String{
+        var str = array_string.split(separator: ".")
+        if str.last == "pdf" {
+            return "pdf"
+        }else{
+            return ""
+        }
+    }
    
    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
          guard let myURL = urls.first else {
@@ -391,6 +471,26 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                              Servicefile.shared.gallerydicarray = B
                              print("uploaded data in certifi",Servicefile.shared.gallerydicarray)
                           }
+                        if self.img_for == "Certi" {
+                            var B = Servicefile.shared.certifdicarray
+                            var arr = B
+                            let a = ["bus_certif":Data] as NSDictionary
+                            arr.append(a)
+                            B = arr
+                            print(B)
+                            Servicefile.shared.certifdicarray = B
+                            print("uploaded data in certifi",Servicefile.shared.certifdicarray)
+                        }
+                         
+                        if self.img_for == "Gov" {
+                         self.image_govid = Data
+                        }
+                         
+                        if self.img_for == "Photo" {
+                         self.image_photo = Data
+                        }
+                         
+                         self.coll_certificate.reloadData()
                        self.setimag()
                           self.stopAnimatingActivityIndicator()
                        self.coll_galary_img.reloadData()

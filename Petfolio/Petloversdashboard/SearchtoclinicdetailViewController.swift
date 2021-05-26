@@ -216,7 +216,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         if col_sepc_list == collectionView {
             return CGSize(width: col_sepc_list.frame.width / 2.1, height:  30)
         }else if col_pet_handle == collectionView {
-            return CGSize(width: self.pet_handle[indexPath.row].count * 10 + 20 , height:  30)
+            return CGSize(width: col_pet_handle.frame.width / 3.2 , height:  30)
         }else{
             return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
         }

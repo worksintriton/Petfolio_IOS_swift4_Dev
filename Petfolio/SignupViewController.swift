@@ -29,11 +29,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var label_emailstatus: UILabel!
     @IBOutlet weak var view_details: UIView!
     
+    @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var btn_email_verify: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         Servicefile.shared.checkemailvalid = "signup"
         self.viewemail.view_cornor()
         self.ViewFname.view_cornor()
@@ -59,6 +61,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         view_details.addGestureRecognizer(tap)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Sign up"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
+    // header action
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

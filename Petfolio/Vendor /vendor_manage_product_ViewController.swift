@@ -55,6 +55,8 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_lastview: UIView!
     
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: doc_footer!
     var discount = 0
     var dis_amt = 0
     var textdiscount = ""
@@ -66,6 +68,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         self.view_app_deal.isHidden = false
         self.label_apply_status.text = applylabelval
         self.view_discount_details.isHidden = true
@@ -118,6 +121,23 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.isstart = true
         Servicefile.shared.manageproductDic.removeAll()
         self.callgetproductdetails()
+    }
+    
+    func inital_setup(){
+        // header action
+            self.view_header.label_header_title.text = "Manage product"
+            self.view_header.label_header_title.textColor = .white
+            self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+            self.view_header.view_sos.isHidden = true
+            self.view_header.view_bag.isHidden = true
+        // header action
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.label_Fprocess_two.text = "Manage Products"
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     @objc func textFielddiscount_perunit(textField:UITextField) {

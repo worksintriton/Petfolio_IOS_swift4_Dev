@@ -107,16 +107,19 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_notification(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_profile(_ sender: Any) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {

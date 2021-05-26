@@ -179,6 +179,7 @@ class sp_myordertrack_ViewController: UIViewController, UITableViewDelegate, UIT
             self.view_footer.setup(b1: false, b2: true, b3: false)
             self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
             self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         // footer action
         }
         

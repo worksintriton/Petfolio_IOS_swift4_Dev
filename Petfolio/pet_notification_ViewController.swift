@@ -12,6 +12,7 @@ import Alamofire
 class pet_notification_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var tbl_notifi_list: UITableView!
     
     var selcted = ["0"]
@@ -25,6 +26,14 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
         self.orginal.removeAll()
         self.callnotification()
         // Do any additional setup after loading the view.
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Notifcation"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+    // header action
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

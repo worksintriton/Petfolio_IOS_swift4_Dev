@@ -25,7 +25,7 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaT-Z7-bc2">
-                                <rect key="frame" x="0.0" y="177" width="194" height="125"/>
+                                <rect key="frame" x="0.0" y="187" width="194" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. name name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW9-2d-Cja">
                                         <rect key="frame" x="8" y="8" width="182" height="17"/>
@@ -122,7 +122,7 @@
                             <constraint firstItem="Tph-n1-2UU" firstAttribute="top" secondItem="mKr-LW-K9w" secondAttribute="top" constant="8" id="3PC-Rh-Xd4"/>
                             <constraint firstItem="lHR-4X-AnY" firstAttribute="top" secondItem="mKr-LW-K9w" secondAttribute="top" id="50a-vE-tFR"/>
                             <constraint firstAttribute="trailing" secondItem="Tph-n1-2UU" secondAttribute="trailing" constant="8" id="73L-wj-b4K"/>
-                            <constraint firstAttribute="bottom" secondItem="PaT-Z7-bc2" secondAttribute="bottom" constant="10" id="C8i-rd-JqT"/>
+                            <constraint firstAttribute="bottom" secondItem="PaT-Z7-bc2" secondAttribute="bottom" id="C8i-rd-JqT"/>
                             <constraint firstItem="lHR-4X-AnY" firstAttribute="leading" secondItem="mKr-LW-K9w" secondAttribute="leading" id="EA1-Hd-2ga"/>
                             <constraint firstAttribute="trailing" secondItem="lHR-4X-AnY" secondAttribute="trailing" id="JD6-cE-VHW"/>
                             <constraint firstItem="PaT-Z7-bc2" firstAttribute="leading" secondItem="mKr-LW-K9w" secondAttribute="leading" id="LzL-iW-eDz"/>
@@ -150,6 +150,7 @@
                 <outlet property="label_vendor" destination="Yxc-Qg-IdM" id="oH9-IF-UHO"/>
                 <outlet property="view_main" destination="mKr-LW-K9w" id="jqs-lT-sZY"/>
                 <outlet property="view_rating" destination="fXC-k3-A66" id="KUX-I1-7Qd"/>
+                <outlet property="view_shopbag" destination="rwB-vV-kGF" id="BhR-8V-kZM"/>
             </connections>
             <point key="canvasLocation" x="242.0289855072464" y="150.66964285714286"/>
         </collectionViewCell>

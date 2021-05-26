@@ -219,7 +219,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             return cell
         }else if col_pet_handle == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as!  pet_handle_details_CollectionViewCell
-            cell.label_pet_handle.text = " " + self.pet_handle[indexPath.row]
+            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
             cell.view_pethandle.view_cornor()
             return cell
         }else{
@@ -241,7 +241,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         if col_sepc_list == collectionView {
             return CGSize(width: col_sepc_list.frame.width / 2.1, height:  30)
         }else if col_pet_handle == collectionView {
-            return CGSize(width: 100 , height:  30)
+            return CGSize(width: col_pet_handle.frame.width / 3.2 , height:  30)
         }else{
             return CGSize(width: self.coll_imgview.frame.size.width , height:  self.coll_imgview.frame.size.height)
         }

@@ -57,6 +57,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -64,7 +65,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
         self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
     // footer action
     }
@@ -183,7 +183,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_commissed.isHidden = false
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
-            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
+            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].completed_at
             cell.labe_comMissed.text = "Completion on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -191,7 +191,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
             cell.view_commissed.isHidden = false
-            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
+            cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].missed_at
             cell.labe_comMissed.text = "Cancelled on :"
             cell.label_completedon.textColor = UIColor.red
             cell.labe_comMissed.textColor = UIColor.red
@@ -201,7 +201,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                 cell.label_status_val.text = "Not available"
             } else if Servicefile.shared.pet_applist_do_sp[indexPath.row].appoint_patient_st == "Patient Not Available" {
                 cell.label_status_val.text = "Not available"
-            } else if Servicefile.shared.pet_applist_do_sp[indexPath.row].appoint_patient_st == "Petowner Cancelled appointment" {
+            } else if Servicefile.shared.pet_applist_do_sp[indexPath.row].appoint_patient_st == "Patient Appointment Cancelled" {
                 cell.label_status.isHidden = true
                 cell.label_status_val.isHidden = true
             } else {
@@ -307,7 +307,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 148
+        return 188
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

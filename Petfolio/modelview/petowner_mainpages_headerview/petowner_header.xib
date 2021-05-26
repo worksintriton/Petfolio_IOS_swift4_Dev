@@ -69,7 +69,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fM-Aq-cDI">
-                                    <rect key="frame" x="34" y="10" width="153.5" height="16"/>
+                                    <rect key="frame" x="34" y="2" width="153.5" height="32"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -89,9 +89,9 @@
                             <constraints>
                                 <constraint firstItem="8Sn-Kn-N3b" firstAttribute="top" secondItem="nm6-6M-9Mo" secondAttribute="top" id="1pr-0H-Mhm"/>
                                 <constraint firstItem="8Sn-Kn-N3b" firstAttribute="leading" secondItem="nm6-6M-9Mo" secondAttribute="leading" id="5hX-H5-v1u"/>
-                                <constraint firstItem="1fM-Aq-cDI" firstAttribute="top" secondItem="nm6-6M-9Mo" secondAttribute="top" constant="10" id="6Mi-gm-U6y"/>
+                                <constraint firstItem="1fM-Aq-cDI" firstAttribute="top" secondItem="nm6-6M-9Mo" secondAttribute="top" constant="2" id="6Mi-gm-U6y"/>
                                 <constraint firstItem="b33-Oh-doL" firstAttribute="leading" secondItem="nm6-6M-9Mo" secondAttribute="leading" constant="12" id="9qm-Uj-Hx3"/>
-                                <constraint firstAttribute="bottom" secondItem="1fM-Aq-cDI" secondAttribute="bottom" constant="10" id="M1x-2J-nb2"/>
+                                <constraint firstAttribute="bottom" secondItem="1fM-Aq-cDI" secondAttribute="bottom" constant="2" id="M1x-2J-nb2"/>
                                 <constraint firstItem="1fM-Aq-cDI" firstAttribute="leading" secondItem="b33-Oh-doL" secondAttribute="trailing" constant="10" id="aoe-Xd-D4T"/>
                                 <constraint firstAttribute="bottom" secondItem="8Sn-Kn-N3b" secondAttribute="bottom" id="d0F-C7-IwE"/>
                                 <constraint firstItem="b33-Oh-doL" firstAttribute="centerY" secondItem="nm6-6M-9Mo" secondAttribute="centerY" id="haS-6L-I3j"/>

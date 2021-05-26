@@ -27,6 +27,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     @IBOutlet weak var label_product_amt: UILabel!
     //@IBOutlet weak var label_shipping_address: UILabel!
     
+    @IBOutlet weak var image_orderdetails: UIImageView!
+    @IBOutlet weak var image_shipping_drop: UIImageView!
+    @IBOutlet weak var image_productdetails: UIImageView!
     @IBOutlet weak var view_productdetails: UIView!
     @IBOutlet weak var view_shipingaddress: UIView!
     @IBOutlet weak var label_ship_name: UILabel!
@@ -104,7 +107,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         self.tbl_prod_details.delegate = self
         self.tbl_prod_details.dataSource = self
         self.view_confirmall.isHidden = true
-       
+        self.image_orderdetails.image = UIImage(named: imagelink.down1)
+        self.image_shipping_drop.image = UIImage(named: imagelink.down1)
+        self.image_productdetails.image = UIImage(named: imagelink.up)
        
     }
     
@@ -123,7 +128,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-    // header action
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
@@ -296,9 +302,11 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         if isorderdetails {
             isorderdetails = false
             self.view_orderdetails.isHidden = true
+            self.image_orderdetails.image = UIImage(named: imagelink.down1)
         } else {
             isorderdetails = true
             self.view_orderdetails.isHidden = false
+            self.image_orderdetails.image = UIImage(named: imagelink.up)
         }
     }
     
@@ -321,9 +329,11 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         if isshipingdetails {
             isshipingdetails = false
             self.view_shipingaddress.isHidden = true
+            self.image_shipping_drop.image = UIImage(named: imagelink.down1)
         }else{
             isshipingdetails = true
             self.view_shipingaddress.isHidden = false
+            self.image_shipping_drop.image = UIImage(named: imagelink.up)
         }
     }
     
@@ -331,9 +341,11 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         if isproductdetails {
             isproductdetails = false
             self.view_productdetails.isHidden = true
+            self.image_productdetails.image = UIImage(named: imagelink.down1)
         }else{
             isproductdetails = true
             self.view_productdetails.isHidden = false
+            self.image_productdetails.image = UIImage(named: imagelink.up)
         }
     }
     

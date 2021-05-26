@@ -44,7 +44,8 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var textview_popup: UITextView!
     @IBOutlet weak var view_btn_popup_update: UIView!
     
-    @IBOutlet weak var view_footer: UIView!
+    @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var rejectDispatchstatus: UILabel!
     
     var order_change_status = [""] // 0 non_status, 1 confirm status , 2 dispatch status, 3 reject status
@@ -93,6 +94,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inital_setup()
         self.view_footer.view_cornor()
         self.isconfirmed.removeAll()
         self.isrejected.removeAll()
@@ -123,6 +125,25 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
         self.textview_popup.textColor = .gray
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
         self.view_shadow.addGestureRecognizer(tap)
+    }
+    
+    
+    func inital_setup(){
+        // header action
+            self.view_header.label_header_title.text = "Order Details"
+            self.view_header.label_header_title.textColor = .white
+            self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+            self.view_header.view_sos.isHidden = true
+            self.view_header.view_bag.isHidden = true
+        // header action
+        self.view_footer.setup(b1: true, b2: false, b3: false)
+        self.view_footer.label_Fprocess_two.text = "Manage Products"
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
     }
     
     @objc func hidetbl() {

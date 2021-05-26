@@ -40,13 +40,14 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = ""
+        self.view_subpage_header.label_header_title.text = "Service Details"
         self.view_subpage_header.label_header_title.textColor = .white
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -54,7 +55,6 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
         self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
     // footer action
     }

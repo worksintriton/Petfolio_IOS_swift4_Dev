@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N25-wZ-LRg">
-                        <rect key="frame" x="0.0" y="0.0" width="63" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jb-oU-Wgw">
-                                <rect key="frame" x="10.5" y="0.0" width="42" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jb-oU-Wgw">
+                                <rect key="frame" x="8" y="0.0" width="187" height="50"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -29,20 +29,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980392160000001" green="0.3411764706" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="7Jb-oU-Wgw" secondAttribute="width" multiplier="1.5" id="Dn6-Wg-MGl"/>
-                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="centerX" secondItem="N25-wZ-LRg" secondAttribute="centerX" id="EMN-xu-284"/>
-                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="top" secondItem="N25-wZ-LRg" secondAttribute="top" id="RpB-RW-h8L"/>
-                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="centerY" secondItem="N25-wZ-LRg" secondAttribute="centerY" id="Tdk-Xx-FZW"/>
-                            <constraint firstAttribute="bottom" secondItem="7Jb-oU-Wgw" secondAttribute="bottom" id="zH9-74-Y8U"/>
+                            <constraint firstAttribute="trailing" secondItem="7Jb-oU-Wgw" secondAttribute="trailing" constant="8" id="HfZ-oe-R0d"/>
+                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="top" secondItem="N25-wZ-LRg" secondAttribute="top" id="MW9-9s-Ljg"/>
+                            <constraint firstItem="7Jb-oU-Wgw" firstAttribute="leading" secondItem="N25-wZ-LRg" secondAttribute="leading" constant="8" id="VZW-oV-8t5"/>
+                            <constraint firstAttribute="bottom" secondItem="7Jb-oU-Wgw" secondAttribute="bottom" id="ivt-aw-QEA"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="N25-wZ-LRg" secondAttribute="bottom" id="77b-nb-jXm"/>
-                <constraint firstItem="N25-wZ-LRg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pch-ab-aSN"/>
-                <constraint firstItem="N25-wZ-LRg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vqi-iq-aul"/>
+                <constraint firstAttribute="trailing" secondItem="N25-wZ-LRg" secondAttribute="trailing" id="BBV-eA-bh7"/>
+                <constraint firstAttribute="bottom" secondItem="N25-wZ-LRg" secondAttribute="bottom" id="PTg-TX-pfX"/>
+                <constraint firstItem="N25-wZ-LRg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="geH-km-CHi"/>
+                <constraint firstItem="N25-wZ-LRg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hJd-Ow-erp"/>
             </constraints>
             <size key="customSize" width="203" height="50"/>
             <connections>

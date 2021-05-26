@@ -150,7 +150,7 @@
                 <outlet property="label_DR" destination="UtT-pd-dJn" id="FNe-W0-mT3"/>
                 <outlet property="label_clinic" destination="8Sw-4r-Hca" id="Chs-7x-K2t"/>
                 <outlet property="view_main" destination="ViT-VJ-HUB" id="pdp-Xy-gi8"/>
-                <outlet property="view_pet_paw" destination="ysV-To-5Zo" id="jRw-d8-a3v"/>
+                <outlet property="view_pet_paw" destination="mla-by-Xxf" id="9dY-62-6Il"/>
                 <outlet property="view_rating" destination="j3p-UD-QyD" id="SAK-NP-qNa"/>
                 <outlet property="view_vets" destination="OAz-Cs-u9Q" id="dwR-3f-DVW"/>
             </connections>

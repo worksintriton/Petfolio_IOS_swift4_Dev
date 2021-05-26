@@ -61,6 +61,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var image_home: UIImageView!
     @IBOutlet weak var btn_home: UIButton!
     
+    
+    @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var btn_online: UIButton!
     @IBOutlet weak var btn_visit: UIButton!
     @IBOutlet weak var image_visit: UIImageView!
@@ -68,7 +70,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.intial_setup_action()
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
         self.View_shadow.isHidden = true
         self.view_popup.isHidden = true
@@ -124,6 +126,20 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.setuploadimg()
         print("Communication type",Servicefile.shared.pet_apoint_communication_type)
         self.checkappointmentcommtype()
+    }
+    
+    
+    func intial_setup_action(){
+    // header action
+        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: false, b2: false, b3: true, b4: false)
+    // header action
     }
     
     override func viewWillDisappear(_ animated: Bool) {

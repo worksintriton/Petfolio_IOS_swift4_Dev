@@ -40,6 +40,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     @IBOutlet weak var view_petname: UIView!
     @IBOutlet weak var view_selectpet: UIView!
     
+    @IBOutlet weak var view_color: UIView!
+    @IBOutlet weak var view_weight: UIView!
     @IBOutlet weak var tblview_petdetail: UITableView!
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
@@ -130,8 +132,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
     // header action
-   
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -337,6 +339,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             self.textfield_petage.text = ""
             self.textfield_weight.text = ""
             self.textfield_color.text = ""
+           
             self.textfield_petname.isUserInteractionEnabled = true
             self.textfield_petage.isUserInteractionEnabled = true
             self.textfield_weight.isUserInteractionEnabled = true

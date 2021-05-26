@@ -402,7 +402,9 @@ extension UIViewController {
 //    self.present(vc, animated: true, completion: nil)
     
     @objc func button5(sender: UIButton){
-       
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "comunityViewController") as! comunityViewController
+        self.present(vc, animated: true, completion: nil)
+        
     }
     
     func setup_footer_image(){

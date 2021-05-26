@@ -22,11 +22,11 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","My Coupons","Reports","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Report","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorities","Notification","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Settings", "Logout"]
-            self.imgmenu = ["Like","Bell","Doc","Calendar","Discount","Medical History","PaymentDetails","Setting", "Exit"]
+            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","My Coupons","Reports","Notification", "Logout"]
+            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Report","Bell", "Exit"]
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
@@ -64,16 +64,21 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.labelmenu[indexPath.row] == "Manage Product" {
+        if self.labelmenu[indexPath.row] == "Manage Products" {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_manage_product_ViewController") as! vendor_manage_product_ViewController
         self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Notification"{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
-            UserDefaults.standard.set("", forKey: "userid")
-                   UserDefaults.standard.set("", forKey: "usertype")
-                   Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
-                   Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                   self.present(vc, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.pushtologin()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
         }else{
             self.dismiss(animated: true, completion: nil)
         }

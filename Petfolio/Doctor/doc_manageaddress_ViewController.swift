@@ -50,7 +50,7 @@ class doc_manageaddress_ViewController: UIViewController, UITableViewDelegate, U
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Shop"
+        self.view_subpage_header.label_header_title.text = "Manage Address"
         self.view_subpage_header.label_header_title.textColor = .white
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_subpage_header.view_profile.isHidden = true
@@ -62,6 +62,7 @@ class doc_manageaddress_ViewController: UIViewController, UITableViewDelegate, U
         self.view_footer.setup(b1: false, b2: true, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     // footer action
     }
     
@@ -85,6 +86,7 @@ class doc_manageaddress_ViewController: UIViewController, UITableViewDelegate, U
         cell.btn_edit.tag = indexPath.row
         cell.btn_isshowOption.tag = indexPath.row
         cell.label_locationTitle.text = Servicefile.shared.petuserlocaadd[indexPath.row].location_nickname
+        
         if self.isclickisoption[indexPath.row] == "1" {
             cell.view_option.isHidden = false
         }else{

@@ -55,8 +55,8 @@ class imagelink{
     static let cat1 = "cat_walk1"
     static let cat2 = "catwalk2"
     static let dog1 = "doganimate"
-    
-    
+    static let down1 = "down1"
+    static let up = "up"
 }
 
 class colorpickert{

@@ -48,6 +48,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     @IBOutlet weak var label_vacindate: UILabel!
     @IBOutlet weak var view_vacc_date: UIView!
     
+    @IBOutlet weak var label_app_dateandtime: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.intial_setup_action()
@@ -66,8 +67,8 @@ class sp_app_details_page_ViewController: UIViewController  {
         }else{
             self.view_complete_cancel.isHidden = true
         }
-        self.view_address.isHidden = true
-        self.view_address_details.isHidden = true
+//        self.view_address.isHidden = true
+//        self.view_address_details.isHidden = true
        
     }
     
@@ -251,6 +252,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                         let data = res["Data"] as! NSDictionary
                         
                         self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                        self.label_app_dateandtime.text = data["display_date"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""
                         if comm_type == "Online" || comm_type == "Online Or Visit"{
                             self.view_confrence.isHidden = false
@@ -260,7 +262,13 @@ class sp_app_details_page_ViewController: UIViewController  {
                         self.label_order_id.text = data["payment_id"] as? String ?? ""
                         self.label_payment_method.text = data["payment_method"] as? String ?? ""
                         self.label_ordercost.text = data["service_amount"] as? String ?? ""
-                        
+                        let sp_business_info = data["sp_business_info"] as! NSArray
+                        if sp_business_info.count > 0 {
+                            let sp_info = sp_business_info[0] as! NSDictionary
+                            
+                        let location = sp_info["sp_loc"] as? String ?? ""
+                       self.label_address_details.text = location
+                        }
                         let pet_id = data["pet_id"] as! NSDictionary
                         let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
                         if Int(truncating: pet_id["vaccinated"] as? NSNumber ?? 0) == 1 {
@@ -306,6 +314,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                                 }
                             }
                         }
+                       
                         
                         self.stopAnimatingActivityIndicator()
                     }else{

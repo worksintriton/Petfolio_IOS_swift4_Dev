@@ -59,8 +59,27 @@ class Doc_detailspage_ViewController: UIViewController {
     @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var view_home_dotted_line: UIView!
     
+    @IBOutlet weak var label_alergies: UILabel!
+    
+    @IBOutlet weak var label_pet_comments: UILabel!
+    
+    @IBOutlet weak var label_diagnosis: UILabel!
+    
+    @IBOutlet weak var label_sub_diagnosis: UILabel!
+    
+    @IBOutlet weak var view_diagnosis: UIView!
+    @IBOutlet weak var view_subdiagnosis: UIView!
+    @IBOutlet weak var view_doc_comm_header: UIView!
+    @IBOutlet weak var view_doc_comm: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view_diagnosis.isHidden = true
+        self.view_subdiagnosis.isHidden = true
+        self.view_doc_comm_header.isHidden = true
+        self.view_doc_comm.isHidden = true
+        
         self.view_emergency.isHidden = true
         self.view_main_prescrip.isHidden = true
         self.view_prescription.view_cornor()
@@ -78,6 +97,12 @@ class Doc_detailspage_ViewController: UIViewController {
         }else if Servicefile.shared.Doc_selected_app_list == "Complete" {
             self.view_complete_cancel.isHidden = true
             self.view_confrence.isHidden = true
+            
+            self.view_diagnosis.isHidden = false
+            self.view_subdiagnosis.isHidden = false
+            self.view_doc_comm_header.isHidden = false
+            self.view_doc_comm.isHidden = false
+            
         }else{
             self.view_complete_cancel.isHidden = true
             self.view_confrence.isHidden = true
@@ -258,7 +283,7 @@ class Doc_detailspage_ViewController: UIViewController {
                         Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
                        
                         self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
-                        self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
+                        self.label_app_bookAndTime.text = data["display_date"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""
                         let appoinment_status = data["appoinment_status"] as? String ?? ""
                         if appoinment_status == "Incomplete" {
@@ -319,18 +344,29 @@ class Doc_detailspage_ViewController: UIViewController {
                         }else{
                             self.image_pet_img.image = UIImage(named: "sample")
                         }
+                        let problem_info = data["problem_info"] as? String ?? ""
+                        self.label_pet_comments.text = problem_info
+                        let allergies = data["allergies"] as? String ?? ""
+                        self.label_alergies.text = allergies
+                        let diagnosis = data["diagnosis"] as? String ?? ""
+                        self.label_diagnosis.text = diagnosis
+                        let sub_diagnosis = data["sub_diagnosis"] as? String ?? ""
+                        self.label_sub_diagnosis.text = sub_diagnosis
+                        let prescription_details = data["doctor_comment"] as? String ?? ""
+                        self.label_pethandle.text = prescription_details
+                        self.label_pethandle.sizeToFit()
                         let user_id = data["user_id"] as! NSDictionary
-                        let firstname = user_id["first_name"] as? String
-                        let lastname = user_id["last_name"] as? String
-                        let userimage = user_id["profile_img"] as? String
-                        self.label_holder_name.text = firstname! + " " + lastname!
+                        let firstname = user_id["first_name"] as? String ?? ""
+                        let lastname = user_id["last_name"] as? String ?? ""
+                        let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
+                        self.label_holder_name.text = firstname + " " + lastname
                         self.label_holder_servie_name.isHidden = true
                         let amt = data["amount"] as? String ?? "0"
                         self.label_holder_cost.text = "₹ " + amt
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: "sample")
                         } else {
-                            self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
+                            self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_holder_name.image = UIImage(named: "sample")
                                 } else {
@@ -345,27 +381,26 @@ class Doc_detailspage_ViewController: UIViewController {
                         if doc_business_info.count > 0 {
                             let doc_info = doc_business_info[0] as! NSDictionary
                             self.label_address_details.text = doc_info["clinic_loc"] as? String ?? ""
-                            let pet_handle = doc_info["pet_handled"] as! NSArray
-                            var petha = ""
-                            for i in 0..<pet_handle.count{
-                                let pethan = pet_handle[i] as! NSDictionary
-                                let val = pethan["pet_handled"] as? String ?? ""
-                                if i == 0 {
-                                    if i == pet_handle.count-1 {
-                                        petha = val + "."
-                                    }else{
-                                        petha = val + ", "
-                                    }
-                                    
-                                }else  if i == pet_handle.count-1 {
-                                    petha = petha + val + "."
-                                }else{
-                                    petha = petha + ", " + val
-                                }
-                                
-                            }
-                            self.label_pethandle.text = petha
-                            self.label_pethandle.sizeToFit()
+//                            let pet_handle = doc_info["pet_handled"] as! NSArray
+//                            var petha = ""
+//                            for i in 0..<pet_handle.count{
+//                                let pethan = pet_handle[i] as! NSDictionary
+//                                let val = pethan["pet_handled"] as? String ?? ""
+//                                if i == 0 {
+//                                    if i == pet_handle.count-1 {
+//                                        petha = val + "."
+//                                    }else{
+//                                        petha = val + ", "
+//                                    }
+//
+//                                }else  if i == pet_handle.count-1 {
+//                                    petha = petha + val + "."
+//                                }else{
+//                                    petha = petha + ", " + val
+//                                }
+//
+//                            }
+                           
                         }
                       
                         let visit_type = data["visit_type"] as? String ?? ""

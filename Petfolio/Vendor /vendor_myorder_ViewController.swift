@@ -426,6 +426,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
    
     func callgetlist(){
+        print("user id",Servicefile.shared.userid)
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_getlistid, method: .post, parameters:
@@ -433,7 +434,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
-                    print("success data",res)
+                    print("vendor id success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         
@@ -547,7 +548,8 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_new_orderlist, method: .post, parameters:
             ["vendor_id": Servicefile.shared.vendorid,
-             "order_status" : "Complete"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "order_status" : "Complete",
+             "skip_count" : 1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -629,7 +631,8 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_new_orderlist, method: .post, parameters:
             ["vendor_id": Servicefile.shared.vendorid,
-             "order_status" : "Cancelled"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "order_status" : "Cancelled",
+             "skip_count" : 1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

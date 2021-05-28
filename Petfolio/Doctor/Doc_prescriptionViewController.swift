@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import iOSDropDown
 
 class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
@@ -19,10 +20,25 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var label_popup: UILabel!
     @IBOutlet weak var view_btn: UIView!
     @IBOutlet weak var view_submit: UIView!
+    @IBOutlet weak var doc_diagno: DropDown!
+    @IBOutlet weak var doc_sub_diagno: DropDown!
+    @IBOutlet weak var doctor_diagnosis: UITextField!
+    @IBOutlet weak var doctor_sub_diagnosis: UITextField!
     
-    
+    @IBOutlet weak var view_header: header_title!
+    var diagno = [""]
+    var diafno_sub = [""]
+    var diagno_dic_array = [Any]()
+    var sub_diagno_dic_array = [Any]()
+    var sdiagno = ""
+    var subdiagno = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.diagno.removeAll()
+        self.diafno_sub.removeAll()
+        Servicefile.shared.Doc_pre_descrip = ""
+        Servicefile.shared.doc_pres_diagno = ""
+        Servicefile.shared.doc_pres_sub_diagno = ""
         Servicefile.shared.Doc_pres.removeAll()
         self.tbl_medilist.delegate = self
         self.tbl_medilist.dataSource = self
@@ -36,11 +52,37 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.textview_descrip.delegate = self
         self.textview_descrip.text = "Write here..."
         // Do any additional setup after loading the view.
+        self.calldoc_diaog()
+        self.intial_setup_action()
+    }
+    
+   
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_title.text = "Prescription Details"
+        self.view_header.label_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+    // header action
     }
     
     
     @IBAction func action_submitprescription(_ sender: Any) {
-        self.callpescription()
+        if self.doctor_sub_diagnosis.text == "" {
+            self.alert(Message: "Please select the sub diagnosis")
+        }else if self.doctor_diagnosis.text == "" {
+            self.alert(Message: "Please select the diagnosis")
+        }else if self.textview_descrip.text == "" {
+            self.alert(Message: "Please select the description")
+        }else{
+            Servicefile.shared.Doc_pre_descrip = self.textview_descrip.text!
+            Servicefile.shared.doc_pres_diagno = self.doctor_diagnosis.text!
+            Servicefile.shared.doc_pres_sub_diagno = self.doctor_sub_diagnosis.text!
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_preview_prescription_ViewController") as! doc_preview_prescription_ViewController
+            self.present(vc, animated: true, completion: nil)
+            
+            
+        }
+        
     }
     
     @IBAction func action_hidepopup(_ sender: Any) {
@@ -126,7 +168,6 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
 
     
-    
     func callpescription(){
         print("data in prescription")
                  Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -134,6 +175,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_prescription_create, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
           "Date":Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
           "Doctor_Comments":"test",
+          "diagnosis" : self.doctor_diagnosis.text!,
+          "sub_diagnosis" : self.doctor_sub_diagnosis.text!,
           "PDF_format":"",
           "Prescription_type" :"PDF",
           "Prescription_img" : "",
@@ -202,6 +245,112 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                       self.alert(Message: "No Intenet Please check and try again ")
                   }
               }
+    
+    
+    @IBAction func action_doc_diagno(_ sender: Any) {
+        self.doc_diagno.showList()
+    }
+    
+    @IBAction func action_sub_doc_diagno(_ sender: Any) {
+        self.doc_sub_diagno.showList()
+    }
+    
+    
+    func calldoc_diaog(){
+        self.diagno.removeAll()
+        self.diafno_sub.removeAll()
+        self.diagno_dic_array.removeAll()
+            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_prescription_diagno, method: .get, parameters: nil
+                 , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                      switch (response.result) {
+                                                      case .success:
+                                                            let res = response.value as! NSDictionary
+                                                            print("success data",res)
+                                                            let Code  = res["Code"] as! Int
+                                                            if Code == 200 {
+                                                                let data  = res["Data"] as! NSArray
+                                                                self.diagno_dic_array = data as! [Any]
+                                                                for i in 0..<data.count{
+                                                                    let dataval = data[i] as! NSDictionary
+                                                                    let diagnosis = dataval["diagnosis"] as? String ?? ""
+                                                                    if diagnosis != "" {
+                                                                        self.diagno.append(diagnosis)
+                                                                    }
+                                                                }
+                                                                self.doc_diagno.optionArray = self.diagno
+                                                                self.diafno_sub.removeAll()
+                                                                self.doc_sub_diagno.optionArray = self.diafno_sub
+                                                                self.doc_diagno.didSelect{(selectedText , index ,id) in
+                                                                let data = "Selected String: \(selectedText) \n index: \(index)"
+                                                                    print(data)
+                                                                    self.doctor_diagnosis.text = selectedText
+                                                                    self.doctor_sub_diagnosis.text = ""
+                                                                    self.sdiagno = selectedText
+                                                                    let dataval = self.diagno_dic_array[index] as! NSDictionary
+                                                                    let add_id = dataval["_id"] as? String ?? ""
+                                                                    self.calldoc_sub_diaog(indexid: add_id)
+                                                                    }
+                                                              self.stopAnimatingActivityIndicator()
+                                                            }else{
+                                                              self.stopAnimatingActivityIndicator()
+                                                              print("status code service denied")
+                                                            }
+                                                          break
+                                                      case .failure(let Error):
+                                                          self.stopAnimatingActivityIndicator()
+                                                          print("Can't Connect to Server / TimeOut",Error)
+                                                          break
+                                                      }
+                                         }
+                  }else{
+                      self.stopAnimatingActivityIndicator()
+                      self.alert(Message: "No Intenet Please check and try again ")
+                  }
+              }
       
+    func calldoc_sub_diaog(indexid: String){
+        print("diagnosis_id",indexid)
+        self.diafno_sub.removeAll()
+            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_prescription_sub_diagno, method: .post, parameters: ["diagnosis_id" :indexid]
+                 , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                      switch (response.result) {
+                                                      case .success:
+                                                            let res = response.value as! NSDictionary
+                                                            print("success data",res)
+                                                            let Code  = res["Code"] as! Int
+                                                            if Code == 200 {
+                                                                let data  = res["Data"] as! NSArray
+                                                                self.sub_diagno_dic_array = data as! [Any]
+                                                                for i in 0..<data.count{
+                                                                    let dataval = data[i] as! NSDictionary
+                                                                    let diagnosis = dataval["sub_diagnosis"] as? String ?? ""
+                                                                    if diagnosis != "" {
+                                                                        self.diafno_sub.append(diagnosis)
+                                                                    }
+                                                                }
+                                                                self.doc_sub_diagno.optionArray = self.diafno_sub
+                                                                self.doc_sub_diagno.selectedIndex = 0
+                                                                self.doc_sub_diagno.didSelect{(selectedText , index ,id) in
+                                                                let data = "Selected String: \(selectedText) \n index: \(index)"
+                                                                    self.subdiagno = selectedText
+                                                                    self.doctor_sub_diagnosis.text = selectedText
+                                                                    }
+                                                              self.stopAnimatingActivityIndicator()
+                                                            }else{
+                                                              self.stopAnimatingActivityIndicator()
+                                                              print("status code service denied")
+                                                            }
+                                                          break
+                                                      case .failure(let Error):
+                                                          self.stopAnimatingActivityIndicator()
+                                                          print("Can't Connect to Server / TimeOut",Error)
+                                                          break
+                                                      }
+                                         }
+                  }else{
+                      self.stopAnimatingActivityIndicator()
+                      self.alert(Message: "No Intenet Please check and try again ")
+                  }
+              }
     
 }

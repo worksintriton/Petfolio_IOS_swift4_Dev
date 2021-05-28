@@ -134,6 +134,7 @@
 		84BA814E26523E0B00BFA01B /* sp_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA814D26523E0B00BFA01B /* sp_favlist_ViewController.swift */; };
 		84BA81AC26526B3400BFA01B /* pet_paymentdetails_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA81AB26526B3400BFA01B /* pet_paymentdetails_ViewController.swift */; };
 		84BA81B02652806C00BFA01B /* doc_paymentdetilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA81AF2652806C00BFA01B /* doc_paymentdetilsViewController.swift */; };
+		84BB273D265FB31C00F92404 /* doc_preview_prescription_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */; };
 		84C46CF725F7412200808FBB /* ProductdealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C46CF625F7412200808FBB /* ProductdealsViewController.swift */; };
 		84C6A399264FA1DA00DBE200 /* doc_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */; };
 		84C6A3A7264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */; };
@@ -463,6 +464,7 @@
 		84BA814D26523E0B00BFA01B /* sp_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sp_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84BA81AB26526B3400BFA01B /* pet_paymentdetails_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_paymentdetails_ViewController.swift; sourceTree = "<group>"; };
 		84BA81AF2652806C00BFA01B /* doc_paymentdetilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_paymentdetilsViewController.swift; sourceTree = "<group>"; };
+		84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_preview_prescription_ViewController.swift; sourceTree = "<group>"; };
 		84C46CF625F7412200808FBB /* ProductdealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductdealsViewController.swift; sourceTree = "<group>"; };
 		84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_fav_cell_CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1043,6 +1045,7 @@
 				8433883C264C15E7001443EC /* doc_order_cancel_ViewController.swift */,
 				84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */,
 				84BA81AF2652806C00BFA01B /* doc_paymentdetilsViewController.swift */,
+				84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -1801,6 +1804,7 @@
 				B02D745E2599A3AB0033D2D0 /* Petlover_myorder_ViewController.swift in Sources */,
 				84BA814E26523E0B00BFA01B /* sp_favlist_ViewController.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
+				84BB273D265FB31C00F92404 /* doc_preview_prescription_ViewController.swift in Sources */,
 				8402B9D0264A8836009DDFC0 /* doc_footer.swift in Sources */,
 				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,
 				8457F12B2609B63A005B66DD /* pet_order_reject_ViewController.swift in Sources */,

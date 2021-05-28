@@ -257,6 +257,9 @@ class Servicefile {
     static let pet_payment_details = baseurl + "/api/appointments/doctor/petlover_payment"
     static let doc_payment_details = baseurl + "/api/appointments/doctor_payment"
     
+    static let doc_prescription_diagno = baseurl + "/api/diagnosis/getlist"
+    static let doc_prescription_sub_diagno = baseurl + "/api/sub_diagnosis/getlist_id"
+    
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -409,6 +412,10 @@ class Servicefile {
     var pethandicarray = [Any]()
     var photodicarray = [Any]()
     var Doc_pres = [Any]()
+    var Doc_pre_descrip = ""
+    var doc_pres_diagno = ""
+    var doc_pres_sub_diagno = ""
+    
     var govdicarray = [Any]()
     var certifdicarray = [Any]()
     var clinicdicarray = [Any]()

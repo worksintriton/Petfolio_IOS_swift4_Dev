@@ -222,8 +222,8 @@
             filePath = "Petfolio/servicefile.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "864"
-            endingLineNumber = "864"
+            startingLineNumber = "871"
+            endingLineNumber = "871"
             landmarkName = "checkyearmonthdiffer(sdate:edate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -548,7 +548,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b224"
+                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b205"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -558,12 +558,12 @@
                   urlString = "file:///Users/admin/Documents/R&amp;D/Petfolio/Petfolio/ServiceProvider/Sp_profile_ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
                   offsetFromSymbolStart = "36">
                </Location>
                <Location
-                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b224"
+                  uuid = "0C5FEEDF-29FD-427A-9DD0-AC19CB5F7137 - 73ebe9d18648b205"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -573,8 +573,8 @@
                   urlString = "file:///Users/admin/Documents/R&amp;D/Petfolio/Petfolio/ServiceProvider/Sp_profile_ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
                   offsetFromSymbolStart = "368">
                </Location>
             </Locations>
@@ -608,7 +608,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
                   endingLineNumber = "78"
-                  offsetFromSymbolStart = "2068">
+                  offsetFromSymbolStart = "2084">
                </Location>
                <Location
                   uuid = "659D70D0-B6A9-43CA-B830-427FF93094C0 - 6fe43407c4bb926b"
@@ -623,7 +623,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
                   endingLineNumber = "78"
-                  offsetFromSymbolStart = "4916">
+                  offsetFromSymbolStart = "5584">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -673,6 +673,70 @@
             startingLineNumber = "184"
             endingLineNumber = "184"
             landmarkName = "call_ser_details()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D4D0BA7-5325-4218-9748-D704F30BC8B9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Petloversdashboard/Pet_app_details_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
+            landmarkName = "call_getdetails()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "932E40E2-CEF5-4C38-BF20-94D3605C2785"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Doctor/Doc_detailspage_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "call_getdetails()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "749507D8-C356-4C20-9067-829256500F2D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Petloversdashboard/Pet_app_details_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
+            landmarkName = "call_getdetails()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2993FC94-F1D3-4EEC-8B48-4923B6FA581F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Petfolio/Petloversdashboard/Pet_app_details_ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "call_getdetails()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

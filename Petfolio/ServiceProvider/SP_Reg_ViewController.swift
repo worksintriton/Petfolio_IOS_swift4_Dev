@@ -870,12 +870,13 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
    
-    
+    //Servicefile.shared.sp_loc
+    //self.locationaddress
     func callDocspec(){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_register, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
-             "sp_loc": self.locationaddress,
+             "sp_loc": Servicefile.shared.sp_loc,
              "sp_lat": Servicefile.shared.sp_lat,
              "sp_long": Servicefile.shared.sp_long,
              "bus_user_name": Servicefile.shared.first_name,

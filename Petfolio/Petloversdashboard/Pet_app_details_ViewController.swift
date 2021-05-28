@@ -58,8 +58,37 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
     @IBOutlet weak var label_app_bookAndTime: UILabel!
+    
+    
+    
+    @IBOutlet weak var label_alergies: UILabel!
+    
+    @IBOutlet weak var label_pet_comments: UILabel!
+    
+    @IBOutlet weak var label_diagnosis: UILabel!
+    
+    @IBOutlet weak var label_sub_diagnosis: UILabel!
+    
+    @IBOutlet weak var view_diagnosis: UIView!
+    @IBOutlet weak var view_subdiagnosis: UIView!
+    @IBOutlet weak var view_doc_comm_header: UIView!
+    @IBOutlet weak var view_doc_comm: UIView!
+    @IBOutlet weak var label_doc_comm: UILabel!
+    @IBOutlet weak var view_alergies: UIView!
+    @IBOutlet weak var view_comments: UIView!
+    @IBOutlet weak var view_pethandledetails: UIView!
+    @IBOutlet weak var view_pethandle: UIView!
+    @IBOutlet weak var view_visittype: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view_diagnosis.isHidden = true
+        self.view_subdiagnosis.isHidden = true
+        self.view_doc_comm_header.isHidden = true
+        self.view_doc_comm.isHidden = true
+        self.view_alergies.isHidden = true
+        self.view_comments.isHidden = true
         self.image_emergency.isHidden = true
         self.view_main_prescrip.isHidden = true
         //self.view_home.view_cornor()
@@ -78,6 +107,8 @@ class Pet_app_details_ViewController: UIViewController {
          self.view_cancel.isHidden = true
         self.label_Holder_service_name.isHidden = true
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+            self.view_alergies.isHidden = false
+            self.view_comments.isHidden = false
             if Servicefile.shared.pet_selected_app_list == "current" {
                 self.view_complete_cancel.isHidden = true
                 //self.view_complete.isHidden = true
@@ -92,12 +123,21 @@ class Pet_app_details_ViewController: UIViewController {
             } else if Servicefile.shared.pet_selected_app_list == "Complete" {
                 self.view_complete_cancel.isHidden = true
                 self.view_confrence.isHidden = true
+                self.view_diagnosis.isHidden = false
+                self.view_subdiagnosis.isHidden = false
+                self.view_doc_comm_header.isHidden = false
+                self.view_doc_comm.isHidden = false
             } else {
                 self.view_complete_cancel.isHidden = true
                 self.view_confrence.isHidden = true
             }
             
         }else{
+            self.view_pethandledetails.isHidden = true
+            self.view_pethandle.isHidden = true
+            self.view_visittype.isHidden = true
+            self.view_home_address.isHidden = true
+            self.view_data_home_address.isHidden = true
             if Servicefile.shared.pet_selected_app_list == "current" {
                 self.view_complete_cancel.isHidden  = true
                 if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
@@ -260,6 +300,7 @@ class Pet_app_details_ViewController: UIViewController {
                         let data = res["Data"] as! NSDictionary
                         self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                           
                             Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
                             Servicefile.shared.Doc_details_app_id = data["_id"] as? String ?? ""
                             self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
@@ -281,10 +322,12 @@ class Pet_app_details_ViewController: UIViewController {
                                 } else if Servicefile.shared.pet_selected_app_list == "Complete" {
                                     self.view_complete_cancel.isHidden = true
                                     self.view_confrence.isHidden = true
+                                    
                                 } else {
                                     self.view_complete_cancel.isHidden = true
                                     self.view_confrence.isHidden = true
                                 }
+                                
                             }else{
                                 self.view_confrence.isHidden = true
                             }
@@ -396,7 +439,17 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_pethandle.text = petha
                             self.label_pethandle.sizeToFit()
                             let _id  = doctor_id["_id"] as? String ?? ""
-                            
+                            let problem_info = data["problem_info"] as? String ?? ""
+                            self.label_pet_comments.text = problem_info
+                            let allergies = data["allergies"] as? String ?? ""
+                            self.label_alergies.text = allergies
+                            let diagnosis = data["diagnosis"] as? String ?? ""
+                            self.label_diagnosis.text = diagnosis
+                            let sub_diagnosis = data["sub_diagnosis"] as? String ?? ""
+                            self.label_sub_diagnosis.text = sub_diagnosis
+                            let prescription_details = data["doctor_comment"] as? String ?? ""
+                            self.label_doc_comm.text = prescription_details
+                            self.label_doc_comm.sizeToFit()
                             Servicefile.shared.doc_detail_id = _id
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = clinic_loc
@@ -412,6 +465,10 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                         }else{
+                            self.view_diagnosis.isHidden = true
+                            self.view_subdiagnosis.isHidden = true
+                            self.view_doc_comm_header.isHidden = true
+                            self.view_doc_comm.isHidden = true
                             self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
                             self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
                             self.view_confrence.isHidden = true
@@ -475,7 +532,7 @@ class Pet_app_details_ViewController: UIViewController {
                                 }
                             }
                         }
-                        
+                       
                         if Servicefile.shared.pet_selected_app_list == "current" {
                             self.view_complete_cancel.isHidden  = true
                             if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
@@ -490,7 +547,7 @@ class Pet_app_details_ViewController: UIViewController {
                         } else {
                             self.view_complete_cancel.isHidden = true
                         }
-                        
+                       
                         
                         self.stopAnimatingActivityIndicator()
                     }else{

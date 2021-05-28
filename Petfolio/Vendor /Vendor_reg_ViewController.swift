@@ -213,6 +213,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         self.alert(Message: "Please upload the Goverment Id")
     }else if Servicefile.shared.certifdicarray.count == 0 {
         self.alert(Message: "Please upload the certificates")
+    }else if self.locationaddress == "" {
+        self.alert(Message: "Please add the address")
     }else{
         if self.textfield_bus_email.text != ""{
             let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_bus_email.text!)

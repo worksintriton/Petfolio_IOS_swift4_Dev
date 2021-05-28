@@ -24,6 +24,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
         var isorgiselect = [""]
         override func viewDidLoad() {
             super.viewDidLoad()
+            Servicefile.shared.petnewprod.removeAll()
             self.isselect.removeAll()
             self.isorgiselect.removeAll()
             let docnibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)

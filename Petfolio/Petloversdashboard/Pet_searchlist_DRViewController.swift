@@ -47,8 +47,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_shop(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 3
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_pet_profile(_ sender: Any) {
@@ -62,8 +64,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
        }
     
     @IBAction func action_petservice(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 1
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -93,8 +97,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     

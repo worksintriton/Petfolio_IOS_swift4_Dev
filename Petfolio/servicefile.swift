@@ -50,12 +50,15 @@ class imagelink{
     // Header side menu
     
     static let image_sos = "sos2"
-    static let image_bel = "bell2"
+    //static let image_bel = "bell2"
+    static let image_bel = "notification"
     static let image_bag = "cart2"
     static let image_profile = "user2"
-    static let image_back = "back1"
+    static let image_back = "side arrow"
     
-    static let sidemenu = "Group55"
+    static let sidemenu = "Menu1"
+//    static let sidemenu = "Group55"
+    
     static let Icon_map_pin = "Icon_map_pin"
     static let Drop_down = "Path76"
     
@@ -317,7 +320,8 @@ class Servicefile {
     var orgiutypesel = ["0"]
     var loadingcount = 0
     var ishiping = ""
-    
+    var tabbar_selectedindex = 3
+    var selectedviewcontroller = UIViewController()
     static let approvestring = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm "
     static let approvednumber = "1234567890"
     static let approvednumberandspecial = "1234567890."

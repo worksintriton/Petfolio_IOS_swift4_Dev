@@ -142,19 +142,25 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     
     @IBAction func action_pet_service(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 1
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_care(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-           self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
        }
     
     @IBAction func action_sos(_ sender: Any) {

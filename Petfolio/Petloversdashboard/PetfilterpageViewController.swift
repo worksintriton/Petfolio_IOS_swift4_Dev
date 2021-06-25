@@ -169,7 +169,10 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
    
     

@@ -171,13 +171,17 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     
     @IBAction func action_petcare(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     

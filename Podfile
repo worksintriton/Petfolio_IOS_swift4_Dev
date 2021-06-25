@@ -19,6 +19,7 @@ target 'Petfolio' do
   pod 'JJFloatingActionButton'
   pod 'AASignatureView'
   pod 'IQKeyboardManagerSwift'
+  pod 'CircleBar'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

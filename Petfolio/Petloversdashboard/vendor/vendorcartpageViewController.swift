@@ -85,8 +85,10 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     
     @IBAction func action_movetoshop(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 3
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     

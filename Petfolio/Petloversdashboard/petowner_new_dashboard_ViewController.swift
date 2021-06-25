@@ -400,51 +400,67 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction func action_DocSeeMore(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 1
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petshop_seemore(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 3
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
 }
 
 extension UIViewController {
     
     @objc func button1(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
        
     }
     
     @objc func button2(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 1
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @objc func button3(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
         
     }
     
     @objc func button4(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 3
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
        
     }
 //    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
 //    self.present(vc, animated: true, completion: nil)
     
     @objc func button5(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "comunityViewController") as! comunityViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 4
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
         
     }
     

@@ -67,12 +67,16 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                     self.present(vc, animated: true, completion: nil)
     }
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                             self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     @IBAction func action_cares(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
-                             self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 0
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
@@ -91,8 +95,10 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     @IBAction func action_shop(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.tabbar_selectedindex = 3
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
     }
     
     

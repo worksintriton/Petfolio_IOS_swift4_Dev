@@ -11,7 +11,10 @@ import Alamofire
 import SafariServices
 import WebKit
 import SDWebImage
+import CircleBar
 
+
+@available(iOS 13.0, *)
 class SliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     @IBOutlet weak var view_skip_btn: UIView!
@@ -83,8 +86,12 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 
                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.user_type == "1" {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                    self.present(vc, animated: true, completion: nil)
+                   
+                    Servicefile.shared.tabbar_selectedindex = 2
+                    let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                    tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                    self.present(tapbar, animated: true, completion: nil)
+//                    pettabbarViewController
                 } else if Servicefile.shared.user_type == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)

@@ -245,8 +245,10 @@ class pet_edit_otherinfo_ViewController: UIViewController {
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                        self.present(vc, animated: true, completion: nil)
+                        Servicefile.shared.tabbar_selectedindex = 2
+                        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                        self.present(tapbar, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

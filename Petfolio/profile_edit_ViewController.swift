@@ -195,8 +195,10 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         let alert = UIAlertController(title: "", message: "Profile Updated sucessfully", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                             if Servicefile.shared.user_type == "1" {
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
-                                self.present(vc, animated: true, completion: nil)
+                                Servicefile.shared.tabbar_selectedindex = 2
+                                let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                self.present(tapbar, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "4" {
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                                 self.present(vc, animated: true, completion: nil)

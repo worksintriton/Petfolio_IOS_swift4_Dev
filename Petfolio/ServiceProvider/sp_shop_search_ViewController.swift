@@ -37,7 +37,7 @@ class sp_shop_search_ViewController: UIViewController, UICollectionViewDelegate,
         // header action
             self.view_header.label_header_title.text = "Search"
             self.view_header.label_header_title.textColor = .white
-            self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+            self.view_header.btn_back.addTarget(self, action: #selector(self.viewback), for: .touchUpInside)
             self.view_header.view_profile.isHidden = true
             self.view_header.view_sos.isHidden = true
             self.view_header.view_bel.isHidden = true
@@ -69,6 +69,12 @@ class sp_shop_search_ViewController: UIViewController, UICollectionViewDelegate,
             return true
         }
         
+    @objc func viewback(sender: UIButton){
+        Servicefile.shared.tabbar_selectedindex = 3
+               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+               self.present(tapbar, animated: true, completion: nil)
+    }
        
         
         override func viewWillDisappear(_ animated: Bool) {

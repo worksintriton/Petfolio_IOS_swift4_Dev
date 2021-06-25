@@ -185,7 +185,6 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callsearchlist(){
-        Servicefile.shared.moredocd.removeAll()
       print("user_id" , Servicefile.shared.userid,
         "search_string", self.textfield_search.text!,
          "communication_type", self.comm_type)

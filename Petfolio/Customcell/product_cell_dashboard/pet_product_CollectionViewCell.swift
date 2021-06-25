@@ -11,6 +11,7 @@ import Cosmos
 
 class pet_product_CollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var view_y_main: UIView!
     @IBOutlet weak var view_main: UIView!
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var label_prod_title: UILabel!
@@ -18,7 +19,6 @@ class pet_product_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var view_rating: CosmosView!
     @IBOutlet weak var label_price: UILabel!
     @IBOutlet weak var image_fav: UIImageView!
-    
     @IBOutlet weak var view_shopbag: UIView!
-    //  @IBOutlet weak var label_offer: UILabel!
+    
 }

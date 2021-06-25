@@ -22,6 +22,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var tbl_searchlist: UITableView!
     
+    @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var view_home: UIView!
     
     let locationManager = CLLocationManager()
@@ -33,6 +34,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         //self.view_home.view_cornor()
         Servicefile.shared.long = 0.0
         Servicefile.shared.lati = 0.0
@@ -48,6 +50,23 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
         self.view_footer.dropShadow()
         // Do any additional setup after loading the view.
         self.textfield_search.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    func intial_setup_action(){
+    // header action
+        self.view_header.label_header_title.text = "Pickup Location"
+        self.view_header.label_header_title.textColor = .white
+        self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
+        self.view_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
+        self.view_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_header.view_sos.isHidden = true
+        self.view_header.view_bel.isHidden = true
+        self.view_header.view_bag.isHidden = true
+        self.view_header.view_profile.isHidden = true
+    // header action
+   
     }
     
     @IBAction func action_sos(_ sender: Any) {

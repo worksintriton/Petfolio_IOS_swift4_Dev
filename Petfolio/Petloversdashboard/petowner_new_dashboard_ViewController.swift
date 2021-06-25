@@ -63,16 +63,53 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.view_vet_seemore.layer.cornerRadius = self.view_service_more.frame.height / 2
         self.view_shop_seemore.layer.cornerRadius = self.view_service_more.frame.height / 2
         self.calldelegate()
+        let nibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
+        self.col_vet.register(nibName, forCellWithReuseIdentifier: "cell1")
+        let niName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
+        self.col_shop.register(niName, forCellWithReuseIdentifier: "cell")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         scrollview.addSubview(refreshControl) // not required when using UITableViewController
+        print("referal code :",Servicefile.shared.my_ref_code)
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
+        NotificationCenter.default.addObserver(self, selector: #selector(checklocation), name: UIApplication.willEnterForegroundNotification
+                    , object: nil)
+    }
+    
+    @objc func checklocation(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                locationManager.startUpdatingLocation()
+            @unknown default:
+                let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+           
+        }else{
+            let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
-        print("referal code :",Servicefile.shared.my_ref_code)
     }
     
     func intial_setup_action(){
@@ -231,18 +268,19 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         if self.col_banner == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dash_banner_CollectionViewCell
             cell.image_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
+                print(error)
                 if (error != nil) {
                     cell.image_banner.image = UIImage(named: "b_sample")
                 } else {
                     cell.image_banner.image = image
                 }
             }
-            //cell.image_banner.contentMode = .scaleAspectFit
+//            cell.image_banner.image = UIImage(named: "b_sample")
             cell.label_banner.text = Servicefile.shared.petbanner[indexPath.row].title
             return cell
         }else if self.col_service == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_Service_CollectionViewCell
-            cell.view_service.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
+            cell.view_service.backgroundColor = .clear
             cell.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_service.image = UIImage(named: "b_sample")
@@ -251,8 +289,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 }
             }
             //cell.view_service.dropShadow()
-            cell.view_service.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
-            cell.view_service.layer.cornerRadius = 40.0
+//            cell.view_service.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
+//            cell.view_service.layer.cornerRadius = 40.0
             print("service title",Servicefile.shared.petser[indexPath.row].service_title)
             cell.label_service.text = Servicefile.shared.petser[indexPath.row].service_title
             return cell
@@ -270,7 +308,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.image_banner.layer.cornerRadius = 15.0
             return cell
         }else if self.col_vet == collectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_vets_CollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_vet.image = UIImage(named: "b_sample")
@@ -298,12 +336,12 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
             return cell
         }else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_shop_CollectionViewCell
-            cell.image_shop.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_shop.image = UIImage(named: "b_sample")
+                    cell.image_product.image = UIImage(named: "b_sample")
                 } else {
-                    cell.image_shop.image = image
+                    cell.image_product.image = image
                 }
             }
             if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
@@ -311,31 +349,34 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }else {
                 cell.image_fav.image = UIImage(named: imagelink.fav_false)
             }
+            cell.image_product.layer.cornerRadius = 8.0
             cell.view_main.dropShadow()
-            cell.label_product.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-            cell.label_category.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
+            cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
+            cell.label_vendor.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
             cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
-            cell.view_rating_shop.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate) ?? 0.0
-            cell.view_rating_shop.isUserInteractionEnabled = false
-            cell.view_shop.view_cornor()
-            cell.image_shop.view_cornor()
+            cell.view_rating.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate) ?? 0.0
+            cell.view_rating.isUserInteractionEnabled = false
+            cell.view_shopbag.view_cornor()
+            cell.image_product.view_cornor()
+            //cell.image_shop.view_cornor()
             cell.view_main.view_cornor()
-            cell.view_shop_image.layer.cornerRadius = cell.view_shop_image.frame.height / 2
+            cell.view_y_main.view_cornor()
+            cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.col_banner == collectionView {
-            return CGSize(width: self.view.frame.size.width , height:  100)
+            return CGSize(width: self.col_banner.frame.size.width , height:  self.col_banner.frame.size.height)
         }else if self.col_service == collectionView {
-            return CGSize(width: 110 , height:  110)
+            return CGSize(width: 130 , height:  130)
         }else if self.col_shop_banner == collectionView {
             return CGSize(width: 260 , height:  80)
         }else if self.col_vet == collectionView {
-            return CGSize(width: 160 , height:  250)
+            return CGSize(width: 170 , height:  230)
         }else {
-            return CGSize(width: 160 , height:  280)
+            return CGSize(width: 170 , height:  260)
         }
     }
     
@@ -462,7 +503,14 @@ extension petloverDashboardViewController {
         Servicefile.shared.pet_dash_lati = self.latitude
         Servicefile.shared.pet_dash_long = self.longitude
         Servicefile.shared.pet_dash_address = self.locationaddress
-        
+        print("user_id" , Servicefile.shared.userid,
+              "lat" , self.latitude,
+              "long" , self.longitude,
+              "user_type" , 1 ,
+              "address" , self.locationaddress,
+              "Doctor", self.doc,
+              "Product" , self.pro,
+              "service" , self.ser)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard_new, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,
@@ -512,6 +560,7 @@ extension petloverDashboardViewController {
                         }
                         
                         let middle_Banner_details = dash["middle_Banner_details"] as! NSArray
+                        Servicefile.shared.petshopbanner.removeAll()
                         for item in 0..<middle_Banner_details.count {
                             let Bval = middle_Banner_details[item] as! NSDictionary
                             let id = Bval["_id"] as? String ?? ""

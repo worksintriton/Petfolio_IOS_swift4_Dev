@@ -40,6 +40,13 @@ class imagelink{
     
     // footer image
     
+    static let footnav1 = "navbar (1)"
+    static let footnav2 = "navbar (2)"
+    static let footnav3 = "navbar (3)"
+    static let footnav4 = "navbar (4)"
+    static let footnav5 = "navbar (5)"
+    
+    
     // Header side menu
     
     static let image_sos = "sos2"
@@ -90,7 +97,7 @@ class Servicefile {
     static let petdashboard_new = baseurl + "/api/userdetails/petlove/mobile/dashboardtest"
     static let petdetails = baseurl + "/api/petdetails/mobile/dropdownslist"
     static let pet_sp_filter = baseurl + "/api/service_provider/filter_price_list"
-    
+    static let pet_healthissue = baseurl + "/api/healthissue/getlist"
     static let petdetailget = baseurl + "/api/pettype/mobile/getlist"
     static let addlocation = baseurl + "/api/locationdetails/create"
     static let imageupload = baseurl + "/upload1"
@@ -391,8 +398,8 @@ class Servicefile {
     var selecteddefaultstatus = false
     var ordertype = "current"
     var islocationget = false
-    
-    var appgreen = "#56B9A4"
+    //var appgreen = "#56B9A4"
+    var appgreen = "#2d6d66"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
     var extralightgray = "#f0f0f0"
@@ -406,6 +413,10 @@ class Servicefile {
     var orgspecialza = [""]
     var isspecialza = [""]
     
+    var Pet_breed_val = ""
+    var pet_type_val = ""
+    var petname = ""
+    var healthissue = ""
     var edudicarray = [Any]()
     var expdicarray = [Any]()
     var specdicarray = [Any]()

@@ -84,6 +84,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - iOSDropDown (0.3.4)
+  - IQKeyboardManagerSwift (6.5.6)
   - JJFloatingActionButton (2.5.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
@@ -111,6 +112,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - iOSDropDown
+  - IQKeyboardManagerSwift
   - JJFloatingActionButton
   - NVActivityIndicatorView
   - SDWebImage
@@ -136,6 +138,7 @@ SPEC REPOS:
     - GooglePlaces
     - GoogleUtilities
     - iOSDropDown
+    - IQKeyboardManagerSwift
     - JJFloatingActionButton
     - nanopb
     - NVActivityIndicatorView
@@ -163,6 +166,7 @@ SPEC CHECKSUMS:
   GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JJFloatingActionButton: fdc3aefb0f28f04d0f988fa25d5fac97028a9ea7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   NVActivityIndicatorView: 738e843cb8924e9e4fc3e559d0728031624bf860
@@ -172,6 +176,6 @@ SPEC CHECKSUMS:
   SNShadowSDK: 47806bf857763d41b8d434e97051fc5b22662f3a
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 7c71ae8da0c461f6984534bd6ea9dc5a35ffedbb
+PODFILE CHECKSUM: b19b590c71be7a2b32a4cb9f9f65e1d78d00aef3
 
 COCOAPODS: 1.10.1

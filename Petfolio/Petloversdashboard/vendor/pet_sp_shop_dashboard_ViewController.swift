@@ -36,7 +36,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
-        self.view_header.image_button2.image = UIImage(named: "Bag")
+        self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         
         var img = Servicefile.shared.userimage

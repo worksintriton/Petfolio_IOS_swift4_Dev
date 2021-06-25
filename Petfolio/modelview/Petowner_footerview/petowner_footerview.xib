@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,6 +20,7 @@
                 <outlet property="image_Fprocess_one" destination="xHF-QR-OGt" id="uif-bY-SEQ"/>
                 <outlet property="image_Fprocess_three" destination="gyv-yq-qCV" id="zda-Ll-h16"/>
                 <outlet property="image_Fprocess_two" destination="wev-Np-x3Y" id="Moy-2k-kqc"/>
+                <outlet property="image_footer" destination="dNE-I2-Aya" id="qjc-ks-isM"/>
                 <outlet property="label_Fprocess_five" destination="2jh-jG-L2I" id="HGQ-Wt-XZx"/>
                 <outlet property="label_Fprocess_four" destination="23h-73-DkO" id="hNs-44-WZn"/>
                 <outlet property="label_Fprocess_one" destination="7B5-Mc-m3M" id="Tm3-c3-imX"/>
@@ -43,6 +43,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdB-sf-bpp">
                     <rect key="frame" x="0.0" y="0.0" width="456" height="54"/>
                     <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navbar (3)" translatesAutoresizingMaskIntoConstraints="NO" id="dNE-I2-Aya">
+                            <rect key="frame" x="0.0" y="0.0" width="456" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3F-Bd-5Ty">
                             <rect key="frame" x="11.5" y="0.0" width="433" height="48.5"/>
                             <subviews>
@@ -135,6 +139,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-lp-jJD">
                                             <rect key="frame" x="0.0" y="0.0" width="87" height="48.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -222,7 +227,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="v5F-uq-sfR" firstAttribute="bottom" secondItem="dTy-vV-x9w" secondAttribute="bottom" id="6d7-hc-Re2"/>
                                 <constraint firstItem="dTy-vV-x9w" firstAttribute="bottom" secondItem="0IC-xb-l7F" secondAttribute="bottom" id="7aw-Sg-AeZ"/>
@@ -247,17 +252,21 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="u3F-Bd-5Ty" firstAttribute="centerX" secondItem="qdB-sf-bpp" secondAttribute="centerX" id="4NY-nq-Xxg"/>
                         <constraint firstItem="u3F-Bd-5Ty" firstAttribute="height" secondItem="qdB-sf-bpp" secondAttribute="height" multiplier="0.9" id="5EM-5p-5nL"/>
                         <constraint firstItem="u3F-Bd-5Ty" firstAttribute="top" secondItem="qdB-sf-bpp" secondAttribute="top" id="6ah-8s-gVq"/>
                         <constraint firstItem="u3F-Bd-5Ty" firstAttribute="width" secondItem="qdB-sf-bpp" secondAttribute="width" multiplier="0.95" id="Bfr-o7-Dxh"/>
+                        <constraint firstAttribute="bottom" secondItem="dNE-I2-Aya" secondAttribute="bottom" id="UAL-5n-GpB"/>
+                        <constraint firstItem="dNE-I2-Aya" firstAttribute="top" secondItem="qdB-sf-bpp" secondAttribute="top" id="Zwh-Ib-yCe"/>
+                        <constraint firstAttribute="trailing" secondItem="dNE-I2-Aya" secondAttribute="trailing" id="iFV-RQ-J77"/>
+                        <constraint firstItem="dNE-I2-Aya" firstAttribute="leading" secondItem="qdB-sf-bpp" secondAttribute="leading" id="zwT-Pt-nmX"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="qdB-sf-bpp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TYa-YX-xPp"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qdB-sf-bpp" secondAttribute="trailing" id="hpw-fO-Fc8"/>
@@ -272,10 +281,8 @@
         <image name="Foot_print_gray" width="100" height="100"/>
         <image name="Group59" width="24" height="24"/>
         <image name="home_blue" width="100" height="100"/>
+        <image name="navbar (3)" width="454" height="78"/>
         <image name="petcare_gray" width="100" height="100"/>
         <image name="shop_gray" width="100" height="100"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

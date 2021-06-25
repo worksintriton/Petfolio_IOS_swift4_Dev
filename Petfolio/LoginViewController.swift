@@ -256,6 +256,7 @@ extension UIView {
         layer.shadowRadius = 0
     }
     
+    
     func startAnimating() {
         Servicefile.shared.gradientLayer.frame = self.bounds
         Servicefile.shared.gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)

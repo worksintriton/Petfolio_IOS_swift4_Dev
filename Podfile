@@ -18,6 +18,7 @@ target 'Petfolio' do
   pod 'iOSDropDown'
   pod 'JJFloatingActionButton'
   pod 'AASignatureView'
+  pod 'IQKeyboardManagerSwift'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

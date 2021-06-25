@@ -85,6 +85,11 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.view_shadow.isHidden = true
         self.view_prod_selected.isHidden = true
         self.datepicker_date.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+                    self.datepicker_date.preferredDatePickerStyle = .wheels
+                       } else {
+                           // Fallback on earlier versions
+                }
         self.view_discard.isHidden = true
         self.view_datepicker.isHidden = true
         self.view_discard.view_cornor()

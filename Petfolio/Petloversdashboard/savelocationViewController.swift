@@ -76,7 +76,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     }
     
     func intial_setup_action(){
-    // header action
+        // header action
         self.view_subpage_header.label_header_title.text = "Pickup Location"
         self.view_subpage_header.label_header_title.textColor = .white
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
@@ -84,8 +84,11 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-    // header action
-   
+        self.view_subpage_header.view_sos.isHidden = true
+        self.view_subpage_header.view_bel.isHidden = true
+        self.view_subpage_header.view_bag.isHidden = true
+        self.view_subpage_header.view_profile.isHidden = true
+        // header action
     }
     
     @IBAction func action_switch(_ sender: UISwitch) {

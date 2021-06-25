@@ -8,152 +8,200 @@
 
 import UIKit
 import Alamofire
-
-class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+//, UITableViewDelegate, UITableViewDataSource
+class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    @IBOutlet weak var view_Petname: UIView!
-    @IBOutlet weak var view_pettype: UIView!
-    @IBOutlet weak var view_pettypeDrop: UIView!
-    @IBOutlet weak var view_petbreedDrop: UIView!
-    @IBOutlet weak var view_petbreed: UIView!
-    @IBOutlet weak var view_petgender: UIView!
-    @IBOutlet weak var view_petweight: UIView!
+   
+    @IBOutlet weak var view_Petname: selectval!
+    @IBOutlet weak var view_petcolor: selectval!
+    @IBOutlet weak var view_pet: selectval!
+    @IBOutlet weak var view_petweight: selectval!
+    @IBOutlet weak var view_selectdate: selectval! //  vacinated date
+    @IBOutlet weak var view_selectdateCalender: selectval! // DOB
+    @IBOutlet weak var view_petbio: selectval!
+    
+    @IBOutlet weak var view_gender: genderview!
+    
+    
+    
     @IBOutlet weak var view_petage: UIView!
     @IBOutlet weak var view_datelabel: UIView!
-    @IBOutlet weak var view_selectdate: UIView!
-    @IBOutlet weak var view_selectdateCalender: UIView!
+    
     @IBOutlet weak var view_calender: UIView!
     @IBOutlet weak var view_calenderbtn: UIView!
-    @IBOutlet weak var view_petcolor: UIView!
+    
+    
     @IBOutlet weak var view_submit: UIView!
     
     
-    @IBOutlet weak var textfield_petname: UITextField!
-    @IBOutlet weak var textfield_pettype: UITextField!
-    @IBOutlet weak var textfield_petbreed: UITextField!
-    @IBOutlet weak var textfield_petgender: UITextField!
-    @IBOutlet weak var textfield_petweight: UITextField!
-    @IBOutlet weak var textfiled_petage: UITextField!
-    @IBOutlet weak var textfield_selectdate: UITextField!
-    @IBOutlet weak var textfield_DOB: UITextField!
     
-    @IBOutlet weak var textfield_petcolor: UITextField!
+   
+    @IBOutlet weak var textfiled_petage: UITextField!
+    
     @IBOutlet weak var img_novaccine: UIImageView!
     @IBOutlet weak var img_yesvaccine: UIImageView!
     
-    @IBOutlet weak var tblview_pettype: UITableView!
-    @IBOutlet weak var tblview_petbreed: UITableView!
-    @IBOutlet weak var tblview_gender: UITableView!
+//    @IBOutlet weak var tblview_pettype: UITableView!
+//    @IBOutlet weak var tblview_petbreed: UITableView!
+//    @IBOutlet weak var tblview_gender: UITableView!
     
     
     @IBOutlet weak var datepicker_date: UIDatePicker!
     
     var isdob = false
+    var Pet_breed_val = ""
+    var pet_type_val = ""
     var Pet_breed = [""]
     var pet_type = [""]
     var petid = [""]
-    
+    var petage = ""
     var petgender = [""]
-    
+    var isselectdate = ""
     var isvaccin = true
-    
+    var gender = "Male"
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pet_type.removeAll()
         self.Pet_breed.removeAll()
-        self.view_Petname.view_cornor()
-        self.view_petage.view_cornor()
-        self.view_pettype.view_cornor()
-        self.view_petbreed.view_cornor()
-        self.view_petgender.view_cornor()
-        self.view_petage.view_cornor()
+        self.setdesign()
         self.view_selectdate.view_cornor()
-        self.view_pettypeDrop.view_cornor()
-        self.view_petbreedDrop.view_cornor()
+//        self.view_pettypeDrop.view_cornor()
+        self.view_pet.view_cornor()
         self.view_petcolor.view_cornor()
         self.view_selectdateCalender.layer.cornerRadius = CGFloat(Servicefile.shared.viewLabelcornorraius)
         self.view_submit.view_cornor()
         // Do any additional setup after loading the view.
         self.callpetdetails()
         self.callpetdetailget()
-        
-        self.textfield_petname.delegate = self
-        self.textfield_petgender.delegate = self
-        self.textfield_petweight.delegate = self
+        self.view_pet.textfield_value.delegate = self
+        self.view_Petname.textfield_value.delegate = self
+        self.view_petbio.textfield_value.delegate = self
+        self.view_petweight.textfield_value.delegate = self
         self.textfiled_petage.delegate = self
-        self.textfield_petcolor.delegate = self
+        self.view_petcolor.textfield_value.delegate = self
         
-        self.tblview_pettype.delegate = self
-        self.tblview_pettype.dataSource = self
-        self.tblview_petbreed.delegate = self
-        self.tblview_petbreed.dataSource = self
-        self.tblview_gender.delegate = self
-        self.tblview_gender.dataSource = self
-        
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = true
-        self.tblview_gender.isHidden = true
-        
-        self.view_calenderbtn.dropShadow()
-        
-        let apgreen = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.tblview_petbreed.layer.borderColor = apgreen.cgColor
-        self.tblview_pettype.layer.borderColor = apgreen.cgColor
-        self.tblview_gender.layer.borderColor = apgreen.cgColor
-        self.tblview_petbreed.layer.borderWidth = 0.2
-        self.tblview_pettype.layer.borderWidth = 0.2
-        self.tblview_gender.layer.borderWidth = 0.2
-        
-        self.tblview_petbreed.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        self.tblview_pettype.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        self.tblview_gender.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         
         self.view_calender.isHidden = true
         self.view_calenderbtn.view_cornor()
         self.datepicker_date.datePickerMode = .date
         self.datepicker_date.maximumDate = Date()
+        if #available(iOS 13.4, *) {
+                    self.datepicker_date.preferredDatePickerStyle = .wheels
+                       } else {
+                           // Fallback on earlier versions
+                }
         self.textfiled_petage.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.datepicker_date.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        self.view_pet.btn_get_data.addTarget(self, action: #selector(action_getpet), for: .touchUpInside)
+        
+        self.view_pet.textfield_value.text = Servicefile.shared.pet_type_val + Servicefile.shared.Pet_breed_val
+        self.view_selectdateCalender.btn_get_data.addTarget(self, action: #selector(action_showDOBcalender), for: .touchUpInside)
+        self.view_selectdate.btn_get_data.addTarget(self, action: #selector(action_showcalender), for: .touchUpInside)
+        self.view_Petname.btn_get_data.addTarget(self, action: #selector(action_get), for: .touchUpInside)
+        self.view_gender.maleselect()
+        self.gender = "Male"
+        self.view_gender.btn_m.addTarget(self, action: #selector(action_getm), for: .touchUpInside)
+        self.view_gender.btn_f.addTarget(self, action: #selector(action_getf), for: .touchUpInside)
+        self.view_gender.btn_o.addTarget(self, action: #selector(action_geto), for: .touchUpInside)
     }
+    
+   
+    @objc func action_getm(_ sender: Any) {
+        self.view_gender.maleselect()
+        self.gender = "Male"
+    }
+    
+    @objc func action_getf(_ sender: Any) {
+        self.view_gender.femaleselect()
+        self.gender = "Female"
+    }
+    
+    @objc func action_geto(_ sender: Any) {
+        self.view_gender.othersselect()
+        self.gender = "Others"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.pet_type_val != "" {
+            self.view_pet.textfield_value.text = Servicefile.shared.pet_type_val + ", " + Servicefile.shared.Pet_breed_val
+        }
+       
+    }
+    
+    @objc func action_getpet(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "getpetViewController") as! getpetViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func action_get(_ sender: Any) {
+        print("you have clicked")
+    }
+    
+    
+    func setdesign(){
+        Servicefile.shared.Pet_breed_val = ""
+        Servicefile.shared.pet_type_val = ""
+        self.view_Petname.textfield_value.placeholder = "Pet name"
+        self.view_pet.textfield_value.placeholder = "Pet Type & Breed"
+        self.view_selectdate.textfield_value.placeholder = "Select Vaccinated date"
+        self.view_selectdateCalender.textfield_value.placeholder = "Date of Birth"
+        self.view_petcolor.textfield_value.placeholder = "Pet color"
+        self.view_petweight.textfield_value.placeholder = "Pet weight (Kg)"
+        self.view_petbio.textfield_value.placeholder = "Pet Bio"
+        self.view_pet.view_btn_side.isHidden = false
+        self.view_pet.btn_get_data.isHidden = false
+        self.view_Petname.btn_get_data.isHidden = true
+        self.view_petbio.btn_get_data.isHidden = true
+        self.view_petcolor.btn_get_data.isHidden = true
+        self.view_selectdate.view_btn_side.isHidden = false
+        self.view_selectdate.btn_get_data.isHidden = false
+        self.view_selectdateCalender.view_btn_side.isHidden = false
+        self.view_selectdateCalender.btn_get_data.isHidden = false
+        self.view_selectdate.image_side_view.image = UIImage(named: "calender")
+        self.view_selectdateCalender.image_side_view.image = UIImage(named: "calender")
+        
+    }
+    
     
     @objc func dateChanged(_ sender: UIDatePicker) {
         let senderdate = sender.date
         let sedate = Servicefile.shared.ddMMyyyystringformat(date: senderdate)
         if self.isdob {
-            self.textfield_DOB.text = sedate
-            self.textfiled_petage.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
-            
+            self.isselectdate = sedate
+            self.view_selectdateCalender.textfield_value.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
         }else{
-            self.textfield_selectdate.text = sedate
+            self.view_selectdate.textfield_value.text = sedate
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) -> Bool {
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = true
-        self.tblview_gender.isHidden = true
+//        self.tblview_petbreed.isHidden = true
+//        self.tblview_pettype.isHidden = true
+//        self.tblview_gender.isHidden = true
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textfield_petname.resignFirstResponder()
-        self.textfield_petgender.resignFirstResponder()
-        self.textfield_petweight.resignFirstResponder()
-        self.textfiled_petage.resignFirstResponder()
-        self.textfield_petcolor.resignFirstResponder()
+        self.view.endEditing(true)
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == self.textfield_petname {
+        if textField == self.view_Petname.textfield_value {
             let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
             return string == numberFiltered
         }
-        if textField == self.textfield_petweight {
+        if textField == self.view_petbio.textfield_value {
+            let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+            let compSepByCharInSet = string.components(separatedBy: aSet)
+            let numberFiltered = compSepByCharInSet.joined(separator: "")
+            return string == numberFiltered
+        }
+        if textField == self.view_petweight.textfield_value {
             let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumberandspecial).inverted
             let compSepByCharInSet = string.components(separatedBy: aSet)
             let numberFiltered = compSepByCharInSet.joined(separator: "")
@@ -165,31 +213,31 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
 //            let numberFiltered = compSepByCharInSet.joined(separator: "")
 //            return string == numberFiltered
 //        }
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = true
-        self.tblview_gender.isHidden = true
+//        self.tblview_petbreed.isHidden = true
+//        self.tblview_pettype.isHidden = true
+//        self.tblview_gender.isHidden = true
         return true
     }
     
     @objc func textFieldDidChange(textField : UITextField){
-        if self.textfield_petname == textField {
-            if self.textfield_petname.text!.count > 24 {
-                self.textfield_petname.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
-                self.textfield_petname.resignFirstResponder()
+        if self.view_Petname.textfield_value == textField {
+            if self.view_Petname.textfield_value.text!.count > 24 {
+                self.view_Petname.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+                self.view_Petname.textfield_value.resignFirstResponder()
             }else{
-                self.textfield_petname.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+                self.view_Petname.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
             }
-            if self.textfield_petcolor.text!.count > 14 {
-                self.textfield_petcolor.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
-                self.textfield_petcolor.resignFirstResponder()
+            if self.view_petcolor.textfield_value.text!.count > 14 {
+                self.view_petcolor.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
+                self.view_petcolor.textfield_value.resignFirstResponder()
             }else{
-                self.textfield_petcolor.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
+                self.view_petcolor.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
             }
-            if self.textfield_petweight.text!.count > 4 {
-               self.textfield_petweight.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
-                self.textfield_petweight.resignFirstResponder()
+            if self.view_petweight.textfield_value.text!.count > 4 {
+                self.view_petweight.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
+                self.view_petweight.textfield_value.resignFirstResponder()
             }else{
-                self.textfield_petweight.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
+                self.view_petweight.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
             }
 //            if self.textfiled_petage.text!.count > 1 {
 //                self.textfiled_petage.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
@@ -209,77 +257,77 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
         self.pushtologin()
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.tblview_pettype == tableView {
-            return self.pet_type.count
-        }else if self.tblview_petbreed == tableView {
-            return self.Pet_breed.count
-        }else{
-            return self.petgender.count
-        }
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+////        if self.tblview_pettype == tableView {
+////            return self.pet_type.count
+////        }else if self.tblview_petbreed == tableView {
+////            return self.Pet_breed.count
+////        }else{
+////            return self.petgender.count
+////        }
+//    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.tblview_pettype == tableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
-            cell.textLabel?.text = self.pet_type[indexPath.row]
-            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            cell.selectionStyle = .none
-            return cell
-        }else if self.tblview_gender == tableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "gender", for: indexPath)
-            cell.textLabel?.text = self.petgender[indexPath.row]
-            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            cell.selectionStyle = .none
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
-            cell.textLabel?.text = self.Pet_breed[indexPath.row]
-            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            cell.selectionStyle = .none
-            return cell
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if self.tblview_pettype == tableView {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "Ptype", for: indexPath)
+//            cell.textLabel?.text = self.pet_type[indexPath.row]
+//            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//            cell.selectionStyle = .none
+//            return cell
+//        }else if self.tblview_gender == tableView {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "gender", for: indexPath)
+//            cell.textLabel?.text = self.petgender[indexPath.row]
+//            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//            cell.selectionStyle = .none
+//            return cell
+//        }else{
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "Pbreed", for: indexPath)
+//            cell.textLabel?.text = self.Pet_breed[indexPath.row]
+//            cell.textLabel?.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+//            cell.selectionStyle = .none
+//            return cell
+//        }
+//
+//    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = true
-        self.tblview_gender.isHidden = true
-        if self.tblview_petbreed ==  tableView {
-            self.textfield_petbreed.text! = self.Pet_breed[indexPath.row]
-        }else if self.tblview_pettype ==  tableView {
-            self.textfield_pettype.text! = self.pet_type[indexPath.row]
-            self.callpetbreedbyid(petid: self.petid[indexPath.row])
-        }else{
-            self.textfield_petgender.text = self.petgender[indexPath.row]
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.tblview_petbreed.isHidden = true
+//        self.tblview_pettype.isHidden = true
+//        self.tblview_gender.isHidden = true
+//        if self.tblview_petbreed ==  tableView {
+//            self.textfield_petbreed.text! = self.Pet_breed[indexPath.row]
+//        }else if self.tblview_pettype ==  tableView {
+//            self.textfield_pettype.text! = self.pet_type[indexPath.row]
+//            self.callpetbreedbyid(petid: self.petid[indexPath.row])
+//        }else{
+//            self.textfield_petgender.text = self.petgender[indexPath.row]
+//        }
+//    }
     
     @IBAction func action_pettype(_ sender: Any) {
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = false
-        self.tblview_gender.isHidden = true
+//        self.tblview_petbreed.isHidden = true
+//        self.tblview_pettype.isHidden = false
+//        self.tblview_gender.isHidden = true
         
     }
     
     
     @IBAction func action_gender(_ sender: Any) {
-        self.tblview_petbreed.isHidden = true
-        self.tblview_pettype.isHidden = true
-        self.tblview_gender.isHidden = false
+//        self.tblview_petbreed.isHidden = true
+//        self.tblview_pettype.isHidden = true
+//        self.tblview_gender.isHidden = false
     }
     
     
     @IBAction func action_petbreed(_ sender: Any) {
         if self.Pet_breed.count > 0 {
-            self.tblview_petbreed.isHidden = false
-            self.tblview_pettype.isHidden = true
-            self.tblview_gender.isHidden = true
+//            self.tblview_petbreed.isHidden = false
+//            self.tblview_pettype.isHidden = true
+//            self.tblview_gender.isHidden = true
         }
     }
     
@@ -305,12 +353,12 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     
-    @IBAction func action_showDOBcalender(_ sender: Any) {
+    @objc func action_showDOBcalender(_ sender: Any) {
         self.isdob = true
         self.view_calender.isHidden = false
     }
     
-    @IBAction func action_showcalender(_ sender: Any) {
+    @objc func action_showcalender(_ sender: Any) {
         self.isdob = false
         self.view_calender.isHidden = false
     }
@@ -320,39 +368,37 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     @IBAction func action_submit(_ sender: Any) {
-        if self.textfield_petname.text == "" {
+        if self.view_Petname.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet name")
-        }else if self.textfield_pettype.text == "" {
-            self.alert(Message: "Please select Pet type")
-        }else if self.textfield_petbreed.text == "" {
-            self.alert(Message: "Please select Pet breed")
-        }else if self.textfield_petgender.text == "" {
-            self.alert(Message: "Please select Pet gender")
-        }else if self.textfield_petcolor.text == "" {
+        }else if self.view_petbio.textfield_value.text == "" {
+            self.alert(Message: "Please enter Pet Bio")
+        }else if Servicefile.shared.pet_type_val == "" {
+            self.alert(Message: "Please select Pet Type and Breed")
+        }else if self.view_petcolor.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet color")
-        }else if self.self.textfield_DOB.text == "" {
+        }else if self.view_selectdateCalender.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet age")
         }else{
             print("user_id", Servicefile.shared.userid,
-                   "pet_img" ,"",
-                   "pet_name" , Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
-                   "pet_type" , Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
-                   "pet_breed" , Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
-                   "pet_gender" , Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
-                   "pet_color" , Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-                   "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-                   "pet_age" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
-                   "pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
-                   "vaccinated" , self.isvaccin,
-                   "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
-                   "default_status" , true,
-                   "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
+                  "pet_img" ,"",
+                  "pet_name" , Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),
+                  "pet_type" , Servicefile.shared.pet_type_val ,
+                  "pet_breed" ,Servicefile.shared.Pet_breed_val,
+                  "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
+                  "pet_gender" , Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
+                  "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
+                  "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
+                  "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                  "vaccinated" , self.isvaccin,
+                  "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
+                  "default_status" , true,
+                  "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
             if self.isvaccin != false {
-                if self.textfield_selectdate.text == "" {
+                if self.view_selectdate.textfield_value.text == "" {
                     self.alert(Message: "Please select vaccinated date")
                 }else{
-                    let birthdate =  Servicefile.shared.ddMMyyyydateformat(date: self.textfield_DOB.text!)
-                    let vacinateddate = Servicefile.shared.ddMMyyyydateformat(date: self.textfield_selectdate.text! )
+                    let birthdate =  Servicefile.shared.ddMMyyyydateformat(date: self.isselectdate)
+                    let vacinateddate = Servicefile.shared.ddMMyyyydateformat(date: self.view_selectdate.textfield_value.text! )
                     if  Servicefile.shared.checkdaydiffer(sdate: birthdate, edate: vacinateddate) {
                     self.calladdpetdetails()
                     }else{
@@ -433,7 +479,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                         }
                         //                    self.tblview_pettype.reloadData()
                         //                    self.tblview_petbreed.reloadData()
-                        self.tblview_gender.reloadData()
+                        //self.tblview_gender.reloadData()
                         self.stopAnimatingActivityIndicator()
                         
                     }else{
@@ -454,30 +500,32 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
     func calladdpetdetails(){
         print("user_id", Servicefile.shared.userid,
               "pet_img" ,"",
-              "pet_name" , Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
-              "pet_type" , Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
-              "pet_breed" , Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
-              "pet_gender" , Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
-              "pet_color" , Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-              "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
+              "pet_name" , Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),
+              "pet_type" , Servicefile.shared.pet_type_val,
+              "pet_breed" , Servicefile.shared.Pet_breed_val,
+              "pet_gender" , Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
+              "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
+              "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
+              "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
+              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
               "vaccinated" , self.isvaccin,
-              "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
+              "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
               "default_status" , true,
               "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
              "pet_img" :"",
-             "pet_name" : Servicefile.shared.checktextfield(textfield: self.textfield_petname.text!),
-             "pet_type" : Servicefile.shared.checktextfield(textfield: self.textfield_pettype.text!),
-             "pet_breed" : Servicefile.shared.checktextfield(textfield: self.textfield_petbreed.text!),
-             "pet_gender" : Servicefile.shared.checktextfield(textfield: self.textfield_petgender.text!),
-             "pet_color" : Servicefile.shared.checktextfield(textfield: self.textfield_petcolor.text!),
-             "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_petweight.text!),
-             "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfield_DOB.text!),
+             "pet_name" : Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),
+             "pet_type" : Servicefile.shared.pet_type_val,
+             "pet_breed" : Servicefile.shared.Pet_breed_val,
+             "petbio": Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
+             "pet_gender" : Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
+             "pet_color" : Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
+             "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
+             "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
              "vaccinated" : self.isvaccin,
-             "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.textfield_selectdate.text!),
+             "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
              "default_status" : true,
              "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),"mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
@@ -610,8 +658,8 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                             }
                             
                         }
-                        self.tblview_pettype.reloadData()
-                        self.tblview_petbreed.reloadData()
+//                        self.tblview_pettype.reloadData()
+//                        self.tblview_petbreed.reloadData()
                         
                         self.stopAnimatingActivityIndicator()
                         
@@ -641,7 +689,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        self.textfield_petbreed.text = ""
+                        //self.textfield_petbreed.text = ""
                         let Pet_breed = res["Data"] as! NSArray
                         self.Pet_breed.removeAll()
                         for item in 0..<Pet_breed.count{
@@ -651,7 +699,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate, UITableV
                                 self.Pet_breed.append(pbv)
                             }
                         }
-                        self.tblview_petbreed.reloadData()
+//                        self.tblview_petbreed.reloadData()
                         self.stopAnimatingActivityIndicator()
                         self.stopAnimatingActivityIndicator()
                     }else{

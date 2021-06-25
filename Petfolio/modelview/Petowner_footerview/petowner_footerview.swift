@@ -39,6 +39,8 @@ class petowner_footerview: UIView {
     @IBOutlet weak var label_Fprocess_five : UILabel!
     @IBOutlet weak var btn_Fprocess_five : UIButton!
     
+    @IBOutlet weak var image_footer: UIImageView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureView()
@@ -62,6 +64,8 @@ class petowner_footerview: UIView {
         if b3 {
             self.image_Fprocess_three.image = UIImage(named: imagelink.home_blue)
             self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+            self.image_footer.image = UIImage(named: imagelink.footnav3)
+            
         }else{
             self.image_Fprocess_three.image = UIImage(named: imagelink.Home_gray)
             self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
@@ -69,6 +73,8 @@ class petowner_footerview: UIView {
         if b1 {
             self.image_Fprocess_one.image = UIImage(named: imagelink.petcare_blue)
             self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+            self.image_footer.image = UIImage(named: imagelink.footnav1)
+            
         }else{
             self.image_Fprocess_one.image = UIImage(named: imagelink.petcare_gray)
             self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
@@ -76,6 +82,7 @@ class petowner_footerview: UIView {
         if b5 {
             self.image_Fprocess_five.image = UIImage(named: imagelink.pet_community_blue)
             self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+            self.image_footer.image = UIImage(named: imagelink.footnav5)
         }else{
             self.image_Fprocess_five.image = UIImage(named: imagelink.pet_community_gray)
             self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
@@ -83,6 +90,7 @@ class petowner_footerview: UIView {
         if b2 {
             self.image_Fprocess_two.image = UIImage(named: imagelink.pet_service_blue)
             self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+            self.image_footer.image = UIImage(named: imagelink.footnav2)
         }else{
             self.image_Fprocess_two.image = UIImage(named: imagelink.pet_service_gray)
             self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
@@ -90,6 +98,7 @@ class petowner_footerview: UIView {
         if b4 {
             self.image_Fprocess_four.image = UIImage(named: imagelink.shop_blue)
             self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+            self.image_footer.image = UIImage(named: imagelink.footnav4)
         }else{
             self.image_Fprocess_four.image = UIImage(named: imagelink.shop_gray)
             self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)

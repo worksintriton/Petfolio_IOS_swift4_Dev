@@ -34,9 +34,16 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
         self.tbl_holidaylist.dataSource = self
         self.view_datepicker.isHidden = true
         self.datepick_date.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            self.datepick_date.preferredDatePickerStyle = .wheels
+         } else {
+                  
+        }
         self.datepick_date.minimumDate = Date()
         self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
     }
+    
+    
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

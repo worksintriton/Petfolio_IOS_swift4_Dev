@@ -261,16 +261,16 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
                 
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
-                    cell.image_fav.image = UIImage(named: imagelink.favtrue)
+                    cell.image_fav.image = UIImage(named: imagelink.fav_true)
                 }else{
-                    cell.image_fav.image = UIImage(named: imagelink.favfalse)
+                    cell.image_fav.image = UIImage(named: imagelink.fav_false)
                 }
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
-                    cell.image_fav.image = UIImage(named: imagelink.favtrue)
+                    cell.image_fav.image = UIImage(named: imagelink.fav_true)
                 }else{
-                    cell.image_fav.image = UIImage(named: imagelink.favfalse)
+                    cell.image_fav.image = UIImage(named: imagelink.fav_false)
                 }
                 
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
@@ -287,6 +287,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                }
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate
+                cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
                return cell
             }
         }

@@ -253,7 +253,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                         Servicefile.shared.pet_apoint_amount = amount
                         self.label_cont_amt.text = " INR " + String(Servicefile.shared.pet_apoint_amount)
                         self.label_city.text = clicloc + ". "
-                        self.label_distance.text = Servicefile.shared.petdoc[Servicefile.shared.selectedindex].distance + " KM away"
+                        self.label_distance.text = Servicefile.shared.moredocd[Servicefile.shared.selectedindex].distance + " KM away"
                         for itm in 0..<clidet.count{
                             let dat = clidet[itm] as! NSDictionary
                             let pic = dat["clinic_pic"] as? String ?? Servicefile.sample_img

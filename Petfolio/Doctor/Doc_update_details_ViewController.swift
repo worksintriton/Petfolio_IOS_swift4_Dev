@@ -180,7 +180,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         
         self.datepicker_date.datePickerMode = .date
         self.datepicker_expdate.datePickerMode = .date
-        
+        if #available(iOS 13.4, *) {
+            self.datepicker_date.preferredDatePickerStyle = .wheels
+            self.datepicker_expdate.preferredDatePickerStyle = .wheels
+         } else {
+                  
+        }
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         print("user id",Servicefile.shared.userid)
         self.datepicker_expdate.addTarget(self, action: #selector(dateChangedexp(_:)), for: .valueChanged)

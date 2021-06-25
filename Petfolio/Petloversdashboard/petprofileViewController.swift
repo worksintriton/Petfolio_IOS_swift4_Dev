@@ -130,7 +130,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.imag_profile.image = UIImage(named: "sample")
             }
             
-            cell.imag_profile.layer.cornerRadius =  cell.imag_profile.frame.width / 2
+            cell.imag_profile.view_cornor()
             if self.ismenu[indexPath.row] == "1"{
                cell.View_menu.isHidden = false
             }else{
@@ -198,7 +198,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
              }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-             return CGSize(width: 128 , height:  128)
+             return CGSize(width: 168 , height:  168)
     }
     
     @objc func backpage(){

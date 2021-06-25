@@ -11,13 +11,16 @@ import CoreData
 import Firebase
 import GoogleMaps
 import GooglePlaces
+import IQKeyboardManagerSwift
 
+@available(iOS 13.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 let googleApiKey = "AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc"
 var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        IQKeyboardManager.shared.enable = true
        GMSServices.provideAPIKey(googleApiKey)
             FirebaseApp.configure()
             do {

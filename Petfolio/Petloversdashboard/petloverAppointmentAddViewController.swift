@@ -126,6 +126,12 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.setuploadimg()
         print("Communication type",Servicefile.shared.pet_apoint_communication_type)
         self.checkappointmentcommtype()
+        self.textfield_pettype.text = Servicefile.shared.pet_type_val
+        self.textfield_petbreed.text = Servicefile.shared.Pet_breed_val
+        self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
+        self.textfield_alergies.isUserInteractionEnabled = false
+        self.textfield_alergies.text = Servicefile.shared.healthissue
+        self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
     
     

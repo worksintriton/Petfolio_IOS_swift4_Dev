@@ -36,6 +36,8 @@
 		<string>paytmmp</string>
 		<string>credpay</string>
 	</array>
+    <key>UIUserInterfaceStyle</key>
+    <string>light</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -111,5 +113,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIUserInterfaceStyle</key>
+	<string></string>
 </dict>
 </plist>

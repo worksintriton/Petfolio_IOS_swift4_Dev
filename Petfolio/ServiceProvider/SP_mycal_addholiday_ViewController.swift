@@ -36,6 +36,11 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
         self.view_datepicker.isHidden = true
         self.datepick_date.datePickerMode = .date
         self.datepick_date.minimumDate = Date()
+        if #available(iOS 13.4, *) {
+            self.datepick_date.preferredDatePickerStyle = .wheels
+         } else {
+                  
+        }
         self.datepick_date.addTarget(self, action: #selector(dateChange(_:)), for: .valueChanged)
         // Do any additional setup after loading the view.
     }

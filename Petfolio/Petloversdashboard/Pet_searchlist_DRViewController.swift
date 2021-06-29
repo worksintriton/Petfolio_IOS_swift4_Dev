@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var tbl_searchlist: UITableView!
    // @IBOutlet weak var view_footer: UIView!
@@ -19,6 +19,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     var refreshControl = UIRefreshControl()
     var comm_type = 0
     
+    @IBOutlet weak var view_bac: UIView!
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var noofdoc: UILabel!
     @IBOutlet weak var switch_commtype: UISwitch!
@@ -26,7 +27,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var label_nodata: UILabel!
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var view_care: UIView!
-    
+    @IBOutlet weak var col_ban: UICollectionView!
+    var pagcount = 0
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.moredocd.removeAll()
@@ -36,6 +39,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.label_nodata.isHidden = true
         self.tbl_searchlist.delegate = self
         self.tbl_searchlist.dataSource = self
+        self.col_ban.delegate = self
+        self.col_ban.dataSource = self
         self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tbl_searchlist.addSubview(refreshControl) // not required when using UITableViewController
         self.label_comm_type.text = "Offline Doctors"
@@ -43,7 +48,65 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.textfield_search.delegate = self
         self.view_search.view_cornor()
         self.intial_setup_action()
+        self.view_bac.layer.cornerRadius = self.view_bac.frame.height / 2
         
+    }
+    
+    @IBAction func action_bac(_ sender: Any) {
+        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        if Servicefile.shared.moredocd.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == Servicefile.shared.moredocd.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+              
+           }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Servicefile.shared.moredocd.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
+            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    cell.img_banner.image = UIImage(named: "sample")
+                } else {
+                    cell.img_banner.image = image
+                }
+            }
+            // cell.img_banner.view_cornor()
+            // cell.view_banner_two.view_cornor()
+            return cell
+       
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+            return CGSize(width: self.col_ban.frame.size.width , height:  self.col_ban.frame.size.height)
+      
     }
     
     @IBAction func action_shop(_ sender: Any) {
@@ -237,6 +300,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                  self.label_nodata.isHidden = true
                                                             }
                                                             self.tbl_searchlist.reloadData()
+                                                            self.col_ban.reloadData()
+                                                            self.startTimer()
                                                             self.refreshControl.endRefreshing()
                                                            self.stopAnimatingActivityIndicator()
                                                         }else{

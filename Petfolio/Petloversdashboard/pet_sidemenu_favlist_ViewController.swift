@@ -40,7 +40,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     func intial_setup_action(){
     // header action
         self.view_subpage_header.label_header_title.text = "My Favourite"
-        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
@@ -188,6 +188,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_vets.view_cornor()
             cell.image_vet.view_cornor()
             cell.view_main.view_cornor()
+            cell.view_bottom_curve.view_cornor()
             cell.view_main.layer.borderWidth = 0.3
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
@@ -220,6 +221,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_vets.view_cornor()
             cell.image_vet.view_cornor()
             cell.view_main.view_cornor()
+            cell.view_bottom_curve.view_cornor()
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
             return cell

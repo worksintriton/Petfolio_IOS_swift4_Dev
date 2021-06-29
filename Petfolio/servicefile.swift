@@ -21,19 +21,19 @@ class imagelink{
     static let fav_false = "heart_gray"
     // footer image
     
-    static let Home_gray = "Home_gray"
+    static let Home_gray = "nhome"
     static let home_blue = "home_blue"
     
-    static let petcare_gray = "petcare_gray"
+    static let petcare_gray = "npetcare"
     static let petcare_blue = "petcare_blue"
     
     static let shop_blue = "shop_blue"
-    static let shop_gray = "shop_gray"
+    static let shop_gray = "nshop"
     
-    static let pet_service_gray = "Foot_print_gray"
+    static let pet_service_gray = "npetservice"
     static let pet_service_blue = "foot_print_blue"
     
-    static let pet_community_gray = "commu"
+    static let pet_community_gray = "ncommun"
     static let pet_community_blue = "commu1"
     
     static let SOS = "Group59"
@@ -409,6 +409,7 @@ class Servicefile {
     var extralightgray = "#f0f0f0"
     var shadowtop = "#ffffff"
     var black = "#444444"
+    var textcolor = "#444444"
     static let appblack = "#444444"
     static let appgray = "#AAAAAA"
     static let appred = "#FF0000"

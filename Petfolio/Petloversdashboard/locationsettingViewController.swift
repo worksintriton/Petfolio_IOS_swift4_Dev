@@ -55,7 +55,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     func intial_setup_action(){
     // header action
         self.view_header.label_header_title.text = "Pickup Location"
-        self.view_header.label_header_title.textColor = .white
+        self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)

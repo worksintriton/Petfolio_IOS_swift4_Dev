@@ -21,6 +21,7 @@ class dash_doc_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_DR: UILabel!
     @IBOutlet weak var label_clinic: UILabel!
     @IBOutlet weak var view_rating: CosmosView!
+    @IBOutlet weak var view_bottom_curve: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

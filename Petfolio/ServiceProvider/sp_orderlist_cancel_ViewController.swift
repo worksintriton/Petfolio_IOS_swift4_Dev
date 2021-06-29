@@ -40,7 +40,7 @@ class sp_orderlist_cancel_ViewController:  UIViewController, UITableViewDelegate
     func intial_setup_action(){
     // header action
         self.view_subpage_header.label_header_title.text = "Orders detail"
-        self.view_subpage_header.label_header_title.textColor = .white
+        self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.view_profile.isHidden = true
         self.view_subpage_header.view_sos.isHidden = true

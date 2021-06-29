@@ -24,6 +24,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="188" height="306"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwB-vV-kGF">
+                                <rect key="frame" x="150" y="160.5" width="30" height="30"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shopping-bag" translatesAutoresizingMaskIntoConstraints="NO" id="mIP-Nc-a3r">
+                                        <rect key="frame" x="7" y="7" width="16" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QdW-lP-0lt"/>
+                                    <constraint firstAttribute="width" constant="30" id="UAU-cF-wlK"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaT-Z7-bc2">
                                 <rect key="frame" x="0.0" y="183.5" width="188" height="122.5"/>
                                 <subviews>
@@ -67,7 +81,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fXC-k3-A66" secondAttribute="trailing" constant="25" id="EZv-bl-dP1"/>
                                     <constraint firstItem="3M1-V2-gTY" firstAttribute="leading" secondItem="PaT-Z7-bc2" secondAttribute="leading" constant="8" id="Glo-6J-2yR"/>
@@ -81,20 +95,6 @@
                                     <constraint firstAttribute="height" constant="122.5" id="s7C-JS-I1D"/>
                                     <constraint firstItem="fXC-k3-A66" firstAttribute="top" secondItem="Yxc-Qg-IdM" secondAttribute="bottom" constant="8" id="sfm-ub-eEw"/>
                                     <constraint firstItem="Yxc-Qg-IdM" firstAttribute="top" secondItem="HW9-2d-Cja" secondAttribute="bottom" constant="2" id="yD5-u1-v4T"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwB-vV-kGF">
-                                <rect key="frame" x="150" y="165.5" width="30" height="30"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shopping-bag" translatesAutoresizingMaskIntoConstraints="NO" id="mIP-Nc-a3r">
-                                        <rect key="frame" x="7" y="7" width="16" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QdW-lP-0lt"/>
-                                    <constraint firstAttribute="width" constant="30" id="UAU-cF-wlK"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tph-n1-2UU">
@@ -115,7 +115,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.99382632969999996" blue="0.89366537329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tph-n1-2UU" firstAttribute="top" secondItem="mKr-LW-K9w" secondAttribute="top" constant="8" id="3PC-Rh-Xd4"/>
                             <constraint firstItem="lHR-4X-AnY" firstAttribute="top" secondItem="mKr-LW-K9w" secondAttribute="top" id="50a-vE-tFR"/>
@@ -126,7 +126,7 @@
                             <constraint firstItem="PaT-Z7-bc2" firstAttribute="leading" secondItem="mKr-LW-K9w" secondAttribute="leading" id="LzL-iW-eDz"/>
                             <constraint firstAttribute="trailing" secondItem="rwB-vV-kGF" secondAttribute="trailing" constant="8" id="WzS-nT-OfR"/>
                             <constraint firstAttribute="trailing" secondItem="PaT-Z7-bc2" secondAttribute="trailing" id="d8c-te-XeH"/>
-                            <constraint firstItem="HW9-2d-Cja" firstAttribute="top" secondItem="rwB-vV-kGF" secondAttribute="bottom" id="h0P-Jf-hv6"/>
+                            <constraint firstItem="HW9-2d-Cja" firstAttribute="top" secondItem="rwB-vV-kGF" secondAttribute="bottom" constant="5" id="h0P-Jf-hv6"/>
                             <constraint firstItem="lHR-4X-AnY" firstAttribute="height" secondItem="mKr-LW-K9w" secondAttribute="height" id="rYZ-qf-EKe"/>
                         </constraints>
                     </view>
@@ -154,11 +154,6 @@
             <point key="canvasLocation" x="242.0289855072464" y="150.66964285714286"/>
         </collectionViewCell>
     </objects>
-    <designables>
-        <designable name="fXC-k3-A66">
-            <size key="intrinsicContentSize" width="80" height="12"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="grey_paw" width="12" height="10"/>

@@ -332,6 +332,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.view_vets.view_cornor()
             cell.image_vet.view_cornor()
             cell.view_main.view_cornor()
+            cell.view_bottom_curve.view_cornor()
+            
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
             return cell
@@ -361,6 +363,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             //cell.image_shop.view_cornor()
             cell.view_main.view_cornor()
             cell.view_y_main.view_cornor()
+            cell.view_y_main.dropShadow()
+            cell.contentView.dropShadow()
             cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
             return cell
         }

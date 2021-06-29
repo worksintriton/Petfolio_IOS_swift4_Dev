@@ -132,7 +132,7 @@ class vendorTrackorderViewController: UIViewController {
     func inital_setup(){
         // header action
             self.view_header.label_header_title.text = "Track Order"
-            self.view_header.label_header_title.textColor = .white
+            self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
             self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
         self.view_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)

@@ -36,7 +36,7 @@ class doc_shop_search_ViewController: UIViewController, UICollectionViewDelegate
     func intial_setup_action(){
     // header action
         self.view_header.label_header_title.text = "Search"
-        self.view_header.label_header_title.textColor = .white
+        self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_header.btn_back.addTarget(self, action: #selector(self.viewback), for: .touchUpInside)
         self.view_header.view_profile.isHidden = true
         self.view_header.view_sos.isHidden = true

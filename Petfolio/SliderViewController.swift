@@ -103,12 +103,13 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     self.present(vc, animated: true, completion: nil)
                 }
             }else{
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                let vc = UIStoryboard.LoginViewController()
                 self.present(vc, animated: true, completion: nil)
             }
             
         }else{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            
+            let vc = UIStoryboard.LoginViewController()
             self.present(vc, animated: true, completion: nil)
         }
     }

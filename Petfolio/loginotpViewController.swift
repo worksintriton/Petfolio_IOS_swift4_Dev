@@ -210,12 +210,13 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                         UserDefaults.standard.set(userid, forKey: "userid")
                                                        if Servicefile.shared.user_type == "1" {
                                                         Servicefile.shared.tabbar_selectedindex = 2
-                                                        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                                                        let tapbar = UIStoryboard.SHCircleBarControll()
                                                         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                                         self.present(tapbar, animated: true, completion: nil)
                                                        } else if Servicefile.shared.user_type == "4" {
-                                                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
-                                                                                      self.present(vc, animated: true, completion: nil)
+                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                        self.present(vc, animated: true, completion: nil)
+                                                        
                                                        } else if Servicefile.shared.user_type == "2" {
                                                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
                                                             self.present(vc, animated: true, completion: nil)

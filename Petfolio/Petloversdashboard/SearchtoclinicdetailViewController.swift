@@ -170,7 +170,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     @IBAction func action_back(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -236,7 +236,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func action_book(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
+        let vc = UIStoryboard.searchcalenderdetailsViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

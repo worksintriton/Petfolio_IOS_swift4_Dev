@@ -384,8 +384,8 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
     @objc func action_btn_trackorder(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_orderstatus_ViewController") as! vendor_orderstatus_ViewController
-              self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.vendor_orderstatus_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

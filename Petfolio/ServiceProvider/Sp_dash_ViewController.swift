@@ -622,7 +622,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         UserDefaults.standard.set("", forKey: "usertype")
         Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        let vc = UIStoryboard.LoginViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

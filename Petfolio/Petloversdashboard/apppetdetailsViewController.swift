@@ -66,7 +66,7 @@ class apppetdetailsViewController: UIViewController, UICollectionViewDelegate, U
         Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[indexPath.row].pet_img
         Servicefile.shared.pet_type_val = Servicefile.shared.pet_petlist[indexPath.row].pet_type
         Servicefile.shared.Pet_breed_val = Servicefile.shared.pet_petlist[indexPath.row].pet_breed
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pethealthissueViewController") as! pethealthissueViewController
+        let vc = UIStoryboard.pethealthissueViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

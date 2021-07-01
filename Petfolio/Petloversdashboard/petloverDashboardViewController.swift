@@ -361,7 +361,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             print("data in")
         }else if self.colleView_Doctor == collectionView {
             Servicefile.shared.selectedindex = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlov_DocselectViewController") as! petlov_DocselectViewController
+            let vc = UIStoryboard.petlov_DocselectViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.colleView_Service == collectionView {
             

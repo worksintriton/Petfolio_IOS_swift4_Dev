@@ -665,7 +665,8 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
               "service_name" : "",
               "service_amount": "",
               "location_id": Servicefile.shared.pet_apoint_location_id,
-              "visit_type": Servicefile.shared.pet_apoint_visit_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+              "visit_type": Servicefile.shared.pet_apoint_visit_type,
+              "health_issue_title":Servicefile.shared.healthissue], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

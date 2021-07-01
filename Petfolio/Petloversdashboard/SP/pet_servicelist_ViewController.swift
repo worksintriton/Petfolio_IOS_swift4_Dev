@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SNShadowSDK
 
-class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
    // @IBOutlet weak var view_image_catimg: SNShadowView!
     @IBOutlet weak var view_image_catimg: UIView!
@@ -23,11 +23,19 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var view_filter: UIView!
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     
+    @IBOutlet weak var col_servic: UICollectionView!
     @IBOutlet weak var view_footer: petowner_footerview!
+    var bannerlist = [Any]()
+    var pagcount = 0
+    @IBOutlet weak var view_top_cat: UIView!
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.col_servic.delegate = self
+        self.col_servic.dataSource = self
         self.intial_setup_action()
+        self.view_top_cat.layer.cornerRadius = 20.0
         //self.view_image_catimg.layer.cornerRadius = self.view_image_catimg.frame.height / 2
         self.view_image_catimg.View_image_dropshadow(cornordarius: self.view_image_catimg.frame.height / 2, iscircle: true)
         self.label_nodatafound.isHidden = true
@@ -37,6 +45,9 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_sortby.layer.cornerRadius = self.view_sortby.frame.height / 2
         self.view_filter.layer.cornerRadius = self.view_filter.frame.height / 2
     }
+    
+    
+    
     
     func intial_setup_action(){
     // header action
@@ -57,6 +68,58 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
     // footer action
+    }
+    
+    func startTimer() {
+        self.timer.invalidate()
+        timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        if self.bannerlist.count > 0 {
+               self.pagcount += 1
+               if self.pagcount == self.bannerlist.count {
+                   self.pagcount = 0
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.col_servic.scrollToItem(at: indexPath, at: .left, animated: true)
+               }else{
+                   let indexPath = IndexPath(row: pagcount, section: 0)
+                   self.col_servic.scrollToItem(at: indexPath, at: .left, animated: true)
+               }
+              
+           }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.bannerlist.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
+        let bannerimg = self.bannerlist[indexPath.row] as? NSDictionary ?? ["":""]
+        let image = bannerimg["image_path"] as? String ?? ""
+        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    cell.img_banner.image = UIImage(named: "sample")
+                } else {
+                    cell.img_banner.image = image
+                }
+            }
+            // cell.img_banner.view_cornor()
+            // cell.view_banner_two.view_cornor()
+            return cell
+       
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+            return CGSize(width: self.col_servic.frame.size.width , height:  self.col_servic.frame.size.height)
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,6 +268,10 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                             }))
                             self.present(alert, animated: true, completion: nil)
                         }
+                        let banner = res["banner"] as! NSArray
+                        self.bannerlist = banner as! [Any]
+                        self.col_servic.reloadData()
+                        self.startTimer()
                         self.tabl_service.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{

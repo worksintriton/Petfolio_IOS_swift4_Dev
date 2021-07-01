@@ -75,7 +75,7 @@ class SHCircleBarControll: UITabBarController {
         print("selected image",self.tabBar.selectedItem?.image as Any)
        
        //
-        
+       
             let tabWidth = self.view.bounds.width / CGFloat(5)
             UIView.animate(withDuration: 0.3) {
                 self.circleView.frame = CGRect(x: (tabWidth * CGFloat(Servicefile.shared.tabbar_selectedindex) + tabWidth / 2 - 30), y: self.tabBar.frame.origin.y - 30 , width: 60, height: 60)
@@ -103,7 +103,7 @@ class SHCircleBarControll: UITabBarController {
    
     
     
-    private var _barHeight: CGFloat = 64
+    private var _barHeight: CGFloat = 54
     open var barHeight: CGFloat {
         get {
             if #available(iOS 11.0, *) {

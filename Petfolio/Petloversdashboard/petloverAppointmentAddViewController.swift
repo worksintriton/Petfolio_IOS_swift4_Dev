@@ -294,8 +294,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     
     override func viewWillAppear(_ animated: Bool) {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
+        let viewController = UIStoryboard.petloverAppointmentAddViewController()
         self.view.window?.rootViewController = viewController
         self.view.window?.makeKeyAndVisible()
     }
@@ -682,7 +681,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                 ,"service_name" : "",
              "service_amount": "",
              "location_id": Servicefile.shared.pet_apoint_location_id,
-             "visit_type": Servicefile.shared.pet_apoint_visit_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "visit_type": Servicefile.shared.pet_apoint_visit_type,
+             "health_issue_title":Servicefile.shared.healthissue], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                     switch (response.result) {
                     case .success:
                         let res = response.value as! NSDictionary

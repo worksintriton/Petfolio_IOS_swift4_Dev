@@ -32,10 +32,20 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     var sub_diagno_dic_array = [Any]()
     var sdiagno = ""
     var subdiagno = ""
+    var m = false
+    var a = false
+    var n = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.diagno.removeAll()
         self.diafno_sub.removeAll()
+        self.tbl_medilist.register(UINib(nibName: "docaddpresTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.tbl_medilist.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "pres")
+        
+        Servicefile.shared.medi = ""
+        Servicefile.shared.noofday = ""
         Servicefile.shared.Doc_pre_descrip = ""
         Servicefile.shared.doc_pres_diagno = ""
         Servicefile.shared.doc_pres_sub_diagno = ""
@@ -122,22 +132,164 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Doc_pres_textfieldactionTableViewCell
-                      cell.textfield_medi.text = ""
-                      cell.textfield_noofdays.text = ""
-                      cell.conspdays.text = ""
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docaddpresTableViewCell
+            cell.textfield_medi.text = Servicefile.shared.medi
+            cell.textfield_noofdays.text = Servicefile.shared.noofday
                       cell.selectionStyle = .none
+                      if m != true {
+                          cell.img_m.image = UIImage(named: imagelink.checkbox)
+                      }else{
+                          cell.img_m.image = UIImage(named: imagelink.checkbox_1)
+                       }
+                      if a != true {
+                        cell.img_a.image = UIImage(named: imagelink.checkbox)
+                      }else{
+                        cell.img_a.image = UIImage(named: imagelink.checkbox_1)
+                      }
+                      if n != true {
+                        cell.img_n.image = UIImage(named: imagelink.checkbox)
+                      }else{
+                        cell.img_n.image = UIImage(named: imagelink.checkbox_1)
+                      }
+            
+                     cell.btn_m.addTarget(self, action: #selector(action_m), for: .touchUpInside)
+                     cell.btn_a.addTarget(self, action: #selector(action_a), for: .touchUpInside)
+                     cell.btn_n.addTarget(self, action: #selector(action_n), for: .touchUpInside)
                       cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
                                      return cell
-               }else{
-                  let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
-                  let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-                  cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
-                  cell.label_consp.text = presdata["consumption"] as? String ?? ""
-                  cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
-                                return cell
-               }
-       
+        }else{
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
+            let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
+            cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
+            let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+            let mv = cons["morning"] as? Bool ?? false
+            let av = cons["evening"] as? Bool ?? false
+            let nv = cons["night"] as? Bool ?? false
+                
+            if mv != true {
+                cell.img_m.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_m.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if av != true {
+                cell.img_a.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_a.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if nv != true {
+                cell.img_n.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_n.image = UIImage(named: imagelink.checkbox_1)
+            }
+            cell.btn_m.tag = indexPath.row
+            cell.btn_n.tag = indexPath.row
+            cell.btn_a.tag = indexPath.row
+            
+            
+            cell.btn_m.addTarget(self, action: #selector(action_m), for: .touchUpInside)
+            cell.btn_a.addTarget(self, action: #selector(action_a), for: .touchUpInside)
+            cell.btn_n.addTarget(self, action: #selector(action_n), for: .touchUpInside)
+            cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    @objc func action_editm(sender: UIButton){
+        let tag = sender.tag
+        let presdata = Servicefile.shared.Doc_pres[tag] as! NSDictionary
+        let tabname = presdata["Tablet_name"] as? String ?? ""
+        let Quantity = presdata["Quantity"] as? String ?? ""
+        let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+        var mv = cons["morning"] as? Bool ?? false
+        let av = cons["evening"] as? Bool ?? false
+        let nv = cons["night"] as? Bool ?? false
+        if mv != false {
+            mv = false
+        }else{
+            mv = true
+        }
+        Servicefile.shared.Doc_pres.remove(at: tag)
+        let a = ["Quantity": Quantity,
+                 "Tablet_name": tabname,
+                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+        Servicefile.shared.Doc_pres.insert(a, at: tag)
+        self.tbl_medilist.reloadData()
+    }
+    
+    @objc func action_edita(sender: UIButton){
+        let tag = sender.tag
+        let presdata = Servicefile.shared.Doc_pres[tag] as! NSDictionary
+        let tabname = presdata["Tablet_name"] as? String ?? ""
+        let Quantity = presdata["Quantity"] as? String ?? ""
+        let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+        let mv = cons["morning"] as? Bool ?? false
+        var av = cons["evening"] as? Bool ?? false
+        let nv = cons["night"] as? Bool ?? false
+        if av != false {
+            av = false
+        }else{
+            av = true
+        }
+        Servicefile.shared.Doc_pres.remove(at: tag)
+        let a = ["Quantity": Quantity,
+                 "Tablet_name": tabname,
+                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+        Servicefile.shared.Doc_pres.insert(a, at: tag)
+        self.tbl_medilist.reloadData()
+    }
+    
+    @objc func action_editn(sender: UIButton){
+        let tag = sender.tag
+        let presdata = Servicefile.shared.Doc_pres[tag] as! NSDictionary
+        let tabname = presdata["Tablet_name"] as? String ?? ""
+        let Quantity = presdata["Quantity"] as? String ?? ""
+        let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+        let mv = cons["morning"] as? Bool ?? false
+        let av = cons["evening"] as? Bool ?? false
+        var nv = cons["night"] as? Bool ?? false
+        if nv != false {
+            nv = false
+        }else{
+            nv = true
+        }
+        Servicefile.shared.Doc_pres.remove(at: tag)
+        let a = ["Quantity": Quantity,
+                 "Tablet_name": tabname,
+                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+        Servicefile.shared.Doc_pres.insert(a, at: tag)
+        self.tbl_medilist.reloadData()
+        self.tbl_medilist.reloadData()
+    }
+    
+    @objc func action_m(sender: UIButton){
+        if m != false {
+            m = false
+        }else{
+            m = true
+        }
+        self.tbl_medilist.reloadData()
+    }
+    
+    @objc func action_a(sender: UIButton){
+        if a != false {
+            a = false
+        }else{
+            a = true
+        }
+        self.tbl_medilist.reloadData()
+    }
+    
+    @objc func action_n(sender: UIButton){
+        if n != false {
+            n = false
+        }else{
+            n = true
+        }
+        self.tbl_medilist.reloadData()
     }
     
     @objc func action_addtablet(sender: UIButton){
@@ -146,14 +298,14 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             self.alert(Message: "please enter the no of days")
         }else if Servicefile.shared.medi == "" {
              self.alert(Message: "please enter the Medicine name")
-        }else if Servicefile.shared.consdays == "" {
+        }else if m == false && n == false && a == false {
             self.alert(Message: "please enter the consuption days")
         }else{
             var B = Servicefile.shared.Doc_pres
             var arr = B
             let a = ["Quantity": Servicefile.shared.noofday,
                      "Tablet_name": Servicefile.shared.medi,
-                     "consumption": Servicefile.shared.consdays] as NSDictionary
+                     "consumption": ["evening":self.a,"morning":self.m,"night":self.n]] as NSDictionary
             arr.append(a)
             B = arr
             print(B)
@@ -161,9 +313,12 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             print("uploaded data in photodicarray",Servicefile.shared.Doc_pres)
             self.tbl_medilist.reloadData()
         }
-          Servicefile.shared.medi = ""
-            Servicefile.shared.noofday = ""
-            Servicefile.shared.consdays = ""
+        Servicefile.shared.medi = ""
+        Servicefile.shared.noofday = ""
+        Servicefile.shared.consdays = ""
+        self.m = false
+        self.a = false
+        self.n = false
         
     }
 

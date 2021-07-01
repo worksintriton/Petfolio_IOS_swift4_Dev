@@ -39,6 +39,10 @@
 		840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */; };
 		840B74F325EF991E00B7F63B /* pet_other_information_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */; };
 		840B74F525EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */; };
+		840D816E268C88E300A77E8F /* docaddpresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D816C268C88E300A77E8F /* docaddpresTableViewCell.swift */; };
+		840D816F268C88E300A77E8F /* docaddpresTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840D816D268C88E300A77E8F /* docaddpresTableViewCell.xib */; };
+		840D8175268C97EB00A77E8F /* docpreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D8173268C97EB00A77E8F /* docpreTableViewCell.swift */; };
+		840D8176268C97EB00A77E8F /* docpreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840D8174268C97EB00A77E8F /* docpreTableViewCell.xib */; };
 		8413E95E2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413E95C2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.swift */; };
 		8413E95F2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8413E95D2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.xib */; };
 		8413E9632636D53800E8796C /* pet_vendor_orderdetails_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413E9622636D53800E8796C /* pet_vendor_orderdetails_ViewController.swift */; };
@@ -94,6 +98,7 @@
 		844169BB261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */; };
 		844169FA261EF970001B9A2A /* petowner_footerview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169F9261EF970001B9A2A /* petowner_footerview.swift */; };
 		84416A1D261F06E6001B9A2A /* petowner_footerview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84416A1C261F06E6001B9A2A /* petowner_footerview.xib */; };
+		8451A578268E0A17008E07EA /* petdocapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8451A577268E0A17008E07EA /* petdocapp.storyboard */; };
 		8451A91D260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451A91C260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift */; };
 		84568DA2264E6F0C00379C23 /* pet_sidemenu_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84568DA1264E6F0C00379C23 /* pet_sidemenu_favlist_ViewController.swift */; };
 		84568DA8264E8BA800379C23 /* dash_doc_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84568DA6264E8BA800379C23 /* dash_doc_CollectionViewCell.swift */; };
@@ -116,6 +121,7 @@
 		847194332631AD7300FEA91E /* vendor_orderdetails_status_TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847194312631AD7300FEA91E /* vendor_orderdetails_status_TableViewCell.xib */; };
 		8479DF0F268B530D0009EBD7 /* docnewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479DF0D268B530D0009EBD7 /* docnewTableViewCell.swift */; };
 		8479DF10268B530D0009EBD7 /* docnewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8479DF0E268B530D0009EBD7 /* docnewTableViewCell.xib */; };
+		8479DF59268B81360009EBD7 /* customfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479DF58268B81360009EBD7 /* customfile.swift */; };
 		847C3328263FF277004D5706 /* dealupdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C3327263FF277004D5706 /* dealupdateViewController.swift */; };
 		847FEAAB264D0194001DAE97 /* pet_app_select_address_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FEAAA264D0194001DAE97 /* pet_app_select_address_ViewController.swift */; };
 		847FEAB5264D0CA6001DAE97 /* pet_app_addresslist_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FEAB3264D0CA6001DAE97 /* pet_app_addresslist_TableViewCell.swift */; };
@@ -389,6 +395,10 @@
 		840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myaddress_create_address_ViewController.swift; sourceTree = "<group>"; };
 		840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_other_information_ViewController.swift; sourceTree = "<group>"; };
 		840B74F425EFC26300B7F63B /* pet_edit_otherinfo_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_edit_otherinfo_ViewController.swift; sourceTree = "<group>"; };
+		840D816C268C88E300A77E8F /* docaddpresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docaddpresTableViewCell.swift; sourceTree = "<group>"; };
+		840D816D268C88E300A77E8F /* docaddpresTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = docaddpresTableViewCell.xib; sourceTree = "<group>"; };
+		840D8173268C97EB00A77E8F /* docpreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docpreTableViewCell.swift; sourceTree = "<group>"; };
+		840D8174268C97EB00A77E8F /* docpreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = docpreTableViewCell.xib; sourceTree = "<group>"; };
 		8413E95C2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_new_myorder_TableViewCell.swift; sourceTree = "<group>"; };
 		8413E95D2636BE8400E8796C /* pet_vendor_new_myorder_TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = pet_vendor_new_myorder_TableViewCell.xib; sourceTree = "<group>"; };
 		8413E9622636D53800E8796C /* pet_vendor_orderdetails_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_orderdetails_ViewController.swift; sourceTree = "<group>"; };
@@ -444,6 +454,7 @@
 		844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_edit_profile_ViewController.swift; sourceTree = "<group>"; };
 		844169F9261EF970001B9A2A /* petowner_footerview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petowner_footerview.swift; sourceTree = "<group>"; };
 		84416A1C261F06E6001B9A2A /* petowner_footerview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = petowner_footerview.xib; sourceTree = "<group>"; };
+		8451A577268E0A17008E07EA /* petdocapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = petdocapp.storyboard; sourceTree = "<group>"; };
 		8451A91C260C754F001E79BE /* pet_vendor_shop_search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_shop_search_ViewController.swift; sourceTree = "<group>"; };
 		84568DA1264E6F0C00379C23 /* pet_sidemenu_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sidemenu_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84568DA6264E8BA800379C23 /* dash_doc_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dash_doc_CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -466,6 +477,7 @@
 		847194312631AD7300FEA91E /* vendor_orderdetails_status_TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vendor_orderdetails_status_TableViewCell.xib; sourceTree = "<group>"; };
 		8479DF0D268B530D0009EBD7 /* docnewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docnewTableViewCell.swift; sourceTree = "<group>"; };
 		8479DF0E268B530D0009EBD7 /* docnewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = docnewTableViewCell.xib; sourceTree = "<group>"; };
+		8479DF58268B81360009EBD7 /* customfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customfile.swift; sourceTree = "<group>"; };
 		847C3327263FF277004D5706 /* dealupdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dealupdateViewController.swift; sourceTree = "<group>"; };
 		847FEAAA264D0194001DAE97 /* pet_app_select_address_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_select_address_ViewController.swift; sourceTree = "<group>"; };
 		847FEAB3264D0CA6001DAE97 /* pet_app_addresslist_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_addresslist_TableViewCell.swift; sourceTree = "<group>"; };
@@ -780,6 +792,8 @@
 		84056648261862D80099A26D /* Customcell */ = {
 			isa = PBXGroup;
 			children = (
+				840D8172268C97CA00A77E8F /* docpresview */,
+				840D8109268C3E1C00A77E8F /* docaddpresc */,
 				8479DF0C268B52F30009EBD7 /* Docnew */,
 				8432F5DD268462C90056926C /* pethealthissue */,
 				8432F5C226831CAF0056926C /* petdetimage */,
@@ -830,6 +844,24 @@
 				840566662618946A0099A26D /* editshipaddresslistTableViewCell.xib */,
 			);
 			path = Editshipaddresslist;
+			sourceTree = "<group>";
+		};
+		840D8109268C3E1C00A77E8F /* docaddpresc */ = {
+			isa = PBXGroup;
+			children = (
+				840D816C268C88E300A77E8F /* docaddpresTableViewCell.swift */,
+				840D816D268C88E300A77E8F /* docaddpresTableViewCell.xib */,
+			);
+			path = docaddpresc;
+			sourceTree = "<group>";
+		};
+		840D8172268C97CA00A77E8F /* docpresview */ = {
+			isa = PBXGroup;
+			children = (
+				840D8173268C97EB00A77E8F /* docpreTableViewCell.swift */,
+				840D8174268C97EB00A77E8F /* docpreTableViewCell.xib */,
+			);
+			path = docpresview;
 			sourceTree = "<group>";
 		};
 		8413E9842636F01F00E8796C /* pet_vendor_orderdetails_cancel */ = {
@@ -918,6 +950,21 @@
 				847194382631B0C000FEA91E /* Petowner_footerview */,
 			);
 			path = modelview;
+			sourceTree = "<group>";
+		};
+		8451A573268E0959008E07EA /* petowner_doc_appointment */ = {
+			isa = PBXGroup;
+			children = (
+				8451A577268E0A17008E07EA /* petdocapp.storyboard */,
+			);
+			path = petowner_doc_appointment;
+			sourceTree = "<group>";
+		};
+		8451A574268E0974008E07EA /* petowner_sp_appointment */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = petowner_sp_appointment;
 			sourceTree = "<group>";
 		};
 		84568DA5264E8B8700379C23 /* doc_dash_cell */ = {
@@ -1022,6 +1069,8 @@
 		8479DF31268B775C0009EBD7 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				8451A574268E0974008E07EA /* petowner_sp_appointment */,
+				8451A573268E0959008E07EA /* petowner_doc_appointment */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -1386,6 +1435,7 @@
 				B019893A25B828FC00A650AD /* emailsignupViewController.swift */,
 				B0BB3B4225C96D72003B9B83 /* ProfileimageuploadViewController.swift */,
 				842B5D4425EA0D9300D37082 /* testfileViewController.swift */,
+				8479DF58268B81360009EBD7 /* customfile.swift */,
 			);
 			path = Petfolio;
 			sourceTree = "<group>";
@@ -1590,9 +1640,11 @@
 				B094D267255D6221008400D6 /* futura medium bt.ttf in Resources */,
 				B094D221255BDE88008400D6 /* LaunchScreen.storyboard in Resources */,
 				8413E98E2636F0A000E8796C /* pet_vendor_orderdetails_cancel_TableViewCell.xib in Resources */,
+				840D816F268C88E300A77E8F /* docaddpresTableViewCell.xib in Resources */,
 				84C6A3A8264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib in Resources */,
 				84E11997263ADC3E004981B7 /* cat_walk1.gif in Resources */,
 				847194212631ACDE00FEA91E /* vendor_orderdetails_dispathorder_TableViewCell.xib in Resources */,
+				840D8176268C97EB00A77E8F /* docpreTableViewCell.xib in Resources */,
 				84F636A226539E010033BA34 /* paymentdetails_TableViewCell.xib in Resources */,
 				8402B9AD264A4377009DDFC0 /* unselect_medi_TableViewCell.xib in Resources */,
 				B094D269255D6221008400D6 /* futura light bt.ttf in Resources */,
@@ -1607,6 +1659,7 @@
 				84951E9E26807A2B001F526D /* getbreedTableViewCell.xib in Resources */,
 				B094D26E255D6221008400D6 /* Futura Bold font.ttf in Resources */,
 				B0571C952562504200B42719 /* GoogleService-Info.plist in Resources */,
+				8451A578268E0A17008E07EA /* petdocapp.storyboard in Resources */,
 				B094D219255BDE82008400D6 /* Main.storyboard in Resources */,
 				8463DADD267DD4E400DC06E2 /* genderview.xib in Resources */,
 				B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */,
@@ -1823,6 +1876,7 @@
 				B013E9E825B718FE00A8E41E /* viewprescriptionViewController.swift in Sources */,
 				B08F73152563E1E200AEB8CC /* petdocCollectionViewCell.swift in Sources */,
 				B0FF1AEA257F9E34006227E4 /* petloverProfilepetlistCollectionViewCell.swift in Sources */,
+				840D8175268C97EB00A77E8F /* docpreTableViewCell.swift in Sources */,
 				B020D0AC25878BDF008F5C7B /* sosTableViewCell.swift in Sources */,
 				848FA98C25F8F81200C55733 /* cartproductTableViewCell.swift in Sources */,
 				84CC8E26267CB16600256FC6 /* selectval.swift in Sources */,
@@ -1920,6 +1974,7 @@
 				84140A5526007C40007B554F /* vendor_new_TableViewCell.swift in Sources */,
 				843F7146261DCBFE003A5731 /* vendor_profile_view_ViewController.swift in Sources */,
 				84C967F0264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift in Sources */,
+				840D816E268C88E300A77E8F /* docaddpresTableViewCell.swift in Sources */,
 				B094D255255C259E008400D6 /* User_typeCollectionViewCell.swift in Sources */,
 				B0891F6C259B255E00764396 /* searchcalenderdetailsViewController.swift in Sources */,
 				84BA814626523C8900BFA01B /* sp_cancelorder_ViewController.swift in Sources */,
@@ -1997,6 +2052,7 @@
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				840A79AB26258CAE000A735D /* myaddresslistViewController.swift in Sources */,
 				B0F56E3825C82B0E00B1634F /* Pet_app_details_ViewController.swift in Sources */,
+				8479DF59268B81360009EBD7 /* customfile.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */,
 				B0751612256D2682002DAA20 /* petlov_DocselectViewController.swift in Sources */,

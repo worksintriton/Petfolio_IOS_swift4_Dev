@@ -431,7 +431,8 @@ class Servicefile {
     var Doc_pre_descrip = ""
     var doc_pres_diagno = ""
     var doc_pres_sub_diagno = ""
-    
+    var meditext = ""
+    var noofdaytext = ""
     var govdicarray = [Any]()
     var certifdicarray = [Any]()
     var clinicdicarray = [Any]()

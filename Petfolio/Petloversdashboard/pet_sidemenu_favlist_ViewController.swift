@@ -284,7 +284,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.appointtype == "Doctor" {
             Servicefile.shared.selectedindex = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlov_DocselectViewController") as! petlov_DocselectViewController
+            let vc = UIStoryboard.petlov_DocselectViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.appointtype == "Service" {
             Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[indexPath.row]._id

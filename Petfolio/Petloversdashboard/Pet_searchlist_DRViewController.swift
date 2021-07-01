@@ -19,6 +19,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     var refreshControl = UIRefreshControl()
     var comm_type = 0
     
+    @IBOutlet weak var view_top_doc: UIView!
     @IBOutlet weak var view_bac: UIView!
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var noofdoc: UILabel!
@@ -33,7 +34,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.moredocd.removeAll()
-        //self.view_care.view_cornor()
+        self.view_top_doc.layer.cornerRadius = 20.0
         self.callsearchlist()
         self.noofdoc.text = "0"
         self.label_nodata.isHidden = true
@@ -191,8 +192,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         cell.selectionStyle = .none
         cell.label_docSubsci.text = spe
         let str = Servicefile.shared.moredocd[indexPath.row].clinic_loc
-        let result = String(str.prefix(8))
-        cell.label_placeanddis.text = result
+        //let result = String(str.prefix(8))
+        cell.label_placeanddis.text = str
         cell.label_distance.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
         cell.label_likes.text = Servicefile.shared.moredocd[indexPath.row].review_count
         cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
@@ -220,8 +221,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
         Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[tag].amount)!
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchcalenderdetailsViewController") as! searchcalenderdetailsViewController
-        
+        let vc = UIStoryboard.searchcalenderdetailsViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -229,7 +229,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[indexPath.row].user_id
         Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[indexPath.row].amount)!
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchtoclinicdetailViewController") as! SearchtoclinicdetailViewController
+        let vc = UIStoryboard.SearchtoclinicdetailViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

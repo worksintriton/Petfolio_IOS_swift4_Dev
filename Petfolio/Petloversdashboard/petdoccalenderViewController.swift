@@ -106,7 +106,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     @IBAction func action_bookappoint(_ sender: Any) {
         if Servicefile.shared.pet_apoint_booking_time != "" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "apppetdetailsViewController") as! apppetdetailsViewController
+            let vc = UIStoryboard.apppetdetailsViewController()
             self.present(vc, animated: true, completion: nil)
         }
     }

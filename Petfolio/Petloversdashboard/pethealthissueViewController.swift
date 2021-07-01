@@ -62,7 +62,7 @@ class pethealthissueViewController: UIViewController, UICollectionViewDelegateFl
             let data = self.healthissue[indexPath.row] as? NSDictionary  ?? ["":""]
             let dataval = data["health_issue_title"] as? String ?? ""
             Servicefile.shared.healthissue = dataval
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverAppointmentAddViewController") as! petloverAppointmentAddViewController
+            let vc = UIStoryboard.petloverAppointmentAddViewController()
             self.present(vc, animated: true, completion: nil)
         }
         

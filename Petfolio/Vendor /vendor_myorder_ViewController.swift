@@ -99,7 +99,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_sidemenu_ViewController") as! vendor_sidemenu_ViewController
+        let vc = UIStoryboard.vendor_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -243,7 +243,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @objc func orderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderdetailsViewController") as! orderdetailsViewController
+        let vc = UIStoryboard.orderdetailsViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -257,14 +257,14 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @objc func updatestatusorderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_orderstatus_ViewController") as! vendor_orderstatus_ViewController
+        let vc = UIStoryboard.vendor_orderstatus_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[indexPath.row]._id
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_orderstatus_ViewController") as! vendor_orderstatus_ViewController
+//        let vc = UIStoryboard.vendor_orderstatus_ViewController()
 //        self.present(vc, animated: true, completion: nil)
     }
     
@@ -808,7 +808,8 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         UserDefaults.standard.set("", forKey: "usertype")
         Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        
+        let vc = UIStoryboard.LoginViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

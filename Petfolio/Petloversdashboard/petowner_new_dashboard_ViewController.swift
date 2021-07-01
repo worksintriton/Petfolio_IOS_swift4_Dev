@@ -374,9 +374,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         if self.col_banner == collectionView {
             return CGSize(width: self.col_banner.frame.size.width , height:  self.col_banner.frame.size.height)
         }else if self.col_service == collectionView {
-            return CGSize(width: 130 , height:  130)
+            return CGSize(width: 140 , height:  140)
         }else if self.col_shop_banner == collectionView {
-            return CGSize(width: 260 , height:  80)
+            return CGSize(width: 280 , height:  90)
         }else if self.col_vet == collectionView {
             return CGSize(width: 170 , height:  230)
         }else {
@@ -389,7 +389,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             print("data in")
         }else if self.col_vet == collectionView {
             Servicefile.shared.selectedindex = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlov_DocselectViewController") as! petlov_DocselectViewController
+            let vc = UIStoryboard.petlov_DocselectViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.col_service == collectionView {
             Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id

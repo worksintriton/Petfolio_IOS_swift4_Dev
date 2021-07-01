@@ -180,7 +180,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 3.2)
+        return CGSize(width: collectionView.frame.size.width / 2.05 , height:   collectionView.frame.size.height / 2.3)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

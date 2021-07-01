@@ -121,11 +121,28 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
 //                          cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
 //                                         return cell
 //                   }else{
-                      let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! Doc_pres_labelTableViewCell
-                      let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-                      cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
-                      cell.label_consp.text = presdata["consumption"] as? String ?? ""
-                      cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
+            let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
+            cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
+            let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+            let mv = cons["morning"] as? Bool ?? false
+            let av = cons["evening"] as? Bool ?? false
+            let nv = cons["night"] as? Bool ?? false
+            if mv != true {
+                cell.img_m.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_m.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if av != true {
+                cell.img_a.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_a.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if nv != true {
+                cell.img_n.image = UIImage(named: imagelink.checkbox)
+            }else{
+                cell.img_n.image = UIImage(named: imagelink.checkbox_1)
+            }
                                     return cell
 //                   }
            

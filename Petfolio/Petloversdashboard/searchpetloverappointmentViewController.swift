@@ -131,8 +131,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textfield_pettype.text = Servicefile.shared.pet_type_val
         self.textfield_petbreed.text = Servicefile.shared.Pet_breed_val
         self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
-        self.textfield_alergies.isUserInteractionEnabled = false
-        self.textfield_alergies.text = Servicefile.shared.healthissue
+        
         self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
     
@@ -185,7 +184,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
 //        let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
 //        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
 //            if (error != nil) {
-//                cell.img_banner.image = UIImage(named: "b_sample")
+//                cell.img_banner.image = UIImage(named: imagelink.sample)
 //            } else {
 //                cell.img_banner.image = image
 //            }
@@ -199,7 +198,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
         cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.Img_id.image = UIImage(named: "b_sample")
+                cell.Img_id.image = UIImage(named: imagelink.sample)
             } else {
                 cell.Img_id.image = image
             }
@@ -362,11 +361,11 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     func setuploadimg(){
 //        if self.petimage == "" {
-//            self.image_petcurrent.image = UIImage(named: "sample")
+//            self.image_petcurrent.image = UIImage(named: imagelink.sample)
 //        }else{
 //            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
 //                if (error != nil) {
-//                    self.image_petcurrent.image = UIImage(named: "sample")
+//                    self.image_petcurrent.image = UIImage(named: imagelink.sample)
 //                } else {
 //                    self.image_petcurrent.image = image
 //                }
@@ -440,8 +439,12 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
             self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
             self.textfield_petname.isUserInteractionEnabled = false
+//            Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
+//            self.view_pickupload.isHidden = true
+//            self.coll_imag.reloadData()
+//            self.startTimer()
+            self.view_pickupload.isHidden = false
             Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[index].pet_img
-            self.view_pickupload.isHidden = true
             self.coll_imag.reloadData()
             self.startTimer()
         }else{
@@ -587,21 +590,21 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     func checkappointdetails(){
-        if self.textfield_petname.text == "" {
-            self.alert(Message: "please enter the petname")
-        }else if self.textfield_pettype.text == "" {
-            self.alert(Message: "please select the pet type")
-        }else if self.textfield_petbreed.text == "" {
-            self.alert(Message: "please select the pet breed")
-        }else if self.textfield_alergies.text == "" {
-            self.alert(Message: "please enter the allergy")
-        }else if self.textview_descrip.text == "" {
-            self.alert(Message: "please enter the description")
-        }else if self.textview_descrip.text == "Add comment here.." {
-            self.alert(Message: "please enter the description")
-        }else if self.petimage == ""{
-            self.alert(Message: "please upload the")
-        }else{
+//        if self.textfield_petname.text == "" {
+//            self.alert(Message: "please enter the petname")
+//        }else if self.textfield_pettype.text == "" {
+//            self.alert(Message: "please select the pet type")
+//        }else if self.textfield_petbreed.text == "" {
+//            self.alert(Message: "please select the pet breed")
+//        }else if self.textfield_alergies.text == "" {
+//            self.alert(Message: "please enter the allergy")
+//        }else if self.textview_descrip.text == "" {
+//            self.alert(Message: "please enter the description")
+//        }else if self.textview_descrip.text == "Add comment here.." {
+//            self.alert(Message: "please enter the description")
+//        }else if self.petimage == ""{
+//            self.alert(Message: "please upload the")
+//        }else{
             print("details for complettion")
             let date = Date()
             let format = DateFormatter()
@@ -635,7 +638,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }else{
                 self.calladdpetdetails()
             }
-        }
+//        }
     }
     
     func callsubmit(){

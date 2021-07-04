@@ -61,14 +61,14 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
         if Servicefile.shared.UtypeData[indexPath.row].user_type_img != "" {
             cell.Img_UT.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.UtypeData[indexPath.row].user_type_img)) { (image, error, cache, urls) in
                               if (error != nil) {
-                                  cell.Img_UT.image = UIImage(named: "sample")
+                                  cell.Img_UT.image = UIImage(named: imagelink.sample)
                                   cell.Img_UT.layer.cornerRadius = 3.0
                               } else {
                                   cell.Img_UT.image = image
                               }
                           }
         }else{
-            cell.Img_UT.image = UIImage(named: "sample")
+            cell.Img_UT.image = UIImage(named: imagelink.sample)
         }
        
         cell.Img_UT.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

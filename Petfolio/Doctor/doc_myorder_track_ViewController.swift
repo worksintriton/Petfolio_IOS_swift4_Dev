@@ -340,7 +340,7 @@ class doc_myorder_track_ViewController: UIViewController, UITableViewDelegate, U
                         self.product_title.text = self.product_name
                         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                             if (error != nil) {
-                                self.image_product.image = UIImage(named: "sample")
+                                self.image_product.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_product.image = image
                             }

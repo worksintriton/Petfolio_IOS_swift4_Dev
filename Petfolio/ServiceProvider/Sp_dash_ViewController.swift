@@ -80,7 +80,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         }
         self.sp_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.sp_header.image_profile.image = UIImage(named: "b_sample")
+                self.sp_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.sp_header.image_profile.image = image
             }
@@ -194,7 +194,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         cell.label_petname.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_name
         cell.label_pettype.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_type
-        cell.img_petimg.image = UIImage(named: "sample")
+        cell.img_petimg.image = UIImage(named: imagelink.sample)
         cell.label_amount.text =  "₹" + Servicefile.shared.SP_Das_petdetails[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].sername
         
@@ -202,18 +202,18 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         let petdic = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img[0] as! NSDictionary
         let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
         if petimg == "" {
-            cell.img_petimg.image = UIImage(named: "sample")
+            cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{
             cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_petimg.image = UIImage(named: "sample")
+                    cell.img_petimg.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_petimg.image = image
                 }
             }
         }
         }else{
-            cell.img_petimg.image = UIImage(named: "sample")
+            cell.img_petimg.image = UIImage(named: imagelink.sample)
         }
            
         cell.selectionStyle = .none

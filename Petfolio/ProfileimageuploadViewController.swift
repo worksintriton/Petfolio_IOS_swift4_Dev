@@ -31,11 +31,11 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     
     func setimage(strimg : String) {
         if strimg == "" {
-            self.image_profile.image = UIImage(named: "sample")
+            self.image_profile.image = UIImage(named: imagelink.sample)
         }else{
             self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    self.image_profile.image = UIImage(named: "sample")
+                    self.image_profile.image = UIImage(named: imagelink.sample)
                 } else {
                     self.image_profile.image = image
                 }
@@ -132,7 +132,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
                         self.imageval = Data
                         self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: self.imageval)) { (image, error, cache, urls) in
                             if (error != nil) {
-                                self.image_profile.image = UIImage(named: "sample")
+                                self.image_profile.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_profile.image = image
                             }

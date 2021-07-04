@@ -127,7 +127,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: "b_sample")
+                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.view_header.image_profile.image = image
             }
@@ -271,7 +271,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.image_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 print(error)
                 if (error != nil) {
-                    cell.image_banner.image = UIImage(named: "b_sample")
+                    cell.image_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_banner.image = image
                 }
@@ -284,7 +284,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.view_service.backgroundColor = .clear
             cell.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_service.image = UIImage(named: "b_sample")
+                    cell.image_service.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_service.image = image
                 }
@@ -299,7 +299,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_shop_banner_CollectionViewCell
             cell.image_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petshopbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_banner.image = UIImage(named: "b_sample")
+                    cell.image_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_banner.image = image
                 }
@@ -312,7 +312,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_vet.image = UIImage(named: "b_sample")
+                    cell.image_vet.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_vet.image = image
                 }
@@ -342,7 +342,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_product.image = UIImage(named: "b_sample")
+                    cell.image_product.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_product.image = image
                 }
@@ -405,66 +405,68 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction func action_DocSeeMore(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petshop_seemore(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
     }
 }
 
 extension UIViewController {
     
     @objc func button1(sender: UIButton){
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        
     }
     
     @objc func button2(sender: UIButton){
-        Servicefile.shared.tabbar_selectedindex = 1
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     @objc func button3(sender: UIButton){
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
         
     }
     
     @objc func button4(sender: UIButton){
-        Servicefile.shared.tabbar_selectedindex = 3
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
        
     }
 //    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
 //    self.present(vc, animated: true, completion: nil)
     
     @objc func button5(sender: UIButton){
-        Servicefile.shared.tabbar_selectedindex = 4
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+//        Servicefile.shared.tabbar_selectedindex = 4
+        let tapbar = UIStoryboard.comunityViewController()
+//        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         
     }

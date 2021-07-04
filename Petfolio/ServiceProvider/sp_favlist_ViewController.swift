@@ -69,7 +69,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
             cell.label_ratting.text = Servicefile.shared.petnewprod[indexPath.row].product_rate
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_product.image = UIImage(named: "sample")
+                cell.image_product.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_product.image = image
             }

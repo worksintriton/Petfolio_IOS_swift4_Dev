@@ -250,7 +250,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             print("clinic data in", imgdat)
             cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.Img_id.image = UIImage(named: "sample")
+                    cell.Img_id.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.Img_id.image = image
                 }

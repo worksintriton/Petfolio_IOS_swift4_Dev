@@ -204,7 +204,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func set_signa_image(strimage: String){
         self.image_signature.sd_setImage(with: Servicefile.shared.StrToURL(url: strimage)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.image_signature.image = UIImage(named: "sample")
+                self.image_signature.image = UIImage(named: imagelink.sample)
             } else {
                 self.image_signature.image = image
             }
@@ -1257,13 +1257,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         if self.clinicpic != "" {
             self.Img_clinic.sd_setImage(with: Servicefile.shared.StrToURL(url: self.clinicpic)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    self.Img_clinic.image = UIImage(named: "sample")
+                    self.Img_clinic.image = UIImage(named: imagelink.sample)
                 } else {
                     self.Img_clinic.image = image
                 }
             }
         }else{
-            self.Img_clinic.image = UIImage(named: "sample")
+            self.Img_clinic.image = UIImage(named: imagelink.sample)
         }
         
     }

@@ -45,18 +45,18 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
             let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as! NSDictionary
             let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
             if petimg == "" {
-                cell.image_data.image = UIImage(named: "sample")
+                cell.image_data.image = UIImage(named: imagelink.sample)
             }else{
                 cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_data.image = UIImage(named: "sample")
+                        cell.image_data.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_data.image = image
                     }
                 }
             }
         }else{
-            cell.image_data.image = UIImage(named: "sample")
+            cell.image_data.image = UIImage(named: imagelink.sample)
         }
         
         cell.image_data.view_cornor()

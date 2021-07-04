@@ -43,7 +43,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
         }
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: "b_sample")
+                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.view_header.image_profile.image = image
             }
@@ -68,15 +68,15 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                                     self.present(vc, animated: true, completion: nil)
     }
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     @IBAction func action_cares(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
@@ -96,10 +96,11 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     }
     
     @IBAction func action_shop(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -120,7 +121,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                    cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
                    cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
                                           if (error != nil) {
-                                              cell.imag_cat.image = UIImage(named: "sample")
+                                              cell.imag_cat.image = UIImage(named: imagelink.sample)
                                           } else {
                                               cell.imag_cat.image = image
                                           }
@@ -137,7 +138,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                       cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
                       cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
                                              if (error != nil) {
-                                                 cell.imag_cat.image = UIImage(named: "sample")
+                                                 cell.imag_cat.image = UIImage(named: imagelink.sample)
                                              } else {
                                                  cell.imag_cat.image = image
                                              }
@@ -152,7 +153,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                       cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
                       cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
                                              if (error != nil) {
-                                                 cell.imag_cat.image = UIImage(named: "sample")
+                                                 cell.imag_cat.image = UIImage(named: imagelink.sample)
                                              } else {
                                                  cell.imag_cat.image = image
                                              }
@@ -168,7 +169,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                         cell.label_subtitle.text = Servicefile.shared.pet_servicecat[indexPath.row].sub_title
                         cell.imag_cat.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_servicecat[indexPath.row].image)) { (image, error, cache, urls) in
                                                if (error != nil) {
-                                                   cell.imag_cat.image = UIImage(named: "sample")
+                                                   cell.imag_cat.image = UIImage(named: imagelink.sample)
                                                } else {
                                                    cell.imag_cat.image = image
                                                }

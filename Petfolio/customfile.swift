@@ -46,6 +46,42 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
     }
     
+    // bottom pages
+    static func petloverDashboardViewController() -> petloverDashboardViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "petloverDashboardViewController") as! petloverDashboardViewController
+    }
+    
+    static func Pet_searchlist_DRViewController() -> Pet_searchlist_DRViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "Pet_searchlist_DRViewController") as! Pet_searchlist_DRViewController
+    }
+    
+    static func pet_sp_shop_dashboard_ViewController() -> pet_sp_shop_dashboard_ViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_sp_shop_dashboard_ViewController") as! pet_sp_shop_dashboard_ViewController
+    }
+    
+    static func pet_dashfooter_servicelist_ViewController() -> pet_dashfooter_servicelist_ViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_dashfooter_servicelist_ViewController") as! pet_dashfooter_servicelist_ViewController
+    }
+    
+    static func comunityViewController() -> comunityViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "comunityViewController") as! comunityViewController
+    }
+    
+    
+
+     // pet care
+
+     // shop
+
+     // service
+    // bottom pages
+    
+    
     // pet_doc_appointment
     
     static func searchhealthlistViewController() -> searchhealthlistViewController {

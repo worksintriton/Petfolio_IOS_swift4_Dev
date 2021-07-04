@@ -35,6 +35,10 @@ class prescriptionViewController: UIViewController {
     @IBOutlet weak var label_alergies: UILabel!
     @IBOutlet weak var label_doccomments: UILabel!
     
+    @IBOutlet weak var label_doc_name: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.label_owner_name.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -72,7 +76,15 @@ class prescriptionViewController: UIViewController {
                                                         self.label_age.text = Data["age"] as? String ?? ""
                                                         self.label_alergies.text =  Data["allergies"] as? String ?? ""
                                                         self.label_diagnosis.text = Data["diagnosis"] as? String ?? ""
-                                                        //"digital_sign" = "http://54.212.108.156:3000/api/uploads/1624529843161.jpg";
+                                                        let signature = Data["digital_sign"] as? String ?? ""
+                                                        self.img_signature.sd_setImage(with: Servicefile.shared.StrToURL(url:  signature)) { (image, error, cache, urls) in
+                                                            if (error != nil) {
+                                                                self.img_signature.image = UIImage(named: imagelink.sample)
+                                                            } else {
+                                                                self.img_signature.image = image
+                                                            }
+                                                        }
+                                                        
                                                         var spec = ""
                                                         let docspec = Data["doctor_speci"] as? NSArray ?? [Any]() as NSArray
                                                         var petha = ""
@@ -95,16 +107,18 @@ class prescriptionViewController: UIViewController {
                                                         }
                                                         self.label_subtittle.text = petha
                                                         self.label_title.text =  Data["doctorname"] as? String ?? ""
+                                                        self.label_doc_name.text =  Data["doctorname"] as? String ?? ""
+                                                        
                                                         self.label_petgender.text =  Data["gender"] as? String ?? ""
                                                        // "health_issue_title" = "Dental issues";
                                                         self.label_owner_name.text =  Data["owner_name"]  as? String ?? ""
                                                         self.label_breed.text =  Data["pet_breed"] as? String ?? ""
                                                         self.label_pet_name.text = Data["pet_name"] as? String ?? ""
                                                         self.label_pet_type.text = Data["pet_type"] as? String ?? ""
-                                                        //"phone_number" = "+91-9988776655";
+                                                        self.label_powered_ph.text = Data["phone_number"] as? String ?? ""
                                                         self.label_subdiagnosis.text = Data["sub_diagnosis"] as? String ?? ""
-                                                        //"web_name" = "www.petfolio.com";
-                                                        self.label_pet_weight.text = Data["weight"] as! String
+                                                        self.label_powered_title.text = Data["web_name"] as? String ?? ""
+                                                        self.label_pet_weight.text = String(Data["weight"] as? Int ?? 0)
                                                         self.stopAnimatingActivityIndicator()
                                                       }else{
                                                         self.stopAnimatingActivityIndicator()

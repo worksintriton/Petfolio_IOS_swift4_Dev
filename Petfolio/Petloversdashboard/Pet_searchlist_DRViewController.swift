@@ -55,10 +55,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_bac(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     func startTimer() {
@@ -94,7 +94,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_banner.image = UIImage(named: "sample")
+                    cell.img_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_banner.image = image
                 }
@@ -112,10 +112,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_shop(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_pet_profile(_ sender: Any) {
@@ -129,10 +130,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
        }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -162,10 +163,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -200,7 +201,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
         cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.img_doc.image = UIImage(named: "sample")
+                cell.img_doc.image = UIImage(named: imagelink.sample)
             } else {
                 cell.img_doc.image = image
             }
@@ -345,7 +346,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         }
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: "b_sample")
+                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.view_header.image_profile.image = image
             }

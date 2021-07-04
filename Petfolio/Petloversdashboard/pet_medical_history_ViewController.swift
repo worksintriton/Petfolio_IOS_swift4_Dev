@@ -71,7 +71,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! select_medi_TableViewCell
             cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_medi_detail[indexPath.row].vet_image)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_data.image = UIImage(named: "b_sample")
+                    cell.image_data.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_data.image = image
                 }
@@ -85,7 +85,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! unselect_medi_TableViewCell
             cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_medi_detail[indexPath.row].vet_image)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_data.image = UIImage(named: "b_sample")
+                    cell.image_data.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_data.image = image
                 }
@@ -144,16 +144,16 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
             if  pet_im != "" {
                 cell.image_pet.sd_setImage(with: Servicefile.shared.StrToURL(url: pet_im)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_pet.image = UIImage(named: "b_sample")
+                        cell.image_pet.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_pet.image = image
                     }
                 }
             }else{
-                cell.image_pet.image = UIImage(named: "b_sample")
+                cell.image_pet.image = UIImage(named: imagelink.sample)
             }
         }else{
-            cell.image_pet.image = UIImage(named: "b_sample")
+            cell.image_pet.image = UIImage(named: imagelink.sample)
         }
         cell.view_pet.view_cornor()
         cell.image_pet.view_cornor()

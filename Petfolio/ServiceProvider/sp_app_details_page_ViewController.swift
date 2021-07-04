@@ -60,7 +60,7 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.view_complete.view_cornor()
         self.call_getdetails()
         self.view_confrence.isHidden = true
-        self.image_holder_name.image = UIImage(named: "sample")
+        self.image_holder_name.image = UIImage(named: imagelink.sample)
         if Servicefile.shared.SP_selected_app_list == "New" {
             self.view_complete_cancel.isHidden = false
         }else if Servicefile.shared.SP_selected_app_list == "Complete" {
@@ -289,7 +289,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                         let petimage = pet_id["pet_img"] as? String ?? ""
                         self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
                             if (error != nil) {
-                                self.image_pet_img.image = UIImage(named: "sample")
+                                self.image_pet_img.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_pet_img.image = image
                             }
@@ -305,11 +305,11 @@ class sp_app_details_page_ViewController: UIViewController  {
                         let amt = data["service_amount"] as? String ?? ""
                         self.label_holder_cost.text = "₹ " + amt
                         if userimage == "" {
-                            self.image_holder_name.image = UIImage(named: "sample")
+                            self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
                             self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
                                 if (error != nil) {
-                                    self.image_holder_name.image = UIImage(named: "sample")
+                                    self.image_holder_name.image = UIImage(named: imagelink.sample)
                                 } else {
                                     self.image_holder_name.image = image
                                 }

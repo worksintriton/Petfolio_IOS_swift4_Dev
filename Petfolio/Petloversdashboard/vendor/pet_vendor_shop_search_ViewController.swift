@@ -63,24 +63,24 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     }
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
         
     }
     
@@ -99,10 +99,11 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     }
     
     @IBAction func action_back(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 3
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -136,13 +137,13 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_search[indexPath.row].product_img) {
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_search[indexPath.row].product_img)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_product.image = UIImage(named: "sample")
+                        cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_product.image = image
                     }
                 }
             } else {
-                cell.image_product.image = UIImage(named: "sample")
+                cell.image_product.image = UIImage(named: imagelink.sample)
             }
             return cell
         }

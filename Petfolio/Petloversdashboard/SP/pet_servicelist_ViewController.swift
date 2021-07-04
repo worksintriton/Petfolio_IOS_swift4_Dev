@@ -106,7 +106,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         let image = bannerimg["image_path"] as? String ?? ""
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_banner.image = UIImage(named: "sample")
+                    cell.img_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_banner.image = image
                 }
@@ -128,16 +128,16 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -176,7 +176,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         cell.label_sp_name.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name
         cell.img_sp.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.img_sp.image = UIImage(named: "sample")
+                cell.img_sp.image = UIImage(named: imagelink.sample)
             } else {
                 cell.img_sp.image = image
             }
@@ -236,7 +236,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                         self.label_category.text = title
                         self.image_catimg.sd_setImage(with: Servicefile.shared.StrToURL(url: image_path)) { (image, error, cache, urls) in
                             if (error != nil) {
-                                self.image_catimg.image = UIImage(named: "sample")
+                                self.image_catimg.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_catimg.image = image
                             }

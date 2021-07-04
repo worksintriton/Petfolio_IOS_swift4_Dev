@@ -158,7 +158,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_order.image = UIImage(named: "sample")
+                        cell.image_order.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_order.image = image
                     }
@@ -191,7 +191,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_order.image = UIImage(named: "sample")
+                        cell.image_order.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_order.image = image
                     }
@@ -406,7 +406,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                         self.prodcut_image = order_details["order_image"] as? String ?? Servicefile.sample_img
                         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                                 if (error != nil) {
-                                    self.image_product.image = UIImage(named: "sample")
+                                    self.image_product.image = UIImage(named: imagelink.sample)
                                 } else {
                                     self.image_product.image = image
                                 }

@@ -45,7 +45,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
         self.product_title.text = Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_text
         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.image_product.image = UIImage(named: "sample")
+                self.image_product.image = UIImage(named: imagelink.sample)
             } else {
                 self.image_product.image = image
             }

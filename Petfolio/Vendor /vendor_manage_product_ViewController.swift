@@ -367,7 +367,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Arraytoimage(arr: pet_prod_img))) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_product.image = UIImage(named: "sample")
+                        cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_product.image = image
                     }
@@ -424,7 +424,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             cell.selectionStyle = .none
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Arraytoimage(arr: pet_prod_img))) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_product.image = UIImage(named: "sample")
+                        cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_product.image = image
                     }

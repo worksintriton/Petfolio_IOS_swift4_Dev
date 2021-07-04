@@ -44,7 +44,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         }
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: "b_sample")
+                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.view_header.image_profile.image = image
             }

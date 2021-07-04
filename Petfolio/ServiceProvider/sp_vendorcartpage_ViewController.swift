@@ -178,7 +178,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             if product_img.count > 0 {
                 cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: product_img[0] as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.img_product.image = UIImage(named: "sample")
+                        cell.img_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.img_product.image = image
                     }

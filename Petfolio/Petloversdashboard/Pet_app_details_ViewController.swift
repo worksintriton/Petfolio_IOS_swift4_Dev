@@ -187,7 +187,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     
     @IBAction func action_prescription(_ sender: Any) {
-        let vc = UIStoryboard.pdfViewController()
+        let vc = UIStoryboard.prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -213,10 +213,10 @@ class Pet_app_details_ViewController: UIViewController {
     
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -430,13 +430,13 @@ class Pet_app_details_ViewController: UIViewController {
                                 
                                 self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                     if (error != nil) {
-                                        self.image_pet_img.image = UIImage(named: "sample")
+                                        self.image_pet_img.image = UIImage(named: imagelink.sample)
                                     } else {
                                         self.image_pet_img.image = image
                                     }
                                 }
                             }else{
-                                self.image_pet_img.image = UIImage(named: "sample")
+                                self.image_pet_img.image = UIImage(named: imagelink.sample)
                             }
                             self.label_pethandle.text = petha
                             self.label_pethandle.sizeToFit()
@@ -456,11 +456,11 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = clinic_loc
                             if userimage == "" {
-                                self.image_holder_name.image = UIImage(named: "sample")
+                                self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
-                                        self.image_holder_name.image = UIImage(named: "sample")
+                                        self.image_holder_name.image = UIImage(named: imagelink.sample)
                                     } else {
                                         self.image_holder_name.image = image
                                     }
@@ -501,13 +501,13 @@ class Pet_app_details_ViewController: UIViewController {
                                 
                                 self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                     if (error != nil) {
-                                        self.image_pet_img.image = UIImage(named: "sample")
+                                        self.image_pet_img.image = UIImage(named: imagelink.sample)
                                     } else {
                                         self.image_pet_img.image = image
                                     }
                                 }
                             }else{
-                                self.image_pet_img.image = UIImage(named: "sample")
+                                self.image_pet_img.image = UIImage(named: imagelink.sample)
                             }
                             let user_id = data["user_id"] as! NSDictionary
                             let firstname = user_id["first_name"] as? String ?? ""
@@ -523,11 +523,11 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = sp_loc
                             if userimage == "" {
-                                self.image_holder_name.image = UIImage(named: "sample")
+                                self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
                                 self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
-                                        self.image_holder_name.image = UIImage(named: "sample")
+                                        self.image_holder_name.image = UIImage(named: imagelink.sample)
                                     } else {
                                         self.image_holder_name.image = image
                                     }

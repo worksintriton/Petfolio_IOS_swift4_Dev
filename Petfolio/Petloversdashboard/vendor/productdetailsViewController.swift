@@ -184,10 +184,10 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
         
     }
     
@@ -195,9 +195,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func action_petcares(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         
     }
@@ -252,7 +252,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
                 cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: self.product_img[indexPath.row])) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.img_banner.image = UIImage(named: "b_sample")
+                        cell.img_banner.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.img_banner.image = image
                     }
@@ -282,13 +282,13 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                    
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
-                           cell.image_product.image = UIImage(named: "sample")
+                           cell.image_product.image = UIImage(named: imagelink.sample)
                        } else {
                            cell.image_product.image = image
                        }
                    }
                }else{
-                   cell.image_product.image = UIImage(named: "sample")
+                   cell.image_product.image = UIImage(named: imagelink.sample)
                }
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate

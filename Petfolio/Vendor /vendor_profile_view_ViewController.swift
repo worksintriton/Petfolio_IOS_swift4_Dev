@@ -74,11 +74,11 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
         self.label_email.text = Servicefile.shared.user_email
         self.label_phono.text = Servicefile.shared.user_phone
         if Servicefile.shared.userimage == "" {
-                   self.imag_user.image = UIImage(named: "sample")
+                   self.imag_user.image = UIImage(named: imagelink.sample)
                }else{
                    self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                        if (error != nil) {
-                           self.imag_user.image = UIImage(named: "sample")
+                           self.imag_user.image = UIImage(named: imagelink.sample)
                        } else {
                            self.imag_user.image = image
                        }
@@ -118,7 +118,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
            let imgval = img["bussiness_gallery"]  as? String ?? Servicefile.sample_img
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
                                   if (error != nil) {
-                                      cell.img_banner.image = UIImage(named: "sample")
+                                      cell.img_banner.image = UIImage(named: imagelink.sample)
                                   } else {
                                       cell.img_banner.image = image
                                   }

@@ -143,7 +143,7 @@ class sp_todaydeals_ViewController: UIViewController, UICollectionViewDelegate, 
                 cell.label_price.text = "₹ "+String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
                 cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                 cell.image_product.dropShadow()
-                //cell.image_product.image = UIImage(named: "sample")
+                //cell.image_product.image = UIImage(named: imagelink.sample)
                 cell.label_offer.isHidden = true
                 if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount > 0 {
                     cell.label_offer.isHidden = false
@@ -153,13 +153,13 @@ class sp_todaydeals_ViewController: UIViewController, UICollectionViewDelegate, 
                     
                     cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                         if (error != nil) {
-                            cell.image_product.image = UIImage(named: "sample")
+                            cell.image_product.image = UIImage(named: imagelink.sample)
                         } else {
                             cell.image_product.image = image
                         }
                     }
                 }else{
-                    cell.image_product.image = UIImage(named: "sample")
+                    cell.image_product.image = UIImage(named: imagelink.sample)
                 }
                 cell.label_ratting.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_rating
                 cell.label_likes.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_review

@@ -177,10 +177,11 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_shop(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        
+    //        Servicefile.shared.tabbar_selectedindex = 3
+                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                   self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_notification(_ sender: Any) {
@@ -190,25 +191,25 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     
     @IBAction func action_care(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
 
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
 
     }
     
@@ -234,9 +235,9 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_DocSeeMore(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
@@ -271,7 +272,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_banner.image = UIImage(named: "b_sample")
+                    cell.img_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_banner.image = image
                 }
@@ -287,7 +288,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
             cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_doc.image = UIImage(named: "sample")
+                    cell.img_doc.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_doc.image = image
                 }
@@ -308,7 +309,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             cell.label_ser.text = Servicefile.shared.petser[indexPath.row].service_title
             cell.img_ser.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_ser.image = UIImage(named: "sample")
+                    cell.img_ser.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_ser.image = image
                 }
@@ -321,7 +322,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puppyprod", for: indexPath) as! petprodCollectionViewCell
             cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_prod.image = UIImage(named: "sample")
+                    cell.img_prod.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_prod.image = image
                 }
@@ -333,7 +334,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! petprodCollectionViewCell
             cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_prod.image = UIImage(named: "sample")
+                    cell.img_prod.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_prod.image = image
                 }

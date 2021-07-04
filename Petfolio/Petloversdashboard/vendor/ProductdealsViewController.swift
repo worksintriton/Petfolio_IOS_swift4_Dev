@@ -146,17 +146,17 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
                 cell.label_offer.isHidden = false
                 cell.label_offer.text = String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount) + " % off"
             }
-            //cell.image_product.image = UIImage(named: "sample")
+            //cell.image_product.image = UIImage(named: imagelink.sample)
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img) {
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_product.image = UIImage(named: "sample")
+                        cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_product.image = image
                     }
                 }
             }else{
-                cell.image_product.image = UIImage(named: "sample")
+                cell.image_product.image = UIImage(named: imagelink.sample)
             }
             cell.label_ratting.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_rating
             cell.label_likes.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_review

@@ -47,7 +47,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
             }
         }else{
             Servicefile.shared.petlistimg = [Any]()
-               self.imag_petimag.image = UIImage(named: "sample")
+               self.imag_petimag.image = UIImage(named: imagelink.sample)
         }
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
@@ -66,7 +66,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
           let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
           cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
               if (error != nil) {
-                  cell.Img_id.image = UIImage(named: "sample")
+                  cell.Img_id.image = UIImage(named: imagelink.sample)
               } else {
                   cell.Img_id.image = image
               }
@@ -97,7 +97,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     func setimage(strimg : String){
         self.imag_petimag.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.imag_petimag.image = UIImage(named: "sample")
+                self.imag_petimag.image = UIImage(named: imagelink.sample)
             } else {
                 self.imag_petimag.image = image
             }

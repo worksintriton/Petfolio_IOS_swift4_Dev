@@ -60,7 +60,7 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
-        cell.img_banner.image = UIImage(named: "sample")
+        cell.img_banner.image = UIImage(named: imagelink.sample)
         cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner.dropShadow()
@@ -68,13 +68,13 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
          
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.img_banner.image = UIImage(named: "sample")
+                cell.img_banner.image = UIImage(named: imagelink.sample)
             } else {
                 cell.img_banner.image = image
             }
         }
     }else{
-         cell.img_banner.image = UIImage(named: "sample")
+         cell.img_banner.image = UIImage(named: imagelink.sample)
     }
    
     

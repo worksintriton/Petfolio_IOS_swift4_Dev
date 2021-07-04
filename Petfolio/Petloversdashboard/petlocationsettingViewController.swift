@@ -83,16 +83,16 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     

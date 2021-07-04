@@ -68,9 +68,11 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.pet_handle.removeAll()
         self.pet_spec.removeAll()
         let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
-        let nibName = UINib(nibName: "pet_handle_details_CollectionViewCell", bundle:nil)
+        //let nibName = UINib(nibName: "pet_handle_details_CollectionViewCell", bundle:nil)
+        let nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
+        
         self.col_sepc_list.register(spec_nibName, forCellWithReuseIdentifier: "cell1")
-        self.col_pet_handle.register(nibName, forCellWithReuseIdentifier: "cell2")
+        self.col_pet_handle.register(nibName, forCellWithReuseIdentifier: "cell1")
         self.GMS_mapView.delegate = self
         self.GMS_mapView.view_cornor()
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
@@ -143,24 +145,24 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     
     @IBAction func action_pet_service(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_care(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        }
     
@@ -170,9 +172,9 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func action_back(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
@@ -203,15 +205,16 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
             
             return cell
         }else if col_pet_handle == collectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as!  pet_handle_details_CollectionViewCell
-            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
-            cell.view_pethandle.view_cornor()
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)  as!  spec_details_page_CollectionViewCell
+                cell.label_spec.text = self.pet_handle[indexPath.row]
+//            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
+//            cell.view_pethandle.view_cornor()
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:self.clinicpic[indexPath.row])) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_banner.image = UIImage(named: "sample")
+                    cell.img_banner.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_banner.image = image
                 }

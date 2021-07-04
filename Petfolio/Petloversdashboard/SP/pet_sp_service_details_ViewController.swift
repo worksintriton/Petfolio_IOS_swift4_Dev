@@ -89,7 +89,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         let image = bannerdic["bus_service_gall"] as? String ?? Servicefile.sample_bannerimg
                    cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                        if (error != nil) {
-                           cell.img_banner.image = UIImage(named: "sample")
+                           cell.img_banner.image = UIImage(named: imagelink.sample)
                        } else {
                            cell.img_banner.image = image
                        }
@@ -172,17 +172,17 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     
     @IBAction func action_petcare(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -253,7 +253,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 self.label_service.text = Servicefile.shared.service_id_title
                                                                        self.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.service_id_image_path )) { (image, error, cache, urls) in
                                                                                              if (error != nil) {
-                                                                                                 self.image_service.image = UIImage(named: "sample")
+                                                                                                 self.image_service.image = UIImage(named: imagelink.sample)
                                                                                              } else {
                                                                                                  self.image_service.image = image
                                                                                              }

@@ -83,7 +83,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: "b_sample")
+                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.view_header.image_profile.image = image
             }
@@ -128,7 +128,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }
@@ -159,7 +159,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }
@@ -189,7 +189,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }

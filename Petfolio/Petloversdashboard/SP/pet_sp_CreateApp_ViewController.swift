@@ -178,7 +178,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
            let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
                if (error != nil) {
-                   cell.img_banner.image = UIImage(named: "b_sample")
+                   cell.img_banner.image = UIImage(named: imagelink.sample)
                } else {
                    cell.img_banner.image = image
                }
@@ -238,11 +238,11 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
 //    func setuploadimg(){
 //        if self.petimage == "" {
-//            self.image_petcurrent.image = UIImage(named: "sample")
+//            self.image_petcurrent.image = UIImage(named: imagelink.sample)
 //        }else{
 //            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
 //                       if (error != nil) {
-//                           self.image_petcurrent.image = UIImage(named: "sample")
+//                           self.image_petcurrent.image = UIImage(named: imagelink.sample)
 //                       } else {
 //                           self.image_petcurrent.image = image
 //                       }

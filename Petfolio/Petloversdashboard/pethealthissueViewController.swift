@@ -44,7 +44,7 @@ class pethealthissueViewController: UIViewController, UICollectionViewDelegateFl
                
                     cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                         if (error != nil) {
-                            cell.image_data.image = UIImage(named: "sample")
+                            cell.image_data.image = UIImage(named: imagelink.sample)
                         } else {
                             cell.image_data.image = image
                         }

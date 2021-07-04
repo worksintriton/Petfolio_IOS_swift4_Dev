@@ -52,9 +52,9 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func action_care(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        }
     
@@ -84,11 +84,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
              self.label_phono.text = Servicefile.shared.user_phone
         
         if Servicefile.shared.userimage == "" {
-            self.imag_user.image = UIImage(named: "sample")
+            self.imag_user.image = UIImage(named: imagelink.sample)
         }else{
             self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    self.imag_user.image = UIImage(named: "sample")
+                    self.imag_user.image = UIImage(named: imagelink.sample)
                 } else {
                     self.imag_user.image = image
                 }
@@ -119,18 +119,18 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                 let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as! NSDictionary
                 let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
                 if petimg == "" {
-                    cell.imag_profile.image = UIImage(named: "sample")
+                    cell.imag_profile.image = UIImage(named: imagelink.sample)
                 }else{
                     cell.imag_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                         if (error != nil) {
-                            cell.imag_profile.image = UIImage(named: "sample")
+                            cell.imag_profile.image = UIImage(named: imagelink.sample)
                         } else {
                             cell.imag_profile.image = image
                         }
                     }
                 }
             }else{
-                cell.imag_profile.image = UIImage(named: "sample")
+                cell.imag_profile.image = UIImage(named: imagelink.sample)
             }
             
             cell.imag_profile.view_cornor()
@@ -205,18 +205,18 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @objc func backpage(){
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     
     @IBAction func action_back(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_editprofile(_ sender: Any) {

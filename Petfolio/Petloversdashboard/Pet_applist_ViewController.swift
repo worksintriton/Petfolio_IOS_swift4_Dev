@@ -93,17 +93,17 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_care(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
@@ -113,10 +113,10 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -239,14 +239,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Service_name
         }
         cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
-        cell.img_petimg.image = UIImage(named: "sample")
+        cell.img_petimg.image = UIImage(named: imagelink.sample)
         cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
-            cell.img_petimg.image = UIImage(named: "sample")
+            cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{
             cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_applist_do_sp[indexPath.row].photo)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.img_petimg.image = UIImage(named: "sample")
+                    cell.img_petimg.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.img_petimg.image = image
                 }
@@ -338,17 +338,18 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func backaction() {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_backaction(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
+        
     }
     
     @IBAction func action_cancelled(_ sender: Any) {

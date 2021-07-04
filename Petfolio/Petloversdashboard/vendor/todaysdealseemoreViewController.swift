@@ -100,24 +100,24 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction func action_home(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+//        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = UIStoryboard.petloverDashboardViewController()
+//        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        Servicefile.shared.tabbar_selectedindex = 0
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = UIStoryboard.SHCircleBarControll()
-               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-               self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 1
+                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                       self.present(tapbar, animated: true, completion: nil)
 
     }
     
@@ -169,7 +169,7 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
             cell.label_price.text = "₹ "+String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
-            //cell.image_product.image = UIImage(named: "sample")
+            //cell.image_product.image = UIImage(named: imagelink.sample)
             cell.label_offer.isHidden = true
             if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount > 0 {
                 cell.label_offer.isHidden = false
@@ -179,13 +179,13 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
                 
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_product.image = UIImage(named: "sample")
+                        cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_product.image = image
                     }
                 }
             }else{
-                cell.image_product.image = UIImage(named: "sample")
+                cell.image_product.image = UIImage(named: imagelink.sample)
             }
             cell.label_ratting.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_rating
             cell.label_likes.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_review

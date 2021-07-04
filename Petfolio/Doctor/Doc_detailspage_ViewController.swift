@@ -90,7 +90,7 @@ class Doc_detailspage_ViewController: UIViewController {
         self.view_cancel.view_cornor()
         self.view_complete.view_cornor()
         self.call_getdetails()
-        self.image_holder_name.image = UIImage(named: "sample")
+        self.image_holder_name.image = UIImage(named: imagelink.sample)
         if Servicefile.shared.Doc_selected_app_list == "New" {
             self.view_complete_cancel.isHidden = false
             self.view_confrence.isHidden = false
@@ -336,13 +336,13 @@ class Doc_detailspage_ViewController: UIViewController {
                             let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
                             self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                 if (error != nil) {
-                                    self.image_pet_img.image = UIImage(named: "sample")
+                                    self.image_pet_img.image = UIImage(named: imagelink.sample)
                                 } else {
                                     self.image_pet_img.image = image
                                 }
                             }
                         }else{
-                            self.image_pet_img.image = UIImage(named: "sample")
+                            self.image_pet_img.image = UIImage(named: imagelink.sample)
                         }
                         let problem_info = data["problem_info"] as? String ?? ""
                         self.label_pet_comments.text = problem_info
@@ -364,11 +364,11 @@ class Doc_detailspage_ViewController: UIViewController {
                         let amt = data["amount"] as? String ?? "0"
                         self.label_holder_cost.text = "₹ " + amt
                         if userimage == "" {
-                            self.image_holder_name.image = UIImage(named: "sample")
+                            self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
                             self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                 if (error != nil) {
-                                    self.image_holder_name.image = UIImage(named: "sample")
+                                    self.image_holder_name.image = UIImage(named: imagelink.sample)
                                 } else {
                                     self.image_holder_name.image = image
                                 }

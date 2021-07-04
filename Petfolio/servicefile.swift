@@ -12,7 +12,9 @@ class imagelink{
     static let link = imagelink()
     static let favtrue = "Like 3"
     static let favfalse = "Like 2"
-    static let sample = "sample"
+    //static let sample = "sample"
+    static let sample = "noimg"
+    
     static let selectedRadio = "selectedRadio"
     static let Radio = "Radio"
     static let checkbox = "checkbox"
@@ -288,7 +290,8 @@ class Servicefile {
     var backview = UIView()
     var loadlabel = UILabel()
     var gifimg = UIImageView()
-    var sampleimag = Servicefile.sample_img
+    //var sampleimag = Servicefile.sample_img
+    var sampleimag = imagelink.sample
     var FCMtoken = ""
     var usertype = "Pet Lover"
     var user_type_value = 1

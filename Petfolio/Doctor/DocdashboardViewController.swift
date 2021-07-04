@@ -76,7 +76,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }
         self.doc_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.doc_header.image_profile.image = UIImage(named: "b_sample")
+                self.doc_header.image_profile.image = UIImage(named: imagelink.sample)
             } else {
                 self.doc_header.image_profile.image = image
             }
@@ -195,7 +195,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         cell.View_mainview.layer.borderColor = UIColor.lightGray.cgColor
         cell.label_petname.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_name
         cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
-        cell.img_petimg.image = UIImage(named: "sample")
+        cell.img_petimg.image = UIImage(named: imagelink.sample)
         cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
         let petimage = Servicefile.shared.Doc_dashlist[indexPath.row].pet_img
@@ -203,18 +203,18 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             let petdic = petimage[0] as! NSDictionary
             let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
             if petimg == "" {
-                       cell.img_petimg.image = UIImage(named: "sample")
+                       cell.img_petimg.image = UIImage(named: imagelink.sample)
                    }else{
                        cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                            if (error != nil) {
-                               cell.img_petimg.image = UIImage(named: "sample")
+                               cell.img_petimg.image = UIImage(named: imagelink.sample)
                            } else {
                                cell.img_petimg.image = image
                            }
                        }
                    }
         }else{
-            cell.img_petimg.image = UIImage(named: "sample")
+            cell.img_petimg.image = UIImage(named: imagelink.sample)
         }
         cell.View_mainview.view_cornor()
         cell.img_petimg.view_cornor()
@@ -234,7 +234,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
-        let vc = UIStoryboard.pdfViewController()
+        let vc = UIStoryboard.prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -212,7 +212,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
                 cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: self.product_img[indexPath.row])) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.img_banner.image = UIImage(named: "b_sample")
+                        cell.img_banner.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.img_banner.image = image
                     }
@@ -242,13 +242,13 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                    
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
-                           cell.image_product.image = UIImage(named: "sample")
+                           cell.image_product.image = UIImage(named: imagelink.sample)
                        } else {
                            cell.image_product.image = image
                        }
                    }
                }else{
-                   cell.image_product.image = UIImage(named: "sample")
+                   cell.image_product.image = UIImage(named: imagelink.sample)
                }
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate

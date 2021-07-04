@@ -210,10 +210,10 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                         let userid = user_details["_id"] as? String ?? ""
                                                         UserDefaults.standard.set(userid, forKey: "userid")
                                                        if Servicefile.shared.user_type == "1" {
-                                                        Servicefile.shared.tabbar_selectedindex = 2
-                                                        let tapbar = UIStoryboard.SHCircleBarControll()
-                                                        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                                                        self.present(tapbar, animated: true, completion: nil)
+                                                        //        Servicefile.shared.tabbar_selectedindex = 2
+                                                                let tapbar = UIStoryboard.petloverDashboardViewController()
+                                                        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                                                self.present(tapbar, animated: true, completion: nil)
                                                        } else if Servicefile.shared.user_type == "4" {
                                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                                                         self.present(vc, animated: true, completion: nil)

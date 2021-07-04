@@ -73,11 +73,11 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
         self.label_email.text = Servicefile.shared.user_email
         self.label_phono.text = Servicefile.shared.user_phone
         if Servicefile.shared.userimage == "" {
-                   self.imag_user.image = UIImage(named: "sample")
+                   self.imag_user.image = UIImage(named: imagelink.sample)
                }else{
                    self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                        if (error != nil) {
-                           self.imag_user.image = UIImage(named: "sample")
+                           self.imag_user.image = UIImage(named: imagelink.sample)
                        } else {
                            self.imag_user.image = image
                        }

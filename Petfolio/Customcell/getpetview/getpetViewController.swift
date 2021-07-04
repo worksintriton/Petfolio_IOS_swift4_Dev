@@ -112,7 +112,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         let pet_type_img = pb["pet_type_img"] as? String ?? ""
         cell.image_view.sd_setImage(with: Servicefile.shared.StrToURL(url: pet_type_img)) { (image, error, cache, urls) in
                if (error != nil) {
-                   cell.image_view.image = UIImage(named: "sample")
+                   cell.image_view.image = UIImage(named: imagelink.sample)
                } else {
                    cell.image_view.image = image
                }

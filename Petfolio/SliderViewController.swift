@@ -26,12 +26,12 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
-        self.petlist.removeAll()
+        //self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
-        self.getdemo()
+//        self.getdemo()
         // Do any additional setup after loading the view.
     }
     
@@ -47,15 +47,17 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
-        cell.pettitle.text = ""
-        print("image path",self.petlist[indexPath.row])
-        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
-            if (error != nil) {
-                cell.petimage.image = image
-            } else {
-                cell.petimage.image = UIImage(named: Servicefile.sample_img)
-            }
-        }
+//        cell.pettitle.text = ""
+//        print("image path",self.petlist[indexPath.row])
+//        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                cell.petimage.image = image
+//            } else {
+//                cell.petimage.image = UIImage(named: Servicefile.sample_img)
+//            }
+//        }
+        cell.petimage.image = UIImage(named: "logo")
+        cell.petimage.contentMode = .scaleAspectFit
         return cell
     }
     
@@ -87,10 +89,10 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
                 if Servicefile.shared.user_type == "1" {
                    
-                    Servicefile.shared.tabbar_selectedindex = 2
-                    let tapbar = UIStoryboard.SHCircleBarControll()
-                    tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                    self.present(tapbar, animated: true, completion: nil)
+                    //        Servicefile.shared.tabbar_selectedindex = 2
+                            let tapbar = UIStoryboard.petloverDashboardViewController()
+                    //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                            self.present(tapbar, animated: true, completion: nil)
 //                    pettabbarViewController
                 } else if Servicefile.shared.user_type == "4" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController

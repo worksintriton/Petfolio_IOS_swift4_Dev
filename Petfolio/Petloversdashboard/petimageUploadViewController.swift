@@ -49,7 +49,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
             }
         }else{
             Servicefile.shared.petlistimg = [Any]()
-               self.imag_petimag.image = UIImage(named: "sample")
+               self.imag_petimag.image = UIImage(named: imagelink.sample)
         }
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
@@ -57,7 +57,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     func setimage(strimg : String){
         self.imag_petimag.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
             if (error != nil) {
-                self.imag_petimag.image = UIImage(named: "sample")
+                self.imag_petimag.image = UIImage(named: imagelink.sample)
             } else {
                 self.imag_petimag.image = image
             }
@@ -78,7 +78,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
         let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
         cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.Img_id.image = UIImage(named: "sample")
+                cell.Img_id.image = UIImage(named: imagelink.sample)
             } else {
                 cell.Img_id.image = image
             }
@@ -193,10 +193,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func action_skip(_ sender: Any) {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -212,10 +212,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
                                                         _ = res["Data"] as! NSDictionary
-                                                        Servicefile.shared.tabbar_selectedindex = 2
-                                                        let tapbar = UIStoryboard.SHCircleBarControll()
-                                                        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                                                        self.present(tapbar, animated: true, completion: nil)
+                                                        //        Servicefile.shared.tabbar_selectedindex = 2
+                                                                let tapbar = UIStoryboard.petloverDashboardViewController()
+                                                        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                                                self.present(tapbar, animated: true, completion: nil)
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

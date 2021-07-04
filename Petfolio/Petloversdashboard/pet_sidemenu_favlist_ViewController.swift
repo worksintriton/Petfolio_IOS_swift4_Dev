@@ -85,10 +85,10 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
   
     
     @objc func backaction() {
-        Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = UIStoryboard.SHCircleBarControll()
-        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 2
+                let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -166,7 +166,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_vet.image = UIImage(named: "b_sample")
+                    cell.image_vet.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_vet.image = image
                 }
@@ -197,7 +197,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_vet.image = UIImage(named: "b_sample")
+                    cell.image_vet.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_vet.image = image
                 }
@@ -252,13 +252,13 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
-                    cell.image_product.image = UIImage(named: "sample")
+                    cell.image_product.image = UIImage(named: imagelink.sample)
                 } else {
                     cell.image_product.image = image
                 }
             }
         }else{
-            cell.image_product.image = UIImage(named: "sample")
+            cell.image_product.image = UIImage(named: imagelink.sample)
         }
             cell.view_rating.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate)!
          cell.label_vendor.text = ""

@@ -109,7 +109,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }
@@ -137,7 +137,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }
@@ -161,7 +161,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.selectionStyle = .none
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.image_order.image = UIImage(named: "sample")
+                cell.image_order.image = UIImage(named: imagelink.sample)
             } else {
                 cell.image_order.image = image
             }

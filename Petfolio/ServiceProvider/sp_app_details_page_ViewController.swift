@@ -51,6 +51,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     @IBOutlet weak var label_app_dateandtime: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()
@@ -93,7 +94,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     
     
     @IBAction func action_profile(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+        let vc = UIStoryboard.Sp_profile_ViewController()
                          self.present(vc, animated: true, completion: nil)
        }
        
@@ -159,7 +160,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        let vc = UIStoryboard.Sp_dash_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

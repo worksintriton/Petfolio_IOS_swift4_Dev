@@ -20,6 +20,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
@@ -60,7 +61,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if self.labelmenu[indexPath.row] == "My Appointment"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+            let vc = UIStoryboard.Pet_applist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Petlover_myorder_ViewController") as! Petlover_myorder_ViewController

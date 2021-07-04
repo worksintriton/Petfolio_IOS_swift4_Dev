@@ -57,6 +57,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.call_protocals()
         self.added_service.removeAll()

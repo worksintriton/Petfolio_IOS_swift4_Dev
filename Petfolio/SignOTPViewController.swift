@@ -22,6 +22,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.textfield_otp.delegate = self
         self.Viewotp.view_cornor()
         self.Viewactionotp.view_cornor()
@@ -242,10 +243,10 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
                             self.present(vc, animated: true, completion: nil)
                         } else if Servicefile.shared.user_type == "2"{
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
+                            let vc = UIStoryboard.SP_Reg_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         } else if Servicefile.shared.user_type == "3"{
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Vendor_reg_ViewController") as! Vendor_reg_ViewController
+                            let vc = UIStoryboard.Vendor_reg_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         }
                         self.stopAnimatingActivityIndicator()

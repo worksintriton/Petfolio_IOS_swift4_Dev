@@ -26,6 +26,7 @@ class doc_todaysdealseemoreViewController: UIViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.Textfield_search.text = ""
         self.label_noproduct.text = "No products available"

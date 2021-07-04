@@ -28,6 +28,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             
             override func viewDidLoad() {
                 super.viewDidLoad()
+                self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
                 self.intial_setup_action()
                 self.view_shadow.isHidden = true
                 self.view_alert.isHidden = true
@@ -85,7 +86,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             
             @IBAction func action_changeaddress(_ sender: Any) {
                 Servicefile.shared.shipaddresslist.removeAll()
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_editshippingaddress_ViewController") as! sp_editshippingaddress_ViewController
+                let vc = UIStoryboard.sp_editshippingaddress_ViewController()
                 self.present(vc, animated: true, completion: nil)
             }
             

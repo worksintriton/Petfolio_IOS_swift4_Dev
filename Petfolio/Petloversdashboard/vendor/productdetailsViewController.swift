@@ -62,6 +62,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         
         self.label_cartcount.layer.cornerRadius = 10.0
@@ -184,7 +185,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         
@@ -195,7 +196,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBAction func action_petcares(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         

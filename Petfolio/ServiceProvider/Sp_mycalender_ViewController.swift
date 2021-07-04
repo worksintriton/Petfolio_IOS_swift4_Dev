@@ -21,6 +21,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_mycalender_selectedhours.removeAll()
         Servicefile.shared.docMycalHourdicarray.removeAll()
         self.availday.removeAll()
@@ -48,7 +49,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
         }
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
        if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_calender_hour_ViewController") as! Sp_calender_hour_ViewController
+        let vc = UIStoryboard.Sp_calender_hour_ViewController()
                    self.present(vc, animated: true, completion: nil)
        }else {
         self.alert(Message: "Please select the week days")
@@ -62,7 +63,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
     
     
     @IBAction func action_holida(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_mycal_addholiday_ViewController") as! SP_mycal_addholiday_ViewController
+        let vc = UIStoryboard.SP_mycal_addholiday_ViewController()
                self.present(vc, animated: true, completion: nil)
     }
     
@@ -102,7 +103,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_calender_hour_ViewController") as! Sp_calender_hour_ViewController
+        let vc = UIStoryboard.Sp_calender_hour_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

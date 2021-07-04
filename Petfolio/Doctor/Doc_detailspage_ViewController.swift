@@ -74,7 +74,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_diagnosis.isHidden = true
         self.view_subdiagnosis.isHidden = true
         self.view_doc_comm_header.isHidden = true
@@ -144,7 +144,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_prescrption(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        let vc = UIStoryboard.pdfViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

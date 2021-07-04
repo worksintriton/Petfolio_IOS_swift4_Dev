@@ -33,6 +33,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.moredocd.removeAll()
         self.view_top_doc.layer.cornerRadius = 20.0
         self.callsearchlist()
@@ -55,7 +56,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_bac(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -112,7 +113,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_shop(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -129,7 +130,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_petservice(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -162,7 +163,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

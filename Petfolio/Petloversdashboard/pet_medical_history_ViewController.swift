@@ -20,6 +20,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
     var orgidata = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.pet_medi_detail.removeAll()
         Servicefile.shared.pet_petlist.removeAll()
         let nibName = UINib(nibName: "medi_pet_CollectionViewCell", bundle:nil)

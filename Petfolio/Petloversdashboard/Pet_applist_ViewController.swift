@@ -35,6 +35,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         //self.view_home.view_cornor()
         self.view_popup.view_cornor()
@@ -93,14 +94,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func action_care(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -113,7 +114,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -259,7 +260,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         let tag = sender.tag
         if Servicefile.shared.pet_applist_do_sp[tag].start_appointment_status == "In-Progress" {
             Servicefile.shared.selectedindex = tag
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_confrence_ViewController") as! Pet_confrence_ViewController
+            let vc = UIStoryboard.Pet_confrence_ViewController()
             self.present(vc, animated: true, completion: nil)
         } else {
             self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
@@ -279,7 +280,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     @objc func action_pres(sender : UIButton){
         let tag = sender.tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.pet_applist_do_sp[tag]._id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        let vc = UIStoryboard.prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -287,7 +288,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         let tag = sender.tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.pet_applist_do_sp[tag]._id
         Servicefile.shared.selectedindex = tag
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReviewRateViewController") as! ReviewRateViewController
+        let vc = UIStoryboard.ReviewRateViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -320,7 +321,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         // if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
         Servicefile.shared.pet_selected_app_list = self.appointtype
         Servicefile.shared.selectedindex = indexPath.row
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_app_details_ViewController") as! Pet_app_details_ViewController
+        let vc = UIStoryboard.Pet_app_details_ViewController()
         self.present(vc, animated: true, completion: nil)
         // }
     }
@@ -338,14 +339,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func backaction() {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_backaction(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

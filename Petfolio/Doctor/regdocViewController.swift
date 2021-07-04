@@ -126,6 +126,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setdesign()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.digisignature = ""
         self.set_signa_image(strimage: self.digisignature)

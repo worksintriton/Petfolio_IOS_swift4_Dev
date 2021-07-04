@@ -30,6 +30,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.intial_setup_action()
              self.tblview_applist.register(UINib(nibName: "pet_vendor_new_myorder_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
             Servicefile.shared.ordertype = "current"
@@ -188,7 +189,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
             let tag = sender.tag
             Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id
             Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_myorderdetailspage_ViewController") as!  sp_myorderdetailspage_ViewController
+            let vc = UIStoryboard.sp_myorderdetailspage_ViewController()
             self.present(vc, animated: true, completion: nil)
         }
         

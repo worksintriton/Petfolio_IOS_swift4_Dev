@@ -69,6 +69,7 @@ class orderlistdetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.label_orderdate.text = ""
         self.label_id.text = ""

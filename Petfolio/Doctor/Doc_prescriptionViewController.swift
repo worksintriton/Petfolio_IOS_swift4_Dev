@@ -39,6 +39,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.diagno.removeAll()
         self.diafno_sub.removeAll()
         self.tbl_medilist.register(UINib(nibName: "docaddpresTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")

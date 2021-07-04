@@ -32,6 +32,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.col_servic.delegate = self
         self.col_servic.dataSource = self
         self.intial_setup_action()
@@ -128,14 +129,14 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petcare(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -193,14 +194,14 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = indexPath.row
         Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[tag]._id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_service_details_ViewController") as! pet_sp_service_details_ViewController
+        let vc = UIStoryboard.pet_sp_service_details_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_appointment(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[tag]._id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_service_details_ViewController") as! pet_sp_service_details_ViewController
+        let vc = UIStoryboard.pet_sp_service_details_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

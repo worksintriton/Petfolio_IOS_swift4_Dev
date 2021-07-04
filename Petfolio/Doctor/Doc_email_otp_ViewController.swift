@@ -23,6 +23,7 @@ class Doc_email_otp_ViewController: UIViewController, UITextFieldDelegate {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callotpresend()
         self.textfield_otp.delegate = self
         self.Viewotp.view_cornor()

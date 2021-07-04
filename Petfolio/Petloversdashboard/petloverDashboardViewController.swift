@@ -53,6 +53,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         //self.view_home.view_cornor()
         self.view_footer.view_cornor()
         self.view_footer.dropShadow()
@@ -177,7 +178,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     @IBAction func action_shop(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -190,14 +191,14 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     @IBAction func action_care(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
 
@@ -205,7 +206,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
 
@@ -234,7 +235,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     @IBAction func action_DocSeeMore(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -367,7 +368,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             
             Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
             Servicefile.shared.service_index = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
+            let vc = UIStoryboard.pet_servicelist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else {
             print("data in")

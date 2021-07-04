@@ -31,6 +31,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_footer.view_cornor()
         self.view_img_user.view_cornor()
@@ -91,7 +92,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
    @IBAction func action_profile(_ sender: Any) {
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+    let vc = UIStoryboard.Sp_profile_ViewController()
                            self.present(vc, animated: true, completion: nil)
          }
          
@@ -144,7 +145,7 @@ class Sp_profile_ViewController: UIViewController, UICollectionViewDelegate, UIC
     
    
     @IBAction func action_bussi_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+        let vc = UIStoryboard.Sp_profile_edit_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

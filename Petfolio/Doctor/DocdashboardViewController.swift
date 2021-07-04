@@ -42,6 +42,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_dashlist.removeAll()
         self.label_nodata.isHidden = true
         self.view_new.view_cornor()
@@ -233,7 +234,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        let vc = UIStoryboard.pdfViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -19,6 +19,7 @@ class Doc_confrence_ViewController: UIViewController,JitsiMeetViewDelegate {
     var inc = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_noshow.layer.cornerRadius = self.view_noshow.frame.height / 2
         self.view_close_conversation.layer.cornerRadius = self.view_close_conversation.frame.height / 2
     }

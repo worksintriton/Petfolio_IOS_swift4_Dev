@@ -31,6 +31,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         //self.view_home.view_cornor()
         self.isclickisoption.removeAll()
@@ -71,7 +72,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func action_care(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        }
@@ -216,7 +217,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func action_back(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

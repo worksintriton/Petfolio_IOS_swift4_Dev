@@ -82,7 +82,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_diagnosis.isHidden = true
         self.view_subdiagnosis.isHidden = true
         self.view_doc_comm_header.isHidden = true
@@ -181,20 +181,20 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     @IBAction func action_reshedule(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_app_details_doc_calender_ViewController") as! pet_app_details_doc_calender_ViewController
+        let vc = UIStoryboard.pet_app_details_doc_calender_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_prescription(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pdfViewController") as! pdfViewController
+        let vc = UIStoryboard.pdfViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_start_confrence(_ sender: Any) {
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].start_appointment_status == "In-Progress" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_confrence_ViewController") as! Pet_confrence_ViewController
+            let vc = UIStoryboard.Pet_confrence_ViewController()
             self.present(vc, animated: true, completion: nil)
         } else {
             self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
@@ -214,7 +214,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

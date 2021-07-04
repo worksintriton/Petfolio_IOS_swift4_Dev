@@ -22,6 +22,7 @@ class sp_shop_search_ViewController: UIViewController, UICollectionViewDelegate,
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.intial_setup_action()
             self.label_noproduct.isHidden = true
             self.textfield_search.delegate = self
@@ -71,7 +72,7 @@ class sp_shop_search_ViewController: UIViewController, UICollectionViewDelegate,
         
     @objc func viewback(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }

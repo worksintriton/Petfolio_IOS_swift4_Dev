@@ -37,7 +37,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_footer.view_cornor()
         self.view_footer.dropShadow()
         self.view_popup.view_cornor()
@@ -78,7 +78,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
     
     @IBAction func action_care(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

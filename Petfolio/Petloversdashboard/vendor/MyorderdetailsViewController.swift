@@ -14,6 +14,7 @@ class MyorderdetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.tbl_myorderlist.delegate = self
         self.tbl_myorderlist.dataSource = self
         // Do any additional setup after loading the view.

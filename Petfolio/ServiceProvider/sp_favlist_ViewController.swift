@@ -24,6 +24,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
         var isorgiselect = [""]
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             Servicefile.shared.petnewprod.removeAll()
             self.isselect.removeAll()
             self.isorgiselect.removeAll()

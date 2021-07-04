@@ -24,6 +24,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.locusel = Servicefile.shared.utypesel
         self.Viewchange.view_cornor()
         self.collec_usertype.delegate = self

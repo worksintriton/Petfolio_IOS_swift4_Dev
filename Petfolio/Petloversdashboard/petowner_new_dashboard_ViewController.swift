@@ -50,6 +50,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_popup.view_cornor()
         self.view_denypop.view_cornor()
@@ -394,7 +395,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.col_service == collectionView {
             Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
             Servicefile.shared.service_index = indexPath.row
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_servicelist_ViewController") as! pet_servicelist_ViewController
+            let vc = UIStoryboard.pet_servicelist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else {
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
@@ -405,21 +406,21 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     @IBAction func action_DocSeeMore(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petservice_seemore(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_petshop_seemore(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -429,7 +430,7 @@ extension UIViewController {
     
     @objc func button1(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        
@@ -437,14 +438,14 @@ extension UIViewController {
     
     @objc func button2(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 1
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @objc func button3(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         
@@ -452,7 +453,7 @@ extension UIViewController {
     
     @objc func button4(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 3
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
        
@@ -462,7 +463,7 @@ extension UIViewController {
     
     @objc func button5(sender: UIButton){
         Servicefile.shared.tabbar_selectedindex = 4
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
         

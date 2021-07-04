@@ -39,6 +39,7 @@ class SHCircleBarController: UITabBarController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tabBar = SHCircleBar()
         self.setValue(tabBar, forKey: "tabBar")
         

@@ -21,6 +21,7 @@ class Pet_confrence_ViewController: UIViewController ,JitsiMeetViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_close_conversation.layer.cornerRadius = self.view_close_conversation.frame.height / 2
     }
     

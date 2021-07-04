@@ -28,7 +28,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         let docnibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(docnibName, forCellWithReuseIdentifier: "cell1")
         self.intial_setup_action()
@@ -86,7 +86,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     
     @objc func backaction() {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -288,8 +288,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             self.present(vc, animated: true, completion: nil)
         }else if self.appointtype == "Service" {
             Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[indexPath.row]._id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_service_details_ViewController") as! pet_sp_service_details_ViewController
-            self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.pet_sp_service_details_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else {
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id

@@ -75,6 +75,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callcornor()
         self.textview_spaddress.delegate = self
         self.calllocationcheck()
@@ -950,7 +951,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func action_register_success(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_reg_calender_ViewController") as! Sp_reg_calender_ViewController
+        let vc = UIStoryboard.Sp_reg_calender_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

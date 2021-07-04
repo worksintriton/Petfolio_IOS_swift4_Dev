@@ -27,6 +27,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     var selnearby = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_apply.view_cornor()
         self.view_clearall.view_cornor()
         self.callpetdetails()
@@ -170,7 +171,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func action_back(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

@@ -21,6 +21,7 @@ class viewprescriptionViewController: UIViewController , UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_pres.removeAll()
         self.callpescription()
         self.tbl_medilist.delegate = self

@@ -31,6 +31,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_continue.isHidden = true
         self.listtime.removeAll()
@@ -71,7 +72,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     }
     
     @IBAction func action_afterappBooked(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+        let vc = UIStoryboard.Pet_applist_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

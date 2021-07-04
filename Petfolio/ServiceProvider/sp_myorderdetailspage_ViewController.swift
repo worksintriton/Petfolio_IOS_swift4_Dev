@@ -91,6 +91,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.intial_setup_action()
             self.view_footer.view_cornor()
             self.label_confirmall.text = "Cancel All"
@@ -254,7 +255,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
         @objc func action_btn_trackorder(sender: UIButton){
             let tag = sender.tag
             Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_myordertrack_ViewController") as! sp_myordertrack_ViewController
+            let vc = UIStoryboard.sp_myordertrack_ViewController()
                   self.present(vc, animated: true, completion: nil)
         }
         
@@ -264,7 +265,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
             Servicefile.shared.iscancelselect.removeAll()
             Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
             Servicefile.shared.iscancelselect.append(Servicefile.shared.productid)
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_cancelorder_ViewController") as! sp_cancelorder_ViewController
+            let vc = UIStoryboard.sp_cancelorder_ViewController()
                   self.present(vc, animated: true, completion: nil)
         }
         
@@ -308,7 +309,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                     Servicefile.shared.iscancelselect.append(Servicefile.shared.orderdetail_prod[i].product_id)
                 }
             }
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_orderlist_cancel_ViewController") as! sp_orderlist_cancel_ViewController
+            let vc = UIStoryboard.sp_orderlist_cancel_ViewController()
                   self.present(vc, animated: true, completion: nil)
            
         }

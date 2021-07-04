@@ -21,6 +21,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_mycalender_selectedhours.removeAll()
         Servicefile.shared.docMycalHourdicarray.removeAll()
         self.availday.removeAll()
@@ -49,7 +50,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         }
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
        if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_reg_calender_hour_ViewController") as! sp_reg_calender_hour_ViewController
+        let vc = UIStoryboard.sp_reg_calender_hour_ViewController()
                    self.present(vc, animated: true, completion: nil)
        }else {
         self.alert(Message: "Please select the week days")
@@ -102,7 +103,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_reg_calender_hour_ViewController") as! sp_reg_calender_hour_ViewController
+        let vc = UIStoryboard.sp_reg_calender_hour_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

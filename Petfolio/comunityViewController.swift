@@ -13,6 +13,7 @@ class comunityViewController: UIViewController {
     @IBOutlet weak var image_comm: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.image_comm.image = UIImage(named: "petcoming")
         // Do any additional setup after loading the view.
     }

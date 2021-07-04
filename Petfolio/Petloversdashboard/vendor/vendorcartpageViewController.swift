@@ -37,6 +37,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_cart_count.isHidden = true
         self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2
@@ -86,7 +87,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func action_movetoshop(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }

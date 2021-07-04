@@ -34,6 +34,7 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_popup.view_cornor()
         self.label_noaddress.isHidden = true

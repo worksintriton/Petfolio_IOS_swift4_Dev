@@ -12,7 +12,7 @@ class pet_callroom_ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         // Do any additional setup after loading the view.
     }
     

@@ -40,6 +40,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_cart_count.isHidden = true
         self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2

@@ -25,6 +25,7 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.label_noproduct.text = "No products available"
         self.label_noproduct.isHidden = true

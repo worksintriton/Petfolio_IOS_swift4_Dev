@@ -25,6 +25,7 @@ class doc_paymentdetilsViewController: UIViewController, UITableViewDelegate, UI
     var paydetails = [Any]()
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.view_total_ex.view_cornor()
             self.view_tx.view_cornor()
             self.view_all.view_cornor()

@@ -66,6 +66,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self
@@ -121,6 +122,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.label_service_title.text = Servicefile.shared.service_id_title
         self.petimage = Servicefile.shared.sampleimag
         //self.setuploadimg()
+        self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
     
     func intial_setup_action(){
@@ -197,7 +199,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
          }
    
     @IBAction func action_afterappBooked(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+        let vc = UIStoryboard.Pet_applist_ViewController()
            self.present(vc, animated: true, completion: nil)
        }
        

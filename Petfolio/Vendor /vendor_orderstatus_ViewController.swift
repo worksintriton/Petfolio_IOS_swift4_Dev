@@ -135,6 +135,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_footer.view_cornor()
         self.view_drop.view_cornor()
         self.view_update.view_cornor()

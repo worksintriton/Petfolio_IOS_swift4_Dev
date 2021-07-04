@@ -19,6 +19,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     var orginal = ["0"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.tbl_notifi_list.delegate = self
         self.tbl_notifi_list.dataSource = self
         Servicefile.shared.notif_list.removeAll()

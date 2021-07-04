@@ -27,6 +27,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.coll_clinic.delegate = self
         self.coll_clinic.dataSource = self

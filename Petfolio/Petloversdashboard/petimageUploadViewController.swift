@@ -23,6 +23,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.imagepicker.delegate = self
         self.setimage(strimg: self.uploadimage)
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -193,7 +194,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     
     @IBAction func action_skip(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
@@ -212,7 +213,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                                                      if Code == 200 {
                                                         _ = res["Data"] as! NSDictionary
                                                         Servicefile.shared.tabbar_selectedindex = 2
-                                                        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                                                        let tapbar = UIStoryboard.SHCircleBarControll()
                                                         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                                         self.present(tapbar, animated: true, completion: nil)
                                                         self.stopAnimatingActivityIndicator()

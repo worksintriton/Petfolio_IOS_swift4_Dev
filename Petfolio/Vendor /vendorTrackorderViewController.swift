@@ -97,6 +97,7 @@ class vendorTrackorderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_intransit_pathline.isHidden = true
         self.view_return.isHidden = true
         self.view_return_status.isHidden = true

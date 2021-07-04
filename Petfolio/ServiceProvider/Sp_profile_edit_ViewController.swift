@@ -70,6 +70,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.textview_spaddress.delegate = self
         self.textview_spaddress.isUserInteractionEnabled = false
         self.call_protocals()
@@ -891,7 +892,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     }
     
     @IBAction func action_update_popup(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        let vc = UIStoryboard.Sp_dash_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

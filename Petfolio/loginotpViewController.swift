@@ -22,6 +22,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.textfield_otp.delegate = self
         self.Viewotp.view_cornor()
         self.Viewactionotp.view_cornor()
@@ -218,10 +219,10 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                         self.present(vc, animated: true, completion: nil)
                                                         
                                                        } else if Servicefile.shared.user_type == "2" {
-                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                                        let vc = UIStoryboard.Sp_dash_ViewController()
                                                             self.present(vc, animated: true, completion: nil)
                                                         }else if Servicefile.shared.user_type == "3" {
-                                                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
+                                                            let vc = UIStoryboard.vendor_myorder_ViewController()
                                                             self.present(vc, animated: true, completion: nil)
                                                         }
                                                         self.stopAnimatingActivityIndicator()

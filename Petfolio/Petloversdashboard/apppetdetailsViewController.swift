@@ -18,6 +18,8 @@ class apppetdetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.callpetdash()
         Servicefile.shared.pet_type_val = ""
         Servicefile.shared.Pet_breed_val = ""
         self.label_hey_name.text = "Hey " + Servicefile.shared.first_name + ","

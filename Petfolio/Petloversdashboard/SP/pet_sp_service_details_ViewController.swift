@@ -41,6 +41,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
         self.view_rate_back.layer.cornerRadius = 30.0
@@ -123,8 +124,8 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     
     @IBAction func action_book(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_calender_ViewController") as! pet_sp_calender_ViewController
-                     self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.pet_sp_calender_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -172,14 +173,14 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     @IBAction func action_petcare(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 2
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

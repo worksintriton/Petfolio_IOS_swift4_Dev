@@ -29,6 +29,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.listtime.removeAll()
         self.seltime.removeAll()
@@ -69,7 +70,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     }
     
     @IBAction func action_afterappBooked(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+        let vc = UIStoryboard.Pet_applist_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -98,8 +99,11 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     
     
     @IBAction func action_bookappoint(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_CreateApp_ViewController") as! pet_sp_CreateApp_ViewController
-        self.present(vc, animated: true, completion: nil)
+        if Servicefile.shared.pet_apoint_booking_time != "" {
+            let vc = UIStoryboard.sppetselectdetailsViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -24,13 +24,14 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     var demodata = [{}]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
-        //self.petlist.removeAll()
+        self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
-        //self.getdemo()
+        self.getdemo()
         // Do any additional setup after loading the view.
     }
     
@@ -48,14 +49,13 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
         cell.pettitle.text = ""
         print("image path",self.petlist[indexPath.row])
-//        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
-//            if (error != nil) {
-                cell.petimage.image = UIImage(named: "logo")
-                cell.petimage.contentMode = .scaleAspectFit
-//            } else {
-//                cell.petimage.image = image
-//            }
-//        }
+        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
+            if (error != nil) {
+                cell.petimage.image = image
+            } else {
+                cell.petimage.image = UIImage(named: Servicefile.sample_img)
+            }
+        }
         return cell
     }
     
@@ -88,7 +88,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 if Servicefile.shared.user_type == "1" {
                    
                     Servicefile.shared.tabbar_selectedindex = 2
-                    let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                    let tapbar = UIStoryboard.SHCircleBarControll()
                     tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                     self.present(tapbar, animated: true, completion: nil)
 //                    pettabbarViewController
@@ -96,10 +96,10 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                     self.present(vc, animated: true, completion: nil)
                 } else if Servicefile.shared.user_type == "2" {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                    let vc = UIStoryboard.Sp_dash_ViewController()
                     self.present(vc, animated: true, completion: nil)
                 } else{
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_myorder_ViewController") as! vendor_myorder_ViewController
+                    let vc = UIStoryboard.vendor_myorder_ViewController()
                     self.present(vc, animated: true, completion: nil)
                 }
             }else{

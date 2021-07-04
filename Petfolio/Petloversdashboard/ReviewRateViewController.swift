@@ -21,6 +21,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Cosmos_rate.rating = 4
         Cosmos_rate.settings.fillMode = .full
         self.view_main.view_cornor()

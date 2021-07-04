@@ -19,6 +19,7 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callmycalender()
         self.view_next.view_cornor()
         self.view_next.dropShadow()
@@ -127,7 +128,7 @@ class sp_reg_calender_hour_ViewController: UIViewController , UITableViewDelegat
                                                             
                                                              if Code == 200 {
                                                                 _ = res["Data"] as! NSDictionary
-                                                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                                                let vc = UIStoryboard.Sp_dash_ViewController()
                                                                                   self.present(vc, animated: true, completion: nil)
                                                                 self.stopAnimatingActivityIndicator()
                                                              }else{

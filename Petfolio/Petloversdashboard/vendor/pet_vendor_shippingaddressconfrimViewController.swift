@@ -27,6 +27,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_shadow.isHidden = true
         self.view_alert.isHidden = true
         self.view_alert.view_cornor()
@@ -58,7 +59,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     
     @IBAction func action_success_continue(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }

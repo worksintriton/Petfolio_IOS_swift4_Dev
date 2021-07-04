@@ -49,6 +49,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.pet_petlist.count > 0 {
             Servicefile.shared.pet_status = "edit"
             self.isspay = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_spayed
@@ -246,7 +247,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                         Servicefile.shared.tabbar_selectedindex = 2
-                        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                        let tapbar = UIStoryboard.SHCircleBarControll()
                         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                         self.present(tapbar, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()

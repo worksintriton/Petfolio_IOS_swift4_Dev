@@ -21,6 +21,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","My Coupons","Reports","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Report","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
@@ -37,7 +38,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     
     
        @IBAction func action_edit(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_profile_view_ViewController") as! vendor_profile_view_ViewController
+        let vc = UIStoryboard.vendor_profile_view_ViewController()
                   self.present(vc, animated: true, completion: nil)
         
        }
@@ -65,7 +66,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "Manage Products" {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_manage_product_ViewController") as! vendor_manage_product_ViewController
+            let vc = UIStoryboard.vendor_manage_product_ViewController()
         self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController

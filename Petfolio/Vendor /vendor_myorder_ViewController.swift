@@ -41,6 +41,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.ordertype = "current"
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
@@ -251,7 +252,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 //    @objc func trackorderdetails(sender: UIButton){
 //        let tag = sender.tag
 //        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorTrackorderViewController") as! vendorTrackorderViewController
+//        let vc = UIStoryboard.vendorTrackorderViewController()
 //        self.present(vc, animated: true, completion: nil)
 //    }
     @objc func updatestatusorderdetails(sender: UIButton){
@@ -768,7 +769,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         let Data = res["Data"] as! NSDictionary
                         let profile_status = Data["profile_status"] as? Bool ?? false
                         if profile_status == false {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Vendor_reg_ViewController") as! Vendor_reg_ViewController
+                            let vc = UIStoryboard.Vendor_reg_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else {
                             let profile_verification_status = Data["profile_verification_status"] as? String ?? ""
@@ -815,17 +816,17 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 }
 extension UIViewController {
     @objc func vendorsidemenu(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_sidemenu_ViewController") as! vendor_sidemenu_ViewController
+        let vc = UIStoryboard.vendor_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func vendorprofile(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_sidemenu_ViewController") as! vendor_sidemenu_ViewController
+        let vc = UIStoryboard.vendor_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func vendorproduct(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_manage_product_ViewController") as! vendor_manage_product_ViewController
+        let vc = UIStoryboard.vendor_manage_product_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

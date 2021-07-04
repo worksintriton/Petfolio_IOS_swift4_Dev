@@ -32,6 +32,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         //self.view_home.view_cornor()
         self.view_setloca.view_cornor()
@@ -82,7 +83,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
     
     @IBAction func action_petservice(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 1
-               let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+               let tapbar = UIStoryboard.SHCircleBarControll()
                tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
 
@@ -90,7 +91,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
     
     @IBAction func action_petcare(_ sender: Any) {
         Servicefile.shared.tabbar_selectedindex = 0
-        let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+        let tapbar = UIStoryboard.SHCircleBarControll()
         tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }

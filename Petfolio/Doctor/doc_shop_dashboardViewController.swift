@@ -22,6 +22,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.inital_setup()
         self.textfield_search.delegate = self
         self.view_allcategory.view_cornor()

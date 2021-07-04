@@ -51,7 +51,9 @@ class pet_vendor_shippingaddressViewController: UIViewController, UITextFieldDel
     var address_status = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.calldelegate()
+        
         self.call_cornor_view()
        
         self.textfield_pincode.addDoneButtonToKeyboard(myAction:  #selector(self.textfield_pincode.resignFirstResponder))

@@ -23,6 +23,7 @@ class pet_paymentdetails_ViewController: UIViewController, UITableViewDelegate, 
     var paydetails = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.tbl_pay_details.register(UINib(nibName: "paymentdetails_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.view_total_ex.view_cornor()
         self.view_tx.view_cornor()

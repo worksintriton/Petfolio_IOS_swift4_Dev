@@ -20,6 +20,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","My Coupons","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Doc","Calendar","suitcase","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
@@ -38,7 +39,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
        @IBAction func action_edit(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+        let vc = UIStoryboard.Sp_profile_ViewController()
                   self.present(vc, animated: true, completion: nil)
        }
     
@@ -65,16 +66,16 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_mycalender_ViewController") as! Sp_mycalender_ViewController
+            let vc = UIStoryboard.Sp_mycalender_ViewController()
         self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorities" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_favlist_ViewController") as! sp_favlist_ViewController
+            let vc = UIStoryboard.sp_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_myorder_ViewController") as! sp_myorder_ViewController
+            let vc = UIStoryboard.sp_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Manage Services" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_edit_ViewController") as! Sp_profile_edit_ViewController
+            let vc = UIStoryboard.Sp_profile_edit_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController

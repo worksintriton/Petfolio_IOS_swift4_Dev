@@ -32,6 +32,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.inital_setup()
         self.view_footer.view_cornor()
         self.view_img_user.view_cornor()
@@ -57,7 +58,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     }
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        let vc = UIStoryboard.Sp_dash_ViewController()
                                  self.present(vc, animated: true, completion: nil)
     }
     
@@ -91,10 +92,10 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
                       self.present(vc, animated: true, completion: nil)
     }
     
-   @IBAction func action_profile(_ sender: Any) {
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
-                           self.present(vc, animated: true, completion: nil)
-         }
+    @IBAction func action_profile(_ sender: Any) {
+        let vc = UIStoryboard.Sp_profile_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
          
          @IBAction func action_notifi(_ sender: Any) {
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
@@ -145,7 +146,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     
    
     @IBAction func action_bussi_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendor_edit_profile_ViewController") as! vendor_edit_profile_ViewController
+        let vc = UIStoryboard.vendor_edit_profile_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

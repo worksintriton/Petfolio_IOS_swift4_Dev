@@ -14,7 +14,6 @@ import SDWebImage
 
 class peteditandadduploadimgViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    
     @IBOutlet weak var imag_petimag: UIImageView!
     @IBOutlet weak var view_continue: UIView!
      let imagepicker = UIImagePickerController()
@@ -23,19 +22,20 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     var uploadimage = Servicefile.sample_img
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_continue.view_cornor()
-        Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img
         self.coll_img_list.delegate = self
         self.coll_img_list.dataSource = self
         self.imagepicker.delegate = self
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-         print("data in edit pet image",Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_img)
-        self.checkimagecontent(intval: 0)
+         
+        self.checkimagecontent(intval: Servicefile.shared.pet_index)
         
     }
     
     func checkimagecontent(intval : Int){
-        
+        Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist
+        print("data in edit pet image",Servicefile.shared.petlistimg)
         let petimage = Servicefile.shared.petlistimg
             if petimage.count > 0 {
                 let petdic = petimage[intval] as! NSDictionary

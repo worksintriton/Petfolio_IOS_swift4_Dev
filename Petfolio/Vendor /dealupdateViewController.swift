@@ -27,6 +27,7 @@ class dealupdateViewController: UIViewController, UITextFieldDelegate, UITextVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.textfield_product_title.delegate = self
         self.textfield_product_price.delegate = self
         self.textfield_product_threshold.delegate = self

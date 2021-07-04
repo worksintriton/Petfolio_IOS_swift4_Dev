@@ -19,11 +19,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_details.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.ViewOTPBTN.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.checkemailvalid = "login"
         Servicefile.shared.email_status = false
         Servicefile.shared.email_status_label = "Verify email"
         self.View_log.view_cornor()
-        self.ViewOTPBTN.view_cornor()
+        self.ViewOTPBTN.layer.cornerRadius = self.ViewOTPBTN.frame.height / 2
         self.View_usercred.view_cornor()
         self.ViewOTPBTN.dropShadow()
         self.View_usercred.dropShadow()

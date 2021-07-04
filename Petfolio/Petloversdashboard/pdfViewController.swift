@@ -20,6 +20,7 @@ class pdfViewController: UIViewController,UIWebViewDelegate, WKNavigationDelegat
     var pdflink = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callpescription()
         self.pdfview.isHidden = true
         self.docname.text = "Pescription"

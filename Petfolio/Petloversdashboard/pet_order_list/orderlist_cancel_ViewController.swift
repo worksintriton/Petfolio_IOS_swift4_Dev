@@ -23,6 +23,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     var showlist = true
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_cancel_order.view_cornor()
         self.view_cancel.view_cornor()

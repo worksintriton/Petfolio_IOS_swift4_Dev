@@ -63,6 +63,7 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         
         self.label_cartcount.layer.cornerRadius = 10.0

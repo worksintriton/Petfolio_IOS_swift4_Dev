@@ -28,7 +28,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_save.view_cornor()
         self.view_firstname.view_cornor()
         self.view_lastname.view_cornor()
@@ -196,14 +196,14 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                             if Servicefile.shared.user_type == "1" {
                                 Servicefile.shared.tabbar_selectedindex = 2
-                                let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                                let tapbar = UIStoryboard.SHCircleBarControll()
                                 tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                 self.present(tapbar, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "4" {
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
                                 self.present(vc, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "2" {
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+                                let vc = UIStoryboard.Sp_dash_ViewController()
                                 self.present(vc, animated: true, completion: nil)
                             }
                         }))

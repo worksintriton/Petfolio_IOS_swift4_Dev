@@ -41,6 +41,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.inital_setup()
         self.label_nodata.isHidden = true
         self.view_popalert.isHidden = true
@@ -101,7 +102,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+        let vc = UIStoryboard.Sp_profile_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -120,7 +121,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
+        let vc = UIStoryboard.sp_side_menuViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -223,7 +224,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         Servicefile.shared.SP_selected_app_list = self.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_app_details_page_ViewController") as! sp_app_details_page_ViewController
+        let vc = UIStoryboard.sp_app_details_page_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -571,10 +572,10 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                         print("profile_status",profile_status)
                         self.call_list_shipping_address()
                         if profile_status == false {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SP_Reg_ViewController") as! SP_Reg_ViewController
+                            let vc = UIStoryboard.SP_Reg_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else if calender_status == false {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_reg_calender_ViewController") as! Sp_reg_calender_ViewController
+                            let vc = UIStoryboard.Sp_reg_calender_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else {
                             let profile_verification_status = Data["profile_verification_status"]  as? String ?? ""
@@ -695,7 +696,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 
 extension UIViewController {
     @objc func spsidemenu(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_side_menuViewController") as! sp_side_menuViewController
+        let vc = UIStoryboard.sp_side_menuViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -715,12 +716,12 @@ extension UIViewController {
     }
     
     @objc func spDashboard(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_dash_ViewController") as! Sp_dash_ViewController
+        let vc = UIStoryboard.Sp_dash_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func spprofile(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
+        let vc = UIStoryboard.Sp_profile_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

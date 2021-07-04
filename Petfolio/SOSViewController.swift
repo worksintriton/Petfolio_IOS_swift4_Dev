@@ -22,6 +22,7 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var phono = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.sel.removeAll()
         self.issel.removeAll()
         for itm in 0..<Servicefile.shared.sosnumbers.count{

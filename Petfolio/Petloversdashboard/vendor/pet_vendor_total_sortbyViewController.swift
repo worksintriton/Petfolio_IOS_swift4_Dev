@@ -18,6 +18,7 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_apply.view_cornor()
         self.view_sortby.view_cornor()
         self.tbl_sortlist.delegate = self

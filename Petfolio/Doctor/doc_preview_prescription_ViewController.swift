@@ -34,6 +34,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         var subdiagno = ""
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.diagno.removeAll()
             self.diafno_sub.removeAll()
             

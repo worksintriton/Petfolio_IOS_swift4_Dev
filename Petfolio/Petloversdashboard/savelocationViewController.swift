@@ -47,6 +47,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.switch_default.isOn = self.defaultstatus
         self.view_change.view_cornor()
          self.view_pincode.view_cornor()
@@ -236,7 +237,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
                                                   if Code == 200 {
                                                     let Data = res["Data"] as! NSDictionary
                                                     Servicefile.shared.tabbar_selectedindex = 2
-                                                    let tapbar = self.storyboard?.instantiateViewController(withIdentifier: "pettabbarViewController") as! SHCircleBarControll
+                                                    let tapbar = UIStoryboard.SHCircleBarControll()
                                                     tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                                     self.present(tapbar, animated: true, completion: nil)
                                                      self.stopAnimatingActivityIndicator()

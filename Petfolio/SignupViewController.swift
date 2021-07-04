@@ -32,9 +32,16 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var btn_email_verify: UIButton!
     
+    @IBOutlet weak var view_page: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_page.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.Viewotp.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.viewcoun.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view_verifyemail.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.ViewChangeUtype.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         Servicefile.shared.checkemailvalid = "signup"
         self.viewemail.view_cornor()

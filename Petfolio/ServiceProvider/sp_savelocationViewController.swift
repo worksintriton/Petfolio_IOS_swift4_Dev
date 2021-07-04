@@ -48,6 +48,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.intial_setup_action()
             self.view_change.view_cornor()
             self.view_pincode.view_cornor()

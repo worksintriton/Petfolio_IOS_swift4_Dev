@@ -14,6 +14,7 @@ class paymentpageViewController: UIViewController  {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         
     }
     override func viewWillAppear(_ animated: Bool) {

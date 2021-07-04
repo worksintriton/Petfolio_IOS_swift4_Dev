@@ -25,6 +25,7 @@ class SP_mycal_addholiday_ViewController: UIViewController, UITableViewDelegate,
     var seldate = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callholidaylist()
         self.view_submit.view_cornor()
         self.view_submit.dropShadow()

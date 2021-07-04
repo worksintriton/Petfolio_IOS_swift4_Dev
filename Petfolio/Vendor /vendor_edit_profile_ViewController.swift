@@ -58,6 +58,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     var In_id = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.call_vendor_details()
         self.call_protocals()
         self.added_service.removeAll()

@@ -403,7 +403,10 @@ class Servicefile {
     var ordertype = "current"
     var islocationget = false
     //var appgreen = "#56B9A4"
+    var apppagecolor = "#F5F5F5"
     var appgreen = "#2d6d66"
+    var appgrey = "#296F67"
+    var appyellow = "#FCDE66"
     var applightgreen = "#F4FAF9"
     var lightgray = "#cfd0d1"
     var extralightgray = "#f0f0f0"

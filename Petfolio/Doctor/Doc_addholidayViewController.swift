@@ -24,6 +24,7 @@ class Doc_addholidayViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.callholidaylist()
         self.view_submit.view_cornor()
         self.view_submit.dropShadow()

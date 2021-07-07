@@ -92,7 +92,7 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func action_addaddress(_ sender: Any) {
         Servicefile.shared.shipaddresslist.removeAll()
         Servicefile.shared.shipaddresslist_isedit = false
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "myaddress_create_address_ViewController") as! myaddress_create_address_ViewController
+        let vc = UIStoryboard.myaddress_create_address_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -199,7 +199,7 @@ class myaddresslistViewController: UIViewController, UITableViewDelegate, UITabl
             self.view_shadow.isHidden = true
             self.view_popup.isHidden = true
             Servicefile.shared.shipaddresslist_isedit = true
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "myaddress_create_address_ViewController") as! myaddress_create_address_ViewController
+            let vc = UIStoryboard.myaddress_create_address_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else{
             let details = Servicefile.shared.shipaddresslist[Servicefile.shared.shipaddresslist_index] as! NSDictionary

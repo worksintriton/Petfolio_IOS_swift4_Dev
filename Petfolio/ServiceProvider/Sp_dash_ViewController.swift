@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
@@ -78,6 +79,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         }else{
             img = Servicefile.sample_img
         }
+        self.sp_header.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.sp_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.sp_header.image_profile.image = UIImage(named: imagelink.sample)
@@ -91,8 +93,8 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.sp_header.btn_location.addTarget(self, action: #selector(self.spmanageaddress), for: .touchUpInside)
         self.sp_header.btn_button2.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
-       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
@@ -107,7 +109,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     @IBAction func action_notifi(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -204,6 +206,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         if petimg == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{
+            cell.img_petimg.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_petimg.image = UIImage(named: imagelink.sample)
@@ -701,22 +704,25 @@ extension UIViewController {
     }
     
     @objc func spmanageaddress(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_manageaddressViewController") as! sp_manageaddressViewController
+        let vc = UIStoryboard.sp_manageaddressViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func spcartpage(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_vendorcartpage_ViewController") as! sp_vendorcartpage_ViewController
+        let vc = UIStoryboard.sp_vendorcartpage_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
+    /// act as dashboard
     @objc func spshop(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_shop_dashboard_ViewController") as! sp_shop_dashboard_ViewController
+        let vc = UIStoryboard.Sp_dash_ViewController()
         self.present(vc, animated: true, completion: nil)
+        
     }
     
+    /// act as shop
     @objc func spDashboard(sender : UIButton){
-        let vc = UIStoryboard.Sp_dash_ViewController()
+        let vc = UIStoryboard.sp_shop_dashboard_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

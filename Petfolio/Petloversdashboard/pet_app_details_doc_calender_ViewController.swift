@@ -63,7 +63,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -59,6 +59,7 @@ class UsertypeViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         cell.Img_Select.isHidden = false
         if Servicefile.shared.UtypeData[indexPath.row].user_type_img != "" {
+            cell.Img_UT.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.Img_UT.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.UtypeData[indexPath.row].user_type_img)) { (image, error, cache, urls) in
                               if (error != nil) {
                                   cell.Img_UT.image = UIImage(named: imagelink.sample)

@@ -53,7 +53,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     // header action
         self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.ac_back), for: .touchUpInside)
         
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
@@ -63,8 +63,13 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     // header action
     }
     
+    @objc func ac_back(sender: UIButton){
+        let vc = UIStoryboard.petlov_DocselectViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -170,6 +175,12 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     
     func callgetdatedetails(){
+        
+        print("user_id",Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+              "Date", self.seldate,
+              "cur_date", Servicefile.shared.ddmmyyyystringformat(date: Date()),
+              "cur_time", Servicefile.shared.hhmmastringformat(date: Date()),
+              "current_time", Servicefile.shared.yyyyMMddHHmmssstringformat(date: Date()))
         self.startAnimatingActivityIndicator()
         self.listtime.removeAll()
         self.seltime.removeAll()
@@ -231,6 +242,8 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     }
     
     func callcheckdatedetails(index: Int){
+        print("doctor_id",Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
+              "Booking_Date",self.seldate,"Booking_Time", self.listtime[index])
         self.startAnimatingActivityIndicator()
         Servicefile.shared.pet_apoint_booking_time = ""
         self.view_continue.isHidden = true

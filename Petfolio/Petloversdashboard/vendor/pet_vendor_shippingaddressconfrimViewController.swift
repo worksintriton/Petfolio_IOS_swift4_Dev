@@ -71,7 +71,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     
     @IBAction func action_changeaddress(_ sender: Any) {
         Servicefile.shared.shipaddresslist.removeAll()
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_editshiplistViewController") as! pet_vendor_editshiplistViewController
+        let vc = UIStoryboard.pet_vendor_editshiplistViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -87,9 +87,9 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
                let options: [String:Any] = [
                    "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                    "currency": "INR",//We support more that 92 international currencies.
-                   "description": "some some",
+                   "description": "",
                    "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                   "name": "sriram",
+                   "name": Servicefile.shared.first_name,
                    "prefill": [
                        "contact": Servicefile.shared.user_phone,
                        "email": Servicefile.shared.user_email

@@ -64,6 +64,13 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
         self.textfield_location.delegate = self
         self.textfield_pickname.delegate = self
         
+            
+        self.textfield_cityname.autocapitalizationType = .sentences
+        self.textfield_location.autocapitalizationType = .sentences
+        self.textfield_pickname.autocapitalizationType = .sentences
+            
+            
+        
         self.textfield_pincode.isUserInteractionEnabled = false
         self.textfield_cityname.isUserInteractionEnabled = false
         self.textfield_location.isUserInteractionEnabled = false
@@ -148,7 +155,7 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -164,7 +171,7 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
         if  Servicefile.shared.islocationget {
             
         }else{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_locationpickup_ViewController") as! pet_vendor_locationpickup_ViewController
+            let vc = UIStoryboard.pet_vendor_locationpickup_ViewController()
             self.present(vc, animated: true, completion: nil)
             Servicefile.shared.islocationget = true
         }
@@ -181,7 +188,7 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
     
     @IBAction func action_changeloca(_ sender: Any) {
         Servicefile.shared.selectedpickname = self.textfield_pickname.text!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_locationpickup_ViewController") as! pet_vendor_locationpickup_ViewController
+        let vc = UIStoryboard.pet_vendor_locationpickup_ViewController()
         self.present(vc, animated: true, completion: nil)
         Servicefile.shared.islocationget = true
     }

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Toucan
+import SDWebImage
 
 
 class ProfileimageuploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -33,6 +34,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
         if strimg == "" {
             self.image_profile.image = UIImage(named: imagelink.sample)
         }else{
+            self.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             self.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
                 if (error != nil) {
                     self.image_profile.image = UIImage(named: imagelink.sample)
@@ -87,7 +89,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -101,12 +103,14 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
            // let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: pickedImg)
+            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+            self.upload(imagedata: convertimg!)
         }
         dismiss(animated: true, completion: nil)
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [

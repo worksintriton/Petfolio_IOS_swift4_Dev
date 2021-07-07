@@ -78,7 +78,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
        }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -153,7 +153,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
              Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
              Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
+            let vc = UIStoryboard.petsavelocationViewController()
             self.present(vc, animated: true, completion: nil)
         }else{
             if Servicefile.shared.petuserlocaadd[indextag].default_status != false {
@@ -211,7 +211,7 @@ class petManageaddressViewController: UIViewController, UITableViewDelegate, UIT
         Servicefile.shared.long = 0.0
         Servicefile.shared.lati = 0.0
         Servicefile.shared.locaaccess = "Add"
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
+        let vc = UIStoryboard.petlocationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -83,7 +83,7 @@ class Doc_confrence_ViewController: UIViewController,JitsiMeetViewDelegate {
     
     @IBAction func action_close_conversation(_ sender: Any) {
         Servicefile.shared.appointmentindex = Servicefile.shared.selectedindex
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_prescriptionViewController") as! Doc_prescriptionViewController
+        let vc = UIStoryboard.Doc_prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

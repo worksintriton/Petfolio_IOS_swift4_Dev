@@ -119,6 +119,13 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         self.textview_descrip.delegate = self
         self.textview_descrip.text = "Add comment here.."
         self.textview_descrip.textColor = UIColor.lightGray
+            
+        self.textfield_color.autocapitalizationType = .sentences
+        self.textfield_petname.autocapitalizationType = .sentences
+        self.textview_descrip.autocapitalizationType = .sentences
+        self.textview_descrip.autocapitalizationType = .sentences
+            
+            
         self.label_service_title.text = Servicefile.shared.service_id_title
         self.petimage = Servicefile.shared.sampleimag
         //self.setuploadimg()
@@ -153,10 +160,10 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                if self.pagcount == Servicefile.shared.petlistimg.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_imag.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: false)
                }
               
            }
@@ -176,6 +183,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
            let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
            let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
                if (error != nil) {
                    cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -194,8 +202,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
        }
     
    @IBAction func action_sos(_ sender: Any) {
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
-             self.present(vc, animated: true, completion: nil)
+    let vc = UIStoryboard.SOSViewController()
+    self.present(vc, animated: true, completion: nil)
          }
    
     @IBAction func action_afterappBooked(_ sender: Any) {
@@ -402,7 +410,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
-              alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+              alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
                  self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
@@ -417,7 +425,8 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
            if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: pickedImg)
+            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+            self.upload(imagedata: convertimg!)
            }
              dismiss(animated: true, completion: nil)
        }
@@ -472,25 +481,25 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
         }
     
     func checkappointdetails(){
-        if self.textfield_petname.text == "" {
-            self.alert(Message: "please enter the petname")
-        }else if self.textfield_pettype.text == "" {
-             self.alert(Message: "please select the pet type")
-        }else if self.textfield_petbreed.text == "" {
-             self.alert(Message: "please select the pet breed")
-        }else if self.textfield_petage.text == "" {
-             self.alert(Message: "please enter the pet age")
-        }else if self.textfield_color.text == "" {
-             self.alert(Message: "please enter the pet color")
-        }else if self.textfield_weight.text == "" {
-             self.alert(Message: "please enter the pet weight")
-        }else if self.textview_descrip.text == "" {
-             self.alert(Message: "please enter the description")
-        }else if self.textview_descrip.text == "Add comment here.." {
-             self.alert(Message: "please enter the description")
-        }else if self.petimage == ""{
-             self.alert(Message: "please upload the")
-        }else{
+//        if self.textfield_petname.text == "" {
+//            self.alert(Message: "please enter the petname")
+//        }else if self.textfield_pettype.text == "" {
+//             self.alert(Message: "please select the pet type")
+//        }else if self.textfield_petbreed.text == "" {
+//             self.alert(Message: "please select the pet breed")
+//        }else if self.textfield_petage.text == "" {
+//             self.alert(Message: "please enter the pet age")
+//        }else if self.textfield_color.text == "" {
+//             self.alert(Message: "please enter the pet color")
+//        }else if self.textfield_weight.text == "" {
+//             self.alert(Message: "please enter the pet weight")
+//        }else if self.textview_descrip.text == "" {
+//             self.alert(Message: "please enter the description")
+//        }else if self.textview_descrip.text == "Add comment here.." {
+//             self.alert(Message: "please enter the description")
+//        }else if self.petimage == ""{
+//             self.alert(Message: "please upload the")
+//        }else{
             print("details for complettion")
             let date = Date()
             let format = DateFormatter()
@@ -518,7 +527,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             }else{
                 self.calladdpetdetails()
             }
-        }
+//        }
     }
     
    func callsubmit(){
@@ -721,9 +730,9 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                    let options: [String:Any] = [
                        "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                                "currency": "INR",//We support more that 92 international currencies.
-                               "description": "some some",
+                               "description": "",
                                "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                               "name": "sriram",
+                               "name": Servicefile.shared.first_name,
                                "prefill": [
                                    "contact": Servicefile.shared.user_phone,
                                    "email": Servicefile.shared.user_email

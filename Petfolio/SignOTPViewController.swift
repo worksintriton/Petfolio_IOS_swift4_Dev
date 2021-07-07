@@ -237,10 +237,10 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         if Servicefile.shared.user_type == "1"{
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "REGPetLoverViewController") as! REGPetLoverViewController
+                            let vc = UIStoryboard.REGPetLoverViewController()
                             self.present(vc, animated: true, completion: nil)
                         } else if Servicefile.shared.user_type == "4"{
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                            let vc = UIStoryboard.regdocViewController()
                             self.present(vc, animated: true, completion: nil)
                         } else if Servicefile.shared.user_type == "2"{
                             let vc = UIStoryboard.SP_Reg_ViewController()

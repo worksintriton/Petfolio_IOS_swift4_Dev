@@ -33,22 +33,47 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
         
     }
     
-    func checkimagecontent(intval : Int){
-        Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist
-        print("data in edit pet image",Servicefile.shared.petlistimg)
-        let petimage = Servicefile.shared.petlistimg
-            if petimage.count > 0 {
-                let petdic = petimage[intval] as! NSDictionary
-                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
-                if petimg == "" {
-                    self.setimage(strimg: petimg)
-            }else{
-                    self.setimage(strimg: petimg)
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? petprofileViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+        if let firstVC = presentingViewController as? sppetselectdetailsViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        if let firstVC = presentingViewController as? searchpetappdetailViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
             }
-        }else{
+        }
+        if let firstVC = presentingViewController as? apppetdetailsViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+        
+        
+       }
+    
+    func checkimagecontent(intval : Int){
+//        Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist
+//        print("data in edit pet image",Servicefile.shared.petlistimg)
+//        let petimage = Servicefile.shared.petlistimg
+//            if petimage.count > 0 {
+//                let petdic = petimage[intval] as! NSDictionary
+//                let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+//                if petimg == "" {
+//                    self.setimage(strimg: petimg)
+//            }else{
+//                    self.setimage(strimg: petimg)
+//            }
+//        }else{
             Servicefile.shared.petlistimg = [Any]()
                self.imag_petimag.image = UIImage(named: imagelink.sample)
-        }
+//        }
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
@@ -64,6 +89,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagecell", for: indexPath) as!  imgidCollectionViewCell
           let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
           let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
           cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
               if (error != nil) {
                   cell.Img_id.image = UIImage(named: imagelink.sample)
@@ -95,6 +121,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
       
     
     func setimage(strimg : String){
+        self.imag_petimag.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.imag_petimag.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.imag_petimag.image = UIImage(named: imagelink.sample)
@@ -107,7 +134,8 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
               if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                   //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-               self.upload(imagedata: pickedImg)
+                let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+                self.upload(imagedata: convertimg!)
               }
                 dismiss(animated: true, completion: nil)
           }
@@ -172,7 +200,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
-              alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+              alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
                  self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
@@ -189,8 +217,29 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     }
     
     @IBAction func action_skip(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
-        self.present(vc, animated: true, completion: nil)
+        if Servicefile.shared.pet_save_for == "p" {
+            let tapbar = UIStoryboard.petprofileViewController()
+            //  tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+            self.present(tapbar, animated: true, completion: nil)
+            
+        }else if Servicefile.shared.pet_save_for == "s" {
+            //        Servicefile.shared.tabbar_selectedindex = 2
+                    let tapbar = UIStoryboard.sppetselectdetailsViewController()
+            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                    self.present(tapbar, animated: true, completion: nil)
+        }else if Servicefile.shared.pet_save_for == "sd" {
+            //        Servicefile.shared.tabbar_selectedindex = 2
+                    let tapbar = UIStoryboard.searchpetappdetailViewController()
+            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                    self.present(tapbar, animated: true, completion: nil)
+        }else{
+            //        Servicefile.shared.tabbar_selectedindex = 2
+                    let tapbar = UIStoryboard.apppetdetailsViewController()
+            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                    self.present(tapbar, animated: true, completion: nil)
+        }
+     
+        
     }
     
     
@@ -206,8 +255,30 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
                                                        let Data = res["Data"] as! NSDictionary
-                                                       let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
-                                                       self.present(vc, animated: true, completion: nil)
+                                                       
+                                                        
+                                                        if Servicefile.shared.pet_save_for == "p" {
+                                                            let vc = UIStoryboard.petprofileViewController()
+                                                            self.present(vc, animated: true, completion: nil)
+                                                            
+                                                        }else if Servicefile.shared.pet_save_for == "s" {
+                                                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                                                    let tapbar = UIStoryboard.sppetselectdetailsViewController()
+                                                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                                                    self.present(tapbar, animated: true, completion: nil)
+                                                        }else if Servicefile.shared.pet_save_for == "sd" {
+                                                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                                                    let tapbar = UIStoryboard.searchpetappdetailViewController()
+                                                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                                                    self.present(tapbar, animated: true, completion: nil)
+                                                        }else{
+                                                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                                                    let tapbar = UIStoryboard.apppetdetailsViewController()
+                                                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                                                    self.present(tapbar, animated: true, completion: nil)
+                                                        }
+                                                        
+                                                       
                                                         self.stopAnimatingActivityIndicator()
                                                      }else{
                                                        self.stopAnimatingActivityIndicator()

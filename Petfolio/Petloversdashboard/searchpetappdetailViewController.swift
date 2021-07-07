@@ -47,6 +47,7 @@ class searchpetappdetailViewController: UIViewController, UICollectionViewDelega
             if petimg == "" {
                 cell.image_data.image = UIImage(named: imagelink.sample)
             }else{
+                cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_data.image = UIImage(named: imagelink.sample)
@@ -58,7 +59,7 @@ class searchpetappdetailViewController: UIViewController, UICollectionViewDelega
         }else{
             cell.image_data.image = UIImage(named: imagelink.sample)
         }
-        
+        cell.img_ischeckbox.isHidden = true
         cell.image_data.view_cornor()
         cell.view_main.view_cornor()
         return cell
@@ -78,11 +79,16 @@ class searchpetappdetailViewController: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_addpetdetails(_ sender: Any) {
-        
+        Servicefile.shared.pet_index = 0
+        Servicefile.shared.pet_status = "Add"
+        Servicefile.shared.pet_save_for = "sd"
+        let vc = UIStoryboard.petloverEditandAddViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard.searchcalenderdetailsViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     

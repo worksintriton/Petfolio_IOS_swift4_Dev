@@ -13,8 +13,10 @@ class getpettypeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var image_data: UIImageView!
     @IBOutlet weak var view_main: UIView!
-    
     @IBOutlet weak var label_title: UILabel!
+    @IBOutlet weak var img_ischeckbox: UIImageView!
+    @IBOutlet weak var view_border: UIView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

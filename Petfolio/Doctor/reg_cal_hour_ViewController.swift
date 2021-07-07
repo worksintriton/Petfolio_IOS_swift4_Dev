@@ -125,9 +125,8 @@ class reg_cal_hour_ViewController: UIViewController, UITableViewDelegate, UITabl
                                                             
                                                              if Code == 200 {
                                                                let Data = res["Data"] as! NSDictionary
-                                                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
-                                                                                  self.present(vc, animated: true, completion: nil)
-                                                                self.stopAnimatingActivityIndicator()
+                                                                let vc = UIStoryboard.DocdashboardViewController()
+                                                                self.present(vc, animated: true, completion: nil)
                                                              }else{
                                                                self.stopAnimatingActivityIndicator()
                                                                print("status code service denied")

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
         
@@ -31,6 +32,7 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
             self.label_noproduct.text = "No products available"
             self.label_noproduct.isHidden = true
             self.textfield_search.text = ""
+            self.textfield_search.autocapitalizationType = .sentences
             self.textfield_search.delegate = self
             self.view_search.view_cornor()
             self.view_sortby.view_cornor()
@@ -66,13 +68,14 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
         
         @IBAction func action_sortby(_ sender: Any) {
             self.textfield_search.text = ""
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_total_sortbyViewController") as! pet_vendor_total_sortbyViewController
+            let vc = UIStoryboard.pet_vendor_total_sortbyViewController()
             self.present(vc, animated: true, completion: nil)
+            
         }
         
         @IBAction func action_filer(_ sender: Any) {
             self.textfield_search.text = ""
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorfilterViewController") as!  vendorfilterViewController
+            let vc = UIStoryboard.vendorfilterViewController()
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -146,6 +149,7 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                 }
                 //cell.image_product.image = UIImage(named: imagelink.sample)
                 if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img) {
+                    cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                     cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.image_product.image = UIImage(named: imagelink.sample)
@@ -168,8 +172,8 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             Servicefile.shared.product_id = Servicefile.shared.sp_dash_productdetails[indexPath.row]._id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_productdetailspage_ViewController") as!  sp_productdetailspage_ViewController
-            self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.sp_productdetailspage_ViewController()
+             self.present(vc, animated: true, completion: nil)
         }
     }
 

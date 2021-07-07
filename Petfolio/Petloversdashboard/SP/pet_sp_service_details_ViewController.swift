@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Cosmos
 import GoogleMaps
+import SDWebImage
 
 
 class pet_sp_service_details_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , GMSMapViewDelegate {
@@ -87,6 +88,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
         let bannerdic = Servicefile.shared.sp_bus_service_galldicarray[indexPath.row] as! NSDictionary
         let image = bannerdic["bus_service_gall"] as? String ?? Servicefile.sample_bannerimg
+            cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                    cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                        if (error != nil) {
                            cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -112,13 +114,13 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     
     
     @IBAction func action_notifica(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-                          self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.pet_notification_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -129,7 +131,8 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard.pet_servicelist_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -251,6 +254,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 
                                                                 
                                                                 self.label_service.text = Servicefile.shared.service_id_title
+                                                                self.image_service.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                                                        self.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.service_id_image_path )) { (image, error, cache, urls) in
                                                                                              if (error != nil) {
                                                                                                  self.image_service.image = UIImage(named: imagelink.sample)

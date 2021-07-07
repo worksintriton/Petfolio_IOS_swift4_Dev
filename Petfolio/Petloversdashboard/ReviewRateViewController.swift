@@ -64,16 +64,13 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
         self.callupdaterateandreview()
     }
     
-   
-      
-      func callupdaterateandreview(){
+      func callupdaterateandreview() {
         var linkurl = ""
          if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
             linkurl = Servicefile.pet_review_update
-         }else{
+         } else {
             linkurl = Servicefile.pet_spreview_update
         }
-        
          self.startAnimatingActivityIndicator()
          if Servicefile.shared.updateUserInterface() { AF.request(linkurl, method: .post, parameters:
              ["_id": Servicefile.shared.pet_apoint_id,

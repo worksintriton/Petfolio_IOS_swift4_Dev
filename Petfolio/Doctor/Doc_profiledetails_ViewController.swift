@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SNShadowSDK
+import SDWebImage
 
 class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -60,6 +61,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         if Servicefile.shared.userimage == "" {
             self.imag_user.image = UIImage(named: imagelink.sample)
         }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                 if (error != nil) {
                     self.imag_user.image = UIImage(named: imagelink.sample)
@@ -74,17 +76,17 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     
     
     @IBAction func action_notifica(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_manageaddress(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
+        let vc = UIStoryboard.doc_manageaddress_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     //
@@ -100,6 +102,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
         let img = Servicefile.shared.DOC_clinicdicarray[indexPath.row] as! NSDictionary
         let imgval = img["clinic_pic"] as? String ?? Servicefile.sample_img
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -123,18 +126,18 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     
     
     @IBAction func action_image_upload(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileimageuploadViewController") as! ProfileimageuploadViewController
+        let vc = UIStoryboard.ProfileimageuploadViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_move_edit_busi_info(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_update_details_ViewController") as! Doc_update_details_ViewController
+        let vc = UIStoryboard.Doc_update_details_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_editprofile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        let vc = UIStoryboard.profile_edit_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -133,13 +133,13 @@ class Doc_detailspage_ViewController: UIViewController {
     }
     
     @IBAction func action_notific(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Doc_profiledetails_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -150,7 +150,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_Start_confrence(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to start te call", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callstart_confrence()
         }))
@@ -191,14 +191,13 @@ class Doc_detailspage_ViewController: UIViewController {
        }
     
     func callconfrence(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_confrence_ViewController") as! Doc_confrence_ViewController
+        let vc = UIStoryboard.Doc_confrence_ViewController()
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     
     @IBAction func action_home(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -208,7 +207,7 @@ class Doc_detailspage_ViewController: UIViewController {
     }
     
     @IBAction func action_completeappoint(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_prescriptionViewController") as! Doc_prescriptionViewController
+        let vc = UIStoryboard.Doc_prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -334,6 +333,7 @@ class Doc_detailspage_ViewController: UIViewController {
                         if petimage.count > 0 {
                             let petdic = petimage[0] as! NSDictionary
                             let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
+                            self.image_pet_img.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                             self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_pet_img.image = UIImage(named: imagelink.sample)
@@ -366,6 +366,7 @@ class Doc_detailspage_ViewController: UIViewController {
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
+                            self.image_holder_name.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                             self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_holder_name.image = UIImage(named: imagelink.sample)

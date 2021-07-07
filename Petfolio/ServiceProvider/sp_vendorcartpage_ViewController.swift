@@ -8,6 +8,7 @@
 
  import UIKit
  import Alamofire
+ import SDWebImage
 
 class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
@@ -86,7 +87,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
         
         
         @IBAction func action_movetoshop(_ sender: Any) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_shop_dashboard_ViewController") as! sp_shop_dashboard_ViewController
+            let vc = UIStoryboard.sp_shop_dashboard_ViewController()
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -140,7 +141,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
         }
         
         @IBAction func action_proceedtobuy(_ sender: Any) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_shop_shippingaddressViewController") as! sp_shop_shippingaddressViewController
+            let vc = UIStoryboard.sp_shop_shippingaddressViewController()
             self.present(vc, animated: true, completion: nil)
             
         }
@@ -176,6 +177,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             cell.label_product_amt.attributedText = attributeString
             cell.label_final_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
             if product_img.count > 0 {
+                cell.img_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: product_img[0] as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.img_product.image = UIImage(named: imagelink.sample)
@@ -198,8 +200,8 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             let productdata = cartlist["product_id"] as! NSDictionary
             let product_id = productdata["_id"] as? String ?? ""
             Servicefile.shared.product_id = product_id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_productdetails_ViewController") as! Doc_productdetails_ViewController
-            self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.Doc_productdetails_ViewController()
+                          self.present(vc, animated: true, completion: nil)
         }
         
         @objc func action_delete(sender: UIButton){

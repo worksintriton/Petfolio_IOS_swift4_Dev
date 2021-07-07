@@ -9,16 +9,29 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import Razorpay
 
-class sppetselectdetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class sppetselectdetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
     
     
     @IBOutlet weak var label_hey_name: UILabel!
     @IBOutlet weak var col_app_pet: UICollectionView!
+    var ischeck = false
+    @IBOutlet weak var view_appointment: UIView!
+    var pindex = 0
     
+    @IBOutlet weak var View_shadow: UIView!
+    
+    @IBOutlet weak var img_view_book: UIImageView!
+    @IBOutlet weak var view_book: UIView!
+    @IBOutlet weak var view_popup: UIView!
+    
+    var razorpay: RazorpayCheckout!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view_book.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view_book.view_cornor()
         self.callpetdash()
         Servicefile.shared.pet_type_val = ""
         Servicefile.shared.Pet_breed_val = ""
@@ -27,6 +40,10 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         self.col_app_pet.register(nibName, forCellWithReuseIdentifier: "cell")
         self.col_app_pet.delegate = self
         self.col_app_pet.dataSource = self
+        self.view_appointment.layer.cornerRadius = self.view_appointment.frame.height / 2
+        self.view_appointment.isHidden = true
+        self.View_shadow.isHidden = true
+        self.view_popup.isHidden = true
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -47,6 +64,7 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
             if petimg == "" {
                 cell.image_data.image = UIImage(named: imagelink.sample)
             }else{
+                cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_data.image = UIImage(named: imagelink.sample)
@@ -58,9 +76,24 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         }else{
             cell.image_data.image = UIImage(named: imagelink.sample)
         }
-        
+        if ischeck {
+            if pindex == indexPath.row {
+                cell.img_ischeckbox.isHidden = false
+                cell.view_border.layer.borderWidth = 2.0
+                cell.view_border.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen).cgColor
+            }else{
+                cell.img_ischeckbox.isHidden = true
+                cell.view_border.layer.borderWidth = 0.0
+            }
+           
+        }else{
+            cell.img_ischeckbox.isHidden = true
+            cell.view_border.layer.borderWidth = 0.0
+        }
         cell.image_data.view_cornor()
         cell.view_main.view_cornor()
+        cell.view_border.view_cornor()
+       // cell.img_ischeckbox.isHidden = true
         return cell
     }
     
@@ -69,8 +102,14 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[indexPath.row].pet_img
         Servicefile.shared.pet_type_val = Servicefile.shared.pet_petlist[indexPath.row].pet_type
         Servicefile.shared.Pet_breed_val = Servicefile.shared.pet_petlist[indexPath.row].pet_breed
-        let vc = UIStoryboard.sphealthissueViewController()
-        self.present(vc, animated: true, completion: nil)
+        Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[indexPath.row].id
+        ischeck = true
+        pindex = indexPath.row
+        self.col_app_pet.reloadData()
+        self.view_appointment.isHidden = false
+        // let vc = UIStoryboard.sphealthissueViewController()
+//        let vc = UIStoryboard.pet_sp_CreateApp_ViewController()
+//        self.present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -78,11 +117,47 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_addpetdetails(_ sender: Any) {
+        Servicefile.shared.pet_index = 0
+        Servicefile.shared.pet_status = "Add"
+        Servicefile.shared.pet_save_for = "s"
+        let vc = UIStoryboard.petloverEditandAddViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_afterappBooked(_ sender: Any) {
+        let vc = UIStoryboard.Pet_applist_ViewController()
+           self.present(vc, animated: true, completion: nil)
+       }
+    
+    
+    @IBAction func action_book_appoinment(_ sender: Any) {
+        
+        //
+        
+        Servicefile.shared.pet_apoint_problem_info = ""
+        Servicefile.shared.pet_apoint_doc_feedback = ""
+        Servicefile.shared.pet_apoint_doc_rate = 0
+        Servicefile.shared.pet_apoint_user_feedback = ""
+        Servicefile.shared.pet_apoint_user_rate = 0.0
+         let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
+                   let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
+                   Servicefile.shared.pet_apoint_display_date = stringformat
+        Servicefile.shared.pet_apoint_server_date_time = ""
+        Servicefile.shared.pet_apoint_payment_id = ""
+        Servicefile.shared.pet_apoint_payment_method = "Online"
+        Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
+        Servicefile.shared.pet_apoint_amount = Servicefile.shared.service_id_amount
+        self.showPaymentForm()
+        //
+        
         
     }
     
+    
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard.pet_sp_calender_ViewController()
+           self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -226,6 +301,136 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
               }
           }
     
+    
+    func showPaymentForm(){
+           if Servicefile.shared.pet_apoint_amount == 0 {
+               Servicefile.shared.pet_apoint_amount = 0
+           }
+        let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
+           print("value changed",data)
+           self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+                   let options: [String:Any] = [
+                       "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
+                               "currency": "INR",//We support more that 92 international currencies.
+                               "description": "",
+                               "image": "http://52.25.163.13:3000/api/uploads/template.png",
+                               "name": Servicefile.shared.first_name,
+                               "prefill": [
+                                   "contact": Servicefile.shared.user_phone,
+                                   "email": Servicefile.shared.user_email
+                               ],
+                               "theme": [
+                                "color": Servicefile.shared.appgreen
+                               ]
+                           ]
 
+                   if let rzp = self.razorpay {
+                             // rzp.open(options)
+                       rzp.open(options,displayController:self)
+                          } else {
+                              print("Unable to initialize")
+                          }
+           }
+           
+           func onPaymentError(_ code: Int32, description str: String) {
+                   print("Payment failed with code")
+            self.callpaymentfail()
+              }
+              
+              func onPaymentSuccess(_ payment_id: String) {
+                    print("Payment Success payment")
+                Servicefile.shared.pet_apoint_payment_id = payment_id
+                 self.callsubmit()
+              }
+           
+           func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
+                  print("error: ", code)
+                 
+              }
+              
+              func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
+                  print("success: ", payment_id)
+                  
+              }
+    
+    func callsubmit(){
+              self.startAnimatingActivityIndicator()
+          if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_createappointm, method: .post, parameters:
+             ["sp_id" : Servicefile.shared.sp_user_id,
+              "booking_date" :  Servicefile.shared.pet_apoint_booking_date,
+              "booking_time" : Servicefile.shared.pet_apoint_booking_time,
+              "booking_date_time" : Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time,
+              "user_id" : Servicefile.shared.userid,
+              "pet_id" : Servicefile.shared.pet_apoint_pet_id,
+              "additional_info" : Servicefile.shared.pet_apoint_problem_info,
+              "sp_attched" : [],
+              "sp_feedback" : "",
+              "sp_rate" : "",
+              "user_feedback" : "",
+              "user_rate" : "0",
+              "display_date" : Servicefile.shared.pet_apoint_display_date,
+              "server_date_time" : "",
+              "payment_id" : Servicefile.shared.pet_apoint_payment_id,
+              "payment_method" : "Online",
+              "service_name" : Servicefile.shared.service_id_title,
+              "service_amount" : Servicefile.shared.service_id_amount,
+              "service_time" : Servicefile.shared.service_id_time,
+              "completed_at" : "",
+              "missed_at" : "",
+              "mobile_type" : "IOS"], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                  switch (response.result) {
+                                                  case .success:
+                                                        let res = response.value as! NSDictionary
+                                                        print("success data",res)
+                                                        let Code  = res["Code"] as! Int
+                                                        if Code == 200 {
+                                                           self.View_shadow.isHidden = false
+                                                           self.view_popup.isHidden = false
+                                                           self.stopAnimatingActivityIndicator()
+                                                        }else{
+                                                          self.stopAnimatingActivityIndicator()
+                                                          print("status code service denied")
+                                                            let Message = res["Message"] as? String ?? ""
+                                                           self.alert(Message: Message)
+                                                        }
+                                                      break
+                                                  case .failure(let Error):
+                                                      self.stopAnimatingActivityIndicator()
+                                                      print("Can't Connect to Server / TimeOut",Error)
+                                                      break
+                                                  }
+                                     }
+              }else{
+                  self.stopAnimatingActivityIndicator()
+                  self.alert(Message: "No Intenet Please check and try again ")
+              }
+          }
+    
+    func callpaymentfail(){
+           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
+               ["appointment_UID": "",
+                "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+                "sp_id":Servicefile.shared.sp_user_id,
+                "status":"Payment Failed",
+                "user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                   switch (response.result) {
+                   case .success:
+                       let res = response.value as! NSDictionary
+                       print("success data",res)
+                       let Code  = res["Code"] as! Int
+                       if Code == 200 {
+                       }else{
+                       }
+                       break
+                   case .failure(_):
+                       self.stopAnimatingActivityIndicator()
+                       break
+                   }
+               }
+           }else{
+               self.stopAnimatingActivityIndicator()
+               self.alert(Message: "No Intenet Please check and try again ")
+           }
+       }
 
 }

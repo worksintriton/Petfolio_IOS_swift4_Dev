@@ -33,6 +33,9 @@ class dealupdateViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.textfield_product_threshold.delegate = self
         self.textview_description.delegate = self
         
+        self.textfield_product_title.autocapitalizationType = .sentences
+        self.textview_description.autocapitalizationType = .sentences
+        
         self.textview_description.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         let data = Servicefile.shared.manageproductDic[Servicefile.shared.selectedindex] as! NSDictionary
         let product_desc = data["product_desc"] as? String ?? ""

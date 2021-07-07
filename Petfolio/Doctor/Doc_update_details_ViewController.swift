@@ -12,6 +12,7 @@ import Toucan
 import MobileCoreServices
 import CoreLocation
 import AASignatureView
+import SDWebImage
 
 class Doc_update_details_ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
     
@@ -179,6 +180,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.textfield_pethandle.delegate = self
         self.textfield_ser_amt.delegate = self
         
+        self.textview_clinicaddress.autocapitalizationType = .sentences
+        self.textfield_clinicname.autocapitalizationType = .sentences
+        self.textfield_education.autocapitalizationType = .sentences
+        self.textfield_exp_company.autocapitalizationType = .sentences
+            
+        
         self.datepicker_date.datePickerMode = .date
         self.datepicker_expdate.datePickerMode = .date
         if #available(iOS 13.4, *) {
@@ -202,6 +209,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     }
     
     func set_signa_image(strimage: String){
+        self.image_signature.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.image_signature.sd_setImage(with: Servicefile.shared.StrToURL(url: strimage)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.image_signature.image = UIImage(named: imagelink.sample)
@@ -268,7 +276,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }
     
     @IBAction func action_change_location(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        let vc = UIStoryboard.Doc_new_setlocation_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -704,7 +712,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     
     @IBAction func action_backtologin(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -825,6 +833,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let imgdat = Servicefile.shared.govdicarray[indexPath.row] as! NSDictionary
             let strdat = imgdat["govt_id_pic"] as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -854,6 +863,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let imgdat = Servicefile.shared.photodicarray[indexPath.row] as! NSDictionary
             let strdat = imgdat["photo_id_pic"] as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -887,6 +897,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let strdat = imgdat["certificate_pic"] as? String ?? Servicefile.sample_img
             print("details",self.spilit_string_data(array_string: strdat))
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -907,6 +918,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
             let strdat = imgdat["clinic_pic"] as? String ?? Servicefile.sample_img
+            cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: "pdf")
@@ -1053,7 +1065,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
 //                        }
 //            //
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -1071,7 +1083,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -1091,7 +1103,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-                self.upload(imagedata: pickedImg)
+                let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+                self.upload(imagedata: convertimg!)
                 dismiss(animated: true, completion: nil)
             }
     }
@@ -1255,6 +1268,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func setclinicimag(){
         if self.clinicpic != "" {
+            self.Img_clinic.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             self.Img_clinic.sd_setImage(with: Servicefile.shared.StrToURL(url: self.clinicpic)) { (image, error, cache, urls) in
                 if (error != nil) {
                     self.Img_clinic.image = UIImage(named: imagelink.sample)

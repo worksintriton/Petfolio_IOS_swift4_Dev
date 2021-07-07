@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
@@ -24,6 +25,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
         self.intial_setup_action()
         self.label_noproduct.isHidden = true
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.view_search.view_cornor()
         Servicefile.shared.sp_dash_Today_Special.removeAll()
         self.coll_prodlist.delegate = self
@@ -86,7 +88,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -135,6 +137,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_search[indexPath.row].product_img) {
+                cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_search[indexPath.row].product_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_product.image = UIImage(named: imagelink.sample)
@@ -155,7 +158,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Servicefile.shared.product_id = Servicefile.shared.sp_dash_search[indexPath.row]._id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as!  productdetailsViewController
+        let vc = UIStoryboard.productdetailsViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

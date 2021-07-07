@@ -21,6 +21,8 @@ class Doc_pres_textfieldactionTableViewCell: UITableViewCell, UITextFieldDelegat
         super.awakeFromNib()
         // Initialization code
         self.textfield_medi.delegate = self
+        
+        self.textfield_medi.autocapitalizationType = .sentences
         self.textfield_noofdays.delegate = self
         self.conspdays.delegate = self
         self.textfield_medi.addTarget(self, action: #selector(textFieldmediTyping), for: .editingChanged)

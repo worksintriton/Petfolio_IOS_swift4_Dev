@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import SDWebImage
 
 class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -52,6 +53,7 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
             cell.image_fav.image = UIImage(named: imagelink.favfalse)
         }
         if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
+            cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
                           if (error != nil) {
                               cell.image_product.image = UIImage(named: imagelink.sample)

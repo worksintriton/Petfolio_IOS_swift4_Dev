@@ -77,6 +77,7 @@ class prescriptionViewController: UIViewController {
                                                         self.label_alergies.text =  Data["allergies"] as? String ?? ""
                                                         self.label_diagnosis.text = Data["diagnosis"] as? String ?? ""
                                                         let signature = Data["digital_sign"] as? String ?? ""
+                                                        self.img_signature.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                                         self.img_signature.sd_setImage(with: Servicefile.shared.StrToURL(url:  signature)) { (image, error, cache, urls) in
                                                             if (error != nil) {
                                                                 self.img_signature.image = UIImage(named: imagelink.sample)

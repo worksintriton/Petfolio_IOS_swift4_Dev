@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                         Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
                         
                         print("userid",Servicefile.shared.userid)
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginotpViewController") as! loginotpViewController
+                        let vc = UIStoryboard.loginotpViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

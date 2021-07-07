@@ -68,8 +68,8 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     // header action
     // footer action
         self.view_footer.setup(b1: false, b2: true, b3: false)
-        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     // footer action
     }
@@ -107,6 +107,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -135,6 +136,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -159,6 +161,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -182,19 +185,13 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         }
     }
     
-    
-    
-    
-    
     @objc func orderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_myorder_detailspage_ViewController") as!  doc_myorder_detailspage_ViewController
+        let vc = UIStoryboard.doc_myorder_detailspage_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
-    
-   
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 162

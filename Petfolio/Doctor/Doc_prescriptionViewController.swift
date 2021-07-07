@@ -88,7 +88,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.Doc_pre_descrip = self.textview_descrip.text!
             Servicefile.shared.doc_pres_diagno = self.doctor_diagnosis.text!
             Servicefile.shared.doc_pres_sub_diagno = self.doctor_sub_diagnosis.text!
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_preview_prescription_ViewController") as! doc_preview_prescription_ViewController
+            let vc = UIStoryboard.doc_preview_prescription_ViewController()
             self.present(vc, animated: true, completion: nil)
             
             
@@ -97,7 +97,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func action_hidepopup(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

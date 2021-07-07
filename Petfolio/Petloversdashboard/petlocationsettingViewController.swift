@@ -40,6 +40,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
         self.view_searchopt.view_cornor()
         self.GMS_mapView.delegate = self
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.tbl_searchlist.delegate = self
         self.tbl_searchlist.dataSource = self
         self.tbl_searchlist.isHidden = true
@@ -97,7 +98,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -166,7 +167,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     @IBAction func action_setlocation(_ sender: Any) {
         if Servicefile.shared.long != 0.0 {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petsavelocationViewController") as! petsavelocationViewController
+            let vc = UIStoryboard.petsavelocationViewController()
             self.present(vc, animated: true, completion: nil)
         }else{
             self.alert(Message: "please select the location")

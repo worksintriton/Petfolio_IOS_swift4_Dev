@@ -22,7 +22,6 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var tbl_searchlist: UITableView!
     
-    
     let locationManager = CLLocationManager()
     var latitude : Double!
     var longitude : Double!
@@ -39,6 +38,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
         self.view_searchopt.view_cornor()
         self.GMS_mapView.delegate = self
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.tbl_searchlist.delegate = self
         self.tbl_searchlist.dataSource = self
         self.tbl_searchlist.isHidden = true
@@ -97,7 +97,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

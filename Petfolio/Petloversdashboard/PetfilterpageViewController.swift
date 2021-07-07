@@ -179,6 +179,10 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
    
     
     func callapply(){
+        print("user_id" , Servicefile.shared.userid,
+              "specialization", self.selspec,
+              "nearby", self.selnearby,
+              "Review_count" , self.selrate)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.filter, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid,

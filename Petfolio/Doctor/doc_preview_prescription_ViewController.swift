@@ -37,7 +37,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.diagno.removeAll()
             self.diafno_sub.removeAll()
-            
+            self.tbl_medilist.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "pres")
             self.tbl_medilist.delegate = self
             self.tbl_medilist.dataSource = self
             self.view_shadow.isHidden = true
@@ -78,7 +78,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         }
         
         @IBAction func action_hidepopup(_ sender: Any) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+            let vc = UIStoryboard.DocdashboardViewController()
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -129,6 +129,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             let mv = cons["morning"] as? Bool ?? false
             let av = cons["evening"] as? Bool ?? false
             let nv = cons["night"] as? Bool ?? false
+            cell.selectionStyle = .none
             if mv != true {
                 cell.img_m.image = UIImage(named: imagelink.checkbox)
             }else{

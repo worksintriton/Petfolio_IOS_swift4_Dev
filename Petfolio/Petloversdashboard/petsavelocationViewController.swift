@@ -63,6 +63,8 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         self.textfield_location.delegate = self
         self.textfield_pickname.delegate = self
         
+        self.textfield_pickname.autocapitalizationType = .sentences
+        
         self.textfield_pincode.isUserInteractionEnabled = false
         self.textfield_cityname.isUserInteractionEnabled = false
         self.textfield_location.isUserInteractionEnabled = false
@@ -124,12 +126,12 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     }
     
     @IBAction func action_back(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+        let vc = UIStoryboard.petManageaddressViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -148,7 +150,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     @IBAction func action_changeloca(_ sender: Any) {
         Servicefile.shared.selectedpickname = self.textfield_pickname.text!
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petlocationsettingViewController") as! petlocationsettingViewController
+        let vc = UIStoryboard.petlocationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -272,7 +274,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         _ = res["Data"] as! NSDictionary
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+                        let vc = UIStoryboard.petManageaddressViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -316,7 +318,7 @@ class petsavelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         _ = res["Data"] as! NSDictionary
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+                        let vc = UIStoryboard.petManageaddressViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

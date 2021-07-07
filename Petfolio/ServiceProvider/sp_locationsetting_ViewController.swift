@@ -41,6 +41,8 @@ class sp_locationsetting_ViewController:  UIViewController, GMSMapViewDelegate, 
             self.view_searchopt.view_cornor()
             self.GMS_mapView.delegate = self
             self.textfield_search.delegate = self
+            
+            self.textfield_search.autocapitalizationType = .sentences
             self.tbl_searchlist.delegate = self
             self.tbl_searchlist.dataSource = self
             self.tbl_searchlist.isHidden = true
@@ -146,7 +148,7 @@ class sp_locationsetting_ViewController:  UIViewController, GMSMapViewDelegate, 
         
         @IBAction func action_setlocation(_ sender: Any) {
             if Servicefile.shared.long != 0.0 {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_savelocationViewController") as! sp_savelocationViewController
+                let vc = UIStoryboard.sp_savelocationViewController()
                 self.present(vc, animated: true, completion: nil)
             }else{
                 self.alert(Message: "please select the location")

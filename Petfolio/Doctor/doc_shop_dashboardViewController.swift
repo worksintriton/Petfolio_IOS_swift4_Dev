@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectItmDelegate, UITextFieldDelegate {
     
@@ -25,6 +26,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.inital_setup()
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.view_allcategory.view_cornor()
         self.view_allcategory.isHidden = true
         self.view_search.view_cornor()
@@ -42,6 +44,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         }else{
             img = Servicefile.sample_img
         }
+        //self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.view_header.image_profile.image = UIImage(named: imagelink.sample)
@@ -57,21 +60,22 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         self.view_header.btn_button2.addTarget(self, action: #selector(self.doccartpage), for: .touchUpInside)
         
         self.view_footer.setup(b1: false, b2: true, b3: false)
-        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
-        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
         self.textfield_search.text = ""
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_shop_search_ViewController") as! doc_shop_search_ViewController
+        let vc = UIStoryboard.doc_shop_search_ViewController()
         self.present(vc, animated: true, completion: nil)
         return true
     }
     
     @IBAction func action_cartpage(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        let vc = UIStoryboard.vendorcartpageViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -83,14 +87,14 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
         self.textfield_search.text = ""
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_shop_search_ViewController") as! doc_shop_search_ViewController
+        let vc = UIStoryboard.doc_shop_search_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
   
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        let vc = UIStoryboard.Pet_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -152,7 +156,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
     
     func buttonPressed(passdata: String) {
            print("pass data from protocal",passdata)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_productdetails_ViewController") as! Doc_productdetails_ViewController
+        let vc = UIStoryboard.Doc_productdetails_ViewController()
                       self.present(vc, animated: true, completion: nil)
         
        
@@ -161,8 +165,8 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
     @objc func action_todaydeal_seemore(sender: UIButton){
            let tag = sender.tag
         Servicefile.shared.today_deals_status = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_todaysdealseemoreViewController") as! doc_todaysdealseemoreViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.doc_todaysdealseemoreViewController()
+        self.present(vc, animated: true, completion: nil)
         
        }
        
@@ -170,7 +174,7 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
            let tag = sender.tag
         Servicefile.shared.today_deals_status = false
         Servicefile.shared.vendor_catid = Servicefile.shared.sp_dash_Product_details[tag].cat_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_ProductdealsViewController") as! doc_ProductdealsViewController
+        let vc = UIStoryboard.doc_ProductdealsViewController()
                self.present(vc, animated: true, completion: nil)
        }
     

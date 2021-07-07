@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class vendor_profile_view_ViewController: UIViewController , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -76,6 +77,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
         if Servicefile.shared.userimage == "" {
                    self.imag_user.image = UIImage(named: imagelink.sample)
                }else{
+                self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                    self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                        if (error != nil) {
                            self.imag_user.image = UIImage(named: imagelink.sample)
@@ -88,8 +90,8 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     }
     
     @IBAction func action_upload_image(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileimageuploadViewController") as! ProfileimageuploadViewController
-                      self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.ProfileimageuploadViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
@@ -98,8 +100,8 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     }
          
          @IBAction func action_notifi(_ sender: Any) {
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-                    self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.pet_notification_ViewController()
+            self.present(vc, animated: true, completion: nil)
          }
     
     
@@ -116,6 +118,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
            let img = Servicefile.shared.vendor_gallary_img[indexPath.row] as! NSDictionary
            let imgval = img["bussiness_gallery"]  as? String ?? Servicefile.sample_img
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
                                   if (error != nil) {
                                       cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -134,13 +137,13 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_profile_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        let vc = UIStoryboard.profile_edit_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

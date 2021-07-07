@@ -9,6 +9,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class sp_myordertrack_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
         
@@ -343,6 +344,7 @@ class sp_myordertrack_ViewController: UIViewController, UITableViewDelegate, UIT
     //                        self.vendor_complete_info = Data["vendor_complete_info"] as? String ?? ""
                             let prodcut_track_details = Data["prodcut_track_details"] as! NSArray
                             self.product_title.text = self.product_name
+                            self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                             self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_product.image = UIImage(named: imagelink.sample)

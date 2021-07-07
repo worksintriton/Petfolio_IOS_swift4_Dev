@@ -106,6 +106,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
                 
                 cell.selectionStyle = .none
+                cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_order.image = UIImage(named: imagelink.sample)
@@ -134,6 +135,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
                 
                 cell.selectionStyle = .none
+                cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_order.image = UIImage(named: imagelink.sample)
@@ -158,6 +160,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
                 
                 cell.selectionStyle = .none
+                cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_order.image = UIImage(named: imagelink.sample)

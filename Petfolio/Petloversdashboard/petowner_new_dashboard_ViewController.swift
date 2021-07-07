@@ -4,7 +4,6 @@
 //
 //  Created by Admin on 19/04/21.
 //  Copyright © 2021 sriram ramachandran. All rights reserved.
-//
 
 import UIKit
 import Alamofire
@@ -103,7 +102,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
-           
         }else{
             let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -117,22 +115,27 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     // header action
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
-        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
-        self.view_header.btn_button2.addTarget(self, action: #selector(action_notifi), for: .touchUpInside)
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.view_header.image_profile.image = image
-            }
-        }
-        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
+        self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
+        self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+//        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+//        self.view_header.btn_button2.addTarget(self, action: #selector(action_notifi), for: .touchUpInside)
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+        //self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.view_header.image_profile.image = image
+//            }
+//        }
+//        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action
     // footer action
@@ -196,7 +199,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         Servicefile.shared.locaaccess = "Deny"
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+        let vc = UIStoryboard.locationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -204,7 +207,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         Servicefile.shared.locaaccess = "Allow"
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+        let vc = UIStoryboard.locationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -223,10 +226,10 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                if self.pagcount == Servicefile.shared.petbanner.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                self.col_banner.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                self.col_banner.scrollToItem(at: indexPath, at: .left, animated: false)
                }
                self.pagecontrol.currentPage = self.pagcount
            }
@@ -268,6 +271,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if self.col_banner == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dash_banner_CollectionViewCell
+            cell.image_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 print(error)
                 if (error != nil) {
@@ -282,6 +286,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.col_service == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_Service_CollectionViewCell
             cell.view_service.backgroundColor = .clear
+            cell.image_service.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_service.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_service.image = UIImage(named: imagelink.sample)
@@ -297,6 +302,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else if self.col_shop_banner == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_dashboard_shop_banner_CollectionViewCell
+            cell.image_banner.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petshopbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_banner.image = UIImage(named: imagelink.sample)
@@ -310,6 +316,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else if self.col_vet == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
+            cell.image_vet.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_vet.image = UIImage(named: imagelink.sample)
@@ -340,6 +347,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+            cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_product.image = UIImage(named: imagelink.sample)
@@ -388,19 +396,19 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.col_banner == collectionView {
             print("data in")
-        }else if self.col_vet == collectionView {
+        } else if self.col_vet == collectionView {
             Servicefile.shared.selectedindex = indexPath.row
             let vc = UIStoryboard.petlov_DocselectViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.col_service == collectionView {
+        } else if self.col_service == collectionView {
             Servicefile.shared.service_id = Servicefile.shared.petser[indexPath.row]._id
             Servicefile.shared.service_index = indexPath.row
             let vc = UIStoryboard.pet_servicelist_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else {
+        } else {
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
-                          self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.productdetailsViewController()
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
@@ -476,37 +484,37 @@ extension UIViewController {
     }
     
     @objc func sidemenu(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        let vc = UIStoryboard.Pet_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func manageaddress(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+        let vc = UIStoryboard.petManageaddressViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func profile(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func notification(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_cart(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        let vc = UIStoryboard.vendorcartpageViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_sos(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_notifi(sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -522,7 +530,6 @@ extension UIViewController {
 extension petloverDashboardViewController {
     
     func call_dashboard_api_details(){
-        
         Servicefile.shared.pet_dash_lati = self.latitude
         Servicefile.shared.pet_dash_long = self.longitude
         Servicefile.shared.pet_dash_address = self.locationaddress
@@ -737,5 +744,6 @@ extension petloverDashboardViewController {
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
+        self.startAnimatingActivityIndicator()
     }
 }

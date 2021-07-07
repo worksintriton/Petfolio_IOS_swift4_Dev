@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class Pet_app_details_ViewController: UIViewController {
     
@@ -202,12 +203,12 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -427,7 +428,7 @@ class Pet_app_details_ViewController: UIViewController {
                             if petimage.count > 0 {
                                 let petdic = petimage[0] as! NSDictionary
                                 let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
-                                
+                                self.image_pet_img.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                 self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_pet_img.image = UIImage(named: imagelink.sample)
@@ -458,6 +459,7 @@ class Pet_app_details_ViewController: UIViewController {
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
+                                self.image_holder_name.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                 self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_holder_name.image = UIImage(named: imagelink.sample)
@@ -498,7 +500,7 @@ class Pet_app_details_ViewController: UIViewController {
                             if petimage.count > 0 {
                                 let petdic = petimage[0] as! NSDictionary
                                 let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
-                                
+                                self.image_pet_img.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                 self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_pet_img.image = UIImage(named: imagelink.sample)
@@ -525,6 +527,7 @@ class Pet_app_details_ViewController: UIViewController {
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
+                                self.image_holder_name.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                 self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_holder_name.image = UIImage(named: imagelink.sample)

@@ -65,11 +65,12 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     var petimage = ""
     var timer = Timer()
     var pagcount = 0
-    
+    var sam_img = UIImage()
     var razorpay: RazorpayCheckout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.petlistimg = [Any]()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.coll_imag.delegate = self
@@ -123,6 +124,9 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textfield_selectpettype.delegate = self
         self.textview_descrip.delegate = self
         self.textview_descrip.text = "Add comment here.."
+        
+        self.textfield_petname.autocapitalizationType = .sentences
+        self.textview_descrip.autocapitalizationType = .sentences
         self.textview_descrip.textColor == UIColor.lightGray
         self.petimage = Servicefile.shared.sampleimag
         self.setuploadimg()
@@ -164,10 +168,10 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                   if self.pagcount == Servicefile.shared.petlistimg.count {
                       self.pagcount = 0
                       let indexPath = IndexPath(row: pagcount, section: 0)
-                      self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                      self.coll_imag.scrollToItem(at: indexPath, at: .right, animated: false)
                   }else{
                       let indexPath = IndexPath(row: pagcount, section: 0)
-                      self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: true)
+                      self.coll_imag.scrollToItem(at: indexPath, at: .left, animated: false)
                   }
                  
               }
@@ -182,6 +186,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath)  as! petbannerCollectionViewCell
 //        let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
 //        let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        // cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
 //        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
 //            if (error != nil) {
 //                cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -196,6 +201,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagecell", for: indexPath)  as! imgidCollectionViewCell
         let petimg = Servicefile.shared.petlistimg[indexPath.row] as! NSDictionary
         let imgstr = petimg["pet_img"] as? String ?? Servicefile.sample_img
+        cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: imgstr)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.Img_id.image = UIImage(named: imagelink.sample)
@@ -204,11 +210,13 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }
         }
         cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        if self.textfield_selectpettype.text! == "" {
+//        if self.textfield_selectpettype.text! == "" {
             cell.view_close.isHidden = false
-        }else{
-            cell.view_close.isHidden = true
-        }
+//        }else{
+//            cell.view_close.isHidden = true
+//        }
+        cell.Img_id.layer.borderWidth = 0.5
+        cell.Img_id.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen).cgColor
         cell.btn_close.tag = indexPath.row
         cell.btn_close.addTarget(self, action: #selector(action_close), for: .touchUpInside)
         return cell
@@ -306,7 +314,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
      @IBAction func action_Home(_ sender: Any) {
          Servicefile.shared.pet_apoint_visit_type = "Home"
          self.checkcommtype()
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_app_select_address_ViewController") as! pet_app_select_address_ViewController
+        let vc = UIStoryboard.pet_app_select_address_ViewController()
         self.present(vc, animated: true, completion: nil)
         
      }
@@ -319,7 +327,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
      
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -363,6 +371,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
 //        if self.petimage == "" {
 //            self.image_petcurrent.image = UIImage(named: imagelink.sample)
 //        }else{
+        //  self.image_petcurrent.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
 //            self.image_petcurrent.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
 //                if (error != nil) {
 //                    self.image_petcurrent.image = UIImage(named: imagelink.sample)
@@ -520,7 +529,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -535,12 +544,14 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: pickedImg)
+            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+            self.upload(imagedata: convertimg!)
         }
         dismiss(animated: true, completion: nil)
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -844,9 +855,9 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             let options: [String:Any] = [
                 "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                 "currency": "INR",//We support more that 92 international currencies.
-                "description": "some some",
+                "description": "",
                 "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                "name": "sriram",
+                "name": Servicefile.shared.first_name,
                 "prefill": [
                     "contact": Servicefile.shared.user_phone,
                     "email": Servicefile.shared.user_email

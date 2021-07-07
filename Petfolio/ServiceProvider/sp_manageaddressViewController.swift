@@ -138,7 +138,7 @@ class sp_manageaddressViewController: UIViewController, UITableViewDelegate, UIT
                 Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
                  Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
                  Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_savelocationViewController") as! sp_savelocationViewController
+                let vc = UIStoryboard.sp_savelocationViewController()
                 self.present(vc, animated: true, completion: nil)
             }else{
                 if Servicefile.shared.petuserlocaadd[indextag].default_status != false {
@@ -196,7 +196,7 @@ class sp_manageaddressViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.long = 0.0
             Servicefile.shared.lati = 0.0
             Servicefile.shared.locaaccess = "Add"
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_locationsetting_ViewController") as! sp_locationsetting_ViewController
+            let vc = UIStoryboard.sp_locationsetting_ViewController()
             self.present(vc, animated: true, completion: nil)
         }
         

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Cosmos
 import GoogleMaps
+import SDWebImage
 
 class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GMSMapViewDelegate  {
     
@@ -122,10 +123,10 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                if self.pagcount == self.clinicpic.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: false)
                }
               
            }
@@ -133,14 +134,14 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
    
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_notifica(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.pet_notification_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -167,15 +168,17 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
        }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
-        //        Servicefile.shared.tabbar_selectedindex = 0
-                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
-        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-        self.present(tapbar, animated: true, completion: nil)
+//        //        Servicefile.shared.tabbar_selectedindex = 0
+//                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+//        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+//        self.present(tapbar, animated: true, completion: nil)
+            let vc = UIStoryboard.Pet_searchlist_DRViewController()
+            self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_fav_unfav(_ sender: Any) {
@@ -212,6 +215,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
+            cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:self.clinicpic[indexPath.row])) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_banner.image = UIImage(named: imagelink.sample)

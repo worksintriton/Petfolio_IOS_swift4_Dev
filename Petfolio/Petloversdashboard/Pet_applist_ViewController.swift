@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import JitsiMeetSDK
 import WebKit
+import SDWebImage
 
 class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JitsiMeetViewDelegate {
     
@@ -48,6 +49,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.label_nodata.text = "No new appointments"
         // Do any additional setup after loading the view.
     }
+    
+    
     
     func intial_setup_action(){
     // header action
@@ -107,7 +110,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -244,6 +247,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{
+            cell.img_petimg.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_applist_do_sp[indexPath.row].photo)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_petimg.image = UIImage(named: imagelink.sample)
@@ -268,12 +272,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -404,7 +408,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callnew(){
-        
+        Servicefile.shared.pet_applist_do_sp.removeAll()
+        self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.plove_getlist_newapp, method: .post, parameters:
@@ -415,7 +420,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.pet_applist_do_sp.removeAll()
+                        
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
@@ -526,6 +531,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callcom(){
+        Servicefile.shared.pet_applist_do_sp.removeAll()
+        self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.plove_getlist_comapp, method: .post, parameters:
@@ -536,7 +543,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.pet_applist_do_sp.removeAll()
+                       
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
@@ -595,6 +602,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func callmiss(){
+        Servicefile.shared.pet_applist_do_sp.removeAll()
+        self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.plove_getlist_missapp, method: .post, parameters:
@@ -605,7 +614,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.pet_applist_do_sp.removeAll()
+                       
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count {
                             let dataitm = Data[itm] as! NSDictionary

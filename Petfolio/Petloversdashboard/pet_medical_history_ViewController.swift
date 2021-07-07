@@ -69,6 +69,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if Servicefile.shared.pet_medi_detail[indexPath.row].isselct == "0" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! select_medi_TableViewCell
+            cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_medi_detail[indexPath.row].vet_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_data.image = UIImage(named: imagelink.sample)
@@ -83,6 +84,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! unselect_medi_TableViewCell
+            cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_medi_detail[indexPath.row].vet_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_data.image = UIImage(named: imagelink.sample)
@@ -142,6 +144,7 @@ class pet_medical_history_ViewController: UIViewController, UITableViewDelegate,
             let pet_img = Servicefile.shared.pet_petlist[indexPath.row].pet_img.last as! NSDictionary
             let pet_im = pet_img["pet_img"] as? String ?? ""
             if  pet_im != "" {
+                cell.image_pet.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_pet.sd_setImage(with: Servicefile.shared.StrToURL(url: pet_im)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_pet.image = UIImage(named: imagelink.sample)

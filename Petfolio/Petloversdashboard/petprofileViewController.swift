@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 
 class petprofileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -60,12 +61,12 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -86,6 +87,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         if Servicefile.shared.userimage == "" {
             self.imag_user.image = UIImage(named: imagelink.sample)
         }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
                 if (error != nil) {
                     self.imag_user.image = UIImage(named: imagelink.sample)
@@ -121,6 +123,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                 if petimg == "" {
                     cell.imag_profile.image = UIImage(named: imagelink.sample)
                 }else{
+                    cell.imag_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                     cell.imag_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.imag_profile.image = UIImage(named: imagelink.sample)
@@ -142,12 +145,12 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.view_main.view_cornor()
             cell.btn_menu.tag = indexPath.row
             cell.btn_menu.addTarget(self, action: #selector(action_clickmenu), for: .touchUpInside)
-            cell.btn_edit.tag = indexPath.row
-            cell.btn_edit.addTarget(self, action: #selector(action_clickedit), for: .touchUpInside)
+//            cell.btn_edit.tag = indexPath.row
+//            cell.btn_edit.addTarget(self, action: #selector(action_clickedit), for: .touchUpInside)
             cell.btn_delete.tag = indexPath.row
             cell.btn_delete.addTarget(self, action: #selector(action_clickdelete), for: .touchUpInside)
-            cell.btn_healthrecord.tag = indexPath.row
-            cell.btn_healthrecord.addTarget(self, action: #selector(action_healthrecord), for: .touchUpInside)
+//            cell.btn_healthrecord.tag = indexPath.row
+//            cell.btn_healthrecord.addTarget(self, action: #selector(action_healthrecord), for: .touchUpInside)
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellimg", for: indexPath) as! petaddimgCollectionViewCell
@@ -159,8 +162,10 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          if indexPath.section == 1 {
+            Servicefile.shared.pet_index = 0
             Servicefile.shared.pet_status = "Add"
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverEditandAddViewController") as! petloverEditandAddViewController
+            Servicefile.shared.pet_save_for = "p"
+            let vc = UIStoryboard.petloverEditandAddViewController()
             self.present(vc, animated: true, completion: nil)
         }
     }
@@ -177,7 +182,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
            let tag = sender.tag
         Servicefile.shared.pet_status = "edit"
         Servicefile.shared.pet_index = tag
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petloverEditandAddViewController") as! petloverEditandAddViewController
+        let vc = UIStoryboard.petloverEditandAddViewController()
         self.present(vc, animated: true, completion: nil)
        }
     
@@ -220,7 +225,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func action_editprofile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        let vc = UIStoryboard.profile_edit_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -231,12 +236,12 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func action_manageaddress(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petManageaddressViewController") as! petManageaddressViewController
+        let vc = UIStoryboard.petManageaddressViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_upload_pic(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileimageuploadViewController") as! ProfileimageuploadViewController
+        let vc = UIStoryboard.ProfileimageuploadViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

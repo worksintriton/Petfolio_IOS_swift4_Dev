@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import JJFloatingActionButton
+import SDWebImage
 
 class vendor_manage_product_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    @IBOutlet weak var image_floatimg: UIImageView!
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var tbl_manage_product: UITableView!
     @IBOutlet weak var textfield_search: UITextField!
@@ -100,6 +102,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.orgiselect = self.isselect
         self.orgiDrop = self.isDrop
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.tbl_manage_product.delegate = self
         self.tbl_manage_product.dataSource = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
@@ -141,8 +144,8 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         // header action
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.label_Fprocess_two.text = "Manage Products"
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
-       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
@@ -364,7 +367,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             let pet_breed = data["pet_breed"] as! NSArray
             let pet_prod_img = data["products_image"] as! NSArray
             let pet_type = data["pet_type"] as! NSArray
-            
+            cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Arraytoimage(arr: pet_prod_img))) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_product.image = UIImage(named: imagelink.sample)
@@ -422,6 +425,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             let data = Servicefile.shared.manageproductDic[indexPath.row] as! NSDictionary
             let pet_prod_img = data["products_image"] as! NSArray
             cell.selectionStyle = .none
+            cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Arraytoimage(arr: pet_prod_img))) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_product.image = UIImage(named: imagelink.sample)

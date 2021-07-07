@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -29,10 +30,13 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var view_care: UIView!
     @IBOutlet weak var col_ban: UICollectionView!
+    var banner = [Any]()
     var pagcount = 0
-    var timer = Timer()
+    //var timer = Timer()
+    var timer : Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.banner.removeAll()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.moredocd.removeAll()
         self.view_top_doc.layer.cornerRadius = 20.0
@@ -48,11 +52,20 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.label_comm_type.text = "Offline Doctors"
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
+        
+        self.textfield_search.autocapitalizationType = .sentences
         self.view_search.view_cornor()
         self.intial_setup_action()
         self.view_bac.layer.cornerRadius = self.view_bac.frame.height / 2
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.timer!.invalidate()
+        self.timer = nil
+    }
+    
+    
     
     @IBAction func action_bac(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 2
@@ -62,20 +75,22 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func startTimer() {
-        self.timer.invalidate()
+//        self.timer!.invalidate()
+        self.timer = nil
         timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
     }
     
     @objc func scrollAutomatically(_ timer1: Timer) {
-        if Servicefile.shared.moredocd.count > 0 {
+        //print("data in doctor",Servicefile.shared.moredocd)
+        if self.banner.count > 0 {
                self.pagcount += 1
-               if self.pagcount == Servicefile.shared.moredocd.count {
+               if self.pagcount == self.banner.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.col_ban.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: false)
                }
               
            }
@@ -86,13 +101,16 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Servicefile.shared.moredocd.count
+        return self.banner.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
-            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url:Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
+        let val = self.banner[indexPath.row] as! NSDictionary
+            let img = val["image_path"] as? String ?? ""
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_banner.image = UIImage(named: imagelink.sample)
                 } else {
@@ -120,13 +138,13 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_pet_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_sos(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
-           self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.SOSViewController()
+        self.present(vc, animated: true, completion: nil)
        }
     
     @IBAction func action_petservice(_ sender: Any) {
@@ -146,7 +164,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.col_ban.reloadData()
         self.tbl_searchlist.reloadData()
+        self.startTimer()
     }
     
     @IBAction func action_switch(_ sender: UISwitch) {
@@ -199,6 +219,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         cell.label_distance.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
         cell.label_likes.text = Servicefile.shared.moredocd[indexPath.row].review_count
         cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
+        cell.img_doc.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_doc.image = UIImage(named: imagelink.sample)
@@ -240,8 +261,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Pet_sidemenu_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_search(_ sender: Any) {
@@ -250,7 +271,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     @IBAction func action_filter(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PetfilterpageViewController") as! PetfilterpageViewController
+        let vc = UIStoryboard.PetfilterpageViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -301,6 +322,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                             }else{
                                                                  self.label_nodata.isHidden = true
                                                             }
+                                                            self.banner  = (res["banner"] as! NSArray) as! [Any]
+                                                            
                                                             self.tbl_searchlist.reloadData()
                                                             self.col_ban.reloadData()
                                                             self.startTimer()
@@ -336,22 +359,27 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     func intial_setup_action(){
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
-        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+//        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.view_header.image_profile.image = image
-            }
-        }
-        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
+        self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
+        self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+//        self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.view_header.image_profile.image = image
+//            }
+//        }
+//        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action

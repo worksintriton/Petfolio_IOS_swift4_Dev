@@ -49,7 +49,7 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
        if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
+        let vc = UIStoryboard.mycal_hoursViewController()
                    self.present(vc, animated: true, completion: nil)
        }else {
         self.alert(Message: "Please select the week days")
@@ -63,8 +63,8 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     @IBAction func action_holida(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_addholidayViewController") as! Doc_addholidayViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Doc_addholidayViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,8 +103,8 @@ class mycalenderViewController: UIViewController, UITableViewDelegate, UITableVi
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
-        self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.mycal_hoursViewController()
+                   self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_availcheck(sender : UIButton){

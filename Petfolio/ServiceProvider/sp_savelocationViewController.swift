@@ -63,6 +63,8 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.textfield_location.delegate = self
             self.textfield_pickname.delegate = self
             
+            self.textfield_pickname.autocapitalizationType = .sentences
+            
             self.textfield_pincode.isUserInteractionEnabled = false
             self.textfield_cityname.isUserInteractionEnabled = false
             self.textfield_location.isUserInteractionEnabled = false
@@ -139,7 +141,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         
         @IBAction func action_changeloca(_ sender: Any) {
             Servicefile.shared.selectedpickname = self.textfield_pickname.text!
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doclocationsettingViewController") as! doclocationsettingViewController
+            let vc = UIStoryboard.doclocationsettingViewController()
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -263,7 +265,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                         let Code  = res["Code"] as! Int
                         if Code == 200 {
                             _ = res["Data"] as! NSDictionary
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
+                            let vc = UIStoryboard.doc_manageaddress_ViewController()
                             self.present(vc, animated: true, completion: nil)
                             self.stopAnimatingActivityIndicator()
                         }else{
@@ -307,7 +309,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                         let Code  = res["Code"] as! Int
                         if Code == 200 {
                             _ = res["Data"] as! NSDictionary
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
+                            let vc = UIStoryboard.doc_manageaddress_ViewController()
                             self.present(vc, animated: true, completion: nil)
                             self.stopAnimatingActivityIndicator()
                         }else{

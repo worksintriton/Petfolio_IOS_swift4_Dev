@@ -19,28 +19,41 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pg5-Bx-fCp" customClass="SNShadowView" customModule="SNShadowSDK">
-                        <rect key="frame" x="3" y="3" width="187" height="198"/>
+                        <rect key="frame" x="5" y="5" width="183" height="194"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-a3-gzE">
+                        <rect key="frame" x="2" y="2" width="189" height="200"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbM-ud-89P">
-                        <rect key="frame" x="3" y="3" width="187" height="198"/>
+                        <rect key="frame" x="5" y="5" width="183" height="194"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ybv-8R-YS6">
-                                <rect key="frame" x="0.0" y="0.0" width="187" height="158.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="183" height="155"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="wYK-mV-PjN">
-                                <rect key="frame" x="0.0" y="160.5" width="187" height="35.5"/>
+                                <rect key="frame" x="5" y="157" width="178" height="35"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox-1" translatesAutoresizingMaskIntoConstraints="NO" id="VDL-92-1P1">
+                                <rect key="frame" x="155" y="8" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="BqC-Yo-pQq"/>
+                                    <constraint firstAttribute="height" constant="20" id="enM-Ru-xBT"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ybv-8R-YS6" firstAttribute="top" secondItem="TbM-ud-89P" secondAttribute="top" id="6yD-8E-oWb"/>
                             <constraint firstItem="Ybv-8R-YS6" firstAttribute="height" secondItem="TbM-ud-89P" secondAttribute="height" multiplier="0.8" id="8zY-2Y-Hik"/>
+                            <constraint firstAttribute="trailing" secondItem="VDL-92-1P1" secondAttribute="trailing" constant="8" id="9AH-7H-9br"/>
+                            <constraint firstItem="VDL-92-1P1" firstAttribute="top" secondItem="TbM-ud-89P" secondAttribute="top" constant="8" id="9Rs-Lm-ie2"/>
                             <constraint firstAttribute="bottom" secondItem="wYK-mV-PjN" secondAttribute="bottom" constant="2" id="I4B-nC-phe"/>
-                            <constraint firstItem="wYK-mV-PjN" firstAttribute="leading" secondItem="Ybv-8R-YS6" secondAttribute="leading" id="L7I-cM-i8J"/>
+                            <constraint firstItem="wYK-mV-PjN" firstAttribute="leading" secondItem="Ybv-8R-YS6" secondAttribute="leading" constant="5" id="L7I-cM-i8J"/>
                             <constraint firstItem="Ybv-8R-YS6" firstAttribute="leading" secondItem="TbM-ud-89P" secondAttribute="leading" id="ZuD-nL-OMs"/>
                             <constraint firstAttribute="trailing" secondItem="Ybv-8R-YS6" secondAttribute="trailing" id="iUA-HF-RGu"/>
                             <constraint firstItem="wYK-mV-PjN" firstAttribute="top" secondItem="Ybv-8R-YS6" secondAttribute="bottom" constant="2" id="lhA-Ro-3rp"/>
@@ -52,25 +65,32 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="TbM-ud-89P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="65G-Lp-Ob8"/>
+                <constraint firstItem="TbM-ud-89P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="65G-Lp-Ob8"/>
                 <constraint firstItem="pg5-Bx-fCp" firstAttribute="trailing" secondItem="TbM-ud-89P" secondAttribute="trailing" id="7Ug-Hd-Wbe"/>
-                <constraint firstAttribute="bottom" secondItem="TbM-ud-89P" secondAttribute="bottom" constant="3" id="B3C-II-xjd"/>
-                <constraint firstAttribute="trailing" secondItem="TbM-ud-89P" secondAttribute="trailing" constant="3" id="G6q-bu-UQB"/>
+                <constraint firstItem="Ka9-a3-gzE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="9Ld-u4-AqS"/>
+                <constraint firstAttribute="bottom" secondItem="TbM-ud-89P" secondAttribute="bottom" constant="5" id="B3C-II-xjd"/>
+                <constraint firstAttribute="trailing" secondItem="Ka9-a3-gzE" secondAttribute="trailing" constant="2" id="CCV-JT-kLU"/>
+                <constraint firstAttribute="trailing" secondItem="TbM-ud-89P" secondAttribute="trailing" constant="5" id="G6q-bu-UQB"/>
                 <constraint firstItem="pg5-Bx-fCp" firstAttribute="bottom" secondItem="TbM-ud-89P" secondAttribute="bottom" id="GGE-zm-ax0"/>
-                <constraint firstItem="TbM-ud-89P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="ML8-fs-lPF"/>
+                <constraint firstItem="Ka9-a3-gzE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="Gas-bh-ruU"/>
+                <constraint firstItem="TbM-ud-89P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ML8-fs-lPF"/>
                 <constraint firstItem="pg5-Bx-fCp" firstAttribute="leading" secondItem="TbM-ud-89P" secondAttribute="leading" id="gT7-pA-moR"/>
                 <constraint firstItem="pg5-Bx-fCp" firstAttribute="top" secondItem="TbM-ud-89P" secondAttribute="top" id="hHK-Rn-WV1"/>
+                <constraint firstAttribute="bottom" secondItem="Ka9-a3-gzE" secondAttribute="bottom" constant="2" id="zg4-kr-T2w"/>
             </constraints>
             <size key="customSize" width="193" height="204"/>
             <connections>
                 <outlet property="image_data" destination="Ybv-8R-YS6" id="lRR-Vg-MeX"/>
+                <outlet property="img_ischeckbox" destination="VDL-92-1P1" id="CyG-Xn-dc4"/>
                 <outlet property="label_title" destination="wYK-mV-PjN" id="cdS-jM-idu"/>
+                <outlet property="view_border" destination="Ka9-a3-gzE" id="9jX-MM-l02"/>
                 <outlet property="view_main" destination="TbM-ud-89P" id="Qgq-yv-gZ0"/>
             </connections>
             <point key="canvasLocation" x="141.30434782608697" y="113.16964285714285"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="checkbox-1" width="58" height="57"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

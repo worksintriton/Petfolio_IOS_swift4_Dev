@@ -35,6 +35,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
         self.view_searchopt.view_cornor()
         self.GMS_mapView.delegate = self
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.tbl_searchlist.delegate = self
         self.tbl_searchlist.dataSource = self
         self.tbl_searchlist.isHidden = true
@@ -146,7 +147,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
    
     @IBAction func action_change_location(_ sender: Any) {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        let vc = UIStoryboard.Doc_new_setlocation_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

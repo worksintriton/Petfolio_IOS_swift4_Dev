@@ -63,8 +63,8 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
     
     
     @IBAction func action_holida(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_addholidayViewController") as! Doc_addholidayViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Doc_addholidayViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

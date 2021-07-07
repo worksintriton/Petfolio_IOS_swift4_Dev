@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class orderdetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
@@ -203,7 +204,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                 cell.image_ischeck_dispatch.image = UIImage(named: imagelink.checkbox)
                 cell.image_ischeck_reject.image = UIImage(named: imagelink.checkbox)
             }
-           
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_order.image = UIImage(named: imagelink.sample)
@@ -242,7 +243,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
            }else {
                cell.image_ischeck_dispatch.image = UIImage(named: imagelink.checkbox)
            }
-            
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_order.image = UIImage(named: imagelink.sample)
@@ -268,6 +269,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! vendor_orderdetails_status_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_order.image = UIImage(named: imagelink.sample)
@@ -544,6 +546,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                             self.view_confirmall.isHidden = true
                             }
                         self.prodcut_image = order_details["order_image"] as? String ?? Servicefile.sample_img
+                        self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_product.image = UIImage(named: imagelink.sample)

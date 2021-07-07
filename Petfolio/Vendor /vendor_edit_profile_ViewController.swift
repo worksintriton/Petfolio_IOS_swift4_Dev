@@ -11,6 +11,7 @@ import Alamofire
 import Toucan
 import MobileCoreServices
 import CoreLocation
+import SDWebImage
 
 
 class vendor_edit_profile_ViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
@@ -88,6 +89,11 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
      self.textfield_business.delegate = self
      self.textfield_bus_phno.delegate = self
      self.textfield_bus_reg.delegate = self
+        
+        self.textfield_Bus_name.autocapitalizationType = .sentences
+        self.textfield_business.autocapitalizationType = .sentences
+        self.textfield_bus_reg.autocapitalizationType = .sentences
+        
      self.collectiondelegate()
     }
      
@@ -250,6 +256,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
             
             let imgdat = Servicefile.shared.gallerydicarray[indexPath.row] as! NSDictionary
                        print("clinic data in", imgdat)
+            cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
          cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"] as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                                       if (error != nil) {
                                           cell.Img_id.image = UIImage(named: imagelink.sample)
@@ -267,6 +274,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
          let strdat = imgdat["bus_certif"] as? String ?? Servicefile.sample_img
          print("details",self.spilit_string_data(array_string: strdat))
          if self.spilit_string_data(array_string: strdat) == "" {
+            cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
              cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                  if (error != nil) {
                      cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -285,8 +293,10 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     }
     
     func spilit_string_data(array_string: String)-> String{
-        var str = array_string.split(separator: ".")
+        let str = array_string.split(separator: ".")
         if str.last == "pdf" {
+            return "pdf"
+        }else if str.last == "PDF" {
             return "pdf"
         }else{
             return ""
@@ -360,7 +370,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
-              alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+              alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
                  self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
@@ -378,7 +388,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
              self.imagepicker.sourceType = .camera
              self.present(self.imagepicker, animated: true, completion: nil)
          }))
-         alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
              self.imagepicker.allowsEditing = false
              self.imagepicker.sourceType = .photoLibrary
              self.present(self.imagepicker, animated: true, completion: nil)
@@ -410,7 +420,8 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
               if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                   //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-                 self.upload(imagedata: pickedImg)
+                let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+                self.upload(imagedata: convertimg!)
               }
                 dismiss(animated: true, completion: nil)
           }

@@ -53,7 +53,7 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
     // header action
         self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.ac_back), for: .touchUpInside)
         //self.view_subpage_header.view_sos.isHidden = true
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
@@ -63,9 +63,14 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
     // header action
    
     }
+    
+    @objc func ac_back(sender: UIButton){
+        let vc = UIStoryboard.SearchtoclinicdetailViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
         
         @IBAction func action_sos(_ sender: Any) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+            let vc = UIStoryboard.SOSViewController()
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -109,7 +114,7 @@ class searchcalenderdetailsViewController: UIViewController, FSCalendarDelegate,
         
         @IBAction func action_bookappoint(_ sender: Any) {
             if Servicefile.shared.pet_apoint_booking_time != "" {
-              let vc = self.storyboard?.instantiateViewController(withIdentifier: "searchpetappdetailViewController") as! searchpetappdetailViewController
+                let vc = UIStoryboard.searchpetappdetailViewController()
                 self.present(vc, animated: true, completion: nil)
             }
         }

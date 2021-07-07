@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
@@ -41,10 +42,10 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
                if self.pagcount == Servicefile.shared.sp_dash_Banner_details.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_pet_dash_shop_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_pet_dash_shop_banner.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_pet_dash_shop_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_pet_dash_shop_banner.scrollToItem(at: indexPath, at: .left, animated: false)
                }
                self.pagecontrol.currentPage = self.pagcount
            }
@@ -65,7 +66,7 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
         cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner.dropShadow()
     if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img) {
-         
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Banner_details[indexPath.row].banner_img)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_banner.image = UIImage(named: imagelink.sample)

@@ -111,6 +111,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -139,6 +140,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -163,6 +165,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -194,7 +197,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         let tag = sender.tag
         Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_orderdetails_ViewController") as! pet_vendor_orderdetails_ViewController
+        let vc = UIStoryboard.pet_vendor_orderdetails_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

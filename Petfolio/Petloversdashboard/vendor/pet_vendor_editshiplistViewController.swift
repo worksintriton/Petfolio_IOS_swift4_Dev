@@ -57,7 +57,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         Servicefile.shared.lati = 0.0
         Servicefile.shared.locaaccess = "Add"
         Servicefile.shared.ishiping = "ship"
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
+        let vc = UIStoryboard.pet_vendor_shipingaddlocationViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -137,7 +137,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
         Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
          Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
          Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
+        let vc = UIStoryboard.pet_vendor_shipingaddlocationViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

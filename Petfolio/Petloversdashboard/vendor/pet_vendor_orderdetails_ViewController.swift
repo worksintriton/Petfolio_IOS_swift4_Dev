@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
@@ -156,6 +157,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             
             let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_orderdetails_cancel_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_order.image = UIImage(named: imagelink.sample)
@@ -189,6 +191,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         }else{
             let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! vendor_orderdetails_status_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_order.image = UIImage(named: imagelink.sample)
@@ -263,8 +266,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
     @objc func action_btn_trackorder(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_trackorderViewController") as! pet_vendor_trackorderViewController
-              self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.pet_vendor_trackorderViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_btn_cancelorder(sender: UIButton){
@@ -273,8 +276,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         Servicefile.shared.iscancelselect.removeAll()
         Servicefile.shared.productid = Servicefile.shared.orderdetail_prod[tag].product_id
         Servicefile.shared.iscancelselect.append(Servicefile.shared.productid)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlist_cancel_ViewController") as! orderlist_cancel_ViewController
-              self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.orderlist_cancel_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -319,8 +322,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                 Servicefile.shared.iscancelselect.append(Servicefile.shared.orderdetail_prod[i].product_id)
             }
         }
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "orderlist_cancel_ViewController") as! orderlist_cancel_ViewController
-              self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.orderlist_cancel_ViewController()
+        self.present(vc, animated: true, completion: nil)
        
     }
     
@@ -404,6 +407,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                             self.view_confirmall.isHidden = true
                             }
                         self.prodcut_image = order_details["order_image"] as? String ?? Servicefile.sample_img
+                        self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_product.image = UIImage(named: imagelink.sample)

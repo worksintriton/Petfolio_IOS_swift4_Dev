@@ -140,7 +140,7 @@ class doc_manageaddress_ViewController: UIViewController, UITableViewDelegate, U
             Servicefile.shared.selectedaddress = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_address
              Servicefile.shared.selectedpickname = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].location_nickname
              Servicefile.shared.selecteddefaultstatus = Servicefile.shared.petuserlocaadd[Servicefile.shared.selectedindex].default_status
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsavelocationViewController") as! docsavelocationViewController
+            let vc = UIStoryboard.docsavelocationViewController()
             self.present(vc, animated: true, completion: nil)
         }else{
             if Servicefile.shared.petuserlocaadd[indextag].default_status != false {
@@ -198,12 +198,12 @@ class doc_manageaddress_ViewController: UIViewController, UITableViewDelegate, U
         Servicefile.shared.long = 0.0
         Servicefile.shared.lati = 0.0
         Servicefile.shared.locaaccess = "Add"
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doclocationsettingViewController") as! doclocationsettingViewController
+        let vc = UIStoryboard.doclocationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_back(_ sender: Any) {
-         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

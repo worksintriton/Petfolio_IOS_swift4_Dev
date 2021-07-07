@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SNShadowSDK
+import SDWebImage
 
 class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
@@ -54,12 +55,18 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     // header action
         self.view_subpage_header.label_header_title.text = "Service Details"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.ac_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
+        
+        
+//        self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
+//        self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
+//        self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
+//        self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -69,6 +76,11 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
     // footer action
+    }
+    
+    @objc func ac_back(sender: UIButton){
+        let vc = UIStoryboard.petloverDashboardViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func startTimer() {
@@ -82,10 +94,10 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                if self.pagcount == self.bannerlist.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_servic.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.col_servic.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_servic.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.col_servic.scrollToItem(at: indexPath, at: .left, animated: false)
                }
               
            }
@@ -104,6 +116,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
         let bannerimg = self.bannerlist[indexPath.row] as? NSDictionary ?? ["":""]
         let image = bannerimg["image_path"] as? String ?? ""
+        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -150,14 +163,14 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     
     @IBAction func action_filter(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sp_filer_ViewController") as! pet_sp_filer_ViewController
+        let vc = UIStoryboard.pet_sp_filer_ViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
     
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -174,6 +187,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         cell.label_rating.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].rating_count)
         cell.label_offer.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_offer) + "% offer"
         cell.label_sp_name.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name
+        cell.img_sp.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_sp.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_sp.image = UIImage(named: imagelink.sample)
@@ -234,6 +248,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                         let image_path = Service_Details["image_path"] as? String ?? Servicefile.sample_img
                         let title = Service_Details["title"] as? String ?? ""
                         self.label_category.text = title
+                        self.image_catimg.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                         self.image_catimg.sd_setImage(with: Servicefile.shared.StrToURL(url: image_path)) { (image, error, cache, urls) in
                             if (error != nil) {
                                 self.image_catimg.image = UIImage(named: imagelink.sample)

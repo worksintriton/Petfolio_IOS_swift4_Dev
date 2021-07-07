@@ -46,8 +46,8 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     @IBAction func action_edit_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.profile_edit_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -70,23 +70,23 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     //doc_myorderdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycalenderViewController") as! mycalenderViewController
-        self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.mycalenderViewController()
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_myorderdetails_ViewController") as! doc_myorderdetails_ViewController
+            let vc = UIStoryboard.doc_myorderdetails_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorities"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_favlist_ViewController") as! doc_favlist_ViewController
+            let vc = UIStoryboard.doc_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Payment Details"{
             self.dismiss(animated: true, completion: nil)
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_paymentdetilsViewController") as! doc_paymentdetilsViewController
 //            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Manage Service" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
+            let vc = UIStoryboard.Doc_profiledetails_ViewController()
             self.present(vc, animated: true, completion: nil)
                 }else if self.labelmenu[indexPath.row] == "Logout"{
                     let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
@@ -107,8 +107,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     }
 
     @IBAction func action_view_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
-        self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Doc_profiledetails_ViewController()
     }
     
 }

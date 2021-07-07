@@ -48,13 +48,13 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-       if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "reg_cal_hour_ViewController") as! reg_cal_hour_ViewController
-                   self.present(vc, animated: true, completion: nil)
-       }else {
-        self.alert(Message: "Please select the week days")
+        if Servicefile.shared.Doc_mycalender_selecteddates.count > 0{
+            let vc = UIStoryboard.reg_cal_hour_ViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else {
+            self.alert(Message: "Please select the week days")
         }
-       
+        
     }
     
     @IBAction func sction_back(_ sender: Any) {
@@ -63,8 +63,8 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     @IBAction func action_holida(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_addholidayViewController") as! Doc_addholidayViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.Doc_addholidayViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,10 +78,10 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Mycal_edit_availdayTableViewCell
         if self.isavailday[indexPath.row] != "0" {
-        cell.img_check.image = UIImage(named: imagelink.checkbox_1)
-               } else{
-                   cell.img_check.image = UIImage(named: imagelink.checkbox)
-               }
+            cell.img_check.image = UIImage(named: imagelink.checkbox_1)
+        } else{
+            cell.img_check.image = UIImage(named: imagelink.checkbox)
+        }
         cell.selectionStyle = .none
         cell.label_weekday.text! = self.availday[indexPath.row]
         if self.isedit[indexPath.row] == "1" {
@@ -96,14 +96,14 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
-   
+    
     
     @objc func action_btnedit(sender : UIButton){
         Servicefile.shared.Doc_mycalender_selecteddates.removeAll()
         let btntag = sender.tag
         Servicefile.shared.Doc_mycalender_selecteddates.append(self.availday[btntag])
         print("Doc_mycalender data to pass",Servicefile.shared.Doc_mycalender_selecteddates)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "mycal_hoursViewController") as! mycal_hoursViewController
+        let vc = UIStoryboard.mycal_hoursViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -118,65 +118,65 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
         }
         self.tbl_availdays.reloadData()
     }
-
+    
     @IBAction func action_backaction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-       func callmycalender(){
+    func callmycalender(){
         self.availday.removeAll()
         self.isedit.removeAll()
         self.isavailday.removeAll()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-       print("user type",Servicefile.shared.userid)
-               self.startAnimatingActivityIndicator()
-           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.mycalender, method: .post, parameters:
-            ["user_id": Servicefile.shared.userid,
-              "Doctor_name":"",
-              "types" : 1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                                   switch (response.result) {
-                                                   case .success:
-                                                         let res = response.value as! NSDictionary
-                                                         print("success data",res)
-                                                         let Code  = res["Code"] as! Int
-                                                         if Code == 200 {
-                                                           let Data = res["Data"] as! NSArray
-                                                            for itm in 0..<Data.count{
-                                                                let itdata = Data[itm] as! NSDictionary
-                                                                let title = itdata["Title"] as? String ?? ""
-                                                                let status = itdata["Status"] as? Bool ?? false
-//                                                                if false checkbok should allow to click check box else
-//                                                                show edit box
-                                                                var isstatus = "0"
-                                                                if status != false {
-                                                                      isstatus = "0"
-                                                                }else{
-                                                                     isstatus = "1"
-                                                                }
-                                                                self.availday.append(title)
-                                                                self.isedit.append(isstatus)
-                                                                self.isavailday.append("0")
-                                                            }
-                                                          
-                                                            self.tbl_availdays.reloadData()
-                                                            self.stopAnimatingActivityIndicator()
-                                                         }else{
-                                                           self.stopAnimatingActivityIndicator()
-                                                           print("status code service denied")
-                                                         }
-                                                       break
-                                                   case .failure(let Error):
-                                                       self.stopAnimatingActivityIndicator()
-                                                       print("Can't Connect to Server / TimeOut",Error)
-                                                       break
-                                                   }
-                                      }
-               }else{
-                   self.stopAnimatingActivityIndicator()
-                   self.alert(Message: "No Intenet Please check and try again ")
-               }
-           }
+        print("user type",Servicefile.shared.userid)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.mycalender, method: .post, parameters:
+                                                                    ["user_id": Servicefile.shared.userid,
+                                                                     "Doctor_name":"",
+                                                                     "types" : 1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                let Data = res["Data"] as! NSArray
+                                                                                for itm in 0..<Data.count{
+                                                                                    let itdata = Data[itm] as! NSDictionary
+                                                                                    let title = itdata["Title"] as? String ?? ""
+                                                                                    let status = itdata["Status"] as? Bool ?? false
+                                                                                    //                                                                if false checkbok should allow to click check box else
+                                                                                    //                                                                show edit box
+                                                                                    var isstatus = "0"
+                                                                                    if status != false {
+                                                                                        isstatus = "0"
+                                                                                    }else{
+                                                                                        isstatus = "1"
+                                                                                    }
+                                                                                    self.availday.append(title)
+                                                                                    self.isedit.append(isstatus)
+                                                                                    self.isavailday.append("0")
+                                                                                }
+                                                                                
+                                                                                self.tbl_availdays.reloadData()
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                     }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
     
-   
+    
     
 }

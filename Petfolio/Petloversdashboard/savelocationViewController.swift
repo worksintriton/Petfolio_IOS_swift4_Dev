@@ -63,6 +63,8 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.textfield_location.delegate = self
         self.textfield_pickname.delegate = self
         
+        self.textfield_pickname.autocapitalizationType = .sentences
+        
         self.textfield_pincode.isUserInteractionEnabled = false
         self.textfield_cityname.isUserInteractionEnabled = false
         self.textfield_location.isUserInteractionEnabled = false
@@ -116,7 +118,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -134,8 +136,8 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
     
     
     @IBAction func action_changeloca(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
-              self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.locationsettingViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     

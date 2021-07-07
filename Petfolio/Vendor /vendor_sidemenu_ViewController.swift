@@ -16,19 +16,22 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
+    
      var labelmenu = [""]
-       var imgmenu = [""]
+     var imgmenu = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","My Coupons","Reports","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Report","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","My Coupons","Reports","Notification", "Logout"]
-            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Report","Bell", "Exit"]
+            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","Notification", "Logout"]
+            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Bell", "Exit"]
         }
+        
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self
@@ -69,7 +72,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
             let vc = UIStoryboard.vendor_manage_product_ViewController()
         self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)

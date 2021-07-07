@@ -51,7 +51,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     // header action
         self.view_subpage_header.label_header_title.text = "Appoinment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.ac_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
@@ -60,8 +60,13 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     // header action
     }
     
+    @objc func ac_back(sender: UIButton){
+        let vc = UIStoryboard.pet_sp_service_details_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

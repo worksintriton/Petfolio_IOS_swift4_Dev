@@ -5,6 +5,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -108,18 +109,18 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -143,7 +144,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func action_proceedtobuy(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shippingaddressconfrimViewController") as! pet_vendor_shippingaddressconfrimViewController
+        let vc = UIStoryboard.pet_vendor_shippingaddressconfrimViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -179,6 +180,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         cell.label_product_amt.attributedText = attributeString
         cell.label_final_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
         if product_img.count > 0 {
+            cell.img_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: product_img[0] as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_product.image = UIImage(named: imagelink.sample)
@@ -201,7 +203,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let productdata = cartlist["product_id"] as! NSDictionary
         let product_id = productdata["_id"] as? String ?? ""
         Servicefile.shared.product_id = product_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
+        let vc = UIStoryboard.productdetailsViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

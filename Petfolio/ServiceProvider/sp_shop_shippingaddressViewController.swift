@@ -73,9 +73,8 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             
             
             @IBAction func action_success_continue(_ sender: Any) {
-              
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "sp_shop_dashboard_ViewController") as! sp_shop_dashboard_ViewController
-                    self.present(vc, animated: true, completion: nil)
+                let vc = UIStoryboard.sp_shop_dashboard_ViewController()
+                self.present(vc, animated: true, completion: nil)
                
                 
             }
@@ -100,7 +99,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                         Servicefile.shared.lati = 0.0
                         Servicefile.shared.locaaccess = "Add"
                         Servicefile.shared.ishiping = "ship"
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shipingaddlocationViewController") as! pet_vendor_shipingaddlocationViewController
+                        let vc = UIStoryboard.pet_vendor_shipingaddlocationViewController()
                         self.present(vc, animated: true, completion: nil)
                         
                     }))
@@ -119,9 +118,9 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                        let options: [String:Any] = [
                            "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                            "currency": "INR",//We support more that 92 international currencies.
-                           "description": "some some",
+                           "description": "",
                            "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                           "name": "sriram",
+                           "name": Servicefile.shared.first_name,
                            "prefill": [
                                "contact": Servicefile.shared.user_phone,
                                "email": Servicefile.shared.user_email

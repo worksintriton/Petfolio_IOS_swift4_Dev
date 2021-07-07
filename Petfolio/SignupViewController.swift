@@ -60,6 +60,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.textfield_email.delegate = self
         self.textfield_fname.delegate = self
         self.textfield_lastname.delegate = self
+        
+            //.autocapitalizationType = .sentences
+        
         self.textfield_fname.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.textfield_lastname.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.textfield_email.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
@@ -78,20 +81,20 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     // header action
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-    
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= keyboardSize.height
+//            }
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
+//
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -125,7 +128,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.otp = String(otp as! Int)
                         Servicefile.shared.email_status = true
                         Servicefile.shared.signupemail = self.textfield_email.text!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "emailsignupViewController") as! emailsignupViewController
+                        let vc = UIStoryboard.emailsignupViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -272,7 +275,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                        
                         if Servicefile.shared.userid != "" {
                             self.stopAnimatingActivityIndicator()
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignOTPViewController") as! SignOTPViewController
+                            let vc = UIStoryboard.SignOTPViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else{
                             self.stopAnimatingActivityIndicator()
@@ -311,18 +314,18 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if self.textfield_email == textField || self.textfield_phno == textField  {
-            self.moveTextField(textField: textField, up:true)
-        }
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if self.textfield_email == textField || self.textfield_phno == textField {
-            self.moveTextField(textField: textField, up:false)
-        }
-    }
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if self.textfield_email == textField || self.textfield_phno == textField  {
+//            self.moveTextField(textField: textField, up:true)
+//        }
+//        
+//    }
+//    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if self.textfield_email == textField || self.textfield_phno == textField {
+//            self.moveTextField(textField: textField, up:false)
+//        }
+//    }
     
 }

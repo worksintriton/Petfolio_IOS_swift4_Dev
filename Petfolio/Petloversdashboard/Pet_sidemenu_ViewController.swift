@@ -64,20 +64,20 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
             let vc = UIStoryboard.Pet_applist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Petlover_myorder_ViewController") as! Petlover_myorder_ViewController
+            let vc = UIStoryboard.Petlover_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Payment Details"{
             self.dismiss(animated: true, completion: nil)
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_paymentdetails_ViewController") as! pet_paymentdetails_ViewController
 //            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorities"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_sidemenu_favlist_ViewController") as! pet_sidemenu_favlist_ViewController
+            let vc = UIStoryboard.pet_sidemenu_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Medical History"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_medical_history_ViewController") as! pet_medical_history_ViewController
+            let vc = UIStoryboard.pet_medical_history_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
@@ -99,12 +99,12 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     }
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_profile_edit(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile_edit_ViewController") as! profile_edit_ViewController
+        let vc = UIStoryboard.profile_edit_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -24,6 +24,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.textfield_search.delegate = self
+        self.textfield_search.autocapitalizationType = .sentences
         self.view_allcategory.view_cornor()
         self.view_allcategory.isHidden = true
         self.view_search.view_cornor()
@@ -35,25 +36,28 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     func intial_setup_action(){
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
-        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        //self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
         self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
+        self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+       
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.view_header.image_profile.image = image
-            }
-        }
-        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.view_header.image_profile.image = image
+//            }
+//        }
+        //self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action
@@ -72,13 +76,13 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
         self.textfield_search.text = ""
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shop_search_ViewController") as! pet_vendor_shop_search_ViewController
+        let vc = UIStoryboard.pet_vendor_shop_search_ViewController()
         self.present(vc, animated: true, completion: nil)
         return true
     }
     
     @IBAction func action_cartpage(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "vendorcartpageViewController") as! vendorcartpageViewController
+        let vc = UIStoryboard.vendorcartpageViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -90,7 +94,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
         self.textfield_search.text = ""
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_vendor_shop_search_ViewController") as! pet_vendor_shop_search_ViewController
+        let vc = UIStoryboard.pet_vendor_shop_search_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -118,7 +122,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        let vc = UIStoryboard.Pet_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -180,8 +184,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     
     func buttonPressed(passdata: String) {
            print("pass data from protocal",passdata)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
-                      self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.productdetailsViewController()
+        self.present(vc, animated: true, completion: nil)
         
        
        }
@@ -189,7 +193,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     @objc func action_todaydeal_seemore(sender: UIButton){
            let tag = sender.tag
         Servicefile.shared.today_deals_status = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "todaysdealseemoreViewController") as! todaysdealseemoreViewController
+        let vc = UIStoryboard.todaysdealseemoreViewController()
                self.present(vc, animated: true, completion: nil)
         
        }
@@ -198,8 +202,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
            let tag = sender.tag
         Servicefile.shared.today_deals_status = false
         Servicefile.shared.vendor_catid = Servicefile.shared.sp_dash_Product_details[tag].cat_id
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductdealsViewController") as! ProductdealsViewController
-               self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.ProductdealsViewController()
+        self.present(vc, animated: true, completion: nil)
        }
     
     func callpetshopdashget(){

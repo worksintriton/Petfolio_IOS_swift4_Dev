@@ -161,10 +161,10 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
                if self.pagcount == Servicefile.shared.petbanner.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.colleView_banner.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.colleView_banner.scrollToItem(at: indexPath, at: .left, animated: false)
                }
                self.pagecontrol.currentPage = self.pagcount
            }
@@ -172,7 +172,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     
     @IBAction func action_profile(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petprofileViewController") as! petprofileViewController
+        let vc = UIStoryboard.petprofileViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -185,7 +185,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_notification(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+        let vc = UIStoryboard.pet_notification_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -214,7 +214,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Pet_sidemenu_ViewController") as! Pet_sidemenu_ViewController
+        let vc = UIStoryboard.Pet_sidemenu_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -222,7 +222,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
         Servicefile.shared.locaaccess = "Deny"
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+        let vc = UIStoryboard.locationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -230,7 +230,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
         Servicefile.shared.locaaccess = "Allow"
         self.view_popup.isHidden = true
         self.view_shadow.isHidden = true
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "locationsettingViewController") as! locationsettingViewController
+        let vc = UIStoryboard.locationsettingViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -242,7 +242,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -270,6 +270,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if self.colleView_banner == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
+            cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petbanner[indexPath.row].img_path)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -286,6 +287,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             return cell
         }else if self.colleView_Doctor == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "doc", for: indexPath) as! petdocCollectionViewCell
+            cell.img_doc.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_doc.image = UIImage(named: imagelink.sample)
@@ -307,6 +309,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ser", for: indexPath) as! petServCollectionViewCell
             let uicolo = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.petser[indexPath.row].background_color)
             cell.label_ser.text = Servicefile.shared.petser[indexPath.row].service_title
+            cell.img_ser.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_ser.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petser[indexPath.row].service_icon)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_ser.image = UIImage(named: imagelink.sample)
@@ -320,6 +323,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             return cell
         }else if self.colleView_puppylove == collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puppyprod", for: indexPath) as! petprodCollectionViewCell
+            cell.img_prod.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_prod.image = UIImage(named: imagelink.sample)
@@ -332,6 +336,7 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! petprodCollectionViewCell
+            cell.img_prod.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_prod.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.img_prod.image = UIImage(named: imagelink.sample)

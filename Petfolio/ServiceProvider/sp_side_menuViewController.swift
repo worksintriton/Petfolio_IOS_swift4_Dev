@@ -22,15 +22,14 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","My Coupons","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Doc","Calendar","suitcase","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","My Coupons","Notification", "Logout"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","Notification", "Logout"]
             self.imgmenu = ["Doc","Calendar","suitcase","Doc","Like","Discount","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
-        
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self
@@ -68,6 +67,9 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         if self.labelmenu[indexPath.row] == "My calender" {
             let vc = UIStoryboard.Sp_mycalender_ViewController()
         self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Appointment" {
+            let vc = UIStoryboard.sp_shop_dashboard_ViewController()
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorities" {
             let vc = UIStoryboard.sp_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
@@ -78,7 +80,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
             let vc = UIStoryboard.Sp_profile_edit_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
+            let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
             let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)

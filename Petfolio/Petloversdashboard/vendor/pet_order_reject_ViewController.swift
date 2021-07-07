@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -43,6 +44,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
         self.textview_other_reason.textColor = UIColor.lightGray
         self.view_others.isHidden = true
         self.product_title.text = Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_text
+        self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.image_product.image = UIImage(named: imagelink.sample)

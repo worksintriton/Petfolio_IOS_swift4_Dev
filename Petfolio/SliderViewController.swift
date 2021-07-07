@@ -20,18 +20,23 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var view_skip_btn: UIView!
     @IBOutlet weak var dogshowcoll: UICollectionView!
     //typealias Razorpay = RazorpayCheckout
-    var petlist = ["1","2","3"]
+    var petlist = [Any]()
     var demodata = [{}]
+    
+    @IBOutlet weak var pagecontrl: UIPageControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
-        //self.petlist.removeAll()
+        self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"
         self.dogshowcoll.delegate = self
         self.dogshowcoll.dataSource = self
         self.dogshowcoll.isPagingEnabled = true
-//        self.getdemo()
+        self.pagecontrl.numberOfPages = self.petlist.count
+        self.getdemo()
         // Do any additional setup after loading the view.
     }
     
@@ -47,18 +52,30 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petsliderCollectionViewCell
-//        cell.pettitle.text = ""
-//        print("image path",self.petlist[indexPath.row])
-//        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: self.petlist[indexPath.row])) { (image, error, cache, urls) in
-//            if (error != nil) {
-//                cell.petimage.image = image
-//            } else {
-//                cell.petimage.image = UIImage(named: Servicefile.sample_img)
-//            }
-//        }
-        cell.petimage.image = UIImage(named: "logo")
-        cell.petimage.contentMode = .scaleAspectFit
+       
+        //print("image path",self.petlist[indexPath.row])
+        let itmval = self.petlist[indexPath.row] as! NSDictionary
+        let img = itmval["img_path"] as? String ?? ""
+        let title = itmval["title"] as? String ?? ""
+        cell.pettitle.text = title
+        cell.petimage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        print("check url",Servicefile.shared.StrToURL(url: img))
+        cell.petimage.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        cell.petimage.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                print("image path normal",img)
+                cell.petimage.image = UIImage(named: imagelink.sample)
+            } else {
+                print("image path empty",img)
+                cell.petimage.image = image
+            }
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.pagecontrl.currentPage = indexPath.row
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -95,7 +112,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                             self.present(tapbar, animated: true, completion: nil)
 //                    pettabbarViewController
                 } else if Servicefile.shared.user_type == "4" {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                    let vc = UIStoryboard.DocdashboardViewController()
                     self.present(vc, animated: true, completion: nil)
                 } else if Servicefile.shared.user_type == "2" {
                     let vc = UIStoryboard.Sp_dash_ViewController()
@@ -129,12 +146,9 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                         self.demodata.removeAll()
                         let Data = resp["Data"] as! NSArray
                         self.petlist.removeAll()
-                        for i in 0..<Data.count{
-                            let itmval = Data[i] as! NSDictionary
-                            let img = itmval["img_path"] as? String ?? ""
-                            self.petlist.append(img)
-                        }
-                        print(self.petlist)
+                        self.petlist = Data as! [Any]
+//                        print("image path",self.petlist)
+                        self.pagecontrl.numberOfPages = self.petlist.count
                         self.dogshowcoll.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -162,6 +176,35 @@ extension UIViewController  {
         return emailPred.evaluate(with: email)
     }
     
+//    func startAnimatingActivityIndicator() {
+//        Servicefile.shared.customview.frame = CGRect.init(x: 0, y: self.view.frame.origin.y + 60, width: self.view.frame.width, height: self.view.frame.height)
+//        Servicefile.shared.customview.backgroundColor = UIColor.clear        //give color to the view
+//        Servicefile.shared.customview.center = self.view.center
+//        Servicefile.shared.cusstackview.frame = CGRect(x: 0, y: self.view.frame.origin.y + 60, width: self.view.frame.width, height: self.view.frame.height)
+//        Servicefile.shared.backview.frame = CGRect(x: 20, y: 0, width: 50, height: 50)
+//        Servicefile.shared.backview.backgroundColor = UIColor.lightGray
+//        let view1 = UIView()
+//        view1.frame = CGRect(x: 20, y: 120, width: self.view.frame.width-40, height: 50)
+//        view1.backgroundColor = UIColor.white
+//        let view2 = UIView()
+//        view2.frame = CGRect(x: 20, y: 180, width: self.view.frame.width-40, height: 50)
+//        view2.backgroundColor = UIColor.white
+//        let view3 = UIView()
+//        view3.frame = CGRect(x: 20, y: 240, width: self.view.frame.width-40, height: 50)
+//        view3.backgroundColor = UIColor.white
+//        Servicefile.shared.backview.startShimmeringViewAnimation()
+//        view1.startShimmeringViewAnimation()
+//        view2.startShimmeringViewAnimation()
+//        view3.startShimmeringViewAnimation()
+//        Servicefile.shared.customview.addSubview(Servicefile.shared.cusstackview)
+//        Servicefile.shared.cusstackview.addSubview(Servicefile.shared.backview)
+//        Servicefile.shared.cusstackview.addSubview(view1)
+//        Servicefile.shared.cusstackview.addSubview(view2)
+//        Servicefile.shared.cusstackview.addSubview(view3)
+//        self.view.addSubview(Servicefile.shared.customview)
+//
+//    }
+    
     func startAnimatingActivityIndicator() {
         Servicefile.shared.customview.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         Servicefile.shared.customview.backgroundColor = UIColor.clear        //give color to the view
@@ -180,7 +223,7 @@ extension UIViewController  {
         Servicefile.shared.customview.addSubview(Servicefile.shared.backview)
         Servicefile.shared.customview.addSubview(Servicefile.shared.gifimg)
         self.view.addSubview(Servicefile.shared.customview)
-        
+
     }
     
     func startAnimatingActivityIndicator_gif(named: String) {
@@ -215,4 +258,44 @@ extension UIViewController  {
         self.present(alert, animated: true, completion: nil)
     }
     
+}
+
+extension UIView {
+    func startShimmeringViewAnimation() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        let gradientColorOne = UIColor(white: 0.90, alpha: 1.0).cgColor
+        let gradientColorTwo = UIColor(white: 0.95, alpha: 1.0).cgColor
+        gradientLayer.colors = [gradientColorOne, gradientColorTwo, gradientColorOne]
+        gradientLayer.locations = [0.0, 0.5, 1.0]
+        self.layer.addSublayer(gradientLayer)
+
+        let animation = CABasicAnimation(keyPath: "locations")
+        animation.fromValue = [-1.0, -0.5, 0.0]
+        animation.toValue = [1.0, 1.5, 2.0]
+        animation.repeatCount = .infinity
+        animation.duration = 1.25
+        gradientLayer.add(animation, forKey: animation.keyPath)
+    }
+}
+
+extension UIImage {
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
 }

@@ -243,7 +243,7 @@ class pet_other_information_ViewController: UIViewController {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petimageUploadViewController") as! petimageUploadViewController
+                        let vc = UIStoryboard.petimageUploadViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

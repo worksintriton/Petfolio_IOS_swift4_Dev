@@ -43,6 +43,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.tbl_search_breed.isHidden = true
         self.callpetdetailget()
         self.textfield_search.addTarget(self, action: #selector(textFieldsearc), for: .editingChanged)
+        self.textfield_search.autocapitalizationType = .sentences
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,6 +111,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         let pb = self.pet_type[indexPath.row] as! NSDictionary
         let pbv = pb["pet_type_title"] as? String ?? ""
         let pet_type_img = pb["pet_type_img"] as? String ?? ""
+        cell.image_view.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.image_view.sd_setImage(with: Servicefile.shared.StrToURL(url: pet_type_img)) { (image, error, cache, urls) in
                if (error != nil) {
                    cell.image_view.image = UIImage(named: imagelink.sample)

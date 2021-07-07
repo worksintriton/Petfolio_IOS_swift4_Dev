@@ -88,7 +88,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.otp = String(otp)
                            Servicefile.shared.email_status = true
                            Servicefile.shared.signupemail = self.textfield_email.text!
-                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "emailsignupViewController") as! emailsignupViewController
+                        let vc = UIStoryboard.emailsignupViewController()
                            self.present(vc, animated: true, completion: nil)
                            self.stopAnimatingActivityIndicator()
                        }else{
@@ -200,7 +200,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                                 //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                         self.present(tapbar, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "4" {
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                let vc = UIStoryboard.DocdashboardViewController()
                                 self.present(vc, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "2" {
                                 let vc = UIStoryboard.Sp_dash_ViewController()

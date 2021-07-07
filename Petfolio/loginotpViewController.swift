@@ -215,7 +215,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                         //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                                                                 self.present(tapbar, animated: true, completion: nil)
                                                        } else if Servicefile.shared.user_type == "4" {
-                                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+                                                        let vc = UIStoryboard.DocdashboardViewController()
                                                         self.present(vc, animated: true, completion: nil)
                                                         
                                                        } else if Servicefile.shared.user_type == "2" {

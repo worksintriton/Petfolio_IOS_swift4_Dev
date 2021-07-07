@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import JitsiMeetSDK
 import WebKit
+import SDWebImage
 
 class DocdashboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,JitsiMeetViewDelegate {
     
@@ -74,6 +75,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             img = Servicefile.sample_img
         }
+       // self.doc_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.doc_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.doc_header.image_profile.image = UIImage(named: imagelink.sample)
@@ -87,8 +89,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.doc_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
         self.doc_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
-       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
@@ -205,6 +207,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             if petimg == "" {
                        cell.img_petimg.image = UIImage(named: imagelink.sample)
                    }else{
+                    cell.img_petimg.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                        cell.img_petimg.sd_setImage(with: Servicefile.shared.StrToURL(url: petimg)) { (image, error, cache, urls) in
                            if (error != nil) {
                                cell.img_petimg.image = UIImage(named: imagelink.sample)
@@ -225,7 +228,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         Servicefile.shared.Doc_selected_app_list = self.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_detailspage_ViewController") as! Doc_detailspage_ViewController
+        let vc = UIStoryboard.Doc_detailspage_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -241,13 +244,13 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_prescriptionViewController") as! Doc_prescriptionViewController
+        let vc = UIStoryboard.Doc_prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func action_online(sender : UIButton){
         let tag = sender.tag
-        let alert = UIAlertController(title: "", message: "Are you sure you need to start te call", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.tag_val = tag
             self.callstart_confrence()
@@ -259,7 +262,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callconfrence(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_confrence_ViewController") as! Doc_confrence_ViewController
+        let vc = UIStoryboard.Doc_confrence_ViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -358,6 +361,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callnew(){
+        Servicefile.shared.Doc_dashlist.removeAll()
+        self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docdashboardnewapp, method: .post, parameters:
@@ -368,7 +373,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.Doc_dashlist.removeAll()
+                        
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
@@ -432,6 +437,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callcom(){
+        Servicefile.shared.Doc_dashlist.removeAll()
+        self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docdashboardcomapp, method: .post, parameters:
@@ -442,7 +449,6 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.Doc_dashlist.removeAll()
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
@@ -505,6 +511,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func callmiss(){
+        Servicefile.shared.Doc_dashlist.removeAll()
+        self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docdashboardmissapp, method: .post, parameters:
@@ -515,7 +523,6 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        Servicefile.shared.Doc_dashlist.removeAll()
                         let Data = res["Data"] as! NSArray
                         for itm in 0..<Data.count{
                             let dataitm = Data[itm] as! NSDictionary
@@ -642,10 +649,10 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                         let profile_status = Data["profile_status"] as? Bool ?? false
                         let calender_status = Data["calender_status"] as? Bool ?? false
                         if profile_status == false {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "regdocViewController") as! regdocViewController
+                            let vc = UIStoryboard.regdocViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else if calender_status == false {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
+                            let vc = UIStoryboard.Reg_calender_ViewController()
                             self.present(vc, animated: true, completion: nil)
                         }else {
                             let profile_verification_status = Data["profile_verification_status"] as? String ?? ""
@@ -772,32 +779,34 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
 
 extension UIViewController {
     @objc func docsidemenu(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
+        let vc = UIStoryboard.docsidemenuViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func docprofile(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_profiledetails_ViewController") as! Doc_profiledetails_ViewController
+        let vc = UIStoryboard.Doc_profiledetails_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func docmanageaddress(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_manageaddress_ViewController") as! doc_manageaddress_ViewController
+        let vc = UIStoryboard.doc_manageaddress_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc func doccartpage(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_vendorcartpageViewController") as! doc_vendorcartpageViewController
+        let vc = UIStoryboard.doc_vendorcartpageViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
+    /// act as dashboard
     @objc func docshop(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_shop_dashboardViewController") as! doc_shop_dashboardViewController
+        let vc = UIStoryboard.DocdashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
+    /// act as shop
     @objc func docDashboard(sender : UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
+        let vc = UIStoryboard.doc_shop_dashboardViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

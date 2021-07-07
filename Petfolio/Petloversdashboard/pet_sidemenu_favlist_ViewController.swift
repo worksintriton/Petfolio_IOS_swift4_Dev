@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -164,6 +165,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if self.appointtype == "Doctor" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
+            cell.image_vet.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_vet.image = UIImage(named: imagelink.sample)
@@ -195,6 +197,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             return cell
         }else if self.appointtype == "Service" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
+            cell.image_vet.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_vet.image = UIImage(named: imagelink.sample)
@@ -249,7 +252,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
          }
          
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.petnewprod[indexPath.row].products_img) {
-            
+                cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_product.image = UIImage(named: imagelink.sample)
@@ -292,8 +295,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             self.present(vc, animated: true, completion: nil)
         }else {
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "productdetailsViewController") as! productdetailsViewController
-                          self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.productdetailsViewController()
+            self.present(vc, animated: true, completion: nil)
         }
       
     }

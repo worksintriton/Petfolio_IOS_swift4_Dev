@@ -131,7 +131,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
     }
     
     @objc func action_getpet(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "getpetViewController") as! getpetViewController
+        let vc = UIStoryboard.getpetViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -170,7 +170,8 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
         let sedate = Servicefile.shared.ddMMyyyystringformat(date: senderdate)
         if self.isdob {
             self.isselectdate = sedate
-            self.view_selectdateCalender.textfield_value.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
+            self.textfiled_petage.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
+            self.view_selectdateCalender.textfield_value.text = sedate
         }else{
             self.view_selectdate.textfield_value.text = sedate
         }
@@ -370,9 +371,11 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
     @IBAction func action_submit(_ sender: Any) {
         if self.view_Petname.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet name")
-        }else if self.view_petbio.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet Bio")
-        }else if Servicefile.shared.pet_type_val == "" {
+        }
+//        else if self.view_petbio.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet Bio")
+//        }
+        else if Servicefile.shared.pet_type_val == "" {
             self.alert(Message: "Please select Pet Type and Breed")
         }else if self.view_petcolor.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet color")
@@ -388,7 +391,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                   "pet_gender" , Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
                   "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
                   "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-                  "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                  "pet_age" , Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
                   "vaccinated" , self.isvaccin,
                   "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
                   "default_status" , true,
@@ -507,7 +510,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
               "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
               "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
               "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+              "pet_age" , Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
               "vaccinated" , self.isvaccin,
               "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
               "default_status" , true,
@@ -529,7 +532,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                           "pet_gender" : Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
                           "pet_color" : Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
                           "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-                          "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                          "pet_age" : Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
                           "vaccinated" : self.isvaccin,
                           "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
                           "default_status" : true,
@@ -546,7 +549,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                           "pet_gender" : Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
                           "pet_color" : Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
                           "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-                          "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                          "pet_age" : Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
                           "vaccinated" : self.isvaccin,
                           "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
                           "default_status" : true,
@@ -564,7 +567,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         Servicefile.shared.petid = Data["_id"] as? String ?? ""
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_edit_otherinfo_ViewController") as! pet_edit_otherinfo_ViewController
+                        let vc = UIStoryboard.pet_edit_otherinfo_ViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -599,7 +602,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petimageUploadViewController") as! petimageUploadViewController
+                        let vc = UIStoryboard.petimageUploadViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

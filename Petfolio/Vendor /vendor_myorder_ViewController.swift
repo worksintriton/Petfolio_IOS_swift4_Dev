@@ -81,6 +81,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         }else{
             img = Servicefile.sample_img
         }
+       // self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.view_header.image_profile.image = UIImage(named: imagelink.sample)
@@ -94,9 +95,12 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.label_Fprocess_two.text = "Products"
-        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
        // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        
+        
+        
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
@@ -126,6 +130,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         if  Servicefile.shared.ordertype == "current" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -157,6 +162,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         } else  if  Servicefile.shared.ordertype == "Complete"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)
@@ -187,6 +193,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
+            cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.order_productdetail[indexPath.row].v_order_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.image_order.image = UIImage(named: imagelink.sample)

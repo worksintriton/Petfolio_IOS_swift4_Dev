@@ -13,7 +13,7 @@ class imagelink{
     static let favtrue = "Like 3"
     static let favfalse = "Like 2"
     //static let sample = "sample"
-    static let sample = "noimg"
+    static let sample = "Frame 27"
     
     static let selectedRadio = "selectedRadio"
     static let Radio = "Radio"
@@ -22,7 +22,7 @@ class imagelink{
     static let fav_true = "heart_read"
     static let fav_false = "heart_gray"
     // footer image
-    
+    static let success = "success"
     static let Home_gray = "nhome"
     static let home_blue = "home_blue"
     
@@ -94,9 +94,7 @@ class Servicefile {
     static let verifyemail = baseurl + "/api/userdetails/send/emailotp"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
     static let petregister = baseurl + "/api/petdetails/mobile/create"
-   
     static let login = baseurl + "/api/userdetails/mobile/login"
-    
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"
     static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard1"
     static let petdashboard_new = baseurl + "/api/userdetails/petlove/mobile/dashboardtest"
@@ -277,8 +275,8 @@ class Servicefile {
     var signupemail = ""
     var email_status_label = "Verify email"
     // Signup page
-    static let sample_bannerimg = "http://52.25.163.13:3000/api/uploads/banner_empty.jpg"
-    static let sample_img = "http://52.25.163.13:3000/api/uploads/Pic_empty.jpg"
+    static let sample_bannerimg = "http://54.212.108.156:3000/api/uploads/banner_empty.jpg"
+    static let sample_img = "http://54.212.108.156:3000/api/uploads/Pic_empty.jpg"
     
     // sprint 1
     
@@ -287,6 +285,7 @@ class Servicefile {
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
     var customview = UIView()
+    var cusstackview = UIStackView()
     var backview = UIView()
     var loadlabel = UILabel()
     var gifimg = UIImageView()
@@ -393,8 +392,11 @@ class Servicefile {
     // pet appointment params
     var pet_index = 0
     var pet_status = ""
+    var pet_save_for = "p" // p: profile // d: doctor appoint // S // sp appointment
     var lati = 0.0
     var long = 0.0
+    var imagequantity = 0.1
+    
     var selectedpickname = ""
     var selectedaddress = ""
     var selectedCity = ""
@@ -414,11 +416,13 @@ class Servicefile {
     var lightgray = "#cfd0d1"
     var extralightgray = "#f0f0f0"
     var shadowtop = "#ffffff"
+    var white = "#ffffff"
     var black = "#444444"
     var textcolor = "#444444"
     static let appblack = "#444444"
     static let appgray = "#AAAAAA"
     static let appred = "#FF0000"
+    static let appnewgrey = "#c3c3c3"
     var selrate = 0
     var selspec = ""
     var orgspecialza = [""]
@@ -888,11 +892,20 @@ class Servicefile {
 //      let secondsInWeek: Double = 604800
         let Months  = (ti / 2592000)
         let Years  = (ti / 31104000)
-        print("DOB differ",Years, Months)
-        let Ystr = Years >= 0 ? String(Years) + " years " : ""
-        let Mstr =  Months >= 0 ? String(Months) + " months" : String(1) + " months"
-        return Ystr + Mstr
+        let Ystr = Years >= 0 ? String(Years) : "0"
+        let Mstr =  Months >= 0 ? String(Months)  : String(1)
+        print("DOB differ",Ystr, Mstr)
+        var mont = 0
+        let gotmonth = Int(Mstr)!
+        if gotmonth > 12 {
+            let month = Int(Ystr)! * 12
+            mont =  gotmonth - month
+        }else{
+            mont = gotmonth
+        }
+        return Ystr + " years " + String(mont) + " months"
     }
+    
      func checkdaydiffer(sdate: Date, edate: Date)-> Bool{
             let differ = edate.timeIntervalSince(sdate)
             let ti = NSInteger(differ)

@@ -9,6 +9,7 @@
 
  import UIKit
  import Alamofire
+import SDWebImage
 
 class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
         
@@ -148,6 +149,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                 
                 let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_orderdetails_cancel_TableViewCell
                 cell.selectionStyle = .none
+                cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.image_order.image = UIImage(named: imagelink.sample)
@@ -181,6 +183,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
             }else{
                 let cell = tbl_prod_details.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! vendor_orderdetails_status_TableViewCell
                 cell.selectionStyle = .none
+                cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_order.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.orderdetail_prod[indexPath.row].product_image)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.image_order.image = UIImage(named: imagelink.sample)
@@ -390,6 +393,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                                 self.view_confirmall.isHidden = true
                                 }
                             self.prodcut_image = order_details["order_image"] as? String ?? Servicefile.sample_img
+                            self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                             self.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: self.prodcut_image)) { (image, error, cache, urls) in
                                     if (error != nil) {
                                         self.image_product.image = UIImage(named: imagelink.sample)

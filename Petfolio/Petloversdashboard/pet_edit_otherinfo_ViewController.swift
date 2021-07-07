@@ -128,6 +128,32 @@ class pet_edit_otherinfo_ViewController: UIViewController {
         self.view_next_btn.view_cornor()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if let firstVC = presentingViewController as? petloverDashboardViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+        if let firstVC = presentingViewController as? sppetselectdetailsViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+        
+        if let firstVC = presentingViewController as? searchpetappdetailViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+        if let firstVC = presentingViewController as? apppetdetailsViewController {
+            DispatchQueue.main.async {
+                firstVC.viewWillAppear(true)
+            }
+        }
+        
+        
+    }
+    
     @IBAction func action_btn_spray_true(_ sender: Any) {
         self.isspay = true
         self.img_spay_yes.image = UIImage(named: "selectedRadio")
@@ -246,10 +272,29 @@ class pet_edit_otherinfo_ViewController: UIViewController {
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        //        Servicefile.shared.tabbar_selectedindex = 2
-                                let tapbar = UIStoryboard.petloverDashboardViewController()
-                        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                                self.present(tapbar, animated: true, completion: nil)
+                       
+                        if Servicefile.shared.pet_save_for == "p" {
+                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                    let tapbar = UIStoryboard.petloverDashboardViewController()
+                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                    self.present(tapbar, animated: true, completion: nil)
+                        }else if Servicefile.shared.pet_save_for == "s" {
+                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                    let tapbar = UIStoryboard.sppetselectdetailsViewController()
+                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                    self.present(tapbar, animated: true, completion: nil)
+                        }else if Servicefile.shared.pet_save_for == "sd" {
+                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                    let tapbar = UIStoryboard.searchpetappdetailViewController()
+                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                    self.present(tapbar, animated: true, completion: nil)
+                        }else{
+                            //        Servicefile.shared.tabbar_selectedindex = 2
+                                    let tapbar = UIStoryboard.apppetdetailsViewController()
+                            //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+                                    self.present(tapbar, animated: true, completion: nil)
+                        }
+                        
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -295,7 +340,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "peteditandadduploadimgViewController") as! peteditandadduploadimgViewController
+                        let vc = UIStoryboard.peteditandadduploadimgViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

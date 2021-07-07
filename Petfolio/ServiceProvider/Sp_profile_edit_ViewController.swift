@@ -12,6 +12,7 @@ import Alamofire
 import Toucan
 import MobileCoreServices
 import CoreLocation
+import SDWebImage
 
 class Sp_profile_edit_ViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate , UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -104,6 +105,10 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         self.textfield_Bus_name.delegate = self
         self.textfield_spec.delegate = self
         self.textfield_amt.delegate = self
+        
+        self.textfield_servicename.autocapitalizationType = .sentences
+        self.textfield_Bus_name.autocapitalizationType = .sentences
+            
         self.collectiondelegate()
     }
     
@@ -170,7 +175,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     
     @IBAction func action_change_location(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        let vc = UIStoryboard.Doc_new_setlocation_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -472,6 +477,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             
             let imgdat = Servicefile.shared.gallerydicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
+            cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: (imgdat["bus_service_gall"]  as? String ?? Servicefile.sample_img))) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.Img_id.image = UIImage(named: imagelink.sample)
@@ -492,6 +498,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             let imgdat = Servicefile.shared.certifdicarray[indexPath.row] as! NSDictionary
             let strdat = imgdat["bus_certif"] as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -525,6 +532,18 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(sel_spec), for: .touchUpInside)
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if coll_galary_img == collectionView {
+            return CGSize(width: 100 , height:  100)
+        }else if coll_certificate == collectionView {
+            return CGSize(width: 100 , height:  100)
+        }else if coll_speclist == collectionView {
+            return CGSize(width: self.coll_speclist.frame.width / 2.1 , height:  40)
+        }else{
+            return CGSize(width: 100 , height:  40)
         }
     }
     
@@ -585,7 +604,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     
     func spilit_string_data(array_string: String)-> String{
-        var str = array_string.split(separator: ".")
+        let str = array_string.split(separator: ".")
         if str.last == "pdf" {
             return "pdf"
         }else if str.last == "PDF" {
@@ -600,6 +619,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             self.image_photo_id.isHidden = false
             let strdat = self.image_photo as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_photo_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 self.image_photo_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         self.image_photo_id.image = UIImage(named: Servicefile.sample_img)
@@ -621,6 +641,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             self.image_gov.isHidden = false
             let strdat = self.image_govid as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_gov.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 self.image_gov.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         self.image_gov.image = UIImage(named: Servicefile.sample_img)
@@ -657,7 +678,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -676,7 +697,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -708,7 +729,8 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: pickedImg)
+            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+            self.upload(imagedata: convertimg!)
         }
         dismiss(animated: true, completion: nil)
     }

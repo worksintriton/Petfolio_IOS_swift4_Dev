@@ -78,10 +78,13 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         self.callpetdetailget()
         self.view_pet.textfield_value.delegate = self
         self.view_Petname.textfield_value.delegate = self
+        self.view_Petname.textfield_value.autocapitalizationType = .sentences
         self.view_petbio.textfield_value.delegate = self
+        self.view_petbio.textfield_value.autocapitalizationType = .sentences
         self.view_petweight.textfield_value.delegate = self
         self.textfiled_petage.delegate = self
         self.view_petcolor.textfield_value.delegate = self
+        self.view_petcolor.textfield_value.autocapitalizationType = .sentences
         
         
         self.view_calender.isHidden = true
@@ -132,7 +135,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func action_getpet(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "getpetViewController") as! getpetViewController
+        let vc = UIStoryboard.getpetViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -537,7 +540,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         Servicefile.shared.petid = Data["_id"] as? String ?? ""
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_other_information_ViewController") as! pet_other_information_ViewController
+                        let vc = UIStoryboard.pet_other_information_ViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -572,7 +575,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "petimageUploadViewController") as! petimageUploadViewController
+                        let vc = UIStoryboard.petimageUploadViewController()
                         self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Cosmos
+import SDWebImage
 
 
 class Doc_productdetails_ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -105,10 +106,10 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                if self.pagcount == self.product_img.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_product_img.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_product_img.scrollToItem(at: indexPath, at: .right, animated: false)
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_product_img.scrollToItem(at: indexPath, at: .left, animated: true)
+                   self.coll_product_img.scrollToItem(at: indexPath, at: .left, animated: false)
                }
            self.pagecontroller.currentPage = self.pagcount
               
@@ -210,6 +211,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
             
             if collectionView == coll_product_img {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
+                cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: self.product_img[indexPath.row])) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.img_banner.image = UIImage(named: imagelink.sample)
@@ -239,7 +241,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                 }
                 
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
-                   
+                cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
                            cell.image_product.image = UIImage(named: imagelink.sample)
@@ -268,8 +270,8 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
              if coll_product_img != collectionView {
                 Servicefile.shared.product_id = Servicefile.shared.vendor_product_id_details[indexPath.row]._id
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_productdetails_ViewController") as!  Doc_productdetails_ViewController
-            self.present(vc, animated: true, completion: nil)
+                let vc = UIStoryboard.Doc_productdetails_ViewController()
+                              self.present(vc, animated: true, completion: nil)
             }
         }
 }
@@ -426,8 +428,8 @@ extension Doc_productdetails_ViewController {
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_vendorcartpageViewController") as!  doc_vendorcartpageViewController
-                               self.present(vc, animated: true, completion: nil)
+                        let vc = UIStoryboard.doc_vendorcartpageViewController()
+                        self.present(vc, animated: true, completion: nil)
                            self.stopAnimatingActivityIndicator()
                        }else{
                            

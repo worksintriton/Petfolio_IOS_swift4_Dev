@@ -49,6 +49,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
          self.tbl_searchlist.isHidden = true
         self.view_setloca.dropShadow()
         self.view_footer.dropShadow()
+        self.textfield_search.autocapitalizationType = .sentences
         // Do any additional setup after loading the view.
         self.textfield_search.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
@@ -71,7 +72,7 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     }
     
     @IBAction func action_sos(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SOSViewController") as! SOSViewController
+        let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -160,8 +161,8 @@ class locationsettingViewController: UIViewController, GMSMapViewDelegate, CLLoc
     
     @IBAction func action_setlocation(_ sender: Any) {
         if Servicefile.shared.long != 0.0 {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "savelocationViewController") as! savelocationViewController
-                   self.present(vc, animated: true, completion: nil)
+            let vc = UIStoryboard.savelocationViewController()
+            self.present(vc, animated: true, completion: nil)
         }else{
             self.alert(Message: "please select the location")
         }

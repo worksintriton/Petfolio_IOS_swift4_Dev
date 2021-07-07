@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class pet_notification_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,6 +18,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     
     var selcted = ["0"]
     var orginal = ["0"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -26,13 +28,14 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
         self.selcted.removeAll()
         self.orginal.removeAll()
         self.callnotification()
+        self.intial_setup_action()
         // Do any additional setup after loading the view.
     }
     
     func intial_setup_action(){
     // header action
         self.view_header.label_title.text = "Notifcation"
-        self.view_header.label_title.textColor = .white
+        self.view_header.label_title.textColor = .black
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
     // header action
     }
@@ -52,6 +55,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
             cell.view_main.view_cornor()
             cell.view_main.dropShadow()
             if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
+                cell.image_noti.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_noti.image = UIImage(named: "logo")
@@ -74,6 +78,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
             cell.view_main.view_cornor()
             cell.view_main.dropShadow()
             if Servicefile.shared.notif_list[indexPath.row].notify_img != "" {
+                cell.image_noti.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_noti.image = UIImage(named: "logo")

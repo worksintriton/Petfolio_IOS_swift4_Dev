@@ -99,12 +99,12 @@ class sp_app_details_page_ViewController: UIViewController  {
        }
        
        @IBAction func action_notifi(_ sender: Any) {
-           let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_notification_ViewController") as! pet_notification_ViewController
-                  self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard.pet_notification_ViewController()
+        self.present(vc, animated: true, completion: nil)
        }
     
     @IBAction func action_Start_confrence(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to start te call", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callstart_confrence()
         }))
@@ -153,9 +153,8 @@ class sp_app_details_page_ViewController: UIViewController  {
        }
     
     func callconfrence(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_confrence_ViewController") as! Doc_confrence_ViewController
+        let vc = UIStoryboard.Doc_confrence_ViewController()
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     
@@ -287,6 +286,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                         self.label_petType.text = pet_id["pet_type"] as? String ?? ""
                         self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
                         let petimage = pet_id["pet_img"] as? String ?? ""
+                        self.image_pet_img.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                         self.image_pet_img.sd_setImage(with: Servicefile.shared.StrToURL(url: petimage)) { (image, error, cache, urls) in
                             if (error != nil) {
                                 self.image_pet_img.image = UIImage(named: imagelink.sample)
@@ -307,6 +307,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
+                            self.image_holder_name.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                             self.image_holder_name.sd_setImage(with: Servicefile.shared.StrToURL(url: userimage!)) { (image, error, cache, urls) in
                                 if (error != nil) {
                                     self.image_holder_name.image = UIImage(named: imagelink.sample)

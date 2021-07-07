@@ -12,6 +12,7 @@ import Toucan
 import MobileCoreServices
 import CoreLocation
 import AASignatureView
+import SDWebImage
 
 class regdocViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
     
@@ -198,6 +199,18 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.textfield_spec.delegate = self
         self.textfield_pethandle.delegate = self
         self.textfield_ser_amt.delegate = self
+            
+            
+        
+            
+        
+        self.textview_clinicaddress.autocapitalizationType = .sentences
+        self.textfield_clinicname.autocapitalizationType = .sentences
+        self.textfield_education.autocapitalizationType = .sentences
+        self.textfield_exp_company.autocapitalizationType = .sentences
+        
+        
+        
         
         self.datepicker_date.datePickerMode = .date
         self.datepicker_expdate.datePickerMode = .date
@@ -620,6 +633,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         if let setimage = view_signature_lib.signature {
             //self.image_signature.image = setimage
             self.Img_uploadarea = "sign"
+            
             self.upload(imagedata: setimage)
         }
         self.view_signature.isHidden = true
@@ -627,6 +641,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func set_signa_image(strimage: String){
+        self.image_signature.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.image_signature.sd_setImage(with: Servicefile.shared.StrToURL(url: strimage)) { (image, error, cache, urls) in
             if (error != nil) {
                 self.image_signature.image = UIImage(named: imagelink.sample)
@@ -710,7 +725,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_movetocalender(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Reg_calender_ViewController") as! Reg_calender_ViewController
+        let vc = UIStoryboard.Reg_calender_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -813,6 +828,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let imgdat = Servicefile.shared.govdicarray[indexPath.row] as! NSDictionary
             let strdat = imgdat["govt_id_pic"] as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -842,6 +858,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let imgdat = Servicefile.shared.photodicarray[indexPath.row] as! NSDictionary
             let strdat = imgdat["photo_id_pic"] as? String ?? Servicefile.sample_img
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -875,6 +892,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let strdat = imgdat["certificate_pic"] as? String ?? Servicefile.sample_img
             print("details",self.spilit_string_data(array_string: strdat))
             if self.spilit_string_data(array_string: strdat) == "" {
+                cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: Servicefile.sample_img)
@@ -895,6 +913,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let imgdat = Servicefile.shared.clinicdicarray[indexPath.row] as! NSDictionary
             print("clinic data in", imgdat)
             let strdat = imgdat["clinic_pic"] as? String ?? Servicefile.sample_img
+            cell.Img_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.Img_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.Img_id.image = UIImage(named: "pdf")
@@ -1032,7 +1051,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -1051,7 +1070,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Pick from Gallary", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
             self.imagepicker.allowsEditing = false
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
@@ -1070,7 +1089,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            self.upload(imagedata: pickedImg)
+            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+            self.upload(imagedata: convertimg!)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -1234,6 +1254,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     func setclinicimag(){
         if self.clinicpic != "" {
+            self.Img_clinic.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             self.Img_clinic.sd_setImage(with: Servicefile.shared.StrToURL(url: self.clinicpic)) { (image, error, cache, urls) in
                 if (error != nil) {
                     self.Img_clinic.image = UIImage(named: imagelink.sample)
@@ -1248,8 +1269,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBAction func action_change_location(_ sender: Any) {
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Doc_new_setlocation_ViewController") as! Doc_new_setlocation_ViewController
+        let vc = UIStoryboard.Doc_new_setlocation_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -1384,8 +1404,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func spilit_string_data(array_string: String)-> String{
-        var str = array_string.split(separator: ".")
+        let str = array_string.split(separator: ".")
         if str.last == "pdf" {
+            return "pdf"
+        }else if str.last == "PDF" {
             return "pdf"
         }else{
             return ""

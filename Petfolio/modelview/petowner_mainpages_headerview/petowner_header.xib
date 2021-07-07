@@ -129,21 +129,21 @@
                             <rect key="frame" x="364" y="10" width="40" height="40"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group55" translatesAutoresizingMaskIntoConstraints="NO" id="7EX-xu-auY">
-                                    <rect key="frame" x="4" y="4" width="32" height="32"/>
+                                    <rect key="frame" x="10" y="10" width="20" height="20"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2E-x1-atT">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="7EX-xu-auY" firstAttribute="centerY" secondItem="dCX-7c-G7L" secondAttribute="centerY" id="2HU-Lh-tLD"/>
-                                <constraint firstItem="7EX-xu-auY" firstAttribute="height" secondItem="dCX-7c-G7L" secondAttribute="height" multiplier="0.8" id="7Yh-TV-9Tc"/>
+                                <constraint firstItem="7EX-xu-auY" firstAttribute="height" secondItem="dCX-7c-G7L" secondAttribute="height" multiplier="0.5" id="7Yh-TV-9Tc"/>
                                 <constraint firstAttribute="height" constant="40" id="9R2-ah-pzf"/>
                                 <constraint firstAttribute="trailing" secondItem="V2E-x1-atT" secondAttribute="trailing" id="AYZ-J7-ykj"/>
                                 <constraint firstAttribute="bottom" secondItem="V2E-x1-atT" secondAttribute="bottom" id="Eci-IK-Kw8"/>
-                                <constraint firstItem="7EX-xu-auY" firstAttribute="width" secondItem="dCX-7c-G7L" secondAttribute="width" multiplier="0.8" id="RjX-co-VBe"/>
+                                <constraint firstItem="7EX-xu-auY" firstAttribute="width" secondItem="dCX-7c-G7L" secondAttribute="width" multiplier="0.5" id="RjX-co-VBe"/>
                                 <constraint firstItem="V2E-x1-atT" firstAttribute="leading" secondItem="dCX-7c-G7L" secondAttribute="leading" id="YBg-HO-gak"/>
                                 <constraint firstItem="7EX-xu-auY" firstAttribute="centerX" secondItem="dCX-7c-G7L" secondAttribute="centerX" id="bPA-D4-LLa"/>
                                 <constraint firstItem="V2E-x1-atT" firstAttribute="top" secondItem="dCX-7c-G7L" secondAttribute="top" id="mSp-LD-MmV"/>

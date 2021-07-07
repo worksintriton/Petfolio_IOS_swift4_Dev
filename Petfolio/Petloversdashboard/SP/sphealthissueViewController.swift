@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class sphealthissueViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -41,7 +42,7 @@ class sphealthissueViewController: UIViewController, UICollectionViewDelegateFlo
         cell.label_title.text = data["health_issue_title"] as? String ?? ""
       
         let image = data["health_issue_img"] as? String ?? Servicefile.sample_img
-           
+        cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_data.image = UIImage(named: imagelink.sample)

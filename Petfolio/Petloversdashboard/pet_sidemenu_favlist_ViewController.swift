@@ -40,7 +40,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "My Favourite"
+        self.view_subpage_header.label_header_title.text = "Favorites"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -388,8 +388,9 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
                             let product_rate = String(Bval["product_rating"] as? Float ?? 0.0) //?? ""
                             let review_count = Bval["product_review"] as? Int ?? 0
                             let product_title = Bval["product_title"] as? String ?? ""
+                            let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
 //                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
-                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name))
+                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image))
                            
                         }
                         if Servicefile.shared.petnewprod.count > 0 {

@@ -242,7 +242,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                             let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
-                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                            let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                         }
                         for cat_prod_deta in 0..<Product_details.count{
                             let catval = Product_details[cat_prod_deta] as! NSDictionary
@@ -260,7 +261,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                                 let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
                                 let product_review = String(prodval["product_review"] as? Int ?? 0)
                                 let product_title = prodval["product_title"] as? String ?? ""
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                                let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0 {
                                 Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))

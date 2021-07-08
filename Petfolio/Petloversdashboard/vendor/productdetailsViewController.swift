@@ -280,7 +280,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                     cell.image_fav.image = UIImage(named: imagelink.fav_false)
                 }
                 
-               if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
+                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].thumbnail_image) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
@@ -397,8 +397,9 @@ extension productdetailsViewController {
                             let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
                             let product_review = String(prodval["product_review"] as? Int ?? 0)
                             let product_title = prodval["product_title"] as? String ?? ""
+                            let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
                             self.label_product_title.text =  product_title
-                            Servicefile.shared.vendor_product_id_details.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                            Servicefile.shared.vendor_product_id_details.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                         }
                         
                        

@@ -1009,7 +1009,8 @@ struct Petnewdashproduct{
     var cat_names : String
     var products_img : String
     var review_count : Int
-    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int, cat_name: String) {
+    var thumbnail_image : String
+    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int, cat_name: String, Ithumbnail_image : String) {
         self._id = UID
         self.product_fav_status = product_fav_status
         self.product_offer_status = product_offer_status
@@ -1020,6 +1021,7 @@ struct Petnewdashproduct{
         self.products_img = products_img
         self.review_count = review_count
         self.cat_names = cat_name
+        self.thumbnail_image = Ithumbnail_image
 
     }
 }
@@ -1651,6 +1653,7 @@ struct productdetails{
     var product_rating : String
     var product_review : String
     var product_title : String
+    var thumbnail_image : String
     init(In_id : String,
     In_product_discount : Int,
     In_product_fav : Bool,
@@ -1658,7 +1661,7 @@ struct productdetails{
     In_product_price : Int,
     In_product_rating : String,
     In_product_review : String,
-    In_product_title : String) {
+    In_product_title : String, In_thumbnail_image: String) {
         self._id = In_id
         self.product_discount = In_product_discount
         self.product_fav = In_product_fav
@@ -1667,6 +1670,7 @@ struct productdetails{
         self.product_rating = In_product_rating
         self.product_review = In_product_review
         self.product_title = In_product_title
+        self.thumbnail_image = In_thumbnail_image
     }
 }
 
@@ -1734,6 +1738,7 @@ struct order_productdetails {
     let v_completed_date : String
     let v_user_feedback : String
     let v_user_rate : Int
+    
     init(In_v_order_booked_on : String,
          In_v_order_id : String,
          In_v_order_image : String,

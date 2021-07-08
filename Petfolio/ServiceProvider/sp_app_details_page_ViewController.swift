@@ -84,7 +84,7 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.view_header.view_bag.isHidden = true
     // header action
     // footer action
-        self.view_footer.setup(b1: false, b2: true, b3: false)
+        self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)

@@ -149,9 +149,9 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
                 cell.label_offer.text = String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount) + " % off"
             }
             //cell.image_product.image = UIImage(named: imagelink.sample)
-            if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img) {
+            if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_productdetails[indexPath.row].thumbnail_image) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_productdetails[indexPath.row].product_img)) { (image, error, cache, urls) in
+                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_productdetails[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.image_product.image = UIImage(named: imagelink.sample)
                     } else {
@@ -207,7 +207,8 @@ extension ProductdealsViewController {
                             let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
                             let product_review = String(prodval["product_review"] as? Int ?? 0)
                             let product_title = prodval["product_title"] as? String ?? ""
-                            Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                            let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                         }
                         if Servicefile.shared.sp_dash_productdetails.count > 0 {
                             self.label_noproduct.isHidden = true
@@ -260,7 +261,8 @@ extension ProductdealsViewController {
                             let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
-                            Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                            let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                         }
                         if Servicefile.shared.sp_dash_productdetails.count > 0{
                             self.label_noproduct.isHidden = true

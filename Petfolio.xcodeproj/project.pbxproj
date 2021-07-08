@@ -162,6 +162,8 @@
 		84BA81AC26526B3400BFA01B /* pet_paymentdetails_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA81AB26526B3400BFA01B /* pet_paymentdetails_ViewController.swift */; };
 		84BA81B02652806C00BFA01B /* doc_paymentdetilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA81AF2652806C00BFA01B /* doc_paymentdetilsViewController.swift */; };
 		84BB273D265FB31C00F92404 /* doc_preview_prescription_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */; };
+		84BF704F26974F6700306C63 /* previewdocpresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BF704D26974F6700306C63 /* previewdocpresTableViewCell.swift */; };
+		84BF705026974F6700306C63 /* previewdocpresTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BF704E26974F6700306C63 /* previewdocpresTableViewCell.xib */; };
 		84C46CF725F7412200808FBB /* ProductdealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C46CF625F7412200808FBB /* ProductdealsViewController.swift */; };
 		84C6A399264FA1DA00DBE200 /* doc_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */; };
 		84C6A3A7264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */; };
@@ -528,6 +530,8 @@
 		84BA81AB26526B3400BFA01B /* pet_paymentdetails_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_paymentdetails_ViewController.swift; sourceTree = "<group>"; };
 		84BA81AF2652806C00BFA01B /* doc_paymentdetilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_paymentdetilsViewController.swift; sourceTree = "<group>"; };
 		84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_preview_prescription_ViewController.swift; sourceTree = "<group>"; };
+		84BF704D26974F6700306C63 /* previewdocpresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewdocpresTableViewCell.swift; sourceTree = "<group>"; };
+		84BF704E26974F6700306C63 /* previewdocpresTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = previewdocpresTableViewCell.xib; sourceTree = "<group>"; };
 		84C46CF625F7412200808FBB /* ProductdealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductdealsViewController.swift; sourceTree = "<group>"; };
 		84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_fav_cell_CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -812,6 +816,7 @@
 		84056648261862D80099A26D /* Customcell */ = {
 			isa = PBXGroup;
 			children = (
+				84BF704C26974F2500306C63 /* previewdocpresview */,
 				840D8172268C97CA00A77E8F /* docpresview */,
 				840D8109268C3E1C00A77E8F /* docaddpresc */,
 				8479DF0C268B52F30009EBD7 /* Docnew */,
@@ -1134,6 +1139,15 @@
 				84951E9C26807A2B001F526D /* getbreedTableViewCell.xib */,
 			);
 			path = getbreedview;
+			sourceTree = "<group>";
+		};
+		84BF704C26974F2500306C63 /* previewdocpresview */ = {
+			isa = PBXGroup;
+			children = (
+				84BF704D26974F6700306C63 /* previewdocpresTableViewCell.swift */,
+				84BF704E26974F6700306C63 /* previewdocpresTableViewCell.xib */,
+			);
+			path = previewdocpresview;
 			sourceTree = "<group>";
 		};
 		84C6A39C264FA92F00DBE200 /* product_cell */ = {
@@ -1703,6 +1717,7 @@
 				B094D26C255D6221008400D6 /* Futura Medium Italic font.ttf in Resources */,
 				84E11996263ADC3E004981B7 /* catwalk2.gif in Resources */,
 				842D442626429EA100325795 /* spec_details_page_CollectionViewCell.xib in Resources */,
+				84BF705026974F6700306C63 /* previewdocpresTableViewCell.xib in Resources */,
 				B094D273255D6221008400D6 /* Futura-CondensedLight.otf in Resources */,
 				B094D266255D6221008400D6 /* Futura Bold Italic font.ttf in Resources */,
 				8479DF10268B530D0009EBD7 /* docnewTableViewCell.xib in Resources */,
@@ -1962,6 +1977,7 @@
 				8418898D262D520300CA9A13 /* petowner_header.swift in Sources */,
 				84BA812E265238FC00BFA01B /* sp_locationsetting_ViewController.swift in Sources */,
 				B08F731B2563EC5000AEB8CC /* petbannerCollectionViewCell.swift in Sources */,
+				84BF704F26974F6700306C63 /* previewdocpresTableViewCell.swift in Sources */,
 				84568DA2264E6F0C00379C23 /* pet_sidemenu_favlist_ViewController.swift in Sources */,
 				B02D3A812593019A0010A4B6 /* paymentpageViewController.swift in Sources */,
 				842E27A8260B6D030026D7B6 /* mangeproduct_withoutvalTableViewCell.swift in Sources */,

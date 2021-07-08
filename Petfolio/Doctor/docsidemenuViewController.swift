@@ -19,7 +19,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     
     var labelmenu = [""]
     var imgmenu = [""]
-//  self.labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+//  self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
 //    self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,11 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","My Coupons","Payment Details","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","My Coupons","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","Discount","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","My Coupons","Payment Details","Notification", "Logout"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","My Coupons","Payment Details","Notifications", "Logout"]
             self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","Discount","PaymentDetails","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
@@ -75,10 +75,10 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = UIStoryboard.doc_myorderdetails_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Favorities"{
+        }else if self.labelmenu[indexPath.row] == "Favorites"{
             let vc = UIStoryboard.doc_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Notification"{
+        }else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Payment Details"{

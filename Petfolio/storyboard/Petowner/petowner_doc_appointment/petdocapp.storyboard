@@ -8530,17 +8530,6 @@
             <point key="canvasLocation" x="9599" y="884"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="CXw-hv-oIH">
-            <size key="intrinsicContentSize" width="170" height="30"/>
-        </designable>
-        <designable name="ETo-87-jD9">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="Qa0-T3-phM">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="AddAddress" width="161" height="161"/>
         <image name="Icon_map_pin" width="12.5" height="15.5"/>

@@ -22,12 +22,12 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","Calendar","suitcase","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointment","My calender","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Doc","Calendar","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorities","Notification", "Logout"]
-            self.imgmenu = ["Doc","Calendar","suitcase","Doc","Like","Discount","Bell", "Exit"]
+            self.labelmenu = ["My Appointment","My calender","My Orders","Favorites","Notifications", "Logout"]
+            self.imgmenu = ["Doc","Calendar","Doc","Like","Discount","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -70,16 +70,18 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         }else if self.labelmenu[indexPath.row] == "My Appointment" {
             let vc = UIStoryboard.Sp_dash_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Favorities" {
+        }else if self.labelmenu[indexPath.row] == "Favorites" {
             let vc = UIStoryboard.sp_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = UIStoryboard.sp_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Manage Services" {
-            let vc = UIStoryboard.Sp_profile_edit_ViewController()
-            self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Notification"{
+        }
+//        else if self.labelmenu[indexPath.row] == "Manage Services" {
+//            let vc = UIStoryboard.Sp_profile_edit_ViewController()
+//            self.present(vc, animated: true, completion: nil)
+//        }
+        else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{

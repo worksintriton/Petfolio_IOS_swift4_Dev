@@ -107,11 +107,11 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
     
      func intial_setup_action(){
      // header action
-         self.view_subpage_header.label_header_title.text = "Orders detail"
+         self.view_subpage_header.label_header_title.text = "Favorites"
          self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
          self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
          self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
-        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
          self.view_subpage_header.view_sos.isHidden = true
          self.view_subpage_header.view_bag.isHidden = true
      // header action
@@ -157,7 +157,8 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
                             let product_title = Bval["product_title"] as? String ?? ""
 //                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
                             self.isselect.append("0")
-                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name))
+                            let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image))
                            
                         }
                         self.isorgiselect = self.isselect

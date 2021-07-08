@@ -93,6 +93,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.view_profile.layer.cornerRadius = self.view_header.view_profile.frame.height / 2
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
+        self.view_header.btn_button2.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.label_Fprocess_one.text = "Manage Products"
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
@@ -522,7 +523,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                             let v_completed_date = itmval["v_completed_date"] as? String ?? ""
                             let v_user_feedback = itmval["v_user_feedback"] as? String ?? ""
                             let v_user_rate = itmval["v_user_rate"] as? Int ?? 0
-                            
+                            let thumbnail_image = itmval["thumbnail_image"] as? String ?? ""
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                         }
@@ -552,6 +553,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func callcomm(){
+        
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_new_orderlist, method: .post, parameters:
@@ -828,7 +830,7 @@ extension UIViewController {
     }
     
     @objc func vendorprofile(sender : UIButton){
-        let vc = UIStoryboard.vendor_sidemenu_ViewController()
+        let vc = UIStoryboard.vendor_profile_view_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     

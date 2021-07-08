@@ -119,7 +119,7 @@ class Doc_detailspage_ViewController: UIViewController {
     // header action
         self.view_header.label_header_title.text = "My Appointment"
         self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_header.btn_back.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_header.view_profile.isHidden = true
         self.view_header.view_sos.isHidden = true
         self.view_header.view_bel.isHidden = true

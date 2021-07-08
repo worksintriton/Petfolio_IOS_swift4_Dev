@@ -294,7 +294,8 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 self.label_service_com_name.text = Servicefile.shared.sp_bussiness_name
                                                                 self.label_serview_provider.text = bus_user_name
                                                                 self.label_location.text = Servicefile.shared.sp_loc
-                                                                self.label_distance.text = Servicefile.shared.sp_distance + " Km away"
+                                                                self.label_distance.text = String(Servicefile.shared.pet_SP_service_details[Servicefile.shared.service_index].distance) + " Km away"
+                                                                
                                                                 self.col_pet_ser.reloadData()
                                                                 //self.label_description.text = ""
                                                                 self.coll_service.reloadData()

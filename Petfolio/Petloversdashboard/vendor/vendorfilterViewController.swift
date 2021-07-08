@@ -237,10 +237,11 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
                             let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
+                            let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
                             if Servicefile.shared.today_deals_status {
-                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                             }else{
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title))
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
                             }
                         }
                         self.stopAnimatingActivityIndicator()

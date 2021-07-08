@@ -274,6 +274,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.col_shop.dataSource = self
         self.col_banner.isPagingEnabled = true
     }
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -373,7 +375,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
             cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
+            cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_product.image = UIImage(named: imagelink.sample)
                 } else {
@@ -663,8 +665,9 @@ extension petloverDashboardViewController {
                             let product_rate = String(Bval["product_rating"] as? Float ?? 0.0) //?? ""
                             let review_count = Bval["product_review"] as? Int ?? 0
                             let product_title = Bval["product_title"] as? String ?? ""
+                            let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
 //                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
-                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name))
+                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image))
                            
                         }
                         Servicefile.shared.Petpuppylove.removeAll()

@@ -22,10 +22,10 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorities","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notification", "Logout"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout"]
             self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit"]
         }
         
@@ -66,14 +66,16 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = UIStoryboard.Petlover_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Payment Details"{
-            self.dismiss(animated: true, completion: nil)
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_paymentdetails_ViewController") as! pet_paymentdetails_ViewController
-//            self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Notification"{
+        }
+//        else if self.labelmenu[indexPath.row] == "Payment Details"{
+//            self.dismiss(animated: true, completion: nil)
+////            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_paymentdetails_ViewController") as! pet_paymentdetails_ViewController
+////            self.present(vc, animated: true, completion: nil)
+//        }
+        else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Favorities"{
+        }else if self.labelmenu[indexPath.row] == "Favorites"{
             let vc = UIStoryboard.pet_sidemenu_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Medical History"{

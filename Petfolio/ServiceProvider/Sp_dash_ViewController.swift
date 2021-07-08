@@ -91,7 +91,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.sp_header.image_profile.layer.cornerRadius = self.sp_header.image_profile.frame.height / 2
         self.sp_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
         self.sp_header.btn_location.addTarget(self, action: #selector(self.spmanageaddress), for: .touchUpInside)
-        self.sp_header.btn_button2.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+        self.sp_header.btn_button2.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)

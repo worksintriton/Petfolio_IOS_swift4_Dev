@@ -25,11 +25,11 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","Notification", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","Notification", "Logout"]
-            self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Bell", "Exit"]
+            self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout"]
+            self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit"]
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
@@ -69,7 +69,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         if self.labelmenu[indexPath.row] == "Manage Products" {
             let vc = UIStoryboard.vendor_manage_product_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Notification"{
+        }else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{

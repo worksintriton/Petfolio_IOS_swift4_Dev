@@ -34,7 +34,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     
     func intial_setup_action(){
     // header action
-        self.view_header.label_title.text = "Notifcation"
+        self.view_header.label_title.text = "Notifcations"
         self.view_header.label_title.textColor = .black
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
     // header action

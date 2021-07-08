@@ -207,6 +207,8 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = indexPath.row
+        Servicefile.shared.service_index = tag
+        
         Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[tag]._id
         let vc = UIStoryboard.pet_sp_service_details_ViewController()
         self.present(vc, animated: true, completion: nil)
@@ -214,6 +216,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     
     @objc func action_appointment(sender: UIButton){
         let tag = sender.tag
+        Servicefile.shared.service_index = tag
         Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[tag]._id
         let vc = UIStoryboard.pet_sp_service_details_ViewController()
         self.present(vc, animated: true, completion: nil)

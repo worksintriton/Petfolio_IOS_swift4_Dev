@@ -56,6 +56,12 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
             view.endEditing(true)
         }
     
+    @IBAction func action_bac(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     @objc func updateCounter() {
         self.secondstext.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
          if counter > 0 {

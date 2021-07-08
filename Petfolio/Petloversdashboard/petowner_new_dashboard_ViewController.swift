@@ -85,7 +85,22 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
+            case .notDetermined:
+//                let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+                self.locationManager.requestAlwaysAuthorization()
+                self.locationManager.requestWhenInUseAuthorization()
+                if CLLocationManager.locationServicesEnabled() {
+
+                        locationManager.delegate = self
+                        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                        locationManager.startUpdatingLocation()
+                    }
+            break
+            case .restricted, .denied:
                 let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -101,6 +116,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                 }))
                 self.present(alert, animated: true, completion: nil)
+              
             }
         }else{
             let alert = UIAlertController(title: "Please turn on Your Location for service", message: "", preferredStyle: .alert)
@@ -109,6 +125,15 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        self.latitude = locValue.latitude
+        self.longitude = locValue.longitude
+        self.latLong(lat: self.latitude,long: self.longitude)
+        self.locationManager.stopUpdatingLocation()
     }
     
     func intial_setup_action(){
@@ -317,7 +342,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else if self.col_vet == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
             cell.image_vet.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].doctor_img)) { (image, error, cache, urls) in
+            cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_vet.image = UIImage(named: imagelink.sample)
                 } else {
@@ -615,7 +640,8 @@ extension petloverDashboardViewController {
                             let spec = Dicspec["specialization"] as? String ?? ""
                             let clinic_name = Bval["clinic_name"] as? String ?? ""
                             let fav = Bval["fav"] as? Bool ?? false
-                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name, Ifav : fav))
+                            let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name, Ifav : fav, Ithumbnail_image: thumbnail_image))
                         }
                         Servicefile.shared.petnewprod.removeAll()
                         let Products_details = dash["Products_details"] as! NSArray

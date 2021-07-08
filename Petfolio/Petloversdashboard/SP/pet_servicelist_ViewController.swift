@@ -188,7 +188,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         cell.label_offer.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_offer) + "% offer"
         cell.label_sp_name.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name
         cell.img_sp.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        cell.img_sp.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].image)) { (image, error, cache, urls) in
+        cell.img_sp.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.pet_SP_service_details[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_sp.image = UIImage(named: imagelink.sample)
             } else {
@@ -270,7 +270,8 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                             let service_place = itmval["service_place"] as? String ?? ""
                             let service_price = Int(truncating: itmval["service_price"] as? NSNumber ?? 0)
                             let service_provider_name = itmval["service_provider_name"] as? String ?? ""
-                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name))
+                            let thumbnail_image = itmval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name, in_thumbnail_image: thumbnail_image))
                         }
                         if Servicefile.shared.pet_SP_service_details.count > 0 {
                             self.label_nodatafound.isHidden = true

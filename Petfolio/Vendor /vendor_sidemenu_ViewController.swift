@@ -17,8 +17,8 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var label_user: UILabel!
     @IBOutlet weak var label_email: UILabel!
     
-     var labelmenu = [""]
-     var imgmenu = [""]
+    var labelmenu = [""]
+    var imgmenu = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +31,18 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
             self.labelmenu = ["Customer Orders","Manage Products","My Orders","Favorities","Notification", "Logout"]
             self.imgmenu = ["Doc","shop-1","Doc","Like","Discount","Bell", "Exit"]
         }
-        
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
-        // Do any additional setup after loading the view.
     }
     
     
-       @IBAction func action_edit(_ sender: Any) {
+    @IBAction func action_edit(_ sender: Any) {
         let vc = UIStoryboard.vendor_profile_view_ViewController()
-                  self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
         
-       }
+    }
     
     @IBAction func action_dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -70,7 +68,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "Manage Products" {
             let vc = UIStoryboard.vendor_manage_product_ViewController()
-        self.present(vc, animated: true, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notification"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
@@ -95,6 +93,6 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
 
 extension vendor_sidemenu_ViewController {
     
-   
+    
 }
 

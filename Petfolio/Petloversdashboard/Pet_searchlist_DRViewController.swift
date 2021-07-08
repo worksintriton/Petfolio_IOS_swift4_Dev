@@ -220,7 +220,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         cell.label_likes.text = Servicefile.shared.moredocd[indexPath.row].review_count
         cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
         cell.img_doc.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].doctor_img)) { (image, error, cache, urls) in
+        cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
             if (error != nil) {
                 cell.img_doc.image = UIImage(named: imagelink.sample)
             } else {
@@ -314,7 +314,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                 }
                                                                 let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0))
                                                                 let user_id = dat["user_id"] as? String ?? ""
-                                                                Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount))
+                                                                
+                                                                let thumbnail_image = dat["thumbnail_image"] as? String ?? ""
+                                                                Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount, in_thumbnail_image: thumbnail_image))
                                                             }
                                                             self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
                                                             if  Servicefile.shared.moredocd.count ==  0{

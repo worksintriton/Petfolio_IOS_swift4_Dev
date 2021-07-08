@@ -215,7 +215,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                     let bus_user_name  = Data["bus_user_name"] as? String ?? ""
                                                                     let bus_user_phone  = Data["bus_user_phone"] as? String ?? ""
                                                                     let bussiness_name  = Data["bussiness_name"] as? String ?? ""
-                                                                    let distance  = Data["distance"] as? Int ?? 0
+                                                                    let distance  = Data["distance"] as? Double ?? 0.0
                                                                     let fav = Data["fav"] as? Bool ?? false
                                                                     if fav {
                                                                         self.image_fav.image = UIImage(named: imagelink.fav_true)

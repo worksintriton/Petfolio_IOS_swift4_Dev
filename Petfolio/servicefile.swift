@@ -1080,7 +1080,9 @@ struct Petnewdashdoc{
     var spec : String
     var distance : String
     var fav : Bool
-    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String, idistance : String, Iclinic_name : String, Ifav : Bool) {
+    var thumbnail_image : String
+    
+    init(UID : String, doctor_img: String, doctor_name: String, review_count: Int, star_count: Int, ispec : String, idistance : String, Iclinic_name : String, Ifav : Bool, Ithumbnail_image: String) {
         self._id = UID
         self.doctor_img = doctor_img
         self.doctor_name = doctor_name
@@ -1090,6 +1092,7 @@ struct Petnewdashdoc{
         self.distance =  idistance
         self.clinic_name = Iclinic_name
         self.fav = Ifav
+        self.thumbnail_image = Ithumbnail_image
     }
 }
 
@@ -1443,6 +1446,7 @@ struct moredoc{
     var user_id : String
     var specialization : [spec]
     var amount : String
+    var thumbnail_image : String
     init(I_id : String
         , I_clinic_loc : String
         , I_clinic_name : String
@@ -1454,7 +1458,7 @@ struct moredoc{
         , I_review_count : String
         , I_star_count : String
         , I_user_id : String
-        , I_specialization : [spec], in_amount: String) {
+         , I_specialization : [spec], in_amount: String, in_thumbnail_image: String) {
         self._id = I_id
         self.clinic_loc = I_clinic_loc
         self.clinic_name = I_clinic_name
@@ -1468,6 +1472,7 @@ struct moredoc{
         self.user_id = I_user_id
         self.specialization = I_specialization
         self.amount = in_amount
+        self.thumbnail_image = in_thumbnail_image
     }
 }
 
@@ -1519,9 +1524,10 @@ struct SP_service_details{
     var service_place : String
     var service_price : Int
     var service_provider_name : String
+    var thumbnail_image : String
     init( I_id : String, Icomments_count : Int, Idistance : Double, Iimage : String,
           Irating_count :  Int, Iservice_offer : Int, Iservice_place : String, Iservice_price : Int,
-          Iservice_provider_name : String) {
+          Iservice_provider_name : String, in_thumbnail_image : String) {
         self._id = I_id
         self.comments_count = Icomments_count
         self.distance = Idistance
@@ -1531,6 +1537,7 @@ struct SP_service_details{
         self.service_place = Iservice_place
         self.service_price = Iservice_price
         self.service_provider_name = Iservice_provider_name
+        self.thumbnail_image = in_thumbnail_image
     }
 }
 

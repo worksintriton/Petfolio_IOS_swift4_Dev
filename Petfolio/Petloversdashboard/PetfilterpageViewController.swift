@@ -218,7 +218,8 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
                             }
                             let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0.0))
                             let user_id = dat["user_id"] as? String ?? ""
-                            Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount))
+                            let thumbnail_image = dat["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount, in_thumbnail_image: thumbnail_image))
                         }
                         self.stopAnimatingActivityIndicator()
                         self.dismiss(animated: true, completion: nil)

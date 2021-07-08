@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="168" height="226"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oY4-0c-do4">
-                                        <rect key="frame" x="0.0" y="0.0" width="168" height="226"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="169.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiU-rY-vHj">
@@ -143,7 +143,7 @@
                                     <constraint firstItem="oY4-0c-do4" firstAttribute="leading" secondItem="OAz-Cs-u9Q" secondAttribute="leading" id="IOq-7k-WS4"/>
                                     <constraint firstItem="yiU-rY-vHj" firstAttribute="bottom" secondItem="shM-PF-BGB" secondAttribute="bottom" id="OVx-LG-met"/>
                                     <constraint firstAttribute="trailing" secondItem="oY4-0c-do4" secondAttribute="trailing" id="ZJs-7U-UUc"/>
-                                    <constraint firstItem="oY4-0c-do4" firstAttribute="height" secondItem="OAz-Cs-u9Q" secondAttribute="height" id="cI2-Em-Fbi"/>
+                                    <constraint firstItem="oY4-0c-do4" firstAttribute="height" secondItem="OAz-Cs-u9Q" secondAttribute="height" multiplier="0.75" id="cI2-Em-Fbi"/>
                                     <constraint firstItem="yiU-rY-vHj" firstAttribute="trailing" secondItem="shM-PF-BGB" secondAttribute="trailing" id="ed2-z1-6Yx"/>
                                     <constraint firstItem="j71-3a-sUc" firstAttribute="leading" secondItem="shM-PF-BGB" secondAttribute="leading" id="kWz-ja-M0H"/>
                                     <constraint firstItem="shM-PF-BGB" firstAttribute="top" secondItem="mla-by-Xxf" secondAttribute="bottom" constant="-7" id="o3D-nQ-tcd"/>

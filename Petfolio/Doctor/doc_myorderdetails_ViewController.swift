@@ -62,7 +62,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         self.view_subpage_header.label_header_title.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
-       self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.notification), for: .touchUpInside)
+       self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.view_sos.isHidden = true
         self.view_subpage_header.view_bag.isHidden = true
     // header action

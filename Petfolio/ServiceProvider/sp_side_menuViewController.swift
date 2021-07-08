@@ -68,7 +68,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
             let vc = UIStoryboard.Sp_mycalender_ViewController()
         self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Appointment" {
-            let vc = UIStoryboard.sp_shop_dashboard_ViewController()
+            let vc = UIStoryboard.Sp_dash_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorities" {
             let vc = UIStoryboard.sp_favlist_ViewController()

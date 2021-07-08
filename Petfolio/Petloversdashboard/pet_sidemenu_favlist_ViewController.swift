@@ -329,7 +329,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
                             let spec = Dicspec["specialization"] as? String ?? ""
                             let clinic_name = Bval["clinic_name"] as? String ?? ""
                             let fav = Bval["fav"] as? Bool ?? false
-                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name, Ifav : fav))
+                            let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.petdoc.append(Petnewdashdoc.init(UID: id, doctor_img: imgpath, doctor_name: title, review_count: review_count, star_count: star_count, ispec: spec, idistance: distance, Iclinic_name: clinic_name, Ifav : fav, Ithumbnail_image: thumbnail_image))
                         }
                         if Servicefile.shared.petdoc.count > 0 {
                             self.label_nodata.isHidden = true
@@ -440,7 +441,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
                             let service_place = itmval["service_place"] as? String ?? ""
                             let service_price = Int(truncating: itmval["service_price"] as? NSNumber ?? 0)
                             let service_provider_name = itmval["service_provider_name"] as? String ?? ""
-                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name))
+                            let thumbnail_image = itmval["thumbnail_image"] as? String ?? ""
+                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name, in_thumbnail_image: thumbnail_image))
                         }
                         if Servicefile.shared.pet_SP_service_details.count > 0 {
                             self.label_nodata.isHidden = true

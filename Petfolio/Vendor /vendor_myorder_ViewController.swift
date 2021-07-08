@@ -94,9 +94,9 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.view_header.view_profile.layer.cornerRadius = self.view_header.view_profile.frame.height / 2
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
-        self.view_footer.label_Fprocess_two.text = "Products"
+        self.view_footer.label_Fprocess_one.text = "Manage Products"
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.vendorproduct), for: .touchUpInside)
-       // self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.vendordash), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
         
@@ -834,6 +834,11 @@ extension UIViewController {
     
     @objc func vendorproduct(sender : UIButton){
         let vc = UIStoryboard.vendor_manage_product_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func vendordash(sender : UIButton){
+        let vc = UIStoryboard.vendor_myorder_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

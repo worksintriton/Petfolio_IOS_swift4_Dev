@@ -83,6 +83,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                 self.doc_header.image_profile.image = image
             }
         }
+        self.doc_header.contentMode = .scaleAspectFill
         self.doc_header.label_location.text = Servicefile.shared.shiplocation
         
         self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
@@ -215,6 +216,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                cell.img_petimg.image = image
                            }
                        }
+                    cell.img_petimg.contentMode = .scaleAspectFill
                    }
         }else{
             cell.img_petimg.image = UIImage(named: imagelink.sample)

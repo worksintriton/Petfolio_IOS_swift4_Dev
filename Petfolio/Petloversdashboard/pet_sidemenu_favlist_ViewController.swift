@@ -303,6 +303,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     
     
     func calldoc(){
+        Servicefile.shared.petdoc.removeAll()
+        self.col_selected_list.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_fav_doc, method: .post, parameters:
@@ -357,6 +359,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     }
     
     func callproductdetails(){
+        Servicefile.shared.petnewprod.removeAll()
+        self.col_selected_list.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_fav_product, method: .post, parameters:
@@ -418,6 +422,8 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     }
     
     func callservice(){
+        Servicefile.shared.pet_SP_service_details.removeAll()
+        self.col_selected_list.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_fav_service, method: .post, parameters:

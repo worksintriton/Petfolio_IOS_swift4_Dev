@@ -148,6 +148,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
             } else {
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
+            cell.image_product.contentMode = .scaleAspectFill
             return cell
         }
     }

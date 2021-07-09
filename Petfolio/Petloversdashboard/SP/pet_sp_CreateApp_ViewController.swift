@@ -191,6 +191,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                    cell.img_banner.image = image
                }
            }
+        cell.img_banner.contentMode = .scaleAspectFill
            cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
            //cell.view_banner_two.isHidden = true
            cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

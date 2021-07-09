@@ -375,6 +375,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         cell.image_product.image = image
                     }
                 }
+            cell.image_product.contentMode = .scaleAspectFill
             cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
             let pet_prod_status = data["today_deal"] as! Bool
             cell.label_deal_status.isHidden = true
@@ -433,6 +434,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         cell.image_product.image = image
                     }
             }
+            cell.image_product.contentMode = .scaleAspectFill
             let pet_prod_status = data["today_deal"] as! Bool
             cell.label_deal_status.isHidden = true
             if pet_prod_status {

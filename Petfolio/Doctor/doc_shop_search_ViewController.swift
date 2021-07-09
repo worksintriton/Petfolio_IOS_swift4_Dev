@@ -130,6 +130,7 @@ class doc_shop_search_ViewController: UIViewController, UICollectionViewDelegate
             } else {
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
+            cell.image_product.contentMode = .scaleAspectFill
             return cell
         }
     }

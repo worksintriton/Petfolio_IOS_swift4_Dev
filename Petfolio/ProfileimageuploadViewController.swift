@@ -42,7 +42,8 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
                     self.image_profile.image = image
                 }
             }
-        }   
+        }
+        self.image_profile.contentMode = .scaleAspectFill
     }
     
     

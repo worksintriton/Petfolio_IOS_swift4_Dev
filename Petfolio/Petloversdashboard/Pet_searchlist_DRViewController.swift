@@ -117,6 +117,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                     cell.img_banner.image = image
                 }
             }
+         cell.img_banner.contentMode = .scaleAspectFill
             // cell.img_banner.view_cornor()
             // cell.view_banner_two.view_cornor()
             return cell

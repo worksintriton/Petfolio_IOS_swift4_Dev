@@ -176,9 +176,6 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.present(vc, animated: true, completion: nil)
     }
     
-   
-      
-   
     
     @IBAction func action_profile(_ sender: Any) {
         
@@ -259,6 +256,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                         cell.img_banner.image = image
                     }
                 }
+                cell.img_banner.contentMode = .scaleAspectFill
                 cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                 return cell
             }else{
@@ -292,6 +290,8 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                }else{
                    cell.image_product.image = UIImage(named: imagelink.sample)
                }
+                
+                cell.image_product.contentMode = .scaleAspectFill
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate
                 cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
@@ -383,9 +383,7 @@ extension productdetailsViewController {
                             self.view_select_count.isHidden = true
                             self.view_cart_main.isHidden = true
                         }
-                        
-                        
-                        
+                        self.view_isqualityprod.isHidden = true
                         Servicefile.shared.vendor_product_id_details.removeAll()
                         for prodi in 0..<product_related.count{
                             let prodval = product_related[prodi] as! NSDictionary

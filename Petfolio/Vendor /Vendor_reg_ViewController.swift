@@ -262,6 +262,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                     cell.Img_id.image = image
                 }
             }
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(action_gallrydic_close), for: .touchUpInside)
@@ -283,6 +284,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.view_close.layer.cornerRadius = cell.view_close.frame.height / 2
             cell.btn_close.tag = indexPath.row
             cell.btn_close.addTarget(self, action: #selector(action_certificate_close), for: .touchUpInside)
@@ -323,7 +325,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             }else{
                 self.image_photo_id.image = UIImage(named: "pdf")
             }
-            
+            self.image_photo_id.contentMode = .scaleAspectFill
             self.view_photoid_btn.isHidden = false
         }else{
             self.image_photo_id.isHidden = true
@@ -345,7 +347,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             }else{
                 self.image_gov.image = UIImage(named: "pdf")
             }
-            self.image_gov.image = UIImage(named: "pdf")
+            self.image_gov.contentMode = .scaleAspectFill
+            //self.image_gov.image = UIImage(named: "pdf")
             self.view_govid_btn.isHidden = false
         }else{
             self.image_gov.isHidden = true

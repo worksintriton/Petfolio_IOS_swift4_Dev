@@ -63,6 +63,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                 self.imag_petimag.image = image
             }
         }
+        self.imag_petimag.contentMode = .scaleAspectFill
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -85,12 +86,13 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                 cell.Img_id.image = image
             }
         }
+        cell.Img_id.contentMode = .scaleAspectFill
          cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.view_close.layer.cornerRadius = cell.view_close.frame.height /  2
                  cell.btn_close.tag = indexPath.row
                  cell.btn_close.addTarget(self, action: #selector(action_buttonclose), for: .touchUpInside)
                  return cell
-             }
+        }
     
     
     
@@ -106,7 +108,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
           let tag = sender.tag
           Servicefile.shared.petlistimg.remove(at: tag)
           self.coll_img_list.reloadData()
-        self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
+        if Servicefile.shared.petlistimg.count == 0 {
+            self.setimage(strimg: Servicefile.sample_img)
+        }
+        //self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
       }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

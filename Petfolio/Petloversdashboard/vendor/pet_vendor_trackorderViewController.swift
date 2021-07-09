@@ -353,7 +353,7 @@ class pet_vendor_trackorderViewController:  UIViewController, UITableViewDelegat
                                 self.image_product.image = image
                             }
                         }
-
+                        self.image_product.contentMode = .scaleAspectFill
                         self.label_orderdate.text = Servicefile.shared.date_of_booking
                         self.label_id.text = Servicefile.shared.order_id
                         self.label_paymentmethod.text = "Online"

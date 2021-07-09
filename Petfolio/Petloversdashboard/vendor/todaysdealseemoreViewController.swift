@@ -189,6 +189,7 @@ class todaysdealseemoreViewController: UIViewController, UICollectionViewDelegat
             }else{
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
+            cell.image_product.contentMode = .scaleAspectFill
             cell.label_ratting.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_rating
             cell.label_likes.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_review
             return cell
@@ -243,6 +244,7 @@ extension todaysdealseemoreViewController {
                         }else{
                             self.label_noproduct.isHidden = false
                         }
+                        
                         self.stopAnimatingActivityIndicator()
                         self.coll_prodlist.reloadData()
                     }else{
@@ -295,6 +297,7 @@ extension todaysdealseemoreViewController {
                         }else{
                             self.label_noproduct.isHidden = false
                         }
+                        
                         //Servicefile.shared.loadingcount = 0
                         self.stopAnimatingActivityIndicator()
                         self.coll_prodlist.reloadData()

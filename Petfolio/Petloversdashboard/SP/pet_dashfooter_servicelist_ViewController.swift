@@ -130,6 +130,8 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                     cell.imag_cat.image = image
                 }
             }
+            
+            cell.imag_cat.contentMode = .scaleAspectFill
             cell.imag_cat.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_image.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_img.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -148,6 +150,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                     cell.imag_cat.image = image
                 }
             }
+            cell.imag_cat.contentMode = .scaleAspectFill
             cell.imag_cat.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_image.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_img.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -164,6 +167,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                     cell.imag_cat.image = image
                 }
             }
+            cell.imag_cat.contentMode = .scaleAspectFill
             cell.imag_cat.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_image.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_img.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -181,6 +185,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
                     cell.imag_cat.image = image
                 }
             }
+            cell.imag_cat.contentMode = .scaleAspectFill
             cell.imag_cat.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_image.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_blur_img.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

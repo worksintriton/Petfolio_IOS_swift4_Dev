@@ -74,6 +74,7 @@ class sp_shop_dash_bannerTableViewCell: UITableViewCell , UICollectionViewDelega
                 cell.img_banner.image = image
             }
         }
+        cell.img_banner.contentMode = .scaleAspectFill
     }else{
          cell.img_banner.image = UIImage(named: imagelink.sample)
     }

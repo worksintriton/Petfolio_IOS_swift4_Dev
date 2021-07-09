@@ -10,6 +10,11 @@ import UIKit
 
 class previewdocpresTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var label_title: UILabel!
+    @IBOutlet weak var labe_count: UILabel!
+    @IBOutlet weak var label_consuption: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

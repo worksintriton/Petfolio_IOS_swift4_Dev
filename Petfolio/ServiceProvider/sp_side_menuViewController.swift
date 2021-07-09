@@ -93,9 +93,10 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
                 
             }))
             self.present(alert, animated: true, completion: nil)
-        }else{
-            self.dismiss(animated: true, completion: nil)
         }
+//        else{
+//            self.dismiss(animated: true, completion: nil)
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

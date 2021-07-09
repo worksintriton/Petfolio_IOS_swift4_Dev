@@ -40,7 +40,6 @@ class sphealthissueViewController: UIViewController, UICollectionViewDelegateFlo
         let data = self.healthissue[indexPath.row] as? NSDictionary  ?? ["":""]
         
         cell.label_title.text = data["health_issue_title"] as? String ?? ""
-      
         let image = data["health_issue_img"] as? String ?? Servicefile.sample_img
         cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: image)) { (image, error, cache, urls) in
@@ -51,8 +50,7 @@ class sphealthissueViewController: UIViewController, UICollectionViewDelegateFlo
                     }
                 }
             
-       
-        
+        cell.image_data.contentMode = .scaleAspectFill
         cell.image_data.view_cornor()
         cell.view_main.view_cornor()
         cell.view_shadow.view_cornor()

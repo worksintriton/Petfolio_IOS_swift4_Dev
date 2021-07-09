@@ -648,6 +648,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             } else {
                 self.image_signature.image = image
             }
+            self.image_signature.contentMode = .scaleAspectFill
         }
         self.image_signature.layer.borderWidth = 0.5
         self.view_close.layer.borderWidth = 0.5
@@ -835,6 +836,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     } else {
                         cell.Img_id.image = image
                     }
+                    cell.Img_id.contentMode = .scaleAspectFill
                 }
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
@@ -869,6 +871,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
+            cell.Img_id.contentMode = .scaleAspectFill
             let val = Servicefile.shared.certifdicarray[indexPath.row]
             print("certificate val",val)
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -899,11 +902,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     } else {
                         cell.Img_id.image = image
                     }
+                   
                 }
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
-            
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
@@ -920,7 +924,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     } else {
                         cell.Img_id.image = image
                     }
+                    
                 }
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
@@ -1261,6 +1267,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     self.Img_clinic.image = image
                 }
+                self.Img_clinic.contentMode = .scaleAspectFill
             }
         }else{
             self.Img_clinic.image = UIImage(named: imagelink.sample)

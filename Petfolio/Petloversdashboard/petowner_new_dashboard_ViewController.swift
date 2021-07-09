@@ -251,10 +251,14 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                if self.pagcount == Servicefile.shared.petbanner.count {
                    self.pagcount = 0
                    let indexPath = IndexPath(row: pagcount, section: 0)
-                self.col_banner.scrollToItem(at: indexPath, at: .right, animated: false)
+                self.col_banner.isPagingEnabled = false
+                self.col_banner.scrollToItem(at: indexPath, at: .left, animated: false)
+                self.col_banner.isPagingEnabled = true
                }else{
                    let indexPath = IndexPath(row: pagcount, section: 0)
+                self.col_banner.isPagingEnabled = false
                 self.col_banner.scrollToItem(at: indexPath, at: .left, animated: false)
+                self.col_banner.isPagingEnabled = true
                }
                self.pagecontrol.currentPage = self.pagcount
            }
@@ -292,7 +296,6 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         }else{
             return  Servicefile.shared.petnewprod.count
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -307,6 +310,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                     cell.image_banner.image = image
                 }
             }
+            cell.image_banner.contentMode = .scaleAspectFill
 //            cell.image_banner.image = UIImage(named: "b_sample")
             cell.label_banner.text = Servicefile.shared.petbanner[indexPath.row].title
             return cell
@@ -432,7 +436,9 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             Servicefile.shared.service_index = indexPath.row
             let vc = UIStoryboard.pet_servicelist_ViewController()
             self.present(vc, animated: true, completion: nil)
-        } else {
+        } else if self.col_shop_banner == collectionView {
+            
+        }else{
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
             let vc = UIStoryboard.productdetailsViewController()
             self.present(vc, animated: true, completion: nil)
@@ -744,7 +750,7 @@ extension petloverDashboardViewController {
                             let city = city_list["location_city"] as? String ?? ""
                             Servicefile.shared.pet_header_city = city
                             self.view_header.label_location.text = Servicefile.shared.pet_header_city
-                        }else{
+                        } else {
                             Servicefile.shared.pet_header_city = ""
                             self.view_header.label_location.text = Servicefile.shared.pet_header_city
                         }
@@ -756,7 +762,6 @@ extension petloverDashboardViewController {
                         self.col_shop.reloadData()
                         self.startTimer()
                         self.refreshControl.endRefreshing()
-                       
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

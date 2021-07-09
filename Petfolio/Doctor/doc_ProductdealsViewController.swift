@@ -159,6 +159,7 @@ class doc_ProductdealsViewController: UIViewController , UICollectionViewDelegat
             }else{
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
+            cell.image_product.contentMode = .scaleAspectFill
             cell.label_ratting.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_rating
             cell.label_likes.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_review
             return cell

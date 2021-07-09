@@ -96,7 +96,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                            cell.img_banner.image = image
                        }
                    }
-            
+            cell.img_banner.contentMode = .scaleAspectFill
                    cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
 //        cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
@@ -207,7 +207,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                               let Code  = res["Code"] as! Int
                                                               if Code == 200 {
                                                                    let Data = res["Data"] as! NSDictionary
-                                                                 let bus_certif = Data["bus_certif"] as! NSArray
+                                                                   let bus_certif = Data["bus_certif"] as! NSArray
                                                                     let _id  = Data["_id"] as? String ?? ""
                                                                     let bus_profile  = Data["bus_profile"] as? String ?? ""
                                                                     let bus_proof  = Data["bus_proof"] as? String ?? ""
@@ -262,7 +262,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                                                  self.image_service.image = image
                                                                                              }
                                                                                          }
-                                                                
+                                                                self.image_service.contentMode = .scaleAspectFill
                                                                  Servicefile.shared.Sp_bus_certifdicarray.removeAll()
                                                                  Servicefile.shared.sp_bus_service_galldicarray.removeAll()
                                                                  Servicefile.shared.sp_bus_service_list.removeAll()

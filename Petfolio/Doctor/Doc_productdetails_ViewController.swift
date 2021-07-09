@@ -219,6 +219,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                         cell.img_banner.image = image
                     }
                 }
+                cell.img_banner.contentMode = .scaleAspectFill
                 cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                 return cell
             }else{
@@ -252,6 +253,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                }else{
                    cell.image_product.image = UIImage(named: imagelink.sample)
                }
+                cell.image_product.contentMode = .scaleAspectFill
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate
                return cell
@@ -342,7 +344,7 @@ extension Doc_productdetails_ViewController {
                             self.view_select_count.isHidden = true
                             self.view_cart_main.isHidden = true
                         }
-                        
+                        self.view_isqualityprod.isHidden = true
                         
                         
                         Servicefile.shared.vendor_product_id_details.removeAll()

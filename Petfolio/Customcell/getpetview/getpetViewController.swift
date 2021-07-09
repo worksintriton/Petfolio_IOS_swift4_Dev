@@ -119,6 +119,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
                    cell.image_view.image = image
                }
            }
+        cell.image_view.contentMode = .scaleAspectFill
         cell.label_data.text = pbv
         cell.view_image.view_cornor()
         cell.image_view.view_cornor()

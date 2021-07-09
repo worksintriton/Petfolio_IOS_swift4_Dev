@@ -74,6 +74,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
             cell.image_product.image = image
         }
         }
+        cell.image_product.contentMode = .scaleAspectFill
         if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
          cell.image_fav.image = UIImage(named: imagelink.favtrue)
      }else{

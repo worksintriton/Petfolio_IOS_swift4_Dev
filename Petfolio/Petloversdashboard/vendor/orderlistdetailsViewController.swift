@@ -172,6 +172,7 @@ class orderlistdetailsViewController: UIViewController {
                                 self.image_product.image = image
                             }
                         }
+                        self.image_product.contentMode = .scaleAspectFill
                         self.view_status.isHidden = false
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id

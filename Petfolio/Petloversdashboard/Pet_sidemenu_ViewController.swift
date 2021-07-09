@@ -17,16 +17,22 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     
     var labelmenu = [""]
     var imgmenu = [""]
-    
+    /*if Servicefile.shared.my_ref_code != "" {
+     self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+ }else{
+     self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout"]
+     self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit"]
+ }*/
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout"]
-            self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Payment Details","Notifications", "Logout"]
+            self.imgmenu = ["Like","Doc","Calendar","PaymentDetails","Bell", "Exit"]
         }
         
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -78,10 +84,12 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         }else if self.labelmenu[indexPath.row] == "Favorites"{
             let vc = UIStoryboard.pet_sidemenu_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Medical History"{
-            let vc = UIStoryboard.pet_medical_history_ViewController()
-            self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Logout"{
+        }
+//        else if self.labelmenu[indexPath.row] == "Medical History"{
+//            let vc = UIStoryboard.pet_medical_history_ViewController()
+//            self.present(vc, animated: true, completion: nil)
+//        }
+        else if self.labelmenu[indexPath.row] == "Logout"{
             let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.pushtologin()
@@ -91,9 +99,10 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
             }))
             self.present(alert, animated: true, completion: nil)
           
-        }else{
-                self.dismiss(animated: true, completion: nil)
-            }
+        }
+//        else{
+//                self.dismiss(animated: true, completion: nil)
+//            }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

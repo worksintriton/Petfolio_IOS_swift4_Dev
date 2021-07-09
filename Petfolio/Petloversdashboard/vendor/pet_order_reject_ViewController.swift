@@ -52,6 +52,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
                 self.image_product.image = image
             }
         }
+        self.image_product.contentMode = .scaleAspectFill
         self.Label_product_amt.text = "₹ " +   String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_price)
         self.Label_status.text = "Delivered on : " +  String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_booked_on)
         

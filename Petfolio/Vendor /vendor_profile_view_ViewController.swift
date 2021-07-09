@@ -86,6 +86,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
                        }
                    }
                }
+        self.imag_user.contentMode = .scaleAspectFill
         self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
@@ -118,14 +119,15 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as! petbannerCollectionViewCell
            let img = Servicefile.shared.vendor_gallary_img[indexPath.row] as! NSDictionary
            let imgval = img["bussiness_gallery"]  as? String ?? Servicefile.sample_img
-        cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
+           cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+           cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: imgval)) { (image, error, cache, urls) in
                                   if (error != nil) {
                                       cell.img_banner.image = UIImage(named: imagelink.sample)
                                   } else {
                                       cell.img_banner.image = image
                                   }
                               }
+        cell.img_banner.contentMode = .scaleAspectFill
            cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner.view_cornor()
         cell.view_banner_two.view_cornor()

@@ -124,6 +124,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                     cell.img_banner.image = image
                 }
             }
+        cell.img_banner.contentMode = .scaleAspectFill
             // cell.img_banner.view_cornor()
             // cell.view_banner_two.view_cornor()
             return cell
@@ -195,6 +196,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                 cell.img_sp.image = image
             }
         }
+        cell.img_sp.contentMode = .scaleAspectFill
         cell.selectionStyle = .none
         cell.view_img_sp.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
        // cell.view_img_sp.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
@@ -259,6 +261,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                                 self.image_catimg.image = image
                             }
                         }
+                        self.image_catimg.contentMode = .scaleAspectFill
                         let Service_provider = Data["Service_provider"] as! NSArray
                         self.label_Service_count.text = String(Service_provider.count) + "  Providers"
                         Servicefile.shared.pet_SP_service_details.removeAll()

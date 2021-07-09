@@ -115,6 +115,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -144,6 +145,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -169,6 +171,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count

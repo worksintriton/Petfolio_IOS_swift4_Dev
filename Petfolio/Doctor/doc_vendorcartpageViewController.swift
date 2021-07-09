@@ -186,6 +186,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
                 }
             }
         }
+        cell.img_product.contentMode = .scaleAspectFill
         cell.btn_decrement.tag = indexPath.row
         cell.btn_increament.tag = indexPath.row
         cell.btn_delete.tag = indexPath.row

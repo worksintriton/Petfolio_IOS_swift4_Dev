@@ -491,7 +491,7 @@
                                                             <constraint firstItem="3UP-oc-BgG" firstAttribute="leading" secondItem="gK7-9G-nZG" secondAttribute="leading" constant="-2" id="vH7-WN-RkR"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcs-Yq-Tb0">
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcs-Yq-Tb0">
                                                         <rect key="frame" x="10" y="527" width="394" height="40"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suitcase" translatesAutoresizingMaskIntoConstraints="NO" id="HUe-av-grU">
@@ -519,7 +519,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5G-ER-bKK">
-                                                        <rect key="frame" x="10" y="572" width="394" height="40"/>
+                                                        <rect key="frame" x="10" y="533" width="394" height="40"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exit" translatesAutoresizingMaskIntoConstraints="NO" id="JNB-vG-arS">
                                                                 <rect key="frame" x="-2" y="7.5" width="25" height="25"/>
@@ -560,7 +560,6 @@
                                                 <constraints>
                                                     <constraint firstItem="rPl-Ph-eB6" firstAttribute="leading" secondItem="5o9-21-ZAE" secondAttribute="leading" id="6CP-n6-UCP"/>
                                                     <constraint firstItem="5o9-21-ZAE" firstAttribute="top" secondItem="lwM-HH-Uw7" secondAttribute="top" constant="5" id="6ib-Ep-4tn"/>
-                                                    <constraint firstItem="v5G-ER-bKK" firstAttribute="top" secondItem="rcs-Yq-Tb0" secondAttribute="bottom" constant="5" id="6nn-Dd-1U0"/>
                                                     <constraint firstItem="91M-XQ-kUl" firstAttribute="centerY" secondItem="3lE-fB-ypw" secondAttribute="centerY" id="CPq-yJ-6Ej"/>
                                                     <constraint firstAttribute="height" constant="668" id="DoD-55-MQX"/>
                                                     <constraint firstItem="Gzi-QP-muJ" firstAttribute="leading" secondItem="5o9-21-ZAE" secondAttribute="leading" id="Hhx-yM-tXB"/>
@@ -581,6 +580,7 @@
                                                     <constraint firstItem="gK7-9G-nZG" firstAttribute="leading" secondItem="JaV-ef-APG" secondAttribute="leading" id="pOT-eD-5EZ"/>
                                                     <constraint firstItem="Gzi-QP-muJ" firstAttribute="top" secondItem="foT-yf-So3" secondAttribute="bottom" constant="4" id="q5j-uL-Puf"/>
                                                     <constraint firstItem="5o9-21-ZAE" firstAttribute="leading" secondItem="lwM-HH-Uw7" secondAttribute="leading" constant="10" id="rXY-sm-D8w"/>
+                                                    <constraint firstItem="v5G-ER-bKK" firstAttribute="top" secondItem="gK7-9G-nZG" secondAttribute="bottom" constant="8" id="sQo-D6-EAw"/>
                                                     <constraint firstItem="Gzi-QP-muJ" firstAttribute="trailing" secondItem="5o9-21-ZAE" secondAttribute="trailing" id="uhn-0q-2aE"/>
                                                     <constraint firstAttribute="trailing" secondItem="5o9-21-ZAE" secondAttribute="trailing" constant="10" id="w6U-qe-PXE"/>
                                                     <constraint firstItem="JaV-ef-APG" firstAttribute="top" secondItem="Gzi-QP-muJ" secondAttribute="bottom" constant="8" id="wG3-2h-uHm"/>
@@ -3996,8 +3996,8 @@
                                                                                 <constraint firstItem="XQw-wV-DEa" firstAttribute="centerX" secondItem="7ir-EB-bKB" secondAttribute="centerX" id="whH-U3-eIM"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todays deal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxn-B2-Rrn">
-                                                                            <rect key="frame" x="319.5" y="167" width="66.5" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's deal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxn-B2-Rrn">
+                                                                            <rect key="frame" x="317" y="167" width="69" height="21"/>
                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                             <color key="textColor" systemColor="systemRedColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -4187,8 +4187,8 @@
                                                                                 <constraint firstItem="Vyw-NP-bpi" firstAttribute="centerY" secondItem="SCV-xh-0Lh" secondAttribute="centerY" id="rvW-Dv-N4Z"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todays deal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E8-ZA-kS1">
-                                                                            <rect key="frame" x="317.5" y="167" width="66.5" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's deal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E8-ZA-kS1">
+                                                                            <rect key="frame" x="315" y="167" width="69" height="21"/>
                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                             <color key="textColor" systemColor="systemRedColor"/>
                                                                             <nil key="highlightedColor"/>

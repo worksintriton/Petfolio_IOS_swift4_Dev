@@ -76,6 +76,7 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         }else{
             cell.image_data.image = UIImage(named: imagelink.sample)
         }
+        cell.image_data.contentMode = .scaleAspectFill
         if ischeck {
             if pindex == indexPath.row {
                 cell.img_ischeckbox.isHidden = false

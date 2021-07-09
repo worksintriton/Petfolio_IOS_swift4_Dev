@@ -89,6 +89,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 self.view_header.image_profile.image = image
             }
         }
+        self.view_header.contentMode = .scaleAspectFill
         self.view_header.label_title.text = "My Orders"
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.view_profile.layer.cornerRadius = self.view_header.view_profile.frame.height / 2
@@ -138,7 +139,9 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             } else {
                 cell.image_order.image = image
             }
+               
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -171,6 +174,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -201,7 +205,9 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             } else {
                 cell.image_order.image = image
             }
+               
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count

@@ -51,6 +51,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         Servicefile.shared.doc_pres_diagno = ""
         Servicefile.shared.doc_pres_sub_diagno = ""
         Servicefile.shared.Doc_pres.removeAll()
+        
         self.tbl_medilist.delegate = self
         self.tbl_medilist.dataSource = self
         self.view_shadow.isHidden = true

@@ -377,9 +377,11 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
 //        }
         else if Servicefile.shared.pet_type_val == "" {
             self.alert(Message: "Please select Pet Type and Breed")
-        }else if self.view_petcolor.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet color")
-        }else if self.view_selectdateCalender.textfield_value.text == "" {
+        }
+//        else if self.view_petcolor.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet color")
+//        }
+        else if self.view_selectdateCalender.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet age")
         }else{
             print("user_id", Servicefile.shared.userid,

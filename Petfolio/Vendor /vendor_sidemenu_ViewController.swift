@@ -81,9 +81,10 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
                 
             }))
             self.present(alert, animated: true, completion: nil)
-        }else{
-            self.dismiss(animated: true, completion: nil)
         }
+//        else{
+//            self.dismiss(animated: true, completion: nil)
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -342,9 +342,7 @@ extension sp_productdetailspage_ViewController {
                             self.view_select_count.isHidden = true
                             self.view_cart_main.isHidden = true
                         }
-                        
-                        
-                        
+                        self.view_isqualityprod.isHidden = true
                         Servicefile.shared.vendor_product_id_details.removeAll()
                         for prodi in 0..<product_related.count{
                             let prodval = product_related[prodi] as! NSDictionary

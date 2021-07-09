@@ -80,6 +80,33 @@ class colorpickert{
     
 }
 
+class Appalert{
+    static let link = Appalert()
+    
+    static let new_appointments = ""
+    static let missed_appointments = ""
+    static let completed_appointments = ""
+    //
+    static let sp_new_appointments = ""
+    static let sp_missed_appointments = ""
+    static let sp_completed_appointments = ""
+    //
+    
+    static let No_notifications = ""
+    static let No_holidays = ""
+    static let OTP_via_Email = ""
+    static let OTP_via_SMS = ""
+    static let products_available = ""
+    static let new_orders = ""
+    static let completed_orders = ""
+    static let cancelled_orders = ""
+    static let cart_is_empty = ""
+    static let Reason_for_cancellation = ""
+    static let Why_are_you_Returing_this  = ""
+  
+    
+}
+
 class Servicefile {
     
     static let shared = Servicefile()
@@ -115,6 +142,7 @@ class Servicefile {
     static let SPdashboardcomapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/comapp"
     static let SPdashboardmissapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/missapp"
     
+    static let communitytext = baseurl + "/api/userdetails/community_text"
     
     static let mycalender = baseurl + "/api/new_doctortime/fetch_dates"
     static let Sp_mycalender = baseurl + "/api/sp_available_time/fetch_dates"

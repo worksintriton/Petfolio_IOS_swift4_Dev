@@ -212,6 +212,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                         cell.image_order.image = image
                     }
                 }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.image_order.layer.cornerRadius = 8.0
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
@@ -251,6 +252,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                         cell.image_order.image = image
                     }
                 }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.image_order.layer.cornerRadius = 8.0
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
@@ -277,6 +279,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                         cell.image_order.image = image
                     }
                 }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.image_order.layer.cornerRadius = 8.0
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
@@ -554,6 +557,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                                     self.image_product.image = image
                                 }
                             }
+                        self.image_product.contentMode = .scaleAspectFill
                         Servicefile.shared.orderdetail_prod.removeAll()
                         let product_details = Data["product_details"] as! NSArray
                         for i in 0..<product_details.count{

@@ -277,6 +277,7 @@ class vendorTrackorderViewController: UIViewController {
                                 self.image_product.image = image
                             }
                         }
+                        self.image_product.contentMode = .scaleAspectFill
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"

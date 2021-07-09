@@ -264,6 +264,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                                           cell.Img_id.image = image
                                       }
                                   }
+            cell.Img_id.contentMode = .scaleAspectFill
          cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
          cell.btn_close.tag = indexPath.row
          cell.btn_close.addTarget(self, action: #selector(action_gallrydic_close), for: .touchUpInside)
@@ -282,6 +283,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                      cell.Img_id.image = image
                  }
              }
+            cell.Img_id.contentMode = .scaleAspectFill
          }else{
              cell.Img_id.image = UIImage(named: "pdf")
          }
@@ -586,7 +588,9 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                                                   let Code  = res["Code"] as! Int
                                                   if Code == 200 {
                                                     //let Data = res["Data"] as! NSDictionary
-                                                    self.callupdatestatus()
+                                                    //self.callupdatestatus()
+                                                    self.view_popup.isHidden = false
+                                                    self.view_shadow.isHidden = false
                                                      self.stopAnimatingActivityIndicator()
                                                   }else{
                                                     self.stopAnimatingActivityIndicator()

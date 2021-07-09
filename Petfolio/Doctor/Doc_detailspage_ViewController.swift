@@ -341,9 +341,12 @@ class Doc_detailspage_ViewController: UIViewController {
                                     self.image_pet_img.image = image
                                 }
                             }
+                            
+                            
                         }else{
                             self.image_pet_img.image = UIImage(named: imagelink.sample)
                         }
+                        self.image_pet_img.contentMode = .scaleAspectFill
                         let problem_info = data["problem_info"] as? String ?? ""
                         self.label_pet_comments.text = problem_info
                         let allergies = data["allergies"] as? String ?? ""
@@ -374,6 +377,7 @@ class Doc_detailspage_ViewController: UIViewController {
                                     self.image_holder_name.image = image
                                 }
                             }
+                            self.image_holder_name.contentMode = .scaleAspectFill
                         }
                        
                         self.view_address.isHidden = false

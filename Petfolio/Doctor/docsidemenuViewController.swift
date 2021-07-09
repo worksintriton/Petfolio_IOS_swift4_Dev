@@ -27,12 +27,12 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","My Coupons","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","Discount","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","My Coupons","Payment Details","Notifications", "Logout"]
-            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","Discount","PaymentDetails","Bell", "Exit"]
+            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout"]
+            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -97,9 +97,10 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
                         
                     }))
                     self.present(alert, animated: true, completion: nil)
-        }else{
-                self.dismiss(animated: true, completion: nil)
-            }
+        }
+//                else{
+//                self.dismiss(animated: true, completion: nil)
+//            }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

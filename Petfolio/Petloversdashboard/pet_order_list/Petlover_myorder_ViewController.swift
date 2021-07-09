@@ -90,6 +90,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             self.desing_set_mis()
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         
     }
@@ -119,6 +120,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -148,6 +150,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -173,6 +176,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
                 cell.image_order.image = image
             }
         }
+            cell.image_order.contentMode = .scaleAspectFill
             cell.label_orderID.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_id
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
@@ -188,9 +192,6 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             return cell
         }
     }
-    
-    
-    
     
     
     @objc func orderdetails(sender: UIButton){

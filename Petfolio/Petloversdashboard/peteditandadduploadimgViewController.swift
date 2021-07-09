@@ -67,6 +67,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
             }else{
                     self.setimage(strimg: petimg)
             }
+        self.imag_petimag.contentMode = .scaleAspectFill
        
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
@@ -91,6 +92,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                   cell.Img_id.image = image
               }
           }
+        cell.Img_id.contentMode = .scaleAspectFill
         self.setimage(strimg: imgstr)
         cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_close.layer.cornerRadius = cell.view_close.frame.height /  2

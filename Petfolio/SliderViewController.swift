@@ -70,6 +70,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 cell.petimage.image = image
             }
         }
+        cell.petimage.contentMode = .scaleAspectFill
         return cell
     }
     

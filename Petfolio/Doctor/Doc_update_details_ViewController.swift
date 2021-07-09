@@ -844,6 +844,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_govid), for: .touchUpInside)
@@ -874,6 +875,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
+            cell.Img_id.contentMode = .scaleAspectFill
             let val = Servicefile.shared.certifdicarray[indexPath.row]
             print("certificate val",val)
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -908,7 +910,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             }else{
                 cell.Img_id.image = UIImage(named: "pdf")
             }
-            
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_certifid), for: .touchUpInside)
@@ -926,6 +928,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                         cell.Img_id.image = image
                     }
                 }
+            cell.Img_id.contentMode = .scaleAspectFill
             cell.Img_id.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.view_close.layer.cornerRadius =  cell.view_close.frame.size.height / 2
             cell.btn_close.addTarget(self, action: #selector(action_close_clinic), for: .touchUpInside)
@@ -1279,6 +1282,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }else{
             self.Img_clinic.image = UIImage(named: imagelink.sample)
         }
+        self.Img_clinic.contentMode = .scaleAspectFill
         
     }
     
@@ -1381,6 +1385,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func callDocreg(){
         self.textfield_ser_amt.resignFirstResponder()
         self.startAnimatingActivityIndicator()
+        // "profile_status" : true,
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docbussedit, method: .post, parameters:
             ["_id" : Servicefile.shared.Doc_id,
              "user_id" : Servicefile.shared.userid,
@@ -1399,7 +1404,6 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
              "certificate_pic" :  Servicefile.shared.certifdicarray,
              "govt_id_pic" : Servicefile.shared.govdicarray,
              "photo_id_pic" : Servicefile.shared.photodicarray,
-             "profile_status" : true,
              "profile_verification_status" : Servicefile.shared.Doc_profile_verification_status,
              "consultancy_fees" : Servicefile.shared.checkInttextfield(strtoInt: self.textfield_ser_amt.text!),
              "date_and_time" : Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),

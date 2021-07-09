@@ -68,8 +68,10 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 } else {
                     self.imag_user.image = image
                 }
+                
             }
         }
+        self.imag_user.contentMode = .scaleAspectFill
         self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.calldetails()
     }
@@ -110,6 +112,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 cell.img_banner.image = image
             }
         }
+        cell.img_banner.contentMode = .scaleAspectFill
         cell.view_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.img_banner.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.view_banner_two.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)

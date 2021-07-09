@@ -42,7 +42,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.Doc_pres.removeAll()
-        self.tbl_prescription.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "pres")
+        self.tbl_prescription.register(UINib(nibName: "previewdocpresTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.label_owner_name.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.tbl_prescription.delegate = self
         self.tbl_prescription.dataSource = self
@@ -58,15 +58,12 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! previewdocpresTableViewCell
         let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
-        cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
-        let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
-        let mv = cons["morning"] as? Bool ?? false
-        let av = cons["evening"] as? Bool ?? false
-        let nv = cons["night"] as? Bool ?? false
-         
-        cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
+        cell.label_title.text = presdata["Tablet_name"] as? String ?? ""
+        let cons = presdata["consumption"] as? String ?? ""
+        cell.label_consuption.text = cons
+        cell.labe_count.text = presdata["Quantity"] as? String ?? ""
         return cell
     }
    

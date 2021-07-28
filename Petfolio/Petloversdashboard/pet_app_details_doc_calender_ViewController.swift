@@ -168,6 +168,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
     
     
     func callgetdatedetails(){
+        let dateval = Calendar.current.date( byAdding: .hour, value: 1, to: Date())
         self.startAnimatingActivityIndicator()
         self.listtime.removeAll()
         self.seltime.removeAll()
@@ -176,9 +177,9 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_avail_time, method: .post, parameters:
             ["user_id":Servicefile.shared.doc_detail_id,
              "Date": self.seldate,
-             "cur_date": Servicefile.shared.ddmmyyyystringformat(date: Date()),
-             "cur_time": Servicefile.shared.hhmmastringformat(date: Date()),
-             "current_time": Servicefile.shared.yyyyMMddHHmmssstringformat(date: Date())], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+             "cur_date": Servicefile.shared.ddmmyyyystringformat(date: dateval!),
+             "cur_time": Servicefile.shared.hhmmastringformat(date: dateval!),
+             "current_time": Servicefile.shared.yyyyMMddHHmmssstringformat(date: dateval!)], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary

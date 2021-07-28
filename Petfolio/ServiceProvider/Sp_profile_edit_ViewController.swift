@@ -62,6 +62,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     var img_for = "Gall" // Photo or Gov or Certi
     var timeindex = 0
     var tblindex = 0
+    var cityname = ""
     
     
     @IBOutlet weak var textview_spaddress: UITextView!
@@ -171,6 +172,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     override func viewWillAppear(_ animated: Bool) {
         print("location",Servicefile.shared.sp_loc, Servicefile.shared.sp_lat,Servicefile.shared.sp_long)
         self.textview_spaddress.text = Servicefile.shared.sp_loc
+        self.latLong(lat: Servicefile.shared.sp_lat, long: Servicefile.shared.sp_long)
     }
     
     
@@ -206,6 +208,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                 }
                 if pm.locality != nil {
                     addressString = addressString + pm.locality! + ", "
+                    self.cityname = pm.locality!
                 }
                 if pm.country != nil {
                     addressString = addressString + pm.country! + ", "
@@ -872,6 +875,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
               "sp_loc": Servicefile.shared.sp_loc,
               "sp_lat": Servicefile.shared.sp_lat,
               "sp_long": Servicefile.shared.sp_long,
+              "city_name": self.cityname,
               "bus_user_name": Servicefile.shared.first_name,
               "bus_user_email": Servicefile.shared.user_email,
               "profile_status": true,

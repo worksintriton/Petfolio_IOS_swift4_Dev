@@ -11843,7 +11843,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VP7-4H-kbe">
                                                                             <rect key="frame" x="10" y="8" width="219" height="41.5"/>
                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                                                            <nil key="textColor"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-jr-hcd">
@@ -11852,7 +11852,7 @@
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See more" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgz-jd-xdy">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="74" height="31"/>
                                                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cw1-Rx-1Cl">
@@ -11874,10 +11874,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nyE-JC-Mdm">
-                                                                            <rect key="frame" x="10" y="50.5" width="404" height="180"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <rect key="frame" x="10" y="50.5" width="404" height="220"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="180" id="Oju-OV-hey"/>
+                                                                                <constraint firstAttribute="height" constant="220" id="Oju-OV-hey"/>
                                                                             </constraints>
                                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="L4r-WX-85v">
                                                                                 <size key="itemSize" width="139" height="173"/>
@@ -11887,7 +11887,7 @@
                                                                             </collectionViewFlowLayout>
                                                                             <cells>
                                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="prod" id="64L-57-2T8" customClass="pet_shop_product_CollectionViewCell" customModule="PetFolio" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="3.5" width="139" height="173"/>
+                                                                                    <rect key="frame" x="0.0" y="23.5" width="139" height="173"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="edm-ij-aMc">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="139" height="173"/>
@@ -12018,7 +12018,7 @@
                                                                             </cells>
                                                                         </collectionView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" red="0.1634779274" green="0.43256717919999998" blue="0.4048450589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstItem="nyE-JC-Mdm" firstAttribute="top" secondItem="VP7-4H-kbe" secondAttribute="bottom" constant="1" id="4dy-Bn-p8D"/>
                                                                         <constraint firstAttribute="trailing" secondItem="nyE-JC-Mdm" secondAttribute="trailing" id="5Rx-F4-7Fp"/>
@@ -12028,7 +12028,7 @@
                                                                         <constraint firstItem="nyE-JC-Mdm" firstAttribute="leading" secondItem="2XO-A1-ovm" secondAttribute="leading" constant="10" id="QRD-fr-ssZ"/>
                                                                         <constraint firstItem="VP7-4H-kbe" firstAttribute="width" secondItem="2XO-A1-ovm" secondAttribute="width" multiplier="0.528986" id="cvv-IY-Hb8"/>
                                                                         <constraint firstAttribute="trailing" secondItem="nmH-jr-hcd" secondAttribute="trailing" constant="10" id="on2-mY-mxk"/>
-                                                                        <constraint firstAttribute="height" constant="220" id="qJx-RB-cx9"/>
+                                                                        <constraint firstAttribute="height" constant="280" id="qJx-RB-cx9"/>
                                                                         <constraint firstItem="VP7-4H-kbe" firstAttribute="top" secondItem="2XO-A1-ovm" secondAttribute="top" constant="8" id="r1Y-qg-0fE"/>
                                                                     </constraints>
                                                                 </view>
@@ -12090,10 +12090,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6sy-jj-DRx">
-                                                                            <rect key="frame" x="10" y="50.5" width="404" height="180"/>
+                                                                            <rect key="frame" x="10" y="50.5" width="404" height="220"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="180" id="sXM-Mm-eTL"/>
+                                                                                <constraint firstAttribute="height" constant="220" id="sXM-Mm-eTL"/>
                                                                             </constraints>
                                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="9Lt-YH-d1H">
                                                                                 <size key="itemSize" width="139" height="173"/>
@@ -12103,7 +12103,7 @@
                                                                             </collectionViewFlowLayout>
                                                                             <cells>
                                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="prod" id="13s-CU-Fkc" customClass="pet_shop_product_CollectionViewCell" customModule="PetFolio" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="3.5" width="139" height="173"/>
+                                                                                    <rect key="frame" x="0.0" y="23.5" width="139" height="173"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QBW-Hn-MLu">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="139" height="173"/>
@@ -12236,7 +12236,7 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="220" id="5rm-f2-Vi5"/>
+                                                                        <constraint firstAttribute="height" constant="280" id="5rm-f2-Vi5"/>
                                                                         <constraint firstAttribute="trailing" secondItem="6sy-jj-DRx" secondAttribute="trailing" id="8Gj-qa-tHX"/>
                                                                         <constraint firstAttribute="trailing" secondItem="xp6-1u-UQG" secondAttribute="trailing" constant="10" id="9BV-fj-Dko"/>
                                                                         <constraint firstItem="6sy-jj-DRx" firstAttribute="top" secondItem="KRD-fT-liY" secondAttribute="bottom" constant="1" id="Cua-VI-Xd4"/>
@@ -12351,7 +12351,7 @@
         <image name="back" width="41" height="69"/>
         <image name="calender" width="131" height="113"/>
         <image name="calender-menu" width="69" height="69"/>
-        <image name="chatBubble" width="74" height="69"/>
+        <image name="chatBubble" width="512" height="512"/>
         <image name="close" width="44" height="44"/>
         <image name="dotted black" width="693" height="2"/>
         <image name="dotted grey" width="693" height="2"/>

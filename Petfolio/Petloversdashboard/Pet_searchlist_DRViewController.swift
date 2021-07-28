@@ -11,9 +11,8 @@ import Alamofire
 import SDWebImage
 
 class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet weak var tbl_searchlist: UITableView!
-   // @IBOutlet weak var view_footer: UIView!
     @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var view_header: petowner_header!
     
@@ -34,9 +33,10 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     var pagcount = 0
     //var timer = Timer()
     var timer : Timer?
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         self.banner.removeAll()
+        self.tbl_searchlist.register(UINib(nibName: "listvalTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.moredocd.removeAll()
         self.view_top_doc.layer.cornerRadius = 20.0
@@ -49,14 +49,13 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.col_ban.dataSource = self
         self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tbl_searchlist.addSubview(refreshControl) // not required when using UITableViewController
+        self.view_bac.layer.cornerRadius = self.view_bac.frame.height / 2
         self.label_comm_type.text = "Offline Doctors"
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
-        
         self.textfield_search.autocapitalizationType = .sentences
         self.view_search.view_cornor()
         self.intial_setup_action()
-        self.view_bac.layer.cornerRadius = self.view_bac.frame.height / 2
         
     }
     
@@ -69,13 +68,13 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_bac(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 2
-                let tapbar = UIStoryboard.petloverDashboardViewController()
+        let tapbar = UIStoryboard.petloverDashboardViewController()
         //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                self.present(tapbar, animated: true, completion: nil)
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     func startTimer() {
-//        self.timer!.invalidate()
+        //        self.timer!.invalidate()
         self.timer = nil
         timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
     }
@@ -83,17 +82,17 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @objc func scrollAutomatically(_ timer1: Timer) {
         //print("data in doctor",Servicefile.shared.moredocd)
         if self.banner.count > 0 {
-               self.pagcount += 1
-               if self.pagcount == self.banner.count {
-                   self.pagcount = 0
-                   let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_ban.scrollToItem(at: indexPath, at: .right, animated: false)
-               }else{
-                   let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.col_ban.scrollToItem(at: indexPath, at: .left, animated: false)
-               }
-              
-           }
+            self.pagcount += 1
+            if self.pagcount == self.banner.count {
+                self.pagcount = 0
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.col_ban.scrollToItem(at: indexPath, at: .right, animated: false)
+            }else{
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.col_ban.scrollToItem(at: indexPath, at: .left, animated: false)
+            }
+            
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -106,36 +105,36 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
         let val = self.banner[indexPath.row] as! NSDictionary
-            let img = val["image_path"] as? String ?? ""
+        let img = val["image_path"] as? String ?? ""
         cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-            cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    cell.img_banner.image = UIImage(named: imagelink.sample)
-                } else {
-                    cell.img_banner.image = image
-                }
+        cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+            if (error != nil) {
+                cell.img_banner.image = UIImage(named: imagelink.sample)
+            } else {
+                cell.img_banner.image = image
             }
-         cell.img_banner.contentMode = .scaleAspectFill
-            // cell.img_banner.view_cornor()
-            // cell.view_banner_two.view_cornor()
-            return cell
-       
+        }
+        cell.img_banner.contentMode = .scaleAspectFill
+        // cell.img_banner.view_cornor()
+        // cell.view_banner_two.view_cornor()
+        return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-            return CGSize(width: self.col_ban.frame.size.width , height:  self.col_ban.frame.size.height)
-      
+        return CGSize(width: self.col_ban.frame.size.width , height:  self.col_ban.frame.size.height)
+        
     }
     
     @IBAction func action_shop(_ sender: Any) {
         
-    //        Servicefile.shared.tabbar_selectedindex = 3
-                   let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
-    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                   self.present(tapbar, animated: true, completion: nil)
+        //        Servicefile.shared.tabbar_selectedindex = 3
+        let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_pet_profile(_ sender: Any) {
@@ -146,13 +145,13 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBAction func action_sos(_ sender: Any) {
         let vc = UIStoryboard.SOSViewController()
         self.present(vc, animated: true, completion: nil)
-       }
+    }
     
     @IBAction func action_petservice(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 1
-                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
         //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                       self.present(tapbar, animated: true, completion: nil)
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -165,6 +164,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.callnoticartcount()
         self.col_ban.reloadData()
         self.tbl_searchlist.reloadData()
         self.startTimer()
@@ -185,9 +185,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_home(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 2
-                let tapbar = UIStoryboard.petloverDashboardViewController()
+        let tapbar = UIStoryboard.petloverDashboardViewController()
         //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                self.present(tapbar, animated: true, completion: nil)
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     
@@ -200,42 +200,41 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchlistTableViewCell
-        cell.label_docname.text = Servicefile.shared.moredocd[indexPath.row].doctor_name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! listvalTableViewCell
+        cell.label_title.text = Servicefile.shared.moredocd[indexPath.row].doctor_name
+        cell.label_sub_title.text = Servicefile.shared.moredocd[indexPath.row].clinic_name
         var spe = ""
         for itm in 0..<Servicefile.shared.moredocd[indexPath.row].specialization.count{
             let spc = Servicefile.shared.moredocd[indexPath.row].specialization[itm].sepcial
             if itm == 0 {
-                  spe = spc
+                spe = spc
             }else{
-                // spe = spe + ", " + spc
-                spe =  spc
+                spe = spe + ", " + spc
+                //spe =  spc
             }
         }
         cell.selectionStyle = .none
-        cell.label_docSubsci.text = spe
-        let str = Servicefile.shared.moredocd[indexPath.row].clinic_loc
-        //let result = String(str.prefix(8))
-        cell.label_placeanddis.text = str
-        cell.label_distance.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
-        cell.label_likes.text = Servicefile.shared.moredocd[indexPath.row].review_count
-        cell.label_rating.text =  Servicefile.shared.moredocd[indexPath.row].star_count
-        cell.img_doc.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        cell.img_doc.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
+        cell.label_details.text = spe
+        let str = Servicefile.shared.moredocd[indexPath.row].city_name
+        if Servicefile.shared.moredocd[indexPath.row].city_name == "" {
+            cell.label_loc.text = ""
+        }else{
+            cell.label_loc.text = str + " | "
+        }
+        cell.label_km.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
+        cell.label_amt.text = "₹ " + Servicefile.shared.moredocd[indexPath.row].amount
+        cell.label_rate.text =  Servicefile.shared.moredocd[indexPath.row].star_count
+        cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
             if (error != nil) {
-                cell.img_doc.image = UIImage(named: imagelink.sample)
+                cell.image_data.image = UIImage(named: imagelink.sample)
             } else {
-                cell.img_doc.image = image
+                cell.image_data.image = image
             }
         }
-        cell.view_img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        //cell.view_img_doc.View_image_dropshadow(cornordarius: CGFloat(Servicefile.shared.viewcornorradius), iscircle: false)
-        cell.view_book.dropShadow()
-        cell.img_doc.dropShadow()
-        cell.img_doc.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        cell.view_book.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-        cell.btn_book.tag = indexPath.row
-        cell.btn_book.addTarget(self, action: #selector(action_book), for: .touchUpInside)
+        cell.image_data.view_cornor()
+        cell.view_main.dropShadow()
+        cell.view_main.view_cornor()
         return cell
     }
     
@@ -258,7 +257,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 115
+        return 170
     }
     
     @IBAction func action_sidemenu(_ sender: Any) {
@@ -274,119 +273,151 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBAction func action_filter(_ sender: Any) {
         let vc = UIStoryboard.PetfilterpageViewController()
         self.present(vc, animated: true, completion: nil)
-        
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     func callsearchlist(){
-      print("user_id" , Servicefile.shared.userid,
-        "search_string", self.textfield_search.text!,
-         "communication_type", self.comm_type)
-              self.startAnimatingActivityIndicator()
-       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_search, method: .post, parameters:
-           ["user_id" : Servicefile.shared.userid,
-            "search_string": self.textfield_search.text!,
-             "communication_type": self.comm_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                                                  switch (response.result) {
-                                                  case .success:
-                                                        let res = response.value as! NSDictionary
-                                                        print("success data",res)
-                                                        let Code  = res["Code"] as! Int
-                                                        if Code == 200 {
-                                                            Servicefile.shared.moredocd.removeAll()
-                                                          let Data = res["Data"] as! NSArray
-                                                            for itm in 0..<Data.count{
-                                                                let dat = Data[itm] as! NSDictionary
-                                                                let _id = dat["_id"] as? String ?? ""
-                                                                let amount = String(dat["amount"] as? Int ?? 0)
-                                                                let clinic_loc = dat["clinic_loc"] as? String ?? ""
-                                                                let clinic_name = dat["clinic_name"] as? String ?? ""
-                                                                let communication_type = dat["communication_type"] as? String ?? ""
-                                                                let distance = dat["distance"] as? String ?? ""
-                                                                let doctor_img = dat["doctor_img"] as? String ?? Servicefile.sample_img
-                                                                let doctor_name = dat["doctor_name"] as? String ?? ""
-                                                                let dr_title = dat["dr_title"] as? String ?? ""
-                                                                let review_count = String(dat["review_count"] as? Int ?? 0)
-                                                                let specializations = dat["specialization"] as! NSArray
-                                                                Servicefile.shared.specd.removeAll()
-                                                                for i in 0..<specializations.count{
-                                                                    let item = specializations[i] as! NSDictionary
-                                                                    let specialization = item["specialization"] as? String ?? ""
-                                                                    Servicefile.shared.specd.append(spec.init(i_spec: specialization))
-                                                                }
-                                                                let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0))
-                                                                let user_id = dat["user_id"] as? String ?? ""
-                                                                
-                                                                let thumbnail_image = dat["thumbnail_image"] as? String ?? ""
-                                                                Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, I_specialization:  Servicefile.shared.specd, in_amount: amount, in_thumbnail_image: thumbnail_image))
-                                                            }
-                                                            self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
-                                                            if  Servicefile.shared.moredocd.count ==  0{
-                                                                 self.label_nodata.isHidden = false
-                                                            }else{
-                                                                 self.label_nodata.isHidden = true
-                                                            }
-                                                            self.banner  = (res["banner"] as! NSArray) as! [Any]
-                                                            
-                                                            self.tbl_searchlist.reloadData()
-                                                            self.col_ban.reloadData()
-                                                            self.startTimer()
-                                                            self.refreshControl.endRefreshing()
-                                                           self.stopAnimatingActivityIndicator()
-                                                        }else{
-                                                            if  Servicefile.shared.moredocd.count ==  0{
-                                                                 self.label_nodata.isHidden = false
-                                                            }else{
-                                                                 self.label_nodata.isHidden = true
-                                                            }
-                                                          self.stopAnimatingActivityIndicator()
-                                                          print("status code service denied")
-                                                        }
-                                                      break
-                                                  case .failure(let Error):
-                                                    if  Servicefile.shared.moredocd.count ==  0{
-                                                         self.label_nodata.isHidden = false
-                                                    }else{
-                                                         self.label_nodata.isHidden = true
-                                                    }
-                                                      self.stopAnimatingActivityIndicator()
-                                                      print("Can't Connect to Server / TimeOut",Error)
-                                                      break
-                                                  }
-                                     }
-              }else{
-                  self.stopAnimatingActivityIndicator()
-                  self.alert(Message: "No Intenet Please check and try again ")
-              }
-          }
+        print("user_id" , Servicefile.shared.userid,
+              "search_string", self.textfield_search.text!,
+              "communication_type", self.comm_type)
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_search, method: .post, parameters:
+                                                                    ["user_id" : Servicefile.shared.userid,
+                                                                     "search_string": self.textfield_search.text!,
+                                                                     "communication_type": self.comm_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                Servicefile.shared.moredocd.removeAll()
+                                                                                let Data = res["Data"] as! NSArray
+                                                                                for itm in 0..<Data.count{
+                                                                                    let dat = Data[itm] as! NSDictionary
+                                                                                    let _id = dat["_id"] as? String ?? ""
+                                                                                    let amount = String(dat["amount"] as? Int ?? 0)
+                                                                                    let clinic_loc = dat["clinic_loc"] as? String ?? ""
+                                                                                    let city_name = dat["city_name"] as? String ?? ""
+                                                                                    let clinic_name = dat["clinic_name"] as? String ?? ""
+                                                                                    let communication_type = dat["communication_type"] as? String ?? ""
+                                                                                    let distance = dat["distance"] as? String ?? ""
+                                                                                    let doctor_img = dat["doctor_img"] as? String ?? Servicefile.sample_img
+                                                                                    let doctor_name = dat["doctor_name"] as? String ?? ""
+                                                                                    let dr_title = dat["dr_title"] as? String ?? ""
+                                                                                    let review_count = String(dat["review_count"] as? Int ?? 0)
+                                                                                    let specializations = dat["specialization"] as! NSArray
+                                                                                    Servicefile.shared.specd.removeAll()
+                                                                                    for i in 0..<specializations.count{
+                                                                                        let item = specializations[i] as! NSDictionary
+                                                                                        let specialization = item["specialization"] as? String ?? ""
+                                                                                        Servicefile.shared.specd.append(spec.init(i_spec: specialization))
+                                                                                    }
+                                                                                    let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0))
+                                                                                    let user_id = dat["user_id"] as? String ?? ""
+                                                                                    
+                                                                                    let thumbnail_image = dat["thumbnail_image"] as? String ?? ""
+                                                                                    Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, Icity_name: city_name, I_specialization:  Servicefile.shared.specd, in_amount: amount, in_thumbnail_image: thumbnail_image))
+                                                                                }
+                                                                                self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
+                                                                                if  Servicefile.shared.moredocd.count ==  0{
+                                                                                    self.label_nodata.isHidden = false
+                                                                                }else{
+                                                                                    self.label_nodata.isHidden = true
+                                                                                }
+                                                                                self.banner  = (res["banner"] as! NSArray) as! [Any]
+                                                                                
+                                                                                self.tbl_searchlist.reloadData()
+                                                                                self.col_ban.reloadData()
+                                                                                self.startTimer()
+                                                                                self.refreshControl.endRefreshing()
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                if  Servicefile.shared.moredocd.count ==  0{
+                                                                                    self.label_nodata.isHidden = false
+                                                                                }else{
+                                                                                    self.label_nodata.isHidden = true
+                                                                                }
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            if  Servicefile.shared.moredocd.count ==  0{
+                                                                                self.label_nodata.isHidden = false
+                                                                            }else{
+                                                                                self.label_nodata.isHidden = true
+                                                                            }
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                     }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+        
+        
+    }
     
     func intial_setup_action(){
-    // header action
+        // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
-//        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
+        //        self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
         self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-//        var img = Servicefile.shared.userimage
-//        if img != "" {
-//            img = Servicefile.shared.userimage
-//        }else{
-//            img = Servicefile.sample_img
-//        }
-//        self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-//            if (error != nil) {
-//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-//            } else {
-//                self.view_header.image_profile.image = image
-//            }
-//        }
-//        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+        //        var img = Servicefile.shared.userimage
+        //        if img != "" {
+        //            img = Servicefile.shared.userimage
+        //        }else{
+        //            img = Servicefile.sample_img
+        //        }
+        //        self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        //        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+        //            if (error != nil) {
+        //                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+        //            } else {
+        //                self.view_header.image_profile.image = image
+        //            }
+        //        }
+        //        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
-    // header action
-    // footer action
+        // header action
+        // footer action
         //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
@@ -394,8 +425,8 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         
         self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
-    // footer action
+        // footer action
     }
-   
-
+    
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import SDWebImage
 
-class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
 
     @IBOutlet weak var label_cate_value: UILabel!
@@ -22,6 +22,9 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let nibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)
+                self.coll_cat_prod_list.register(nibName, forCellWithReuseIdentifier: "cell")
+
         self.coll_cat_prod_list.delegate = self
         self.coll_cat_prod_list.dataSource = self
     }
@@ -35,9 +38,14 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
         cell.label_prod_title.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_title
         cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_price)
+        
+        
+        cell.label_orginalprice.attributedText = Servicefile.shared.convertdashlinestring(str: String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount_price))
+        
+        
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
         cell.label_offer.isHidden = true
@@ -45,6 +53,8 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
             cell.label_offer.isHidden = false
             cell.label_offer.text = String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount) + " % off"
         }
+        
+        
         
         //cell.image_product.image = UIImage(named: imagelink.sample)
         if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_fav {
@@ -67,6 +77,10 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         cell.image_product.contentMode = .scaleAspectFill
         cell.label_ratting.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_rating
         cell.label_likes.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_review
+        cell.view_remove.isHidden = true
+        cell.view_menu.isHidden = true
+        cell.view_main.view_cornor()
+        cell.view_main.dropShadow()
         return cell
     }
     
@@ -79,7 +93,9 @@ class todayspecialTableViewCell: UITableViewCell, UICollectionViewDelegate, UICo
         
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150 , height: 210)
+    }
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {

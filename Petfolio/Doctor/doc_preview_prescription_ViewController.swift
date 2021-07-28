@@ -32,8 +32,35 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         var sub_diagno_dic_array = [Any]()
         var sdiagno = ""
         var subdiagno = ""
+    
+    @IBOutlet weak var label_pres: UILabel!
+    @IBOutlet weak var image_pres: UIImageView!
+    @IBOutlet weak var view_pres_manual: UIView!
+    @IBOutlet weak var view_pres_img: UIView!
+    @IBOutlet weak var label_note: UILabel!
+    
         override func viewDidLoad() {
             super.viewDidLoad()
+            
+            if  Servicefile.shared.doc_diag_type == "PDF" {
+                self.label_pres.isHidden = false
+                self.label_note.isHidden = false
+                self.view_pres_manual.isHidden = false
+                self.view_pres_img.isHidden = true
+                
+            }else{
+                self.label_pres.isHidden = true
+                self.label_note.isHidden = true
+                self.view_pres_manual.isHidden = true
+                self.view_pres_img.isHidden = false
+                self.image_pres.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.doc_diag_img)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_pres.image = UIImage(named: imagelink.sample)
+                    } else {
+                        self.image_pres.image = image
+                    }
+                }
+            }
             self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.diagno.removeAll()
             self.diafno_sub.removeAll()
@@ -54,13 +81,15 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             // Do any additional setup after loading the view.
             self.calldoc_diaog()
             self.intial_setup_action()
+            
+           
         }
         
         
         func intial_setup_action(){
         // header action
             self.view_header.label_title.text = "Preview Prescription Details"
-            self.view_header.label_title.textColor = .white
+            self.view_header.label_title.textColor = .black
             self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         // header action
         }
@@ -105,11 +134,9 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            if section == 0 {
-                return 1
-            }else{
+                print("Servicefile.shared.Doc_pres.count",Servicefile.shared.Doc_pres.count)
                   return Servicefile.shared.Doc_pres.count
-            }
+            
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,6 +152,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
             let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
             cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
+            cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
             let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
             let mv = cons["morning"] as? Bool ?? false
             let av = cons["evening"] as? Bool ?? false
@@ -188,8 +216,8 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
               "diagnosis" : self.doctor_diagnosis.text!,
               "sub_diagnosis" : self.doctor_sub_diagnosis.text!,
               "PDF_format":"",
-              "Prescription_type" :"PDF",
-              "Prescription_img" : "",
+              "Prescription_type" : Servicefile.shared.doc_diag_type,
+              "Prescription_img" : Servicefile.shared.doc_diag_img,
               "user_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].user_id,
               "Prescription_data": Servicefile.shared.Doc_pres,
               "Treatment_Done_by":"Self",

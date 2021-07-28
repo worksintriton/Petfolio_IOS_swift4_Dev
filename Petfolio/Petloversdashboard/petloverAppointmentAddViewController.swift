@@ -136,7 +136,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.textfield_pettype.text = Servicefile.shared.pet_type_val
         self.textfield_petbreed.text = Servicefile.shared.Pet_breed_val
         self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
-        
+        print("pet name",Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name)
         //self.textfield_alergies.text = Servicefile.shared.healthissue
         self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
@@ -455,15 +455,16 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     }
     
     func ispetnameselect(index: Int){
-        print(Servicefile.shared.pet_petlist.count,index)
-        if Servicefile.shared.pet_petlist.count != index {
-            self.textfield_selectpettype.text! = Servicefile.shared.pet_petlist[index].pet_name
-            self.textfield_petname.text = Servicefile.shared.pet_petlist[index].pet_name
-            self.textfield_pettype.text = Servicefile.shared.pet_petlist[index].pet_type
-            self.textfield_petbreed.text = Servicefile.shared.pet_petlist[index].pet_breed
+        let indexs = Servicefile.shared.pet_index
+        print(Servicefile.shared.pet_petlist.count,indexs)
+        if Servicefile.shared.pet_petlist.count != indexs {
+            self.textfield_selectpettype.text! = Servicefile.shared.pet_petlist[indexs].pet_name
+            self.textfield_petname.text = Servicefile.shared.pet_petlist[indexs].pet_name
+            self.textfield_pettype.text = Servicefile.shared.pet_petlist[indexs].pet_type
+            self.textfield_petbreed.text = Servicefile.shared.pet_petlist[indexs].pet_breed
             self.textfield_petname.isUserInteractionEnabled = false
             Servicefile.shared.petlistimg = [Any]()
-            Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[index].id
+            Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[indexs].id
 //            self.view_pickupload.isHidden = true
 //            self.coll_imag.reloadData()
 //            self.startTimer()
@@ -471,7 +472,6 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             self.coll_imag.reloadData()
             self.startTimer()
         }else{
-            
             self.textfield_selectpettype.text! = ""
             self.textfield_petname.text = ""
             self.textfield_pettype.text = ""
@@ -654,8 +654,14 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             Servicefile.shared.pet_apoint_payment_method = "Online"
             Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
             Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
+        
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
+                if self.textview_descrip.text == "Add comment here.." {
+                    self.textview_descrip.text = ""
+                    Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
+                }
+                Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
                 self.showPaymentForm()
             }else{
                 self.calladdpetdetails()

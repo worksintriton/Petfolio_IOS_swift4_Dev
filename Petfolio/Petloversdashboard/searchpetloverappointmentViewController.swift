@@ -441,7 +441,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     func ispetnameselect(index: Int){
-        print(Servicefile.shared.pet_petlist.count,index)
+        print("selected pet name",Servicefile.shared.pet_petlist[index].pet_name,index)
         if Servicefile.shared.pet_petlist.count != index {
             self.textfield_selectpettype.text! = Servicefile.shared.pet_petlist[index].pet_name
             self.textfield_petname.text = Servicefile.shared.pet_petlist[index].pet_name
@@ -645,6 +645,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
+                Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
                 self.showPaymentForm()
             }else{
                 self.calladdpetdetails()

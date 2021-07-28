@@ -163,7 +163,7 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "sp_manageaddressViewController") as! sp_manageaddressViewController
     }
     
-    
+  
     
     
     static func pet_notification_ViewController() -> pet_notification_ViewController {
@@ -399,6 +399,24 @@ extension UIStoryboard {
         let homeStoryboard = UIStoryboard.mainStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
     }
+    
+    static func diagnosiViewController() -> diagnosiViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "diagnosiViewController") as! diagnosiViewController
+    }
+    
+    static func subdiagnosisViewController() -> subdiagnosisViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "subdiagnosisViewController") as! subdiagnosisViewController
+    }
+    
+    static func editsosViewController() -> editsosViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "editsosViewController") as! editsosViewController
+    }
+    
+    
+    
     
     static func doc_shop_dashboardViewController() -> doc_shop_dashboardViewController {
         let homeStoryboard = UIStoryboard.mainStoryboard()
@@ -773,6 +791,16 @@ extension UIStoryboard {
     static func dealupdateViewController() -> dealupdateViewController {
         let homeStoryboard = UIStoryboard.vendorStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "dealupdateViewController") as! dealupdateViewController
+    }
+    
+    static func AddproductViewController() -> AddproductViewController {
+        let homeStoryboard = UIStoryboard.vendorStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "AddproductViewController") as! AddproductViewController
+    }
+    
+    static func addnewprodViewController() -> addnewprodViewController {
+        let homeStoryboard = UIStoryboard.vendorStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "addnewprodViewController") as! addnewprodViewController
     }
     
     static func vendor_orderstatus_ViewController() -> vendor_orderstatus_ViewController {

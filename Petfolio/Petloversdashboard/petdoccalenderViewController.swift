@@ -59,7 +59,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
     // header action
     }
     
@@ -175,7 +175,7 @@ class petdoccalenderViewController: UIViewController, FSCalendarDelegate, UIColl
     
     
     func callgetdatedetails(){
-        
+        // Calendar.current.date( byAdding: .hour, value: 1, to: Date())!
         print("user_id",Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id,
               "Date", self.seldate,
               "cur_date", Servicefile.shared.ddmmyyyystringformat(date: Date()),

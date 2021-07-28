@@ -38,25 +38,31 @@ class sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, U
         
         func inital_setup(){
             self.view_header.btn_sidemenu.addTarget(self, action: #selector(self.spsidemenu), for: .touchUpInside)
-            var img = Servicefile.shared.userimage
-            if img != "" {
-                img = Servicefile.shared.userimage
-            }else{
-                img = Servicefile.sample_img
-            }
-            self.view_header.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-            self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-                } else {
-                    self.view_header.image_profile.image = image
-                }
-            }
+//            var img = Servicefile.shared.userimage
+//            if img != "" {
+//                img = Servicefile.shared.userimage
+//            }else{
+//                img = Servicefile.sample_img
+//            }
+//            self.view_header.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//            self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//                if (error != nil) {
+//                    self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+//                } else {
+//                    self.view_header.image_profile.image = image
+//                }
+//            }
             self.view_header.label_location.text = Servicefile.shared.shiplocation
-            self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
-            self.view_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+//            self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
+//            self.view_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+//            self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
+//            self.view_header.btn_button2.addTarget(self, action: #selector(self.spcartpage), for: .touchUpInside)
+            
+            self.view_header.btn_button2.addTarget(self, action: #selector(spcartpage), for: .touchUpInside)
             self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
-            self.view_header.btn_button2.addTarget(self, action: #selector(self.spcartpage), for: .touchUpInside)
+            self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
+            self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+            
             self.view_footer.setup(b1: false, b2: true, b3: false)
             self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
             self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
@@ -130,7 +136,7 @@ class sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, U
             }else if indexPath.section == 1 {
                 let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
                 cells.delegate = self
-                cells.label_cate_value.text = "Today's deal"
+                cells.label_cate_value.text = "Deals of the day"
                 cells.btn_cate_seemore_btn.tag = indexPath.row
                 Servicefile.shared.sp_shop_dash_tbl_total_index = indexPath.row
                 cells.coll_cat_prod_list.tag = indexPath.row
@@ -213,7 +219,8 @@ class sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, U
                                 let product_review = String(itmdata["product_review"] as? Int ?? 0)
                                 let product_title = itmdata["product_title"] as? String ?? ""
                                 let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
-                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                let product_discount_price = itmdata["product_discount_price"] as? Int ?? 0
+                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }
                             for cat_prod_deta in 0..<Product_details.count{
                                 let catval = Product_details[cat_prod_deta] as! NSDictionary
@@ -232,7 +239,8 @@ class sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, U
                                     let product_review = String(prodval["product_review"] as? Int ?? 0)
                                     let product_title = prodval["product_title"] as? String ?? ""
                                     let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
-                                    Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                    let product_discount_price = prodval["product_discount_price"] as? Int ?? 0
+                                    Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                                 }
                                 if Servicefile.shared.sp_dash_productdetails.count > 0 {
                                     Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))

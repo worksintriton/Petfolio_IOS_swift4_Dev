@@ -16,6 +16,9 @@ import SDWebImage
 
 class regdocViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet weak var view_aboutdoc: UIView!
+    @IBOutlet weak var view_clinic_no: UIView!
+    @IBOutlet weak var view_doctor_id: UIView!
     @IBOutlet weak var view_clinic: UIView!
     @IBOutlet weak var view_education: UIView!
     @IBOutlet weak var view_experience: UIView!
@@ -50,6 +53,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tbl_experience: UITableView!
     @IBOutlet weak var tbl_commtype: UITableView!
     
+    @IBOutlet weak var textview_aboutdoc: UITextView!
+    @IBOutlet weak var textfield_aboutdoc: UITextField!
+    @IBOutlet weak var textfield_doctor_id: UITextField!
+    @IBOutlet weak var textfield_clinic_num: UITextField!
     @IBOutlet weak var textfield_pethandle: UITextField!
     @IBOutlet weak var textfield_spec: UITextField!
     @IBOutlet weak var textview_clinicaddress: UITextView!
@@ -107,6 +114,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     var clinicpic = ""
     var Img_uploadarea = ""
     var digisignature = ""
+    var cityname = ""
     
     let locationManager = CLLocationManager()
     var latitude : Double!
@@ -152,6 +160,10 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         Servicefile.shared.govdicarray.removeAll()
         Servicefile.shared.photodicarray.removeAll()
         
+        self.view_clinic_no.view_cornor()
+        self.view_doctor_id.view_cornor()
+        self.view_aboutdoc.view_cornor()
+        
         self.view_submit.view_cornor()
         self.view_popup.view_cornor()
         self.view_action.view_cornor()
@@ -191,6 +203,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.coll_speciali.delegate = self
         self.coll_speciali.dataSource = self
         
+        self.textfield_clinic_num.delegate = self
+        self.textfield_doctor_id.delegate = self
+        //self.textfield_aboutdoc.delegate = self
+       
+        self.textview_aboutdoc.delegate = self
         self.textview_clinicaddress.delegate = self
         self.textfield_clinicname.delegate = self
         self.textfield_education.delegate = self
@@ -203,7 +220,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             
         
             
-        
+        self.textview_aboutdoc.autocapitalizationType = .sentences
         self.textview_clinicaddress.autocapitalizationType = .sentences
         self.textfield_clinicname.autocapitalizationType = .sentences
         self.textfield_education.autocapitalizationType = .sentences
@@ -229,8 +246,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
-//        self.textview_clinicaddress.text = "Write here.."
-//        self.textview_clinicaddress.textColor = UIColor.lightGray
+        self.textview_aboutdoc.text = "Write here..."
+        self.textview_aboutdoc.textColor = UIColor.gray
+        
         //self.setclinicimag()
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidetbl))
         self.view_shadow.addGestureRecognizer(tap)
@@ -279,6 +297,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
         self.textview_clinicaddress.text = Servicefile.shared.Doc_loc
+        self.latLong(lat: Servicefile.shared.Doc_lat, long: Servicefile.shared.Doc_long)
     }
     
     
@@ -358,6 +377,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.textfield_clinic_num {
+            self.textfield_clinic_num.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_doctor_id {
+            self.textfield_doctor_id.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_aboutdoc {
+            self.textfield_aboutdoc.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
         if textField == self.textfield_clinicname {
             self.textfield_clinicname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
         }
@@ -400,12 +428,58 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     func textViewShouldReturn(_ textView: UITextView) -> Bool {
         self.textview_clinicaddress.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textview_aboutdoc == textView  {
+            if textView.text == "Write here..." {
+                textView.text = ""
+                if textView.textColor == UIColor.gray {
+                    textView.text = nil
+                    textView.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                }
+            }
+        }
+        if self.textview_clinicaddress == textView  {
+            if textView.text == "Write here.." {
+                textView.text = ""
+                if textView.textColor == UIColor.lightGray {
+                    textView.text = nil
+                    textView.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                }
+            }
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_aboutdoc.text!.count > 150 {
+            self.textview_aboutdoc.resignFirstResponder()
+        }else{
+            self.textview_aboutdoc.text = textView.text
+        }
+        if(text == "\n") {
+            self.textview_aboutdoc.resignFirstResponder()
+            self.textview_clinicaddress.resignFirstResponder()
+            return false
+        }
+        if self.textview_clinicaddress.text!.count > 49 {
+            textview_clinicaddress.resignFirstResponder()
+        }else{
+            self.textview_clinicaddress.text = textView.text
+        }
+        self.view_edudate.isHidden = true
+        self.tbl_commtype.isHidden = true
+        self.view_expire.isHidden = true
         return true
     }
     
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resigntext()
+        self.view.endEditing(true)
         return true
     }
     
@@ -664,7 +738,13 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func action_submit(_ sender: Any) {
         self.tbl_commtype.isHidden = true
-        if self.textfield_clinicname.text == "" {
+        if self.textfield_clinic_num.text == "" {
+            self.alert(Message: "please Enter the Clinic Number")
+        } else if self.textfield_doctor_id.text == "" {
+            self.alert(Message: "please Enter the Doctor ID")
+        } else if self.textview_aboutdoc.text == "Write here.." {
+            self.alert(Message: "please Enter the About Doctor")
+        } else if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
         } else if self.textfield_commtype.text == "" {
             self.alert(Message: "please Select the Communication Type")
@@ -691,7 +771,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         }else if  self.digisignature == "" {
             self.alert(Message: "please upload the digital signature")
         } else {
-            print("user_id" , Servicefile.shared.userid,
+            print("doctor_id",Servicefile.shared.checktextfield(textfield: self.textfield_doctor_id.text!),
+                  "doctor_info",Servicefile.shared.checktextfield(textfield: self.textview_aboutdoc.text!),
+                  "clinic_no",Servicefile.shared.checktextfield(textfield: self.textfield_clinic_num.text!),"user_id" , Servicefile.shared.userid,
                   "communication_type",self.textfield_commtype.text!,
                   "dr_title" , "",
                   "dr_name" , "",
@@ -1361,7 +1443,11 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.textfield_ser_amt.resignFirstResponder()
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docbusscreate, method: .post, parameters:
-            ["user_id" : Servicefile.shared.userid,
+            ["doctor_id":Servicefile.shared.checktextfield(textfield: self.textfield_doctor_id.text!),
+             "doctor_info":Servicefile.shared.checktextfield(textfield: self.textview_aboutdoc.text!),
+             "clinic_no":Servicefile.shared.checktextfield(textfield: self.textfield_clinic_num.text!),
+             "city_name": self.cityname,
+             "user_id" : Servicefile.shared.userid,
              "dr_title" : "Dr",
              "dr_name" : Servicefile.shared.first_name,
              "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
@@ -1521,33 +1607,7 @@ extension regdocViewController { // location setup
     }
     
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.textview_clinicaddress == textView  {
-            if textView.text == "Write here.." {
-                textView.text = ""
-                if textView.textColor == UIColor.lightGray {
-                    textView.text = nil
-                    textView.textColor = UIColor.black
-                }
-            }
-        }
-    }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if self.textview_clinicaddress.text!.count > 49 {
-            textview_clinicaddress.resignFirstResponder()
-        }else{
-            self.textview_clinicaddress.text = textView.text
-        }
-        if(text == "\n") {
-            textview_clinicaddress.resignFirstResponder()
-            return false
-        }
-        self.view_edudate.isHidden = true
-        self.tbl_commtype.isHidden = true
-        self.view_expire.isHidden = true
-        return true
-    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -1558,6 +1618,39 @@ extension regdocViewController { // location setup
         
         self.findareabylatlong()
         self.locationManager.stopUpdatingLocation()
+    }
+    
+    func latLong(lat: Double,long: Double)  {
+        if Servicefile.shared.updateUserInterface(){
+            let geoCoder = CLGeocoder()
+            let location = CLLocation(latitude: lat , longitude: long)
+            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                var pm: CLPlacemark!
+                pm = placemarks?[0]
+                if placemarks?[0] != nil {
+                    var addressString : String = ""
+//                    if pm.subLocality != nil {
+//                        addressString = addressString + pm.subLocality! + ", "
+//                    }
+//                    if pm.thoroughfare != nil {
+//                        addressString = addressString + pm.thoroughfare! + ", "
+//                    }
+                    if pm.locality != nil {
+                        addressString = pm.locality!
+                    }
+//                    if pm.country != nil {
+//                        addressString = addressString + pm.country! + ", "
+//                    }
+//                    if pm.postalCode != nil {
+//                        addressString = addressString + pm.postalCode! + " "
+//                    }
+                    
+                    self.cityname = addressString
+                    print(addressString)
+                }
+            })
+        }
+        
     }
     
     func findareabylatlong(){

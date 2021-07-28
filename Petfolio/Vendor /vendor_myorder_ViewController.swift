@@ -41,6 +41,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.ordertype = "current"
         self.view_shadow.isHidden = true

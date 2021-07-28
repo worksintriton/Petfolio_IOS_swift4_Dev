@@ -63,6 +63,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
         }else{
             cell.view_remove.isHidden = true
         }
+        
         cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
         cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
         cell.label_ratting.text = Servicefile.shared.petnewprod[indexPath.row].product_rate
@@ -101,7 +102,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
        
-            return CGSize(width: 140 , height:  180)
+            return CGSize(width: 140 , height:  280)
       
     }
     
@@ -113,8 +114,13 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
          self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
          self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-         self.view_subpage_header.view_sos.isHidden = true
-         self.view_subpage_header.view_bag.isHidden = true
+        self.view_subpage_header.view_sos.isHidden = true
+        self.view_subpage_header.view_profile.isHidden = true
+        self.view_subpage_header.view_bag.isHidden = false
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(doccartpage), for: .touchUpInside)
+        self.view_subpage_header.image_bag.image = UIImage(named: imagelink.image_bag)
+        self.view_subpage_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
      // header action
      // footer action
          self.view_footer.setup(b1: false, b2: true, b3: false)

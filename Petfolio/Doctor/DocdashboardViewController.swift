@@ -43,6 +43,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_dashlist.removeAll()
         self.label_nodata.isHidden = true
@@ -58,42 +59,61 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.view_completed.layer.borderWidth = 0.5
         self.view_missed.layer.borderWidth = 0.5
         self.view_new.layer.borderWidth = 0.5
-        let appgree = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.view_completed.layer.borderColor = appgree.cgColor
-        self.view_missed.layer.borderColor = appgree.cgColor
+        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view_completed.layer.borderColor = appcolor.cgColor
+        self.view_missed.layer.borderColor = appcolor.cgColor
         refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        self.tblview_applist.addSubview(refreshControl)
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
+        self.view_new.backgroundColor = appcolor
+        self.label_new.textColor = UIColor.white
+        self.view_completed.backgroundColor = UIColor.white
+        self.view_missed.backgroundColor = UIColor.white
+        self.label_completed.textColor = appcolor
+        self.label_missed.textColor = appcolor
+        self.view_completed.layer.borderColor = appcolor.cgColor
+        self.view_missed.layer.borderColor = appcolor.cgColor
         self.callcheckstatus()
+        self.callnoticartcount()
     }
     
     func inital_setup(){
         self.doc_header.btn_sidemenu.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-       // self.doc_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        self.doc_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.doc_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.doc_header.image_profile.image = image
-            }
-        }
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+//        //self.doc_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        self.doc_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.doc_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.doc_header.image_profile.image = image
+//            }
+//        }
+       
         self.doc_header.contentMode = .scaleAspectFill
         self.doc_header.label_location.text = Servicefile.shared.shiplocation
+//        self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
+//        self.doc_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
+//        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
+//
+        self.doc_header.btn_button2.addTarget(self, action: #selector(doccartpage), for: .touchUpInside)
+        self.doc_header.image_button2.image = UIImage(named: imagelink.image_bag)
+        self.doc_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.doc_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        //self.doc_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         
-        self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
-        self.doc_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
-        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
         //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
+    
+    
     
     @objc func refresh(){
         self.callcheckstatus()
@@ -774,6 +794,36 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             self.alert(Message: "No Intenet Please check and try again ")
         }
         
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.doc_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
   
 }

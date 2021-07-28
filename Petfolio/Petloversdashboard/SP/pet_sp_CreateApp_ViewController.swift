@@ -524,6 +524,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
             Servicefile.shared.pet_apoint_amount = Servicefile.shared.service_id_amount
             if self.textfield_selectpettype.text != ""{
                 print("old pet ",Servicefile.shared.pet_apoint_pet_id)
+                Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
                 self.showPaymentForm()
             }else{
                 self.calladdpetdetails()

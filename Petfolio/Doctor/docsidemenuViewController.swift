@@ -23,7 +23,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
 //    self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
@@ -71,6 +71,9 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My calender" {
             let vc = UIStoryboard.mycalenderViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Appointment" {
+            let vc = UIStoryboard.DocdashboardViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = UIStoryboard.doc_myorderdetails_ViewController()

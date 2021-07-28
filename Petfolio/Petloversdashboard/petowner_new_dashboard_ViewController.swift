@@ -49,6 +49,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         self.view_popup.view_cornor()
@@ -74,6 +75,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.locationManager.requestWhenInUseAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(checklocation), name: UIApplication.willEnterForegroundNotification
                     , object: nil)
+        
     }
     
     @objc func checklocation(){
@@ -83,6 +85,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.callnoticartcount()
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
@@ -126,6 +129,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -562,6 +567,8 @@ extension UIViewController {
 
 extension petloverDashboardViewController {
     
+    
+    
     func call_dashboard_api_details(){
         Servicefile.shared.pet_dash_lati = self.latitude
         Servicefile.shared.pet_dash_long = self.longitude
@@ -700,13 +707,13 @@ extension petloverDashboardViewController {
                             Servicefile.shared.petser.append(Petdashservice.init(UID: id, background_color: background_color, service_icon: service_icon, service_title: service_title))
                         }
                         
-                        Servicefile.shared.sosnumbers.removeAll()
-                        let SOS = Data["SOS"] as! NSArray
-                        for item in 0..<SOS.count {
-                            let Bval = SOS[item] as! NSDictionary
-                            let Number = String(Bval["Number"] as? Int ?? 0)
-                            Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: Number))
-                        }
+//                        Servicefile.shared.sosnumbers.removeAll()
+//                        let SOS = Data["SOS"] as! NSArray
+//                        for item in 0..<SOS.count {
+//                            let Bval = SOS[item] as! NSDictionary
+//                            let Number = String(Bval["Number"] as? Int ?? 0)
+//                            Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: Number))
+//                        }
                         Servicefile.shared.pet_petlist.removeAll()
                         
                         let pet_details = Data["PetDetails"] as! NSArray
@@ -779,5 +786,35 @@ extension petloverDashboardViewController {
             self.alert(Message: "No Intenet Please check and try again ")
         }
         self.startAnimatingActivityIndicator()
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
 }

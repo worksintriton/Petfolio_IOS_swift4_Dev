@@ -740,6 +740,8 @@ extension UIViewController {
         UserDefaults.standard.set("", forKey: "user_image")
         UserDefaults.standard.set("", forKey: "my_ref_code")
         UserDefaults.standard.set(false, forKey: "email_status")
+        Servicefile.shared.notifi_count = 0
+        Servicefile.shared.cart_count = 0
         Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         let vc = UIStoryboard.LoginViewController()

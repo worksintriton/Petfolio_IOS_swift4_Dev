@@ -30,6 +30,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
+       
     }
     
     
@@ -72,6 +73,36 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     // footer action
     }
     
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         Servicefile.shared.pet_shop_search = self.textfield_search.text!
         self.view.endEditing(true)
@@ -88,6 +119,7 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         self.callpetshopdashget()
+        self.callnoticartcount()
     }
     
     @IBAction func action_search(_ sender: Any) {
@@ -160,7 +192,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         }else if indexPath.section == 1 {
             let cells = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as! todayspecialTableViewCell
             cells.delegate = self
-            cells.label_cate_value.text = "Today's deal"
+            cells.contentView.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cells.label_cate_value.text = "Deals of the day"
+            cells.label_cate_value.textColor = .white
             cells.btn_cate_seemore_btn.tag = indexPath.row
             Servicefile.shared.sp_shop_dash_tbl_total_index = indexPath.row
             cells.coll_cat_prod_list.tag = indexPath.row
@@ -243,7 +277,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
                             let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
-                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                            let product_discount_price = itmdata["product_discount_price"] as? Int ?? 0
+                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price ))
                         }
                         for cat_prod_deta in 0..<Product_details.count{
                             let catval = Product_details[cat_prod_deta] as! NSDictionary
@@ -262,7 +297,9 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
                                 let product_review = String(prodval["product_review"] as? Int ?? 0)
                                 let product_title = prodval["product_title"] as? String ?? ""
                                 let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                let product_discount_price = prodval["product_discount_price"] as? Int ?? 0
+                                
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0 {
                                 Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))

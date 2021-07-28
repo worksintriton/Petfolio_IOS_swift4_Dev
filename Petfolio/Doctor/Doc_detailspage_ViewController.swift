@@ -144,7 +144,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_prescrption(_ sender: Any) {
-        let vc = UIStoryboard.pdfViewController()
+        let vc = UIStoryboard.prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -322,7 +322,7 @@ class Doc_detailspage_ViewController: UIViewController {
                             self.label_vaccinated.text = "No"
                             self.view_vacc_date.isHidden = true
                         }
-                        self.label_age.text = pet_id["pet_age"] as? String ?? "0"
+                        self.label_age.text = pet_id["pet_age"] as? String ?? ""
                         self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
                         self.label_color.text = pet_id["pet_color"] as? String ?? ""
                         self.label_gender.text = pet_id["pet_gender"] as? String ?? ""

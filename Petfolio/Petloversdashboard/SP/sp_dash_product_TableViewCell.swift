@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var label_cate_value: UILabel!
     
@@ -18,6 +18,11 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
      var delegate: SelectItmDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let nibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)
+        self.coll_cat_prod_list.register(nibName, forCellWithReuseIdentifier: "cell")
+
+
         // Initialization code
         self.coll_cat_prod_list.delegate = self
         self.coll_cat_prod_list.dataSource = self
@@ -32,9 +37,14 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
         cell.label_prod_title.text = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_title
         cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_price)
+        
+        
+        cell.label_orginalprice.text = ""
+        
+        
         cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         cell.image_product.dropShadow()
         if Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_fav {
@@ -63,6 +73,10 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
         cell.image_product.contentMode = .scaleAspectFill
         cell.label_ratting.text = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_rating
         cell.label_likes.text = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_review
+        cell.view_remove.isHidden = true
+        cell.view_menu.isHidden = true
+        cell.view_main.view_cornor()
+        cell.view_main.dropShadow()
         return cell
     }
     
@@ -75,11 +89,13 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150 , height: 200)
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

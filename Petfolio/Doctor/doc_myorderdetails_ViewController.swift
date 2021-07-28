@@ -27,9 +27,10 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var tblview_applist: UITableView!
     @IBOutlet weak var label_completed: UILabel!
     @IBOutlet weak var label_missed: UILabel!
-    
+    var refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
          self.tblview_applist.register(UINib(nibName: "pet_vendor_new_myorder_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
@@ -52,7 +53,8 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         self.view_new.layer.borderColor = appgree.cgColor
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        self.tblview_applist.addSubview(refreshControl)
     }
     
     
@@ -64,7 +66,12 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.view_sos.isHidden = true
-        self.view_subpage_header.view_bag.isHidden = true
+        self.view_subpage_header.view_profile.isHidden = true
+        self.view_subpage_header.view_bag.isHidden = false
+        self.view_subpage_header.btn_bag.addTarget(self, action: #selector(doccartpage), for: .touchUpInside)
+        self.view_subpage_header.image_bag.image = UIImage(named: imagelink.image_bag)
+        self.view_subpage_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
     // header action
     // footer action
         self.view_footer.setup(b1: false, b2: true, b3: false)
@@ -86,6 +93,22 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             self.desing_set_mis()
         }
     }
+    
+    
+    @objc func refresh(){
+        if Servicefile.shared.ordertype == "current" {
+            self.callnew()
+            self.design_set_newapp()
+        }else if Servicefile.shared.ordertype == "Complete"{
+            self.callcomm()
+            self.design_set_complete()
+        }else{
+            self.callmissed()
+            self.desing_set_mis()
+        }
+        self.refreshControl.endRefreshing()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         
     }
@@ -263,6 +286,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     }
     
     func callnew(){
+        Servicefile.shared.order_productdetail.removeAll()
+        self.tblview_applist.reloadData()
+        self.label_nodata.isHidden = false
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -317,6 +343,12 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                         }
+                        if Servicefile.shared.order_productdetail.count > 0 {
+                            self.label_nodata.isHidden = true
+                        }else{
+                            self.label_nodata.isHidden = false
+                        }
+                            
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -337,6 +369,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     }
     
     func callcomm(){
+        Servicefile.shared.order_productdetail.removeAll()
+        self.tblview_applist.reloadData()
+        self.label_nodata.isHidden = false
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -391,6 +426,12 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                         }
+                        if Servicefile.shared.order_productdetail.count > 0 {
+                            self.label_nodata.isHidden = true
+                        }else{
+                            self.label_nodata.isHidden = false
+                        }
+                            
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -411,6 +452,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     }
     
     func callmissed(){
+        Servicefile.shared.order_productdetail.removeAll()
+        self.tblview_applist.reloadData()
+        self.label_nodata.isHidden = false
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -465,6 +509,12 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
                             
                             Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                         }
+                        if Servicefile.shared.order_productdetail.count > 0 {
+                            self.label_nodata.isHidden = true
+                        }else{
+                            self.label_nodata.isHidden = false
+                        }
+                            
                         self.tblview_applist.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{

@@ -16,6 +16,7 @@ class product_fav_cell_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_prod_title: UILabel!
     @IBOutlet weak var image_product: UIImageView!
     @IBOutlet weak var label_price: UILabel!
+    @IBOutlet weak var label_orginalprice: UILabel!
     @IBOutlet weak var label_ratting: UILabel!
     @IBOutlet weak var label_likes: UILabel!
     @IBOutlet weak var image_fav: UIImageView!
@@ -23,7 +24,7 @@ class product_fav_cell_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var btn_menu: UIButton!
     @IBOutlet weak var btn_remove: UIButton!
     @IBOutlet weak var view_remove: UIView!
-    
+    @IBOutlet weak var view_menu: UIView!
     
     
     override func awakeFromNib() {

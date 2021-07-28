@@ -169,6 +169,7 @@ class Pet_app_details_ViewController: UIViewController {
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -347,7 +348,7 @@ class Pet_app_details_ViewController: UIViewController {
                                 self.label_vaccinated.text = "No"
                                 self.view_vacc_date.isHidden = true
                             }
-                            self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                            self.label_age.text = pet_id["pet_age"] as? String ?? "0"
                             self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
                             self.label_color.text = pet_id["pet_color"] as? String ?? ""
                             self.label_gender.text = pet_id["pet_gender"] as? String ?? ""

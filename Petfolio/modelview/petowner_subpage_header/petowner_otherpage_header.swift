@@ -27,6 +27,11 @@ class petowner_otherpage_header: UIView {
     @IBOutlet weak var view_bag: UIView!
     @IBOutlet weak var view_profile: UIView!
     
+    @IBOutlet weak var view_belcount: UIView!
+    @IBOutlet weak var label_belcount: UILabel!
+    
+    @IBOutlet weak var view_cartcount: UIView!
+    @IBOutlet weak var label_cartcount: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +52,7 @@ class petowner_otherpage_header: UIView {
             self.image_bag.image = UIImage(named: imagelink.image_bag)
             self.image_profile.image = UIImage(named: imagelink.image_profile)
             self.image_back.image = UIImage(named: imagelink.image_back)
+            self.checknoti()
             self.addSubview(view)
         }
     }
@@ -57,5 +63,20 @@ class petowner_otherpage_header: UIView {
         self.view_bag.isHidden = b3
         self.view_profile.isHidden = b4
         
+    }
+    
+    func checknoti(){
+        self.view_belcount.isHidden = true
+        self.view_cartcount.isHidden = true
+        self.view_belcount.layer.cornerRadius = self.view_belcount.frame.height / 2
+        self.view_cartcount.layer.cornerRadius = self.view_cartcount.frame.height / 2
+        if Servicefile.shared.notifi_count > 0 {
+            self.view_belcount.isHidden = false
+            self.label_belcount.text = String(Servicefile.shared.notifi_count)
+        }
+        if Servicefile.shared.cart_count > 0 {
+            self.view_cartcount.isHidden = false
+            self.label_cartcount.text = String(Servicefile.shared.cart_count)
+        }
     }
 }

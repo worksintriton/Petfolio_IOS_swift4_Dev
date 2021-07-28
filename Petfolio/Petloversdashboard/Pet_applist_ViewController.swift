@@ -36,6 +36,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         //self.view_home.view_cornor()
@@ -61,7 +62,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

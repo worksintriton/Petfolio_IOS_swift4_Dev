@@ -22,14 +22,14 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["shop-1","Doc","Like","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout"]
-            self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit"]
+            self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout"]
+            self.imgmenu = ["shop-1","Doc","Like","add","Bell","Exit"]
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
@@ -37,6 +37,15 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         self.tbl_menulist.dataSource = self
     }
     
+     /*
+     if Servicefile.shared.my_ref_code != "" {
+     self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+     }else{
+     self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout"]
+     self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit"]
+     }
+     */
     
     @IBAction func action_edit(_ sender: Any) {
         let vc = UIStoryboard.vendor_profile_view_ViewController()
@@ -68,6 +77,12 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "Manage Products" {
             let vc = UIStoryboard.vendor_manage_product_ViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My orders"{
+            let vc = UIStoryboard.vendor_myorder_ViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Add Products"{
+            let vc = UIStoryboard.AddproductViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()

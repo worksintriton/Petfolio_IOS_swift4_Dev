@@ -281,7 +281,6 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
         }else {
             return CGSize(width: 160 , height:  280)
         }
-       
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -446,10 +445,12 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
                             let rating_count = itmval["rating_count"] as? Int ?? 0
                             let service_offer = itmval["service_offer"] as? Int ?? 0
                             let service_place = itmval["service_place"] as? String ?? ""
+                            let city_name = itmval["city_name"] as? String ?? ""
                             let service_price = Int(truncating: itmval["service_price"] as? NSNumber ?? 0)
                             let service_provider_name = itmval["service_provider_name"] as? String ?? ""
                             let thumbnail_image = itmval["thumbnail_image"] as? String ?? ""
-                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name, in_thumbnail_image: thumbnail_image))
+                            let bus_service_list = itmval["bus_service_list"] as? NSArray ?? [Any]() as NSArray
+                            Servicefile.shared.pet_SP_service_details.append(SP_service_details.init(I_id: _id, Icomments_count: comments_count, Idistance: distance, Iimage: image, Irating_count: rating_count, Iservice_offer: service_offer, Iservice_place: service_place, Iservice_price: service_price, Iservice_provider_name: service_provider_name, in_thumbnail_image: thumbnail_image, Icity_name: city_name, Iservicelist: bus_service_list as! [Any]))
                         }
                         if Servicefile.shared.pet_SP_service_details.count > 0 {
                             self.label_nodata.isHidden = true

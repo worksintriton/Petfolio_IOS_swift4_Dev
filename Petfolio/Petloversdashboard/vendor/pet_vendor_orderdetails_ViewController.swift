@@ -130,7 +130,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
         // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

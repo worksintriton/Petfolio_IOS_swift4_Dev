@@ -31,6 +31,7 @@ class docdashTableViewCell: UITableViewCell {
     @IBOutlet weak var view_addview: UIView!
     @IBOutlet weak var btn_addreview: UIButton!
     @IBOutlet weak var view_online: UIView!
+    @IBOutlet weak var image_online: UIImageView!
     @IBOutlet weak var btn_online: UIButton!
     @IBOutlet weak var label_status: UILabel!
     @IBOutlet weak var label_status_val: UILabel!

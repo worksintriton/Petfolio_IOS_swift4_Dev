@@ -27,6 +27,8 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            let nibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)
+                    self.coll_prodlist.register(nibName, forCellWithReuseIdentifier: "cell")
             self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.intial_setup_action()
             self.label_noproduct.text = "No products available"
@@ -137,7 +139,7 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                 cell.view_rate.startAnimatings()
                 return cell
             }else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
                 cell.label_prod_title.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_title
                 cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_price)
                 cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -162,12 +164,16 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                 }
                 cell.label_ratting.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_rating
                 cell.label_likes.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_review
+                cell.view_remove.isHidden = true
+                cell.view_menu.isHidden = true
+                cell.view_main.view_cornor()
+                cell.view_main.dropShadow()
                 return cell
             }
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: self.coll_prodlist.frame.size.width/2.1, height: self.coll_prodlist.frame.size.width/2.1)
+            return CGSize(width: self.coll_prodlist.frame.size.width/2.1, height: 200)
         }
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -207,7 +213,8 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                                 let product_review = String(prodval["product_review"] as? Int ?? 0)
                                 let product_title = prodval["product_title"] as? String ?? ""
                                 let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                let product_discount_price = prodval["product_discount_price"] as? Int ?? 0
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0 {
                                 self.label_noproduct.isHidden = true
@@ -261,7 +268,8 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                                 let product_review = String(itmdata["product_review"] as? Int ?? 0)
                                 let product_title = itmdata["product_title"] as? String ?? ""
                                 let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                let product_discount_price = itmdata["product_discount_price"] as? Int ?? 0
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }
                             if Servicefile.shared.sp_dash_productdetails.count > 0{
                                 self.label_noproduct.isHidden = true

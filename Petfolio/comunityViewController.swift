@@ -21,7 +21,7 @@ class comunityViewController: UIViewController {
         super.viewDidLoad()
         self.view_main.view_cornor()
         self.view_ok.view_cornor()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+       // self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         //self.image_comm.image = UIImage(named: "petcoming")
         self.callpetdetailget()
         // Do any additional setup after loading the view.

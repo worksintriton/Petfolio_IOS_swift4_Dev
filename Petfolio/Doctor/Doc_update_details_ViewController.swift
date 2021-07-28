@@ -49,6 +49,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var tbl_experience: UITableView!
     @IBOutlet weak var tbl_commtype: UITableView!
     
+    @IBOutlet weak var textview_aboutdoc: UITextView!
+    @IBOutlet weak var view_aboutdoc: UIView!
+    @IBOutlet weak var view_clinic_no: UIView!
+    @IBOutlet weak var view_doctor_id: UIView!
+    @IBOutlet weak var textfield_doctor_id: UITextField!
+    @IBOutlet weak var textfield_clinic_num: UITextField!
     @IBOutlet weak var textfield_pethandle: UITextField!
     @IBOutlet weak var textfield_spec: UITextField!
     @IBOutlet weak var textview_clinicaddress: UITextView!
@@ -103,6 +109,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     var clinicpic = ""
     var Img_uploadarea = ""
     var digisignature = ""
+    var cityname = ""
     
     let locationManager = CLLocationManager()
     var latitude : Double!
@@ -132,6 +139,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         Servicefile.shared.govdicarray.removeAll()
         Servicefile.shared.photodicarray.removeAll()
         
+        self.view_clinic_no.view_cornor()
+        self.view_doctor_id.view_cornor()
+        self.view_aboutdoc.view_cornor()
         self.view_submit.view_cornor()
         self.view_popup.view_cornor()
         self.view_action.view_cornor()
@@ -171,6 +181,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.coll_speciali.delegate = self
         self.coll_speciali.dataSource = self
         
+        self.textview_aboutdoc.delegate = self
+        self.textfield_clinic_num.delegate = self
+        self.textfield_doctor_id.delegate = self
         self.textview_clinicaddress.delegate = self
         self.textfield_clinicname.delegate = self
         self.textfield_education.delegate = self
@@ -184,7 +197,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.textfield_clinicname.autocapitalizationType = .sentences
         self.textfield_education.autocapitalizationType = .sentences
         self.textfield_exp_company.autocapitalizationType = .sentences
-            
+        self.textview_aboutdoc.autocapitalizationType = .sentences
         
         self.datepicker_date.datePickerMode = .date
         self.datepicker_expdate.datePickerMode = .date
@@ -202,8 +215,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
-        self.textview_clinicaddress.text = "Write here.."
-        self.textview_clinicaddress.textColor == UIColor.lightGray
+        self.textview_aboutdoc.text = "Write here..."
+        self.textview_aboutdoc.textColor = UIColor.gray
         self.updatedetails()
         //self.setclinicimag()
     }
@@ -257,22 +270,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.dismiss(animated: true, completion: nil)
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.textview_clinicaddress == textView  {
-            if textView.text == "Write here.." {
-                textView.text = ""
-                if textView.textColor == UIColor.lightGray {
-                    textView.text = nil
-                    textView.textColor = UIColor.black
-                }
-            }
-        }
-    }
-    
+   
     
         override func viewWillAppear(_ animated: Bool) {
             print("location",Servicefile.shared.Doc_loc, Servicefile.shared.Doc_lat,Servicefile.shared.Doc_long)
             self.textview_clinicaddress.text = Servicefile.shared.Doc_loc
+            self.latLong(lat: Servicefile.shared.Doc_lat, long: Servicefile.shared.Doc_long)
         }
     
     @IBAction func action_change_location(_ sender: Any) {
@@ -297,6 +300,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
 //        print("locations = \(locValue.latitude) \(locValue.longitude)")
         Servicefile.shared.Doc_lat = locValue.latitude
         Servicefile.shared.Doc_long = locValue.longitude
+        self.latLong(lat: Servicefile.shared.Doc_lat, long: Servicefile.shared.Doc_long)
         self.locationManager.stopUpdatingLocation()
     }
     
@@ -347,6 +351,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.textfield_clinic_num {
+            self.textfield_clinic_num.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+        if textField == self.textfield_doctor_id {
+            self.textfield_doctor_id.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
+        }
+      
         if textField == self.textfield_clinicname {
             self.textfield_clinicname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
         }
@@ -362,15 +373,48 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         return true
     }
     
+    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+        self.textview_clinicaddress.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textview_aboutdoc == textView  {
+            if textView.text == "Write here..." {
+                textView.text = ""
+                if textView.textColor == UIColor.gray {
+                    textView.text = nil
+                    textView.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                }
+            }
+        }
+        if self.textview_clinicaddress == textView  {
+            if textView.text == "Write here.." {
+                textView.text = ""
+                if textView.textColor == UIColor.lightGray {
+                    textView.text = nil
+                    textView.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                }
+            }
+        }
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_aboutdoc.text!.count > 150 {
+            self.textview_aboutdoc.resignFirstResponder()
+        }else{
+            self.textview_aboutdoc.text = textView.text
+        }
+        if(text == "\n") {
+            self.textview_aboutdoc.resignFirstResponder()
+            self.textview_clinicaddress.resignFirstResponder()
+            return false
+        }
         if self.textview_clinicaddress.text!.count > 149 {
             textview_clinicaddress.resignFirstResponder()
         }else{
             self.textview_clinicaddress.text = textView.text
-        }
-        if(text == "\n") {
-            textview_clinicaddress.resignFirstResponder()
-            return false
         }
         self.view_edudate.isHidden = true
         self.tbl_commtype.isHidden = true
@@ -401,14 +445,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.view_submit.view_cornor()
     }
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
-        self.textview_clinicaddress.resignFirstResponder()
-        return true
-    }
+  
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resigntext()
+        self.view.endEditing(true)
         return true
     }
     
@@ -620,9 +662,15 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     @IBAction func action_submit(_ sender: Any) {
         self.tbl_commtype.isHidden = true
-        if self.textfield_clinicname.text == "" {
+        if self.textfield_clinic_num.text == "" {
+            self.alert(Message: "please Enter the Clinic Number")
+        } else if self.textfield_doctor_id.text == "" {
+            self.alert(Message: "please Enter the Doctor ID")
+        } else if self.textview_aboutdoc.text == "Write here..." {
+            self.alert(Message: "please Enter the About Doctor")
+        } else if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
-        } else if self.textfield_commtype.text == "" {
+        }  else if self.textfield_commtype.text == "" {
             self.alert(Message: "please Select the Communication Type")
         } else if Servicefile.shared.edudicarray.count == 0 {
             self.alert(Message: "please enter the Education details")
@@ -647,7 +695,10 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }else if  self.digisignature == "" {
             self.alert(Message: "please upload the digital signature")
         } else {
-            print("user_id" , Servicefile.shared.userid,
+           
+            print("doctor_id",Servicefile.shared.checktextfield(textfield: self.textfield_doctor_id.text!),
+                  "doctor_info",Servicefile.shared.checktextfield(textfield: self.textview_aboutdoc.text!),
+                  "clinic_no",Servicefile.shared.checktextfield(textfield: self.textfield_clinic_num.text!),"user_id" , Servicefile.shared.userid,
                   "communication_type",self.textfield_commtype.text!,
                   "dr_title" , "",
                   "dr_name" , "",
@@ -667,7 +718,10 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                   "profile_verification_status" , "Not verified",
                   "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()),
                   "consultancy_fees" , "200")
+           
+            
             self.callDocreg()
+            
         }
         
         print("spec details", Servicefile.shared.specdicarray)
@@ -694,6 +748,10 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         //        Servicefile.shared.Doc_profile_verification_status = profile_verification_status
         
         self.textview_clinicaddress.text! = Servicefile.shared.Doc_loc
+        
+        self.textfield_clinic_num.text! = Servicefile.shared.Doc_bussiness_clinicno
+        self.textfield_doctor_id.text! = Servicefile.shared.Doc_bussiness_docid
+        self.textview_aboutdoc.text! = Servicefile.shared.Doc_bussiness_aboutdoc
         if Servicefile.shared.edudicarray.count > 0 {
             self.tbl_educationlist.isHidden = false
         }
@@ -1387,9 +1445,12 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.startAnimatingActivityIndicator()
         // "profile_status" : true,
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.docbussedit, method: .post, parameters:
-            ["_id" : Servicefile.shared.Doc_id,
+            ["doctor_id":Servicefile.shared.checktextfield(textfield: self.textfield_doctor_id.text!),
+             "doctor_info":Servicefile.shared.checktextfield(textfield: self.textview_aboutdoc.text!),
+             "clinic_no":Servicefile.shared.checktextfield(textfield: self.textfield_clinic_num.text!),"_id" : Servicefile.shared.Doc_id,
              "user_id" : Servicefile.shared.userid,
              "dr_title" : "Dr",
+             "city_name": self.cityname,
              "dr_name" : Servicefile.shared.first_name,
              "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
              "communication_type": Servicefile.shared.checktextfield(textfield: self.textfield_commtype.text!),
@@ -1522,5 +1583,37 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }
     }
     
+    func latLong(lat: Double,long: Double)  {
+        if Servicefile.shared.updateUserInterface(){
+            let geoCoder = CLGeocoder()
+            let location = CLLocation(latitude: lat , longitude: long)
+            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                var pm: CLPlacemark!
+                pm = placemarks?[0]
+                if placemarks?[0] != nil {
+                    var addressString : String = ""
+//                    if pm.subLocality != nil {
+//                        addressString = addressString + pm.subLocality! + ", "
+//                    }
+//                    if pm.thoroughfare != nil {
+//                        addressString = addressString + pm.thoroughfare! + ", "
+//                    }
+                    if pm.locality != nil {
+                        addressString = pm.locality!
+                    }
+//                    if pm.country != nil {
+//                        addressString = addressString + pm.country! + ", "
+//                    }
+//                    if pm.postalCode != nil {
+//                        addressString = addressString + pm.postalCode! + " "
+//                    }
+                    
+                    self.cityname = addressString
+                    print("city name",addressString)
+                }
+            })
+        }
+    
+}
 }
 

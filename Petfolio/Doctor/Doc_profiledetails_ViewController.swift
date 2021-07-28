@@ -160,6 +160,10 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                         let Data = res["Data"] as! NSDictionary
                         let _id = Data["_id"] as? String ?? ""
                         let calender_status = Data["calender_status"] as? Bool ?? false
+                        let clinic_no = Data["clinic_no"] as? String ?? ""
+                        let doc_id = Data["doctor_id"] as? String ?? ""
+                        let about_doc = Data["doctor_info"] as? String ?? ""
+                        
                         let clinic_lat = Data["clinic_lat"] as? Double ?? 0.0
                         let clinic_loc = Data["clinic_loc"] as? String ?? ""
                         let clinic_long = Data["clinic_long"] as? Double ?? 0.0
@@ -194,6 +198,9 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                         Servicefile.shared.communication_type = communication_type
                         Servicefile.shared.consultancy_fees = String(consultancy_fees)
                         Servicefile.shared.Doc_id = _id
+                        Servicefile.shared.Doc_bussiness_clinicno = clinic_no
+                        Servicefile.shared.Doc_bussiness_docid = doc_id
+                        Servicefile.shared.Doc_bussiness_aboutdoc = about_doc
                         Servicefile.shared.Doc_bussiness_name = clinic_name
                         Servicefile.shared.Doc_date_and_time  = date_and_time
                         Servicefile.shared.Doc_delete_status = delete_status

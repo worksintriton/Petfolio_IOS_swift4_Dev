@@ -42,6 +42,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.inital_setup()
         self.label_nodata.isHidden = true
@@ -67,35 +68,77 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.tblview_applist.refreshControl = refreshControl
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
+        self.callnoticartcount()
+        self.view_new.backgroundColor = appgree
+        self.label_new.textColor = UIColor.white
         // Do any additional setup after loading the view.
        
     }
     
     func inital_setup(){
         self.sp_header.btn_sidemenu.addTarget(self, action: #selector(self.spsidemenu), for: .touchUpInside)
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-        self.sp_header.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        self.sp_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.sp_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.sp_header.image_profile.image = image
-            }
-        }
-        self.sp_header.label_location.text = Servicefile.shared.shiplocation
-        self.sp_header.image_profile.layer.cornerRadius = self.sp_header.image_profile.frame.height / 2
-        self.sp_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+//        self.sp_header.image_profile.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        self.sp_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.sp_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.sp_header.image_profile.image = image
+//            }
+//        }
         self.sp_header.btn_location.addTarget(self, action: #selector(self.spmanageaddress), for: .touchUpInside)
-        self.sp_header.btn_button2.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        
+        self.sp_header.label_location.text = Servicefile.shared.shiplocation
+//        self.sp_header.image_profile.layer.cornerRadius = self.sp_header.image_profile.frame.height / 2
+//        self.sp_header.btn_profile.addTarget(self, action: #selector(self.spprofile), for: .touchUpInside)
+//
+//        self.sp_header.btn_button2.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        
+        
+        self.sp_header.btn_button2.addTarget(self, action: #selector(spcartpage), for: .touchUpInside)
+        self.sp_header.image_button2.image = UIImage(named: imagelink.image_bag)
+        self.sp_header.image_profile.image = UIImage(named: imagelink.image_bel)
+        self.sp_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
+        
         self.view_footer.setup(b1: true, b2: false, b3: false)
         //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.sp_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     @objc func refresh(){

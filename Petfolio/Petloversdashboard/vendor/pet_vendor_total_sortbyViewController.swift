@@ -18,7 +18,7 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_apply.view_cornor()
         self.view_sortby.view_cornor()
         self.tbl_sortlist.delegate = self
@@ -134,10 +134,11 @@ class pet_vendor_total_sortbyViewController: UIViewController, UITableViewDelega
                             let product_review = String(itmdata["product_review"] as? Int ?? 0)
                             let product_title = itmdata["product_title"] as? String ?? ""
                             let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
+                            let product_discount_price = itmdata["product_discount_price"] as? Int ?? 0
                             if Servicefile.shared.today_deals_status {
-                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }else{
-                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image))
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                             }
                         }
                         self.stopAnimatingActivityIndicator()

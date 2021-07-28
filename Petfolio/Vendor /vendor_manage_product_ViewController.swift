@@ -381,7 +381,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             cell.label_deal_status.isHidden = true
             if pet_prod_status {
                 cell.label_deal_status.isHidden = false
-                cell.label_deal_status.text = "Today deal"
+                cell.label_deal_status.text = "Deals of the day"
                 cell.view_clear_deals.isHidden = false
             }else{
                 cell.label_deal_status.isHidden = true
@@ -439,7 +439,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             cell.label_deal_status.isHidden = true
             if pet_prod_status {
                 cell.label_deal_status.isHidden = false
-                cell.label_deal_status.text = "Today deal"
+                cell.label_deal_status.text = "Deals of the day"
                 cell.view_clear_deals.isHidden = false
             }else{
                 cell.label_deal_status.isHidden = true

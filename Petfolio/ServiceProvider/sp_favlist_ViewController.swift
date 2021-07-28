@@ -102,7 +102,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
            
-                return CGSize(width: 140 , height:  180)
+            return CGSize(width: self.col_doc_fav.frame.width / 2.1 , height:  200)
           
         }
         

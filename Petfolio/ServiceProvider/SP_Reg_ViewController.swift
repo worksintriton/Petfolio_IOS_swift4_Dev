@@ -73,7 +73,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var img_for = "Gall" // Photo or Gov or Certi
     var timeindex = 0
     var tblindex = 0
-    
+    var cityname = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -124,6 +124,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
         Servicefile.shared.long = locValue.longitude
         Servicefile.shared.sp_lat = Servicefile.shared.lati
         Servicefile.shared.sp_long = Servicefile.shared.long
+        self.latLong(lat: Servicefile.shared.sp_lat, long: Servicefile.shared.sp_long)
         self.findareabylatlong()
         self.locationManager.stopUpdatingLocation()
     }
@@ -211,6 +212,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         print("location",Servicefile.shared.sp_loc, Servicefile.shared.sp_lat,Servicefile.shared.sp_long)
         self.textview_spaddress.text = Servicefile.shared.sp_loc
+        self.latLong(lat: Servicefile.shared.sp_lat, long: Servicefile.shared.sp_long)
     }
     
 //    func latLong(lat: Double,long: Double)  {
@@ -902,6 +904,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
              "sp_loc": Servicefile.shared.sp_loc,
              "sp_lat": Servicefile.shared.sp_lat,
              "sp_long": Servicefile.shared.sp_long,
+             "city_name": self.cityname,
              "bus_user_name": Servicefile.shared.first_name,
              "bus_user_email": Servicefile.shared.user_email,
              "profile_status": true,
@@ -1063,6 +1066,39 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    func latLong(lat: Double,long: Double)  {
+        if Servicefile.shared.updateUserInterface(){
+            let geoCoder = CLGeocoder()
+            let location = CLLocation(latitude: lat , longitude: long)
+            geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                var pm: CLPlacemark!
+                pm = placemarks?[0]
+                if placemarks?[0] != nil {
+                    var addressString : String = ""
+//                    if pm.subLocality != nil {
+//                        addressString = addressString + pm.subLocality! + ", "
+//                    }
+//                    if pm.thoroughfare != nil {
+//                        addressString = addressString + pm.thoroughfare! + ", "
+//                    }
+                    if pm.locality != nil {
+                        addressString = pm.locality!
+                    }
+//                    if pm.country != nil {
+//                        addressString = addressString + pm.country! + ", "
+//                    }
+//                    if pm.postalCode != nil {
+//                        addressString = addressString + pm.postalCode! + " "
+//                    }
+                    
+                    self.cityname = addressString
+                    print(addressString)
+                }
+            })
+        }
+        
     }
     
     func spilit_string_data(array_string: String)-> String{

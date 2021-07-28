@@ -360,13 +360,13 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                                                             Servicefile.shared.petser.append(Petdashservice.init(UID: id, background_color: background_color, service_icon: service_icon, service_title: service_title))
                                                         }
                                                         
-                                                        Servicefile.shared.sosnumbers.removeAll()
-                                                        let SOS = Data["SOS"] as! NSArray
-                                                        for item in 0..<SOS.count {
-                                                            let Bval = SOS[item] as! NSDictionary
-                                                            let Number = String(Bval["Number"] as? Int ?? 0)
-                                                            Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: Number))
-                                                        }
+//                                                        Servicefile.shared.sosnumbers.removeAll()
+//                                                        let SOS = Data["SOS"] as! NSArray
+//                                                        for item in 0..<SOS.count {
+//                                                            let Bval = SOS[item] as! NSDictionary
+//                                                            let Number = String(Bval["Number"] as? Int ?? 0)
+//                                                            Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: Number))
+//                                                        }
                                                         Servicefile.shared.pet_petlist.removeAll()
                                                         
                                                         let pet_details = Data["PetDetails"] as! NSArray

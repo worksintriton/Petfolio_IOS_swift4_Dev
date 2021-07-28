@@ -134,6 +134,8 @@ class Servicefile {
     static let docbusscreate = baseurl + "/api/doctordetails/create"
     static let docbussedit = baseurl + "/api/doctordetails/edit"
     
+    static let cartnoticount = baseurl + "/api/product_cart_detail/getlist_count"
+    
     static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
@@ -208,12 +210,15 @@ class Servicefile {
     static let doc_start_appointment = baseurl + "/api/appointments/edit"
     static let doc_cancel_appointment = baseurl + "/api/appointments/edit"
     static let pet_doc_app_reshedule = baseurl + "/api/appointments/reshedule_appointment"
+    static let pet_sos_list = baseurl + "/api/sos_pet/create"
+    static let pet_sos_edit = baseurl + "/api/sos_pet/edit"
+    
     
     static let Doc_fetch_appointment_id = baseurl + "/api/appointments/mobile/fetch_appointment_id"
     static let SP_fetch_appointment_id = baseurl + "/api/sp_appointments/mobile/fetch_appointment_id"
     
     static let notification = baseurl + "/api/notification/mobile/getlist_id"
-    
+    static let readnotification = baseurl + "/api/notification/mark_readed"
     
     static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
      static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
@@ -252,6 +257,8 @@ class Servicefile {
     static let vendor_update_status_dispatch = baseurl + "/api/vendor_order_booking/update_status_dispatch"
     static let vendor_update_status_vendor_cancel = baseurl + "/api/vendor_order_booking/update_status_vendor_cancel"
     static let vendor_manage_product = baseurl + "/api/product_details/mobile/getlist_from_vendor_id1"
+    static let vendor_add_product_list = baseurl + "/api/newproduct_detail/fetch_product_by_cat"
+    static let petprodcateget = baseurl + "/api/product_cate/getlist_cat"
     static let pet_vendor_manage_search = baseurl + "/api/product_details/text_search"
     static let pet_vendor_cat_search = baseurl + "/api/product_details/cat_text_search"
     static let pet_vendor_total_search = baseurl + "/api/product_details/todaydeal_text_search"
@@ -275,6 +282,8 @@ class Servicefile {
     static let pet_vendor_cancel_overall = baseurl + "/api/vendor_order_group/update_vendor_status4"
     static let vendor_mark_deal = baseurl + "/api/product_details/mark_deal"
     static let vendor_edit_product = baseurl + "/api/product_details/mobile/edit_product"
+    static let vendor_product_create = baseurl + "/api/newproduct_detail/vendor_product_create"
+    
     
     static let vendor_order_details_confirm = baseurl + "/api/vendor_order_group/update_vendor_status1"
     static let vendor_order_details_dispatch = baseurl + "/api/vendor_order_group/update_vendor_status2"
@@ -342,6 +351,7 @@ class Servicefile {
     var orderid = ""
     var userimage = ""
     var selectedindex = 0
+    var vselectedindex = 0
     var pet_shop_search = ""
     // userdetails
     var DemoData = [demodat]()
@@ -374,6 +384,7 @@ class Servicefile {
     var pet_SP_service_details = [SP_service_details]()
     var product_id = ""
     var manageproductDic = [Any]()
+    var addproddic = [Any]()
     // pet dashboard
     // pet service
     var pet_servicecat = [service_cat]()
@@ -382,6 +393,7 @@ class Servicefile {
     var moredocd = [moredoc]()
     var specd = [spec]()
     var sosnumbers = [sosnumber]()
+    var sosselect = 0
     
     // see more
     // pet appointment params
@@ -455,6 +467,9 @@ class Servicefile {
     var selspec = ""
     var orgspecialza = [""]
     var isspecialza = [""]
+    
+    var notifi_count = 0
+    var cart_count = 0
     
     var Pet_breed_val = ""
     var pet_type_val = ""
@@ -536,6 +551,9 @@ class Servicefile {
     var Doc_bus_user_name = ""
     var Doc_bus_user_phone = ""
     var Doc_bussiness_name = ""
+    var Doc_bussiness_clinicno = ""
+    var Doc_bussiness_docid = ""
+    var Doc_bussiness_aboutdoc = ""
     var Doc_date_and_time  = ""
     var Doc_delete_status = true
     var Doc_mobile_type = ""
@@ -546,6 +564,12 @@ class Servicefile {
     var Doc_long = 0.0
     var Doc_user_id = ""
     var Doc_signature = ""
+    var doc_diag = ""
+    var doc_diag_id = ""
+    var doc_sub_diag = ""
+    var doc_sub_diag_id = ""
+    var doc_diag_type = "PDF"  // Image
+    var doc_diag_img = ""
     // doc update
     // sp update
     var sp_id = ""
@@ -656,6 +680,86 @@ class Servicefile {
            return textfield
        }
     
+    func setNotification(userInfo: NSDictionary) {
+        print("data from the notification",userInfo)
+        let data = userInfo as! NSDictionary
+        let usertype = data["usertype"] as? String ?? "0"
+        let appintments = data["appintments"] as? String ?? ""
+        let orders = data["orders"] as? String ?? ""
+        if  UserDefaults.standard.string(forKey: "usertype") != nil {
+            if  UserDefaults.standard.string(forKey: "usertype") != "" {
+                Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+                Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
+                    if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
+                    Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                    }else{
+                        Servicefile.shared.my_ref_code = ""
+                    }
+                }else{
+                    Servicefile.shared.my_ref_code = ""
+                }
+                
+                print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                if Servicefile.shared.user_type == usertype && usertype == "1"{
+                    if appintments != "" {
+                        
+                    }else if orders != "" {
+                        
+                    }else {
+//                        let tapbar = UIStoryboard.petloverDashboardViewController()
+//                        self.present(tapbar, animated: true, completion: nil)
+                    }
+                    
+                } else if Servicefile.shared.user_type == usertype && usertype == "2" {
+                    if appintments != "" {
+                        
+                    }else if orders != "" {
+                        
+                    }else {
+                        //                    let vc = UIStoryboard.DocdashboardViewController()
+                        //                    self.present(vc, animated: true, completion: nil)
+                    }
+                    
+
+                } else if Servicefile.shared.user_type == usertype && usertype == "3" {
+                    if appintments != "" {
+                        
+                    }else if orders != "" {
+                        
+                    }else {
+                        //                    let vc = UIStoryboard.Sp_dash_ViewController()
+                        //                    self.present(vc, animated: true, completion: nil)
+                    }
+
+                } else{
+                    if appintments != "" {
+                        
+                    }else if orders != "" {
+                        
+                    }else {
+                        //                    let vc = UIStoryboard.vendor_myorder_ViewController()
+                        //                    self.present(vc, animated: true, completion: nil)
+                    }
+
+                }
+            }else{
+               
+                    //                let vc = UIStoryboard.LoginViewController()
+                    //                self.present(vc, animated: true, completion: nil)
+              
+            }
+        
+        
+        }
+        
+    }
+    
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if (cString.hasPrefix("#")) {
@@ -736,6 +840,19 @@ class Servicefile {
         }else{
             return surl!
         }
+    }
+    
+    
+    func convertdashlinestring(str: String)-> NSMutableAttributedString{
+        var costamt = ""
+        if str != "0" {
+            costamt = "₹ " + str
+        }else{
+            costamt = ""
+        }
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        return attributeString
     }
     
     func verifyUrl (urlString: String?) -> Bool {
@@ -1476,6 +1593,7 @@ struct moredoc{
     var user_id : String
     var specialization : [spec]
     var amount : String
+    var city_name : String
     var thumbnail_image : String
     init(I_id : String
         , I_clinic_loc : String
@@ -1488,6 +1606,7 @@ struct moredoc{
         , I_review_count : String
         , I_star_count : String
         , I_user_id : String
+         , Icity_name : String
          , I_specialization : [spec], in_amount: String, in_thumbnail_image: String) {
         self._id = I_id
         self.clinic_loc = I_clinic_loc
@@ -1503,6 +1622,7 @@ struct moredoc{
         self.specialization = I_specialization
         self.amount = in_amount
         self.thumbnail_image = in_thumbnail_image
+        self.city_name = Icity_name
     }
 }
 
@@ -1513,10 +1633,23 @@ struct spec {
     }
 }
 
+/*
+ "Edit_status" = 1;
+ "_id" = 3;
+ name = Neighbour;
+ phone = 9876543212;
+ */
+
 struct sosnumber {
+    var Edit_status : Bool
+    var id : Int
+    var title : String
     var number : String
-    init(i_number: String) {
+    init(i_number: String, I_title: String, I_id: Int,I_Edit_status : Bool ) {
         self.number = i_number
+        self.id = I_id
+        self.Edit_status = I_Edit_status
+        self.title = I_title
     }
 }
 
@@ -1555,9 +1688,11 @@ struct SP_service_details{
     var service_price : Int
     var service_provider_name : String
     var thumbnail_image : String
+    var city_name: String
+    var servicelist : [Any]
     init( I_id : String, Icomments_count : Int, Idistance : Double, Iimage : String,
           Irating_count :  Int, Iservice_offer : Int, Iservice_place : String, Iservice_price : Int,
-          Iservice_provider_name : String, in_thumbnail_image : String) {
+          Iservice_provider_name : String, in_thumbnail_image : String, Icity_name: String, Iservicelist: [Any]) {
         self._id = I_id
         self.comments_count = Icomments_count
         self.distance = Idistance
@@ -1568,6 +1703,8 @@ struct SP_service_details{
         self.service_price = Iservice_price
         self.service_provider_name = Iservice_provider_name
         self.thumbnail_image = in_thumbnail_image
+        self.city_name = Icity_name
+        self.servicelist = Iservicelist
     }
 }
 
@@ -1682,6 +1819,7 @@ struct productdetails{
     var product_review : String
     var product_title : String
     var thumbnail_image : String
+    var product_discount_price : Int
     init(In_id : String,
     In_product_discount : Int,
     In_product_fav : Bool,
@@ -1689,7 +1827,7 @@ struct productdetails{
     In_product_price : Int,
     In_product_rating : String,
     In_product_review : String,
-    In_product_title : String, In_thumbnail_image: String) {
+    In_product_title : String, In_thumbnail_image: String, Iproduct_discount_price : Int) {
         self._id = In_id
         self.product_discount = In_product_discount
         self.product_fav = In_product_fav
@@ -1699,6 +1837,7 @@ struct productdetails{
         self.product_review = In_product_review
         self.product_title = In_product_title
         self.thumbnail_image = In_thumbnail_image
+        self.product_discount_price = Iproduct_discount_price
     }
 }
 

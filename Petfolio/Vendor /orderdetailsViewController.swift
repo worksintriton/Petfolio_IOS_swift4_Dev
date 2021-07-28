@@ -138,7 +138,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
         self.view_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
             self.view_header.view_sos.isHidden = true
-            self.view_header.view_bag.isHidden = true
+        self.view_header.view_profile.isHidden = true
         // header action
         self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.label_Fprocess_one.text = "Manage Products"

@@ -63,7 +63,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         if textField.text != "" {
             let filteredArr = self.pet_breed_arr.filter({$0.contains(textField.text!)})
             self.searpet_breed = filteredArr
-               tbl_search_breed.reloadData()
+            tbl_search_breed.reloadData()
         }else{
             self.searpet_breed = pet_breed_arr
                tbl_search_breed.reloadData()
@@ -135,6 +135,8 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.callpetbreedbyid(petid: pbv)
         
     }
+    
+   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.col_pettype.frame.size.width / 2.1, height: 175)

@@ -504,11 +504,9 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                         if self.img_for == "Gov" {
                             self.image_govid = Data
                         }
-                        
                         if self.img_for == "Photo" {
                             self.image_photo = Data
                         }
-                        
                         self.coll_certificate.reloadData()
                         self.setimag()
                         self.stopAnimatingActivityIndicator()

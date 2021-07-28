@@ -17,6 +17,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     
     var labelmenu = [""]
     var imgmenu = [""]
+    
     /*if Servicefile.shared.my_ref_code != "" {
      self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
      self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
@@ -26,13 +27,13 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
  }*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Payment Details","Notifications", "Logout"]
-            self.imgmenu = ["Like","Doc","Calendar","PaymentDetails","Bell", "Exit"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Notifications","SOS", "Logout"]
+            self.imgmenu = ["Like","Doc","Calendar","Bell","SOS", "Exit"]
         }
         
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -83,6 +84,9 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorites"{
             let vc = UIStoryboard.pet_sidemenu_favlist_ViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "SOS"{
+            let vc = UIStoryboard.SOSViewController()
             self.present(vc, animated: true, completion: nil)
         }
 //        else if self.labelmenu[indexPath.row] == "Medical History"{

@@ -16,7 +16,8 @@ import IQKeyboardManagerSwift
 @available(iOS 13.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
-let googleApiKey = "AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc"
+    // old AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc
+let googleApiKey = "AIzaSyBq6YK_r9XNtKCycLN0cS3kGdzAYdTcFqQ"
 var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -57,9 +58,16 @@ var window: UIWindow?
 
             application.registerForRemoteNotifications()
             Messaging.messaging().delegate = self
-           
+        if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: { requests in
+                    for request in requests {
+                        Servicefile.shared.setNotification(userInfo: request.request.content.userInfo as NSDictionary)
+                    }
+                })
+            }
             return true
         }
+          
         // MARK: UISceneSession Lifecycle
         func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
           print("Firebase registration token: \(fcmToken)")
@@ -88,9 +96,249 @@ var window: UIWindow?
                          didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
             Messaging.messaging().apnsToken = deviceToken as Data
         }
+    
+    
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        //        Servicefile.shared.setNotification(userInfo: userInfo as NSDictionary)
+                print("data from the notification",userInfo)
+                let data = userInfo as NSDictionary
+                let usertype = data["usertype"] as? String ?? "0"
+                let appintments = data["appintments"] as? String ?? ""
+                let orders = data["orders"] as? String ?? ""
+                if  UserDefaults.standard.string(forKey: "usertype") != nil {
+                    if  UserDefaults.standard.string(forKey: "usertype") != "" {
+                        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                        Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+                        Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                        Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                        Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                        Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                        Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                        if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
+                            if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
+                            Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                            }else{
+                                Servicefile.shared.my_ref_code = ""
+                            }
+                        }else{
+                            Servicefile.shared.my_ref_code = ""
+                        }
+                        
+                        print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                        if Servicefile.shared.user_type == usertype && usertype == "1"{
+                            if appintments != "" {
+                                print("i am in appointment page ")
+                                let vc = UIStoryboard.Pet_applist_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else if orders != "" {
+                                print("i am in order page ")
+                                let vc = UIStoryboard.Petlover_myorder_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else {
+                                let tapbar = UIStoryboard.petloverDashboardViewController()
+                                let navigationController = UINavigationController.init(rootViewController: tapbar)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
+                            
+                        } else if Servicefile.shared.user_type == usertype && usertype == "2" {
+                            if appintments != "" {
+                                print("i am in appointment page ",usertype)
+                                let vc = UIStoryboard.DocdashboardViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else if orders != "" {
+                                print("i am in order page ",usertype)
+                                let vc = UIStoryboard.doc_myorderdetails_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else {
+                                let vc = UIStoryboard.DocdashboardViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
+                            
+
+                        } else if Servicefile.shared.user_type == usertype && usertype == "3" {
+                            if appintments != "" {
+                                print("i am in appointment page ",usertype)
+                                let vc = UIStoryboard.Sp_dash_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else if orders != "" {
+                                print("i am in order page ",usertype)
+                                let vc = UIStoryboard.sp_myorder_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else {
+                                let vc = UIStoryboard.Sp_dash_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
+
+                        } else{
+                            if appintments != "" {
+                                print("i am in appointment page ",usertype)
+                                let vc = UIStoryboard.vendor_myorder_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else if orders != "" {
+                                print("i am in order page ",usertype)
+                                let vc = UIStoryboard.vendor_myorder_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else {
+                                let vc = UIStoryboard.vendor_myorder_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
+
+                        }
+                    }else{
+                        let vc = UIStoryboard.LoginViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }
+                
+                }
+            }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        Servicefile.shared.setNotification(userInfo: userInfo as NSDictionary)
+        print("data from the notification",userInfo)
+        let data = userInfo as NSDictionary
+        let usertype = data["usertype"] as? String ?? "0"
+        let appintments = data["appintments"] as? String ?? ""
+        let orders = data["orders"] as? String ?? ""
+        if  UserDefaults.standard.string(forKey: "usertype") != nil {
+            if  UserDefaults.standard.string(forKey: "usertype") != "" {
+                Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+                Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
+                    if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
+                    Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                    }else{
+                        Servicefile.shared.my_ref_code = ""
+                    }
+                }else{
+                    Servicefile.shared.my_ref_code = ""
+                }
+                
+                print("user type ",Servicefile.shared.user_type,"user id",Servicefile.shared.userid)
+                if Servicefile.shared.user_type == usertype && usertype == "1"{
+                    if appintments != "" {
+                        print("i am in appointment page ")
+                        let vc = UIStoryboard.Pet_applist_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else if orders != "" {
+                        print("i am in order page ")
+                        let vc = UIStoryboard.Petlover_myorder_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else {
+                        let tapbar = UIStoryboard.petloverDashboardViewController()
+                        let navigationController = UINavigationController.init(rootViewController: tapbar)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }
+                    
+                } else if Servicefile.shared.user_type == usertype && usertype == "2" {
+                    if appintments != "" {
+                        print("i am in appointment page ",usertype)
+                        let vc = UIStoryboard.DocdashboardViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else if orders != "" {
+                        print("i am in order page ",usertype)
+                        let vc = UIStoryboard.doc_myorderdetails_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else {
+                        let vc = UIStoryboard.DocdashboardViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }
+                    
+
+                } else if Servicefile.shared.user_type == usertype && usertype == "3" {
+                    if appintments != "" {
+                        print("i am in appointment page ",usertype)
+                        let vc = UIStoryboard.Sp_dash_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else if orders != "" {
+                        print("i am in order page ",usertype)
+                        let vc = UIStoryboard.sp_myorder_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else {
+                        let vc = UIStoryboard.Sp_dash_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }
+
+                } else{
+                    if appintments != "" {
+                        print("i am in appointment page ",usertype)
+                        let vc = UIStoryboard.vendor_myorder_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else if orders != "" {
+                        print("i am in order page ",usertype)
+                        let vc = UIStoryboard.vendor_myorder_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }else {
+                        let vc = UIStoryboard.vendor_myorder_ViewController()
+                        let navigationController = UINavigationController.init(rootViewController: vc)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+                    }
+
+                }
+            }else{
+                let vc = UIStoryboard.LoginViewController()
+                let navigationController = UINavigationController.init(rootViewController: vc)
+                self.window?.rootViewController = navigationController
+                self.window?.makeKeyAndVisible()
+            }
+        
+        }
+    }
     // MARK: - Core Data stack
 
-    lazy var persistentContainer: NSPersistentContainer = {
+lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the

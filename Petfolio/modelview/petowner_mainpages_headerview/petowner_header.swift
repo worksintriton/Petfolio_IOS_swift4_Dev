@@ -25,6 +25,13 @@ class petowner_header: UIView {
     @IBOutlet weak var btn_button2: UIButton!
     @IBOutlet weak var image_button2: UIImageView!
     
+    
+    @IBOutlet weak var view_belcount: UIView!
+    @IBOutlet weak var label_belcount: UILabel!
+    
+    @IBOutlet weak var view_cartcount: UIView!
+    @IBOutlet weak var label_cartcount: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureView()
@@ -43,7 +50,23 @@ class petowner_header: UIView {
             self.image_drop_down.image = UIImage(named: imagelink.Drop_down)
             //self.view_profile.layer.cornerRadius = self.view_profile.frame.height / 2
             self.view_location.layer.cornerRadius = self.view_location.frame.height / 2
+            self.checknoti()
             self.addSubview(view)
+        }
+    }
+    
+    func checknoti(){
+        self.view_belcount.isHidden = true
+        self.view_cartcount.isHidden = true
+        self.view_belcount.layer.cornerRadius = self.view_belcount.frame.height / 2
+        self.view_cartcount.layer.cornerRadius = self.view_cartcount.frame.height / 2
+        if Servicefile.shared.notifi_count > 0 {
+            self.view_belcount.isHidden = false
+            self.label_belcount.text = String(Servicefile.shared.notifi_count)
+        }
+        if Servicefile.shared.cart_count > 0 {
+            self.view_cartcount.isHidden = false
+            self.label_cartcount.text = String(Servicefile.shared.cart_count)
         }
     }
 }

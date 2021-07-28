@@ -14,8 +14,12 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
 
     
     
+    @IBOutlet weak var label_pres: UILabel!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_subtittle: UILabel!
+    @IBOutlet weak var label_dr_id: UILabel!
+    @IBOutlet weak var label_doc_address: UILabel!
+    @IBOutlet weak var label_PH_no: UILabel!
     
     @IBOutlet weak var label_powered_title: UILabel!
     @IBOutlet weak var label_powered_ph: UILabel!
@@ -37,7 +41,10 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBOutlet weak var label_doc_name: UILabel!
     
+    @IBOutlet weak var image_preview: UIImageView!
+    @IBOutlet weak var view_pres: UIView!
     
+    @IBOutlet weak var view_manual: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +53,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
         self.label_owner_name.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.tbl_prescription.delegate = self
         self.tbl_prescription.dataSource = self
+        self.view_pres.isHidden = true
         self.callpescription()
     }
     
@@ -94,6 +102,10 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                         self.label_age.text = Data["age"] as? String ?? ""
                                                         self.label_alergies.text =  Data["allergies"] as? String ?? ""
                                                         self.label_diagnosis.text = Data["diagnosis"] as? String ?? ""
+                                                        self.label_dr_id.text = Data["doctor_id"] as? String ?? ""
+                                                        self.label_doc_address.text = Data["clinic_loc"] as? String ?? ""
+                                                        self.label_PH_no.text = Data["clinic_no"] as? String ?? ""
+                                                        self.label_pres.text = Data["Prescription_id"] as? String ?? ""
                                                         let signature = Data["digital_sign"] as? String ?? ""
                                                         self.img_signature.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                                         self.img_signature.sd_setImage(with: Servicefile.shared.StrToURL(url:  signature)) { (image, error, cache, urls) in
@@ -103,7 +115,6 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                                 self.img_signature.image = image
                                                             }
                                                         }
-                                                        
                                                         var spec = ""
                                                         let docspec = Data["doctor_speci"] as? NSArray ?? [Any]() as NSArray
                                                         var petha = ""
@@ -127,7 +138,22 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                         self.label_subtittle.text = petha
                                                         self.label_title.text =  Data["doctorname"] as? String ?? ""
                                                         self.label_doc_name.text =  Data["doctorname"] as? String ?? ""
-                                                        
+                                                        Servicefile.shared.doc_diag_type =  Data["Prescription_type"] as? String ?? ""
+                                                        if Servicefile.shared.doc_diag_type == "PDF"{
+                                                            self.view_pres.isHidden = true
+                                                            self.view_manual.isHidden = false
+                                                        }else{
+                                                            self.view_pres.isHidden = false
+                                                            self.view_manual.isHidden = true
+                                                        }
+                                                        let presimg =  Data["Prescription_img"] as? String ?? ""
+                                                        self.image_preview.sd_setImage(with: Servicefile.shared.StrToURL(url: presimg)) { (image, error, cache, urls) in
+                                                            if (error != nil) {
+                                                                self.image_preview.image = UIImage(named: imagelink.sample)
+                                                            } else {
+                                                                self.image_preview.image = image
+                                                            }
+                                                        }
                                                         self.label_petgender.text =  Data["gender"] as? String ?? ""
                                                        // "health_issue_title" = "Dental issues";
                                                         self.label_owner_name.text =  Data["owner_name"]  as? String ?? ""

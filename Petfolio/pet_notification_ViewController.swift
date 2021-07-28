@@ -179,6 +179,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                             let date_and_time = notilist["date_and_time"] as? String ?? ""
                             Servicefile.shared.notif_list.append(notificationlist.init(I_id: _id, Iuser_id: user_id, Inotify_title: notify_title, Inotify_descri: notify_descri, Inotify_img: notify_img, Inotify_time: notify_time, Idate_and_time: date_and_time))
                         }
+                        self.callreadnotification()
                         self.tbl_notifi_list.reloadData()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -203,6 +204,39 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
    
-    
+    func callreadnotification(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.readnotification, method: .post, parameters:
+            ["user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                       
+                        let Dat = res["Data"] as! NSDictionary
+                       
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        Servicefile.shared.notif_list.removeAll()
+                        self.tbl_notifi_list.reloadData()
+                        self.stopAnimatingActivityIndicator()
+                        let Messages = res["Message"] as? String ?? ""
+                        self.alert(Message: Messages)
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
+    }
     
 }

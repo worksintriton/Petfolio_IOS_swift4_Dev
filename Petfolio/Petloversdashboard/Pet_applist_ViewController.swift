@@ -145,8 +145,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         if self.appointtype == "current" {
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].communication_type != "Visit" {
                 cell.view_online.isHidden = false
+                if Servicefile.shared.pet_applist_do_sp[indexPath.row].start_appointment_status  != "Not Started" {
+                    cell.image_online.image = UIImage(named: "green_video")
+                }else{
+                    cell.image_online.image = UIImage(named: "gray_video")
+                }
             }else{
                 cell.view_online.isHidden = true
+                
             }
             cell.view_addview.isHidden = true
             cell.view_commissed.isHidden = false

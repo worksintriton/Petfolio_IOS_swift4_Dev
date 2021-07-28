@@ -5514,6 +5514,7 @@
                                                                     <outlet property="btn_online" destination="c8B-uW-ul6" id="1sn-b1-Ykf"/>
                                                                     <outlet property="btn_pres" destination="YP5-Z0-svJ" id="f76-pv-kfA"/>
                                                                     <outlet property="image_emergnecy" destination="Q1e-BM-AQU" id="yQw-Od-XSw"/>
+                                                                    <outlet property="image_online" destination="U9M-P7-b5b" id="Lew-C9-7ff"/>
                                                                     <outlet property="img_petimg" destination="Mrf-DA-FQz" id="lbj-qN-LiM"/>
                                                                     <outlet property="labe_comMissed" destination="pFX-Qn-4n1" id="OfX-kp-ucw"/>
                                                                     <outlet property="label_amount" destination="tJM-md-zBF" id="Sr7-dJ-MJ4"/>
@@ -8616,7 +8617,7 @@
         <image name="heart_read" width="40" height="40"/>
         <image name="history" width="512" height="512"/>
         <image name="location" width="96" height="137"/>
-        <image name="logo" width="689" height="585"/>
+        <image name="logo" width="333" height="401"/>
         <image name="sample" width="150" height="150"/>
         <image name="selectedRadio" width="62" height="62"/>
         <image name="shop_gray" width="100" height="100"/>

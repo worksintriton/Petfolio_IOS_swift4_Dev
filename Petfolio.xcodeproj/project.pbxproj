@@ -32,7 +32,6 @@
 		8407145A26905E80002AF61C /* backup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407145926905E80002AF61C /* backup.xib */; };
 		8407159F269168F0002AF61C /* animateloader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8407159E269168F0002AF61C /* animateloader.xib */; };
 		840715A326916B04002AF61C /* animateloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840715A226916B04002AF61C /* animateloader.swift */; };
-		8408B35F26A93B1A0022EBDA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8408B35E26A93B1A0022EBDA /* GoogleService-Info.plist */; };
 		84096E9F262FE1AB00BB2EAF /* pet_dash_banner_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096E9E262FE1AB00BB2EAF /* pet_dash_banner_CollectionViewCell.swift */; };
 		84096EA3262FE37300BB2EAF /* pet_dashboard_Service_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096EA2262FE37300BB2EAF /* pet_dashboard_Service_CollectionViewCell.swift */; };
 		84096EA7262FE4CE00BB2EAF /* pet_dashboard_shop_banner_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096EA6262FE4CE00BB2EAF /* pet_dashboard_shop_banner_CollectionViewCell.swift */; };
@@ -194,6 +193,7 @@
 		84DE6E2426568CBE00B05196 /* vendor_header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE6E2326568CBE00B05196 /* vendor_header.swift */; };
 		84E11996263ADC3E004981B7 /* catwalk2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84E11994263ADC3C004981B7 /* catwalk2.gif */; };
 		84E11997263ADC3E004981B7 /* cat_walk1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84E11995263ADC3E004981B7 /* cat_walk1.gif */; };
+		84E4F69526B436D200A0D434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E4F69426B436D200A0D434 /* GoogleService-Info.plist */; };
 		84E7BB2A25F652ED009634ED /* todaysdealseemoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */; };
 		84E7BB2C25F656D3009634ED /* ProductshimmerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E7BB2B25F656D3009634ED /* ProductshimmerCollectionViewCell.swift */; };
 		84EECF662628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EECF652628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift */; };
@@ -413,7 +413,6 @@
 		8407145926905E80002AF61C /* backup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = backup.xib; sourceTree = "<group>"; };
 		8407159E269168F0002AF61C /* animateloader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = animateloader.xib; sourceTree = "<group>"; };
 		840715A226916B04002AF61C /* animateloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animateloader.swift; sourceTree = "<group>"; };
-		8408B35E26A93B1A0022EBDA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84096E9E262FE1AB00BB2EAF /* pet_dash_banner_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dash_banner_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84096EA2262FE37300BB2EAF /* pet_dashboard_Service_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashboard_Service_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84096EA6262FE4CE00BB2EAF /* pet_dashboard_shop_banner_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashboard_shop_banner_CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -575,6 +574,7 @@
 		84DE6E2326568CBE00B05196 /* vendor_header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_header.swift; sourceTree = "<group>"; };
 		84E11994263ADC3C004981B7 /* catwalk2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = catwalk2.gif; sourceTree = "<group>"; };
 		84E11995263ADC3E004981B7 /* cat_walk1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat_walk1.gif; sourceTree = "<group>"; };
+		84E4F69426B436D200A0D434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84E7BB2925F652ED009634ED /* todaysdealseemoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todaysdealseemoreViewController.swift; sourceTree = "<group>"; };
 		84E7BB2B25F656D3009634ED /* ProductshimmerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductshimmerCollectionViewCell.swift; sourceTree = "<group>"; };
 		84EECF652628761A00616E8A /* pet_app_details_doc_calender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_details_doc_calender_ViewController.swift; sourceTree = "<group>"; };
@@ -1458,7 +1458,7 @@
 		B0571C932562503400B42719 /* DOc */ = {
 			isa = PBXGroup;
 			children = (
-				8408B35E26A93B1A0022EBDA /* GoogleService-Info.plist */,
+				84E4F69426B436D200A0D434 /* GoogleService-Info.plist */,
 			);
 			path = DOc;
 			sourceTree = "<group>";
@@ -1813,7 +1813,6 @@
 				8407159F269168F0002AF61C /* animateloader.xib in Resources */,
 				847194212631ACDE00FEA91E /* vendor_orderdetails_dispathorder_TableViewCell.xib in Resources */,
 				840D8176268C97EB00A77E8F /* docpreTableViewCell.xib in Resources */,
-				8408B35F26A93B1A0022EBDA /* GoogleService-Info.plist in Resources */,
 				84F636A226539E010033BA34 /* paymentdetails_TableViewCell.xib in Resources */,
 				8402B9AD264A4377009DDFC0 /* unselect_medi_TableViewCell.xib in Resources */,
 				B094D269255D6221008400D6 /* futura light bt.ttf in Resources */,
@@ -1833,6 +1832,7 @@
 				B094D219255BDE82008400D6 /* Main.storyboard in Resources */,
 				8463DADD267DD4E400DC06E2 /* genderview.xib in Resources */,
 				B094D26B255D6221008400D6 /* Futura Book font.ttf in Resources */,
+				84E4F69526B436D200A0D434 /* GoogleService-Info.plist in Resources */,
 				84DDDEDD26AA98E20073473F /* addingprodCollectionViewCell.xib in Resources */,
 				84951E9526805CB8001F526D /* getpetCollectionViewCell.xib in Resources */,
 				B094D26F255D6221008400D6 /* Futura Heavy font.ttf in Resources */,
@@ -2462,8 +2462,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PLV25N8T7A;
+				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2477,8 +2478,9 @@
 				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petfolio.infinitu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio;
 				PRODUCT_NAME = PetFolio;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";
@@ -2491,8 +2493,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PLV25N8T7A;
+				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2505,8 +2508,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petfolio.infinitu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio;
 				PRODUCT_NAME = PetFolio;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s ";
@@ -2527,7 +2531,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.petfolio.infinitu.PetfolioTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio.PetfolioTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2549,7 +2553,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.petfolio.infinitu.PetfolioTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio.PetfolioTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2569,7 +2573,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Com.PetFolio.Infinitus.PetfolioUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio.PetfolioUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2589,7 +2593,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Com.PetFolio.Infinitus.PetfolioUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dci.petfolio.PetfolioUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

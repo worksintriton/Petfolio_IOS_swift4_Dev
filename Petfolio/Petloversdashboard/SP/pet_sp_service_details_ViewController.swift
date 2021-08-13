@@ -40,8 +40,10 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     var longitude : Double!
     let marker = GMSMarker()
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     override func viewDidLoad() {
         super.viewDidLoad()
+        intial_setup_action()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
@@ -57,10 +59,20 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         self.col_pet_ser.dataSource = self
         self.image_service.layer.cornerRadius = self.image_service.frame.size.height / 2
         self.view_img_service.View_image_dropshadow(cornordarius: self.image_service.frame.size.height / 2, iscircle: true)
-        self.view_book.view_cornor()
+        self.view_book.layer.cornerRadius = self.view_book.frame.height / 2
     }
     
-    
+    func intial_setup_action(){
+   
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+    // footer action
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if col_pet_ser == collectionView {

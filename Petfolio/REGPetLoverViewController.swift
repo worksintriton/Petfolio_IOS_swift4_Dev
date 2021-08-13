@@ -410,7 +410,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }else{
-               // self.calladdpetdetails()
+                self.calladdpetdetails()
             }
         }
        

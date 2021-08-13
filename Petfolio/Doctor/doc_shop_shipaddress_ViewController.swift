@@ -41,7 +41,6 @@ class doc_shop_shipaddress_ViewController: UIViewController, UITableViewDelegate
             // Do any additional setup after loading the view.
             self.tableview_list_address.delegate = self
             self.tableview_list_address.dataSource = self
-           
         }
     
     func intial_setup_action(){
@@ -180,7 +179,6 @@ class doc_shop_shipaddress_ViewController: UIViewController, UITableViewDelegate
            
            func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
                print("success: ", payment_id)
-               
            }
         
         

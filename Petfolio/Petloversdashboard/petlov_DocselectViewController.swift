@@ -54,6 +54,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     @IBOutlet weak var view_experience: UIView!
     @IBOutlet weak var view_fee: UIView!
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var col_pet_handle: UICollectionView!
     @IBOutlet weak var col_sepc_list: UICollectionView!
     @IBOutlet weak var view_back: UIView!
@@ -64,6 +65,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        intial_setup_action()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.pet_handle.removeAll()
         self.pet_spec.removeAll()
@@ -95,7 +97,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         self.col_sepc_list.delegate = self
         self.col_sepc_list.dataSource = self
         self.coll_imgview.isPagingEnabled = true
-        self.view_book.submit_cornor()
+        self.view_book.layer.cornerRadius = self.view_book.frame.height / 2
         self.view_book.dropShadow()
         // Do any additional setup after loading the view.
         print("selected doctor details",Servicefile.shared.petdoc[Servicefile.shared.selectedindex])
@@ -126,6 +128,18 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                }
               
            }
+    }
+    
+    func intial_setup_action(){
+   
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+    // footer action
     }
     
     

@@ -29,6 +29,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_edu_year: UILabel!
     @IBOutlet weak var label_edu: UILabel!
     
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var image_fav: UIImageView!
     
     var clinicpic = [""]
@@ -65,6 +66,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.pet_handle.removeAll()
         self.pet_spec.removeAll()
@@ -93,8 +95,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.coll_imgview.delegate = self
         self.coll_imgview.dataSource = self
         self.coll_imgview.isPagingEnabled = true
-        self.view_book.view_cornor()
-        
+        self.view_book.layer.cornerRadius = self.view_book.frame.height / 2
         self.view_book.dropShadow()
         self.col_pet_handle.delegate = self
         self.col_pet_handle.dataSource = self
@@ -107,6 +108,18 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.calldocdetails()
     }
     
+    
+    func intial_setup_action(){
+   
+    // footer action
+        self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+    // footer action
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.timer.invalidate()

@@ -938,14 +938,14 @@
                                         </constraints>
                                     </scrollView>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mL-zw-GXO">
-                                        <rect key="frame" x="0.0" y="758" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="688" width="414" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="1T4-ab-E27"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFB-TP-IG5">
-                                        <rect key="frame" x="83" y="767" width="248" height="42"/>
+                                        <rect key="frame" x="83" y="697" width="248" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make an Appointment " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYx-uZ-b4r">
                                                 <rect key="frame" x="0.0" y="0.0" width="248" height="42"/>
@@ -972,11 +972,19 @@
                                             <constraint firstAttribute="bottom" secondItem="88b-wk-ALx" secondAttribute="bottom" constant="-2" id="sk7-RY-hIY"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeE-5f-MTz" customClass="petowner_footerview" customModule="PetFolio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="743" width="414" height="75"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="pZT-0g-hSA"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fFX-H8-dL3" firstAttribute="leading" secondItem="V4k-y5-LcR" secondAttribute="leading" id="1tA-vj-7eb"/>
                                     <constraint firstAttribute="bottom" secondItem="fFX-H8-dL3" secondAttribute="bottom" id="3jA-u3-yEn"/>
+                                    <constraint firstItem="CeE-5f-MTz" firstAttribute="leading" secondItem="V4k-y5-LcR" secondAttribute="leading" id="5rf-17-yMd"/>
                                     <constraint firstAttribute="trailing" secondItem="6mL-zw-GXO" secondAttribute="trailing" id="6Yn-kF-HMZ"/>
                                     <constraint firstItem="RFB-TP-IG5" firstAttribute="centerX" secondItem="6mL-zw-GXO" secondAttribute="centerX" id="8vW-lK-j0N"/>
                                     <constraint firstItem="fFX-H8-dL3" firstAttribute="top" secondItem="V4k-y5-LcR" secondAttribute="top" id="FXk-bh-AnJ"/>
@@ -987,8 +995,10 @@
                                     <constraint firstAttribute="trailing" secondItem="aBm-6S-vLN" secondAttribute="trailing" id="XYF-GG-47b"/>
                                     <constraint firstItem="4oO-1E-r7C" firstAttribute="top" secondItem="V4k-y5-LcR" secondAttribute="top" constant="20" id="b7G-OL-ja4"/>
                                     <constraint firstItem="RFB-TP-IG5" firstAttribute="height" secondItem="6mL-zw-GXO" secondAttribute="height" multiplier="0.7" id="c1q-GQ-inL"/>
-                                    <constraint firstAttribute="bottom" secondItem="6mL-zw-GXO" secondAttribute="bottom" id="hkg-qR-PwQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="CeE-5f-MTz" secondAttribute="bottom" id="h4R-Wz-adw"/>
+                                    <constraint firstAttribute="bottom" secondItem="6mL-zw-GXO" secondAttribute="bottom" constant="70" id="hkg-qR-PwQ"/>
                                     <constraint firstItem="aBm-6S-vLN" firstAttribute="top" secondItem="V4k-y5-LcR" secondAttribute="top" id="l4i-sd-fJO"/>
+                                    <constraint firstAttribute="trailing" secondItem="CeE-5f-MTz" secondAttribute="trailing" id="m09-c4-eXP"/>
                                     <constraint firstItem="6mL-zw-GXO" firstAttribute="leading" secondItem="V4k-y5-LcR" secondAttribute="leading" id="n39-6m-nxb"/>
                                     <constraint firstItem="4oO-1E-r7C" firstAttribute="leading" secondItem="V4k-y5-LcR" secondAttribute="leading" constant="20" id="pNe-3g-gkI"/>
                                     <constraint firstAttribute="trailing" secondItem="ZJM-qu-cDU" secondAttribute="trailing" constant="20" id="tMs-Im-A00"/>
@@ -1021,6 +1031,7 @@
                         <outlet property="view_back" destination="4oO-1E-r7C" id="CfT-6P-8wl"/>
                         <outlet property="view_book" destination="RFB-TP-IG5" id="yGO-cJ-09x"/>
                         <outlet property="view_fee" destination="RJ0-yK-bnq" id="XIh-Bc-QxG"/>
+                        <outlet property="view_footer" destination="CeE-5f-MTz" id="lPh-wB-ofH"/>
                         <outlet property="view_img_service" destination="mIf-Cp-zL9" id="L33-Gf-5Ar"/>
                         <outlet property="view_location" destination="Q4Z-Ek-C3f" id="Qwo-XB-X1g"/>
                         <outlet property="view_rate" destination="vcw-Lo-CQ5" id="cvq-GV-KDS"/>
@@ -4290,6 +4301,11 @@
             <point key="canvasLocation" x="12961" y="3757"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="vcw-Lo-CQ5">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+    </designables>
     <resources>
         <image name="AddAddress" width="161" height="161"/>
         <image name="Bag" width="63" height="61"/>

@@ -25,6 +25,8 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var view_empty_cart: UIView!
     @IBOutlet weak var label_cart_count: UILabel!
+    @IBOutlet weak var view_btn_apply: UIView!
+    @IBOutlet weak var label_btn_apply: UILabel!
     
     @IBOutlet weak var view_footer: petowner_footerview!
     
@@ -54,6 +56,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         self.view_alert.isHidden = true
         self.view_alert.view_cornor()
         self.view_coupon.view_cornor()
+        self.view_btn_apply.view_cornor()
         self.view_btn_alert.view_cornor()
         self.view_proceedtobuy.view_cornor()
         self.tbl_productlist.delegate = self

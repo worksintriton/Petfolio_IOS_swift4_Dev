@@ -238,9 +238,9 @@ class Pet_app_details_ViewController: UIViewController {
     func callcompleteMissedappoitment(Appointmentid: String, appointmentstatus: String){
         var link = ""
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            link =  Servicefile.SP_complete_and_Missedapp
-        }else{
             link =  Servicefile.Doc_complete_and_Missedapp
+        }else{
+            link =  Servicefile.SP_complete_and_Missedapp
         }
         
         var params = ["":""]
@@ -250,13 +250,14 @@ class Pet_app_details_ViewController: UIViewController {
                   "doc_feedback" : "",
                   "appoint_patient_st": "Patient Appointment Cancelled"]
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        print(link,params)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
             , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
-                    print("success data",res)
+                    print("cancel appointment success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {

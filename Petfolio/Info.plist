@@ -60,17 +60,17 @@
 		</dict>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string>check the availability date</string>
+	<string>Check the availability date</string>
 	<key>NSCameraUsageDescription</key>
-	<string>to add picture for verification</string>
+	<string>To add picture for verification</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Add your service for better service</string>
+	<string>Add your location for better service</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Add your service for better service</string>
+	<string>Add your location for better service</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Add your service for better service</string>
+	<string>Add your location for better service</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Add your service for better service</string>
+	<string>Add your location for better service</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -110,7 +110,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
-	<string></string>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

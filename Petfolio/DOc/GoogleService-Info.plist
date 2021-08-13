@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>415750074843-e8on0la49aukoqanjh6nee83p5lakf9g.apps.googleusercontent.com</string>
+	<string>415750074843-bp221bo4d6fdpf1evqecs99gocqskvve.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.415750074843-e8on0la49aukoqanjh6nee83p5lakf9g</string>
+	<string>com.googleusercontent.apps.415750074843-bp221bo4d6fdpf1evqecs99gocqskvve</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>415750074843-lmdofq8rn2tke3dhu8k02n779fihf495.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.petfolio.infinitu</string>
+	<string>com.dci.petfolio</string>
 	<key>PROJECT_ID</key>
 	<string>petfolio-298707</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:415750074843:ios:f0505cc042d452a205f7fe</string>
+	<string>1:415750074843:ios:dc674e024c161e0d05f7fe</string>
 </dict>
 </plist>

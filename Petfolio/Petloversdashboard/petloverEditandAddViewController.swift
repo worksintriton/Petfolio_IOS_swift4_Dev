@@ -411,7 +411,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
                     }
                 }
             }else{
-               // self.calladdpetdetails()
+                self.calladdpetdetails()
             }
         }
        

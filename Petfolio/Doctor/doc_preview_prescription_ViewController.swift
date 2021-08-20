@@ -33,6 +33,8 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         var sdiagno = ""
         var subdiagno = ""
     
+    @IBOutlet weak var view_iscash: UIView!
+    @IBOutlet weak var textfield_cash: UITextField!
     @IBOutlet weak var label_pres: UILabel!
     @IBOutlet weak var image_pres: UIImageView!
     @IBOutlet weak var view_pres_manual: UIView!
@@ -41,7 +43,13 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            // Servicefile.shared.app_cash
+            if Servicefile.shared.pet_appint_pay_method != "Cash" {
+                self.view_iscash.isHidden = true
+            }else{
+                self.view_iscash.isHidden = false
+            }
+            self.textfield_cash.text = Servicefile.shared.app_cash
             if  Servicefile.shared.doc_diag_type == "PDF" {
                 self.label_pres.isHidden = false
                 self.label_note.isHidden = false

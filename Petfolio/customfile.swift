@@ -614,6 +614,13 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "searchhealthlistViewController") as! searchhealthlistViewController
     }
     
+    static func pet_doc_search_payoptionViewController() -> pet_doc_search_payoptionViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_doc_search_payoptionViewController") as! pet_doc_search_payoptionViewController
+    }
+    
+    
+    
     
     static func searchpetappdetailViewController() -> searchpetappdetailViewController {
         let homeStoryboard = UIStoryboard.petDocappStoryboard()
@@ -685,6 +692,13 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
     }
     
+    static func pet_doc_paymentmethodViewController() -> pet_doc_paymentmethodViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_doc_paymentmethodViewController") as! pet_doc_paymentmethodViewController
+    }
+    
+    
+    
     static func ReviewRateViewController() -> ReviewRateViewController {
         let homeStoryboard = UIStoryboard.petDocappStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "ReviewRateViewController") as! ReviewRateViewController
@@ -734,6 +748,12 @@ extension UIStoryboard {
         let homeStoryboard = UIStoryboard.petspappStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "pet_sp_calender_ViewController") as! pet_sp_calender_ViewController
     }
+    
+    static func pet_sp_app_payment_ViewController() -> pet_sp_app_payment_ViewController {
+        let homeStoryboard = UIStoryboard.petspappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_sp_app_payment_ViewController") as! pet_sp_app_payment_ViewController
+    }
+    
     
     static func pet_sp_CreateApp_ViewController() -> pet_sp_CreateApp_ViewController {
         let homeStoryboard = UIStoryboard.petspappStoryboard()

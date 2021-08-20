@@ -280,7 +280,7 @@ class Doc_detailspage_ViewController: UIViewController {
                     if Code == 200 {
                         let data = res["Data"] as! NSDictionary
                         Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
-                       
+                        Servicefile.shared.pet_appint_pay_method = data["payment_method"] as? String ?? ""
                         self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
                         self.label_app_bookAndTime.text = data["display_date"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""

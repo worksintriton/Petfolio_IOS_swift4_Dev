@@ -43,6 +43,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        Servicefile.shared.pet_appint_pay_method = ""
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.Doc_dashlist.removeAll()
@@ -266,6 +267,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @objc func action_complete(sender : UIButton){
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
+        Servicefile.shared.pet_appint_pay_method = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].payment_method
         let vc = UIStoryboard.Doc_prescriptionViewController()
         self.present(vc, animated: true, completion: nil)
     }
@@ -431,7 +433,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID))
+                            let payment_method = dataitm["payment_method"] as? String ?? ""
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID, In_payment_method: payment_method))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -499,6 +502,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                 //pet_name = doc_business["clinic_name"] as? String ?? ""
                             }
                             let petdetail = dataitm["pet_id"] as! NSDictionary
+                            
+                            
                             let petid = petdetail["_id"] as? String ?? ""
                             let pet_name = petdetail["pet_name"] as? String ?? ""
                             let pet_type = petdetail["pet_type"] as? String ?? ""
@@ -506,7 +511,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID))
+                            let payment_method = petdetail["payment_method"] as? String ?? ""
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : comm_type, In_appointment_UID : appointment_UID, In_payment_method: payment_method))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {
@@ -580,7 +586,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                             let pet_img = petdetail["pet_img"] as! [Any]
                             let user_id = petdetail["user_id"] as? String ?? ""
                             let appointment_UID = dataitm["appointment_UID"] as? String ?? ""
-                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : "", In_appointment_UID : appointment_UID))
+                            let payment_method = petdetail["payment_method"] as? String ?? ""
+                            Servicefile.shared.Doc_dashlist.append(doc_Dash_petdetails.init(in_Appid: id, In_allergies: allergies, In_amount: amount, In_appointment_types: appointment_types, In_doc_attched: docimg, In_pet_id: petid, In_pet_breed: pet_breed, In_pet_img: pet_img, In_pet_name: pet_name, In_user_id: user_id, In_pet_type: pet_type, In_book_date_time: booking_date_time, In_userrate: user_rate, In_userfeedback: user_feedback, In_Booked_at : Booked_at, In_completed_at : completed_at, In_missed_at : missed_at, In_appoint_patient_st: appoint_patient_st, In_commtype : "", In_appointment_UID : appointment_UID, In_payment_method: payment_method))
                             
                         }
                         if Servicefile.shared.Doc_dashlist.count > 0 {

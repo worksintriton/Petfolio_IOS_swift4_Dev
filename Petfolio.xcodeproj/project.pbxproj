@@ -97,6 +97,7 @@
 		84338839264C00EE001443EC /* doc_myorder_track_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338838264C00EE001443EC /* doc_myorder_track_ViewController.swift */; };
 		8433883D264C15E7001443EC /* doc_order_cancel_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433883C264C15E7001443EC /* doc_order_cancel_ViewController.swift */; };
 		843D5F1B265E69CE003A0C1E /* comunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843D5F1A265E69CE003A0C1E /* comunityViewController.swift */; };
+		843EDC2F26CD323700165A1B /* pet_doc_search_payoptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EDC2E26CD323700165A1B /* pet_doc_search_payoptionViewController.swift */; };
 		843F7146261DCBFE003A5731 /* vendor_profile_view_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F7145261DCBFE003A5731 /* vendor_profile_view_ViewController.swift */; };
 		844169BB261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */; };
 		844169FA261EF970001B9A2A /* petowner_footerview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844169F9261EF970001B9A2A /* petowner_footerview.swift */; };
@@ -176,6 +177,8 @@
 		84C6A399264FA1DA00DBE200 /* doc_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */; };
 		84C6A3A7264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */; };
 		84C6A3A8264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6A3A6264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib */; };
+		84C7A28B26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */; };
+		84C7A28F26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7A28E26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift */; };
 		84C967F0264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C967EF264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift */; };
 		84C967F426410AA200310BB2 /* pet_vendor_locationpickup_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C967F326410AA200310BB2 /* pet_vendor_locationpickup_ViewController.swift */; };
 		84CC8E26267CB16600256FC6 /* selectval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC8E25267CB16600256FC6 /* selectval.swift */; };
@@ -478,6 +481,7 @@
 		84338838264C00EE001443EC /* doc_myorder_track_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_myorder_track_ViewController.swift; sourceTree = "<group>"; };
 		8433883C264C15E7001443EC /* doc_order_cancel_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_order_cancel_ViewController.swift; sourceTree = "<group>"; };
 		843D5F1A265E69CE003A0C1E /* comunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comunityViewController.swift; sourceTree = "<group>"; };
+		843EDC2E26CD323700165A1B /* pet_doc_search_payoptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_doc_search_payoptionViewController.swift; sourceTree = "<group>"; };
 		843F7145261DCBFE003A5731 /* vendor_profile_view_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_profile_view_ViewController.swift; sourceTree = "<group>"; };
 		844169BA261EC1F3001B9A2A /* vendor_edit_profile_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_edit_profile_ViewController.swift; sourceTree = "<group>"; };
 		844169F9261EF970001B9A2A /* petowner_footerview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petowner_footerview.swift; sourceTree = "<group>"; };
@@ -557,6 +561,8 @@
 		84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_fav_cell_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84C6A3A6264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = product_fav_cell_CollectionViewCell.xib; sourceTree = "<group>"; };
+		84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_doc_paymentmethodViewController.swift; sourceTree = "<group>"; };
+		84C7A28E26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_app_payment_ViewController.swift; sourceTree = "<group>"; };
 		84C967EF264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_shipingaddlocationViewController.swift; sourceTree = "<group>"; };
 		84C967F326410AA200310BB2 /* pet_vendor_locationpickup_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_locationpickup_ViewController.swift; sourceTree = "<group>"; };
 		84CC8E25267CB16600256FC6 /* selectval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectval.swift; sourceTree = "<group>"; };
@@ -1438,6 +1444,7 @@
 				842EB89725DF743E003CC824 /* todayspecialTableViewCell.swift */,
 				84FF0EA1268F1AE100555703 /* sppetselectdetailsViewController.swift */,
 				84FF0EC5268F1B4000555703 /* sphealthissueViewController.swift */,
+				84C7A28E26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift */,
 			);
 			path = SP;
 			sourceTree = "<group>";
@@ -1525,6 +1532,8 @@
 				8432F5D9268461020056926C /* pethealthissueViewController.swift */,
 				8432F5E6268479840056926C /* searchhealthlistViewController.swift */,
 				8432F639268492B90056926C /* pettabbarViewController.swift */,
+				843EDC2E26CD323700165A1B /* pet_doc_search_payoptionViewController.swift */,
+				84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -2091,6 +2100,7 @@
 				B0431DA425A330C2000424E9 /* Doc_update_details_ViewController.swift in Sources */,
 				B0E98F7525A80D82005C0EF9 /* Sp_calender_hour_ViewController.swift in Sources */,
 				B07CB1B825AC0FBB00E899B0 /* pet_sp_CreateApp_ViewController.swift in Sources */,
+				84C7A28B26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift in Sources */,
 				84DDDEDC26AA98E20073473F /* addingprodCollectionViewCell.swift in Sources */,
 				848FA98A25F8ECF100C55733 /* vendorcartpageViewController.swift in Sources */,
 				B0486494256BD14B0038A71D /* menuTableViewCell.swift in Sources */,
@@ -2128,6 +2138,7 @@
 				B019893F25B842C700A650AD /* Doc_email_otp_ViewController.swift in Sources */,
 				B08C96B325694484003B05B7 /* experienceTableViewCell.swift in Sources */,
 				840566672618946A0099A26D /* editshipaddresslistTableViewCell.swift in Sources */,
+				843EDC2F26CD323700165A1B /* pet_doc_search_payoptionViewController.swift in Sources */,
 				84FF0EA2268F1AE100555703 /* sppetselectdetailsViewController.swift in Sources */,
 				B0D887F92595B13000191833 /* Vendor_reg_ViewController.swift in Sources */,
 				8433880F264BBB69001443EC /* doc_editshippingaddressViewController.swift in Sources */,
@@ -2189,6 +2200,7 @@
 				B08C96AD25691ABB003B05B7 /* photoidCollectionViewCell.swift in Sources */,
 				B02D745E2599A3AB0033D2D0 /* Petlover_myorder_ViewController.swift in Sources */,
 				84BA814E26523E0B00BFA01B /* sp_favlist_ViewController.swift in Sources */,
+				84C7A28F26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift in Sources */,
 				B094D251255C1F97008400D6 /* SignOTPViewController.swift in Sources */,
 				84BB273D265FB31C00F92404 /* doc_preview_prescription_ViewController.swift in Sources */,
 				8402B9D0264A8836009DDFC0 /* doc_footer.swift in Sources */,

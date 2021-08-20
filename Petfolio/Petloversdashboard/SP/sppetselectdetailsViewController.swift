@@ -148,7 +148,9 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         Servicefile.shared.pet_apoint_payment_method = "Online"
         Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
         Servicefile.shared.pet_apoint_amount = Servicefile.shared.service_id_amount
-        self.showPaymentForm()
+            //self.showPaymentForm()
+        let vc = UIStoryboard.pet_sp_app_payment_ViewController()
+           self.present(vc, animated: true, completion: nil)
         //
         
         

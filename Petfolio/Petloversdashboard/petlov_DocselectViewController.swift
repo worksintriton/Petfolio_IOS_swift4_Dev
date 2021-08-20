@@ -370,6 +370,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.coll_imgview.reloadData()
                         self.descri = Data["descri"] as? String ?? ""
                         self.dr_name = Data["dr_name"] as? String ?? ""
+                        Servicefile.shared.dr_name = self.dr_name
                         self.dr_title = Data["dr_title"] as? String ?? ""
                         self.label_yr_exp.text = String(Data["doctor_exp"] as? Int ?? 0) + " Year"
                         let strcount = Data["star_count"] as? Int ?? 0
@@ -392,6 +393,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.setmarker(lat: self.latitude, long: self.longitude)
                         self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
                         self.label_clinicname.text = self.clinic_name
+                        Servicefile.shared.clinic_name = self.clinic_name
                         self.label_specdetails.text = specarray
                         self.label_descrption.text = self.descri
                         self.startTimer()

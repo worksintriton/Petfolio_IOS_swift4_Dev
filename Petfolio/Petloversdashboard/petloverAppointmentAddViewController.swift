@@ -628,46 +628,62 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
 //        }else if self.petimage == ""{
 //            self.alert(Message: "please upload the")
 //        }else{
-            print("details for complettion")
-            let date = Date()
-            let format = DateFormatter()
-            format.dateFormat = "dd-MM-yyyy"
-            let tformat = DateFormatter()
-            tformat.dateFormat = "hh:mm a"
-            var booking_date = format.string(from: date)
-            var booking_time = tformat.string(from: date)
-            print("selected index",Servicefile.shared.selectedindex)
-            //Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
-            Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
-            Servicefile.shared.pet_apoint_video_id = ""
-            Servicefile.shared.pet_apoint_user_id = ""
-            Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
-            Servicefile.shared.pet_apoint_doc_feedback = ""
-            Servicefile.shared.pet_apoint_doc_rate = 0
-            Servicefile.shared.pet_apoint_user_feedback = ""
-            Servicefile.shared.pet_apoint_user_rate = 0.0
-            let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
-            let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
-            Servicefile.shared.pet_apoint_display_date = stringformat
-            Servicefile.shared.pet_apoint_server_date_time = ""
-            Servicefile.shared.pet_apoint_payment_id = ""
-            Servicefile.shared.pet_apoint_payment_method = "Online"
-            Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
-            Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
-        
-            if self.textfield_selectpettype.text != ""{
-                print("old pet ",Servicefile.shared.pet_apoint_pet_id)
-                if self.textview_descrip.text == "Add comment here.." {
-                    self.textview_descrip.text = ""
-                    Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
-                }
-                Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
-                self.showPaymentForm()
+        if Servicefile.shared.pet_apoint_communication_type == "Visit" {
+            if Servicefile.shared.pet_apoint_visit_type == "" {
+                self.alert(Message: "Please select the visit type")
             }else{
-                self.calladdpetdetails()
+                self.setappdetails()
             }
-            self.view.endEditing(true)
+        }else{
+            setappdetails()
+        }
+           
 //        }
+    }
+    
+    func setappdetails(){
+        print("details for complettion")
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let tformat = DateFormatter()
+        tformat.dateFormat = "hh:mm a"
+        var booking_date = format.string(from: date)
+        var booking_time = tformat.string(from: date)
+        print("selected index",Servicefile.shared.selectedindex)
+        //Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
+        Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
+        Servicefile.shared.pet_apoint_video_id = ""
+        Servicefile.shared.pet_apoint_user_id = ""
+        Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
+        Servicefile.shared.pet_apoint_doc_feedback = ""
+        Servicefile.shared.pet_apoint_doc_rate = 0
+        Servicefile.shared.pet_apoint_user_feedback = ""
+        Servicefile.shared.pet_apoint_user_rate = 0.0
+        let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
+        let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
+        Servicefile.shared.pet_apoint_display_date = stringformat
+        Servicefile.shared.pet_apoint_server_date_time = ""
+        Servicefile.shared.pet_apoint_payment_id = ""
+        Servicefile.shared.pet_apoint_payment_method = "Online"
+        Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
+        Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
+        self.view.endEditing(true)
+        if self.textfield_selectpettype.text != ""{
+            print("old pet ",Servicefile.shared.pet_apoint_pet_id)
+            if self.textview_descrip.text == "Add comment here.." {
+                self.textview_descrip.text = ""
+                Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
+            }
+            Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
+            //self.showPaymentForm()
+            let vc = UIStoryboard.pet_doc_paymentmethodViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        }else{
+            self.calladdpetdetails()
+        }
+        
     }
     
     func displaydate(date: Date)->String{
@@ -760,7 +776,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
                         let Data = res["Data"] as! NSDictionary
                         let id = Data["_id"] as? String ?? ""
                         Servicefile.shared.pet_apoint_pet_id = id
-                        self.showPaymentForm()
+                        let vc = UIStoryboard.pet_doc_paymentmethodViewController()
+                        self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

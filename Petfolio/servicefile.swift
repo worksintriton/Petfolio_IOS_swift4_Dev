@@ -182,6 +182,7 @@ class Servicefile {
     static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp1"
     static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp1"
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
+    static let Doc_setcash = baseurl + "/api/appointments/mobile/doctor/app_edit"
     static let SP_complete_and_Missedapp = baseurl + "/api/sp_appointments/edit"
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
     static let Doc_prescription_create = baseurl + "/api/prescription/create"
@@ -222,7 +223,7 @@ class Servicefile {
     
     static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
      static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
-    
+    static let pet_doc_coupon = baseurl + "/api/coupon_code/check_coupon"
     
     static let pet_shop_dash = baseurl + "/api/product_details/getproductdetails_list"
     
@@ -429,6 +430,7 @@ class Servicefile {
     var pet_dash_long = 0.0
     var pet_dash_address = ""
     var pet_apoint_id = ""
+    var pet_appint_pay_method = ""
     // pet appointment params
     var pet_index = 0
     var pet_status = ""
@@ -486,6 +488,8 @@ class Servicefile {
     var doc_pres_sub_diagno = ""
     var meditext = ""
     var noofdaytext = ""
+    var clinic_name = ""
+    var dr_name = ""
     var govdicarray = [Any]()
     var certifdicarray = [Any]()
     var clinicdicarray = [Any]()
@@ -507,6 +511,7 @@ class Servicefile {
     var medi = ""
     var noofday = ""
     var consdays = ""
+    var app_cash = ""
     var appointmentindex = 0
     // prescription
     // sp filter
@@ -983,6 +988,13 @@ class Servicefile {
     func ddMMyyyystringformat(date: Date) -> String{
         let format = DateFormatter()
         format.dateFormat = "dd-MM-yyyy"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
+    func MMddyyyystringformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "MM-dd-yyyy"
         let nextDate = format.string(from: date)
         return nextDate
     }
@@ -1465,9 +1477,10 @@ struct doc_Dash_petdetails{
     var missed_at : String
     var commtype : String
     var appointment_UID : String
+    var payment_method : String
     init(in_Appid : String, In_allergies : String, In_amount : String, In_appointment_types : String,
          In_doc_attched : String, In_pet_id : String, In_pet_breed : String, In_pet_img : [Any],
-         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_Booked_at : String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String, In_commtype : String, In_appointment_UID : String) {
+         In_pet_name : String, In_user_id : String, In_pet_type: String, In_book_date_time: String, In_userrate: String, In_userfeedback: String, In_Booked_at : String, In_completed_at : String, In_missed_at : String, In_appoint_patient_st : String, In_commtype : String, In_appointment_UID : String, In_payment_method : String) {
         self.Appid = in_Appid
         self.allergies = In_allergies
         self.amount = In_amount
@@ -1488,6 +1501,7 @@ struct doc_Dash_petdetails{
         self.appoint_patient_st = In_appoint_patient_st
         self.commtype = In_commtype
         self.appointment_UID = In_appointment_UID
+        self.payment_method = In_payment_method
     }
 }
 

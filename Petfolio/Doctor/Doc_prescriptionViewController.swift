@@ -45,6 +45,9 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var view_header: header_title!
     
+    @IBOutlet weak var textfield_servicechargeamt: UITextField!
+    @IBOutlet weak var view_ifcash: UIView!
+    
     //var img_up = ""
     var diagno = [""]
     var diafno_sub = [""]
@@ -58,9 +61,14 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     var a = false
     var n = false
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].
+        if Servicefile.shared.pet_appint_pay_method != "Cash" {
+            self.view_ifcash.isHidden = true
+        }else{
+            self.view_ifcash.isHidden = false
+        }
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.diagno.removeAll()
         self.diafno_sub.removeAll()
@@ -164,6 +172,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     
     
     @IBAction func action_submitprescription(_ sender: Any) {
+        let cash = self.textfield_servicechargeamt.text!
+        let valcash = cash.removingLeadingSpaces()
         if self.doctor_sub_diagnosis.text == "" {
             self.alert(Message: "Please select the sub diagnosis")
         }else if self.doctor_diagnosis.text == "" {
@@ -171,15 +181,16 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else if self.textview_descrip.text == "" {
             self.alert(Message: "Please select the description")
         }else{
-            Servicefile.shared.Doc_pre_descrip = self.textview_descrip.text!
-            Servicefile.shared.doc_pres_diagno = self.doctor_diagnosis.text!
-            Servicefile.shared.doc_pres_sub_diagno = self.doctor_sub_diagnosis.text!
-            let vc = UIStoryboard.doc_preview_prescription_ViewController()
-            self.present(vc, animated: true, completion: nil)
-            
-            
+            if Servicefile.shared.pet_appint_pay_method != "Cash" {
+                self.callcash()
+            }else{
+                if valcash == "" {
+                    self.alert(Message: "Please update the cash")
+                }else{
+                    self.callcash()
+                }
+            }
         }
-        
     }
     
     @IBAction func action_hidepopup(_ sender: Any) {
@@ -442,6 +453,44 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.m = false
         self.a = false
         self.n = false
+    }
+    
+    func callcash(){
+        var params = ["":""]
+        params = ["_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid,
+                  "amount" : self.textfield_servicechargeamt.text!]
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_setcash, method: .post, parameters: params
+                                                                 , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    switch (response.result) {
+                                                                    case .success:
+                                                                        let res = response.value as! NSDictionary
+                                                                        print("cash success data",res)
+                                                                        let Code  = res["Code"] as! Int
+                                                                        if Code == 200 {
+                                                                            Servicefile.shared.app_cash = self.textfield_servicechargeamt.text!
+                                                                            Servicefile.shared.Doc_pre_descrip = self.textview_descrip.text!
+                                                                            Servicefile.shared.doc_pres_diagno = self.doctor_diagnosis.text!
+                                                                            Servicefile.shared.doc_pres_sub_diagno = self.doctor_sub_diagnosis.text!
+                                                                            let vc = UIStoryboard.doc_preview_prescription_ViewController()
+                                                                            self.present(vc, animated: true, completion: nil)
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                        }else{
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("status code service denied")
+                                                                        }
+                                                                        break
+                                                                    case .failure(let Error):
+                                                                        self.stopAnimatingActivityIndicator()
+                                                                        print("Can't Connect to Server / TimeOut",Error)
+                                                                        break
+                                                                    }
+                                                                 }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     
@@ -725,4 +774,12 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+}
+extension String {
+    func removingLeadingSpaces() -> String {
+        guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: .whitespaces) }) else {
+            return self
+        }
+        return String(self[index...])
+    }
 }

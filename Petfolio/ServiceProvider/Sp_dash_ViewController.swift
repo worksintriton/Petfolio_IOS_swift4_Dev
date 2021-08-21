@@ -43,7 +43,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.inital_setup()
         self.label_nodata.isHidden = true
         self.view_popalert.isHidden = true

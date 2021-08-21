@@ -28,7 +28,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_save.view_cornor()
         self.view_firstname.view_cornor()
         self.view_lastname.view_cornor()

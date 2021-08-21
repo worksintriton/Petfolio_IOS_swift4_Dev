@@ -44,7 +44,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         intial_setup_action()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)
         self.view_rate_back.layer.cornerRadius = 30.0

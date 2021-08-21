@@ -22,7 +22,7 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.coll_servicelist.delegate = self
         self.coll_servicelist.dataSource = self

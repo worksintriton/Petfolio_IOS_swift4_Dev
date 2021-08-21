@@ -72,7 +72,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.textview_spaddress.delegate = self
         self.textview_spaddress.isUserInteractionEnabled = false
         self.call_protocals()

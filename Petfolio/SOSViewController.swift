@@ -23,7 +23,7 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var phono = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         
         self.tbl_calllist.register(UINib(nibName: "soscallTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.sel.removeAll()

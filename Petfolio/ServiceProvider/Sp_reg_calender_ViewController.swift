@@ -21,7 +21,7 @@ class Sp_reg_calender_ViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.Doc_mycalender_selectedhours.removeAll()
         Servicefile.shared.docMycalHourdicarray.removeAll()
         self.availday.removeAll()

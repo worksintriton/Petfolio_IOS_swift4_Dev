@@ -37,7 +37,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         self.banner.removeAll()
         self.tbl_searchlist.register(UINib(nibName: "listvalTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.moredocd.removeAll()
         self.view_top_doc.layer.cornerRadius = 20.0
         self.callsearchlist()

@@ -29,7 +29,7 @@ class doc_ProductdealsViewController: UIViewController , UICollectionViewDelegat
         super.viewDidLoad()
         let docnibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)
                 self.coll_prodlist.register(docnibName, forCellWithReuseIdentifier: "cell")
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.label_noproduct.text = "No products available"
         self.label_noproduct.isHidden = true

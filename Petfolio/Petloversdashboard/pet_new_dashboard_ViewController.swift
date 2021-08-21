@@ -37,7 +37,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_footer.view_cornor()
         self.view_footer.dropShadow()
         self.view_popup.view_cornor()

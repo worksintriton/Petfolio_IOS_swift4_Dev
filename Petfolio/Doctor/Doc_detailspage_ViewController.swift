@@ -74,7 +74,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_diagnosis.isHidden = true
         self.view_subdiagnosis.isHidden = true
         self.view_doc_comm_header.isHidden = true

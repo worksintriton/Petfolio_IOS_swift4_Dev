@@ -27,7 +27,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     var selnearby = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_apply.view_cornor()
         self.view_clearall.view_cornor()
         self.callpetdetails()

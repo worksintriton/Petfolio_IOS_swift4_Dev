@@ -18,7 +18,7 @@ class DemoViewController: UIViewController,UICollectionViewDataSource, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.checkemailvalid = "login"
         self.Democollec.delegate = self
         self.Democollec.dataSource = self

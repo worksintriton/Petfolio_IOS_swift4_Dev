@@ -26,7 +26,7 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
 //    var selspec = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_apply.view_cornor()
         self.view_clearall.view_cornor()
         self.view_apply.dropShadow()

@@ -308,6 +308,10 @@ class Servicefile {
     static let doc_prescription_diagno = baseurl + "/api/diagnosis/getlist"
     static let doc_prescription_sub_diagno = baseurl + "/api/sub_diagnosis/getlist_id"
     
+    
+    static let pet_app_coupon_get = baseurl + "/api/coupon_code/text"
+    static let pet_app_coupon_create = baseurl + "/api/refund_coupon/create"
+    
     // Signup page
     var email_status = false
     var signupemail = ""
@@ -451,6 +455,7 @@ class Servicefile {
     var islocationget = false
     //var appgreen = "#56B9A4"
     var apppagecolor = "#F5F5F5"
+    var appviewcolor = "#FFFFFF"
     var appgreen = "#2d6d66"
     var appgrey = "#296F67"
     var appyellow = "#FCDE66"
@@ -651,6 +656,7 @@ class Servicefile {
     var labelamt_shipping = 0
     var labelamt_subtotal = 0
     var labelsubtotal_itmcount = 0
+    var label_Original_amt_total = 0
     var productid = 0
     var product_price = 0
     var date_of_booking = ""
@@ -1751,12 +1757,14 @@ struct  pet_applist_doc_sp {
     var doctor_name : String
     var doctor_id : String
     var sp_id : String
+    var payment_method  : String
     init(IN_Booked_at : String, IN_Booking_Id : String, IN_Service_name : String, IN__id : String, IN_appointment_for : String
         , IN_appointment_time : String, IN_appointment_type : String, IN_clinic_name : String, IN_completed_at : String
         , IN_cost : String, IN_createdAt : String, IN_missed_at : String, IN_pet_name : String, IN_pet_type : String
         , IN_photo : String, IN_service_cost : String, IN_service_provider_name : String, IN_status : String
         , IN_type : String, IN_updatedAt : String,In_userrate: String, In_userfeed: String, In_communication_type: String, In_start_appointment_status : String, In_appoint_patient_st : String, In_doctor_name : String,In_doctor_id : String
-        , In_sp_id : String) {
+         , In_sp_id : String, In_payment_method: String) {
+        self.payment_method = In_payment_method
         self.Booked_at = IN_Booked_at
         self.Booking_Id = IN_Booking_Id
         self.Service_name = IN_Service_name

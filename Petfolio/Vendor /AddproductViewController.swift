@@ -44,7 +44,7 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
         self.col_prodlist.register(shownib, forCellWithReuseIdentifier: "cell1")
         self.col_prodlist.delegate = self
         self.col_prodlist.dataSource = self
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
     }
     
     override func viewWillAppear(_ animated: Bool) {

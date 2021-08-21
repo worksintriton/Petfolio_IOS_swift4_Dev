@@ -22,7 +22,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     var uploadimage = Servicefile.sample_img
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_continue.view_cornor()
         self.coll_img_list.delegate = self
         self.coll_img_list.dataSource = self

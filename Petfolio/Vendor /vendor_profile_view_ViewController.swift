@@ -33,7 +33,7 @@ class vendor_profile_view_ViewController: UIViewController , UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.inital_setup()
         self.view_footer.view_cornor()
         self.view_img_user.view_cornor()

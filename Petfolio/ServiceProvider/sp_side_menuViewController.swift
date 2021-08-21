@@ -20,7 +20,7 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["My Appointment","My calender","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Doc","Calendar","Doc","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]

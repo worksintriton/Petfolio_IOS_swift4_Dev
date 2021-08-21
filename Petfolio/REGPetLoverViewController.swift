@@ -63,7 +63,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     var gender = "Male"
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.pet_type.removeAll()
         self.Pet_breed.removeAll()
         self.setdesign()

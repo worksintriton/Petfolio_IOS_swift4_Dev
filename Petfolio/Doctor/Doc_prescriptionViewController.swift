@@ -69,7 +69,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             self.view_ifcash.isHidden = false
         }
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.diagno.removeAll()
         self.diafno_sub.removeAll()
         self.sear_diag.removeAll()

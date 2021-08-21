@@ -52,7 +52,7 @@ class myaddress_create_address_ViewController: UIViewController, UITextFieldDele
     var address_status = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.calldelegate()
         self.call_cornor_view()
        

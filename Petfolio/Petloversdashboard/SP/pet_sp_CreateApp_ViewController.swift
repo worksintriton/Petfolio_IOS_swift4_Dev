@@ -66,7 +66,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self

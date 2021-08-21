@@ -71,7 +71,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_app_deal.isHidden = false
         self.label_apply_status.text = applylabelval
         self.view_discount_details.isHidden = true

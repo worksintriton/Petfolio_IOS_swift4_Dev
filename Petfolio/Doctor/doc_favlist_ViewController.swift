@@ -24,7 +24,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
     var isorgiselect = [""]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.isselect.removeAll()
         self.isorgiselect.removeAll()
         let docnibName = UINib(nibName: "product_fav_cell_CollectionViewCell", bundle:nil)

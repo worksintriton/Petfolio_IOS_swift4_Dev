@@ -49,7 +49,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.pet_petlist.count > 0 {
             Servicefile.shared.pet_status = "edit"
             self.isspay = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_spayed

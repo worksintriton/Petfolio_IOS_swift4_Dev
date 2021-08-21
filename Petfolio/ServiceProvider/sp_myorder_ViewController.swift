@@ -31,7 +31,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
         override func viewDidLoad() {
             super.viewDidLoad()
             navigationController?.setNavigationBarHidden(true, animated: false)
-            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
             self.intial_setup_action()
              self.tblview_applist.register(UINib(nibName: "pet_vendor_new_myorder_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
             Servicefile.shared.ordertype = "current"

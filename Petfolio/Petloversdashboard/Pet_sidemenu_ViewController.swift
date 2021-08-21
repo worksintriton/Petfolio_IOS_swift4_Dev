@@ -27,13 +27,13 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
  }*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","Discount","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Notifications","SOS", "Logout"]
-            self.imgmenu = ["Like","Doc","Calendar","Bell","SOS", "Exit"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Notifications","SOS", "Logout"]
+            self.imgmenu = ["Like","Doc","Calendar","Discount","Bell","SOS", "Exit"]
         }
         
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name

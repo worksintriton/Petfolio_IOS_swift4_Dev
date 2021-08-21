@@ -30,7 +30,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_setloca.view_cornor()
         self.view_searchopt.view_cornor()
         self.GMS_mapView.delegate = self

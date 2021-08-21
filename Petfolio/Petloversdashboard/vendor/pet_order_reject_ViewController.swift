@@ -31,7 +31,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
     var seltext = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.ret_reason.removeAll()
         self.isselect.removeAll()

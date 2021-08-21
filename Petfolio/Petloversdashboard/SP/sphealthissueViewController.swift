@@ -16,7 +16,7 @@ class sphealthissueViewController: UIViewController, UICollectionViewDelegateFlo
     var healthissue = [Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.callpethealthissueget()
         Servicefile.shared.pet_type_val = ""
         Servicefile.shared.Pet_breed_val = ""

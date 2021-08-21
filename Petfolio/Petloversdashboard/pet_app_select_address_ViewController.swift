@@ -21,7 +21,7 @@ class pet_app_select_address_ViewController: UIViewController, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_main.view_cornor()
         self.view_useaddress.view_cornor()
         Servicefile.shared.petuserlocaadd.removeAll()

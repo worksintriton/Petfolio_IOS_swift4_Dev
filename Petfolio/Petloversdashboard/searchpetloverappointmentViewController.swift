@@ -71,7 +71,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.petlistimg = [Any]()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.coll_imag.delegate = self
         self.coll_imag.dataSource = self

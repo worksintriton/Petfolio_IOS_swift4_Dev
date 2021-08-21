@@ -29,7 +29,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         let docnibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(docnibName, forCellWithReuseIdentifier: "cell1")
         self.intial_setup_action()

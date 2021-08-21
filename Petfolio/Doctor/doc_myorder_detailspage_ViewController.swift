@@ -92,7 +92,7 @@ class doc_myorder_detailspage_ViewController: UIViewController , UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.view_footer.view_cornor()
         self.label_confirmall.text = "Cancel All"

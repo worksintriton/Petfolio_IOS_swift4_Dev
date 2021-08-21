@@ -28,7 +28,7 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_skip_btn.layer.cornerRadius = self.view_skip_btn.frame.height / 2
         self.petlist.removeAll()
         Servicefile.shared.checkemailvalid = "login"

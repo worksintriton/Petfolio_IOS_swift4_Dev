@@ -20,7 +20,7 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_clearall.view_cornor()
         self.view_apply.view_cornor()
         self.view_sortby.view_cornor()

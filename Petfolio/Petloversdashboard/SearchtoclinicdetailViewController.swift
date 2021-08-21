@@ -67,7 +67,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.intial_setup_action()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.pet_handle.removeAll()
         self.pet_spec.removeAll()
         let spec_nibName = UINib(nibName: "spec_details_page_CollectionViewCell", bundle:nil)

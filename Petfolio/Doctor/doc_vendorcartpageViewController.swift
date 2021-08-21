@@ -33,15 +33,30 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
     @IBOutlet weak var view_footer: doc_footer!
     // var razorpay: RazorpayCheckout!
     
+    @IBOutlet weak var label_btn_apply: UILabel!
+    @IBOutlet weak var view_coupon_discount: UIView!
+    @IBOutlet weak var label_coupon_discount: UILabel!
+    
+    
+    @IBOutlet weak var view_btn_apply: UIView!
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_alert: UIView!
     @IBOutlet weak var view_btn_alert: UIView!
     @IBOutlet weak var view_coupon: UIView!
     
     
+    
+    var textbtncoupon = "Apply"
+    
+    var discountprice = "0"
+    var originalprice = "0"
+    var totalprice = "0"
+    var coupon_status = "Not Applied" // "Applied"
+    var couponcode = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.view_cart_count.isHidden = true
         self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2
@@ -62,6 +77,8 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         self.tbl_productlist.delegate = self
         self.tbl_productlist.dataSource = self
         self.callcartdetails()
+        self.view_coupon_discount.isHidden = true
+        self.view_btn_apply.view_cornor()
     }
     
     
@@ -137,7 +154,86 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
     }
     
     @IBAction func action_coupon(_ sender: Any) {
+        print("Coupon action")
+        self.view.endEditing(true)
+        let cou = self.textfield_coupon.text?.removingLeadingSpaces()
+        if cou != "" {
+            if textbtncoupon != "Remove" {
+                coupon_status = "Applied" // "Not Applied"
+                self.callcheckcoupon()
+            }else{
+                removedata()
+            }
+        }else{
+            self.alert(Message: "Please enter the coupon code")
+        }
+       
         
+    }
+    
+    func removedata(){
+        couponcode = ""
+        coupon_status =  "Not Applied" // "Applied"
+        self.textfield_coupon.text = ""
+        self.textbtncoupon = "Apply"
+        self.view_coupon_discount.isHidden = true
+        self.label_btn_apply.text = self.textbtncoupon
+        self.discountprice = "0"
+        self.label_coupon_discount.text = "₹ " + self.discountprice
+        Servicefile.shared.labelamt_total = Servicefile.shared.label_Original_amt_total
+        self.totalprice = String(Servicefile.shared.label_Original_amt_total)
+        self.label_amt_total.text = "₹ " + self.totalprice
+    }
+    
+    func callcheckcoupon(){
+        self.startAnimatingActivityIndicator()
+        print("current_date" , Servicefile.shared.MMddyyyystringformat(date: Date()),
+              "total_amount" , Servicefile.shared.labelamt_total,
+              "coupon_type" , "3",
+              "user_id" , Servicefile.shared.userid,
+              "code", self.textfield_coupon.text!)
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_coupon, method: .post, parameters:
+                                                                    ["current_date" : Servicefile.shared.MMddyyyystringformat(date: Date()),
+             "total_amount" : Servicefile.shared.labelamt_total,
+             "coupon_type" : "3",
+             "user_id" : Servicefile.shared.userid,
+             "code": self.textfield_coupon.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        self.stopAnimatingActivityIndicator()
+                        let data  = res["Data"] as! NSDictionary
+                        self.textbtncoupon = "Remove"
+                        self.view_coupon_discount.isHidden = false
+                        self.couponcode = self.textfield_coupon.text!
+                        self.label_btn_apply.text = self.textbtncoupon
+                        self.discountprice = String(data["discount_price"] as! Int)
+                        self.label_coupon_discount.text = "₹ " + self.discountprice
+                        self.originalprice = String(data["original_price"] as! Int)
+                        self.totalprice = String(data["total_price"] as! Int)
+                        Servicefile.shared.labelamt_total = data["total_price"] as! Int
+                        self.label_amt_total.text = "₹ " + self.totalprice
+                        let Message = res["Message"] as? String ?? ""
+                        self.alert(Message: Message)
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        let Message = res["Message"] as? String ?? ""
+                        self.alert(Message: Message)
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
+        }
     }
     
     @IBAction func action_proceedtobuy(_ sender: Any) {
@@ -331,10 +427,11 @@ extension doc_vendorcartpageViewController {
                         Servicefile.shared.labelamt_shipping = shipping_charge
                         Servicefile.shared.labelamt_subtotal = prodouct_total
                         Servicefile.shared.labelsubtotal_itmcount = prodcut_item_count
-                        self.label_amt_total.text = String(Servicefile.shared.labelamt_total) + " ₹"
-                        self.label_amt_discount.text = String(Servicefile.shared.labelamt_discount) + " ₹"
-                        self.label_amt_shipping.text = String(Servicefile.shared.labelamt_shipping) + " ₹"
-                        self.label_amt_subtotal.text = String(Servicefile.shared.labelamt_subtotal) + " ₹"
+                        Servicefile.shared.label_Original_amt_total = grand_total
+                        self.label_amt_total.text = "₹ " + String(Servicefile.shared.labelamt_total)
+                        self.label_amt_discount.text = "₹ " + String(Servicefile.shared.labelamt_discount)
+                        self.label_amt_shipping.text = "₹ " + String(Servicefile.shared.labelamt_shipping)
+                        self.label_amt_subtotal.text = "₹ " + String(Servicefile.shared.labelamt_subtotal) 
                         var item = " item"
                         if Servicefile.shared.labelsubtotal_itmcount == 1 {
                             item = " item"

@@ -22,7 +22,7 @@ class doc_editshippingaddressViewController: UIViewController, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         Servicefile.shared.petuserlocaadd.removeAll()
         Servicefile.shared.shipaddresslist_isedit = false

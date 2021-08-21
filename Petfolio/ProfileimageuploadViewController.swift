@@ -22,7 +22,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_continue.view_cornor()
         self.imagepicker.delegate = self
         self.setimage(strimg: Servicefile.shared.userimage)

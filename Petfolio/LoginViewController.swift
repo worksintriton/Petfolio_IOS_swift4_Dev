@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view_details.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.ViewOTPBTN.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.checkemailvalid = "login"
         Servicefile.shared.email_status = false

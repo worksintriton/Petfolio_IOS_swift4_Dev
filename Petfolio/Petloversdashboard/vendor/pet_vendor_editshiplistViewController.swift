@@ -21,7 +21,7 @@ class pet_vendor_editshiplistViewController:  UIViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.petuserlocaadd.removeAll()
         Servicefile.shared.shipaddresslist_isedit = false
         self.view_selectaddress.view_cornor()

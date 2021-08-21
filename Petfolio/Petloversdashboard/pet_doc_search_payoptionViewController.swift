@@ -107,7 +107,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
     }
     
     @IBAction func action_cash(_ sender: Any) {
-        self.pay_method = "cash"
+        self.pay_method = "Cash"
         removedata()
         self.checkradio(str: pay_method)
     }

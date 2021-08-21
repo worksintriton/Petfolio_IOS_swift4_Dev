@@ -51,7 +51,7 @@ class sp_app_details_page_ViewController: UIViewController  {
     @IBOutlet weak var label_app_dateandtime: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.image_holder_name.view_cornor()
         self.image_pet_img.view_cornor()

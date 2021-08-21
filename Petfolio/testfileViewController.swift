@@ -21,7 +21,7 @@ class testfileViewController: UIViewController {
     let d1 = ["a1","a1","a1"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_circle.startAnimating()
         self.view_dash1.startAnimating()
         self.dropdown.optionArray = ["data1","data1","data1","data1"]

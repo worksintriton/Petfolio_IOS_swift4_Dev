@@ -122,7 +122,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.digisignature = Servicefile.shared.Doc_signature
         self.set_signa_image(strimage: self.digisignature)
         

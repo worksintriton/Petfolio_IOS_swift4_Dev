@@ -34,7 +34,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabl_service.register(UINib(nibName: "listvalTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.col_servic.delegate = self
         self.col_servic.dataSource = self
         self.intial_setup_action()

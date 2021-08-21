@@ -29,7 +29,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
     var pet_breed_arr = [""]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         //getpetCollectionViewCell
         self.textfield_search.delegate = self
         self.tbl_search_breed.register(UINib(nibName: "getbreedTableViewCell", bundle: nil), forCellReuseIdentifier: "getbreed")

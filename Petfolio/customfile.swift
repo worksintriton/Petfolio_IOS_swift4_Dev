@@ -675,6 +675,13 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "Pet_app_details_ViewController") as! Pet_app_details_ViewController
     }
     
+    static func App_couponViewController() -> App_couponViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "App_couponViewController") as! App_couponViewController
+    }
+    
+    
+    
     static func pet_app_details_doc_calender_ViewController() -> pet_app_details_doc_calender_ViewController {
         let homeStoryboard = UIStoryboard.petDocappStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "pet_app_details_doc_calender_ViewController") as! pet_app_details_doc_calender_ViewController

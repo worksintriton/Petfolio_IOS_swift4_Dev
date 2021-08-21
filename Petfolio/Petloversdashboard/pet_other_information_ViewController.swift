@@ -49,7 +49,7 @@ class pet_other_information_ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.img_spay_yes.image = UIImage(named: "Radio")
         self.img_spay_no.image = UIImage(named: "Radio")
         

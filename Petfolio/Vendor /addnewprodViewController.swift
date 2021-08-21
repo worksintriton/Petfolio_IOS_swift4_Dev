@@ -31,7 +31,7 @@ class addnewprodViewController: UIViewController, UITextFieldDelegate, UITextVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.textfield_product_title.delegate = self
         self.textfield_product_price.delegate = self
         self.textfield_product_threshold.delegate = self

@@ -69,7 +69,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                     }
                 }
             }
-            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
             self.diagno.removeAll()
             self.diafno_sub.removeAll()
             self.tbl_medilist.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "pres")

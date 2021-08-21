@@ -29,7 +29,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.listtime.removeAll()
         self.seltime.removeAll()

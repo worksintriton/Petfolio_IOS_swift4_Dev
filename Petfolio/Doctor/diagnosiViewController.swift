@@ -25,7 +25,7 @@ class diagnosiViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.textfield_search.delegate = self
         self.tbl_search_breed.register(UINib(nibName: "getbreedTableViewCell", bundle: nil), forCellReuseIdentifier: "getbreed")
         self.tbl_search_breed.delegate = self

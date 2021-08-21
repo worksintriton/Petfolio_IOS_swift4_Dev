@@ -45,7 +45,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.inital_setup()
         Servicefile.shared.pet_appint_pay_method = ""
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.Doc_dashlist.removeAll()
         self.label_nodata.isHidden = true
         self.view_new.view_cornor()

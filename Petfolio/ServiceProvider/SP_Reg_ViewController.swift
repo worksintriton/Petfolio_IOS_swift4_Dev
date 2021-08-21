@@ -76,7 +76,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var cityname = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.callcornor()
         self.textview_spaddress.delegate = self
         self.calllocationcheck()

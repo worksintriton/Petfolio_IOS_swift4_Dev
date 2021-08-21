@@ -21,7 +21,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         Servicefile.shared.Doc_mycalender_selectedhours.removeAll()
         Servicefile.shared.docMycalHourdicarray.removeAll()
         self.availday.removeAll()

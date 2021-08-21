@@ -50,12 +50,12 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     
     var pay_method = "Online"
     var textbtncoupon = "Apply"
-    
     var discountprice = "0"
     var originalprice = "0"
     var totalprice = "0"
     var coupon_status = "Not Applied" // "Applied"
     var couponcode = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view_popupbook.view_cornor()
@@ -108,7 +108,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     }
     
     @IBAction func action_cash(_ sender: Any) {
-        self.pay_method = "cash"
+        self.pay_method = "Cash"
         removedata()
         self.checkradio(str: pay_method)
     }
@@ -205,13 +205,13 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     func callcheckcoupon(){
         print("current_date" , Servicefile.shared.MMddyyyystringformat(date: Date()),
               "total_amount" , Servicefile.shared.pet_apoint_amount,
-              "coupon_type" , "1",
+              "coupon_type" , "2",
               "user_id" , Servicefile.shared.userid,
               "code", self.textfield_coupon.text!)
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_coupon, method: .post, parameters:
                                                                     ["current_date" : Servicefile.shared.MMddyyyystringformat(date: Date()),
                                                                      "total_amount" : Servicefile.shared.pet_apoint_amount,
-                                                                     "coupon_type" : "1",
+                                                                     "coupon_type" : "2",
                                                                      "user_id" : Servicefile.shared.userid,
                                                                      "code": self.textfield_coupon.text!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                                         switch (response.result) {

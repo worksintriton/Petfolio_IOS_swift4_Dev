@@ -71,7 +71,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.petlistimg = [Any]()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
         self.View_shadow.isHidden = true

@@ -27,7 +27,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_shadow.isHidden = true
         self.view_alert.isHidden = true
         self.view_alert.view_cornor()

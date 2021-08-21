@@ -30,7 +30,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.view_continue.isHidden = true
         self.listtime.removeAll()

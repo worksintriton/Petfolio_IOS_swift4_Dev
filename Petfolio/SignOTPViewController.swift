@@ -19,7 +19,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secondstext: UILabel!
     @IBOutlet weak var view_main: UIView!
     var counter = 120
-    
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -28,12 +28,21 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
         self.Viewactionotp.view_cornor()
         self.textfield_otp.addDoneButtonToKeyboard(myAction: #selector(self.textfield_otp.resignFirstResponder))
         self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        self.timer.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view_main.addGestureRecognizer(tap)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
               }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stoptimer()
+    }
+    
+    func stoptimer(){
+        self.timer.invalidate()
+    }
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

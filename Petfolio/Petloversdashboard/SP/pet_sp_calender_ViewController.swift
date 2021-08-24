@@ -23,6 +23,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     var listtime = [""]
     var seltime = [""]
     var selectedtime = ""
+    var bookstatus = [""]
     
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
     @IBOutlet weak var view_continue: UIView!
@@ -91,12 +92,18 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_app_selectdoctordateCollectionViewCell
         cell.label_time.text = self.listtime[indexPath.row]
-        if self.seltime[indexPath.row] == "1"{
-            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+        
+        if self.bookstatus[indexPath.row] == "1" {
+            if self.seltime[indexPath.row] == "1"{
+                cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+                cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+            }else{
+                cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
+                cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            }
         }else{
-            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.applightgreen)
-            cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+            cell.label_time.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.black)
         }
         cell.view_time.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         return cell
@@ -112,16 +119,21 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.seltime.removeAll()
-        self.view_continue.isHidden = false
-        for timitm in 0..<self.listtime.count{
-            self.seltime.append("0")
+        if self.bookstatus[indexPath.row] == "1" {
+            self.seltime.removeAll()
+            self.view_continue.isHidden = false
+            for timitm in 0..<self.listtime.count{
+                self.seltime.append("0")
+            }
+            self.seltime.remove(at: indexPath.row)
+            self.seltime.insert("1", at: indexPath.row)
+            Servicefile.shared.pet_apoint_booking_date = self.seldate
+            Servicefile.shared.pet_apoint_booking_time = self.listtime[indexPath.row]
+            self.coll_seltime.reloadData()
+        }else{
+            self.alert(Message: "Slot is not available")
         }
-        self.seltime.remove(at: indexPath.row)
-        self.seltime.insert("1", at: indexPath.row)
-        Servicefile.shared.pet_apoint_booking_date = self.seldate
-        Servicefile.shared.pet_apoint_booking_time = self.listtime[indexPath.row]
-        self.coll_seltime.reloadData()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -181,6 +193,12 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                     let timitmdic = timedic[timitm] as! NSDictionary
                                     let timval = timitmdic["time"]  as? NSString ?? ""
                                     self.listtime.append(timval as String)
+                                    let bookstatus = timitmdic["book_status"]  as? Bool ?? false
+                                    if bookstatus ==  true {
+                                        self.bookstatus.append("1")
+                                    }else{
+                                        self.bookstatus.append("0")
+                                    }
                                     if timitm == 0 {
                                         self.seltime.append("0")
                                         self.selectedtime = timval as String

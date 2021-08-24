@@ -73,12 +73,16 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = UIStoryboard.Petlover_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Coupons"{
+            let vc = UIStoryboard.mycouponViewController()
+            self.present(vc, animated: true, completion: nil)
         }
 //        else if self.labelmenu[indexPath.row] == "Payment Details"{
 //            self.dismiss(animated: true, completion: nil)
 ////            let vc = self.storyboard?.instantiateViewController(withIdentifier: "pet_paymentdetails_ViewController") as! pet_paymentdetails_ViewController
 ////            self.present(vc, animated: true, completion: nil)
 //        }
+        
         else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)

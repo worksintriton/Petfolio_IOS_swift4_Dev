@@ -308,9 +308,11 @@ class Servicefile {
     static let doc_prescription_diagno = baseurl + "/api/diagnosis/getlist"
     static let doc_prescription_sub_diagno = baseurl + "/api/sub_diagnosis/getlist_id"
     
-    
+    static let pet_app_get_coupon_sidemenu = baseurl + "/api/coupon_code/getlist_id"
     static let pet_app_coupon_get = baseurl + "/api/coupon_code/text"
     static let pet_app_coupon_create = baseurl + "/api/refund_coupon/create"
+    static let sp_avail_time = baseurl + "/api/sp_available_time/slot/get_sp_new"
+    static let sp_avail_time_turnoff = baseurl + "/api/block_slot/create"
     
     // Signup page
     var email_status = false
@@ -319,6 +321,8 @@ class Servicefile {
     // Signup page
     static let sample_bannerimg = "http://54.212.108.156:3000/api/uploads/banner_empty.jpg"
     static let sample_img = "http://54.212.108.156:3000/api/uploads/Pic_empty.jpg"
+    
+    
     
     // sprint 1
     
@@ -491,6 +495,7 @@ class Servicefile {
     var Doc_pre_descrip = ""
     var doc_pres_diagno = ""
     var doc_pres_sub_diagno = ""
+    var appointtype = "New"
     var meditext = ""
     var noofdaytext = ""
     var clinic_name = ""

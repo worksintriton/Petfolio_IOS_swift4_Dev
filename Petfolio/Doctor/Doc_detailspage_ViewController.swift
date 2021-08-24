@@ -94,7 +94,7 @@ class Doc_detailspage_ViewController: UIViewController {
         if Servicefile.shared.Doc_selected_app_list == "New" {
             self.view_complete_cancel.isHidden = false
             self.view_confrence.isHidden = false
-        }else if Servicefile.shared.Doc_selected_app_list == "Complete" {
+        }else if Servicefile.shared.Doc_selected_app_list == "Completed" {
             self.view_complete_cancel.isHidden = true
             self.view_confrence.isHidden = true
             

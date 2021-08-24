@@ -39,7 +39,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     var statussel = ""
     
     @IBOutlet weak var sp_header: petowner_header!
-    var appointtype = "New"
+//    var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -71,6 +71,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.callnoticartcount()
         self.view_new.backgroundColor = appgree
         self.label_new.textColor = UIColor.white
+        
         // Do any additional setup after loading the view.
        
     }
@@ -186,7 +187,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         cell.view_cancnel.isHidden = true
         cell.label_status.isHidden = true
         cell.label_status_val.isHidden = true
-        if self.appointtype == "New" {
+        if Servicefile.shared.appointtype == "New" {
             cell.view_completebtn.isHidden = false
             cell.btn_complete.tag = indexPath.row
             cell.btn_cancel.tag = indexPath.row
@@ -205,7 +206,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                 cell.view_cancnel.isHidden = true
             }
             cell.selectionStyle = .none
-        }else if self.appointtype == "Complete"{
+        }else if Servicefile.shared.appointtype == "Completed"{
             cell.selectionStyle = .none
             cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].completed_at
@@ -267,7 +268,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Servicefile.shared.SP_selected_app_list = self.appointtype
+        Servicefile.shared.SP_selected_app_list = Servicefile.shared.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid
         let vc = UIStoryboard.sp_app_details_page_ViewController()
@@ -317,46 +318,53 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     
     
     @IBAction func action_missed(_ sender: Any) {
-        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.view_missed.backgroundColor = appcolor
-        self.label_missed.textColor = UIColor.white
-        self.view_new.backgroundColor = UIColor.white
-        self.label_new.textColor = appcolor
-        self.label_completed.textColor = appcolor
-        self.view_completed.backgroundColor = UIColor.white
-        self.view_new.layer.borderColor = appcolor.cgColor
-        self.view_new.backgroundColor = UIColor.white
-        self.appointtype = "Missed"
-        self.callmiss()
-        
+        Servicefile.shared.appointtype = "Missed"
+        self.checkapp()
     }
     @IBAction func action_completeappoint(_ sender: Any) {
-        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.view_completed.backgroundColor = appcolor
-        self.label_completed.textColor = UIColor.white
-        self.view_new.backgroundColor = UIColor.white
-        self.view_missed.backgroundColor = UIColor.white
-        self.label_new.textColor = appcolor
-        self.label_missed.textColor = appcolor
-        self.view_new.layer.borderColor = appcolor.cgColor
-        self.view_missed.layer.borderColor = appcolor.cgColor
-        self.appointtype = "Complete"
-        self.callcom()
-        
+        Servicefile.shared.appointtype = "Completed"
+        self.checkapp()
     }
     @IBAction func action_newappoint(_ sender: Any) {
-        let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.view_new.backgroundColor = appcolor
-        self.label_new.textColor = UIColor.white
-        self.view_completed.backgroundColor = UIColor.white
-        self.view_missed.backgroundColor = UIColor.white
-        self.label_completed.textColor = appcolor
-        self.label_missed.textColor = appcolor
-        self.view_completed.layer.borderColor = appcolor.cgColor
-        self.view_missed.layer.borderColor = appcolor.cgColor
-        self.appointtype = "New"
-        self.callnew()
-        
+        Servicefile.shared.appointtype = "New"
+        self.checkapp()
+    }
+    
+    func checkapp(){
+        if Servicefile.shared.appointtype == "New" {
+            let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view_new.backgroundColor = appcolor
+            self.label_new.textColor = UIColor.white
+            self.view_completed.backgroundColor = UIColor.white
+            self.view_missed.backgroundColor = UIColor.white
+            self.label_completed.textColor = appcolor
+            self.label_missed.textColor = appcolor
+            self.view_completed.layer.borderColor = appcolor.cgColor
+            self.view_missed.layer.borderColor = appcolor.cgColor
+            self.callnew()
+        }else if Servicefile.shared.appointtype == "Completed" {
+            let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view_completed.backgroundColor = appcolor
+            self.label_completed.textColor = UIColor.white
+            self.view_new.backgroundColor = UIColor.white
+            self.view_missed.backgroundColor = UIColor.white
+            self.label_new.textColor = appcolor
+            self.label_missed.textColor = appcolor
+            self.view_new.layer.borderColor = appcolor.cgColor
+            self.view_missed.layer.borderColor = appcolor.cgColor
+            self.callcom()
+        }else{
+            let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.view_missed.backgroundColor = appcolor
+            self.label_missed.textColor = UIColor.white
+            self.view_new.backgroundColor = UIColor.white
+            self.label_new.textColor = appcolor
+            self.label_completed.textColor = appcolor
+            self.view_completed.backgroundColor = UIColor.white
+            self.view_new.layer.borderColor = appcolor.cgColor
+            self.view_new.backgroundColor = UIColor.white
+            self.callmiss()
+        }
     }
     
     @IBAction func action_logout(_ sender: Any) {
@@ -581,7 +589,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             self.callspappcancel()
                         }
                         
-                        self.callnew()
+                        self.checkapp()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -634,13 +642,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                 self.call_list_shipping_address()
                                 self.view_shadow.isHidden = true
                                 self.view_popup.isHidden = true
-                                if self.appointtype == "New" {
-                                    self.callnew()
-                                }else if self.appointtype == "Complete"{
-                                    self.callcom()
-                                }else{
-                                    self.callmiss()
-                                }
+                                self.checkapp()
                                
                             }
                         }

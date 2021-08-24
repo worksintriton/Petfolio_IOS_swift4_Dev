@@ -163,8 +163,12 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "sp_manageaddressViewController") as! sp_manageaddressViewController
     }
     
-  
     
+    
+    static func mycouponViewController() -> mycouponViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "mycouponViewController") as! mycouponViewController
+    }
     
     static func pet_notification_ViewController() -> pet_notification_ViewController {
         let homeStoryboard = UIStoryboard.mainStoryboard()
@@ -876,6 +880,14 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "Sp_profile_ViewController") as! Sp_profile_ViewController
     
     }
+    
+    static func sp_turnoff_calender_ViewController() -> sp_turnoff_calender_ViewController {
+        let homeStoryboard = UIStoryboard.serviceStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "sp_turnoff_calender_ViewController") as! sp_turnoff_calender_ViewController
+    
+    }
+    
+    
     
     static func sp_side_menuViewController() -> sp_side_menuViewController {
         let homeStoryboard = UIStoryboard.serviceStoryboard()

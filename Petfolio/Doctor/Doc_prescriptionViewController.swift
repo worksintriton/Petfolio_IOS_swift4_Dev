@@ -782,4 +782,10 @@ extension String {
         }
         return String(self[index...])
     }
+    
+    var detectDate: Date? {
+               let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
+               let matches = detector?.matches(in: self, options: [], range: NSMakeRange(0, self.utf16.count))
+               return matches?.first?.date
+           }
 }

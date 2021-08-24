@@ -181,6 +181,9 @@
 		84C6A399264FA1DA00DBE200 /* doc_favlist_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */; };
 		84C6A3A7264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */; };
 		84C6A3A8264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6A3A6264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib */; };
+		84C6B67726D0D0FA007E2437 /* mycouponlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B67526D0D0FA007E2437 /* mycouponlistTableViewCell.swift */; };
+		84C6B67826D0D0FA007E2437 /* mycouponlistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6B67626D0D0FA007E2437 /* mycouponlistTableViewCell.xib */; };
+		84C6B67E26D0DFBA007E2437 /* vendor_turnoff_calender_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B67D26D0DFBA007E2437 /* vendor_turnoff_calender_ViewController.swift */; };
 		84C7A28B26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */; };
 		84C7A28F26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7A28E26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift */; };
 		84C967F0264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C967EF264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift */; };
@@ -569,6 +572,9 @@
 		84C6A398264FA1DA00DBE200 /* doc_favlist_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_favlist_ViewController.swift; sourceTree = "<group>"; };
 		84C6A3A5264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = product_fav_cell_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84C6A3A6264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = product_fav_cell_CollectionViewCell.xib; sourceTree = "<group>"; };
+		84C6B67526D0D0FA007E2437 /* mycouponlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mycouponlistTableViewCell.swift; sourceTree = "<group>"; };
+		84C6B67626D0D0FA007E2437 /* mycouponlistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mycouponlistTableViewCell.xib; sourceTree = "<group>"; };
+		84C6B67D26D0DFBA007E2437 /* vendor_turnoff_calender_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_turnoff_calender_ViewController.swift; sourceTree = "<group>"; };
 		84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_doc_paymentmethodViewController.swift; sourceTree = "<group>"; };
 		84C7A28E26CE8E00007B3FA5 /* pet_sp_app_payment_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_sp_app_payment_ViewController.swift; sourceTree = "<group>"; };
 		84C967EF264105E600310BB2 /* pet_vendor_shipingaddlocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_shipingaddlocationViewController.swift; sourceTree = "<group>"; };
@@ -856,6 +862,7 @@
 		84056648261862D80099A26D /* Customcell */ = {
 			isa = PBXGroup;
 			children = (
+				84C6B66B26D0D0C2007E2437 /* mycouponlist */,
 				84B8518626CFD822005B9E00 /* app_coupon */,
 				84BCD4E526AFCF3D008EBD54 /* sos */,
 				84DDDED426AA98A50073473F /* addproduct */,
@@ -1228,6 +1235,15 @@
 				84C6A3A6264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.xib */,
 			);
 			path = product_cell;
+			sourceTree = "<group>";
+		};
+		84C6B66B26D0D0C2007E2437 /* mycouponlist */ = {
+			isa = PBXGroup;
+			children = (
+				84C6B67526D0D0FA007E2437 /* mycouponlistTableViewCell.swift */,
+				84C6B67626D0D0FA007E2437 /* mycouponlistTableViewCell.xib */,
+			);
+			path = mycouponlist;
 			sourceTree = "<group>";
 		};
 		84C968152641115900310BB2 /* shipping_address_add_update */ = {
@@ -1692,6 +1708,7 @@
 				847C3327263FF277004D5706 /* dealupdateViewController.swift */,
 				84DDDE3026AA82790073473F /* AddproductViewController.swift */,
 				847653AB26AABEC000FD1B60 /* addnewprodViewController.swift */,
+				84C6B67D26D0DFBA007E2437 /* vendor_turnoff_calender_ViewController.swift */,
 			);
 			path = "Vendor ";
 			sourceTree = "<group>";
@@ -1823,6 +1840,7 @@
 				8432F5CE26831E2B0056926C /* getpettypeCollectionViewCell.xib in Resources */,
 				84188989262D4BB400CA9A13 /* petowner_header.xib in Resources */,
 				B094D26C255D6221008400D6 /* Futura Medium Italic font.ttf in Resources */,
+				84C6B67826D0D0FA007E2437 /* mycouponlistTableViewCell.xib in Resources */,
 				84E11996263ADC3E004981B7 /* catwalk2.gif in Resources */,
 				842D442626429EA100325795 /* spec_details_page_CollectionViewCell.xib in Resources */,
 				84BF705026974F6700306C63 /* previewdocpresTableViewCell.xib in Resources */,
@@ -2271,10 +2289,12 @@
 				8433880B264BB7F4001443EC /* doc_shop_shipaddress_ViewController.swift in Sources */,
 				B084F10D25C7CD8D00A5FB95 /* Doc_confrence_ViewController.swift in Sources */,
 				B02D3A8B259342F00010A4B6 /* sp_side_menuViewController.swift in Sources */,
+				84C6B67E26D0DFBA007E2437 /* vendor_turnoff_calender_ViewController.swift in Sources */,
 				B094D247255BF4DB008400D6 /* petsliderCollectionViewCell.swift in Sources */,
 				84B8518B26CFD887005B9E00 /* App_couponTableViewCell.swift in Sources */,
 				840A79AB26258CAE000A735D /* myaddresslistViewController.swift in Sources */,
 				B0F56E3825C82B0E00B1634F /* Pet_app_details_ViewController.swift in Sources */,
+				84C6B67726D0D0FA007E2437 /* mycouponlistTableViewCell.swift in Sources */,
 				8479DF59268B81360009EBD7 /* customfile.swift in Sources */,
 				B075160E256CCF41002DAA20 /* Mycal_edit_availdayTableViewCell.swift in Sources */,
 				840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */,

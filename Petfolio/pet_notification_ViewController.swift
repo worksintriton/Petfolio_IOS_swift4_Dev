@@ -58,13 +58,13 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                 cell.image_noti.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_noti.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.notif_list[indexPath.row].notify_img)) { (image, error, cache, urls) in
                     if (error != nil) {
-                        cell.image_noti.image = UIImage(named: "logo")
+                        cell.image_noti.image = UIImage(named: imagelink.sample)
                     } else {
                         cell.image_noti.image = image
                     }
                 }
             }else{
-                cell.image_noti.image = UIImage(named: "logo")
+                cell.image_noti.image = UIImage(named: imagelink.sample)
             }
             cell.label_description.text = Servicefile.shared.notif_list[indexPath.row].notify_descri
             cell.label_title.text = Servicefile.shared.notif_list[indexPath.row].notify_title

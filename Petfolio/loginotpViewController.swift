@@ -19,7 +19,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var secondstext: UILabel!
      @IBOutlet weak var view_main: UIView!
     var counter = 120
-   
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -30,7 +30,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         self.Viewotp.dropShadow()
         self.textfield_otp.addDoneButtonToKeyboard(myAction: #selector(self.textfield_otp.resignFirstResponder))
          self.textfield_otp.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        self.timer.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
             view_main.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -55,6 +56,14 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         @objc func dismissKeyboard() {
             view.endEditing(true)
         }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stoptimer()
+    }
+    
+    func stoptimer(){
+        self.timer.invalidate()
+    }
     
     @IBAction func action_bac(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -196,6 +205,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                      let Code  = res["Code"] as! Int
                                                      if Code == 200 {
                                                         let user_details = res["Data"] as! NSDictionary
+                                                        self.stoptimer()
                                                          Servicefile.shared.first_name = user_details["first_name"] as? String ?? ""
                                                          Servicefile.shared.last_name = user_details["last_name"] as? String ?? ""
                                                          Servicefile.shared.user_email = user_details["user_email"] as? String ?? ""

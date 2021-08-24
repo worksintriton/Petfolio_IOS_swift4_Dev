@@ -63,7 +63,7 @@ class sp_app_details_page_ViewController: UIViewController  {
         self.image_holder_name.image = UIImage(named: imagelink.sample)
         if Servicefile.shared.SP_selected_app_list == "New" {
             self.view_complete_cancel.isHidden = false
-        }else if Servicefile.shared.SP_selected_app_list == "Complete" {
+        }else if Servicefile.shared.SP_selected_app_list == "Completed" {
             self.view_complete_cancel.isHidden = true
         }else{
             self.view_complete_cancel.isHidden = true

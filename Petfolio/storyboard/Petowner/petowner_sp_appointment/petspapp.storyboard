@@ -2129,8 +2129,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0lx-nG-FB1">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-ZQ-Nx2">
                                                 <rect key="frame" x="0.0" y="154" width="414" height="512"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0lx-nG-FB1">
+                                                <rect key="frame" x="10" y="154" width="394" height="512"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XQY-mj-INl">
                                                     <size key="itemSize" width="102" height="49"/>
@@ -2186,13 +2190,17 @@
                                             <constraint firstAttribute="bottom" secondItem="0lx-nG-FB1" secondAttribute="bottom" constant="8" id="0yy-hY-5aR"/>
                                             <constraint firstItem="73Z-SJ-zGp" firstAttribute="leading" secondItem="AoN-wx-3Iq" secondAttribute="leading" id="78V-0M-Uc0"/>
                                             <constraint firstItem="HKh-so-xEq" firstAttribute="top" secondItem="AoN-wx-3Iq" secondAttribute="top" constant="101" id="Do2-l0-by2"/>
-                                            <constraint firstAttribute="trailing" secondItem="0lx-nG-FB1" secondAttribute="trailing" id="UsH-fv-ZlV"/>
+                                            <constraint firstAttribute="trailing" secondItem="0lx-nG-FB1" secondAttribute="trailing" constant="10" id="UsH-fv-ZlV"/>
+                                            <constraint firstItem="lGR-ZQ-Nx2" firstAttribute="bottom" secondItem="0lx-nG-FB1" secondAttribute="bottom" id="XAd-pI-VP3"/>
                                             <constraint firstItem="0lx-nG-FB1" firstAttribute="top" secondItem="HKh-so-xEq" secondAttribute="bottom" constant="27" id="auY-sE-fqV"/>
                                             <constraint firstAttribute="trailing" secondItem="73Z-SJ-zGp" secondAttribute="trailing" id="cGT-uM-hoy"/>
+                                            <constraint firstAttribute="trailing" secondItem="lGR-ZQ-Nx2" secondAttribute="trailing" id="h1L-49-Xb5"/>
                                             <constraint firstAttribute="trailing" secondItem="HKh-so-xEq" secondAttribute="trailing" constant="372" id="hh3-kV-1dT"/>
                                             <constraint firstItem="HKh-so-xEq" firstAttribute="leading" secondItem="AoN-wx-3Iq" secondAttribute="leading" id="iAT-cg-kOg"/>
                                             <constraint firstItem="73Z-SJ-zGp" firstAttribute="top" secondItem="AoN-wx-3Iq" secondAttribute="top" id="nvc-fI-evf"/>
-                                            <constraint firstItem="0lx-nG-FB1" firstAttribute="leading" secondItem="AoN-wx-3Iq" secondAttribute="leading" id="oYb-3B-x2C"/>
+                                            <constraint firstItem="0lx-nG-FB1" firstAttribute="leading" secondItem="AoN-wx-3Iq" secondAttribute="leading" constant="10" id="oYb-3B-x2C"/>
+                                            <constraint firstItem="lGR-ZQ-Nx2" firstAttribute="leading" secondItem="AoN-wx-3Iq" secondAttribute="leading" id="tEO-Xx-hY0"/>
+                                            <constraint firstItem="lGR-ZQ-Nx2" firstAttribute="top" secondItem="0lx-nG-FB1" secondAttribute="top" id="uSy-EU-yeL"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="el5-Y0-jMw">
@@ -2297,7 +2305,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="10294" y="-330"/>
+            <point key="canvasLocation" x="10292.753623188406" y="-330.13392857142856"/>
         </scene>
         <!--Pet sp Create App View Controller-->
         <scene sceneID="Qzx-4K-p1d">
@@ -5132,11 +5140,6 @@
             <point key="canvasLocation" x="13884" y="-302"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="vcw-Lo-CQ5">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="AddAddress" width="161" height="161"/>
         <image name="Bag" width="63" height="61"/>

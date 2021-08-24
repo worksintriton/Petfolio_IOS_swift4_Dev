@@ -37,6 +37,7 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 //            }
 //            self.sel.append("0")
 //        }
+        Servicefile.shared.sosnumbers.removeAll()
         self.sel.removeAll()
         self.issel.removeAll()
         self.isedit.removeAll()

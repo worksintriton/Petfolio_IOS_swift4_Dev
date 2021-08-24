@@ -146,14 +146,16 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                         let Message = res["Message"] as? String ?? ""
                         let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            self.dismiss(animated: true, completion: nil)
+                            let vc = UIStoryboard.Pet_applist_ViewController()
+                            self.present(vc, animated: true, completion: nil)
                         }))
                         self.present(alert, animated: true, completion: nil)
                         
                     }else{
                         let alert = UIAlertController(title: "", message: "There is some technical issue in ourside, Please contact admin for details", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            self.dismiss(animated: true, completion: nil)
+                            let vc = UIStoryboard.Pet_applist_ViewController()
+                            self.present(vc, animated: true, completion: nil)
                         }))
                         self.present(alert, animated: true, completion: nil)
                     }

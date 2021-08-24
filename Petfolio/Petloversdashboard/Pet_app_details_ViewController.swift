@@ -110,7 +110,7 @@ class Pet_app_details_ViewController: UIViewController {
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
             self.view_alergies.isHidden = false
             self.view_comments.isHidden = false
-            if Servicefile.shared.pet_selected_app_list == "current" {
+            if Servicefile.shared.pet_selected_app_list == "New" {
                 self.view_complete_cancel.isHidden = true
                 //self.view_complete.isHidden = true
                 self.view_confrence.isHidden = false
@@ -121,7 +121,7 @@ class Pet_app_details_ViewController: UIViewController {
                     self.view_complete_cancel.isHidden  = true
                      self.view_cancel.isHidden = true
                 }
-            } else if Servicefile.shared.pet_selected_app_list == "Complete" {
+            } else if Servicefile.shared.pet_selected_app_list == "Completed" {
                 self.view_complete_cancel.isHidden = true
                 self.view_confrence.isHidden = true
                 self.view_diagnosis.isHidden = false
@@ -139,7 +139,7 @@ class Pet_app_details_ViewController: UIViewController {
             self.view_visittype.isHidden = true
             self.view_home_address.isHidden = true
             self.view_data_home_address.isHidden = true
-            if Servicefile.shared.pet_selected_app_list == "current" {
+            if Servicefile.shared.pet_selected_app_list == "New" {
                 self.view_complete_cancel.isHidden  = true
                 if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
                     self.view_complete_cancel.isHidden = false
@@ -148,7 +148,7 @@ class Pet_app_details_ViewController: UIViewController {
                     self.view_complete_cancel.isHidden  = true
                      self.view_cancel.isHidden = true
                 }
-            } else if Servicefile.shared.pet_selected_app_list == "Complete" {
+            } else if Servicefile.shared.pet_selected_app_list == "Completed" {
                 self.view_complete_cancel.isHidden = true
             } else {
                 self.view_complete_cancel.isHidden = true
@@ -313,7 +313,7 @@ class Pet_app_details_ViewController: UIViewController {
                             Servicefile.shared.doc_details_date = self.label_orderdate.text!
                             let comm_type = data["communication_type"] as? String ?? ""
                             if comm_type == "Online" || comm_type == "Online Or Visit"{
-                                if Servicefile.shared.pet_selected_app_list == "current" {
+                                if Servicefile.shared.pet_selected_app_list == "New" {
                                     self.view_complete_cancel.isHidden = false
                                     //self.view_complete.isHidden = true
                                     self.view_confrence.isHidden = false
@@ -540,7 +540,7 @@ class Pet_app_details_ViewController: UIViewController {
                             }
                         }
                        
-                        if Servicefile.shared.pet_selected_app_list == "current" {
+                        if Servicefile.shared.pet_selected_app_list == "New" {
                             self.view_complete_cancel.isHidden  = true
                             if Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].appointment_time) > Date() {
                                 self.view_complete_cancel.isHidden = false
@@ -587,6 +587,12 @@ class Pet_app_details_ViewController: UIViewController {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
+                        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].payment_method != "Cash" {
+                            let vc = UIStoryboard.App_couponViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }else{
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }else{
                     }
                     break
@@ -600,7 +606,7 @@ class Pet_app_details_ViewController: UIViewController {
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
-        self.dismiss(animated: true, completion: nil)
+        
     }
     
     /// used for get the details from this function
@@ -617,7 +623,12 @@ class Pet_app_details_ViewController: UIViewController {
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        
+                        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].payment_method != "Cash" {
+                            let vc = UIStoryboard.App_couponViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }else{
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }else{
                     }
                     break
@@ -631,7 +642,7 @@ class Pet_app_details_ViewController: UIViewController {
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
         }
-        self.dismiss(animated: true, completion: nil)
+        
     }
     
 }

@@ -332,6 +332,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     }
     
     @IBAction func action_afterappBooked(_ sender: Any) {
+        Servicefile.shared.appointtype = "New"
         let vc = UIStoryboard.Pet_applist_ViewController()
         self.present(vc, animated: true, completion: nil)
     }

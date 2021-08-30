@@ -48,7 +48,7 @@
                                                     <constraint firstAttribute="height" constant="17" id="wEf-CD-hxq"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. name name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sw-4r-Hca">
@@ -57,7 +57,7 @@
                                                     <constraint firstAttribute="height" constant="17" id="WE9-Sv-ZG4"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3p-UD-QyD" customClass="CosmosView" customModule="Cosmos">
@@ -185,6 +185,11 @@
             <point key="canvasLocation" x="227.536231884058" y="114.50892857142857"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="j3p-UD-QyD">
+            <size key="intrinsicContentSize" width="80" height="12"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="grey_paw" width="12" height="10"/>

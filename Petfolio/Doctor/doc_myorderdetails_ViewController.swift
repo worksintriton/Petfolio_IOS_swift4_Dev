@@ -34,7 +34,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
          self.tblview_applist.register(UINib(nibName: "pet_vendor_new_myorder_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        Servicefile.shared.ordertype = "current"
+        
         self.label_nodata.isHidden = true
         self.view_new.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.view_missed.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
@@ -82,10 +82,14 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if Servicefile.shared.ordertype == "current" {
+        self.checkapp()
+    }
+    
+    func checkapp(){
+        if Servicefile.shared.ordertype == "New" {
             self.callnew()
             self.design_set_newapp()
-        }else if Servicefile.shared.ordertype == "Complete"{
+        }else if Servicefile.shared.ordertype == "Completed"{
             self.callcomm()
             self.design_set_complete()
         }else{
@@ -96,10 +100,10 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     
     
     @objc func refresh(){
-        if Servicefile.shared.ordertype == "current" {
+        if Servicefile.shared.ordertype == "New" {
             self.callnew()
             self.design_set_newapp()
-        }else if Servicefile.shared.ordertype == "Complete"{
+        }else if Servicefile.shared.ordertype == "Completed"{
             self.callcomm()
             self.design_set_complete()
         }else{
@@ -126,7 +130,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if  Servicefile.shared.ordertype == "Complete" {
+        if  Servicefile.shared.ordertype == "Completed" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
@@ -156,7 +160,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
-        } else if  Servicefile.shared.ordertype == "current"{
+        } else if  Servicefile.shared.ordertype == "New"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! pet_vendor_new_myorder_TableViewCell
             
             cell.selectionStyle = .none
@@ -226,7 +230,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     
     @IBAction func action_missed(_ sender: Any) {
         self.desing_set_mis()
-        Servicefile.shared.ordertype = "cancelled"
+        Servicefile.shared.ordertype = "Cancelled"
         self.tblview_applist.reloadData()
         self.callmissed()
     }
@@ -245,7 +249,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     
     @IBAction func action_completeappoint(_ sender: Any) {
         self.design_set_complete()
-        Servicefile.shared.ordertype = "Complete"
+        Servicefile.shared.ordertype = "Completed"
         self.tblview_applist.reloadData()
         self.callcomm()
     }
@@ -264,7 +268,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     
     @IBAction func action_newappoint(_ sender: Any) {
         self.design_set_newapp()
-        Servicefile.shared.ordertype = "current"
+        Servicefile.shared.ordertype = "New"
         self.tblview_applist.reloadData()
         self.callnew()
     }

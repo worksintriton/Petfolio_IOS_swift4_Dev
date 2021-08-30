@@ -43,12 +43,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.inital_setup()
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
-        Servicefile.shared.ordertype = "current"
+        // Servicefile.shared.ordertype = "New"
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.view_alert.isHidden = true
         self.label_nodata.isHidden = true
-        
         self.view_new.view_cornor()
         self.view_missed.view_cornor()
         self.view_footer.view_cornor()
@@ -130,7 +129,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if  Servicefile.shared.ordertype == "current" {
+        if  Servicefile.shared.ordertype == "New" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
             cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
@@ -164,7 +163,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             cell.label_ord_date_title.text = "Booked on : "
             return cell
-        } else  if  Servicefile.shared.ordertype == "Complete"{
+        } else  if  Servicefile.shared.ordertype == "Completed"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
             cell.selectionStyle = .none
             cell.image_order.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
@@ -291,7 +290,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func action_missed(_ sender: Any) {
         self.missed_btn()
-        Servicefile.shared.ordertype = "cancelled"
+        Servicefile.shared.ordertype = "Cancelled"
         self.tblview_applist.reloadData()
         self.callcancelled()
         
@@ -301,17 +300,17 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func action_completeappoint(_ sender: Any) {
         self.complete_btn()
-        Servicefile.shared.ordertype = "Complete"
+        Servicefile.shared.ordertype = "Completed"
         self.tblview_applist.reloadData()
         self.callcomm()
         
     }
     
     func call_by_status(){
-        if Servicefile.shared.ordertype == "current" {
+        if Servicefile.shared.ordertype == "New" {
             self.new_btn()
             self.callnew()
-        }else if Servicefile.shared.ordertype == "Complete" {
+        }else if Servicefile.shared.ordertype == "Completed" {
             self.complete_btn()
             self.callcomm()
         }else{
@@ -360,7 +359,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func action_newappoint(_ sender: Any) {
         self.new_btn()
-        Servicefile.shared.ordertype = "current"
+        Servicefile.shared.ordertype = "New"
         self.tblview_applist.reloadData()
         self.callnew()
         

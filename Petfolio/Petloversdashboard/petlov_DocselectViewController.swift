@@ -526,6 +526,24 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
         GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
     }
     
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
+        print("You tapped at")
+        print("did select",Servicefile.shared.lati,Servicefile.shared.long)
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)) {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "comgooglemaps://?saddr=&daddr=\(Servicefile.shared.lati),\(Servicefile.shared.long)&directionsmode=driving")! as URL)
+            
+        } else {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "http://maps.apple.com/?daddr=\(Servicefile.shared.lati),\(Servicefile.shared.long)")! as URL)
+        }
+    }
+    
+    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//
+//    }
+//
 }
 
 

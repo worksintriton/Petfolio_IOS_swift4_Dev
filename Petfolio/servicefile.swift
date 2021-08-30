@@ -66,14 +66,14 @@ class imagelink{
     
     static let cat1 = "cat_walk1"
     static let cat2 = "catwalk2"
-    static let dog1 = "doganimate"
+    static let dog1 = "loader"
     static let down1 = "down1"
     static let up = "up"
 }
 
 class colorpickert{
     static let link = colorpickert()
-    
+    static let appfootcolor = "#2896c2"
     static let footer_blue = "#408DCC"
     static let footer_gray = "#aaa"
     static let orange_color = "#E8571E"
@@ -455,12 +455,12 @@ class Servicefile {
     var selectedstate = ""
     var selectedState = ""
     var selecteddefaultstatus = false
-    var ordertype = "current"
+    var ordertype = "New"
     var islocationget = false
     //var appgreen = "#56B9A4"
     var apppagecolor = "#F5F5F5"
     var appviewcolor = "#FFFFFF"
-    var appgreen = "#2d6d66"
+    var appgreen = "#2896c2"//"#2d6d66"
     var appgrey = "#296F67"
     var appyellow = "#FCDE66"
     var applightgreen = "#F4FAF9"

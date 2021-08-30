@@ -227,9 +227,9 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
         }
         
         func check_order_details_status()-> String{
-            if Servicefile.shared.ordertype == "Complete" {
+            if Servicefile.shared.ordertype == "Completed" {
                     return "Delivered on :"
-            }else if Servicefile.shared.ordertype == "current"{
+            }else if Servicefile.shared.ordertype == "New"{
                 return  "Booked on :"
             }else{
                 return   "Cancelled on :"
@@ -376,12 +376,12 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                             self.label_quality.text =  String(self.product_quantity)
                             //Servicefile.shared.orderid = Servicefile.shared.order_id
                             self.image_status.image = UIImage(named: "success")
-                            if Servicefile.shared.ordertype == "Complete" {
+                            if Servicefile.shared.ordertype == "Completed" {
                                     let date = order_details["order_completed"] as? String ?? ""
                                     self.label_status_date.text = date
                                     self.Label_status.text = "Delivered on"
                                 self.view_confirmall.isHidden = true
-                            }else if Servicefile.shared.ordertype == "current"{
+                            }else if Servicefile.shared.ordertype == "New"{
                                     let date = order_details["order_booked"] as? String ?? ""
                                     self.Label_status.text = "Booked on"
                                     self.label_status_date.text = date

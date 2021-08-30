@@ -17,6 +17,8 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var col_pettype: UICollectionView!
     // show type
     // show breed
+    
+    @IBOutlet weak var label_select: UILabel!
     @IBOutlet weak var textfield_search: UITextField!
     @IBOutlet weak var view_search_breed: UIView!
     @IBOutlet weak var tbl_search_breed: UITableView!
@@ -41,6 +43,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.tbl_search_breed.dataSource = self
         self.view_search_breed.isHidden = true
         self.tbl_search_breed.isHidden = true
+        self.label_select.text = "Select Type"
         self.callpetdetailget()
         self.textfield_search.addTarget(self, action: #selector(textFieldsearc), for: .editingChanged)
         self.textfield_search.autocapitalizationType = .sentences
@@ -208,6 +211,7 @@ class getpetViewController: UIViewController, UICollectionViewDelegate, UICollec
                         }
                         self.searpet_breed = self.pet_breed_arr
                         self.col_pettype.isHidden = true
+                        self.label_select.text = "Select Breed"
                         self.tbl_search_breed.isHidden = false
                         self.view_search_breed.isHidden = false
                         self.tbl_search_breed.reloadData()

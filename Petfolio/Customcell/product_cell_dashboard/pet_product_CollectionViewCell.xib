@@ -48,7 +48,7 @@
                                             <constraint firstAttribute="height" constant="17" id="UEh-hp-dg9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. name name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yxc-Qg-IdM">
@@ -57,7 +57,7 @@
                                             <constraint firstAttribute="height" constant="17" id="kwL-eE-5ub"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXC-k3-A66" customClass="CosmosView" customModule="Cosmos">
@@ -154,6 +154,11 @@
             <point key="canvasLocation" x="242.0289855072464" y="150.66964285714286"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="fXC-k3-A66">
+            <size key="intrinsicContentSize" width="80" height="12"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="grey_paw" width="12" height="10"/>

@@ -67,6 +67,8 @@ class petowner_footerview: UIView {
         self.label_Fprocess_three.isHidden = true
         self.img_s3.isHidden = false
         self.img_s3I.isHidden = false
+        self.img_s3.image = UIImage(named: "navbar (6)")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        self.img_s3.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         self.img_s3I.image = UIImage(named: imagelink.Home_gray)!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         self.img_s3I.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.white)
         self.image_Fprocess_three.isHidden = true
@@ -99,29 +101,29 @@ class petowner_footerview: UIView {
             self.image_Fprocess_three.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.white)
         }
         if b1 {
-            self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         }else{
             self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
             self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
         if b5 {
-            self.image_Fprocess_five.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.image_Fprocess_five.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         }else{
             self.image_Fprocess_five.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
             self.label_Fprocess_five.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
         if b2 {
-            self.image_Fprocess_two.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.image_Fprocess_two.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         }else{
             self.image_Fprocess_two.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
             self.label_Fprocess_two.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)
         }
         if b4 {
-            self.image_Fprocess_four.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.image_Fprocess_four.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         }else{
             self.image_Fprocess_four.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
             self.label_Fprocess_four.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)

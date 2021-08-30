@@ -1452,7 +1452,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="37P-bp-L4t" firstAttribute="centerX" secondItem="uFn-em-32z" secondAttribute="centerX" id="5F7-Ra-vdK"/>
                                                                     <constraint firstAttribute="height" constant="52" id="F06-S7-pUi"/>
@@ -1523,7 +1523,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.00093379826279999998" green="0.58740645650000001" blue="0.45683860780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="170" id="7eC-Bv-boy"/>
                                                     <constraint firstAttribute="height" constant="38" id="rNc-Sj-o5I"/>
@@ -2364,7 +2364,7 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="zzW-rg-eyh" firstAttribute="width" secondItem="KLc-RT-udt" secondAttribute="width" id="3Jm-Wj-pPR"/>
                                                                     <constraint firstItem="e9g-Cw-alQ" firstAttribute="height" secondItem="KLc-RT-udt" secondAttribute="height" id="5d2-5H-w75"/>
@@ -2435,7 +2435,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.00093379826279999998" green="0.58740645650000001" blue="0.45683860780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="2KT-8P-OMm"/>
                                                     <constraint firstAttribute="width" constant="170" id="N8h-Wh-EMz"/>
@@ -2759,7 +2759,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAG-WI-nJF">
-                                                                            <rect key="frame" x="8" y="8" width="398" height="141"/>
+                                                                            <rect key="frame" x="8" y="8" width="398" height="140"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTH-Sb-aPE" customClass="SNShadowView" customModule="SNShadowSDK">
                                                                                     <rect key="frame" x="10" y="15" width="85" height="85"/>
@@ -2938,7 +2938,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e50-6T-6FG">
-                                                                            <rect key="frame" x="8" y="8" width="398" height="141"/>
+                                                                            <rect key="frame" x="8" y="8" width="398" height="140"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37N-FA-nfT" customClass="SNShadowView" customModule="SNShadowSDK">
                                                                                     <rect key="frame" x="10" y="15" width="85" height="85"/>
@@ -3084,7 +3084,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFc-dG-R1V">
-                                                                            <rect key="frame" x="8" y="8" width="398" height="141"/>
+                                                                            <rect key="frame" x="8" y="8" width="398" height="140"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BP-Cr-o3G" customClass="SNShadowView" customModule="SNShadowSDK">
                                                                                     <rect key="frame" x="10" y="15" width="85" height="85"/>
@@ -3513,7 +3513,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="XQP-zc-Smg"/>
                                                     <constraint firstAttribute="width" constant="170" id="gJH-Tj-gUf"/>
@@ -5310,7 +5310,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="w7l-7f-Teb" firstAttribute="width" secondItem="xtt-xE-bWE" secondAttribute="width" id="0FJ-VH-fKz"/>
                                             <constraint firstItem="feN-LU-Rbg" firstAttribute="width" secondItem="xtt-xE-bWE" secondAttribute="width" id="GN3-3V-UrC"/>
@@ -8015,7 +8015,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="Bxh-dL-Isy" firstAttribute="width" secondItem="DAJ-WF-hAw" secondAttribute="width" id="293-3A-EsR"/>
                                                     <constraint firstAttribute="trailing" secondItem="mul-M5-bff" secondAttribute="trailing" id="7sk-GO-g4u"/>
@@ -8077,7 +8077,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="7CO-AC-eMD" secondAttribute="bottom" id="4Wn-Ns-syZ"/>
                                                     <constraint firstItem="GVO-Qc-VHW" firstAttribute="centerY" secondItem="43r-1F-caF" secondAttribute="centerY" id="6dE-h7-iHA"/>
@@ -8235,7 +8235,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.1634779274" green="0.43256717919999998" blue="0.4048450589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="D2J-m8-2uM"/>
                                                             <constraint firstItem="Oll-IQ-8GU" firstAttribute="centerX" secondItem="jiQ-gK-dRz" secondAttribute="centerX" id="U3X-u5-tlf"/>
@@ -8497,7 +8497,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.15686274509803921" green="0.58823529411764708" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="54" id="3PS-Wy-UOg"/>
                                                             <constraint firstItem="Ce6-Ct-aLr" firstAttribute="centerY" secondItem="fbD-M2-rmR" secondAttribute="centerY" id="BPO-Xt-W4h"/>

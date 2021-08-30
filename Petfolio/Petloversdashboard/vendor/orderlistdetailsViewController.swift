@@ -193,12 +193,12 @@ class orderlistdetailsViewController: UIViewController {
                             let date = itdata["date"] as! String
                             let id = itdata["id"] as! Int
                             let title = itdata["title"] as! String
-                            if Servicefile.shared.ordertype == "Complete" {
+                            if Servicefile.shared.ordertype == "Completed" {
                                 if title == "Order Dispatch" {
                                     self.label_status_date.text = date
                                     self.Label_status.text = "Delivered on"
                                 }
-                            }else if Servicefile.shared.ordertype == "current"{
+                            }else if Servicefile.shared.ordertype == "New"{
                                 if title == "Order Booked" {
                                     self.Label_status.text = "Booked on"
                                     self.label_status_date.text = date

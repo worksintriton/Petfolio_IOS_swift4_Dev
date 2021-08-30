@@ -50,7 +50,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tbl_searchlist.addSubview(refreshControl) // not required when using UITableViewController
         self.view_bac.layer.cornerRadius = self.view_bac.frame.height / 2
-        self.label_comm_type.text = "Offline Doctors"
+        self.label_comm_type.text = "Clinic Vists" // "Offline Doctors"
         self.switch_commtype.isOn = false
         self.textfield_search.delegate = self
         self.textfield_search.autocapitalizationType = .sentences
@@ -174,11 +174,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         if sender.isOn {
             self.comm_type = 1
             self.callsearchlist()
-            self.label_comm_type.text = "Online Doctors"
+            self.label_comm_type.text = "Online"
         } else {
             self.comm_type = 0
             self.callsearchlist()
-            self.label_comm_type.text = "Offline Doctors"
+            self.label_comm_type.text = "Clinic Vists" // "Offline Doctors"
         }
     }
     

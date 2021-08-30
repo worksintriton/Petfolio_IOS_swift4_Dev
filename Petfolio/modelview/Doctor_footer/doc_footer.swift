@@ -63,13 +63,13 @@ class doc_footer: UIView {
         self.image_Fprocess_three.image = UIImage(named: imagelink.pet_community_gray)!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         
         self.image_Fprocess_one.image = UIImage(named: imagelink.shop_gray)!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        
-        
+        self.img_s2I.image = UIImage(named: "navbar (6)")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        self.img_s2I.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         self.img_s2.image = UIImage(named: imagelink.Home_gray)!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         self.img_s2.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.white)
         if b3 {
-            self.image_Fprocess_three.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+            self.image_Fprocess_three.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_three.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
             
         }else{
             self.image_Fprocess_three.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
@@ -83,9 +83,8 @@ class doc_footer: UIView {
         }
        
         if b2 {
-            self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-           
+            self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         }else{
             self.image_Fprocess_one.tintColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appnewgrey)
             self.label_Fprocess_one.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_gray)

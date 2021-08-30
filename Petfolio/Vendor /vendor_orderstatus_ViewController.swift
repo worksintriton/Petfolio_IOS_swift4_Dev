@@ -387,7 +387,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                      "activity_id" : 1,
                      "activity_title" : "Order Accept",
                      "activity_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
-            Servicefile.shared.ordertype = "current"
+            Servicefile.shared.ordertype = "New"
         }else if self.Label_status.text == "Order Dispatched"{
             url = Servicefile.vendor_update_status_dispatch
             params = ["_id" : Servicefile.shared.orderid,
@@ -397,7 +397,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                           "vendor_complete_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                           "vendor_complete_info" : self.textview_status_reason.text!,
                           "order_status" : "Complete"]
-            Servicefile.shared.ordertype = "Complete"
+            Servicefile.shared.ordertype = "Completed"
         }else if self.Label_status.text == "Order Cancellation"{
             url = Servicefile.vendor_update_status_vendor_cancel
             params = ["_id" : Servicefile.shared.orderid,
@@ -407,7 +407,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
                 "order_status" : "Cancelled",
                 "vendor_cancell_info" : self.textview_status_reason.text!,
                 "vendor_cancell_date" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date())]
-            Servicefile.shared.ordertype = "cancelled"
+            Servicefile.shared.ordertype = "Cancelled"
         }
         
         

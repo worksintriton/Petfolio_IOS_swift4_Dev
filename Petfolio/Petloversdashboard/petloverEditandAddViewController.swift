@@ -143,13 +143,13 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
     func setdesign(){
         Servicefile.shared.Pet_breed_val = ""
         Servicefile.shared.pet_type_val = ""
-        self.view_Petname.textfield_value.placeholder = "Pet name"
-        self.view_pet.textfield_value.placeholder = "Pet Type & Breed"
-        self.view_selectdate.textfield_value.placeholder = "Select Vaccinated date"
+        self.view_Petname.textfield_value.placeholder = "Name"
+        self.view_pet.textfield_value.placeholder = "Types & Breed"
+        self.view_selectdate.textfield_value.placeholder = "Select vaccinated date"
         self.view_selectdateCalender.textfield_value.placeholder = "Date of Birth"
-        self.view_petcolor.textfield_value.placeholder = "Pet color"
-        self.view_petweight.textfield_value.placeholder = "Pet weight (Kg)"
-        self.view_petbio.textfield_value.placeholder = "Pet Bio"
+        self.view_petcolor.textfield_value.placeholder = "Color"
+        self.view_petweight.textfield_value.placeholder = "Weight (kg)"
+        self.view_petbio.textfield_value.placeholder = "Bio"
         self.view_pet.view_btn_side.isHidden = false
         self.view_pet.btn_get_data.isHidden = false
         self.view_Petname.btn_get_data.isHidden = true

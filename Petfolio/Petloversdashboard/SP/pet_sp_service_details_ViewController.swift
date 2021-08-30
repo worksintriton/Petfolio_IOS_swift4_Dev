@@ -52,6 +52,8 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         self.view_fee.layer.cornerRadius = 30.0
         self.view_location.layer.cornerRadius = 30.0
         self.view_rate.rating = 0.0
+        self.GMS_mapView.delegate = self
+        self.GMS_mapView.view_cornor()
         self.call_ser_details()
         self.coll_service.delegate = self
         self.coll_service.dataSource = self
@@ -344,6 +346,19 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
         markerView.tintColor = UIColor.red
         marker.iconView = markerView
         GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
+        print("You tapped at")
+        print("did select",Servicefile.shared.lati,Servicefile.shared.long)
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)) {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "comgooglemaps://?saddr=&daddr=\(Servicefile.shared.lati),\(Servicefile.shared.lati)&directionsmode=driving")! as URL)
+            
+        } else {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "http://maps.apple.com/?daddr=\(Servicefile.shared.lati),\(Servicefile.shared.long)")! as URL)
+        }
     }
 
 }

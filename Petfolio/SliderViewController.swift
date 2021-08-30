@@ -213,9 +213,9 @@ extension UIViewController  {
         Servicefile.shared.backview.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         Servicefile.shared.backview.backgroundColor = UIColor.black
         Servicefile.shared.backview.alpha = 0.4
-        Servicefile.shared.gifimg.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+        Servicefile.shared.gifimg.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
         //Servicefile.shared.gifimg.image = UIImage(named: "doganimate.gif")
-        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "doganimate", withExtension: "gif")!)
+        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "loader", withExtension: "gif")!)
         Servicefile.shared.gifimg.image = UIImage.sd_image(withGIFData: imageData)
         //        Servicefile.shared.loadlabel.textAlignment = .center
         //        Servicefile.shared.loadlabel.font = UIFont.boldSystemFont(ofSize: 16.0)
@@ -224,7 +224,6 @@ extension UIViewController  {
         Servicefile.shared.customview.addSubview(Servicefile.shared.backview)
         Servicefile.shared.customview.addSubview(Servicefile.shared.gifimg)
         self.view.addSubview(Servicefile.shared.customview)
-
     }
     
     func startAnimatingActivityIndicator_gif(named: String) {

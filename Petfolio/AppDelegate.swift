@@ -267,6 +267,7 @@ var window: UIWindow?
                             self.window?.makeKeyAndVisible()
                         }else if orders != "" {
                             print("i am in order page ")
+                            Servicefile.shared.ordertype = orders
                             let vc = UIStoryboard.Petlover_myorder_ViewController()
                             let navigationController = UINavigationController.init(rootViewController: vc)
                             self.window?.rootViewController = navigationController
@@ -288,6 +289,7 @@ var window: UIWindow?
                             self.window?.makeKeyAndVisible()
                         }else if orders != "" {
                             print("i am in order page ",usertype)
+                            Servicefile.shared.ordertype = orders
                             let vc = UIStoryboard.doc_myorderdetails_ViewController()
                             let navigationController = UINavigationController.init(rootViewController: vc)
                             self.window?.rootViewController = navigationController
@@ -308,6 +310,7 @@ var window: UIWindow?
                             self.window?.makeKeyAndVisible()
                         }else if orders != "" {
                             print("i am in order page ",usertype)
+                            Servicefile.shared.ordertype = orders
                             let vc = UIStoryboard.sp_myorder_ViewController()
                             let navigationController = UINavigationController.init(rootViewController: vc)
                             self.window?.rootViewController = navigationController
@@ -327,6 +330,7 @@ var window: UIWindow?
                             self.window?.makeKeyAndVisible()
                         }else if orders != "" {
                             print("i am in order page ",usertype)
+                            Servicefile.shared.ordertype = orders
                             let vc = UIStoryboard.vendor_myorder_ViewController()
                             let navigationController = UINavigationController.init(rootViewController: vc)
                             self.window?.rootViewController = navigationController

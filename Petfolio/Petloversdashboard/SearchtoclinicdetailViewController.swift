@@ -19,9 +19,9 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     @IBOutlet weak var label_clinicdetails: UILabel!
     @IBOutlet weak var coll_imgview: UICollectionView!
     @IBOutlet weak var label_city: UILabel!
-//    @IBOutlet weak var label_Noofcomments: UILabel!
-//    @IBOutlet weak var Label_ratingval: UILabel!
-//    @IBOutlet weak var label_specdetails: UILabel!
+    //    @IBOutlet weak var label_Noofcomments: UILabel!
+    //    @IBOutlet weak var Label_ratingval: UILabel!
+    //    @IBOutlet weak var label_specdetails: UILabel!
     @IBOutlet weak var view_book: UIView!
     @IBOutlet weak var label_descrption: UILabel!
     @IBOutlet weak var label_distance: UILabel!
@@ -86,7 +86,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.view_fee.dropShadow()
         self.view_location.dropShadow()
         self.view_experience.dropShadow()
-       
+        
         //self.view_home.view_cornor()
         self.pet_type.removeAll()
         self.petid.removeAll()
@@ -110,15 +110,15 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     
     func intial_setup_action(){
-   
-    // footer action
+        
+        // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
-    // footer action
+        // footer action
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -132,19 +132,19 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     @objc func scrollAutomatically(_ timer1: Timer) {
         if self.clinicpic.count > 0 {
-               self.pagcount += 1
-               if self.pagcount == self.clinicpic.count {
-                   self.pagcount = 0
-                   let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imgview.scrollToItem(at: indexPath, at: .right, animated: false)
-               }else{
-                   let indexPath = IndexPath(row: pagcount, section: 0)
-                   self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: false)
-               }
-              
-           }
+            self.pagcount += 1
+            if self.pagcount == self.clinicpic.count {
+                self.pagcount = 0
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.coll_imgview.scrollToItem(at: indexPath, at: .right, animated: false)
+            }else{
+                let indexPath = IndexPath(row: pagcount, section: 0)
+                self.coll_imgview.scrollToItem(at: indexPath, at: .left, animated: false)
+            }
+            
+        }
     }
-   
+    
     
     @IBAction func action_profile(_ sender: Any) {
         let vc = UIStoryboard.petprofileViewController()
@@ -160,25 +160,25 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     
     @IBAction func action_pet_service(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 1
-                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
         //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                       self.present(tapbar, animated: true, completion: nil)
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     
     @IBAction func action_home(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 2
-                let tapbar = UIStoryboard.petloverDashboardViewController()
+        let tapbar = UIStoryboard.petloverDashboardViewController()
         //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                self.present(tapbar, animated: true, completion: nil)
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @IBAction func action_care(_ sender: Any) {
         //        Servicefile.shared.tabbar_selectedindex = 0
-                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
         //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
-       }
+    }
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = UIStoryboard.SOSViewController()
@@ -186,12 +186,12 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func action_back(_ sender: Any) {
-//        //        Servicefile.shared.tabbar_selectedindex = 0
-//                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
-//        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-//        self.present(tapbar, animated: true, completion: nil)
-            let vc = UIStoryboard.Pet_searchlist_DRViewController()
-            self.present(vc, animated: true, completion: nil)
+        //        //        Servicefile.shared.tabbar_selectedindex = 0
+        //                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+        //        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        //        self.present(tapbar, animated: true, completion: nil)
+        let vc = UIStoryboard.Pet_searchlist_DRViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_fav_unfav(_ sender: Any) {
@@ -211,7 +211,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         }else{
             return self.clinicpic.count
         }
-      
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -222,9 +222,9 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
             return cell
         }else if col_pet_handle == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)  as!  spec_details_page_CollectionViewCell
-                cell.label_spec.text = self.pet_handle[indexPath.row]
-//            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
-//            cell.view_pethandle.view_cornor()
+            cell.label_spec.text = self.pet_handle[indexPath.row]
+            //            cell.label_pet_handle.text = self.pet_handle[indexPath.row]
+            //            cell.view_pethandle.view_cornor()
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
@@ -236,8 +236,8 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                     cell.img_banner.image = image
                 }
             }
-//            cell.img_banner.view_cornor()
-//            cell.view_banner_two.view_cornor()
+            //            cell.img_banner.view_cornor()
+            //            cell.view_banner_two.view_cornor()
             return cell
         }
     }
@@ -265,115 +265,115 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.doc_fetchdocdetails, method: .post, parameters:
-            ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                switch (response.result) {
-                case .success:
-                    let res = response.value as! NSDictionary
-                    print("success data",res)
-                    let Code  = res["Code"] as! Int
-                    if Code == 200 {
-                        self.clinicpic.removeAll()
-                        let Data = res["Data"] as! NSDictionary
-                        self._id = Data["_id"] as? String ?? ""
-                        self.clinic_name = Data["clinic_name"] as? String ?? ""
-                        Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
-                        let clidet = Data["clinic_pic"] as! NSArray
-                        let clicloc =  Data["clinic_loc"] as? String ?? ""
-                        let amount =  Data["amount"] as? Int ?? 0
-                        Servicefile.shared.pet_apoint_amount = amount
-                        self.label_cont_amt.text = " INR " + String(Servicefile.shared.pet_apoint_amount)
-                        self.label_city.text = clicloc + ". "
-                        self.label_distance.text = Servicefile.shared.moredocd[Servicefile.shared.selectedindex].distance + " KM away"
-                        for itm in 0..<clidet.count{
-                            let dat = clidet[itm] as! NSDictionary
-                            let pic = dat["clinic_pic"] as? String ?? Servicefile.sample_img
-                            self.clinicpic.append(pic)
-                        }
-                        let educ_details = Data["education_details"] as! NSArray
-                        for itm in 0..<educ_details.count{
-                            let dat = educ_details[itm] as! NSDictionary
-                            let ed = dat["education"] as? String ?? ""
-                            if self.edu == "" {
-                                self.edu = ed  + self.edu
-                            }else{
-                                self.edu =  self.edu + ", " +  ed
-                            }
-                            
-                        }
-                        let fav = Data["fav"] as? Bool ?? false
-                        if fav {
-                            self.image_fav.image = UIImage(named: imagelink.fav_true)
-                        }else {
-                            self.image_fav.image = UIImage(named: imagelink.fav_false)
-                        }
-                        self.label_edu.text = self.edu
-                        var specarray = ""
-                        let spec =  Data["specialization"] as! NSArray
-                        self.pet_spec.removeAll()
-                        for itm in 0..<spec.count{
-                            let dat = spec[itm] as! NSDictionary
-                            let pic = dat["specialization"] as? String ?? ""
-                            self.pet_spec.append(pic)
-                            if itm == 0 {
-                                specarray =   pic
-                            }else{
-                                let val = specarray + ", "
-                                specarray = val + pic
-                            }
-                        }
-                        print("pet handle",self.pet_spec)
-                        self.col_sepc_list.reloadData()
-                        self.pet_handle.removeAll()
-                        let pet_ha =  Data["pet_handled"] as! NSArray
-                        for itm in 0..<pet_ha.count{
-                            let dat = pet_ha[itm] as! NSDictionary
-                            let pic = dat["pet_handled"] as? String ?? ""
-                            self.pet_handle.append(pic)
-                        }
-                        print("pet handle",self.pet_handle)
-                        self.col_pet_handle.reloadData()
-                        self.coll_imgview.reloadData()
-                        self.descri = Data["descri"] as? String ?? ""
-                        self.dr_name = Data["dr_name"] as? String ?? ""
-                        self.dr_title = Data["dr_title"] as? String ?? ""
-                        let strcount = Data["star_count"] as? Int ?? 0
-                        let r_count =  Data["review_count"] as? Int ?? 0
-                        self.star_count = String(strcount)
-                        
-                        let rcount = String(r_count)
-                        if self.star_count == "" {
-                            self.ratingval.rating = 0.0
-                        }else{
-                            self.ratingval.rating = Double(strcount)
-                        }
-//                        if rcount == "" {
-//                            self.label_Noofcomments.text = "0"
-//                        }else{
-//                            self.label_Noofcomments.text = rcount
-//                        }
-                        
-                        self.label_edu_year.text = String(Data["doctor_exp"] as? Int ?? 0) + " Year"
-                        self.latitude = Data["clinic_lat"] as? Double ?? 0.0
-                        self.longitude = Data["clinic_long"] as? Double ?? 0.0
-                        self.setmarker(lat: self.latitude, long: self.longitude)
-                        self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
-                        self.label_clinicname.text = self.clinic_name
-                        
-                        //self.label_specdetails.text = specarray
-                        self.label_descrption.text = self.descri
-                        self.startTimer()
-                        self.stopAnimatingActivityIndicator()
-                    }else{
-                        self.stopAnimatingActivityIndicator()
-                        print("status code service denied")
-                    }
-                    break
-                case .failure(let Error):
-                    self.stopAnimatingActivityIndicator()
-                    print("Can't Connect to Server / TimeOut",Error)
-                    break
-                }
-            }
+                                                                    ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                self.clinicpic.removeAll()
+                                                                                let Data = res["Data"] as! NSDictionary
+                                                                                self._id = Data["_id"] as? String ?? ""
+                                                                                self.clinic_name = Data["clinic_name"] as? String ?? ""
+                                                                                Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
+                                                                                let clidet = Data["clinic_pic"] as! NSArray
+                                                                                let clicloc =  Data["clinic_loc"] as? String ?? ""
+                                                                                let amount =  Data["amount"] as? Int ?? 0
+                                                                                Servicefile.shared.pet_apoint_amount = amount
+                                                                                self.label_cont_amt.text = " INR " + String(Servicefile.shared.pet_apoint_amount)
+                                                                                self.label_city.text = clicloc + ". "
+                                                                                self.label_distance.text = Servicefile.shared.moredocd[Servicefile.shared.selectedindex].distance + " KM away"
+                                                                                for itm in 0..<clidet.count{
+                                                                                    let dat = clidet[itm] as! NSDictionary
+                                                                                    let pic = dat["clinic_pic"] as? String ?? Servicefile.sample_img
+                                                                                    self.clinicpic.append(pic)
+                                                                                }
+                                                                                let educ_details = Data["education_details"] as! NSArray
+                                                                                for itm in 0..<educ_details.count{
+                                                                                    let dat = educ_details[itm] as! NSDictionary
+                                                                                    let ed = dat["education"] as? String ?? ""
+                                                                                    if self.edu == "" {
+                                                                                        self.edu = ed  + self.edu
+                                                                                    }else{
+                                                                                        self.edu =  self.edu + ", " +  ed
+                                                                                    }
+                                                                                    
+                                                                                }
+                                                                                let fav = Data["fav"] as? Bool ?? false
+                                                                                if fav {
+                                                                                    self.image_fav.image = UIImage(named: imagelink.fav_true)
+                                                                                }else {
+                                                                                    self.image_fav.image = UIImage(named: imagelink.fav_false)
+                                                                                }
+                                                                                self.label_edu.text = self.edu
+                                                                                var specarray = ""
+                                                                                let spec =  Data["specialization"] as! NSArray
+                                                                                self.pet_spec.removeAll()
+                                                                                for itm in 0..<spec.count{
+                                                                                    let dat = spec[itm] as! NSDictionary
+                                                                                    let pic = dat["specialization"] as? String ?? ""
+                                                                                    self.pet_spec.append(pic)
+                                                                                    if itm == 0 {
+                                                                                        specarray =   pic
+                                                                                    }else{
+                                                                                        let val = specarray + ", "
+                                                                                        specarray = val + pic
+                                                                                    }
+                                                                                }
+                                                                                print("pet handle",self.pet_spec)
+                                                                                self.col_sepc_list.reloadData()
+                                                                                self.pet_handle.removeAll()
+                                                                                let pet_ha =  Data["pet_handled"] as! NSArray
+                                                                                for itm in 0..<pet_ha.count{
+                                                                                    let dat = pet_ha[itm] as! NSDictionary
+                                                                                    let pic = dat["pet_handled"] as? String ?? ""
+                                                                                    self.pet_handle.append(pic)
+                                                                                }
+                                                                                print("pet handle",self.pet_handle)
+                                                                                self.col_pet_handle.reloadData()
+                                                                                self.coll_imgview.reloadData()
+                                                                                self.descri = Data["descri"] as? String ?? ""
+                                                                                self.dr_name = Data["dr_name"] as? String ?? ""
+                                                                                self.dr_title = Data["dr_title"] as? String ?? ""
+                                                                                let strcount = Data["star_count"] as? Int ?? 0
+                                                                                let r_count =  Data["review_count"] as? Int ?? 0
+                                                                                self.star_count = String(strcount)
+                                                                                
+                                                                                let rcount = String(r_count)
+                                                                                if self.star_count == "" {
+                                                                                    self.ratingval.rating = 0.0
+                                                                                }else{
+                                                                                    self.ratingval.rating = Double(strcount)
+                                                                                }
+                                                                                //                        if rcount == "" {
+                                                                                //                            self.label_Noofcomments.text = "0"
+                                                                                //                        }else{
+                                                                                //                            self.label_Noofcomments.text = rcount
+                                                                                //                        }
+                                                                                
+                                                                                self.label_edu_year.text = String(Data["doctor_exp"] as? Int ?? 0) + " Year"
+                                                                                self.latitude = Data["clinic_lat"] as? Double ?? 0.0
+                                                                                self.longitude = Data["clinic_long"] as? Double ?? 0.0
+                                                                                self.setmarker(lat: self.latitude, long: self.longitude)
+                                                                                self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
+                                                                                self.label_clinicname.text = self.clinic_name
+                                                                                
+                                                                                //self.label_specdetails.text = specarray
+                                                                                self.label_descrption.text = self.descri
+                                                                                self.startTimer()
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                    }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
@@ -384,28 +384,28 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_fav, method: .post, parameters:
-            ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                switch (response.result) {
-                case .success:
-                    let res = response.value as! NSDictionary
-                    print("success data",res)
-                    let Code  = res["Code"] as! Int
-                    if Code == 200 {
-                        self.clinicpic.removeAll()
-                        
-                        self.calldocdetails()
-                        self.stopAnimatingActivityIndicator()
-                    }else{
-                        self.stopAnimatingActivityIndicator()
-                        print("status code service denied")
-                    }
-                    break
-                case .failure(let Error):
-                    self.stopAnimatingActivityIndicator()
-                    print("Can't Connect to Server / TimeOut",Error)
-                    break
-                }
-            }
+                                                                    ["doctor_id": Servicefile.shared.sear_Docapp_id,"user_id": Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                self.clinicpic.removeAll()
+                                                                                
+                                                                                self.calldocdetails()
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                    }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
@@ -468,35 +468,35 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     func callpetbreedbyid(petid: String){
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petbreedid, method: .post, parameters:
-            ["pet_type_id" : petid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
-                switch (response.result) {
-                case .success:
-                    let res = response.value as! NSDictionary
-                    print("success data",res)
-                    let Code  = res["Code"] as! Int
-                    if Code == 200 {
-                        let Pet_breed = res["Data"] as! NSArray
-                        self.Pet_breed.removeAll()
-                        for item in 0..<Pet_breed.count{
-                            let pb = Pet_breed[item] as! NSDictionary
-                            let pbv = pb["pet_breed"] as? String ?? ""
-                            if pbv != "" {
-                                self.Pet_breed.append(pbv)
-                            }
-                        }
-                        self.stopAnimatingActivityIndicator()
-                        self.stopAnimatingActivityIndicator()
-                    }else{
-                        self.stopAnimatingActivityIndicator()
-                        print("status code service denied")
-                    }
-                    break
-                case .failure(let Error):
-                    self.stopAnimatingActivityIndicator()
-                    print("Can't Connect to Server / TimeOut",Error)
-                    break
-                }
-            }
+                                                                    ["pet_type_id" : petid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                let Pet_breed = res["Data"] as! NSArray
+                                                                                self.Pet_breed.removeAll()
+                                                                                for item in 0..<Pet_breed.count{
+                                                                                    let pb = Pet_breed[item] as! NSDictionary
+                                                                                    let pbv = pb["pet_breed"] as? String ?? ""
+                                                                                    if pbv != "" {
+                                                                                        self.Pet_breed.append(pbv)
+                                                                                    }
+                                                                                }
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                            }else{
+                                                                                self.stopAnimatingActivityIndicator()
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            self.stopAnimatingActivityIndicator()
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                    }
         }else{
             self.stopAnimatingActivityIndicator()
             self.alert(Message: "No Intenet Please check and try again ")
@@ -517,5 +517,17 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         markerView.tintColor = UIColor.red
         marker.iconView = markerView
         GMS_mapView.camera =  GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
+    }
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
+        print("You tapped at")
+        print("did select",Servicefile.shared.lati,Servicefile.shared.long)
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)) {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "comgooglemaps://?saddr=&daddr=\(Servicefile.shared.lati),\(Servicefile.shared.long)&directionsmode=driving")! as URL)
+            
+        } else {
+            UIApplication.shared.openURL(NSURL(string:
+                                                "http://maps.apple.com/?daddr=\(Servicefile.shared.lati),\(Servicefile.shared.long)")! as URL)
+        }
     }
 }

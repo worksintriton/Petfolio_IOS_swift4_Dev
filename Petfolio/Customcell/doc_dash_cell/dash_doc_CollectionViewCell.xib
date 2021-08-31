@@ -185,11 +185,6 @@
             <point key="canvasLocation" x="227.536231884058" y="114.50892857142857"/>
         </collectionViewCell>
     </objects>
-    <designables>
-        <designable name="j3p-UD-QyD">
-            <size key="intrinsicContentSize" width="80" height="12"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="grey_paw" width="12" height="10"/>

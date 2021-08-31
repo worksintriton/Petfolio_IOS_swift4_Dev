@@ -233,7 +233,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="26"/>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.0" green="0.57647058819999997" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.15686274510000001" green="0.58823529409999997" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="Jbn-30-e6S" firstAttribute="top" secondItem="afV-ws-CHl" secondAttribute="top" constant="4" id="1UP-Q3-Ttk"/>
                                                     <constraint firstItem="eUB-BD-gSE" firstAttribute="top" secondItem="afV-ws-CHl" secondAttribute="top" id="2ur-Fd-LFS"/>
@@ -265,7 +265,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.90588235294117647" green="0.96078431372549022" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89019607840000003" green="0.97647058819999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="mkf-95-veL" firstAttribute="top" secondItem="OKg-e2-c2o" secondAttribute="top" constant="5" id="5dV-Jq-MCS"/>
                                     <constraint firstItem="tOp-FY-Gxt" firstAttribute="trailing" secondItem="mkf-95-veL" secondAttribute="trailing" id="7o9-xj-BK9"/>

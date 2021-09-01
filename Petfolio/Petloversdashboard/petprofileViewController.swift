@@ -118,7 +118,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petloverProfilepetlistCollectionViewCell
             cell.label_petname.text = Servicefile.shared.pet_petlist[indexPath.row].pet_name
             if Servicefile.shared.pet_petlist[indexPath.row].pet_img.count > 0 {
-                let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as! NSDictionary
+                let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as? NSDictionary ?? ["":""]
                 let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
                 if petimg == "" {
                     cell.imag_profile.image = UIImage(named: imagelink.sample)

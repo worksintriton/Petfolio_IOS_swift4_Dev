@@ -42,7 +42,7 @@ class searchpetappdetailViewController: UIViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! getpettypeCollectionViewCell
         cell.label_title.text = Servicefile.shared.pet_petlist[indexPath.row].pet_name
         if Servicefile.shared.pet_petlist[indexPath.row].pet_img.count > 0 {
-            let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as! NSDictionary
+            let petdic = Servicefile.shared.pet_petlist[indexPath.row].pet_img[0] as? NSDictionary ?? ["":""]
             let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
             if petimg == "" {
                 cell.image_data.image = UIImage(named: imagelink.sample)

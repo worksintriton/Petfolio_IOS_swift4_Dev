@@ -257,6 +257,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func action_book(_ sender: Any) {
+        print("search pet app ",Servicefile.shared.clinic_name,Servicefile.shared.dr_name)
         let vc = UIStoryboard.searchcalenderdetailsViewController()
         self.present(vc, animated: true, completion: nil)
     }
@@ -269,13 +270,14 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                         switch (response.result) {
                                                                         case .success:
                                                                             let res = response.value as! NSDictionary
-                                                                            print("success data",res)
+                                                                            print("272 doc details api success data",res)
                                                                             let Code  = res["Code"] as! Int
                                                                             if Code == 200 {
                                                                                 self.clinicpic.removeAll()
                                                                                 let Data = res["Data"] as! NSDictionary
                                                                                 self._id = Data["_id"] as? String ?? ""
                                                                                 self.clinic_name = Data["clinic_name"] as? String ?? ""
+                                                                                Servicefile.shared.clinic_name = self.clinic_name
                                                                                 Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
                                                                                 let clidet = Data["clinic_pic"] as! NSArray
                                                                                 let clicloc =  Data["clinic_loc"] as? String ?? ""
@@ -335,6 +337,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                                 self.coll_imgview.reloadData()
                                                                                 self.descri = Data["descri"] as? String ?? ""
                                                                                 self.dr_name = Data["dr_name"] as? String ?? ""
+                                                                                Servicefile.shared.dr_name = self.dr_name
                                                                                 self.dr_title = Data["dr_title"] as? String ?? ""
                                                                                 let strcount = Data["star_count"] as? Int ?? 0
                                                                                 let r_count =  Data["review_count"] as? Int ?? 0
@@ -358,7 +361,6 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                                 self.setmarker(lat: self.latitude, long: self.longitude)
                                                                                 self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
                                                                                 self.label_clinicname.text = self.clinic_name
-                                                                                
                                                                                 //self.label_specdetails.text = specarray
                                                                                 self.label_descrption.text = self.descri
                                                                                 self.startTimer()

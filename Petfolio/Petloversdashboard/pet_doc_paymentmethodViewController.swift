@@ -57,6 +57,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
     var couponcode = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_popupbook.view_cornor()
         self.view_makepay.view_cornor()
         self.view_popup.view_cornor()

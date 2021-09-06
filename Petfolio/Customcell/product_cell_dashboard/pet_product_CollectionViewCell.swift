@@ -20,5 +20,11 @@ class pet_product_CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label_price: UILabel!
     @IBOutlet weak var image_fav: UIImageView!
     @IBOutlet weak var view_shopbag: UIView!
+    @IBOutlet weak var image_shopping_bag: UIImageView!
+    @IBOutlet weak var label_offer: UILabel!
+    
+    @IBOutlet weak var label_off_percentage: UILabel!
+    
+    
     
 }

@@ -132,10 +132,9 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                         }
                     }
                 }
-            }else{
+            } else {
                 cell.imag_profile.image = UIImage(named: imagelink.sample)
             }
-            
             cell.imag_profile.view_cornor()
             if self.ismenu[indexPath.row] == "1"{
                cell.View_menu.isHidden = false

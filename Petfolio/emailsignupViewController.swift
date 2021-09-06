@@ -23,7 +23,7 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_main.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
+        //self.view_main.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         // self.callotpresend()
         self.textfield_otp.delegate = self
@@ -103,7 +103,7 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
-        print("user type",Servicefile.shared.user_type)
+        print("user type",Servicefile.shared.otp)
         if Servicefile.shared.otp != "0" {
             let otptxt = self.textfield_otp.text!
                    let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)

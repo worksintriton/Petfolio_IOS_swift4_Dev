@@ -43,6 +43,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.iswalkin = false
         self.inital_setup()
         Servicefile.shared.pet_appint_pay_method = ""
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -269,6 +270,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         Servicefile.shared.Doc_selected_app_list = Servicefile.shared.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
@@ -659,10 +661,15 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                        "appoinment_status" : "Missed",
                        "appoint_patient_st": "Doctor Cancelled appointment"]
         }
-        
+        var link = ""
+        if Servicefile.shared.iswalkin {
+            link =  Servicefile.Doc_walkin_complete_and_Missedapp
+        }else{
+            link =  Servicefile.Doc_complete_and_Missedapp
+        }
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_complete_and_Missedapp, method: .post, parameters: params
+        if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
             , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:

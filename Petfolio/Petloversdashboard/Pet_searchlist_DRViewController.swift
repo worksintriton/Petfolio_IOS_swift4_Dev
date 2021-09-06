@@ -232,6 +232,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                 cell.image_data.image = image
             }
         }
+        
         cell.image_data.view_cornor()
         cell.view_main.dropShadow()
         cell.view_main.view_cornor()

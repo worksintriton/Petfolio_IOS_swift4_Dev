@@ -48,7 +48,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_shadow.isHidden = true
         self.view_popup.isHidden = true
         self.label_nodata.text = "No new appointments"
-        
+        Servicefile.shared.iswalkin = false
         // Do any additional setup after loading the view.
     }
     
@@ -333,19 +333,17 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+     // if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
         Servicefile.shared.pet_selected_app_list = Servicefile.shared.appointtype
         Servicefile.shared.selectedindex = indexPath.row
         let vc = UIStoryboard.Pet_app_details_ViewController()
         self.present(vc, animated: true, completion: nil)
-        // }
+    // }
     }
     
     @IBAction func action_confrim(_ sender: Any) {
         //print("appointment Booked time",Servicefile.shared.pet_applist_do_sp[indextag].appointment_time)
-        
         self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[indextag]._id, type:  Servicefile.shared.pet_applist_do_sp[indextag].appointment_for)
-        
     }
     
     @IBAction func action_no(_ sender: Any) {
@@ -412,7 +410,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             self.view_current.layer.borderColor = appcolor.cgColor
             self.view_cancelled.layer.borderColor = appcolor.cgColor
             self.callcom()
-        }else if Servicefile.shared.appointtype == "New"{
+        } else if Servicefile.shared.appointtype == "New" {
             self.label_nodata.text = "No New appointments"
             let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.view_current.backgroundColor = appcolor

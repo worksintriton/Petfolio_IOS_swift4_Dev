@@ -3405,17 +3405,17 @@
                                                                                                 <constraint firstAttribute="width" constant="84" id="6BY-hd-l3K"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
-                                                                                            <color key="textColor" red="0.0" green="0.58823529409999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" red="0.15686274510000001" green="0.58823529409999997" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="LcH-dj-Otf">
                                                                                             <rect key="frame" x="92" y="3" width="207" height="16"/>
                                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
-                                                                                            <color key="textColor" red="0.0" green="0.58823529409999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" red="0.15686274510000001" green="0.58823529409999997" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                     </subviews>
-                                                                                    <color key="backgroundColor" red="0.95686274510000002" green="0.98039215690000003" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
                                                                                         <constraint firstItem="QrA-bq-ZGK" firstAttribute="leading" secondItem="fl4-sw-OXv" secondAttribute="leading" id="8mk-IF-qel"/>
                                                                                         <constraint firstItem="LcH-dj-Otf" firstAttribute="leading" secondItem="QrA-bq-ZGK" secondAttribute="trailing" constant="8" id="Mf9-9d-x5C"/>
@@ -3434,7 +3434,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" red="0.89019607840000003" green="0.97647058819999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstItem="JxQ-m8-AUC" firstAttribute="leading" secondItem="HTY-rU-omH" secondAttribute="trailing" constant="2" id="0KT-xO-MbW"/>
                                                                                 <constraint firstItem="HX8-8B-U4o" firstAttribute="height" secondItem="vx5-Gg-AMi" secondAttribute="height" id="0oK-nL-oF1"/>

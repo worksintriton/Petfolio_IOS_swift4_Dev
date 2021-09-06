@@ -94,7 +94,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 200
     }
     
     func callcheckcoupon(){

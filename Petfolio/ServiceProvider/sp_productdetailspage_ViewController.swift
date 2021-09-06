@@ -21,6 +21,7 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
     @IBOutlet weak var view_addtocart: UIView!
    
    
+    @IBOutlet weak var label_offer: UILabel!
     @IBOutlet weak var view_cart_main: UIView!
     @IBOutlet weak var view_select_count: UIView!
     @IBOutlet weak var coll_product_img: UICollectionView!
@@ -223,10 +224,24 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
                 return cell
             }else{
                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+                cell.image_shopping_bag.image = UIImage(named: "shopping-bag")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                cell.image_shopping_bag.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
                 cell.view_main.view_cornor()
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
-               cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
-                
+                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
+                     cell.label_off_percentage.text =  String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + "% off"
+                 }else{
+                     cell.label_off_percentage.text = ""
+                 }
+                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
+                     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                     attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                     cell.label_offer.attributedText = attributeString
+                 }else{
+                     cell.label_offer.text = ""
+                 }
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
                     cell.image_fav.image = UIImage(named: imagelink.favtrue)
                 }else{
@@ -254,6 +269,25 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
                }
                 cell.view_rating.rating = Double(Servicefile.shared.vendor_product_id_details[indexPath.row].product_rating)!
                 cell.label_vendor.text = self.product_cate
+                
+                cell.label_offer.text = ""
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price != 0 {
+                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                    attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                    cell.label_offer.attributedText = attributeString
+                }else{
+                    cell.label_offer.text = ""
+                }
+                
+                cell.label_off_percentage.text = ""
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
+                    cell.label_off_percentage.text = String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + " % off"
+                }else{
+                    cell.label_off_percentage.text = ""
+                }
+                
+                
+                
                return cell
             }
         }
@@ -298,11 +332,14 @@ extension sp_productdetailspage_ViewController {
                         self.label_categ.text =   self.product_cate
                         //self.product_cart_count = data["product_cart_count"] as! Int
                         self.product_discount = data["product_discount"] as? Int ?? 0
+                        let product_discount_price = data["product_discount_price"] as? Int ?? 0
                         if self.product_discount != 0 {
                             self.label_discount.text =  String(self.product_discount) + "% off"
                         }else{
                             self.view_off.isHidden = true
                         }
+                        self.label_offer.text = ""
+                        self.label_offer.attributedText = Servicefile.shared.convertdashlinestring(str: String(product_discount_price))
                         self.product_discription = data["product_discription"] as! String
                         self.product_fav = data["product_fav"] as? Bool ?? false
                         self.image_like.isHidden = false

@@ -57,14 +57,16 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
     var couponcode = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_popupbook.view_cornor()
         self.view_makepay.view_cornor()
         self.view_popup.view_cornor()
         self.view_appremove.view_cornor()
         self.view_textfield_coupon.view_cornor()
         self.intial_setup_action()
-        self.label_clinicname.text = Servicefile.shared.moredocd[Servicefile.shared.selectedindex].clinic_name
-        self.label_docname.text = Servicefile.shared.moredocd[Servicefile.shared.selectedindex].doctor_name
+        print("amount in payment page",Servicefile.shared.pet_apoint_amount)
+        self.label_clinicname.text = Servicefile.shared.clinic_name
+        self.label_docname.text = Servicefile.shared.dr_name
         self.label_app_type.text = Servicefile.shared.pet_apoint_appointment_types
         self.label_cost.text = "₹ " + String(Servicefile.shared.pet_apoint_amount)
         self.label_bookingdatetime.text = Servicefile.shared.pet_apoint_booking_date_time

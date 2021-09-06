@@ -11,8 +11,6 @@ import Alamofire
 
 class DemoViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    
-    
     @IBOutlet weak var Democollec: UICollectionView!
     @IBOutlet weak var ViewGetstart: UIView!
     

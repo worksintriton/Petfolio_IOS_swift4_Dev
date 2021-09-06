@@ -134,19 +134,19 @@ class orderlistdetailsViewController: UIViewController {
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         self._id = Data["_id"] as! String
-                        self.billing_address = Data["billing_address"] as! String
-                        self.billling_address_id = Data["billling_address_id"] as! String
-                        self.coupon_code = Data["coupon_code"] as! String
-                        self.date_of_booking = Data["date_of_booking"] as! String
-                        self.date_of_booking_display = Data["date_of_booking_display"] as! String
-                        self.delivery_date = Data["delivery_date"] as! String
-                        self.delivery_date_display = Data["delivery_date_display"] as! String
-                        self.discount_price = Data["discount_price"] as! Int
+                        self.billing_address = Data["billing_address"] as? String ?? ""
+                        self.billling_address_id = Data["billling_address_id"] as? String ?? ""
+                        self.coupon_code = Data["coupon_code"] as? String ?? ""
+                        self.date_of_booking = Data["date_of_booking"] as? String ?? ""
+                        self.date_of_booking_display = Data["date_of_booking_display"] as? String ?? ""
+                        self.delivery_date = Data["delivery_date"] as? String ?? ""
+                        self.delivery_date_display = Data["delivery_date_display"] as? String ?? ""
+                        self.discount_price = Data["discount_price"] as? Int ?? 0
                         self.grand_total = Data["grand_total"] as! Int
-                        self.order_id = Data["order_id"] as! String;
-                        self.order_status = Data["order_status"] as! String
+                        self.order_id = Data["order_id"] as? String ?? ""
+                        self.order_status = Data["order_status"] as? String ?? ""
                         self.over_all_total = Data["over_all_total"] as! Int
-                        self.payment_id = Data["payment_id"] as! String
+                        self.payment_id = Data["payment_id"] as? String ?? ""
                         self.prodcut_image = Data["prodcut_image"] as? String ?? Servicefile.sample_img
                         self.prodouct_total = Data["prodouct_total"] as! Int
                         self.product_name = Data["product_name"] as? String ?? ""
@@ -157,13 +157,13 @@ class orderlistdetailsViewController: UIViewController {
                         
                         self.shipping_charge = Data["shipping_charge"] as! Int
                         self.status = Data["status"] as! String
-                        self.user_cancell_date = Data["user_cancell_date"] as! String
-                        self.user_cancell_info = Data["user_cancell_info"] as! String
-                        self.vendor_accept_cancel = Data["vendor_accept_cancel"] as! String
-                        self.vendor_cancell_date = Data["vendor_cancell_date"] as! String
-                        self.vendor_cancell_info = Data["vendor_cancell_info"] as! String
-                        self.vendor_complete_date = Data["vendor_complete_date"] as! String
-                        self.vendor_complete_info = Data["vendor_complete_info"] as! String
+                        self.user_cancell_date = Data["user_cancell_date"] as? String ?? ""
+                        self.user_cancell_info = Data["user_cancell_info"] as? String ?? ""
+                        self.vendor_accept_cancel = Data["vendor_accept_cancel"] as? String ?? ""
+                        self.vendor_cancell_date = Data["vendor_cancell_date"] as? String ?? ""
+                        self.vendor_cancell_info = Data["vendor_cancell_info"] as? String ?? ""
+                        self.vendor_complete_date = Data["vendor_complete_date"] as? String ?? ""
+                        self.vendor_complete_info = Data["vendor_complete_info"] as? String ?? ""
                         let prodcut_track_details = Data["prodcut_track_details"] as! NSArray
                         self.product_title.text = self.product_name
                         self.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
@@ -176,6 +176,8 @@ class orderlistdetailsViewController: UIViewController {
                         }
                         self.image_product.contentMode = .scaleAspectFill
                         self.view_status.isHidden = false
+                        
+                       
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"

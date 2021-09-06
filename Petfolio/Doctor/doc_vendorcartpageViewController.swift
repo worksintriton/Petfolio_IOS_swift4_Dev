@@ -267,11 +267,19 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
             cell.label_offer.isHidden = true
         }
         cell.selectionStyle = .none
+//        let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
+//        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
+//        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+//        cell.label_product_amt.attributedText = attributeString
+//        cell.label_final_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
+//
         let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-        cell.label_product_amt.attributedText = attributeString
-        cell.label_final_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
+        cell.label_product_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
+        cell.label_final_amt.attributedText = attributeString
+        
+        
         if product_img.count > 0 {
             cell.img_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: product_img[0] as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in

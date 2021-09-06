@@ -142,6 +142,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                               }else{
                                 print("verification Not success")
                    }
+        }else{
+    self.alert(Message: "Please enter the valid OTP")
         }
     }
     

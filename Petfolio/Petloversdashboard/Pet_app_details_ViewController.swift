@@ -238,7 +238,12 @@ class Pet_app_details_ViewController: UIViewController {
     func callcompleteMissedappoitment(Appointmentid: String, appointmentstatus: String){
         var link = ""
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            link =  Servicefile.Doc_complete_and_Missedapp
+            //link =  Servicefile.Doc_complete_and_Missedapp
+            if Servicefile.shared.iswalkin {
+                link =  Servicefile.Doc_walkin_complete_and_Missedapp
+            }else{
+                link =  Servicefile.Doc_complete_and_Missedapp
+            }
         }else{
             link =  Servicefile.SP_complete_and_Missedapp
         }
@@ -284,13 +289,16 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
    
-    
     func call_getdetails(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         var urllink = ""
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            urllink = Servicefile.Doc_fetch_appointment_id
+            if Servicefile.shared.iswalkin {
+                urllink = Servicefile.Doc_fetch_walkin__appointment_id
+            }else{
+                urllink = Servicefile.Doc_fetch_appointment_id
+            }
         }else{
             urllink = Servicefile.SP_fetch_appointment_id
         }
@@ -336,10 +344,10 @@ class Pet_app_details_ViewController: UIViewController {
                             }else{
                                 self.view_confrence.isHidden = true
                             }
-                            self.label_order_id.text = data["payment_id"] as? String ?? ""
+                            self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                             self.label_payment_method.text = data["payment_method"] as? String ?? ""
-                            self.label_ordercost.text = data["amount"] as? String ?? ""
-                            
+                            let amt_val =  data["amount"] as? String ?? ""
+                            self.label_ordercost.text = "₹ " + amt_val
                             let pet_id = data["pet_id"] as! NSDictionary
                             let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
                             if Int(truncating: pet_id["vaccinated"] as? NSNumber ?? 0) == 1 {
@@ -358,6 +366,7 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_petname_details.text =  pet_id["pet_name"] as? String ?? ""
                             
                             self.view_reshedule.isHidden = true
+                            
                             let appointment_types = data["appointment_types"] as? String ?? ""
                             if appointment_types == "Emergency" {
                                 self.image_emergency.isHidden = false
@@ -365,24 +374,37 @@ class Pet_app_details_ViewController: UIViewController {
                                 self.image_emergency.isHidden = true
                             }
                             let visit_type = data["visit_type"] as? String ?? ""
-                            
-                            if visit_type == "Home"  {
-                                self.label_visittype.text =  visit_type
-                                self.view_home_address.isHidden = false
-                                self.view_data_home_address.isHidden = false
-                                let visit_type_data = res["Address"] as! NSDictionary
-                                 let location = visit_type_data["location_address"] as? String ?? ""
-                                self.label_home_address_details.text = location
+                            if visit_type != "" {
+                                if visit_type == "Home"  {
+                                    self.label_visittype.text =  visit_type
+                                    self.view_home_address.isHidden = false
+                                    self.view_data_home_address.isHidden = false
+                                    let visit_type_data = res["Address"] as! NSDictionary
+                                     let location = visit_type_data["location_address"] as? String ?? ""
+                                    self.label_home_address_details.text = location
+                                }else{
+                                    self.label_visittype.text =  visit_type
+                                    self.view_home_address.isHidden = true
+                                    self.view_data_home_address.isHidden = true
+                                }
                             }else{
                                 self.label_visittype.text =  "Online"
                                 self.view_home_address.isHidden = true
                                 self.view_data_home_address.isHidden = true
                             }
+                            
+                            
+                            
                             let appoinment_status = data["appoinment_status"] as? String ?? ""
                             if appoinment_status == "Incomplete" {
                                 let reshedule_status = data["reshedule_status"] as? String ?? ""
                                 if reshedule_status == "" {
-                                    self.view_reshedule.isHidden = false
+                                    if Servicefile.shared.iswalkin {
+                                        self.view_reshedule.isHidden = true
+                                    }else{
+                                        self.view_reshedule.isHidden = false
+                                    }
+                                    
                                 }else{
                                     self.view_reshedule.isHidden = true
                                 }
@@ -480,7 +502,8 @@ class Pet_app_details_ViewController: UIViewController {
                             self.view_confrence.isHidden = true
                             self.label_order_id.text = data["payment_id"] as? String ?? ""
                             self.label_payment_method.text = data["payment_method"] as? String ?? ""
-                            self.label_ordercost.text = data["service_amount"] as? String ?? ""
+                            let amount_val = data["service_amount"] as? String ?? ""
+                            self.label_ordercost.text = "₹ " + amount_val
                             
                             let pet_id = data["pet_id"] as! NSDictionary
                             let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
@@ -517,13 +540,14 @@ class Pet_app_details_ViewController: UIViewController {
                             let firstname = user_id["first_name"] as? String ?? ""
                             let lastname = user_id["last_name"] as? String ?? ""
                             let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
-                            self.label_holder_name.text = firstname + " " + lastname
+                           
                             self.label_Holder_service_name.isHidden = false
                             self.label_Holder_service_name.text = data["service_name"] as? String ?? ""
                             let amt = data["service_amount"] as? String ?? ""
                             let sp_business_info = data["sp_business_info"] as! NSArray
                             let sp_business = sp_business_info[0] as! NSDictionary
                             let sp_loc  = sp_business["sp_loc"] as? String ?? ""
+                            self.label_holder_name.text = sp_business["bussiness_name"] as? String ?? ""
                             self.label_Holder_cost.text = "₹ " + amt
                             self.label_address_details.text = sp_loc
                             if userimage == "" {

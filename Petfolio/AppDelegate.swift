@@ -260,11 +260,19 @@ var window: UIWindow?
                     if Servicefile.shared.user_type == "1" && usertype == "1"{
                         if appintments != "" {
                             print("i am in appointment page ",appintments)
-                            Servicefile.shared.appointtype = appintments
-                            let vc = UIStoryboard.Pet_applist_ViewController()
-                            let navigationController = UINavigationController.init(rootViewController: vc)
-                            self.window?.rootViewController = navigationController
-                            self.window?.makeKeyAndVisible()
+                            if appintments != "Walkin" {
+                                Servicefile.shared.appointtype = appintments
+                                let vc = UIStoryboard.Pet_applist_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else{
+                                Servicefile.shared.appointtype = "New"
+                                let vc = UIStoryboard.pet_app_walkin_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
                         }else if orders != "" {
                             print("i am in order page ")
                             Servicefile.shared.ordertype = orders
@@ -282,11 +290,20 @@ var window: UIWindow?
                     } else if Servicefile.shared.user_type == "4" && usertype == "4" {
                         if appintments != "" {
                             print("i am in appointment page ",usertype)
-                            Servicefile.shared.appointtype = appintments
-                            let vc = UIStoryboard.DocdashboardViewController()
-                            let navigationController = UINavigationController.init(rootViewController: vc)
-                            self.window?.rootViewController = navigationController
-                            self.window?.makeKeyAndVisible()
+                            
+                            if appintments != "Walkin" {
+                                Servicefile.shared.appointtype = appintments
+                                let vc = UIStoryboard.DocdashboardViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }else{
+                                Servicefile.shared.appointtype = "New"
+                                let vc = UIStoryboard.doc_app_walkin_ViewController()
+                                let navigationController = UINavigationController.init(rootViewController: vc)
+                                self.window?.rootViewController = navigationController
+                                self.window?.makeKeyAndVisible()
+                            }
                         }else if orders != "" {
                             print("i am in order page ",usertype)
                             Servicefile.shared.ordertype = orders

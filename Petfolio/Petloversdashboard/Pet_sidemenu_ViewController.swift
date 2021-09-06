@@ -29,11 +29,11 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         super.viewDidLoad()
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","Discount","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Notifications","SOS", "Logout"]
-            self.imgmenu = ["Like","Doc","Calendar","Discount","Bell","SOS", "Exit"]
+            self.labelmenu = ["Favorites","My Orders","My Appointment","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
+            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit"]
         }
         
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -69,6 +69,9 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         
         if self.labelmenu[indexPath.row] == "My Appointment"{
             let vc = UIStoryboard.Pet_applist_ViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Walk-in Appointments"{
+            let vc = UIStoryboard.pet_app_walkin_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders"{
             let vc = UIStoryboard.Petlover_myorder_ViewController()

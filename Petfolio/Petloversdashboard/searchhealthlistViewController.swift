@@ -64,6 +64,7 @@ class searchhealthlistViewController: UIViewController, UICollectionViewDelegate
         let data = self.healthissue[indexPath.row] as? NSDictionary  ?? ["":""]
         let dataval = data["health_issue_title"] as? String ?? ""
         Servicefile.shared.healthissue = dataval
+        print("search healthlist  app ",Servicefile.shared.clinic_name,Servicefile.shared.dr_name)
         let vc = UIStoryboard.searchpetloverappointmentViewController()
         self.present(vc, animated: true, completion: nil)
     }

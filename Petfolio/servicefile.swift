@@ -77,7 +77,7 @@ class colorpickert{
     static let footer_blue = "#408DCC"
     static let footer_gray = "#aaa"
     static let orange_color = "#E8571E"
-    
+    static let appTextcolor = "#2896c2"
 }
 
 class Appalert{
@@ -140,6 +140,10 @@ class Servicefile {
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
     static let docdashboardmissapp = baseurl + "/api/appointments/mobile/doc_getlist/missapp"
     
+    static let doc_walkin_dashboardnewapp = baseurl + "/api/walkin_appointment/mobile/doc_getlist/newapp"
+    static let doc_walkin_dashboardcomapp = baseurl + "/api/walkin_appointment/mobile/doc_getlist/comapp"
+    static let doc_walkin_dashboardmissapp = baseurl + "/api/walkin_appointment/mobile/doc_getlist/missapp"
+    
     static let SPdashboardnewapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/newapp"
     static let SPdashboardcomapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/comapp"
     static let SPdashboardmissapp = baseurl + "/api/sp_appointments/mobile/sp_getlist/missapp"
@@ -181,12 +185,25 @@ class Servicefile {
     static let plove_getlist_newapp = baseurl + "/api/appointments/mobile/plove_getlist/newapp1"
     static let plove_getlist_missapp = baseurl + "/api/appointments/mobile/plove_getlist/missapp1"
     static let plove_getlist_comapp = baseurl + "/api/appointments/mobile/plove_getlist/comapp1"
+    
+    static let plove_walkin_getlist_newapp = baseurl + "/api/walkin_appointment/mobile/plove_getlist/newapp1"
+    static let plove_walkin_getlist_missapp = baseurl + "/api/walkin_appointment/mobile/plove_getlist/missapp1"
+    static let plove_walkin_getlist_comapp = baseurl + "/api/walkin_appointment/mobile/plove_getlist/comapp1"
+    
     static let Doc_complete_and_Missedapp = baseurl + "/api/appointments/edit"
+    
+    static let Doc_walkin_complete_and_Missedapp = baseurl + "/api/walkin_appointment/edit"
+    
     static let Doc_setcash = baseurl + "/api/appointments/mobile/doctor/app_edit"
     static let SP_complete_and_Missedapp = baseurl + "/api/sp_appointments/edit"
     static let Doc_Dashboard_checkstatus = baseurl + "/api/doctordetails/check_status"
+   
     static let Doc_prescription_create = baseurl + "/api/prescription/create"
     static let view_prescription_create = baseurl + "/api/prescription/fetch_by_appointment_id"
+    
+    static let Doc_walkin_prescription_create = baseurl + "/api/prescription/walkin/create"
+    static let view_walkin_prescription_create = baseurl + "/api/prescription/walkin/fetch_by_appointment_id"
+    
     static let pet_getAddresslist = baseurl + "/api/locationdetails/mobile/getlist_id"
     static let pet_updateaddress =  baseurl + "/api/locationdetails/edit"
     static let pet_defaultaddress =  baseurl + "/api/locationdetails/default/edit"
@@ -216,12 +233,16 @@ class Servicefile {
     
     
     static let Doc_fetch_appointment_id = baseurl + "/api/appointments/mobile/fetch_appointment_id"
+    static let Doc_fetch_walkin__appointment_id = baseurl + "/api/walkin_appointment/mobile/fetch_appointment_id"
     static let SP_fetch_appointment_id = baseurl + "/api/sp_appointments/mobile/fetch_appointment_id"
     
     static let notification = baseurl + "/api/notification/mobile/getlist_id"
     static let readnotification = baseurl + "/api/notification/mark_readed"
     
     static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
+    //static let pet_doc_notification = baseurl + "/api/notification/mobile/alert/notification"
+    
+    
      static let pet_sp_notification = baseurl + "/api/notification/mobile/alert/sp_notification"
     static let pet_doc_coupon = baseurl + "/api/coupon_code/check_coupon"
     
@@ -362,6 +383,7 @@ class Servicefile {
     var selectedindex = 0
     var vselectedindex = 0
     var pet_shop_search = ""
+    var iswalkin = false
     // userdetails
     var DemoData = [demodat]()
     var UtypeData = [Utype]()
@@ -1178,7 +1200,8 @@ struct Petnewdashproduct{
     var products_img : String
     var review_count : Int
     var thumbnail_image : String
-    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int, cat_name: String, Ithumbnail_image : String) {
+    var product_discount_price : Int
+    init(UID : String, product_fav_status: Bool, product_offer_status: Bool, product_offer_value: Int, product_prices: Int, product_rate: String, product_title: String, products_img: String, review_count: Int, cat_name: String, Ithumbnail_image : String, Iproduct_discount_price: Int) {
         self._id = UID
         self.product_fav_status = product_fav_status
         self.product_offer_status = product_offer_status
@@ -1190,6 +1213,7 @@ struct Petnewdashproduct{
         self.review_count = review_count
         self.cat_names = cat_name
         self.thumbnail_image = Ithumbnail_image
+        self.product_discount_price = Iproduct_discount_price
 
     }
 }

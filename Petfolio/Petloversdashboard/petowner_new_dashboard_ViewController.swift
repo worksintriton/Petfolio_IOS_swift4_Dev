@@ -352,6 +352,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else if self.col_vet == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! dash_doc_CollectionViewCell
+            cell.image_paw.image = UIImage(named: "paw1")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            cell.image_paw.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
             cell.image_vet.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_vet.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petdoc[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                 if (error != nil) {
@@ -383,6 +385,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+            cell.image_shopping_bag.image = UIImage(named: "shopping-bag")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            cell.image_shopping_bag.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
             cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url:  Servicefile.shared.petnewprod[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                 if (error != nil) {
@@ -398,6 +402,38 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             }
             cell.image_product.layer.cornerRadius = 8.0
             cell.view_main.dropShadow()
+            if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.label_offer.attributedText = attributeString
+            }else{
+                cell.label_offer.text = ""
+            }
+            
+            cell.label_off_percentage.text = ""
+            if Servicefile.shared.petnewprod[indexPath.row].product_offer_value > 0 {
+                cell.label_off_percentage.text = String(Servicefile.shared.petnewprod[indexPath.row].product_offer_value) + " % off"
+            }else{
+                cell.label_off_percentage.text = ""
+            }
+            /*
+             
+             if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
+                 cell.label_off_percentage.text =  String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + "% off"
+             }else{
+                 cell.label_off_percentage.text = ""
+             }
+             if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
+                 let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                 cell.label_offer.attributedText = attributeString
+             }else{
+                 cell.label_offer.text = ""
+             }
+             
+             */
+            
+            
             cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
             cell.label_vendor.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
             cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
@@ -679,8 +715,10 @@ extension petloverDashboardViewController {
                             let review_count = Bval["product_review"] as? Int ?? 0
                             let product_title = Bval["product_title"] as? String ?? ""
                             let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
+                            let product_discount_price = Bval["product_discount_price"] as? Int ?? 0
 //                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
-                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image))
+                            
+                            Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                            
                         }
                         Servicefile.shared.Petpuppylove.removeAll()

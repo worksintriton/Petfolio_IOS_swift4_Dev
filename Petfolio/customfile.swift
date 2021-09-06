@@ -404,6 +404,11 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "DocdashboardViewController") as! DocdashboardViewController
     }
     
+    static func doc_app_walkin_ViewController() -> doc_app_walkin_ViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "doc_app_walkin_ViewController") as! doc_app_walkin_ViewController
+    }
+    
     static func diagnosiViewController() -> diagnosiViewController {
         let homeStoryboard = UIStoryboard.mainStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "diagnosiViewController") as! diagnosiViewController
@@ -701,6 +706,11 @@ extension UIStoryboard {
     static func Pet_applist_ViewController() -> Pet_applist_ViewController {
         let homeStoryboard = UIStoryboard.petDocappStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
+    }
+    
+    static func pet_app_walkin_ViewController() -> pet_app_walkin_ViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_app_walkin_ViewController") as! pet_app_walkin_ViewController
     }
     
     static func pet_doc_paymentmethodViewController() -> pet_doc_paymentmethodViewController {

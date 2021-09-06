@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.view_details.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
+        //self.view_details.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.ViewOTPBTN.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         Servicefile.shared.checkemailvalid = "login"
@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.View_usercred.view_cornor()
         self.ViewOTPBTN.dropShadow()
         self.View_usercred.dropShadow()
+        self.usercred.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appTextcolor)
         self.usercred.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.usercred.delegate = self
         // Do any additional setup after loading the view.

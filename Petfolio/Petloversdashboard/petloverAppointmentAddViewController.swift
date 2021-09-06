@@ -204,10 +204,10 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         if Servicefile.shared.pet_apoint_visit_type == "" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home Visit" {
             self.image_home.image = UIImage(named: "selectedRadio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic Visit" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "selectedRadio")
         }
@@ -234,10 +234,10 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         if Servicefile.shared.pet_apoint_visit_type == "" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home Visit" {
             self.image_home.image = UIImage(named: "selectedRadio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic Visit" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "selectedRadio")
         }
@@ -261,7 +261,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     
     
      @IBAction func action_Home(_ sender: Any) {
-         Servicefile.shared.pet_apoint_visit_type = "Home"
+         Servicefile.shared.pet_apoint_visit_type = "Home Visit"
          self.checkcommtype()
         let vc = UIStoryboard.pet_app_select_address_ViewController()
         self.present(vc, animated: true, completion: nil)
@@ -270,7 +270,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
      
      
      @IBAction func action_clinic(_ sender: Any) {
-         Servicefile.shared.pet_apoint_visit_type = "Clinic"
+         Servicefile.shared.pet_apoint_visit_type = "Clinic Visit"
          self.checkcommtype()
      }
      
@@ -651,7 +651,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         tformat.dateFormat = "hh:mm a"
         var booking_date = format.string(from: date)
         var booking_time = tformat.string(from: date)
-        print("selected index",Servicefile.shared.selectedindex)
+        //print("selected index",Servicefile.shared.selectedindex)
         //Servicefile.shared.pet_apoint_doctor_id = Servicefile.shared.petdoc[Servicefile.shared.selectedindex]._id
         Servicefile.shared.pet_apoint_booking_date_time = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
         Servicefile.shared.pet_apoint_video_id = ""

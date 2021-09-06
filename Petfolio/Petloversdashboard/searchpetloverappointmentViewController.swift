@@ -70,6 +70,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         Servicefile.shared.petlistimg = [Any]()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
@@ -257,10 +258,10 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         if Servicefile.shared.pet_apoint_visit_type == "" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home Visit" {
             self.image_home.image = UIImage(named: "selectedRadio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic Visit" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "selectedRadio")
         }
@@ -287,10 +288,10 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         if Servicefile.shared.pet_apoint_visit_type == "" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Home" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Home Visit" {
             self.image_home.image = UIImage(named: "selectedRadio")
             self.image_clinic.image = UIImage(named: "Radio")
-        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic" {
+        }else if Servicefile.shared.pet_apoint_visit_type == "Clinic Visit" {
             self.image_home.image = UIImage(named: "Radio")
             self.image_clinic.image = UIImage(named: "selectedRadio")
         }
@@ -310,18 +311,15 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.checkcommtype()
     }
     
-    
      @IBAction func action_Home(_ sender: Any) {
-         Servicefile.shared.pet_apoint_visit_type = "Home"
+         Servicefile.shared.pet_apoint_visit_type = "Home Visit"
          self.checkcommtype()
         let vc = UIStoryboard.pet_app_select_address_ViewController()
         self.present(vc, animated: true, completion: nil)
-        
      }
      
-     
      @IBAction func action_clinic(_ sender: Any) {
-         Servicefile.shared.pet_apoint_visit_type = "Clinic"
+         Servicefile.shared.pet_apoint_visit_type = "Clinic Visit"
          self.checkcommtype()
      }
      
@@ -662,6 +660,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             print("old pet ",Servicefile.shared.pet_apoint_pet_id)
             Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
             //self.showPaymentForm()
+            print("663 search pet lover appointment app",Servicefile.shared.clinic_name,Servicefile.shared.dr_name)
             let vc = UIStoryboard.pet_doc_search_payoptionViewController()
             self.present(vc, animated: true, completion: nil)
             

@@ -82,10 +82,16 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
   
     
     func callpescription(){
-    print("data in prescription")
+        var url = ""
+        if Servicefile.shared.iswalkin {
+            url = Servicefile.view_walkin_prescription_create
+        }else{
+            url = Servicefile.view_prescription_create
+        }
+    print("data in prescription Servicefile.shared.iswalkin",Servicefile.shared.iswalkin,url)
              Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
-      if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.view_prescription_create, method: .post, parameters: [
+      if Servicefile.shared.updateUserInterface() { AF.request(url, method: .post, parameters: [
         "Appointment_ID": Servicefile.shared.pet_apoint_id]
            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                 switch (response.result) {

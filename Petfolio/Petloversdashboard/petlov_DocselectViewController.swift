@@ -310,6 +310,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         let Data = res["Data"] as! NSDictionary
                         self._id = Data["_id"] as? String ?? ""
                         self.clinic_name = Data["clinic_name"] as? String ?? ""
+                        Servicefile.shared.clinic_name = self.clinic_name
                         Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
                          let clidet = Data["clinic_pic"] as! NSArray
                         
@@ -393,7 +394,6 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.setmarker(lat: self.latitude, long: self.longitude)
                         self.label_clinicdetails.text = self.dr_title + " " + self.dr_name
                         self.label_clinicname.text = self.clinic_name
-                        Servicefile.shared.clinic_name = self.clinic_name
                         self.label_specdetails.text = specarray
                         self.label_descrption.text = self.descri
                         self.startTimer()

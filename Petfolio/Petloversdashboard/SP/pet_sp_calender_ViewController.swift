@@ -92,7 +92,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_app_selectdoctordateCollectionViewCell
         cell.label_time.text = self.listtime[indexPath.row]
-        
+        print("sp calender",self.listtime[indexPath.row],self.bookstatus[indexPath.row])
         if self.bookstatus[indexPath.row] == "1" {
             if self.seltime[indexPath.row] == "1"{
                 cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
@@ -185,6 +185,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                         if Code == 200 {
                             let Data = res["Data"] as! NSArray
                             for itm in 0..<Data.count{
+                                self.bookstatus.removeAll()
                                 self.listtime.removeAll()
                                 self.seltime.removeAll()
                                 let datadic = Data[itm] as! NSDictionary
@@ -194,6 +195,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                     let timval = timitmdic["time"]  as? NSString ?? ""
                                     self.listtime.append(timval as String)
                                     let bookstatus = timitmdic["book_status"]  as? Bool ?? false
+                                    print("book status",bookstatus)
                                     if bookstatus ==  true {
                                         self.bookstatus.append("1")
                                     }else{

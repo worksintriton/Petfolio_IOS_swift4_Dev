@@ -19,6 +19,15 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     
     var labelmenu = [""]
     var imgmenu = [""]
+    /*if Servicefile.shared.my_ref_code != "" {
+     self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+     self.tbl_menulist.reloadData()
+ }else{
+     self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout"]
+     self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit"]
+     self.tbl_menulist.reloadData()
+ }*/
 //  self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
 //    self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
     override func viewDidLoad() {
@@ -27,12 +36,12 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout"]
-            self.imgmenu = ["Calendar","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit"]
+            self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Notifications", "Logout"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -74,6 +83,9 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Appointment" {
             let vc = UIStoryboard.DocdashboardViewController()
+            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "Walk-in Appointments" {
+            let vc = UIStoryboard.doc_app_walkin_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
             let vc = UIStoryboard.doc_myorderdetails_ViewController()

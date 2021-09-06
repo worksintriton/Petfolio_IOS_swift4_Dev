@@ -70,6 +70,7 @@ class searchpetappdetailViewController: UIViewController, UICollectionViewDelega
         Servicefile.shared.petlistimg = Servicefile.shared.pet_petlist[indexPath.row].pet_img
         Servicefile.shared.pet_type_val = Servicefile.shared.pet_petlist[indexPath.row].pet_type
         Servicefile.shared.Pet_breed_val = Servicefile.shared.pet_petlist[indexPath.row].pet_breed
+        print("search pet app ",Servicefile.shared.clinic_name,Servicefile.shared.dr_name)
         let vc = UIStoryboard.searchhealthlistViewController()
         self.present(vc, animated: true, completion: nil)
     }

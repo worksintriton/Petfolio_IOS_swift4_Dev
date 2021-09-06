@@ -385,11 +385,11 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                         }
                         
                         self.view_status.isHidden = false
-                        self.label_orderdate.text = self.date_of_booking
+                        self.label_orderdate.text = Servicefile.shared.date_of_booking
                         self.label_id.text = Servicefile.shared.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹ " + String(self.product_price)
-                        self.label_quality.text =  String(self.product_quantity)
+                        self.label_ordertotal.text = "₹ " + String(Servicefile.shared.product_price)
+                        self.label_quality.text =  String(Servicefile.shared.product_quantity)
                         //Servicefile.shared.orderid = Servicefile.shared.order_id
                         self.image_status.image = UIImage(named: "success")
                         if Servicefile.shared.ordertype == "Completed" {

@@ -20,6 +20,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var view_addtocart: UIView!
    
    
+    @IBOutlet weak var view_footer: petowner_footerview!
     @IBOutlet weak var view_cart_main: UIView!
     @IBOutlet weak var view_select_count: UIView!
     @IBOutlet weak var coll_product_img: UICollectionView!
@@ -36,6 +37,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var label_cartcount: UILabel!
     @IBOutlet weak var label_addtocart: UILabel!
     
+    @IBOutlet weak var label_off: UILabel!
     @IBOutlet weak var label_categ: UILabel!
     @IBOutlet weak var view_back: UIView!
     @IBOutlet weak var View_outofstock: UIView!
@@ -63,6 +65,7 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initalsetup()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
         
@@ -86,6 +89,18 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
         self.coll_productlist.delegate = self
         self.coll_productlist.dataSource = self
         self.startTimer()
+    }
+    
+    func initalsetup(){
+        // footer action
+            self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.button2), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
+            //self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+            
+            self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
+        // footer action
     }
     
   
@@ -261,10 +276,23 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 return cell
             }else{
                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
+                cell.image_shopping_bag.image = UIImage(named: "shopping-bag")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                cell.image_shopping_bag.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
                 cell.view_main.view_cornor()
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
-                
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
+                    cell.label_off_percentage.text =  String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + "% off"
+                }else{
+                    cell.label_off_percentage.text = ""
+                }
+                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
+                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                    attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                    cell.label_offer.attributedText = attributeString
+                }else{
+                    cell.label_offer.text = ""
+                }
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
                     cell.image_fav.image = UIImage(named: imagelink.fav_true)
                 }else{
@@ -277,10 +305,9 @@ class productdetailsViewController: UIViewController, UICollectionViewDelegate, 
                 }else{
                     cell.image_fav.image = UIImage(named: imagelink.fav_false)
                 }
-                
                 if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].thumbnail_image) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
+                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                        if (error != nil) {
                            cell.image_product.image = UIImage(named: imagelink.sample)
                        } else {
@@ -339,6 +366,9 @@ extension productdetailsViewController {
                         self.label_categ.text =   self.product_cate
                         //self.product_cart_count = data["product_cart_count"] as! Int
                         self.product_discount = data["product_discount"] as? Int ?? 0
+                        let product_discount_price = data["product_discount_price"] as? Int ?? 0
+                        self.label_off.text = ""
+                        self.label_off.attributedText = Servicefile.shared.convertdashlinestring(str: String(product_discount_price))
                         if self.product_discount != 0 {
                             self.label_discount.text =  String(self.product_discount) + "% off"
                         }else{

@@ -200,6 +200,8 @@
 		84DDDEDD26AA98E20073473F /* addingprodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DDDEDB26AA98E20073473F /* addingprodCollectionViewCell.xib */; };
 		84DDDEE426AA99050073473F /* showprodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDDEE226AA99050073473F /* showprodCollectionViewCell.swift */; };
 		84DDDEE526AA99050073473F /* showprodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DDDEE326AA99050073473F /* showprodCollectionViewCell.xib */; };
+		84DDE2AF26DF43B400C9A749 /* pet_app_walkin_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDE2AE26DF43B400C9A749 /* pet_app_walkin_ViewController.swift */; };
+		84DDE2B326DF491600C9A749 /* doc_app_walkin_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDE2B226DF491600C9A749 /* doc_app_walkin_ViewController.swift */; };
 		84DE6E2026568C0F00B05196 /* vendor_header.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DE6E1F26568C0F00B05196 /* vendor_header.xib */; };
 		84DE6E2426568CBE00B05196 /* vendor_header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE6E2326568CBE00B05196 /* vendor_header.swift */; };
 		84E11996263ADC3E004981B7 /* catwalk2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84E11994263ADC3C004981B7 /* catwalk2.gif */; };
@@ -592,6 +594,8 @@
 		84DDDEDB26AA98E20073473F /* addingprodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addingprodCollectionViewCell.xib; sourceTree = "<group>"; };
 		84DDDEE226AA99050073473F /* showprodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showprodCollectionViewCell.swift; sourceTree = "<group>"; };
 		84DDDEE326AA99050073473F /* showprodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = showprodCollectionViewCell.xib; sourceTree = "<group>"; };
+		84DDE2AE26DF43B400C9A749 /* pet_app_walkin_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_app_walkin_ViewController.swift; sourceTree = "<group>"; };
+		84DDE2B226DF491600C9A749 /* doc_app_walkin_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doc_app_walkin_ViewController.swift; sourceTree = "<group>"; };
 		84DE6E1F26568C0F00B05196 /* vendor_header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vendor_header.xib; sourceTree = "<group>"; };
 		84DE6E2326568CBE00B05196 /* vendor_header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vendor_header.swift; sourceTree = "<group>"; };
 		84E11994263ADC3C004981B7 /* catwalk2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = catwalk2.gif; sourceTree = "<group>"; };
@@ -1421,6 +1425,7 @@
 				84BB273C265FB31C00F92404 /* doc_preview_prescription_ViewController.swift */,
 				846964A3269ECD2E006F773A /* diagnosiViewController.swift */,
 				846964A7269ECD4F006F773A /* subdiagnosisViewController.swift */,
+				84DDE2B226DF491600C9A749 /* doc_app_walkin_ViewController.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -1573,6 +1578,7 @@
 				84C7A28A26CE70B9007B3FA5 /* pet_doc_paymentmethodViewController.swift */,
 				84B8518F26CFDA2B005B9E00 /* App_couponViewController.swift */,
 				845EEBE426CFF36F00D07359 /* mycouponViewController.swift */,
+				84DDE2AE26DF43B400C9A749 /* pet_app_walkin_ViewController.swift */,
 			);
 			path = Petloversdashboard;
 			sourceTree = "<group>";
@@ -2161,6 +2167,7 @@
 				B0751616256E4952002DAA20 /* petdoccalenderViewController.swift in Sources */,
 				84C6A3A7264FA97C00DBE200 /* product_fav_cell_CollectionViewCell.swift in Sources */,
 				8479DF0F268B530D0009EBD7 /* docnewTableViewCell.swift in Sources */,
+				84DDE2B326DF491600C9A749 /* doc_app_walkin_ViewController.swift in Sources */,
 				8402B9F4264A9D3C009DDFC0 /* doc_shop_dashboardViewController.swift in Sources */,
 				845C10B82601C5630003A038 /* vendor_complete_TableViewCell.swift in Sources */,
 				B02AA43B259E03CE00A94990 /* profile_edit_ViewController.swift in Sources */,
@@ -2252,6 +2259,7 @@
 				B07516182570CA7C002DAA20 /* petloverAppointmentAddViewController.swift in Sources */,
 				8457F12B2609B63A005B66DD /* pet_order_reject_ViewController.swift in Sources */,
 				8463DB04267E04B200DC06E2 /* getpetViewController.swift in Sources */,
+				84DDE2AF26DF43B400C9A749 /* pet_app_walkin_ViewController.swift in Sources */,
 				8432F5DA268461020056926C /* pethealthissueViewController.swift in Sources */,
 				8445A66B26A15A7100D8B045 /* listvalTableViewCell.swift in Sources */,
 				84DDDE3126AA82790073473F /* AddproductViewController.swift in Sources */,
@@ -2524,7 +2532,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2556,7 +2564,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -76,6 +76,23 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
                 cell.image_product.image = image
             }
             }
+            
+            cell.label_orginalprice.text = ""
+            if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.label_orginalprice.attributedText = attributeString
+            }else{
+                cell.label_orginalprice.text = ""
+            }
+            
+            cell.label_offer.text = ""
+            if Servicefile.shared.petnewprod[indexPath.row].product_offer_value > 0 {
+                cell.label_offer.text = String(Servicefile.shared.petnewprod[indexPath.row].product_offer_value) + " % off"
+            }else{
+                cell.label_offer.text = ""
+            }
+            
             if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
              cell.image_fav.image = UIImage(named: imagelink.favtrue)
          }else{
@@ -158,9 +175,10 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
                                 let review_count = Bval["product_review"] as? Int ?? 0
                                 let product_title = Bval["product_title"] as? String ?? ""
                                 let thumbnail_image = Bval["thumbnail_image"] as? String ?? ""
+                                let product_discount_price = Bval["product_discount_price"] as? Int ?? 0
     //                            Servicefile.shared.petprod.append(Petdashproduct.init(I_id: id, Idelete_status: delete_status, Ishow_status: show_status, Iimg_index: img_index, Iproduct_title: product_title, Iproducts_img: products_img))
                                 self.isselect.append("0")
-                                Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image))
+                                Servicefile.shared.petnewprod.append(Petnewdashproduct.init(UID: id, product_fav_status: product_fav_status, product_offer_status: product_offer_status, product_offer_value: product_offer_value, product_prices: product_prices, product_rate: product_rate, product_title: product_title, products_img: products_img, review_count: review_count, cat_name: cat_name, Ithumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
                                
                             }
                             self.isorgiselect = self.isselect

@@ -180,6 +180,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             self.alert(Message: "Please select the diagnosis")
         }else if self.textview_descrip.text == "" {
             self.alert(Message: "Please select the description")
+        }else if checkispdf() {
+            self.alert(Message: "Please add the tablets")
         }else{
             if Servicefile.shared.pet_appint_pay_method != "Cash" {
                 self.callcash()
@@ -190,6 +192,18 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                     self.callcash()
                 }
             }
+        }
+    }
+    
+    func checkispdf()->Bool{
+        if Servicefile.shared.doc_diag_type == "PDF"  {
+            if Servicefile.shared.Doc_pres.count > 0 {
+                return false
+            }else{
+                return true
+            }
+        }else{
+            return false
         }
     }
     
@@ -498,10 +512,16 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         if Servicefile.shared.doc_diag_type == "Image" {
             Servicefile.shared.Doc_pres.removeAll()
         }
+        var url = ""
+        if Servicefile.shared.iswalkin {
+            url = Servicefile.Doc_walkin_prescription_create
+        }else{
+            url = Servicefile.Doc_prescription_create
+        }
         print("data in prescription")
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_prescription_create, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
+        if Servicefile.shared.updateUserInterface() { AF.request(url, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
                                                                                                                                   "Date":Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
                                                                                                                                   "Doctor_Comments":"test",
                                                                                                                                   "diagnosis" : self.doctor_diagnosis.text!,

@@ -185,6 +185,10 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
 //                   }
            
         }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
         
         @objc func action_addtablet(sender: UIButton){
             print("data in doc pres",Servicefile.shared.medi, Servicefile.shared.noofday, Servicefile.shared.consdays)
@@ -215,10 +219,16 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
 
         
         func callpescription(){
+            var url = ""
+            if Servicefile.shared.iswalkin {
+                url = Servicefile.Doc_walkin_prescription_create
+            }else{
+                url = Servicefile.Doc_prescription_create
+            }
             print("data in prescription")
                      Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                     self.startAnimatingActivityIndicator()
-              if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_prescription_create, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
+              if Servicefile.shared.updateUserInterface() { AF.request(url, method: .post, parameters: ["doctor_id": Servicefile.shared.userid,
               "Date":Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
               "Doctor_Comments": self.textview_descrip.text!,
               "diagnosis" : self.doctor_diagnosis.text!,

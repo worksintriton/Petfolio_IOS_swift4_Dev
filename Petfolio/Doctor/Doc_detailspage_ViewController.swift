@@ -237,9 +237,15 @@ class Doc_detailspage_ViewController: UIViewController {
                        "appoint_patient_st": "Doctor Cancelled appointment"]
         }
         
+        var link = ""
+        if Servicefile.shared.iswalkin {
+            link =  Servicefile.Doc_walkin_complete_and_Missedapp
+        }else{
+            link =  Servicefile.Doc_complete_and_Missedapp
+        }
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_complete_and_Missedapp, method: .post, parameters: params
+        if Servicefile.shared.updateUserInterface() { AF.request(link, method: .post, parameters: params
             , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
@@ -270,7 +276,13 @@ class Doc_detailspage_ViewController: UIViewController {
     func call_getdetails(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
-        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Doc_fetch_appointment_id, method: .post, parameters:
+        var urllink = ""
+        if Servicefile.shared.iswalkin {
+            urllink = Servicefile.Doc_fetch_walkin__appointment_id
+        }else{
+            urllink = Servicefile.Doc_fetch_appointment_id
+        }
+        if Servicefile.shared.updateUserInterface() { AF.request(urllink, method: .post, parameters:
             ["apppointment_id": Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
@@ -281,8 +293,8 @@ class Doc_detailspage_ViewController: UIViewController {
                         let data = res["Data"] as! NSDictionary
                         Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
                         Servicefile.shared.pet_appint_pay_method = data["payment_method"] as? String ?? ""
-                        self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
-                        self.label_app_bookAndTime.text = data["display_date"] as? String ?? ""
+                        self.label_orderdate.text = data["date_and_time"] as? String ?? ""
+                        self.label_app_bookAndTime.text =  data["booking_date_time"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""
                         let appoinment_status = data["appoinment_status"] as? String ?? ""
                         if appoinment_status == "Incomplete" {
@@ -309,9 +321,10 @@ class Doc_detailspage_ViewController: UIViewController {
                             self.view_emergency.isHidden = true
                         }
                        
-                        self.label_order_id.text = data["payment_id"] as? String ?? ""
+                        self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                         self.label_payment_method.text = data["payment_method"] as? String ?? ""
-                        self.label_ordercost.text = data["amount"] as? String ?? ""
+                        let amt = data["amount"] as? String ?? ""
+                        self.label_ordercost.text = "₹" + amt
                         
                         let pet_id = data["pet_id"] as! NSDictionary
                         let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
@@ -362,10 +375,10 @@ class Doc_detailspage_ViewController: UIViewController {
                         let firstname = user_id["first_name"] as? String ?? ""
                         let lastname = user_id["last_name"] as? String ?? ""
                         let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
-                        self.label_holder_name.text = firstname + " " + lastname
+                        
                         self.label_holder_servie_name.isHidden = true
-                        let amt = data["amount"] as? String ?? "0"
-                        self.label_holder_cost.text = "₹ " + amt
+                        let amount_val = data["amount"] as? String ?? "0"
+                        self.label_holder_cost.text = "₹ " + amount_val
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
@@ -382,6 +395,11 @@ class Doc_detailspage_ViewController: UIViewController {
                        
                         self.view_address.isHidden = false
                         self.view_address_details.isHidden = false
+                        let doc_bus = data["doctor_id"] as! NSDictionary
+                        let fir = doc_bus["first_name"] as? String ?? ""
+                        let last = doc_bus["last_name"] as? String ?? ""
+                        
+                        self.label_holder_name.text = fir + last
                         let doc_business_info = data["doc_business_info"] as! NSArray
                         if doc_business_info.count > 0 {
                             let doc_info = doc_business_info[0] as! NSDictionary
@@ -409,7 +427,8 @@ class Doc_detailspage_ViewController: UIViewController {
                         }
                       
                         let visit_type = data["visit_type"] as? String ?? ""
-                       
+                        if visit_type != "" {
+                        
                         if visit_type == "Home"  {
                             self.label_visittype.text =  visit_type
                             self.view_home_address.isHidden = false
@@ -419,12 +438,16 @@ class Doc_detailspage_ViewController: UIViewController {
                              let location = visit_type_data["location_address"] as? String ?? ""
                             self.label_home_address_details.text = location
                         }else{
+                            self.label_visittype.text =  visit_type
+                            self.view_home_address.isHidden = true
+                            self.view_data_home_address.isHidden = true
+                            self.view_home_dotted_line.isHidden = true
+                        }}else{
                             self.label_visittype.text =  "Online"
                             self.view_home_address.isHidden = true
                             self.view_data_home_address.isHidden = true
                             self.view_home_dotted_line.isHidden = true
                         }
-                        
                         
                         //                        {
                         //                            "__v" = 0;

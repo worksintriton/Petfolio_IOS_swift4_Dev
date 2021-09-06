@@ -125,7 +125,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
                         let otp = Data["otp"] as? Int ?? 0
-                        Servicefile.shared.otp = String(otp as! Int)
+                        Servicefile.shared.otp = String(otp)
                         Servicefile.shared.email_status = true
                         Servicefile.shared.signupemail = self.textfield_email.text!
                         let vc = UIStoryboard.emailsignupViewController()

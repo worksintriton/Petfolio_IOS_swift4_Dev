@@ -24,6 +24,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var locationaddress = ""
     
     
+    @IBOutlet weak var label_view_popup: UILabel!
     @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var view_Bus_name: UIView!
     @IBOutlet weak var view_addservice: UIView!
@@ -74,6 +75,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     var timeindex = 0
     var tblindex = 0
     var cityname = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -172,7 +174,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
              self.textfield_spec.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
         }
         if textField == self.textfield_amt{
-             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 4)
+             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 6)
         }   
         return true
     }
@@ -659,7 +661,6 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             }else{
                 self.image_photo_id.image = UIImage(named: "pdf")
             }
-            
             self.view_photo_id_close.isHidden = false
         }else{
             self.image_photo_id.isHidden = true
@@ -681,7 +682,6 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
             }else{
                 self.image_gov.image = UIImage(named: "pdf")
             }
-            self.image_gov.image = UIImage(named: "pdf")
             self.view_govid_close.isHidden = false
         }else{
             self.image_gov.isHidden = true
@@ -925,7 +925,9 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let Data = res["Data"] as! NSDictionary
+                        _ = res["Data"] as! NSDictionary
+                        let Message = res["Message"] as? String ?? ""
+                        self.label_view_popup.text = Message
                         self.callupdatestatus()
                         self.stopAnimatingActivityIndicator()
                     }else{
@@ -958,6 +960,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
                     if Code == 200 {
                         self.view_popup.isHidden = false
                         self.view_shadow.isHidden = false
+                        
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

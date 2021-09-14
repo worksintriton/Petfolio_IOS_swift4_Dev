@@ -245,18 +245,13 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                      cell.label_offer.text = ""
                  }
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
-                    cell.image_fav.image = UIImage(named: imagelink.favtrue)
-                }else{
-                    cell.image_fav.image = UIImage(named: imagelink.favfalse)
-                }
-                
-               cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
-               cell.image_product.dropShadow()
-                if Servicefile.shared.vendor_product_id_details[indexPath.row].product_fav {
                     cell.image_fav.image = UIImage(named: imagelink.fav_true)
                 }else{
                     cell.image_fav.image = UIImage(named: imagelink.fav_false)
                 }
+                
+               cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+               cell.image_product.dropShadow()
                 cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge

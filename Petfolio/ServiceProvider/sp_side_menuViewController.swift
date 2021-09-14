@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
@@ -37,6 +38,22 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: imagelink.sample)
+        }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: imagelink.sample)
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+    }
+    
        @IBAction func action_edit(_ sender: Any) {
         let vc = UIStoryboard.Sp_profile_ViewController()
                   self.present(vc, animated: true, completion: nil)
@@ -64,10 +81,10 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.labelmenu[indexPath.row] == "My calender" {
+        if self.labelmenu[indexPath.row] == "My Calender" {
             let vc = UIStoryboard.Sp_mycalender_ViewController()
         self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "My Appointment" {
+        }else if self.labelmenu[indexPath.row] == "My Appointments" {
             let vc = UIStoryboard.Sp_dash_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Favorites" {
@@ -85,11 +102,11 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
-            let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.pushtologin()
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
                 
             }))
             self.present(alert, animated: true, completion: nil)

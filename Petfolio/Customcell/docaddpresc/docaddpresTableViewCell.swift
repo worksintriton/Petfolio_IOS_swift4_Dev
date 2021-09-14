@@ -56,13 +56,10 @@ class docaddpresTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-   
-    
     @objc func returntext(sender: UIButton){
         self.textfield_medi.resignFirstResponder()
         self.textfield_noofdays.resignFirstResponder()
     }
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textfield_medi.resignFirstResponder()

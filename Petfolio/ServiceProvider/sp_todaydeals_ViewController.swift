@@ -153,9 +153,9 @@ class sp_todaydeals_ViewController: UIViewController, UICollectionViewDelegate, 
                     cell.label_offer.isHidden = false
                     cell.label_offer.text = String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount) + " % off"
                 }
-                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img) {
+                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_Today_Special[indexPath.row].thumbnail_image) {
                     cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                    cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_img)) { (image, error, cache, urls) in
+                    cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.sp_dash_Today_Special[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                         if (error != nil) {
                             cell.image_product.image = UIImage(named: imagelink.sample)
                         } else {
@@ -165,6 +165,18 @@ class sp_todaydeals_ViewController: UIViewController, UICollectionViewDelegate, 
                 }else{
                     cell.image_product.image = UIImage(named: imagelink.sample)
                 }
+                if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount_price > 0 {
+                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_discount_price))
+                    attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                    cell.label_orginalprice.attributedText = attributeString
+                }else{
+                    cell.label_orginalprice.text = ""
+                }
+               if Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_fav {
+                   cell.image_fav.image = UIImage(named: imagelink.favtrue)
+               }else{
+                   cell.image_fav.image = UIImage(named: imagelink.favfalse)
+               }
                 cell.label_ratting.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_rating
                 cell.label_likes.text = Servicefile.shared.sp_dash_Today_Special[indexPath.row].product_review
                 cell.view_remove.isHidden = true

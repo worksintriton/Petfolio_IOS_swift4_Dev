@@ -501,6 +501,14 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
 //        }else if self.petimage == ""{
 //             self.alert(Message: "please upload the")
 //        }else{
+        
+        if self.textview_descrip.text == "" {
+            self.textview_descrip.text = "No Comments"
+                }
+        
+        if self.textview_descrip.text == "Add comment here.." {
+            self.textview_descrip.text = "No Comments"
+                }
             print("details for complettion")
             let date = Date()
             let format = DateFormatter()

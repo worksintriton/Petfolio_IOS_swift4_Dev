@@ -18,16 +18,10 @@ import WebKit
 
 class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate , RazorpayPaymentCompletionProtocol, RazorpayPaymentCompletionProtocolWithData {
     
-    
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
-    
-    
     var razorpay: RazorpayCheckout!
-    
-    
     @IBOutlet weak var label_clinicname: UILabel!
     @IBOutlet weak var label_docname: UILabel!
-    
     @IBOutlet weak var label_petname: UILabel!
     @IBOutlet weak var label_app_type: UILabel!
     @IBOutlet weak var label_cost: UILabel!
@@ -182,24 +176,35 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         //        }else if self.petimage == ""{
         //            self.alert(Message: "please upload the")
         //        }else{
+        
+        
         print("discount_price" , Int(self.discountprice)!,
               "original_price" , Int(self.originalprice)!,
               "total_price" , Int(self.totalprice)!,
               "coupon_status" , coupon_status,
               "coupon_code" , couponcode)
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
+            
             if Servicefile.shared.pet_apoint_visit_type == "" {
                 self.alert(Message: "Please select the visit type")
             }else{
-                showPaymentForm()
+                if self.pay_method != "Cash" {
+                    self.showPaymentForm()
+                }else{
+                    self.callsubmit()
+                }
             }
-        }else{
-            showPaymentForm()
+            
+        } else {
+            
+            if self.pay_method != "Cash" {
+                self.showPaymentForm()
+            }else{
+                self.callsubmit()
+            }
             
         }
         
-        
-        //        }
     }
     
     func callcheckcoupon(){
@@ -424,9 +429,4 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                self.alert(Message: "No Intenet Please check and try again ")
            }
        }
-    
-    
-    
-    
-    
 }

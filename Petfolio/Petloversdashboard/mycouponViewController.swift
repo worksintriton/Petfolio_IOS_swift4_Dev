@@ -68,6 +68,7 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
         let sub_title = data["descri"] as? String ?? ""
         let ref = data["coupon_code"] as? String ?? ""
         let expir = data["expired_date"] as? String ?? ""
+        let used_status =  data["used_status"] as? String ?? ""
         cell.view_main.view_cornor()
         cell.view_main.dropShadow()
 //        cell.image_img_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
@@ -81,17 +82,24 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
         cell.label_title.text = title
         cell.label_sub_title.text = sub_title
         var strddmm = ""
-        if expir != "" {
-            let dat = expir.detectDate
-            strddmm = "Expires on : " + Servicefile.shared.ddMMyyyystringformat(date: dat ?? Date())
-        }else{
-            strddmm = ""
-        }
-        
-        cell.label_expiry_date.text = strddmm
+        cell.label_expiry_date.textColor = UIColor.red
         cell.label_ref.text = ref
         cell.btn_copy_coupon.tag = indexPath.row
         cell.btn_copy_coupon.addTarget(self, action: #selector(copycoupon), for: .touchUpInside)
+        if used_status != "Used" {
+            if expir != "" {
+                let dat = expir.detectDate
+                strddmm = "Expires on : " + Servicefile.shared.ddMMyyyystringformat(date: dat ?? Date())
+            }else{
+                strddmm = ""
+            }
+            cell.label_expiry_date.text = strddmm
+        }else{
+            cell.label_expiry_date.text = used_status
+            cell.label_expiry_date.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
+            cell.label_ref.attributedText = Servicefile.shared.convertdashlinestring(str: ref)
+            cell.btn_copy_coupon.isHidden = true
+        }
         cell.selectionStyle = .none
         return cell
     }

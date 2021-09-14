@@ -401,9 +401,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         return true
     }
     
-   
-    
-    
     func viewdesign(){
         self.view_clinic.view_cornor()
         self.view_education.view_cornor()

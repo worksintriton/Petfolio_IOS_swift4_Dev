@@ -183,6 +183,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
 //        }else if self.petimage == ""{
 //            self.alert(Message: "please upload the")
 //        }else{
+        
         print("discount_price" , Int(self.discountprice)!,
               "original_price" , Int(self.originalprice)!,
               "total_price" , Int(self.totalprice)!,
@@ -192,10 +193,27 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
             if Servicefile.shared.pet_apoint_visit_type == "" {
                 self.alert(Message: "Please select the visit type")
             }else{
-                showPaymentForm()
+                if self.pay_method != "Cash" {
+                    if self.totalprice > "0"{
+                        self.showPaymentForm()
+                    }else{
+                        self.callsubmit()
+                    }
+                }else{
+                    self.callsubmit()
+                }
+               
             }
         }else{
-            showPaymentForm()
+            if self.pay_method != "Cash" {
+                if self.totalprice > "0"{
+                    self.showPaymentForm()
+                }else{
+                    self.callsubmit()
+                }
+            }else{
+                self.callsubmit()
+            }
 
         }
        

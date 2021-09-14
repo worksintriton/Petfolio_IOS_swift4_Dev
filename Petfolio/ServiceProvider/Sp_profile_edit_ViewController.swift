@@ -138,30 +138,43 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-              if textField == self.textfield_servicename {
-               let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                  let compSepByCharInSet = string.components(separatedBy: aSet)
-                  let numberFiltered = compSepByCharInSet.joined(separator: "")
-                  return string == numberFiltered
-              }
-              if textField == self.textfield_Bus_name {
-                  let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                  let compSepByCharInSet = string.components(separatedBy: aSet)
-                  let numberFiltered = compSepByCharInSet.joined(separator: "")
-                  return string == numberFiltered
-              }
-              if textField == self.textfield_spec{
-                  let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
-                  let compSepByCharInSet = string.components(separatedBy: aSet)
-                  let numberFiltered = compSepByCharInSet.joined(separator: "")
-                  return string == numberFiltered
-              }
-               if textField == self.textfield_amt{
-               let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
-               let compSepByCharInSet = string.components(separatedBy: aSet)
-               let numberFiltered = compSepByCharInSet.joined(separator: "")
-               return string == numberFiltered
-               }
+//              if textField == self.textfield_servicename {
+//               let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+//                  let compSepByCharInSet = string.components(separatedBy: aSet)
+//                  let numberFiltered = compSepByCharInSet.joined(separator: "")
+//                  return string == numberFiltered
+//              }
+//              if textField == self.textfield_Bus_name {
+//                  let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+//                  let compSepByCharInSet = string.components(separatedBy: aSet)
+//                  let numberFiltered = compSepByCharInSet.joined(separator: "")
+//                  return string == numberFiltered
+//              }
+//              if textField == self.textfield_spec{
+//                  let aSet = NSCharacterSet(charactersIn: Servicefile.approvestring).inverted
+//                  let compSepByCharInSet = string.components(separatedBy: aSet)
+//                  let numberFiltered = compSepByCharInSet.joined(separator: "")
+//                  return string == numberFiltered
+//              }
+//               if textField == self.textfield_amt{
+//               let aSet = NSCharacterSet(charactersIn: Servicefile.approvednumber).inverted
+//               let compSepByCharInSet = string.components(separatedBy: aSet)
+//               let numberFiltered = compSepByCharInSet.joined(separator: "")
+//               return string == numberFiltered
+//               }
+        if textField == self.textfield_servicename {
+            self.textfield_servicename.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+        }
+        if textField == self.textfield_Bus_name {
+            self.textfield_Bus_name.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+        }
+        if textField == self.textfield_spec{
+             self.textfield_spec.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
+        }
+        if textField == self.textfield_amt{
+             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 6)
+        }
+        
               return true
           }
     

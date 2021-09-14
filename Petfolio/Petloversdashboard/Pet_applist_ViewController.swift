@@ -559,7 +559,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                                 self.callspappcancel()
                                                                             }else{
                                                                                 self.callDocappcancel()
-                                                                                
                                                                             }
                                                                             self.stopAnimatingActivityIndicator()
                                                                         }else{
@@ -742,8 +741,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                             let Code  = res["Code"] as! Int
                                                                             if Code == 200 {
                                                                                 if Servicefile.shared.pet_applist_do_sp[self.indextag].payment_method != "Cash" {
-                                                                                    let vc = UIStoryboard.App_couponViewController()
-                                                                                    self.present(vc, animated: true, completion: nil)
+                                                                                    if Int(Servicefile.shared.pet_applist_do_sp[self.indextag].cost)! > 0 {
+                                                                                        let vc = UIStoryboard.App_couponViewController()
+                                                                                        self.present(vc, animated: true, completion: nil)
+                                                                                    }else{
+                                                                                        self.callnew()
+                                                                                    }
                                                                                 }else{
                                                                                     self.callnew()
                                                                                 }

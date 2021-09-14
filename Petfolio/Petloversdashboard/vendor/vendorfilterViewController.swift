@@ -16,7 +16,8 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var view_apply: UIView!
     @IBOutlet weak var view_clearall: UIView!
     
-    var discountvalue = ["30 % and More","20 % and More","10 % and More","10 % and below",]
+    var discountvalue = ["30 % and More","20 % and More","10 % and More","10 % and below"]
+    var discvalue = ["3","2","1","0"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,10 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
         self.view_clearall.view_cornor()
         self.view_apply.view_cornor()
         self.view_sortby.view_cornor()
-        
+        Servicefile.shared.vendor_filter_pet_type_id = ""
+        Servicefile.shared.vendor_filter_catid = ""
+        Servicefile.shared.vendor_filter_discount = ""
+        Servicefile.shared.vendor_filter_pet_breed_id = ""
         self.tbl_sortlist.delegate = self
         self.tbl_sortlist.dataSource = self
         
@@ -38,12 +42,33 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
                        firstVC.viewWillAppear(true)
                       }
                   }
+            if let firstVC = presentingViewController as? doc_todaysdealseemoreViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+            if let firstVC = presentingViewController as? sp_todaydeals_ViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
         }else{
             if let firstVC = presentingViewController as? ProductdealsViewController {
                       DispatchQueue.main.async {
                        firstVC.viewWillAppear(true)
                       }
                   }
+            if let firstVC = presentingViewController as? doc_ProductdealsViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+            if let firstVC = presentingViewController as? sp_productdeals_ViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+            
         }
        }
     
@@ -93,7 +118,7 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
         }
         
         if Servicefile.shared.vendor_fdata[indexPath.section].sectionname == "Discount"{
-            Servicefile.shared.vendor_filter_discount = String(indexPath.row)
+            Servicefile.shared.vendor_filter_discount = self.discvalue[indexPath.row]
         }
         
         if Servicefile.shared.vendor_fdata[indexPath.section].sectionname == "Category"{
@@ -193,6 +218,10 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
        
     }
     @IBAction func action_clearall(_ sender: Any) {
+        Servicefile.shared.vendor_filter_pet_type_id = ""
+        Servicefile.shared.vendor_filter_catid = ""
+        Servicefile.shared.vendor_filter_discount = ""
+        Servicefile.shared.vendor_filter_pet_breed_id = ""
         Servicefile.shared.vendor_fdata = Servicefile.shared.vendor_orgifdata
         self.tbl_sortlist.reloadData()
     }
@@ -201,16 +230,19 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
         self.callfilterby()
     }
     
+    
     func callfilterby(){
 //        Servicefile.shared.loadingcount = 1
 //        self.loadcount = self.loadcount + 1
+        Servicefile.shared.sp_dash_Today_Special.removeAll()
+        Servicefile.shared.sp_dash_productdetails.removeAll()
         var params  = [String:Any]()
         
             params = [ "pet_type": Servicefile.shared.vendor_filter_pet_type_id,
                        "pet_breed": Servicefile.shared.vendor_filter_pet_breed_id,
                        "discount_value": Servicefile.shared.vendor_filter_discount,
                        "cat_id": Servicefile.shared.vendor_filter_catid]
-        
+        print("244 filet api process",params)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_vendor_filter, method: .post, parameters:
                                                                     params, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -276,6 +308,7 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
                     if Code == 200 {
                         let Data = resp["Data"] as! NSDictionary
                         let Pet_type = Data["usertypedata"] as! NSArray
+                        let category = Data["product_categories"] as! NSArray
                         Servicefile.shared.vendor_fdata.removeAll()
                         Servicefile.shared.vendor_fstatus.removeAll()
                         for item in 0..<Pet_type.count{
@@ -295,6 +328,13 @@ class vendorfilterViewController:  UIViewController, UITableViewDelegate, UITabl
                         }
                         Servicefile.shared.vendor_fdata.append(vendor_filterdata.init(In_sectionname: "Discount", In_row_val: Servicefile.shared.vendor_fstatus, In_isselect: false))
                         Servicefile.shared.vendor_fstatus.removeAll()
+                        for item in 0..<category.count{
+                            let pb = category[item] as! NSDictionary
+                            let pbtittle = pb["product_cate"] as? String ?? ""
+                            let pbid = pb["_id"] as? String ?? ""
+                            let isselect = false
+                            Servicefile.shared.vendor_fstatus.append(vendor_filterstatus.init(In_id: pbid, In_title: pbtittle, In_isselect: isselect))
+                        }
                         Servicefile.shared.vendor_fdata.append(vendor_filterdata.init(In_sectionname: "Category", In_row_val: Servicefile.shared.vendor_fstatus, In_isselect: false))
                         Servicefile.shared.vendor_orgifdata = Servicefile.shared.vendor_fdata
                         self.tbl_sortlist.reloadData()

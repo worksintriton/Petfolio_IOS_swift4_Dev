@@ -38,6 +38,8 @@
 		84096EAB262FE5C000BB2EAF /* pet_dashboard_vets_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096EAA262FE5C000BB2EAF /* pet_dashboard_vets_CollectionViewCell.swift */; };
 		84096EAF262FE7E900BB2EAF /* pet_dashboard_shop_CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84096EAE262FE7E900BB2EAF /* pet_dashboard_shop_CollectionViewCell.swift */; };
 		8409722C2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409722B2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift */; };
+		8409729826E9DFD9003E582B /* prestitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409729626E9DFD9003E582B /* prestitleTableViewCell.swift */; };
+		8409729926E9DFD9003E582B /* prestitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8409729726E9DFD9003E582B /* prestitleTableViewCell.xib */; };
 		840A79AB26258CAE000A735D /* myaddresslistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79AA26258CAE000A735D /* myaddresslistViewController.swift */; };
 		840A79AF26258CFA000A735D /* myaddress_create_address_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */; };
 		840B74F325EF991E00B7F63B /* pet_other_information_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */; };
@@ -432,6 +434,8 @@
 		84096EAA262FE5C000BB2EAF /* pet_dashboard_vets_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashboard_vets_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84096EAE262FE7E900BB2EAF /* pet_dashboard_shop_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_dashboard_shop_CollectionViewCell.swift; sourceTree = "<group>"; };
 		8409722B2615FEC400F15F8B /* pet_vendor_trackorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_vendor_trackorderViewController.swift; sourceTree = "<group>"; };
+		8409729626E9DFD9003E582B /* prestitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prestitleTableViewCell.swift; sourceTree = "<group>"; };
+		8409729726E9DFD9003E582B /* prestitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = prestitleTableViewCell.xib; sourceTree = "<group>"; };
 		840A79AA26258CAE000A735D /* myaddresslistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myaddresslistViewController.swift; sourceTree = "<group>"; };
 		840A79AE26258CFA000A735D /* myaddress_create_address_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myaddress_create_address_ViewController.swift; sourceTree = "<group>"; };
 		840B74F225EF991E00B7F63B /* pet_other_information_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_other_information_ViewController.swift; sourceTree = "<group>"; };
@@ -868,6 +872,7 @@
 		84056648261862D80099A26D /* Customcell */ = {
 			isa = PBXGroup;
 			children = (
+				8409729526E9DFBF003E582B /* prestitle */,
 				84C6B66B26D0D0C2007E2437 /* mycouponlist */,
 				84B8518626CFD822005B9E00 /* app_coupon */,
 				84BCD4E526AFCF3D008EBD54 /* sos */,
@@ -935,6 +940,15 @@
 				840715A226916B04002AF61C /* animateloader.swift */,
 			);
 			path = animateloader;
+			sourceTree = "<group>";
+		};
+		8409729526E9DFBF003E582B /* prestitle */ = {
+			isa = PBXGroup;
+			children = (
+				8409729626E9DFD9003E582B /* prestitleTableViewCell.swift */,
+				8409729726E9DFD9003E582B /* prestitleTableViewCell.xib */,
+			);
+			path = prestitle;
 			sourceTree = "<group>";
 		};
 		840D8109268C3E1C00A77E8F /* docaddpresc */ = {
@@ -1880,6 +1894,7 @@
 				84FF0E7E268F15E700555703 /* petspapp.storyboard in Resources */,
 				B094D274255D6221008400D6 /* Futura Heavy Italic font.ttf in Resources */,
 				84FF0E7A268EDC8B00555703 /* doctor.storyboard in Resources */,
+				8409729926E9DFD9003E582B /* prestitleTableViewCell.xib in Resources */,
 				B094D26A255D6221008400D6 /* Futura Light Italic font.ttf in Resources */,
 				B094D21E255BDE88008400D6 /* Assets.xcassets in Resources */,
 				84951E9E26807A2B001F526D /* getbreedTableViewCell.xib in Resources */,
@@ -2139,6 +2154,7 @@
 				B02F7AD425A6FE82009EC53D /* servicecat_CollectionViewCell.swift in Sources */,
 				8413E9632636D53800E8796C /* pet_vendor_orderdetails_ViewController.swift in Sources */,
 				84DDDEE426AA99050073473F /* showprodCollectionViewCell.swift in Sources */,
+				8409729826E9DFD9003E582B /* prestitleTableViewCell.swift in Sources */,
 				B01DA7482566014B00B1FA0B /* regdocViewController.swift in Sources */,
 				B02E7A5B25777FC800B2B0C2 /* Pet_applist_TableViewCell.swift in Sources */,
 				B0FF1AEC2580865C006227E4 /* petManageaddressViewController.swift in Sources */,
@@ -2532,7 +2548,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2564,7 +2580,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

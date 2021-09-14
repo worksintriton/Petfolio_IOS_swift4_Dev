@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SDWebImage
+
 class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tbl_menulist: UITableView!
@@ -36,11 +38,11 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calender","Manage Services","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Notifications", "Logout"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calender","Manage Services","My Orders","Favorites","Notifications", "Logout"]
             self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
@@ -48,6 +50,22 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.label_email.text = Servicefile.shared.user_email
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: imagelink.sample)
+        }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: imagelink.sample)
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
     @IBAction func action_dismiss(_ sender: Any) {
@@ -78,10 +96,10 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     
     //doc_myorderdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.labelmenu[indexPath.row] == "My calender" {
+        if self.labelmenu[indexPath.row] == "My Calender" {
             let vc = UIStoryboard.mycalenderViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "My Appointment" {
+        }else if self.labelmenu[indexPath.row] == "My Appointments" {
             let vc = UIStoryboard.DocdashboardViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Walk-in Appointments" {
@@ -100,15 +118,15 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
             self.dismiss(animated: true, completion: nil)
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_paymentdetilsViewController") as! doc_paymentdetilsViewController
 //            self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Manage Service" {
+        }else if self.labelmenu[indexPath.row] == "Manage Services" {
             let vc = UIStoryboard.Doc_profiledetails_ViewController()
             self.present(vc, animated: true, completion: nil)
                 }else if self.labelmenu[indexPath.row] == "Logout"{
-                    let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                         self.pushtologin()
                     }))
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
                         
                     }))
                     self.present(alert, animated: true, completion: nil)

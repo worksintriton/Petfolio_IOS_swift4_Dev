@@ -58,7 +58,7 @@ class addnewprodViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.textfield_product_title.text = product_name
         self.textfield_product_title.isUserInteractionEnabled = false
         self.textview_description.isUserInteractionEnabled = true
-        self.textview_description.isEditable = false
+        self.textview_description.isEditable = true
         self.textview_description.text = product_desc
         self.textfield_product_price.text = ""
         self.textfield_product_threshold.text = ""
@@ -68,7 +68,8 @@ class addnewprodViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.view_productthreshold.view_cornor()
         self.view_product_price.view_cornor()
         self.view_description.view_cornor()
-        
+        self.textfield_product_price.addTarget(self, action: #selector(textFieldpriceTyping), for: .editingChanged)
+        self.textfield_product_threshold.addTarget(self, action: #selector(textFieldthresholdTyping), for: .editingChanged)
     }
     func inital_setup(){
         // header action
@@ -107,6 +108,28 @@ class addnewprodViewController: UIViewController, UITextFieldDelegate, UITextVie
         }
     }
     
+    @objc func textFieldpriceTyping(textField:UITextField) {
+        if self.textfield_product_price.text!.count > 5 {
+            self.textfield_product_price.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
+            self.textfield_product_price.text = textField.text!
+            self.textfield_product_price.resignFirstResponder()
+        } else {
+            self.textfield_product_price.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
+            self.textfield_product_price.text = textField.text!
+        }
+    }
+    
+    @objc func textFieldthresholdTyping(textField:UITextField) {
+        if self.textfield_product_threshold.text!.count > 5 {
+            self.textfield_product_threshold.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
+            self.textfield_product_threshold.text = textField.text!
+            self.textfield_product_threshold.resignFirstResponder()
+        } else {
+            self.textfield_product_threshold.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
+            self.textfield_product_threshold.text = textField.text!
+        }
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if self.textview_description.text!.count > 149 {
             self.textview_description.resignFirstResponder()
@@ -130,6 +153,8 @@ class addnewprodViewController: UIViewController, UITextFieldDelegate, UITextVie
         }else if self.checkemptyfield(strv: textview_description.text!) {
             self.alert(Message: "Please enter the Product description")
         }else if self.textview_description.text == "Product description here..."{
+            self.alert(Message: "Please enter the Product description")
+        }else if self.textview_description.text == ""{
             self.alert(Message: "Please enter the Product description")
         }else{
             self.callsubmit()

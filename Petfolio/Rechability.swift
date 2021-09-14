@@ -137,6 +137,7 @@ extension Reachability {
         return (flags?.intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]) == true
     }
 }
+
 func callout(reachability: SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
     guard let info = info else { return }
     DispatchQueue.main.async {
@@ -146,6 +147,7 @@ func callout(reachability: SCNetworkReachability, flags: SCNetworkReachabilityFl
             .flagsChanged()
     }
 }
+
 extension Notification.Name {
     static let flagsChanged = Notification.Name("FlagsChanged")
 }

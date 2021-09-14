@@ -615,6 +615,13 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
 //        }else if self.petimage == ""{
 //            self.alert(Message: "please upload the")
 //        }else{
+        if self.textview_descrip.text == "" {
+            self.textview_descrip.text = "No Comments"
+                }
+        
+        if self.textview_descrip.text == "Add comment here.." {
+            self.textview_descrip.text = "No Comments"
+                }
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             if Servicefile.shared.pet_apoint_visit_type == "" {
                 self.alert(Message: "Please select the visit type")

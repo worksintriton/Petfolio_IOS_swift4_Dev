@@ -95,11 +95,11 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
         }
         
         @IBAction func action_empty_cart(_ sender: Any) {
-            let alert = UIAlertController(title: "Are you sure need to Empty the Cart", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let alert = UIAlertController(title: "Are you sure need to Empty the Cart?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.callDeleteoverallproduct()
             }))
-            alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
             }))
             self.present(alert, animated: true, completion: nil)
         }
@@ -316,11 +316,11 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             let cartlist =  Servicefile.shared.cartdata[tag] as! NSDictionary
             let productdata = cartlist["product_id"] as! NSDictionary
             Servicefile.shared.product_id = productdata["_id"] as! String
-            let alert = UIAlertController(title: "Are you sure need to delete the product", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let alert = UIAlertController(title: "Are you sure need to delete the products?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.callDeletetheproductcount()
             }))
-            alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
             }))
             self.present(alert, animated: true, completion: nil)
            

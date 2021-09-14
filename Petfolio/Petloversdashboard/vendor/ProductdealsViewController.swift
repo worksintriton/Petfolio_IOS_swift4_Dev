@@ -166,7 +166,18 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
             }else{
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
-            
+            if Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price > 0 {
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price))
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.label_orginalprice.attributedText = attributeString
+            }else{
+                cell.label_orginalprice.text = ""
+            }
+           if Servicefile.shared.sp_dash_productdetails[indexPath.row].product_fav {
+               cell.image_fav.image = UIImage(named: imagelink.favtrue)
+           }else{
+               cell.image_fav.image = UIImage(named: imagelink.favfalse)
+           }
             cell.image_product.contentMode = .scaleAspectFill
             cell.label_ratting.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_rating
             cell.label_likes.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_review

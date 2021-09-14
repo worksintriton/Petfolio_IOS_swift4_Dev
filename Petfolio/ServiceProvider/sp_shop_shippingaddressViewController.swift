@@ -157,7 +157,9 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                        //               } else {
                        //                   print("Unable to initialize")
                        //               }
-                   }
+                }else{
+                    self.callsubmitproduct()
+                }
                }
                
                func onPaymentError(_ code: Int32, description str: String) {

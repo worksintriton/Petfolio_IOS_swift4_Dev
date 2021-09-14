@@ -241,7 +241,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             //cell.view_main.layer.borderColor = color.cgColor
          //cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
          cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
          
             if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
              cell.image_fav.image = UIImage(named: imagelink.favtrue)

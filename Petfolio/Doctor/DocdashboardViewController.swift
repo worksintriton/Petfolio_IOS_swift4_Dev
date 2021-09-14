@@ -297,7 +297,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func action_online(sender : UIButton){
         let tag = sender.tag
-        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.tag_val = tag
             self.callstart_confrence()
@@ -315,7 +315,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func action_cancelled(sender : UIButton){
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let tag = sender.tag
             self.tag_val = tag

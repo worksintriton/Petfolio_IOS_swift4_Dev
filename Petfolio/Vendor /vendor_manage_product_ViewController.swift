@@ -64,16 +64,18 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     var textdiscount = ""
     var textamt = ""
     
+    @IBOutlet weak var imageaction: UIImageView!
     let actionButton = JJFloatingActionButton()
     var applylabelval = "Apply Deal"
     var disstatus = false
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_app_deal.isHidden = false
-        self.label_apply_status.text = applylabelval
+        // self.label_apply_status.text = applylabelval
+        self.label_apply_status.text = "Add Deal"
         self.view_discount_details.isHidden = true
         self.view_stackview.layer.cornerRadius = 10.0
         self.view_datepicker.view_cornor()
@@ -93,6 +95,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                        } else {
                            // Fallback on earlier versions
                 }
+        self.actionButton.buttonColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
         self.view_discard.isHidden = true
         self.view_datepicker.isHidden = true
         self.view_discard.view_cornor()
@@ -114,6 +117,8 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.actionButton.isHidden = true
         self.textfield_discount_perunit.addTarget(self, action: #selector(textFielddiscount_perunit), for: .editingChanged)
         self.textfield_deal_price.addTarget(self, action: #selector(textFielddeal_price), for: .editingChanged)
+        self.imageaction.image = UIImage(named: "floaticn")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        self.imageaction.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
     }
     
     override func viewWillAppear(_ animated: Bool) {

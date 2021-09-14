@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
 import Alamofire
+import SDWebImage
 
 class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -25,17 +25,41 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["shop-1","Doc","Like","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Manage Products","My orders","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["shop-1","Doc","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout"]
-            self.imgmenu = ["shop-1","Doc","Like","add","Bell","Exit"]
+            self.labelmenu = ["Manage Products","My orders","Add Products","Notifications", "Logout"]
+            self.imgmenu = ["shop-1","Doc","add","Bell","Exit"]
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: imagelink.sample)
+        }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: imagelink.sample)
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+    }
+    
+    /*if Servicefile.shared.my_ref_code != "" {
+     self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.imgmenu = ["shop-1","Doc","Like","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+ }else{
+     self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout"]
+     self.imgmenu = ["shop-1","Doc","Like","add","Bell","Exit"]
+ }*/
     
      /*
      if Servicefile.shared.my_ref_code != "" {
@@ -88,8 +112,8 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Logout"{
-            let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 self.pushtologin()
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in

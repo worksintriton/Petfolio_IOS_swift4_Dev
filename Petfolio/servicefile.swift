@@ -1003,6 +1003,13 @@ class Servicefile {
         return nextDate
     }
     
+    func yyyyMMddHHmmssnumberformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "ddMMyyyyhhmmss"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
     func yyyyMMddHHmmssDateformat(date: String) -> Date{
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"

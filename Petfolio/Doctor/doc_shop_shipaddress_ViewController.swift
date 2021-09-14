@@ -157,7 +157,9 @@ class doc_shop_shipaddress_ViewController: UIViewController, UITableViewDelegate
                    //               } else {
                    //                   print("Unable to initialize")
                    //               }
-               }
+            }else{
+                self.callsubmitproduct()
+            }
            }
            
            func onPaymentError(_ code: Int32, description str: String) {

@@ -66,7 +66,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
                 cell.view_remove.isHidden = true
             }
             cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
             cell.label_ratting.text = Servicefile.shared.petnewprod[indexPath.row].product_rate
             cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in

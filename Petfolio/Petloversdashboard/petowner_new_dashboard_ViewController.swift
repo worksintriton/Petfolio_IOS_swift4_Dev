@@ -436,7 +436,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             
             cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
             cell.label_vendor.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
-            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
             cell.view_rating.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate) ?? 0.0
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_shopbag.view_cornor()
@@ -602,8 +602,6 @@ extension UIViewController {
 
 
 extension petloverDashboardViewController {
-    
-    
     
     func call_dashboard_api_details(){
         Servicefile.shared.pet_dash_lati = self.latitude

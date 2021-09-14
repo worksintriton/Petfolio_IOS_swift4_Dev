@@ -629,6 +629,13 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
 //        }else if self.petimage == ""{
 //            self.alert(Message: "please upload the")
 //        }else{
+        if self.textview_descrip.text == "" {
+            self.textview_descrip.text = "No Comments"
+                }
+        
+        if self.textview_descrip.text == "Add comment here.." {
+            self.textview_descrip.text = "No Comments"
+                }
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             if Servicefile.shared.pet_apoint_visit_type == "" {
                 self.alert(Message: "Please select the visit type")
@@ -672,10 +679,14 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.view.endEditing(true)
         if self.textfield_selectpettype.text != ""{
             print("old pet ",Servicefile.shared.pet_apoint_pet_id)
+            if self.textview_descrip.text == "" {
+                self.textview_descrip.text = "No Comments"
+                    }
+            
             if self.textview_descrip.text == "Add comment here.." {
-                self.textview_descrip.text = ""
-                Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
-            }
+                self.textview_descrip.text = "No Comments"
+                    }
+            Servicefile.shared.pet_apoint_problem_info = self.textview_descrip.text!
             Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
             //self.showPaymentForm()
             let vc = UIStoryboard.pet_doc_paymentmethodViewController()

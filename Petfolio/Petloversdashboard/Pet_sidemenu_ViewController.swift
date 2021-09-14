@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -29,10 +30,10 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         super.viewDidLoad()
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favorites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
             self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointment","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
+            self.labelmenu = ["Favorites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
             self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit"]
         }
         
@@ -43,6 +44,22 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if Servicefile.shared.userimage == "" {
+            self.imag_user.image = UIImage(named: imagelink.sample)
+        }else{
+            self.imag_user.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self.imag_user.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.userimage)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imag_user.image = UIImage(named: imagelink.sample)
+                } else {
+                    self.imag_user.image = image
+                }
+            }
+        }
+        self.imag_user.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
     }
     
     @IBAction func action_dismiss(_ sender: Any) {
@@ -66,8 +83,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     }
 //    pet_paymentdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if self.labelmenu[indexPath.row] == "My Appointment"{
+        if self.labelmenu[indexPath.row] == "My Appointments"{
             let vc = UIStoryboard.Pet_applist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Walk-in Appointments"{
@@ -101,11 +117,11 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
 //            self.present(vc, animated: true, completion: nil)
 //        }
         else if self.labelmenu[indexPath.row] == "Logout"{
-            let alert = UIAlertController(title: "Are you sure you need to logout", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.pushtologin()
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
                 
             }))
             self.present(alert, animated: true, completion: nil)

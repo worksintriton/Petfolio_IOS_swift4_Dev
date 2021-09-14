@@ -150,7 +150,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_Start_confrence(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to start the call?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callstart_confrence()
         }))
@@ -213,7 +213,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_cancelappoint(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid, appointmentstatus: "cancel")
         }))

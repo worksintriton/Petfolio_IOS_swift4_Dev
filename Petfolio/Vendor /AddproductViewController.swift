@@ -202,6 +202,7 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func callget(){
+        
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() {
             AF.request(Servicefile.petprodcateget, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -213,6 +214,7 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
                     if Code == 200 {
                         let Data = resp["Data"] as! [Any]
                         self.cate_dic = Data
+                        self.cate.removeAll()
                         for i in 0..<self.cate_dic.count {
                             let dataval = self.cate_dic[i] as! NSDictionary
                             let diag = dataval["product_cate_name"] as? String ?? ""

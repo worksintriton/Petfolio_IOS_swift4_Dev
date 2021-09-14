@@ -76,7 +76,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.sear_diag_sub.removeAll()
         self.tbl_medilist.register(UINib(nibName: "docaddpresTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.tbl_medilist.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "pres")
-        
+        self.tbl_medilist.register(UINib(nibName: "docpreTableViewCell", bundle: nil), forCellReuseIdentifier: "nul")
         Servicefile.shared.medi = ""
         Servicefile.shared.noofday = ""
         Servicefile.shared.Doc_pre_descrip = ""
@@ -243,7 +243,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+         if indexPath.section == 0 {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docaddpresTableViewCell
             cell.textfield_medi.text = Servicefile.shared.medi
             cell.textfield_noofdays.text = Servicefile.shared.noofday
@@ -316,8 +316,6 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.isimg_manual.image = UIImage(named: imagelink.selectedRadio)
         self.isimg_up_img.image = UIImage(named: imagelink.Radio)
         Servicefile.shared.doc_diag_type = "PDF"
-        
-        
     }
     
     @IBAction func action_upload_img(_ sender: Any) {
@@ -459,14 +457,15 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             print(B)
             Servicefile.shared.Doc_pres = B
             print("uploaded data in photodicarray",Servicefile.shared.Doc_pres)
+            Servicefile.shared.medi = ""
+            Servicefile.shared.noofday = ""
+            Servicefile.shared.consdays = ""
+            self.m = false
+            self.a = false
+            self.n = false
             self.tbl_medilist.reloadData()
         }
-        Servicefile.shared.medi = ""
-        Servicefile.shared.noofday = ""
-        Servicefile.shared.consdays = ""
-        self.m = false
-        self.a = false
-        self.n = false
+       
     }
     
     func callcash(){

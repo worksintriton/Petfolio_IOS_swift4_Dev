@@ -64,7 +64,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.label_sub_title.text = sub_title
         if ref != "" {
             let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-            cell.label_ref.text = "REF" + refdetail
+            cell.label_ref.text = "REF" + refdetail + Servicefile.shared.yyyyMMddHHmmssnumberformat(date: Date())
         }else{
             cell.label_ref.text = ""
         }
@@ -78,13 +78,13 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
         var refval = ""
         var c_type = ""
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            c_type = "2"
-        }else{
             c_type = "1"
+        }else{
+            c_type = "2"
         }
         if ref != "" {
             let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-            refval = "REF" + refdetail
+            refval = "REF" + refdetail + Servicefile.shared.yyyyMMddHHmmssnumberformat(date: Date())
             self.callcreateprocess(code: refval,amount: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost,ctype: c_type, userid: Servicefile.shared.userid)
         }else{
             refval = "Bank"

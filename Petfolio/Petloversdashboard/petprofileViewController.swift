@@ -188,11 +188,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     @objc func action_clickdelete(sender: UIButton){
               let tag = sender.tag
               Servicefile.shared.pet_index = tag
-        let alert = UIAlertController(title: "", message: "Are you sure you need to delete pet details", preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        let alert = UIAlertController(title: "", message: "Are you sure you need to delete the pet details?", preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.calldeleteaddress(id: Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id)
                     }))
-                alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         
             }))
                self.present(alert, animated: true, completion: nil)

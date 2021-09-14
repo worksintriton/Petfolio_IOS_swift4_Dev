@@ -234,11 +234,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @objc func Acceptdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let alert = UIAlertController(title: "Are you sure need to accept order", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        let alert = UIAlertController(title: "Are you sure need to accept order?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callacceptorderreturn()
         }))
-        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
         
@@ -246,11 +246,11 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     @objc func Rejectdetails(sender: UIButton) {
         let tag = sender.tag
         Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
-        let alert = UIAlertController(title: "Are you sure need to reject order", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        let alert = UIAlertController(title: "Are you sure need to reject order?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callreturnorderreturn()
         }))
-        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
     }

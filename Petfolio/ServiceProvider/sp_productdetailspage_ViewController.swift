@@ -44,6 +44,9 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
     @IBOutlet weak var view_isqualityprod: UIView!
     @IBOutlet weak var pagecontroller: UIPageControl!
     
+    @IBOutlet weak var view_circle: UIView!
+    @IBOutlet weak var label_cart_count: UILabel!
+    @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var view_off: UIView!
     var _id = ""
     var ca_id = ""
@@ -67,7 +70,9 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
-        
+        self.view_circle.layer.cornerRadius = self.view_circle.frame.height / 2
+        self.label_cart_count.text = String(Servicefile.shared.cart_count)
+        self.intial_setup_action()
         self.label_cartcount.layer.cornerRadius = 10.0
         let nibName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
         self.coll_productlist.register(nibName, forCellWithReuseIdentifier: "cell")
@@ -90,6 +95,16 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
         self.startTimer()
     }
     
+    
+    func intial_setup_action(){
+    
+        // footer action
+            self.view_footer.setup(b1: false, b2: true, b3: false)
+            self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.spshop), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.spDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        // footer action
+    }
   
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -228,15 +243,15 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
                 cell.image_shopping_bag.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
                 cell.view_main.view_cornor()
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
-                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
-                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                cell.label_price.text = "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                cell.label_price.text = "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
                  if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
                      cell.label_off_percentage.text =  String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + "% off"
                  }else{
                      cell.label_off_percentage.text = ""
                  }
                  if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
-                     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
                      attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                      cell.label_offer.attributedText = attributeString
                  }else{
@@ -272,7 +287,7 @@ class sp_productdetailspage_ViewController: UIViewController, UICollectionViewDe
                 
                 cell.label_offer.text = ""
                 if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price != 0 {
-                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
                     attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                     cell.label_offer.attributedText = attributeString
                 }else{
@@ -359,7 +374,7 @@ extension sp_productdetailspage_ViewController {
                         //self.label_likes.text = self.product_review
                        
                         self.view_rate.rating = self.product_rating
-                        self.label_product_cost.text = "₹ " + String(self.product_price)
+                        self.label_product_cost.text = "INR " + String(self.product_price)
                         self.label_discount.text = String(self.product_discount) + "% off"
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription

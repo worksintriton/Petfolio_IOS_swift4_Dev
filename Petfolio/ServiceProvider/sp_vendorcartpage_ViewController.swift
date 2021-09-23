@@ -181,10 +181,10 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             self.view_coupon_discount.isHidden = true
             self.label_btn_apply.text = self.textbtncoupon
             self.discountprice = "0"
-            self.label_coupon_discount.text = "₹ " + self.discountprice
+            self.label_coupon_discount.text = "INR " + self.discountprice
             Servicefile.shared.labelamt_total = Servicefile.shared.label_Original_amt_total
             self.totalprice = String(Servicefile.shared.label_Original_amt_total)
-            self.label_amt_total.text = "₹ " + self.totalprice
+            self.label_amt_total.text = "INR " + self.totalprice
         }
         
         func callcheckcoupon(){
@@ -213,11 +213,11 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                             self.couponcode = self.textfield_coupon.text!
                             self.label_btn_apply.text = self.textbtncoupon
                             self.discountprice = String(data["discount_price"] as! Int)
-                            self.label_coupon_discount.text = "₹ " + self.discountprice
+                            self.label_coupon_discount.text = "INR " + self.discountprice
                             self.originalprice = String(data["original_price"] as! Int)
                             self.totalprice = String(data["total_price"] as! Int)
                             Servicefile.shared.labelamt_total = data["total_price"] as! Int
-                            self.label_amt_total.text = "₹ " + self.totalprice
+                            self.label_amt_total.text = "INR " + self.totalprice
                             let Message = res["Message"] as? String ?? ""
                             self.alert(Message: Message)
                         }else{
@@ -260,6 +260,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             let cartlist = Servicefile.shared.cartdata[indexPath.row] as! NSDictionary
             let productdata = cartlist["product_id"] as! NSDictionary
             let product_img = productdata["product_img"] as! NSArray
+            let thumbnail_image = productdata["thumbnail_image"] as? String ?? ""
             cell.label_product_title.text = productdata["product_name"] as? String ?? ""
             cell.label_product_cart_count.text = String(cartlist["product_count"] as? Int ?? 0)
             cell.selectionStyle = .none
@@ -276,16 +277,16 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
 //            cell.label_product_amt.attributedText = attributeString
 //            cell.label_final_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
             
-            let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
+            let costamt = "INR " + String(productdata["discount_amount"] as? Int ?? 0)
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-            cell.label_product_amt.text = "₹ " + String(productdata["cost"] as? Int ?? 0)
+            cell.label_product_amt.text = "INR " + String(productdata["cost"] as? Int ?? 0)
             cell.label_final_amt.attributedText = attributeString
             
             
             if product_img.count > 0 {
                 cell.img_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: product_img[0] as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in
+                cell.img_product.sd_setImage(with: Servicefile.shared.StrToURL(url: thumbnail_image as? String ?? Servicefile.sample_img)) { (image, error, cache, urls) in
                     if (error != nil) {
                         cell.img_product.image = UIImage(named: imagelink.sample)
                     } else {
@@ -438,10 +439,10 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                             Servicefile.shared.labelamt_subtotal = prodouct_total
                             Servicefile.shared.labelsubtotal_itmcount = prodcut_item_count
                             Servicefile.shared.label_Original_amt_total = grand_total
-                            self.label_amt_total.text = "₹ " + String(Servicefile.shared.labelamt_total)
-                            self.label_amt_discount.text = "₹ " + String(Servicefile.shared.labelamt_discount)
-                            self.label_amt_shipping.text = "₹ " + String(Servicefile.shared.labelamt_shipping)
-                            self.label_amt_subtotal.text = "₹ " + String(Servicefile.shared.labelamt_subtotal)
+                            self.label_amt_total.text = "INR " + String(Servicefile.shared.labelamt_total)
+                            self.label_amt_discount.text = "INR " + String(Servicefile.shared.labelamt_discount)
+                            self.label_amt_shipping.text = "INR " + String(Servicefile.shared.labelamt_shipping)
+                            self.label_amt_subtotal.text = "INR " + String(Servicefile.shared.labelamt_subtotal)
                             var item = " item"
                             if Servicefile.shared.labelsubtotal_itmcount == 1 {
                                 item = " item"

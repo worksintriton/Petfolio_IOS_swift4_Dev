@@ -49,6 +49,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        CacheManager.shared.clearCache()
+//        Servicefile.shared.getuserdata()
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        print("user name",Servicefile.shared.user_type, Servicefile.shared.first_name)
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
@@ -70,7 +75,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.col_shop.register(niName, forCellWithReuseIdentifier: "cell")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         scrollview.addSubview(refreshControl) // not required when using UITableViewController
-        print("referal code :",Servicefile.shared.my_ref_code)
+        print("Referral code :",Servicefile.shared.my_ref_code)
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(checklocation), name: UIApplication.willEnterForegroundNotification
@@ -403,7 +408,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             cell.image_product.layer.cornerRadius = 8.0
             cell.view_main.dropShadow()
             if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
-                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                 cell.label_offer.attributedText = attributeString
             }else{
@@ -424,7 +429,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
                  cell.label_off_percentage.text = ""
              }
              if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
-                 let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                 let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
                  attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                  cell.label_offer.attributedText = attributeString
              }else{
@@ -436,7 +441,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             
             cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
             cell.label_vendor.text = Servicefile.shared.petnewprod[indexPath.row].cat_names
-            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
             cell.view_rating.rating = Double(Servicefile.shared.petnewprod[indexPath.row].product_rate) ?? 0.0
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_shopbag.view_cornor()
@@ -478,7 +483,16 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
             let vc = UIStoryboard.pet_servicelist_ViewController()
             self.present(vc, animated: true, completion: nil)
         } else if self.col_shop_banner == collectionView {
-            
+            if Servicefile.shared.petshopbanner[indexPath.row].title == "Pet Care" { //; title = Shop, title = "Pet Care";
+                let tapbar = UIStoryboard.Pet_searchlist_DRViewController()
+                self.present(tapbar, animated: true, completion: nil)
+            }else if Servicefile.shared.petshopbanner[indexPath.row].title == "Pet Service" { //; title = Shop, title = "Pet Care"
+                let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+                self.present(tapbar, animated: true, completion: nil)
+            }else if Servicefile.shared.petshopbanner[indexPath.row].title == "Shop" { //; title = Shop, title = "Pet Care";
+                let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+                self.present(tapbar, animated: true, completion: nil)
+            }
         }else{
             Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
             let vc = UIStoryboard.productdetailsViewController()

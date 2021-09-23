@@ -147,9 +147,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
         if quantity == 1 {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
         }else {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
           
       
@@ -177,9 +177,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
         if quantity == 1 {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
         }else {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
             cell.btn_order_details.tag = indexPath.row
@@ -203,9 +203,9 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
             cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
         let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
         if quantity == 1 {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
         }else {
-            cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+            cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
         }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
             cell.label_prod_date_title.text = "Cancelled on : "

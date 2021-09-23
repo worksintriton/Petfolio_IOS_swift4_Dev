@@ -71,6 +71,8 @@ class doc_shop_dashboardViewController: UIViewController, UITableViewDelegate, U
         self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         
+        
+        
         self.view_footer.setup(b1: false, b2: true, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         //self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)

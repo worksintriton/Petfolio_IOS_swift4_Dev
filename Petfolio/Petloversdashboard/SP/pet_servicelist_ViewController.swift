@@ -183,7 +183,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
             cell.label_loc.text = Servicefile.shared.pet_SP_service_details[indexPath.row].city_name
         }
         
-        cell.label_amt.text = "₹ " +  String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_price)
+        cell.label_amt.text = "INR " +  String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_price)
         cell.label_rate.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].rating_count)
         //cell.label_offer.text = String(Servicefile.shared.pet_SP_service_details[indexPath.row].service_offer) + "% offer"
         cell.label_title.text = Servicefile.shared.pet_SP_service_details[indexPath.row].service_provider_name

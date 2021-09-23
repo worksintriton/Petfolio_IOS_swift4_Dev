@@ -162,7 +162,7 @@ class Pet_app_details_ViewController: UIViewController {
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "My Appointment"
+        self.view_subpage_header.label_header_title.text = "Appointment Details"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -177,7 +177,6 @@ class Pet_app_details_ViewController: UIViewController {
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        
         self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
     // footer action
     }
@@ -226,7 +225,7 @@ class Pet_app_details_ViewController: UIViewController {
     }
     
     @IBAction func action_cancelappoint(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel this Appointment", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex]._id, appointmentstatus: "cancel")
         }))
@@ -314,10 +313,12 @@ class Pet_app_details_ViewController: UIViewController {
                         self.view_confrence.isHidden = true
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
                            
+                            
+                            
                             Servicefile.shared.pet_apoint_id = data["_id"] as? String ?? ""
                             Servicefile.shared.Doc_details_app_id = data["_id"] as? String ?? ""
                             self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
-                            self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                            self.label_orderdate.text = data["date_and_time"] as? String ?? ""
                             Servicefile.shared.doc_details_date = self.label_orderdate.text!
                             let comm_type = data["communication_type"] as? String ?? ""
                             if comm_type == "Online" || comm_type == "Online Or Visit"{
@@ -347,7 +348,7 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                             self.label_payment_method.text = data["payment_method"] as? String ?? ""
                             let amt_val =  data["amount"] as? String ?? ""
-                            self.label_ordercost.text = "₹ " + amt_val
+                            self.label_ordercost.text = "INR " + amt_val
                             let pet_id = data["pet_id"] as! NSDictionary
                             let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
                             if Int(truncating: pet_id["vaccinated"] as? NSNumber ?? 0) == 1 {
@@ -478,7 +479,7 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_doc_comm.text = prescription_details
                             self.label_doc_comm.sizeToFit()
                             Servicefile.shared.doc_detail_id = _id
-                            self.label_Holder_cost.text = "₹ " + amt
+                            self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = clinic_loc
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
@@ -497,13 +498,15 @@ class Pet_app_details_ViewController: UIViewController {
                             self.view_subdiagnosis.isHidden = true
                             self.view_doc_comm_header.isHidden = true
                             self.view_doc_comm.isHidden = true
+                            
                             self.label_app_bookAndTime.text = data["booking_date_time"] as? String ?? ""
-                            self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
+                            self.label_orderdate.text = data["date_and_time"] as? String ?? ""
+                            
                             self.view_confrence.isHidden = true
                             self.label_order_id.text = data["payment_id"] as? String ?? ""
                             self.label_payment_method.text = data["payment_method"] as? String ?? ""
                             let amount_val = data["service_amount"] as? String ?? ""
-                            self.label_ordercost.text = "₹ " + amount_val
+                            self.label_ordercost.text = "INR " + amount_val
                             
                             let pet_id = data["pet_id"] as! NSDictionary
                             let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
@@ -548,7 +551,7 @@ class Pet_app_details_ViewController: UIViewController {
                             let sp_business = sp_business_info[0] as! NSDictionary
                             let sp_loc  = sp_business["sp_loc"] as? String ?? ""
                             self.label_holder_name.text = sp_business["bussiness_name"] as? String ?? ""
-                            self.label_Holder_cost.text = "₹ " + amt
+                            self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = sp_loc
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)

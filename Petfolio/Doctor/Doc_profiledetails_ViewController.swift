@@ -25,6 +25,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var view_footer: doc_footer!
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var view_img_user: SNShadowView!
+    @IBOutlet weak var label_clinic_name: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +42,14 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     // header action
         self.view_header.label_header_title.text = "Profile"
         self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_header.btn_back.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_header.view_profile.isHidden = true
         self.view_header.view_sos.isHidden = true
         self.view_header.view_bel.isHidden = true
         self.view_header.view_bag.isHidden = true
     // header action
     // footer action
-        self.view_footer.setup(b1: false, b2: true, b3: false)
+        self.view_footer.setup(b1: true, b2: false, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     // footer action
@@ -68,7 +69,6 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                 } else {
                     self.imag_user.image = image
                 }
-                
             }
         }
         self.imag_user.contentMode = .scaleAspectFill
@@ -168,6 +168,7 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
                         let clinic_loc = Data["clinic_loc"] as? String ?? ""
                         let clinic_long = Data["clinic_long"] as? Double ?? 0.0
                         let clinic_name = Data["clinic_name"] as? String ?? ""
+                        self.label_clinic_name.text = clinic_name
                         let communication_type = Data["communication_type"] as? String ?? ""
                         let consultancy_fees = Data["consultancy_fees"] as? Int ?? 0
                         let date_and_time = Data["date_and_time"] as? String ?? ""

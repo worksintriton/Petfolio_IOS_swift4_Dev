@@ -148,7 +148,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         Servicefile.shared.Pet_breed_val = ""
         Servicefile.shared.pet_type_val = ""
         self.view_Petname.textfield_value.placeholder = "Name"
-        self.view_pet.textfield_value.placeholder = "Type & Breed"
+        self.view_pet.textfield_value.placeholder = "Types & Breeds"
         self.view_selectdate.textfield_value.placeholder = "Select Vaccinated date"
         self.view_selectdateCalender.textfield_value.placeholder = "Date of Birth"
         self.view_petcolor.textfield_value.placeholder = "Color"
@@ -374,15 +374,19 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     @IBAction func action_submit(_ sender: Any) {
         if self.view_Petname.textfield_value.text == "" {
             self.alert(Message: "Please enter Pet name")
-        }else if self.view_petbio.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet Bio")
-        }else if Servicefile.shared.pet_type_val == "" {
+        }
+//        else if self.view_petbio.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet Bio")
+//        }
+        else if Servicefile.shared.pet_type_val == "" {
             self.alert(Message: "Please select Pet Type and Breed")
-        }else if self.view_petcolor.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet color")
-        }else if self.view_selectdateCalender.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet age")
-        }else{
+        }
+//        else if self.view_petcolor.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet color")
+//        }else if self.view_selectdateCalender.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet age")
+//        }
+        else{
             print("user_id", Servicefile.shared.userid,
                   "pet_img" ,"",
                   "pet_name" , Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),

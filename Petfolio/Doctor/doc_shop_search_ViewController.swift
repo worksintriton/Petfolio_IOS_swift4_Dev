@@ -74,7 +74,7 @@ class doc_shop_search_ViewController: UIViewController, UICollectionViewDelegate
     
     @objc func viewback(sender : UIButton){
 //        Servicefile.shared.tabbar_selectedindex = 3
-               let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
+               let tapbar = UIStoryboard.doc_shop_dashboardViewController() // shop
 //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                self.present(tapbar, animated: true, completion: nil)
     }
@@ -115,7 +115,7 @@ class doc_shop_search_ViewController: UIViewController, UICollectionViewDelegate
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
             cell.label_prod_title.text = Servicefile.shared.sp_dash_search[indexPath.row].product_title
-            cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_search[indexPath.row].product_price)
+            cell.label_price.text = "INR " + String(Servicefile.shared.sp_dash_search[indexPath.row].product_price)
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_search[indexPath.row].product_img) {

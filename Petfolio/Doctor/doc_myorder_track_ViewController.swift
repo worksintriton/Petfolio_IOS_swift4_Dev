@@ -324,7 +324,7 @@ class doc_myorder_track_ViewController: UIViewController, UITableViewDelegate, U
                         self.prodouct_total = Data["product_total_price"] as? Int ?? 0
                         self.product_name = Data["product_name"] as? String ?? ""
                         self.product_price = Data["product_price"] as? Int ?? 0
-                        self.label_product_amt.text = "₹ " +  String(self.prodouct_total)
+                        self.label_product_amt.text = "INR " +  String(self.prodouct_total)
                         self.product_quantity = Data["product_count"] as? Int ?? 0
                         self.shipping_address = Data["shipping_address"] as? String ?? ""
                         self.shipping_address_id = Data["shipping_address_id"] as? String ?? ""
@@ -351,7 +351,7 @@ class doc_myorder_track_ViewController: UIViewController, UITableViewDelegate, U
                         self.label_orderdate.text = Servicefile.shared.date_of_booking
                         self.label_id.text = Servicefile.shared.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹" + String(self.prodouct_total)
+                        self.label_ordertotal.text = "INR " + String(self.prodouct_total)
                         self.label_quality.text = String(self.product_quantity)
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary

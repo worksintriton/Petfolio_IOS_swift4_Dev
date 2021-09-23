@@ -47,8 +47,12 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
     @IBOutlet weak var view_textfield_coupon: UIView!
     @IBOutlet weak var view_popupbook: UIView!
     
+    @IBOutlet weak var view_iscash: UIView!
+    
     var pay_method = "Online"
     var textbtncoupon = "Apply"
+    
+    @IBOutlet weak var label_pop_status: UILabel!
     
     var discountprice = "0"
     var originalprice = "0"
@@ -64,14 +68,17 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
         self.view_appremove.view_cornor()
         self.view_textfield_coupon.view_cornor()
         self.intial_setup_action()
-        print("amount in payment page",Servicefile.shared.pet_apoint_amount)
+        print("amount in payment page",Servicefile.shared.pet_apoint_amount, Servicefile.shared.pet_apoint_communication_type)
+        if Servicefile.shared.pet_apoint_communication_type == "Online" {
+            self.view_iscash.isHidden = true
+        }
         self.label_clinicname.text = Servicefile.shared.clinic_name
         self.label_docname.text = Servicefile.shared.dr_name
         self.label_app_type.text = Servicefile.shared.pet_apoint_appointment_types
-        self.label_cost.text = "₹ " + String(Servicefile.shared.pet_apoint_amount)
+        self.label_cost.text = "INR " + String(Servicefile.shared.pet_apoint_amount)
         self.label_bookingdatetime.text = Servicefile.shared.pet_apoint_booking_date_time
-        self.label_app_cost.text = "₹ " + String(Servicefile.shared.pet_apoint_amount)
-        self.label_total_app_discount.text = "₹ " + String(Servicefile.shared.pet_apoint_amount)
+        self.label_app_cost.text = "INR " + String(Servicefile.shared.pet_apoint_amount)
+        self.label_total_app_discount.text = "INR " + String(Servicefile.shared.pet_apoint_amount)
         self.label_petname.text =  Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
         self.checkradio(str: pay_method)
         self.label_app_discount.text = "0"
@@ -123,7 +130,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: false, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
     // header action
     }
    
@@ -156,9 +163,9 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
         self.view_isonline.isHidden = true
         self.label_applyremove.text = self.textbtncoupon
         self.discountprice = "0"
-        self.label_app_discount.text = "₹ " + self.discountprice
+        self.label_app_discount.text = "INR " + self.discountprice
         self.totalprice = String(Servicefile.shared.pet_apoint_amount)
-        self.label_total_app_discount.text = "₹ " + self.totalprice
+        self.label_total_app_discount.text = "INR " + self.totalprice
     }
     
     @IBAction func action_view_appointmentbooked(_ sender: Any) {
@@ -245,10 +252,10 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
                         self.couponcode = self.textfield_coupon.text!
                         self.label_applyremove.text = self.textbtncoupon
                         self.discountprice = String(data["discount_price"] as! Int)
-                        self.label_app_discount.text = "₹ " + self.discountprice
+                        self.label_app_discount.text = "INR " + self.discountprice
                         self.originalprice = String(data["original_price"] as! Int)
                         self.totalprice = String(data["total_price"] as! Int)
-                        self.label_total_app_discount.text = "₹ " + self.totalprice
+                        self.label_total_app_discount.text = "INR " + self.totalprice
                         let Message = res["Message"] as? String ?? ""
                         self.alert(Message: Message)
                     }else{
@@ -311,6 +318,9 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
+                        Servicefile.shared.appointtype = "New"
+                        let Message = res["Message"] as? String ?? ""
+                        self.label_pop_status.text = Message
                         self.View_shadow.isHidden = false
                         self.view_popup.isHidden = false
                         self.stopAnimatingActivityIndicator()

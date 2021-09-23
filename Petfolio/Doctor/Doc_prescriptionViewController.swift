@@ -10,8 +10,10 @@ import UIKit
 import Alamofire
 import iOSDropDown
 import SDWebImage
+import IQKeyboardManagerSwift
 
-class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchTextFieldDelegate {
     
     @IBOutlet weak var tbl_medilist: UITableView!
     
@@ -30,6 +32,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var label_prescription: UILabel!
     @IBOutlet weak var label_note: UILabel!
     @IBOutlet weak var view_prescrip: UIView!
+    @IBOutlet weak var view_pres1: UIView!
+    @IBOutlet weak var view_pres2: UIView!
     
     @IBOutlet weak var isimg_manual: UIImageView!
     @IBOutlet weak var isimg_up_img: UIImageView!
@@ -61,8 +65,26 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     var a = false
     var n = false
     
+    
+    @IBOutlet weak var textfield_medicine: UITextField!
+    @IBOutlet weak var textfield_noofdays: UITextField!
+    
+    @IBOutlet weak var img_M: UIImageView!
+    @IBOutlet weak var btn_M: UIButton!
+    
+    
+    @IBOutlet weak var img_A: UIImageView!
+    @IBOutlet weak var btn_A: UIButton!
+    
+    
+    @IBOutlet weak var img_N: UIImageView!
+    @IBOutlet weak var btn_N: UIButton!
+    @IBOutlet weak var btn_add: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].
         if Servicefile.shared.pet_appint_pay_method != "Cash" {
             self.view_ifcash.isHidden = true
@@ -82,12 +104,14 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         Servicefile.shared.Doc_pre_descrip = ""
         Servicefile.shared.doc_pres_diagno = ""
         Servicefile.shared.doc_pres_sub_diagno = ""
+        Servicefile.shared.doc_diag_img = ""
         Servicefile.shared.Doc_pres.removeAll()
         Servicefile.shared.doc_diag = ""
         Servicefile.shared.doc_sub_diag = ""
         Servicefile.shared.doc_diag_id = ""
         Servicefile.shared.doc_sub_diag_id = ""
         Servicefile.shared.doc_diag_type = "PDF"
+        
         
         self.tbl_medilist.delegate = self
         self.tbl_medilist.dataSource = self
@@ -114,10 +138,28 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.view_close.isHidden = true
         self.imagepicker.delegate = self
         
+        self.textfield_medicine.delegate = self
+        self.textfield_noofdays.delegate = self
+        
+        self.btn_M.addTarget(self, action: #selector(action_m), for: .touchUpInside)
+        self.btn_A.addTarget(self, action: #selector(action_a), for: .touchUpInside)
+        self.btn_N.addTarget(self, action: #selector(action_n), for: .touchUpInside)
+        self.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        IQKeyboardManager.shared.enable = true
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
+        IQKeyboardManager.shared.enable = false
         self.doctor_diagnosis.text = Servicefile.shared.doc_diag
         self.doctor_sub_diagnosis.text = Servicefile.shared.doc_sub_diag
     }
@@ -148,6 +190,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    
+    
     func calldrop(){
         self.doc_diagno.optionArray = self.sear_diag
         self.doc_diagno.didSelect{(selectedText , index ,id) in
@@ -174,14 +218,18 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     @IBAction func action_submitprescription(_ sender: Any) {
         let cash = self.textfield_servicechargeamt.text!
         let valcash = cash.removingLeadingSpaces()
-        if self.doctor_sub_diagnosis.text == "" {
-            self.alert(Message: "Please select the sub diagnosis")
-        }else if self.doctor_diagnosis.text == "" {
+        if self.doctor_diagnosis.text == "" {
             self.alert(Message: "Please select the diagnosis")
-        }else if self.textview_descrip.text == "" {
-            self.alert(Message: "Please select the description")
+        }else if self.doctor_sub_diagnosis.text == "" {
+            self.alert(Message: "Please select the sub diagnosis")
+        }else if self.textview_descrip.text == "Write here..."{
+            self.alert(Message: "please enter the comments")
+        }else if self.textview_descrip.text == ""{
+            self.alert(Message: "please enter the comments")
         }else if checkispdf() {
             self.alert(Message: "Please add the tablets")
+        }else if checkisimage() {
+            self.alert(Message: "Please add the image")
         }else{
             if Servicefile.shared.pet_appint_pay_method != "Cash" {
                 self.callcash()
@@ -203,9 +251,24 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                 return true
             }
         }else{
+            
             return false
         }
     }
+    
+    func checkisimage()->Bool{
+        if Servicefile.shared.doc_diag_type == "Image"  {
+            if Servicefile.shared.doc_diag_img != "" {
+                return false
+            }else{
+                return true
+            }
+        }else{
+            return false
+        }
+    }
+    
+    
     
     @IBAction func action_hidepopup(_ sender: Any) {
         let vc = UIStoryboard.DocdashboardViewController()
@@ -216,7 +279,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.dismiss(animated: true, completion: nil)
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -235,45 +298,47 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }else{
+//        if section == 0 {
+//            return 1
+//        }else{
             return Servicefile.shared.Doc_pres.count
-        }
+       // }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         if indexPath.section == 0 {
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docaddpresTableViewCell
-            cell.textfield_medi.text = Servicefile.shared.medi
-            cell.textfield_noofdays.text = Servicefile.shared.noofday
-            cell.selectionStyle = .none
-            if m != true {
-                cell.img_m.image = UIImage(named: imagelink.checkbox)
-            }else{
-                cell.img_m.image = UIImage(named: imagelink.checkbox_1)
-            }
-            if a != true {
-                cell.img_a.image = UIImage(named: imagelink.checkbox)
-            }else{
-                cell.img_a.image = UIImage(named: imagelink.checkbox_1)
-            }
-            if n != true {
-                cell.img_n.image = UIImage(named: imagelink.checkbox)
-            }else{
-                cell.img_n.image = UIImage(named: imagelink.checkbox_1)
-            }
-            
-            cell.btn_m.addTarget(self, action: #selector(action_m), for: .touchUpInside)
-            cell.btn_a.addTarget(self, action: #selector(action_a), for: .touchUpInside)
-            cell.btn_n.addTarget(self, action: #selector(action_n), for: .touchUpInside)
-            cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
-            return cell
-        }else{
+//         if indexPath.section == 0 {
+//            let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! docaddpresTableViewCell
+//            cell.textfield_medi.text = Servicefile.shared.medi
+//            cell.textfield_noofdays.text = Servicefile.shared.noofday
+//            cell.selectionStyle = .none
+//            if m != true {
+//                cell.img_m.image = UIImage(named: imagelink.checkbox)
+//            }else{
+//                cell.img_m.image = UIImage(named: imagelink.checkbox_1)
+//            }
+//            if a != true {
+//                cell.img_a.image = UIImage(named: imagelink.checkbox)
+//            }else{
+//                cell.img_a.image = UIImage(named: imagelink.checkbox_1)
+//            }
+//            if n != true {
+//                cell.img_n.image = UIImage(named: imagelink.checkbox)
+//            }else{
+//                cell.img_n.image = UIImage(named: imagelink.checkbox_1)
+//            }
+//
+//            cell.btn_m.addTarget(self, action: #selector(action_m), for: .touchUpInside)
+//            cell.btn_a.addTarget(self, action: #selector(action_a), for: .touchUpInside)
+//            cell.btn_n.addTarget(self, action: #selector(action_n), for: .touchUpInside)
+//            cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
+//            return cell
+//        }else{
             let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
             let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
+            cell.selectionStyle = .none
             cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
             let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
+            
             let mv = cons["morning"] as? Bool ?? false
             let av = cons["evening"] as? Bool ?? false
             let nv = cons["night"] as? Bool ?? false
@@ -296,12 +361,14 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             cell.btn_m.tag = indexPath.row
             cell.btn_n.tag = indexPath.row
             cell.btn_a.tag = indexPath.row
-            cell.btn_m.addTarget(self, action: #selector(action_m), for: .touchUpInside)
-            cell.btn_a.addTarget(self, action: #selector(action_a), for: .touchUpInside)
-            cell.btn_n.addTarget(self, action: #selector(action_n), for: .touchUpInside)
+            cell.btn_delete.tag = indexPath.row
+//            cell.btn_m.addTarget(self, action: #selector(action_editm), for: .touchUpInside)
+//            cell.btn_a.addTarget(self, action: #selector(action_edita), for: .touchUpInside)
+//            cell.btn_n.addTarget(self, action: #selector(action_editn), for: .touchUpInside)
+            cell.btn_delete.addTarget(self, action: #selector(action_delete), for: .touchUpInside)
             cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
             return cell
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -312,6 +379,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.label_prescription.isHidden = false
         self.label_note.isHidden = false
         self.view_prescrip.isHidden = false
+        self.view_pres1.isHidden = false
+        self.view_pres2.isHidden = false
         self.view_upload.isHidden = true
         self.isimg_manual.image = UIImage(named: imagelink.selectedRadio)
         self.isimg_up_img.image = UIImage(named: imagelink.Radio)
@@ -322,6 +391,8 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         self.label_prescription.isHidden = true
         self.label_note.isHidden = true
         self.view_prescrip.isHidden = true
+        self.view_pres1.isHidden = true
+        self.view_pres2.isHidden = true
         self.view_upload.isHidden = false
         self.isimg_manual.image = UIImage(named: imagelink.Radio)
         self.isimg_up_img.image = UIImage(named: imagelink.selectedRadio)
@@ -358,12 +429,17 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             mv = true
         }
-        Servicefile.shared.Doc_pres.remove(at: tag)
-        let a = ["Quantity": Quantity,
-                 "Tablet_name": tabname,
-                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
-        Servicefile.shared.Doc_pres.insert(a, at: tag)
-        self.tbl_medilist.reloadData()
+        
+        if av == false && mv == false && nv == false {
+            self.alert(Message: "Consumption should not be empty ")
+        }else{
+            Servicefile.shared.Doc_pres.remove(at: tag)
+            let a = ["Quantity": Quantity,
+                     "Tablet_name": tabname,
+                     "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+            Servicefile.shared.Doc_pres.insert(a, at: tag)
+            self.tbl_medilist.reloadData()
+        }
     }
     
     @objc func action_edita(sender: UIButton){
@@ -380,12 +456,18 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             av = true
         }
-        Servicefile.shared.Doc_pres.remove(at: tag)
-        let a = ["Quantity": Quantity,
-                 "Tablet_name": tabname,
-                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
-        Servicefile.shared.Doc_pres.insert(a, at: tag)
-        self.tbl_medilist.reloadData()
+        
+        if av == false && mv == false && nv == false {
+            self.alert(Message: "Consumption days should not be empty ")
+        }else{
+            Servicefile.shared.Doc_pres.remove(at: tag)
+            let a = ["Quantity": Quantity,
+                     "Tablet_name": tabname,
+                     "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+            Servicefile.shared.Doc_pres.insert(a, at: tag)
+            self.tbl_medilist.reloadData()
+        }
+        
     }
     
     @objc func action_editn(sender: UIButton){
@@ -402,13 +484,17 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             nv = true
         }
-        Servicefile.shared.Doc_pres.remove(at: tag)
-        let a = ["Quantity": Quantity,
-                 "Tablet_name": tabname,
-                 "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
-        Servicefile.shared.Doc_pres.insert(a, at: tag)
-        self.tbl_medilist.reloadData()
-        self.tbl_medilist.reloadData()
+        
+        if av == false && mv == false && nv == false {
+            self.alert(Message: "Consumption days should not be empty ")
+        }else{
+            Servicefile.shared.Doc_pres.remove(at: tag)
+            let a = ["Quantity": Quantity,
+                     "Tablet_name": tabname,
+                     "consumption": ["evening": av,"morning": mv,"night": nv]] as NSDictionary
+            Servicefile.shared.Doc_pres.insert(a, at: tag)
+            self.tbl_medilist.reloadData()
+        }
     }
     
     @objc func action_m(sender: UIButton){
@@ -417,7 +503,11 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             m = true
         }
-        self.tbl_medilist.reloadData()
+        if m != true {
+            self.img_M.image = UIImage(named: imagelink.checkbox)
+        }else{
+            self.img_M.image = UIImage(named: imagelink.checkbox_1)
+        }
     }
     
     @objc func action_a(sender: UIButton){
@@ -426,7 +516,13 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             a = true
         }
-        self.tbl_medilist.reloadData()
+        if a != true {
+            self.img_A.image = UIImage(named: imagelink.checkbox)
+        }else{
+            self.img_A.image = UIImage(named: imagelink.checkbox_1)
+        }
+        
+        
     }
     
     @objc func action_n(sender: UIButton){
@@ -435,18 +531,37 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else{
             n = true
         }
-        self.tbl_medilist.reloadData()
+        if n != true {
+            self.img_N.image = UIImage(named: imagelink.checkbox)
+        }else{
+            self.img_N.image = UIImage(named: imagelink.checkbox_1)
+        }
+    }
+    
+    @objc func action_delete(sender: UIButton){
+        let alert = UIAlertController(title: "Are you sure need to delete the tablet?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let tag = sender.tag
+            let presdata = Servicefile.shared.Doc_pres.remove(at: tag)
+            self.tbl_medilist.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @objc func action_addtablet(sender: UIButton){
+        Servicefile.shared.medi = self.textfield_medicine.text!
+        Servicefile.shared.noofday = self.textfield_noofdays.text!
         print("data in doc pres",Servicefile.shared.medi, Servicefile.shared.noofday, Servicefile.shared.consdays)
-        if Servicefile.shared.noofday == "" {
-            self.alert(Message: "please enter the no of days")
-        }else if Servicefile.shared.medi == "" {
-            self.alert(Message: "please enter the Medicine name")
-        }else if m == false && n == false && a == false {
-            self.alert(Message: "please enter the consuption days")
-        }else{
+        if Servicefile.shared.medi == "" {
+            self.alert(Message: "please enter tablet name")
+        } else if Servicefile.shared.noofday == "" {
+            self.alert(Message: "please enter no of days")
+        } else if m == false && n == false && a == false {
+            self.alert(Message: "please enter consumption")
+        } else {
             var B = Servicefile.shared.Doc_pres
             var arr = B
             let a = ["Quantity": Servicefile.shared.noofday,
@@ -460,9 +575,27 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
             Servicefile.shared.medi = ""
             Servicefile.shared.noofday = ""
             Servicefile.shared.consdays = ""
+            self.textfield_medicine.text = Servicefile.shared.medi
+            self.textfield_noofdays.text =  Servicefile.shared.noofday
+            
             self.m = false
             self.a = false
             self.n = false
+            if self.n != true {
+                self.img_N.image = UIImage(named: imagelink.checkbox)
+            }else{
+                self.img_N.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if self.a != true {
+                self.img_A.image = UIImage(named: imagelink.checkbox)
+            }else{
+                self.img_A.image = UIImage(named: imagelink.checkbox_1)
+            }
+            if self.m != true {
+                self.img_M.image = UIImage(named: imagelink.checkbox)
+            }else{
+                self.img_M.image = UIImage(named: imagelink.checkbox_1)
+            }
             self.tbl_medilist.reloadData()
         }
        
@@ -617,12 +750,12 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -636,7 +769,16 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-            self.upload(imagedata: convertimg!)
+            let data = pickedImg.jpegData(compressionQuality: 0.9)
+            let size = Servicefile.shared.converttosize(size: 2)
+            print("Image size",data!.count,"size value",size)
+            if data!.count > size {
+                self.alert(Message: "Please Select the image Less that 2MB")
+            }else{
+                self.upload(imagedata: convertimg!)
+            }
+            
+           
         }
         dismiss(animated: true, completion: nil)
     }

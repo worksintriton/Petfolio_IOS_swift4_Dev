@@ -18,6 +18,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var view_apply: UIView!
     @IBOutlet weak var view_clearall: UIView!
     @IBOutlet weak var tbl_spec: UITableView!
+    @IBOutlet weak var img_5up: UIImageView!
     @IBOutlet weak var img_4up: UIImageView!
     @IBOutlet weak var img_3up: UIImageView!
     @IBOutlet weak var img_2up: UIImageView!
@@ -71,6 +72,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         self.img_2up.image = UIImage(named: "Radio")
         self.img_3up.image = UIImage(named: "Radio")
         self.img_4up.image = UIImage(named: "Radio")
+        self.img_5up.image = UIImage(named: "Radio")
         self.selrate = 0
         self.selspec = ""
         self.selnearby = 0
@@ -84,11 +86,22 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
                "Review_count" , self.selrate)
     }
     
+    
+    @IBAction func action_5up(_ sender: Any) {
+        self.img_1up.image = UIImage(named: "Radio")
+        self.img_2up.image = UIImage(named: "Radio")
+        self.img_3up.image = UIImage(named: "Radio")
+        self.img_4up.image = UIImage(named: "Radio")
+        self.img_5up.image = UIImage(named: "selectedRadio")
+        self.selrate = 5
+    }
+    
     @IBAction func action_4up(_ sender: Any) {
         self.img_1up.image = UIImage(named: "Radio")
         self.img_2up.image = UIImage(named: "Radio")
         self.img_3up.image = UIImage(named: "Radio")
         self.img_4up.image = UIImage(named: "selectedRadio")
+        self.img_5up.image = UIImage(named: "Radio")
         self.selrate = 4
     }
     
@@ -97,6 +110,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         self.img_2up.image = UIImage(named: "Radio")
         self.img_3up.image = UIImage(named: "selectedRadio")
         self.img_4up.image = UIImage(named: "Radio")
+        self.img_5up.image = UIImage(named: "Radio")
         self.selrate = 3
     }
     
@@ -105,6 +119,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         self.img_2up.image = UIImage(named: "selectedRadio")
         self.img_3up.image = UIImage(named: "Radio")
         self.img_4up.image = UIImage(named: "Radio")
+        self.img_5up.image = UIImage(named: "Radio")
         self.selrate = 2
     }
     
@@ -113,6 +128,7 @@ class PetfilterpageViewController: UIViewController, UITableViewDelegate, UITabl
         self.img_2up.image = UIImage(named: "Radio")
         self.img_3up.image = UIImage(named: "Radio")
         self.img_4up.image = UIImage(named: "Radio")
+        self.img_5up.image = UIImage(named: "Radio")
         self.selrate = 1
     }
     

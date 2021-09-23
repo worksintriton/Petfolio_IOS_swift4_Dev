@@ -54,16 +54,14 @@ class imagelink{
     static let image_sos = "sos2"
     //static let image_bel = "bell2"
     static let image_bel = "notification"
-    static let image_bag = "cart2"
+    static let image_bag = "Bag" // #imageLiteral(resourceName: "Bag.png")
     static let image_profile = "user2"
     static let image_back = "side arrow"
     
     static let sidemenu = "Menu1"
-//    static let sidemenu = "Group55"
-    
+ // static let sidemenu = "Group55"
     static let Icon_map_pin = "Icon_map_pin"
     static let Drop_down = "Path76"
-    
     static let cat1 = "cat_walk1"
     static let cat2 = "catwalk2"
     static let dog1 = "loader"
@@ -225,6 +223,7 @@ class Servicefile {
     static let pet_sp_service_details = baseurl + "/api/service_provider/mobile/sp_fetch_by_id"
     static let pet_review_update = baseurl + "/api/appointments/reviews/update"
     static let pet_spreview_update = baseurl + "/api/sp_appointments/reviews/update"
+    static let product_review_update = baseurl + "/api/product_details/reviews/update"
     static let doc_start_appointment = baseurl + "/api/appointments/edit"
     static let doc_cancel_appointment = baseurl + "/api/appointments/edit"
     static let pet_doc_app_reshedule = baseurl + "/api/appointments/reshedule_appointment"
@@ -348,7 +347,7 @@ class Servicefile {
     // sprint 1
     
     let gradientLayer = CAGradientLayer()
-    var ruppesymbol = "₹ "
+    var ruppesymbol = "INR "
     var Doc_mycalender_selecteddates = [""]
     var Doc_mycalender_selectedhours = [""]
     var customview = UIView()
@@ -461,14 +460,15 @@ class Servicefile {
     var pet_dash_address = ""
     var pet_apoint_id = ""
     var pet_appint_pay_method = ""
+    var app_type = "app"  // walk
     // pet appointment params
     var pet_index = 0
     var pet_status = ""
     var pet_save_for = "p" // p: profile // d: doctor appoint // S // sp appointment
     var lati = 0.0
     var long = 0.0
-    var imagequantity = 0.1
-    
+    var imagequantity = 0.5
+    var imagehighquantity = 0.9
     var selectedpickname = ""
     var selectedaddress = ""
     var selectedCity = ""
@@ -718,6 +718,50 @@ class Servicefile {
            return textfield
        }
     
+    func getuserdata(){
+        if  UserDefaults.standard.string(forKey: "usertype") != nil {
+            if  UserDefaults.standard.string(forKey: "usertype") != "" {
+                Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+                Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
+                Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+                Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+                Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+                Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
+                Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
+                    if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
+                    Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                    }else{
+                        Servicefile.shared.my_ref_code = ""
+                    }
+                }else{
+                    Servicefile.shared.my_ref_code = ""
+                }
+            }
+        }
+            
+    }
+    
+    func fileSize(forURL url: Any) -> Double {
+            var fileURL: URL?
+            var fileSize: Double = 0.0
+            if (url is URL) || (url is String)
+            {
+                if (url is URL) {
+                    fileURL = url as? URL
+                }
+                else {
+                    fileURL = URL(fileURLWithPath: url as! String)
+                }
+                var fileSizeValue = 0.0
+                try? fileSizeValue = (fileURL?.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).allValues.first?.value as! Double?)!
+                if fileSizeValue > 0.0 {
+                    fileSize = (Double(fileSizeValue) / (1024 * 1024))
+                }
+            }
+            return fileSize
+    }
+    
     func setNotification(userInfo: NSDictionary) {
         print("data from the notification",userInfo)
         let data = userInfo as! NSDictionary
@@ -880,11 +924,17 @@ class Servicefile {
         }
     }
     
+    func converttosize(size: Int)->Int{
+        let sizeInBytes = size * 1024 * 1024
+        return sizeInBytes
+    }
+    
+    
     
     func convertdashlinestring(str: String)-> NSMutableAttributedString{
         var costamt = ""
         if str != "0" {
-            costamt = "₹ " + str
+            costamt = "INR " + str
         }else{
             costamt = ""
         }

@@ -25,11 +25,11 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Manage Products","My orders","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["shop-1","Doc","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Add Products","Manage Products","My orders","Notifications", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["add","shop-1","Doc","Bell", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Manage Products","My orders","Add Products","Notifications", "Logout"]
-            self.imgmenu = ["shop-1","Doc","add","Bell","Exit"]
+            self.labelmenu = ["Add Products","Manage Products","My orders","Notifications", "Logout"]
+            self.imgmenu = ["add","shop-1","Doc","Bell","Exit"]
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
         self.label_email.text = Servicefile.shared.user_email
@@ -54,19 +54,19 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     /*if Servicefile.shared.my_ref_code != "" {
-     self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.labelmenu = ["Manage Products","My orders","Favourites","Add Products","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
      self.imgmenu = ["shop-1","Doc","Like","add","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
  }else{
-     self.labelmenu = ["Manage Products","My orders","Favorites","Add Products","Notifications", "Logout"]
+     self.labelmenu = ["Manage Products","My orders","Favourites","Add Products","Notifications", "Logout"]
      self.imgmenu = ["shop-1","Doc","Like","add","Bell","Exit"]
  }*/
     
      /*
      if Servicefile.shared.my_ref_code != "" {
-     self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.labelmenu = ["Customer Orders","Manage Products","Favourites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
      self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
      }else{
-     self.labelmenu = ["Customer Orders","Manage Products","Favorites","Notifications", "Logout"]
+     self.labelmenu = ["Customer Orders","Manage Products","Favourites","Notifications", "Logout"]
      self.imgmenu = ["Doc","shop-1","Like","Bell", "Exit"]
      }
      */
@@ -117,7 +117,7 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
                 self.pushtologin()
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-                
+                self.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
         }

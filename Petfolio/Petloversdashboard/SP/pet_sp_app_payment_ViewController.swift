@@ -41,7 +41,9 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     @IBOutlet weak var view_makepay: UIView!
     @IBOutlet weak var view_textfield_coupon: UIView!
     @IBOutlet weak var view_popupbook: UIView!
+    @IBOutlet weak var view_pay_status: UILabel!
     
+    @IBOutlet weak var label_pop_status: UILabel!
     var pay_method = "Online"
     var textbtncoupon = "Apply"
     var discountprice = "0"
@@ -52,6 +54,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_popupbook.view_cornor()
         self.view_makepay.view_cornor()
         self.view_popup.view_cornor()
@@ -61,10 +64,10 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         self.label_clinicname.text = Servicefile.shared.service_id_title
         self.label_docname.text = Servicefile.shared.sp_bussiness_name
         self.label_app_type.text = Servicefile.shared.pet_apoint_appointment_types
-        self.label_cost.text = "₹ " + String(Servicefile.shared.pet_apoint_amount)
+        self.label_cost.text = "INR " + String(Servicefile.shared.pet_apoint_amount)
         self.label_bookingdatetime.text = Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time
-        self.label_app_cost.text = "₹ " + String(Servicefile.shared.service_id_amount)
-        self.label_total_app_discount.text = "₹ " + String(Servicefile.shared.service_id_amount)
+        self.label_app_cost.text = "INR " + String(Servicefile.shared.service_id_amount)
+        self.label_total_app_discount.text = "INR " + String(Servicefile.shared.service_id_amount)
         self.label_petname.text =  Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
         self.checkradio(str: pay_method)
         self.label_app_discount.text = "0"
@@ -116,7 +119,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: false, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
         // header action
     }
     
@@ -149,9 +152,9 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         self.view_isonline.isHidden = true
         self.label_applyremove.text = self.textbtncoupon
         self.discountprice = "0"
-        self.label_app_discount.text = "₹ " + self.discountprice
+        self.label_app_discount.text = "INR " + self.discountprice
         self.totalprice = String(Servicefile.shared.pet_apoint_amount)
-        self.label_total_app_discount.text = "₹ " + self.totalprice
+        self.label_total_app_discount.text = "INR " + self.totalprice
     }
     
     @IBAction func action_view_appointmentbooked(_ sender: Any) {
@@ -231,10 +234,10 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                                                                                 self.couponcode = self.textfield_coupon.text!
                                                                                 self.label_applyremove.text = self.textbtncoupon
                                                                                 self.discountprice = String(data["discount_price"] as! Int)
-                                                                                self.label_app_discount.text = "₹ " + self.discountprice
+                                                                                self.label_app_discount.text = "INR " + self.discountprice
                                                                                 self.originalprice = String(data["original_price"] as! Int)
                                                                                 self.totalprice = String(data["total_price"] as! Int)
-                                                                                self.label_total_app_discount.text = "₹ " + self.totalprice
+                                                                                self.label_total_app_discount.text = "INR " + self.totalprice
                                                                                 let Message = res["Message"] as? String ?? ""
                                                                                 self.alert(Message: Message)
                                                                             }else{
@@ -381,8 +384,11 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                                                         print("success data",res)
                                                         let Code  = res["Code"] as! Int
                                                         if Code == 200 {
+                                                            Servicefile.shared.appointtype = "New"
                                                            self.View_shadow.isHidden = false
                                                            self.view_popup.isHidden = false
+                                                            let Message = res["Message"] as? String ?? ""
+                                                            self.label_pop_status.text = Message
                                                            self.stopAnimatingActivityIndicator()
                                                         }else{
                                                           self.stopAnimatingActivityIndicator()

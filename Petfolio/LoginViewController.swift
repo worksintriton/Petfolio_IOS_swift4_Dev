@@ -87,7 +87,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
-                    print("success data",res)
+                    print("login success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSDictionary
@@ -102,7 +102,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                         Servicefile.shared.userid = user_details["_id"] as? String ?? ""
                         Servicefile.shared.userimage = user_details["profile_img"] as? String ?? ""
                         Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
-                        
                         print("userid",Servicefile.shared.userid)
                         let vc = UIStoryboard.loginotpViewController()
                         self.present(vc, animated: true, completion: nil)

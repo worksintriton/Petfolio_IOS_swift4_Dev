@@ -94,7 +94,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 240
     }
     
     func callcheckcoupon(){
@@ -143,21 +143,15 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let data  = res["Data"] as! NSDictionary
-                        let Message = res["Message"] as? String ?? ""
-                        let alert = UIAlertController(title: "", message: Message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            let vc = UIStoryboard.Pet_applist_ViewController()
-                            self.present(vc, animated: true, completion: nil)
-                        }))
-                        self.present(alert, animated: true, completion: nil)
+                        
+                        let vc = UIStoryboard.Pet_applist_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                        
                         
                     }else{
-                        let alert = UIAlertController(title: "", message: "There is some technical issue in ourside, Please contact admin for details", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                            let vc = UIStoryboard.Pet_applist_ViewController()
-                            self.present(vc, animated: true, completion: nil)
-                        }))
-                        self.present(alert, animated: true, completion: nil)
+                        let vc = UIStoryboard.Pet_applist_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                       
                     }
                     break
                 case .failure(let Error):

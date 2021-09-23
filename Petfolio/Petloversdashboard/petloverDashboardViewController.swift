@@ -53,6 +53,10 @@ class petloverDashboardViewController1: UIViewController, UICollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         //self.view_home.view_cornor()
         self.view_footer.view_cornor()

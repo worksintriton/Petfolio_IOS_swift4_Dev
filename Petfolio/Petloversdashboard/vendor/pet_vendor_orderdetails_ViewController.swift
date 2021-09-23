@@ -170,9 +170,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
             if Servicefile.shared.orderdetail_prod[indexPath.row].product_count > 1{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
             }else{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
             }
             cell.label_bookdate.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_booked
             cell.label_orderdatetitle.text = self.check_order_details_status()
@@ -205,9 +205,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
             if Servicefile.shared.orderdetail_prod[indexPath.row].product_count > 1{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) products)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) products)"
             }else{
-                cell.label_AmtAndProdCount.text = "₹ " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) product)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + "( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) product)"
             }
             cell.label_order_date.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_booked
             cell.label_orderdatetitle.text = self.check_order_details_status()
@@ -379,16 +379,16 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                         Servicefile.shared.product_title = order_details["order_text"] as? String ?? ""
                         self.product_title.text = Servicefile.shared.product_title
                         if Servicefile.shared.product_quantity > 1 {
-                            self.label_product_amt.text = "₹ " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) products )"
+                            self.label_product_amt.text = "INR " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) products )"
                         }else{
-                            self.label_product_amt.text = "₹ " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) product )"
+                            self.label_product_amt.text = "INR " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) product )"
                         }
                         
                         self.view_status.isHidden = false
                         self.label_orderdate.text = Servicefile.shared.date_of_booking
                         self.label_id.text = Servicefile.shared.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹ " + String(Servicefile.shared.product_price)
+                        self.label_ordertotal.text = "INR " + String(Servicefile.shared.product_price)
                         self.label_quality.text =  String(Servicefile.shared.product_quantity)
                         //Servicefile.shared.orderid = Servicefile.shared.order_id
                         self.image_status.image = UIImage(named: "success")

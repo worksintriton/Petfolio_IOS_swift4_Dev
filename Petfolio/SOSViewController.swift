@@ -17,6 +17,7 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var tbl_calllist: UITableView!
     @IBOutlet weak var view_call: UIView!
     
+    @IBOutlet weak var label_nophone: UILabel!
     var sel = ["0"]
     var issel = ["0"]
     var isedit = ["0"]
@@ -24,7 +25,8 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
-        
+        self.label_nophone.isHidden = true
+        self.label_nophone.text = "No phone numbers"
         self.tbl_calllist.register(UINib(nibName: "soscallTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.sel.removeAll()
         self.issel.removeAll()
@@ -171,6 +173,11 @@ class SOSViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                                     self.sel.append("0")
                                     self.isedit.append("0")
                                     Servicefile.shared.sosnumbers.append(sosnumber.init(i_number: phone, I_title: name, I_id: _id, I_Edit_status: Edit_status))
+                                }
+                                if Servicefile.shared.sosnumbers.count > 0 {
+                                    self.label_nophone.isHidden = true
+                                }else{
+                                    self.label_nophone.isHidden = false
                                 }
                                 self.tbl_calllist.reloadData()
                                 self.stopAnimatingActivityIndicator()

@@ -180,14 +180,13 @@ class sp_app_details_page_ViewController: UIViewController  {
     
     
     @IBAction func action_cancelappoint(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel this Appointment", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid, appointmentstatus: "cancel")
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     func callcompleteMissedappoitment(Appointmentid: String, appointmentstatus: String){
@@ -251,22 +250,24 @@ class sp_app_details_page_ViewController: UIViewController  {
                     if Code == 200 {
                         let data = res["Data"] as! NSDictionary
                         
-                        self.label_orderdate.text = data["booking_date_time"] as? String ?? ""
-                        self.label_app_dateandtime.text = data["display_date"] as? String ?? ""
+                        self.label_orderdate.text = data["date_and_time"] as? String ?? ""
+                        self.label_app_dateandtime.text = data["booking_date_time"] as? String ?? ""
                         let comm_type = data["communication_type"] as? String ?? ""
                         if comm_type == "Online" || comm_type == "Online Or Visit"{
                             self.view_confrence.isHidden = false
                         }else{
                             self.view_confrence.isHidden = true
                         }
-                        self.label_order_id.text = data["payment_id"] as? String ?? ""
+                        self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                         self.label_payment_method.text = data["payment_method"] as? String ?? ""
-                        self.label_ordercost.text = data["service_amount"] as? String ?? ""
+                        
                         let sp_business_info = data["sp_business_info"] as! NSArray
                         if sp_business_info.count > 0 {
                             let sp_info = sp_business_info[0] as! NSDictionary
-                            
+                            let firstname = sp_info["bussiness_name"] as? String
+                            self.label_holder_name.text = firstname!
                         let location = sp_info["sp_loc"] as? String ?? ""
+                            
                        self.label_address_details.text = location
                         }
                         let pet_id = data["pet_id"] as! NSDictionary
@@ -278,7 +279,7 @@ class sp_app_details_page_ViewController: UIViewController  {
                             self.label_vaccinated.text = "No"
                             self.view_vacc_date.isHidden = true
                         }
-                        self.label_age.text = String(pet_id["pet_age"] as? Int ?? 0)
+                        self.label_age.text = String(pet_id["pet_age"] as? String ?? "")
                         self.label_weight.text = String(pet_id["pet_weight"] as? Int ?? 0)
                         self.label_color.text = pet_id["pet_color"] as? String ?? ""
                         self.label_gender.text = pet_id["pet_gender"] as? String ?? ""
@@ -295,15 +296,17 @@ class sp_app_details_page_ViewController: UIViewController  {
                             }
                         }
                         let user_id = data["user_id"] as! NSDictionary
-                        let firstname = user_id["first_name"] as? String
-                        let lastname = user_id["last_name"] as? String
+                        
+                        
+                        
                         let userimage = user_id["profile_img"] as? String
-                        self.label_holder_name.text = firstname! + " " + lastname!
+                        
                         self.label_holder_servie_name.isHidden = false
                         let service_name = data["service_name"] as? String ?? ""
                         self.label_holder_servie_name.text = service_name
                         let amt = data["service_amount"] as? String ?? ""
-                        self.label_holder_cost.text = "₹ " + amt
+                        self.label_holder_cost.text = "INR " + amt
+                        self.label_ordercost.text = "INR " + amt
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {

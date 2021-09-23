@@ -614,6 +614,7 @@
 		84F636A026539E010033BA34 /* paymentdetails_TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = paymentdetails_TableViewCell.xib; sourceTree = "<group>"; };
 		84F6409F26443032005AD42A /* pet_product_CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_product_CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F640A026443032005AD42A /* pet_product_CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = pet_product_CollectionViewCell.xib; sourceTree = "<group>"; };
+		84F96CA126F1AF3D002C0DAA /* YKPhotoCircleCrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YKPhotoCircleCrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84FF0E71268EDC4700555703 /* vendor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = vendor.storyboard; sourceTree = "<group>"; };
 		84FF0E75268EDC7700555703 /* service.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = service.storyboard; sourceTree = "<group>"; };
 		84FF0E79268EDC8B00555703 /* doctor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = doctor.storyboard; sourceTree = "<group>"; };
@@ -1739,6 +1740,7 @@
 		BFC1A352B16A02A35923CB4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84F96CA126F1AF3D002C0DAA /* YKPhotoCircleCrop.framework */,
 				B0251C8225C3D85100C14BD2 /* Alamofire.framework */,
 				B0658EC425C282270074C2D1 /* SystemConfiguration.framework */,
 				EFECE1888C55DE2C40A26855 /* Pods_Petfolio.framework */,
@@ -2548,7 +2550,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2580,7 +2582,7 @@
 				CODE_SIGN_ENTITLEMENTS = Petfolio/Petfolio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = H2UW5RTL22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -339,7 +339,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                                 self.dr_name = Data["dr_name"] as? String ?? ""
                                                                                 Servicefile.shared.dr_name = self.dr_name
                                                                                 self.dr_title = Data["dr_title"] as? String ?? ""
-                                                                                let strcount = Data["star_count"] as? Int ?? 0
+                                                                                let strcount = Double(truncating: Data["star_count"] as? NSNumber ?? 0)
                                                                                 let r_count =  Data["review_count"] as? Int ?? 0
                                                                                 self.star_count = String(strcount)
                                                                                 

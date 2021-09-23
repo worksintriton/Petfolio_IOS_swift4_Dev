@@ -66,7 +66,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
         cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-        cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+        cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
         cell.label_ratting.text = Servicefile.shared.petnewprod[indexPath.row].product_rate
         cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
@@ -79,7 +79,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
         
         cell.label_orginalprice.text = ""
         if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             cell.label_orginalprice.attributedText = attributeString
         }else{
@@ -125,7 +125,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
     
      func intial_setup_action(){
      // header action
-         self.view_subpage_header.label_header_title.text = "Favorites"
+         self.view_subpage_header.label_header_title.text = "Favourites"
          self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
          self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
          self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)

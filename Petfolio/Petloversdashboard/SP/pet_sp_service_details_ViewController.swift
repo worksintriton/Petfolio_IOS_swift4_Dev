@@ -264,7 +264,7 @@ class pet_sp_service_details_ViewController: UIViewController, UICollectionViewD
                                                                 Servicefile.shared.service_id_title = Details["title"] as? String ?? ""
                                                                 Servicefile.shared.service_id_amount = Details["amount"] as? Int ?? 0
                                                                 Servicefile.shared.service_id_time = Details["time"] as? String ?? ""
-                                                                self.label_fee.text = "₹ " +  String(Servicefile.shared.service_id_amount)
+                                                                self.label_fee.text = "INR " +  String(Servicefile.shared.service_id_amount)
                                                                 
                                                                 
                                                                 self.label_service.text = Servicefile.shared.service_id_title

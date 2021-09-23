@@ -48,6 +48,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         super.viewDidLoad()
         self.inital_setup()
         Servicefile.shared.iswalkin = true
+        Servicefile.shared.app_type = "walk"  // app
         Servicefile.shared.pet_appint_pay_method = ""
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -94,7 +95,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
 
         // header action
             
-            self.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
             
         // header action
         
@@ -224,7 +225,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         cell.label_petname.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_name
         cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
         cell.img_petimg.image = UIImage(named: imagelink.sample)
-        cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
+        cell.label_amount.text =  "INR " + Servicefile.shared.Doc_dashlist[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
         let petimage = Servicefile.shared.Doc_dashlist[indexPath.row].pet_img
         if petimage.count > 0 {
@@ -297,7 +298,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
     }
     
     @objc func action_cancelled(sender : UIButton){
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel this Appointment", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let tag = sender.tag
             self.tag_val = tag

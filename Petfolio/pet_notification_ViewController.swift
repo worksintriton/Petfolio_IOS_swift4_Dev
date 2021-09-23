@@ -12,9 +12,9 @@ import SDWebImage
 
 class pet_notification_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var tbl_notifi_list: UITableView!
+    @IBOutlet weak var label_text: UILabel!
     
     var selcted = ["0"]
     var orginal = ["0"]
@@ -29,6 +29,8 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
         self.orginal.removeAll()
         self.callnotification()
         self.intial_setup_action()
+        self.label_text.text = "No notifications"
+        self.label_text.isHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -178,6 +180,11 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
                             let notify_time = notilist["notify_time"] as? String ?? ""
                             let date_and_time = notilist["date_and_time"] as? String ?? ""
                             Servicefile.shared.notif_list.append(notificationlist.init(I_id: _id, Iuser_id: user_id, Inotify_title: notify_title, Inotify_descri: notify_descri, Inotify_img: notify_img, Inotify_time: notify_time, Idate_and_time: date_and_time))
+                        }
+                        if Servicefile.shared.notif_list.count > 0 {
+                            self.label_text.isHidden = true
+                        }else{
+                            self.label_text.isHidden = false
                         }
                         self.callreadnotification()
                         self.tbl_notifi_list.reloadData()

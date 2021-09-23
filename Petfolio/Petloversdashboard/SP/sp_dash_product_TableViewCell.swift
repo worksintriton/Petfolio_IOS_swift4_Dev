@@ -39,7 +39,7 @@ class sp_dash_product_TableViewCell: UITableViewCell, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
         cell.label_prod_title.text = Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_title
-        cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_price)
+        cell.label_price.text = "INR " + String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_price)
         cell.label_orginalprice.text = ""
         cell.label_orginalprice.attributedText = Servicefile.shared.convertdashlinestring(str: String(Servicefile.shared.sp_dash_Product_details[coll_cat_prod_list.tag].prod_details[indexPath.row].product_discount_price))
         

@@ -133,7 +133,7 @@ class pet_vendor_shop_search_ViewController: UIViewController, UICollectionViewD
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "prod", for: indexPath) as! pet_shop_product_CollectionViewCell
             cell.label_prod_title.text = Servicefile.shared.sp_dash_search[indexPath.row].product_title
-            cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_search[indexPath.row].product_price)
+            cell.label_price.text = "INR " + String(Servicefile.shared.sp_dash_search[indexPath.row].product_price)
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.sp_dash_search[indexPath.row].product_img) {

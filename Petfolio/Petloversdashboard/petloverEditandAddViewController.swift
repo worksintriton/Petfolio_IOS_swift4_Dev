@@ -60,6 +60,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
     var isselectdate = ""
     var isvaccin = true
     var gender = "Male"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -105,6 +106,11 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
         self.view_gender.btn_m.addTarget(self, action: #selector(action_getm), for: .touchUpInside)
         self.view_gender.btn_f.addTarget(self, action: #selector(action_getf), for: .touchUpInside)
         self.view_gender.btn_o.addTarget(self, action: #selector(action_geto), for: .touchUpInside)
+        self.img_novaccine.image = UIImage(named: "selectedRadio")
+        self.img_yesvaccine.image = UIImage(named: "Radio")
+        self.view_datelabel.isHidden = true
+        self.view_selectdate.isHidden = true
+        self.isvaccin = false
     }
     
    
@@ -144,7 +150,7 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
         Servicefile.shared.Pet_breed_val = ""
         Servicefile.shared.pet_type_val = ""
         self.view_Petname.textfield_value.placeholder = "Name"
-        self.view_pet.textfield_value.placeholder = "Types & Breed"
+        self.view_pet.textfield_value.placeholder = "Types & Breeds"
         self.view_selectdate.textfield_value.placeholder = "Select vaccinated date"
         self.view_selectdateCalender.textfield_value.placeholder = "Date of Birth"
         self.view_petcolor.textfield_value.placeholder = "Color"
@@ -375,15 +381,19 @@ class petloverEditandAddViewController: UIViewController, UITextFieldDelegate{
 //        else if self.view_petbio.textfield_value.text == "" {
 //            self.alert(Message: "Please enter Pet Bio")
 //        }
+        
         else if Servicefile.shared.pet_type_val == "" {
             self.alert(Message: "Please select Pet Type and Breed")
         }
+        
 //        else if self.view_petcolor.textfield_value.text == "" {
 //            self.alert(Message: "Please enter Pet color")
 //        }
-        else if self.view_selectdateCalender.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet age")
-        }else{
+        
+//        else if self.view_selectdateCalender.textfield_value.text == "" {
+//            self.alert(Message: "Please enter Pet age")
+//        }
+        else{
             print("user_id", Servicefile.shared.userid,
                   "pet_img" ,"",
                   "pet_name" , Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),

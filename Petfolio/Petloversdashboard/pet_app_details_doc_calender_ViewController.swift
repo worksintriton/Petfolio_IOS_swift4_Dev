@@ -58,6 +58,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.view_sos.isHidden = true
     // header action
    
     }

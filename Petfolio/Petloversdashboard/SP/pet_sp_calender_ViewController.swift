@@ -92,7 +92,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_app_selectdoctordateCollectionViewCell
         cell.label_time.text = self.listtime[indexPath.row]
-        print("sp calender",self.listtime[indexPath.row],self.bookstatus[indexPath.row])
+        print("sp Calendar",self.listtime[indexPath.row],self.bookstatus[indexPath.row])
         if self.bookstatus[indexPath.row] == "1" {
             if self.seltime[indexPath.row] == "1"{
                 cell.view_time.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)

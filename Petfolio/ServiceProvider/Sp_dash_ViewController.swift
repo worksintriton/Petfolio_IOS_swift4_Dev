@@ -34,14 +34,19 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var label_popalert_details: UILabel!
     @IBOutlet weak var view_btn_yes: UIView!
     @IBOutlet weak var view_btn_no: UIView!
+    
     var refreshControl = UIRefreshControl()
     var indextag = 0
     var statussel = ""
-    
+    var timer = Timer()
     @IBOutlet weak var sp_header: petowner_header!
 //    var appointtype = "New"
     override func viewDidLoad() {
         super.viewDidLoad()
+//        CacheManager.shared.clearCache()
+//        Servicefile.shared.getuserdata()
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.inital_setup()
@@ -71,9 +76,25 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.callnoticartcount()
         self.view_new.backgroundColor = appgree
         self.label_new.textColor = UIColor.white
+        self.timer.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         
-        // Do any additional setup after loading the view.
-       
+    }
+    
+    @objc func updateCounter() {
+//        if Servicefile.shared.userid != "" {
+//            self.checkapp()
+//        }else{
+//            self.stoptimer()
+//        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stoptimer()
+    }
+    
+    func stoptimer(){
+        self.timer.invalidate()
     }
     
     func inital_setup(){
@@ -241,7 +262,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         cell.label_petname.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_name
         cell.label_pettype.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_type
         cell.img_petimg.image = UIImage(named: imagelink.sample)
-        cell.label_amount.text =  "₹" + Servicefile.shared.SP_Das_petdetails[indexPath.row].amount
+        cell.label_amount.text =  "INR " + Servicefile.shared.SP_Das_petdetails[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].sername
         
         if Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img.count > 0 {
@@ -372,6 +393,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func callnew(){
+        self.label_nodata.text = "No new appointments"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SPdashboardnewapp, method: .post, parameters:
@@ -409,6 +431,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             
                             
                         }
+                        
                         if Servicefile.shared.SP_Das_petdetails.count > 0 {
                             self.label_nodata.isHidden = true
                         }else{
@@ -435,6 +458,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     
     
     func callcom(){
+        self.label_nodata.text = "No completed appointments"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SPdashboardcomapp, method: .post, parameters:
@@ -472,6 +496,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             
                             
                         }
+                        
                         if Servicefile.shared.SP_Das_petdetails.count > 0 {
                             self.label_nodata.isHidden = true
                         }else{
@@ -497,6 +522,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func callmiss(){
+        self.label_nodata.text = "No missed appointments"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.SPdashboardmissapp, method: .post, parameters:
@@ -535,6 +561,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                             // appointment_UID
                             
                         }
+                        
                         if Servicefile.shared.SP_Das_petdetails.count > 0 {
                             self.label_nodata.isHidden = true
                         }else{

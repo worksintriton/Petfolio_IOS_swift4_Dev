@@ -172,7 +172,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
              self.textfield_spec.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 25)
         }
         if textField == self.textfield_amt{
-             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 6)
+             self.textfield_amt.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 6)
         }
         
               return true
@@ -362,7 +362,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         }else if Servicefile.shared.speclistdicarray.count == 0 {
             self.alert(Message: "Please select Specialization")
         }else if Servicefile.shared.gallerydicarray.count == 0 {
-            self.alert(Message: "Please upload the Gallary image")
+            self.alert(Message: "Please upload the gallery image")
         }else if self.image_photo == "" {
             self.alert(Message: "Please upload the Photo ID")
         }else if self.image_govid == "" {
@@ -443,7 +443,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             cell.view_time.isHidden = true
             cell.view_amt.isHidden = true
         }
-        cell.label_amt.text = "₹ " + String(Servicefile.shared.selectedamount[indexPath.row])
+        cell.label_amt.text = "INR " + String(Servicefile.shared.selectedamount[indexPath.row])
         cell.label_time.text = Servicefile.shared.selectedservice[indexPath.row]
         cell.btn_drop.tag = indexPath.row
         cell.btn_drop.addTarget(self, action: #selector(clickdropdown), for: .touchUpInside)
@@ -668,7 +668,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             }else{
                 self.image_gov.image = UIImage(named: "pdf")
             }
-            self.image_gov.image = UIImage(named: "pdf")
+            //self.image_gov.image = UIImage(named: "pdf")
             self.view_govid_close.isHidden = false
         }else{
             self.image_gov.isHidden = true
@@ -690,12 +690,12 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     func callgalaryimageprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -709,12 +709,12 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -732,7 +732,15 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             return
         }
         let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
-        self.PDFupload(dat: myURL)
+        let size = 2.0
+        let filesize = Servicefile.shared.fileSize(forURL: myURL)
+        print("size value",size)
+        print("get the file size",filesize)
+        if filesize > size {
+            self.alert(Message: "Please Select the file Less that 2MB")
+        }else{
+            self.PDFupload(dat: myURL)
+        }
         print("import result : \(myURL)","name of file ",filename)
     }
     
@@ -746,7 +754,15 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
             let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-            self.upload(imagedata: convertimg!)
+            let data = pickedImg.jpegData(compressionQuality: 0.9)
+            let size = Servicefile.shared.converttosize(size: 2)
+            print("Image size",data!.count,"size value",size)
+            if data!.count > size {
+                self.alert(Message: "Please Select the image Less that 2MB")
+            }else{
+                
+                self.upload(imagedata: convertimg!)
+            }
         }
         dismiss(animated: true, completion: nil)
     }

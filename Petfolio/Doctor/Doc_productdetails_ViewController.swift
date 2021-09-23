@@ -46,6 +46,11 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var label_offer: UILabel!
     @IBOutlet weak var view_off: UIView!
     
+    @IBOutlet weak var view_circle: UIView!
+    @IBOutlet weak var label_cart_count: UILabel!
+    
+    @IBOutlet weak var view_footer: doc_footer!
+    
     var _id = ""
     var ca_id = ""
     var cat_img_path = ""
@@ -66,9 +71,11 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.intial_setup_action()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_back.layer.cornerRadius = self.view_back.frame.height / 2
-        
+        self.view_circle.layer.cornerRadius = self.view_circle.frame.height / 2
+        self.label_cart_count.text  = String(Servicefile.shared.cart_count)
         self.label_cartcount.layer.cornerRadius = 10.0
         let nibName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
         self.coll_productlist.register(nibName, forCellWithReuseIdentifier: "cell")
@@ -91,6 +98,15 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
         self.startTimer()
     }
     
+    func intial_setup_action(){
+    
+        // footer action
+            self.view_footer.setup(b1: false, b2: true, b3: false)
+            self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+            self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        // footer action
+    }
   
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -159,6 +175,13 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBAction func action_addtocart(_ sender: Any) {
         self.callgotocart()
     }
+    
+    
+    @IBAction func action_go_to_cart(_ sender: Any) {
+        let vc = UIStoryboard.doc_vendorcartpageViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     
     @IBAction func action_fav_unfav(_ sender: Any) {
@@ -230,15 +253,15 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                 cell.image_shopping_bag.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appfootcolor)
                 cell.view_main.view_cornor()
                 cell.label_prod_title.text = Servicefile.shared.vendor_product_id_details[indexPath.row].product_title
-               cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
-                cell.label_price.text = "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+               cell.label_price.text = "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
+                cell.label_price.text = "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_price)
                  if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount > 0 {
                      cell.label_off_percentage.text =  String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount) + "% off"
                  }else{
                      cell.label_off_percentage.text = ""
                  }
                  if Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price > 0 {
-                     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
+                     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.vendor_product_id_details[indexPath.row].product_discount_price))
                      attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                      cell.label_offer.attributedText = attributeString
                  }else{
@@ -339,7 +362,7 @@ extension Doc_productdetails_ViewController {
                         //self.label_likes.text = self.product_review
                        
                         self.view_rate.rating = self.product_rating
-                        self.label_product_cost.text = "₹ " + String(self.product_price)
+                        self.label_product_cost.text = "INR " + String(self.product_price)
                         self.label_discount.text = String(self.product_discount) + "% off"
                         self.label_quantity.text = String(self.threshould)
                         self.label_description.text = self.product_discription

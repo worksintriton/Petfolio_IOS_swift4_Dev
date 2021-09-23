@@ -141,7 +141,7 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
                 cell.label_prod_title.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_title
-                cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_price)
+                cell.label_price.text = "INR " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_price)
                 cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                 cell.image_product.dropShadow()
                 cell.label_offer.isHidden = true
@@ -163,7 +163,7 @@ class sp_productdeals_ViewController: UIViewController , UICollectionViewDelegat
                     cell.image_product.image = UIImage(named: imagelink.sample)
                 }
                 if Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price > 0 {
-                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price))
+                    let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price))
                     attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                     cell.label_orginalprice.attributedText = attributeString
                 }else{

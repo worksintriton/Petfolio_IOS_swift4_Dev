@@ -374,6 +374,7 @@ class pet_new_dashboard_ViewController: UIViewController, UICollectionViewDelega
                                                             let Bval = pet_details[item] as! NSDictionary
                                                             let id = Bval["_id"] as? String ?? ""
                                                             let default_status = Bval["default_status"] as? Bool ?? false
+                                                           
                                                             let last_vaccination_date = Bval["last_vaccination_date"] as? String ?? ""
                                                             let pet_age = Bval["pet_age"] as? String ?? ""
                                                             let pet_breed = Bval["pet_breed"] as? String ?? ""

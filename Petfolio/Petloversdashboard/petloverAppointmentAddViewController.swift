@@ -37,6 +37,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_petname: UIView!
     @IBOutlet weak var view_selectpet: UIView!
     
+    @IBOutlet weak var view_isvist: UIView!
     @IBOutlet weak var tblview_petdetail: UITableView!
     @IBOutlet weak var tblview_pettype: UITableView!
     @IBOutlet weak var tblview_petbreed: UITableView!
@@ -151,7 +152,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: false, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
     // header action
     }
     
@@ -184,6 +185,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = false
+            self.view_isvist.isHidden = false
             self.btn_online.isHidden = false
             self.view_visit.isHidden = true
             Servicefile.shared.pet_apoint_communication_type = "Online"
@@ -191,12 +193,14 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = true
+            self.view_isvist.isHidden = true
             self.btn_online.isHidden = true
             self.view_visit.isHidden = true
         }else if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             self.image_visit.image = UIImage(named: "selectedRadio")
             self.image_online.image = UIImage(named: "Radio")
             self.btn_visit.isHidden = true
+            self.view_isvist.isHidden = false
             self.btn_online.isHidden = true
             self.view_visit.isHidden = false
         }
@@ -218,8 +222,8 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             self.image_visit.image = UIImage(named: "Radio")
             self.image_online.image = UIImage(named: "selectedRadio")
             self.btn_visit.isHidden = false
+            self.view_isvist.isHidden = false
             self.btn_online.isHidden = false
-            self.view_visit.isHidden = true
             Servicefile.shared.pet_apoint_communication_type = "Online"
         }else if Servicefile.shared.pet_apoint_communication_type == "Online" {
             self.image_visit.image = UIImage(named: "Radio")
@@ -250,7 +254,6 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.checkcommtype()
     }
     
-    
     @IBAction func action_online(_ sender: Any) {
         Servicefile.shared.pet_apoint_communication_type = "Online"
         Servicefile.shared.pet_apoint_visit_type = ""
@@ -258,22 +261,17 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.checkcommtype()
     }
     
-    
-    
      @IBAction func action_Home(_ sender: Any) {
          Servicefile.shared.pet_apoint_visit_type = "Home Visit"
          self.checkcommtype()
         let vc = UIStoryboard.pet_app_select_address_ViewController()
         self.present(vc, animated: true, completion: nil)
-        
      }
-     
      
      @IBAction func action_clinic(_ sender: Any) {
          Servicefile.shared.pet_apoint_visit_type = "Clinic Visit"
          self.checkcommtype()
      }
-     
     
     @IBAction func action_sos(_ sender: Any) {
         let vc = UIStoryboard.SOSViewController()
@@ -541,12 +539,12 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     func callgalaryprocess() {
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -561,7 +559,15 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
             let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-            self.upload(imagedata: convertimg!)
+            let data = pickedImg.jpegData(compressionQuality: 0.9)
+            let size = Servicefile.shared.converttosize(size: 2)
+            print("Image size",data!.count,"size value",size)
+            if data!.count > size {
+                self.alert(Message: "Please Select the image Less that 2MB")
+            }else{
+                self.upload(imagedata: convertimg!)
+            }
+            
         }
         dismiss(animated: true, completion: nil)
     }

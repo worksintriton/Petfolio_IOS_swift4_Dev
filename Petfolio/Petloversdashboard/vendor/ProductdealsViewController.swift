@@ -54,6 +54,7 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.view_sos.isHidden = true
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -142,7 +143,7 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! product_fav_cell_CollectionViewCell
             cell.label_prod_title.text = Servicefile.shared.sp_dash_productdetails[indexPath.row].product_title
-            cell.label_price.text = "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_price)
+            cell.label_price.text = "INR " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_price)
             cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
             cell.image_product.dropShadow()
             cell.label_offer.isHidden = true
@@ -167,7 +168,7 @@ class ProductdealsViewController: UIViewController , UICollectionViewDelegate, U
                 cell.image_product.image = UIImage(named: imagelink.sample)
             }
             if Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price > 0 {
-                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price))
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.sp_dash_productdetails[indexPath.row].product_discount_price))
                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                 cell.label_orginalprice.attributedText = attributeString
             }else{

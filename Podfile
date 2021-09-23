@@ -9,6 +9,7 @@ target 'Petfolio' do
   pod 'SDWebImage'
   pod 'Toucan'
   pod 'NVActivityIndicatorView'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'FSCalendar'
@@ -20,6 +21,7 @@ target 'Petfolio' do
   pod 'AASignatureView'
   pod 'IQKeyboardManagerSwift'
   pod 'CircleBar'
+  pod 'ImageCropper'
   # Pods for Petfolio
   target 'PetfolioTests' do
     inherit! :search_paths

@@ -33,6 +33,8 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         var sdiagno = ""
         var subdiagno = ""
     
+    
+    
     @IBOutlet weak var view_iscash: UIView!
     @IBOutlet weak var textfield_cash: UITextField!
     @IBOutlet weak var label_pres: UILabel!
@@ -93,7 +95,6 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
            
         }
         
-        
         func intial_setup_action(){
         // header action
             self.view_header.label_title.text = "Preview Prescription Details"
@@ -108,6 +109,10 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                 self.alert(Message: "Please select the sub diagnosis")
             }else if self.doctor_diagnosis.text == "" {
                 self.alert(Message: "Please select the diagnosis")
+            }else if self.textview_descrip.text == "Write here..."{
+                self.alert(Message: "please enter the comments")
+            }else if self.textview_descrip.text == ""{
+                self.alert(Message: "please enter the comments")
             }else{
                 self.callpescription()
             }
@@ -144,7 +149,6 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 print("Servicefile.shared.Doc_pres.count",Servicefile.shared.Doc_pres.count)
                   return Servicefile.shared.Doc_pres.count
-            
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,10 +161,12 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
 //                          cell.btn_add.addTarget(self, action: #selector(action_addtablet), for: .touchUpInside)
 //                                         return cell
 //                   }else{
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: "pres", for: indexPath) as! docpreTableViewCell
             let presdata = Servicefile.shared.Doc_pres[indexPath.row] as! NSDictionary
             cell.label_medi.text = presdata["Tablet_name"] as? String ?? ""
             cell.label_noofdays.text = presdata["Quantity"] as? String ?? ""
+            cell.view_delete.isHidden = true
             let cons = presdata["consumption"] as? NSDictionary ?? ["":""]
             let mv = cons["morning"] as? Bool ?? false
             let av = cons["evening"] as? Bool ?? false
@@ -193,11 +199,11 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         @objc func action_addtablet(sender: UIButton){
             print("data in doc pres",Servicefile.shared.medi, Servicefile.shared.noofday, Servicefile.shared.consdays)
             if Servicefile.shared.noofday == "" {
-                self.alert(Message: "please enter the no of days")
+                self.alert(Message: "please enter no of days")
             }else if Servicefile.shared.medi == "" {
-                 self.alert(Message: "please enter the Medicine name")
+                 self.alert(Message: "please enter tablet name")
             }else if Servicefile.shared.consdays == "" {
-                self.alert(Message: "please enter the consuption days")
+                self.alert(Message: "please enter consumption")
             }else{
                 var B = Servicefile.shared.Doc_pres
                 var arr = B
@@ -209,11 +215,12 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                 print(B)
                 Servicefile.shared.Doc_pres = B
                 print("uploaded data in photodicarray",Servicefile.shared.Doc_pres)
-                self.tbl_medilist.reloadData()
-            }
-              Servicefile.shared.medi = ""
+                
+                Servicefile.shared.medi = ""
                 Servicefile.shared.noofday = ""
                 Servicefile.shared.consdays = ""
+                self.tbl_medilist.reloadData()
+            }
             
         }
 

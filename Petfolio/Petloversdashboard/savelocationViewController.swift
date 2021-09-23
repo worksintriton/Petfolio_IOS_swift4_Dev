@@ -76,6 +76,7 @@ class savelocationViewController: UIViewController, GMSMapViewDelegate, CLLocati
         self.label_locadetail.text = Servicefile.shared.selectedaddress
         self.textfield_pickname.addTarget(self, action: #selector(textFieldpickTyping), for: .editingChanged)
         // Do any additional setup after loading the view.
+        self.intial_setup_action()
     }
     
     func intial_setup_action(){

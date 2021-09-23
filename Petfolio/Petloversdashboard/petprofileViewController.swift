@@ -24,8 +24,10 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var coll_petlist: UICollectionView!
     
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
+    
     var ismenu = ["0"]
     var isorgi = ["0"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -41,6 +43,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         //self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.view_sos.isHidden = true
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

@@ -46,7 +46,9 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
         self.textfield_lastname.text = Servicefile.shared.last_name
         self.textfield_phoneno.text = Servicefile.shared.user_phone
         // Do any additional setup after loading the view.
-        
+        self.textfield_firstname.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        self.textfield_lastname.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        self.textfield_email.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view_details.addGestureRecognizer(tap)
     }
@@ -115,6 +117,22 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
             Servicefile.shared.email_status = false
             Servicefile.shared.email_status_label = "Verify email"
             self.label_emailstatus.text = Servicefile.shared.email_status_label
+        }
+        if self.textfield_firstname == textField {
+            if self.textfield_firstname.text!.count > 24 {
+                self.textfield_firstname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
+                self.textfield_firstname.resignFirstResponder()
+            }else{
+                self.textfield_firstname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
+            }
+        }
+        if self.textfield_lastname == textField {
+            if self.textfield_lastname.text!.count > 24 {
+                self.textfield_lastname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
+                self.textfield_lastname.resignFirstResponder()
+            }else{
+                 self.textfield_lastname.text = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumericsymbol, textcount: 25)
+            }
         }
     }
     

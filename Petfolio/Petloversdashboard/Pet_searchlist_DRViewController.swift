@@ -55,6 +55,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.textfield_search.delegate = self
         self.textfield_search.autocapitalizationType = .sentences
         self.view_search.view_cornor()
+        self.view_search.dropShadow()
         self.intial_setup_action()
         
     }
@@ -222,7 +223,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
             cell.label_loc.text = str + " | "
         }
         cell.label_km.text = Servicefile.shared.moredocd[indexPath.row].distance + " km"
-        cell.label_amt.text = "₹ " + Servicefile.shared.moredocd[indexPath.row].amount
+        cell.label_amt.text = "INR " + Servicefile.shared.moredocd[indexPath.row].amount
         cell.label_rate.text =  Servicefile.shared.moredocd[indexPath.row].star_count
         cell.image_data.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.image_data.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.moredocd[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in

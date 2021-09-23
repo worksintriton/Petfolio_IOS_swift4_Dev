@@ -12,7 +12,6 @@ import SDWebImage
 
 class Doc_detailspage_ViewController: UIViewController {
     
-    
     @IBOutlet weak var image_holder_name: UIImageView!
     @IBOutlet weak var label_holder_name: UILabel!
     @IBOutlet weak var view_complete: UIView!
@@ -117,9 +116,15 @@ class Doc_detailspage_ViewController: UIViewController {
     
     func intial_setup_action(){
     // header action
-        self.view_header.label_header_title.text = "My Appointment"
+        self.view_header.label_header_title.text = "Appointment Details"
         self.view_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_header.btn_back.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        
+        if Servicefile.shared.app_type != "app" { 
+            self.view_header.btn_back.addTarget(self, action: #selector(self.back_towalkin), for: .touchUpInside)
+        }else{
+            self.view_header.btn_back.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
+        }
+        
         self.view_header.view_profile.isHidden = true
         self.view_header.view_sos.isHidden = true
         self.view_header.view_bel.isHidden = true
@@ -130,6 +135,11 @@ class Doc_detailspage_ViewController: UIViewController {
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
     // footer action
+    }
+    
+    @objc func back_towalkin(){
+        let vc = UIStoryboard.doc_app_walkin_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func action_notific(_ sender: Any) {
@@ -213,7 +223,7 @@ class Doc_detailspage_ViewController: UIViewController {
     
     
     @IBAction func action_cancelappoint(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel this Appointment?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid, appointmentstatus: "cancel")
         }))
@@ -324,7 +334,7 @@ class Doc_detailspage_ViewController: UIViewController {
                         self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                         self.label_payment_method.text = data["payment_method"] as? String ?? ""
                         let amt = data["amount"] as? String ?? ""
-                        self.label_ordercost.text = "₹" + amt
+                        self.label_ordercost.text = "INR " + amt
                         
                         let pet_id = data["pet_id"] as! NSDictionary
                         let last_vaccination_date = pet_id["last_vaccination_date"] as? String ?? ""
@@ -375,10 +385,10 @@ class Doc_detailspage_ViewController: UIViewController {
                         let firstname = user_id["first_name"] as? String ?? ""
                         let lastname = user_id["last_name"] as? String ?? ""
                         let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
-                        
+                        self.label_holder_name.text = firstname + " " + lastname
                         self.label_holder_servie_name.isHidden = true
                         let amount_val = data["amount"] as? String ?? "0"
-                        self.label_holder_cost.text = "₹ " + amount_val
+                        self.label_holder_cost.text = "INR " + amount_val
                         if userimage == "" {
                             self.image_holder_name.image = UIImage(named: imagelink.sample)
                         } else {
@@ -399,7 +409,7 @@ class Doc_detailspage_ViewController: UIViewController {
                         let fir = doc_bus["first_name"] as? String ?? ""
                         let last = doc_bus["last_name"] as? String ?? ""
                         
-                        self.label_holder_name.text = fir + last
+                        
                         let doc_business_info = data["doc_business_info"] as! NSArray
                         if doc_business_info.count > 0 {
                             let doc_info = doc_business_info[0] as! NSDictionary

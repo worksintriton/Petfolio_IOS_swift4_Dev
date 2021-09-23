@@ -32,7 +32,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
         self.view_alert.isHidden = true
         self.view_alert.view_cornor()
         self.view_btn_alert.view_cornor()
-        self.label_cost.text = "₹ " + String(Servicefile.shared.labelamt_total)
+        self.label_cost.text = "INR " + String(Servicefile.shared.labelamt_total)
         Servicefile.shared.shipaddresslist.removeAll()
         self.View_final_pay.view_cornor()
         self.tableview_list_address.register(UINib(nibName: "shipingaddressTableViewCell", bundle: nil), forCellReuseIdentifier: "listaddress")

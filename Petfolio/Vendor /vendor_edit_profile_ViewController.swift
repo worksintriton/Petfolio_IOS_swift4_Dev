@@ -217,7 +217,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
      }else if self.textfield_bus_reg.text == "" {
          self.alert(Message: "Please enter the business details")
      }else if Servicefile.shared.gallerydicarray.count == 0 {
-         self.alert(Message: "Please upload the Gallary image")
+         self.alert(Message: "Please upload the gallery image")
      }else if self.image_photo == "" {
          self.alert(Message: "Please upload the Photo ID")
      }else if self.image_govid == "" {
@@ -320,28 +320,82 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
         
     }
     
+//    func setimag(){
+//        if self.image_photo != "" {
+//             self.view_photoid_btn.isHidden = false
+//             self.image_photo_id.isHidden = false
+//              self.image_photo_id.image = UIImage(named: "pdf")
+//        }else{
+//         self.view_photoid_btn.isHidden = true
+//             self.image_photo_id.isHidden = true
+//        }
+//
+//        if self.image_govid != "" {
+//         self.view_govid_btn.isHidden = false
+//             self.image_gov.isHidden = false
+//             self.image_gov.image = UIImage(named: "pdf")
+//               }else{
+//                    self.image_gov.isHidden = true
+//                 self.view_govid_btn.isHidden = true
+//               }
+//     self.view_govid_btn.view_cornor()
+//     self.view_photoid_btn.view_cornor()
+//     self.image_gov.layer.cornerRadius = 8.0
+//     self.image_photo_id.layer.cornerRadius = 8.0
+//    }
     func setimag(){
+        //
         if self.image_photo != "" {
-             self.view_photoid_btn.isHidden = false
-             self.image_photo_id.isHidden = false
-              self.image_photo_id.image = UIImage(named: "pdf")
+            self.image_photo_id.isHidden = false
+            let strdat = self.image_photo as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_photo_id.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+                self.image_photo_id.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_photo_id.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_photo_id.image = image
+                    }
+                }
+            }else{
+                self.image_photo_id.image = UIImage(named: "pdf")
+            }
+            self.image_photo_id.contentMode = .scaleAspectFill
+            self.view_photoid_btn.isHidden = false
         }else{
-         self.view_photoid_btn.isHidden = true
-             self.image_photo_id.isHidden = true
+            self.image_photo_id.isHidden = true
+            self.view_photoid_btn.isHidden = true
         }
         
         if self.image_govid != "" {
-         self.view_govid_btn.isHidden = false
-             self.image_gov.isHidden = false
-             self.image_gov.image = UIImage(named: "pdf")
-               }else{
-                    self.image_gov.isHidden = true
-                 self.view_govid_btn.isHidden = true
-               }
-     self.view_govid_btn.view_cornor()
-     self.view_photoid_btn.view_cornor()
-     self.image_gov.layer.cornerRadius = 8.0
-     self.image_photo_id.layer.cornerRadius = 8.0
+            self.image_gov.isHidden = false
+            let strdat = self.image_govid as? String ?? Servicefile.sample_img
+            if self.spilit_string_data(array_string: strdat) == "" {
+                self.image_gov.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+                self.image_gov.sd_setImage(with: Servicefile.shared.StrToURL(url: strdat)) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        self.image_gov.image = UIImage(named: Servicefile.sample_img)
+                    } else {
+                        self.image_gov.image = image
+                    }
+                }
+            }else{
+                self.image_gov.image = UIImage(named: "pdf")
+            }
+            self.image_gov.contentMode = .scaleAspectFill
+            //self.image_gov.image = UIImage(named: "pdf")
+            self.view_govid_btn.isHidden = false
+        }else{
+            self.image_gov.isHidden = true
+            self.view_govid_btn.isHidden = true
+        }
+        
+        //
+        
+        self.view_govid_btn.view_cornor()
+        self.view_photoid_btn.view_cornor()
+        self.image_gov.layer.cornerRadius = 8.0
+        self.image_photo_id.layer.cornerRadius = 8.0
     }
      
      @IBAction func action_clear_govid(_ sender: Any) {
@@ -368,12 +422,12 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     func callgalaryimageprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
               alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-                  self.imagepicker.allowsEditing = false
+                  self.imagepicker.allowsEditing = true
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
               alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-                 self.imagepicker.allowsEditing = false
+                 self.imagepicker.allowsEditing = true
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
@@ -386,12 +440,12 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
      func callgalaryprocess(){
          let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
          alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-             self.imagepicker.allowsEditing = false
+             self.imagepicker.allowsEditing = true
              self.imagepicker.sourceType = .camera
              self.present(self.imagepicker, animated: true, completion: nil)
          }))
          alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-             self.imagepicker.allowsEditing = false
+             self.imagepicker.allowsEditing = true
              self.imagepicker.sourceType = .photoLibrary
              self.present(self.imagepicker, animated: true, completion: nil)
          }))
@@ -409,7 +463,15 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
               return
           }
           let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
-          self.PDFupload(dat: myURL)
+        let size = 2.0
+        let filesize = Servicefile.shared.fileSize(forURL: myURL)
+        print("size value",size)
+        print("get the file size",filesize)
+        if filesize > size {
+            self.alert(Message: "Please Select the file Less that 2MB")
+        }else{
+            self.PDFupload(dat: myURL)
+        }
 //          print("import result : \(myURL)","name of file ",filename)
       }
 
@@ -423,7 +485,15 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
               if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                   //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
                 let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-                self.upload(imagedata: convertimg!)
+                let data = pickedImg.jpegData(compressionQuality: 0.9)
+                let size = Servicefile.shared.converttosize(size: 2)
+                print("Image size",data!.count,"size value",size)
+                if data!.count > size {
+                    self.alert(Message: "Please Select the image Less that 2MB")
+                }else{
+                    self.upload(imagedata: convertimg!)
+                }
+                
               }
                 dismiss(animated: true, completion: nil)
           }
@@ -640,7 +710,9 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     }
     
     @IBAction func action_register_success(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard.vendor_myorder_ViewController()
+        self.present(vc, animated: true, completion: nil)
     }
     
     func call_vendor_details(){
@@ -711,7 +783,6 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                self.alert(Message: "No Intenet Please check and try again ")
            }
        }
-    
    }
 
 

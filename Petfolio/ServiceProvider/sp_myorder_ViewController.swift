@@ -123,9 +123,9 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
             let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
             if quantity == 1 {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
             }else {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
             }
               
           
@@ -152,9 +152,9 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
             let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
             if quantity == 1 {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
             }else {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
             }
                 cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
                 cell.btn_order_details.tag = indexPath.row
@@ -177,9 +177,9 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                 cell.label_product_title.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_text
             let quantity = Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count
             if quantity == 1 {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) product)"
             }else {
-                cell.label_cost.text = "₹ " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
+                cell.label_cost.text = "INR " + String(Servicefile.shared.order_productdetail[indexPath.row].v_order_price) + " (\(String(Servicefile.shared.order_productdetail[indexPath.row].v_order_product_count)) products)"
             }
                 cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
                 cell.label_prod_date_title.text = "Cancelled on : "
@@ -324,6 +324,11 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                                 
                                 Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                             }
+                            if Servicefile.shared.order_productdetail.count > 0{
+                                self.label_nodata.isHidden = true
+                            }else{
+                                self.label_nodata.isHidden = false
+                            }
                             self.tblview_applist.reloadData()
                             self.stopAnimatingActivityIndicator()
                         }else{
@@ -398,6 +403,11 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                                 
                                 Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
                             }
+                            if Servicefile.shared.order_productdetail.count > 0{
+                                self.label_nodata.isHidden = true
+                            }else{
+                                self.label_nodata.isHidden = false
+                            }
                             self.tblview_applist.reloadData()
                             self.stopAnimatingActivityIndicator()
                         }else{
@@ -471,6 +481,11 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
                                 
                                 
                                 Servicefile.shared.order_productdetail.append(order_productdetails.init(In_v_order_booked_on: v_order_booked_on, In_v_order_id: v_order_id, In_v_order_image: v_order_image, In_v_order_price: v_order_price, In_v_order_product_count: v_order_product_count, In_v_order_status: v_order_status, In_v_order_text: v_order_text, In_v_payment_id: v_payment_id, In_v_shipping_address: v_shipping_address, In_v_user_id: v_user_id, In_v_vendor_id: v_vendor_id, In_v_cancelled_date: v_cancelled_date, In_v_completed_date: v_completed_date, In_v_user_feedback: v_user_feedback, In_v_user_rate: v_user_rate))
+                            }
+                            if Servicefile.shared.order_productdetail.count > 0{
+                                self.label_nodata.isHidden = true
+                            }else{
+                                self.label_nodata.isHidden = false
                             }
                             self.tblview_applist.reloadData()
                             self.stopAnimatingActivityIndicator()

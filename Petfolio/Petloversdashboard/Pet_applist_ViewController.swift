@@ -36,6 +36,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.app_type = "app" // walk
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
@@ -170,7 +171,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_cancel.tag = indexPath.row
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked for :"
+            cell.labe_comMissed.text = "Booked On :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
@@ -250,10 +251,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.label_petname.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].service_provider_name
             cell.label_servicer_title.text = "Service Name"
             cell.label_pettype.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Service_name
+            cell.label_status.isHidden = true
+            cell.label_status_val.isHidden = true
         }
         cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: imagelink.sample)
-        cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
+        cell.label_amount.text =  "INR " + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{

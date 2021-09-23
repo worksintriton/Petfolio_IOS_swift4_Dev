@@ -33,14 +33,14 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
         let docnibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(docnibName, forCellWithReuseIdentifier: "cell1")
         self.intial_setup_action()
-        self.label_nodata.text = "No favourites available"
+        self.label_nodata.text = "No favourites"
         self.col_selected_list.delegate = self
         self.col_selected_list.dataSource = self
     }
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Favorites"
+        self.view_subpage_header.label_header_title.text = "Favourites"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -97,7 +97,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     @IBAction func action_cancelled(_ sender: Any) {
         let nibName = UINib(nibName: "pet_product_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(nibName, forCellWithReuseIdentifier: "cell")
-        self.label_nodata.text = "No favourites available"
+        self.label_nodata.text = "No favourites"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_cancelled.backgroundColor = appcolor
         self.label_cancelled.textColor = UIColor.white
@@ -114,7 +114,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     @IBAction func action_completeappoint(_ sender: Any) {
         let docnibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(docnibName, forCellWithReuseIdentifier: "cell")
-        self.label_nodata.text = "No favourites available"
+        self.label_nodata.text = "No favourites"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor
         self.label_complete.textColor = UIColor.white
@@ -132,7 +132,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
     @IBAction func action_currentappoint(_ sender: Any) {
         let docnibName = UINib(nibName: "dash_doc_CollectionViewCell", bundle:nil)
         self.col_selected_list.register(docnibName, forCellWithReuseIdentifier: "cell")
-        self.label_nodata.text = "No favourites available"
+        self.label_nodata.text = "No favourites"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_current.backgroundColor = appcolor
         self.label_current.textColor = UIColor.white
@@ -241,7 +241,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             //cell.view_main.layer.borderColor = color.cgColor
          //cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
          cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
-            cell.label_price.text = "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
+            cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
          
             if Servicefile.shared.petnewprod[indexPath.row].product_fav_status {
              cell.image_fav.image = UIImage(named: imagelink.favtrue)
@@ -264,7 +264,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
 //            }
             cell.label_offer.text = ""
             if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
-                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                 cell.label_offer.attributedText = attributeString
             }else{
@@ -281,7 +281,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             /*
              
              if Servicefile.shared.petnewprod[indexPath.row].product_discount_price != 0 {
-                 let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
+                 let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_discount_price))
                  attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
                  cell.label_offer.attributedText = attributeString
              }else{

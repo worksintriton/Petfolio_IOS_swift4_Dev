@@ -381,7 +381,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                     }
                 }
             cell.image_product.contentMode = .scaleAspectFill
-            cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
+            cell.label_amt.text = "INR " + String(data["product_price"] as? Int ?? 0)
             let pet_prod_status = data["today_deal"] as! Bool
             cell.label_deal_status.isHidden = true
             if pet_prod_status {
@@ -469,7 +469,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                 cell.view_menu.isHidden = true
             }
             cell.label_product_title.text = data["product_name"] as? String ?? ""
-            cell.label_amt.text = "₹ " + String(data["product_price"] as? Int ?? 0)
+            cell.label_amt.text = "INR " + String(data["product_price"] as? Int ?? 0)
             cell.btn_hide.tag = indexPath.row
             cell.btn_hide.addTarget(self, action: #selector(ishide), for: .touchUpInside)
             cell.btn_ischeck.tag = indexPath.row
@@ -762,7 +762,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         self.discount = Data["discount"] as? Int ?? 0
                         self.dis_amt = Data["cost"] as? Int ?? 0
                         self.label_discount_val.text = String(self.discount) + " %"
-                        self.label_cost.text = "₹" + String(self.dis_amt)
+                        self.label_cost.text = "INR " + String(self.dis_amt)
                         if self.textfield_discount_perunit.text! != "" {
                             self.view_discount_details.isHidden = false
                         }else{
@@ -802,7 +802,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         self.discount = Data["discount"] as? Int ?? 0
                         self.dis_amt = Data["cost"] as? Int ?? 0
                         self.label_discount_val.text = String(self.discount) + " %"
-                        self.label_cost.text = "₹" + String(self.dis_amt)
+                        self.label_cost.text = "INR " + String(self.dis_amt)
                         if self.textfield_deal_price.text! != "" {
                             self.view_discount_details.isHidden = false
                         }else{

@@ -117,6 +117,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     
     @IBAction func action_Submit(_ sender: Any) {
         dismissKeyboard()
+        print("otp value",Servicefile.shared.otp)
         if Servicefile.shared.otp != "0" {
             let otptxt = self.textfield_otp.text!
                               let trimmedString = otptxt.trimmingCharacters(in: .whitespaces)
@@ -140,7 +141,8 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
                                self.callFCM()
                               }else{
-                                print("verification Not success")
+                                self.alert(Message: "Please enter the valid OTP")
+                                
                    }
         }else{
     self.alert(Message: "Please enter the valid OTP")
@@ -155,6 +157,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
     
     func callotpresend(){
         dismissKeyboard()
+        print("Servicefile.shared.user_phone",Servicefile.shared.user_phone)
                self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.resend, method: .post, parameters:
             [   "user_phone": Servicefile.shared.user_phone], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
@@ -196,6 +199,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
            }
     
     func callFCM(){
+        print("Servicefile.shared.userid",Servicefile.shared.userid)
            self.startAnimatingActivityIndicator()
     if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.tokenupdate, method: .post, parameters:
         [ "user_id": Servicefile.shared.userid,

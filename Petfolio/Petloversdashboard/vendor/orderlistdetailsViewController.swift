@@ -75,9 +75,9 @@ class orderlistdetailsViewController: UIViewController {
         self.label_orderdate.text = ""
         self.label_id.text = ""
         self.label_paymentmethod.text = ""
-        self.label_ordertotal.text = "₹" + String(0)
-        self.Label_product_amt.text = "₹" + String(0)
-        self.label_quality.text = "₹" + String(0)
+        self.label_ordertotal.text = "INR " + String(0)
+        self.Label_product_amt.text = "INR " + String(0)
+        self.label_quality.text = "INR " + String(0)
         self.product_title.text = ""
         self.image_product.image = UIImage(named: Servicefile.sample_img)
         self.view_status.isHidden = true
@@ -181,8 +181,8 @@ class orderlistdetailsViewController: UIViewController {
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹" + String(self.grand_total)
-                        self.Label_product_amt.text = "₹" + String(self.grand_total)
+                        self.label_ordertotal.text = "INR " + String(self.grand_total)
+                        self.Label_product_amt.text = "INR " + String(self.grand_total)
                         self.label_quality.text = String(self.product_quantity)
                         if Servicefile.shared.ordertype == "" {
                             self.image_status.image = UIImage(named: "success")

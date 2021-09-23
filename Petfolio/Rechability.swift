@@ -164,3 +164,38 @@ struct Network {
         case failedToInitializeWith(sockaddr_in)
     }
 }
+
+class CacheManager {
+
+    static let shared = CacheManager()
+    private let fileManager = FileManager.default
+    private lazy var mainDirectoryUrl: URL = {
+
+        let documentsUrl = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        return documentsUrl
+    }()
+
+    
+
+    private func directoryFor(stringUrl: String) -> URL {
+
+        let fileURL = URL(string: stringUrl)!.lastPathComponent
+        let file = self.mainDirectoryUrl.appendingPathComponent(fileURL)
+        return file
+    }
+
+    public func clearCache() {
+        //Delete Cookies
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                NSLog("\(cookie)")
+            }
+        }
+
+        let storage = HTTPCookieStorage.shared
+        for cookie in storage.cookies! {
+            storage.deleteCookie(cookie)
+        }
+    }
+
+}

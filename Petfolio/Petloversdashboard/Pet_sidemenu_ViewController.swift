@@ -20,20 +20,20 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
     var imgmenu = [""]
     
     /*if Servicefile.shared.my_ref_code != "" {
-     self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.labelmenu = ["Favourites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
      self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
  }else{
-     self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout"]
+     self.labelmenu = ["Favourites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout"]
      self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit"]
  }*/
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favorites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favourites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
         }else{
-            self.labelmenu = ["Favorites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
+            self.labelmenu = ["Favourites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
             self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit"]
         }
         
@@ -84,12 +84,15 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
 //    pet_paymentdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.labelmenu[indexPath.row] == "My Appointments"{
+            Servicefile.shared.appointtype = "New"
             let vc = UIStoryboard.Pet_applist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Walk-in Appointments"{
+            Servicefile.shared.appointtype = "New"
             let vc = UIStoryboard.pet_app_walkin_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders"{
+            Servicefile.shared.ordertype = "New"
             let vc = UIStoryboard.Petlover_myorder_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Coupons"{
@@ -105,7 +108,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         else if self.labelmenu[indexPath.row] == "Notifications"{
             let vc = UIStoryboard.pet_notification_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Favorites"{
+        }else if self.labelmenu[indexPath.row] == "Favourites"{
             let vc = UIStoryboard.pet_sidemenu_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "SOS"{
@@ -122,7 +125,7 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
                 self.pushtologin()
             }))
             alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-                
+                self.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
           

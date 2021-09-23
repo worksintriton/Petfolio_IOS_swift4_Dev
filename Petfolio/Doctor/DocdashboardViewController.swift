@@ -43,6 +43,10 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        Servicefile.shared.app_type = "app"  // walk
+        print("user name",Servicefile.shared.user_type, Servicefile.shared.first_name)
         Servicefile.shared.iswalkin = false
         self.inital_setup()
         Servicefile.shared.pet_appint_pay_method = ""
@@ -80,11 +84,23 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.callcheckstatus()
         self.callnoticartcount()
         self.timer.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
     
     @objc func updateCounter() {
-        
+//        if Servicefile.shared.userid != "" {
+//            self.callapp()
+//        }else{
+//            self.stoptimer()
+//        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stoptimer()
+    }
+    
+    func stoptimer(){
+        self.timer.invalidate()
     }
     
     func inital_setup(){
@@ -106,10 +122,11 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
        
         self.doc_header.contentMode = .scaleAspectFill
         self.doc_header.label_location.text = Servicefile.shared.shiplocation
+        
 //        self.doc_header.image_profile.layer.cornerRadius = self.doc_header.image_profile.frame.height / 2
 //        self.doc_header.btn_location.addTarget(self, action: #selector(self.docmanageaddress), for: .touchUpInside)
 //        self.doc_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
-//
+        
         self.doc_header.btn_button2.addTarget(self, action: #selector(doccartpage), for: .touchUpInside)
         self.doc_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.doc_header.image_profile.image = UIImage(named: imagelink.image_bel)
@@ -123,13 +140,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        self.stoptimer()
-    }
-    
-    func stoptimer(){
-        self.timer.invalidate()
-    }
+   
     
     
     
@@ -242,7 +253,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         cell.label_petname.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_name
         cell.label_pettype.text = Servicefile.shared.Doc_dashlist[indexPath.row].pet_type
         cell.img_petimg.image = UIImage(named: imagelink.sample)
-        cell.label_amount.text =  "₹" + Servicefile.shared.Doc_dashlist[indexPath.row].amount
+        cell.label_amount.text =  "INR " + Servicefile.shared.Doc_dashlist[indexPath.row].amount
         cell.label_servicename.text = Servicefile.shared.Doc_dashlist[indexPath.row].appoinment_status
         let petimage = Servicefile.shared.Doc_dashlist[indexPath.row].pet_img
         if petimage.count > 0 {
@@ -315,7 +326,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func action_cancelled(sender : UIButton){
-        let alert = UIAlertController(title: "", message: "Are you sure you need to cancel the Appointment?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel this Appointment?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let tag = sender.tag
             self.tag_val = tag
@@ -418,6 +429,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callnew(){
+        self.label_nodata.text = "No new appointments"
         Servicefile.shared.Doc_dashlist.removeAll()
         self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -495,6 +507,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callcom(){
+        self.label_nodata.text = "No completed appointments"
         Servicefile.shared.Doc_dashlist.removeAll()
         self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -572,6 +585,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func callmiss(){
+        self.label_nodata.text = "No missed appointments"
         Servicefile.shared.Doc_dashlist.removeAll()
         self.tblview_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!

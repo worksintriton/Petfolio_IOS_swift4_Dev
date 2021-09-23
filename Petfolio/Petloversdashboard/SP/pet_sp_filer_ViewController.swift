@@ -18,6 +18,7 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
     @IBOutlet weak var view_apply: UIView!
     @IBOutlet weak var view_clearall: UIView!
     @IBOutlet weak var tbl_spec: UITableView!
+    @IBOutlet weak var img_5up: UIImageView!
     @IBOutlet weak var img_4up: UIImageView!
     @IBOutlet weak var img_3up: UIImageView!
     @IBOutlet weak var img_2up: UIImageView!
@@ -83,6 +84,11 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func action_5up(_ sender: Any) {
+     Servicefile.shared.selrate = 5
+     self.check_review()
+    }
+    
     @IBAction func action_4up(_ sender: Any) {
          Servicefile.shared.selrate = 4
          self.check_review()
@@ -109,26 +115,37 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
             self.img_2up.image = UIImage(named: "Radio")
             self.img_3up.image = UIImage(named: "Radio")
             self.img_4up.image = UIImage(named: "Radio")
+            self.img_5up.image = UIImage(named: "Radio")
         }else if Servicefile.shared.selrate == 2 {
             self.img_1up.image = UIImage(named: "Radio")
             self.img_2up.image = UIImage(named: "selectedRadio")
             self.img_3up.image = UIImage(named: "Radio")
             self.img_4up.image = UIImage(named: "Radio")
+            self.img_5up.image = UIImage(named: "Radio")
         }else if Servicefile.shared.selrate == 3 {
             self.img_1up.image = UIImage(named: "Radio")
             self.img_2up.image = UIImage(named: "Radio")
             self.img_3up.image = UIImage(named: "selectedRadio")
             self.img_4up.image = UIImage(named: "Radio")
+            self.img_5up.image = UIImage(named: "Radio")
         }else if Servicefile.shared.selrate == 4 {
             self.img_1up.image = UIImage(named: "Radio")
             self.img_2up.image = UIImage(named: "Radio")
             self.img_3up.image = UIImage(named: "Radio")
             self.img_4up.image = UIImage(named: "selectedRadio")
+            self.img_5up.image = UIImage(named: "Radio")
+        }else if Servicefile.shared.selrate == 5 {
+            self.img_1up.image = UIImage(named: "Radio")
+            self.img_2up.image = UIImage(named: "Radio")
+            self.img_3up.image = UIImage(named: "Radio")
+            self.img_4up.image = UIImage(named: "Radio")
+            self.img_5up.image = UIImage(named: "selectedRadio")
         }else{
             self.img_1up.image = UIImage(named: "Radio")
             self.img_2up.image = UIImage(named: "Radio")
             self.img_3up.image = UIImage(named: "Radio")
             self.img_4up.image = UIImage(named: "Radio")
+            self.img_5up.image = UIImage(named: "Radio")
         }
     }
     

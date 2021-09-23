@@ -194,10 +194,8 @@ class pet_other_information_ViewController: UIViewController {
                         let userid = Data["_id"] as? String ?? ""
                         UserDefaults.standard.set(userid, forKey: "userid")
                         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
-                        //        Servicefile.shared.tabbar_selectedindex = 2
-                                let tapbar = UIStoryboard.petloverDashboardViewController()
-                        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                                self.present(tapbar, animated: true, completion: nil)
+                        let vc = UIStoryboard.petimageUploadViewController()
+                        self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

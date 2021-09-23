@@ -75,13 +75,13 @@ class genderview: UIView {
     }
     
     func othersselect(){
-        label_F.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        label_F.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
         label_M.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
-        label_O.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray)
+        label_O.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         
-        view_F.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen).cgColor
+        view_F.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray).cgColor
         view_M.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray).cgColor
-        view_O.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.lightgray).cgColor
+        view_O.layer.borderColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen).cgColor
     }
 
 }

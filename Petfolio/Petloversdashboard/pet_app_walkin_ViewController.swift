@@ -39,6 +39,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
+        Servicefile.shared.app_type = "walk" // app & walk
         //self.view_home.view_cornor()
         self.view_popup.view_cornor()
         self.view_yes.layer.cornerRadius = self.view_yes.frame.height / 2
@@ -167,7 +168,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             cell.btn_cancel.tag = indexPath.row
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked for :"
+            cell.labe_comMissed.text = "Booked On :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
@@ -251,7 +252,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         }
         cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: imagelink.sample)
-        cell.label_amount.text =  "₹" + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
+        cell.label_amount.text =  "INR " + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{

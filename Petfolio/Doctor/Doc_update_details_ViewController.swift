@@ -119,6 +119,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var view_action: UIView!
     
+    @IBOutlet weak var label_popmsg: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -215,8 +216,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
-        self.textview_aboutdoc.text = "Write here..."
+        self.textview_aboutdoc.text = "About Doctor"
         self.textview_aboutdoc.textColor = UIColor.gray
+       
         self.updatedetails()
         //self.setclinicimag()
     }
@@ -311,8 +313,16 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }
         
         let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
+        let size = 2.0
+        let filesize = Servicefile.shared.fileSize(forURL: myURL)
+        print("size value",size)
+        print("get the file size",filesize)
+        if filesize > size {
+            self.alert(Message: "Please Select the file Less that 2MB")
+        }else{
+            self.PDFupload(dat: myURL)
+        }
         
-        self.PDFupload(dat: myURL)
 //        print("import result : \(myURL)","name of file ",filename)
     }
     
@@ -381,7 +391,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.textview_aboutdoc == textView  {
-            if textView.text == "Write here..." {
+            if textView.text == "About Doctor" {
                 textView.text = ""
                 if textView.textColor == UIColor.gray {
                     textView.text = nil
@@ -666,7 +676,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             self.alert(Message: "please Enter the Clinic Number")
         } else if self.textfield_doctor_id.text == "" {
             self.alert(Message: "please Enter the Doctor ID")
-        } else if self.textview_aboutdoc.text == "Write here..." {
+        } else if self.textview_aboutdoc.text == "About Doctor" {
             self.alert(Message: "please Enter the About Doctor")
         } else if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
@@ -752,12 +762,14 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.textfield_clinic_num.text! = Servicefile.shared.Doc_bussiness_clinicno
         self.textfield_doctor_id.text! = Servicefile.shared.Doc_bussiness_docid
         self.textview_aboutdoc.text! = Servicefile.shared.Doc_bussiness_aboutdoc
+        self.textview_aboutdoc.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         if Servicefile.shared.edudicarray.count > 0 {
             self.tbl_educationlist.isHidden = false
         }
         if Servicefile.shared.expdicarray.count > 0 {
             self.tbl_experience.isHidden = false
         }
+        
         self.tbl_experience.reloadData()
         self.tbl_educationlist.reloadData()
         self.coll_govtid.reloadData()
@@ -770,7 +782,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     
     @IBAction func action_backtologin(_ sender: Any) {
-        let vc = UIStoryboard.DocdashboardViewController()
+        let vc = UIStoryboard.Doc_profiledetails_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -851,7 +863,6 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         }else{
             return 69
         }
-        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -1110,7 +1121,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         let alert = UIAlertController(title: "Profile", message: "Choose the process, Please Rotate your device to landscape for taking picture for better quality", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
 //            if UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft || UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft {
-                            self.imagepicker.allowsEditing = false
+                            self.imagepicker.allowsEditing = true
                             self.imagepicker.sourceType = .camera
                             self.present(self.imagepicker, animated: true, completion: nil)
 //            } else {
@@ -1127,7 +1138,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
 //            //
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -1140,12 +1151,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
+            
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -1158,16 +1170,34 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         self.present(alert, animated: true, completion: nil)
     }
     
-    
-    
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-                let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-                self.upload(imagedata: convertimg!)
-                dismiss(animated: true, completion: nil)
+                if self.Img_uploadarea == "clinic" {
+                    let reimage = Toucan(image: pickedImg).resize(CGSize(width: 800, height: 300), fitMode: Toucan.Resize.FitMode.crop).image
+                    let convertimg = reimage!.resized(withPercentage: CGFloat(Servicefile.shared.imagehighquantity))
+                    let data = pickedImg.jpegData(compressionQuality: 0.9)
+                    let size = Servicefile.shared.converttosize(size: 2)
+                    print("Image size",data!.count,"size value",size)
+                    if data!.count > size {
+                        self.alert(Message: "Please Select the image Less that 2MB")
+                    }else{
+                        self.upload(imagedata: convertimg!)
+                    }
+                }else{
+                    //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 800, height: 300), fitMode: Toucan.Resize.FitMode.crop).image
+                    let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+                    let data = pickedImg.jpegData(compressionQuality: 0.9)
+                    let size = Servicefile.shared.converttosize(size: 2)
+                    print("Image size",data!.count,"size value",size)
+                    if data!.count > size {
+                        self.alert(Message: "Please Select the image Less that 2MB")
+                    }else{
+                        self.upload(imagedata: convertimg!)
+                    }
+                    
+                }
             }
+        dismiss(animated: true, completion: nil)
     }
     
     func upload(imagedata: UIImage) {
@@ -1451,7 +1481,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
              "user_id" : Servicefile.shared.userid,
              "dr_title" : "Dr",
              "city_name": self.cityname,
-             "dr_name" : Servicefile.shared.first_name,
+             "dr_name" : Servicefile.shared.first_name + " " + Servicefile.shared.last_name,
              "clinic_name" : Servicefile.shared.checktextfield(textfield: self.textfield_clinicname.text!),
              "communication_type": Servicefile.shared.checktextfield(textfield: self.textfield_commtype.text!),
              "clinic_loc" : Servicefile.shared.checktextfield(textfield: Servicefile.shared.Doc_loc),
@@ -1478,7 +1508,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         _ = res["Data"] as! NSDictionary
-                        
+                        let Message = res["Message"] as? String ?? ""
+                        self.label_popmsg.text = Message
                         self.callupdatestatus()
                         self.stopAnimatingActivityIndicator()
                     }else{

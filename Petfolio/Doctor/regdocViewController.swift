@@ -120,6 +120,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     var latitude : Double!
     var longitude : Double!
     
+    @IBOutlet weak var label_popmsg: UILabel!
     @IBOutlet weak var view_header: header_title!
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_popup: UIView!
@@ -246,7 +247,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         self.view_expire.isHidden = true
         self.datepicker_date.maximumDate = Date()
         self.datepicker_expdate.maximumDate = Date()
-        self.textview_aboutdoc.text = "Write here..."
+        self.textview_aboutdoc.text = "About Doctor"
         self.textview_aboutdoc.textColor = UIColor.gray
         
         //self.setclinicimag()
@@ -280,7 +281,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func intial_setup_action(){
     // header action
         self.view_header.label_title.text = "Doctor Business Info"
-        self.view_header.label_title.textColor = .white
+        self.view_header.label_title.textColor = .black
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
     // header action
     }
@@ -338,7 +339,15 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         
         let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
         
-        self.PDFupload(dat: myURL)
+        let size = 2.0
+        let filesize = Servicefile.shared.fileSize(forURL: myURL)
+        print("size value",size)
+        print("get the file size",filesize)
+        if filesize > size {
+            self.alert(Message: "Please Select the file Less that 2MB")
+        }else{
+            self.PDFupload(dat: myURL)
+        }
 //        print("import result : \(myURL)","name of file ",filename)
     }
     
@@ -431,7 +440,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.textview_aboutdoc == textView  {
-            if textView.text == "Write here..." {
+            if textView.text == "About Doctor" {
                 textView.text = ""
                 if textView.textColor == UIColor.gray {
                     textView.text = nil
@@ -739,7 +748,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             self.alert(Message: "please Enter the Clinic Number")
         } else if self.textfield_doctor_id.text == "" {
             self.alert(Message: "please Enter the Doctor ID")
-        } else if self.textview_aboutdoc.text == "Write here.." {
+        } else if self.textview_aboutdoc.text == "About Doctor" {
             self.alert(Message: "please Enter the About Doctor")
         } else if self.textfield_clinicname.text == "" {
             self.alert(Message: "please enter the clinic name")
@@ -754,9 +763,9 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
         } else if Servicefile.shared.specdicarray.count == 0 {
             self.alert(Message: "Please select the Specialisation")
         } else if Servicefile.shared.pethandicarray.count == 0 {
-            self.alert(Message: "Please select the pet type")
+            self.alert(Message: "Please select the pet handle")
         } else if Servicefile.shared.clinicdicarray.count == 0 {
-            self.alert(Message: "Please select the pet type")
+            self.alert(Message: "Please choose minimum one clinic image")
         } else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please select the certificate")
         } else if Servicefile.shared.govdicarray.count == 0 {
@@ -1132,12 +1141,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func callgalaryimageprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -1151,12 +1160,12 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -1171,11 +1180,25 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
-            let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-            self.upload(imagedata: convertimg!)
+            if self.Img_uploadarea == "clinic" {
+                let reimage = Toucan(image: pickedImg).resize(CGSize(width: 800, height: 300), fitMode: Toucan.Resize.FitMode.crop).image
+                let convertimg = reimage!.resized(withPercentage: CGFloat(Servicefile.shared.imagehighquantity))
+                self.upload(imagedata: convertimg!)
+            }else{
+                //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 800, height: 300), fitMode: Toucan.Resize.FitMode.crop).image
+                let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
+                let data = pickedImg.jpegData(compressionQuality: 0.9)
+                let size = Servicefile.shared.converttosize(size: 2)
+                print("Image size",data!.count,"size value",size)
+                if data!.count > size {
+                    self.alert(Message: "Please Select the image Less that 2MB")
+                }else{
+                    self.upload(imagedata: convertimg!)
+                }
+                
+                
+            }
         }
         dismiss(animated: true, completion: nil)
     }
@@ -1387,7 +1410,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                             let pb = comm_type_arr[item] as! NSDictionary
                             let pbv = pb["com_type"] as? String ?? ""
                             let Value = String(pb["Value"] as? Int ?? 0)
-                            if Value != "0" && pbv != "" {
+                            if Value != "" && pbv != "" {
                                 self.comm_type.append(pbv)
                                 self.comm_type_Value.append(Value)
                             }
@@ -1475,6 +1498,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                         self.issubmit = true
                         //let Data = res["Data"] as! NSDictionary
                         self.callupdatestatus()
+                        let Message = res["Message"] as? String ?? ""
+                        self.label_popmsg.text = Message
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -1517,6 +1542,7 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                     if Code == 200 {
                         self.view_popup.isHidden = false
                         self.view_shadow.isHidden = false
+                        
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -53,7 +53,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
             }
         }
         self.image_product.contentMode = .scaleAspectFill
-        self.Label_product_amt.text = "₹ " +   String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_price)
+        self.Label_product_amt.text = "INR " +   String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_price)
         self.Label_status.text = "Delivered on : " +  String(Servicefile.shared.order_productdetail[Servicefile.shared.service_index].v_order_booked_on)
         
     }
@@ -67,6 +67,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
+        self.view_subpage_header.view_sos.isHidden = true
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

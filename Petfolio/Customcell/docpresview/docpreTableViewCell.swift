@@ -22,6 +22,10 @@ class docpreTableViewCell: UITableViewCell {
     @IBOutlet weak var img_n: UIImageView!
     @IBOutlet weak var btn_n: UIButton!
     
+    @IBOutlet weak var view_delete: UIView!
+    @IBOutlet weak var btn_delete: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -281,7 +281,7 @@ class vendorTrackorderViewController: UIViewController {
                         self.label_orderdate.text = self.date_of_booking
                         self.label_id.text = self.order_id
                         self.label_paymentmethod.text = "Online"
-                        self.label_ordertotal.text = "₹" + String(self.grand_total)
+                        self.label_ordertotal.text = "INR " + String(self.grand_total)
                         self.label_quality.text = String(self.product_quantity)
                         for i in 0..<prodcut_track_details.count{
                             let itdata = prodcut_track_details[i] as! NSDictionary

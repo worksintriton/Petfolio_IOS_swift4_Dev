@@ -376,7 +376,6 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.label_yr_exp.text = String(Data["doctor_exp"] as? Int ?? 0) + " Year"
                         let strcount = Data["star_count"] as? Int ?? 0
                         let r_count =  Data["review_count"] as? Int ?? 0
-                        
                         self.star_count = String(strcount)
                         let rcount = String(r_count)
                         if self.star_count == "" {
@@ -384,11 +383,6 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         }else{
                             self.ratingval.rating = Double(strcount)
                         }
-//                        if rcount == "" {
-//                            self.label_Noofcomments.text = "0"
-//                        }else{
-//                            self.label_Noofcomments.text = rcount
-//                        }
                         self.latitude = Data["clinic_lat"] as? Double ?? 0.0
                         self.longitude = Data["clinic_long"] as? Double ?? 0.0
                         self.setmarker(lat: self.latitude, long: self.longitude)

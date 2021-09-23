@@ -22,15 +22,15 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     var labelmenu = [""]
     var imgmenu = [""]
     /*if Servicefile.shared.my_ref_code != "" {
-     self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+     self.labelmenu = ["My Appointment","Walk-in Appointments","My Calendar","Manage Service","My Orders","Favourites","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
      self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
      self.tbl_menulist.reloadData()
  }else{
-     self.labelmenu = ["My Appointment","Walk-in Appointments","My calender","Manage Service","My Orders","Favorites","Payment Details","Notifications", "Logout"]
+     self.labelmenu = ["My Appointment","Walk-in Appointments","My Calendar","Manage Service","My Orders","Favourites","Payment Details","Notifications", "Logout"]
      self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","PaymentDetails","Bell", "Exit"]
      self.tbl_menulist.reloadData()
  }*/
-//  self.labelmenu = ["Favorites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
+//  self.labelmenu = ["Favourites","My Orders","My Appointment","My Coupons","Medical History","Payment Details","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
 //    self.imgmenu = ["Like","Doc","Calendar","Discount","Medical History","PaymentDetails","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +38,11 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calender","Manage Services","My Orders","Favorites","Notifications", "Logout", "Referal: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referal: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calender","Manage Services","My Orders","Favorites","Notifications", "Logout"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout"]
             self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
@@ -96,19 +96,22 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
     
     //doc_myorderdetails_ViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.labelmenu[indexPath.row] == "My Calender" {
+        if self.labelmenu[indexPath.row] == "My Calendar" {
             let vc = UIStoryboard.mycalenderViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Appointments" {
+            Servicefile.shared.appointtype = "New"
             let vc = UIStoryboard.DocdashboardViewController()
             self.present(vc, animated: true, completion: nil)
+            Servicefile.shared.appointtype = "New"
         }else if self.labelmenu[indexPath.row] == "Walk-in Appointments" {
             let vc = UIStoryboard.doc_app_walkin_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "My Orders" {
+            Servicefile.shared.ordertype = "New"
             let vc = UIStoryboard.doc_myorderdetails_ViewController()
             self.present(vc, animated: true, completion: nil)
-        }else if self.labelmenu[indexPath.row] == "Favorites"{
+        }else if self.labelmenu[indexPath.row] == "Favourites"{
             let vc = UIStoryboard.doc_favlist_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Notifications"{
@@ -127,7 +130,7 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
                         self.pushtologin()
                     }))
                     alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-                        
+                        self.dismiss(animated: true, completion: nil)
                     }))
                     self.present(alert, animated: true, completion: nil)
         }

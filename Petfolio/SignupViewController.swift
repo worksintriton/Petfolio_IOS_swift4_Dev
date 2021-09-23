@@ -240,8 +240,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-  
-    
     
     func callsignup(){
         self.startAnimatingActivityIndicator()

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Toucan
 import SDWebImage
-
+import ImageCropper
 
 class ProfileimageuploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -86,12 +86,12 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -102,12 +102,20 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-           // let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
+            //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 800, height: 300), fitMode: Toucan.Resize.FitMode.crop).image
             let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
-            self.upload(imagedata: convertimg!)
+            let data = pickedImg.jpegData(compressionQuality: 0.9)
+            let size = Servicefile.shared.converttosize(size: 2)
+            print("Image size",data!.count,"size value",size)
+            if data!.count > size {
+                self.alert(Message: "Please Select the image Less that 2MB")
+            }else{
+                self.upload(imagedata: convertimg!)
+            }
         }
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func upload(imagedata: UIImage) {

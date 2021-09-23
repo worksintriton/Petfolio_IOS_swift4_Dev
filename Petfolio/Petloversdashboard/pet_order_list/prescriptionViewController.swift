@@ -46,6 +46,8 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBOutlet weak var view_manual: UIView!
     
+    @IBOutlet weak var view_share: UIView!
+    var sharetext = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.Doc_pres.removeAll()
@@ -54,6 +56,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tbl_prescription.delegate = self
         self.tbl_prescription.dataSource = self
         self.view_pres.isHidden = true
+        self.view_share.isHidden = true
         self.callpescription()
     }
     
@@ -74,7 +77,14 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
         cell.labe_count.text = presdata["Quantity"] as? String ?? ""
         return cell
     }
-   
+    
+    
+    @IBAction func action_share(_ sender: Any) {
+        let objectsToShare = [sharetext] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+    }
+    
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -161,7 +171,6 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                             }
                                                         }
                                                         self.label_petgender.text =  Data["gender"] as? String ?? ""
-                                                       // "health_issue_title" = "Dental issues";
                                                         self.label_owner_name.text =  Data["owner_name"]  as? String ?? ""
                                                         self.label_breed.text =  Data["pet_breed"] as? String ?? ""
                                                         self.label_pet_name.text = Data["pet_name"] as? String ?? ""
@@ -170,6 +179,12 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                         self.label_subdiagnosis.text = Data["sub_diagnosis"] as? String ?? ""
                                                         self.label_powered_title.text = Data["web_name"] as? String ?? ""
                                                         self.label_pet_weight.text = String(Data["weight"] as? Int ?? 0)
+                                                        self.sharetext = Data["share_msg"] as? String ?? ""
+                                                        if Servicefile.shared.user_type == "4" {
+                                                            self.view_share.isHidden = false
+                                                        }else{
+                                                            self.view_share.isHidden = true
+                                                        }
                                                         self.stopAnimatingActivityIndicator()
                                                       }else{
                                                         self.stopAnimatingActivityIndicator()

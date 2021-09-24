@@ -231,7 +231,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             cell.selectionStyle = .none
             cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].completed_at
-            cell.labe_comMissed.text = "Completion on :"
+            cell.labe_comMissed.text = "Completed on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{

@@ -46,12 +46,11 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
         self.calender_cal.delegate = self
         self.callgetdatedetails()
         self.calender_cal.scope = .week
-        
     }
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Pickup Location"
+        self.view_subpage_header.label_header_title.text = "My Calendar"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -59,8 +58,8 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
         self.view_subpage_header.view_sos.isHidden = true
+        self.view_subpage_header.view_bag.isHidden = true
     // header action
-   
     }
     
     @IBAction func action_sos(_ sender: Any) {

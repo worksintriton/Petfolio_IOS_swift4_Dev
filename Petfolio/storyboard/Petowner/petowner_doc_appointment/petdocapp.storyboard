@@ -1709,6 +1709,9 @@
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Orange_paw"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="grey_paw"/>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R6f-VV-OTT">
@@ -4143,6 +4146,9 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Orange_paw"/>
                                                                     <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="grey_paw"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpK-qQ-IEL">
@@ -5680,7 +5686,7 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                                <real key="value" value="4"/>
+                                                <integer key="value" value="0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -9416,17 +9422,11 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="UPo-YX-ViX">
                                                 <rect key="frame" x="105" y="12" width="80" height="68"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Booked " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCi-QJ-CyJ">
-                                                <rect key="frame" x="29" y="135" width="232" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Booked " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nCi-QJ-CyJ">
+                                                <rect key="frame" x="8" y="88" width="274" height="87"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="p2u-1S-dIn"/>
+                                                    <constraint firstAttribute="height" constant="87" id="p2u-1S-dIn"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Successful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4h6-5I-0Sf">
-                                                <rect key="frame" x="68" y="92" width="154" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -9465,17 +9465,15 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="290" id="BnF-Fm-Ghm"/>
-                                            <constraint firstItem="nCi-QJ-CyJ" firstAttribute="top" secondItem="UPo-YX-ViX" secondAttribute="bottom" constant="55" id="EIp-JW-cac"/>
+                                            <constraint firstItem="nCi-QJ-CyJ" firstAttribute="top" secondItem="UPo-YX-ViX" secondAttribute="bottom" constant="8" id="EIp-JW-cac"/>
                                             <constraint firstItem="UPo-YX-ViX" firstAttribute="width" secondItem="cjL-0o-sV3" secondAttribute="width" multiplier="0.275862" id="IUV-ic-nP6"/>
-                                            <constraint firstItem="4h6-5I-0Sf" firstAttribute="top" secondItem="UPo-YX-ViX" secondAttribute="bottom" constant="12" id="RWf-it-ePu"/>
                                             <constraint firstAttribute="height" constant="245" id="Uua-tY-22M"/>
-                                            <constraint firstItem="nCi-QJ-CyJ" firstAttribute="width" secondItem="cjL-0o-sV3" secondAttribute="width" multiplier="0.8" id="Va4-Cm-xue"/>
+                                            <constraint firstItem="nCi-QJ-CyJ" firstAttribute="width" secondItem="cjL-0o-sV3" secondAttribute="width" multiplier="0.8" constant="42" id="Va4-Cm-xue"/>
                                             <constraint firstItem="S2T-c8-6Ty" firstAttribute="centerX" secondItem="cjL-0o-sV3" secondAttribute="centerX" id="bBY-gb-Ok3"/>
                                             <constraint firstAttribute="bottom" secondItem="S2T-c8-6Ty" secondAttribute="bottom" constant="16" id="iSa-gl-vjG"/>
                                             <constraint firstItem="UPo-YX-ViX" firstAttribute="height" secondItem="cjL-0o-sV3" secondAttribute="height" multiplier="0.277551" id="mwj-iH-pSi"/>
                                             <constraint firstItem="UPo-YX-ViX" firstAttribute="centerX" secondItem="cjL-0o-sV3" secondAttribute="centerX" id="qf1-Lr-m2S"/>
                                             <constraint firstItem="UPo-YX-ViX" firstAttribute="top" secondItem="cjL-0o-sV3" secondAttribute="top" constant="12" id="rpI-l2-faZ"/>
-                                            <constraint firstItem="4h6-5I-0Sf" firstAttribute="centerX" secondItem="UPo-YX-ViX" secondAttribute="centerX" id="wdP-9K-xFx"/>
                                             <constraint firstItem="nCi-QJ-CyJ" firstAttribute="centerX" secondItem="UPo-YX-ViX" secondAttribute="centerX" id="x51-fL-iPF"/>
                                         </constraints>
                                     </view>
@@ -9537,7 +9535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emb-rz-E65" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12462" y="-597"/>
+            <point key="canvasLocation" x="12460.869565217392" y="-597.32142857142856"/>
         </scene>
         <!--Pet doc search payoption View Controller-->
         <scene sceneID="SeF-PZ-NfP">
@@ -10260,10 +10258,10 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="IAe-6y-y4J">
                                                 <rect key="frame" x="105" y="30" width="80" height="68"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Booked " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kby-uB-dWu">
-                                                <rect key="frame" x="29" y="152.99999999999994" width="232" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Booked " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kby-uB-dWu">
+                                                <rect key="frame" x="4" y="110" width="282" height="70"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="Dyp-UI-bmp"/>
+                                                    <constraint firstAttribute="height" constant="70" id="sUE-hW-4MB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -10299,8 +10297,8 @@
                                                     <constraint firstItem="jYz-z9-Qdq" firstAttribute="leading" secondItem="OkM-dt-bUz" secondAttribute="leading" id="zK1-MY-ZnJ"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Successful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-o0-oro">
-                                                <rect key="frame" x="68" y="112" width="154" height="20.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-o0-oro">
+                                                <rect key="frame" x="145" y="112" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -10308,18 +10306,17 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="kby-uB-dWu" firstAttribute="centerX" secondItem="IAe-6y-y4J" secondAttribute="centerX" id="2kT-aW-hJ9"/>
+                                            <constraint firstAttribute="trailing" secondItem="kby-uB-dWu" secondAttribute="trailing" constant="4" id="78Q-ht-8ZI"/>
                                             <constraint firstAttribute="height" constant="245" id="7Jr-OZ-PLO"/>
                                             <constraint firstItem="d1f-o0-oro" firstAttribute="centerX" secondItem="IAe-6y-y4J" secondAttribute="centerX" id="Bhx-4O-Rl2"/>
-                                            <constraint firstItem="kby-uB-dWu" firstAttribute="top" secondItem="d1f-o0-oro" secondAttribute="bottom" constant="20.6666666666666" id="DUR-gJ-Ezc"/>
                                             <constraint firstItem="IAe-6y-y4J" firstAttribute="height" secondItem="aQr-ZW-Im5" secondAttribute="height" multiplier="0.277551" id="MEw-Ee-xog"/>
-                                            <constraint firstItem="kby-uB-dWu" firstAttribute="centerX" secondItem="d1f-o0-oro" secondAttribute="centerX" id="NcN-cz-ZOd"/>
                                             <constraint firstItem="IAe-6y-y4J" firstAttribute="top" secondItem="aQr-ZW-Im5" secondAttribute="top" constant="30" id="OR0-ay-yyl"/>
-                                            <constraint firstItem="kby-uB-dWu" firstAttribute="top" secondItem="IAe-6y-y4J" secondAttribute="bottom" constant="55" id="Qvn-AH-1tn"/>
                                             <constraint firstItem="d1f-o0-oro" firstAttribute="top" secondItem="IAe-6y-y4J" secondAttribute="bottom" constant="14" id="TcO-4D-BrE"/>
                                             <constraint firstItem="IAe-6y-y4J" firstAttribute="centerX" secondItem="aQr-ZW-Im5" secondAttribute="centerX" id="W0E-M1-EHB"/>
                                             <constraint firstAttribute="width" constant="290" id="ZZA-6s-l8J"/>
-                                            <constraint firstItem="kby-uB-dWu" firstAttribute="width" secondItem="aQr-ZW-Im5" secondAttribute="width" multiplier="0.8" id="a8A-dH-kdI"/>
+                                            <constraint firstItem="kby-uB-dWu" firstAttribute="centerX" secondItem="IAe-6y-y4J" secondAttribute="centerX" id="eDO-b8-FPZ"/>
+                                            <constraint firstItem="kby-uB-dWu" firstAttribute="leading" secondItem="aQr-ZW-Im5" secondAttribute="leading" constant="4" id="gcI-uG-3GK"/>
+                                            <constraint firstItem="kby-uB-dWu" firstAttribute="top" secondItem="IAe-6y-y4J" secondAttribute="bottom" constant="12" id="kR2-N5-0Le"/>
                                             <constraint firstItem="OkM-dt-bUz" firstAttribute="centerX" secondItem="aQr-ZW-Im5" secondAttribute="centerX" id="n9y-nG-IdI"/>
                                             <constraint firstItem="IAe-6y-y4J" firstAttribute="width" secondItem="aQr-ZW-Im5" secondAttribute="width" multiplier="0.275862" id="sB7-qI-OIM"/>
                                             <constraint firstAttribute="bottom" secondItem="OkM-dt-bUz" secondAttribute="bottom" constant="16" id="vMD-nG-bJv"/>

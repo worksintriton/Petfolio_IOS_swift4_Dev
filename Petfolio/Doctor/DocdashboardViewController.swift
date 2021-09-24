@@ -214,7 +214,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_cancnel.isHidden = true
             
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].completed_at
-            cell.labe_comMissed.text = "Completion on :"
+            cell.labe_comMissed.text = "Completed on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
@@ -344,16 +344,19 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func action_missed(_ sender: Any) {
         Servicefile.shared.appointtype = "Missed"
         self.callapp()
+        self.callnoticartcount()
     }
     
     @IBAction func action_completeappoint(_ sender: Any) {
         Servicefile.shared.appointtype = "Completed"
         self.callapp()
+        self.callnoticartcount()
     }
     
     @IBAction func action_newappoint(_ sender: Any) {
         Servicefile.shared.appointtype = "New"
         self.callapp()
+        self.callnoticartcount()
     }
     
     func callapp(){

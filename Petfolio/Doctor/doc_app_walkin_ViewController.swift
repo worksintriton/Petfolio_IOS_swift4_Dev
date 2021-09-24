@@ -95,7 +95,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
 
         // header action
             
-        self.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.btn_back.addTarget(self, action: #selector(self.backcall), for: .touchUpInside)
             
         // header action
         
@@ -103,6 +103,11 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+    }
+    
+   @objc func backcall(){
+    let vc = UIStoryboard.DocdashboardViewController()
+    self.present(vc, animated: true, completion: nil)
     }
     
     
@@ -186,7 +191,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             cell.view_cancnel.isHidden = true
             
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].completed_at
-            cell.labe_comMissed.text = "Completion on :"
+            cell.labe_comMissed.text = "Completed on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{

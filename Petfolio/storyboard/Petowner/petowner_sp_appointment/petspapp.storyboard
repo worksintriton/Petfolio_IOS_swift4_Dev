@@ -599,6 +599,9 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Orange_paw"/>
                                                                     <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="grey_paw"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                         </subviews>
@@ -5132,16 +5135,10 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="Lfn-Jp-7oi">
                                                 <rect key="frame" x="105" y="12" width="80" height="68"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Successful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrR-t3-OCN">
-                                                <rect key="frame" x="68" y="92" width="154" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Booked " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="i78-Vd-dwZ">
-                                                <rect key="frame" x="29" y="124.5" width="232" height="50"/>
+                                                <rect key="frame" x="29" y="88" width="232" height="80"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="Glo-Gv-nOv"/>
+                                                    <constraint firstAttribute="height" constant="80" id="Glo-Gv-nOv"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -5180,16 +5177,14 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="RrR-t3-OCN" firstAttribute="top" secondItem="Lfn-Jp-7oi" secondAttribute="bottom" constant="12" id="A09-6M-sgM"/>
-                                            <constraint firstItem="RrR-t3-OCN" firstAttribute="centerX" secondItem="Lfn-Jp-7oi" secondAttribute="centerX" id="G3Q-Sw-H4e"/>
                                             <constraint firstItem="Lfn-Jp-7oi" firstAttribute="top" secondItem="7Gq-ht-8GX" secondAttribute="top" constant="12" id="MKI-df-IWu"/>
                                             <constraint firstItem="i78-Vd-dwZ" firstAttribute="width" secondItem="7Gq-ht-8GX" secondAttribute="width" multiplier="0.8" id="O4w-V3-amJ"/>
                                             <constraint firstAttribute="width" constant="290" id="R9e-zz-yle"/>
                                             <constraint firstItem="Lfn-Jp-7oi" firstAttribute="height" secondItem="7Gq-ht-8GX" secondAttribute="height" multiplier="0.277551" id="WE4-i2-9kf"/>
-                                            <constraint firstItem="i78-Vd-dwZ" firstAttribute="top" secondItem="RrR-t3-OCN" secondAttribute="bottom" constant="12" id="WKm-x7-Mcd"/>
                                             <constraint firstItem="QxR-Td-hk2" firstAttribute="centerX" secondItem="7Gq-ht-8GX" secondAttribute="centerX" id="dQt-4J-RaX"/>
                                             <constraint firstItem="Lfn-Jp-7oi" firstAttribute="centerX" secondItem="7Gq-ht-8GX" secondAttribute="centerX" id="g8M-r0-Lt1"/>
                                             <constraint firstAttribute="bottom" secondItem="QxR-Td-hk2" secondAttribute="bottom" constant="16" id="j07-DK-Zv8"/>
+                                            <constraint firstItem="i78-Vd-dwZ" firstAttribute="top" secondItem="Lfn-Jp-7oi" secondAttribute="bottom" constant="8" symbolic="YES" id="kEq-FE-9nf"/>
                                             <constraint firstItem="i78-Vd-dwZ" firstAttribute="centerX" secondItem="Lfn-Jp-7oi" secondAttribute="centerX" id="lsD-vl-SxB"/>
                                             <constraint firstItem="Lfn-Jp-7oi" firstAttribute="width" secondItem="7Gq-ht-8GX" secondAttribute="width" multiplier="0.275862" id="pME-QL-ReI"/>
                                             <constraint firstAttribute="height" constant="245" id="pT3-8I-jWE"/>
@@ -5252,7 +5247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5r-1b-kwQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="13884" y="-302"/>
+            <point key="canvasLocation" x="13882.608695652176" y="-302.00892857142856"/>
         </scene>
     </scenes>
     <resources>

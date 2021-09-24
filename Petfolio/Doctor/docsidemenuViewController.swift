@@ -38,8 +38,8 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
             self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout"]

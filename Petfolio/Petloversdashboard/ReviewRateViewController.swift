@@ -82,7 +82,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
                                                           print("success data",res)
                                                           let Code  = res["Code"] as! Int
                                                           if Code == 200 {
-                                                          let alert = UIAlertController(title: "", message: "Rating and Review updated successfully", preferredStyle: .alert)
+                                                          let alert = UIAlertController(title: "", message: "Review Added", preferredStyle: .alert)
                                                                          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                                                              self.dismiss(animated: true, completion: nil)
                                                                               }))

@@ -173,6 +173,24 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
          self.label_emailstatus.text = Servicefile.shared.email_status_label
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? petprofileViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+        if let firstVC = presentingViewController as? Doc_profiledetails_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        if let firstVC = presentingViewController as? Sp_profile_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+       }
+    
     
     
     
@@ -214,15 +232,18 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                             if Servicefile.shared.user_type == "1" {
                                 //        Servicefile.shared.tabbar_selectedindex = 2
-                                        let tapbar = UIStoryboard.petloverDashboardViewController()
+//                                        let tapbar = UIStoryboard.petloverDashboardViewController()
                                 //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                                        self.present(tapbar, animated: true, completion: nil)
+//                                        self.present(tapbar, animated: true, completion: nil)
+                                self.dismiss(animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "4" {
-                                let vc = UIStoryboard.DocdashboardViewController()
-                                self.present(vc, animated: true, completion: nil)
+                                self.dismiss(animated: true, completion: nil)
+//                                let vc = UIStoryboard.DocdashboardViewController()
+//                                self.present(vc, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "2" {
-                                let vc = UIStoryboard.Sp_dash_ViewController()
-                                self.present(vc, animated: true, completion: nil)
+                                self.dismiss(animated: true, completion: nil)
+//                                let vc = UIStoryboard.Sp_dash_ViewController()
+//                                self.present(vc, animated: true, completion: nil)
                             }
                         }))
                         self.present(alert, animated: true, completion: nil)

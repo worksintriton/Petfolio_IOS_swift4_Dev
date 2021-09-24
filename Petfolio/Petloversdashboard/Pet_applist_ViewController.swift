@@ -205,7 +205,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].completed_at
-            cell.labe_comMissed.text = "Completion on :"
+            cell.labe_comMissed.text = "Completed on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{
@@ -275,14 +275,70 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func action_online(sender : UIButton){
         let tag = sender.tag
-        if Servicefile.shared.pet_applist_do_sp[tag].start_appointment_status == "In-Progress" {
-            Servicefile.shared.selectedindex = tag
-            let vc = UIStoryboard.Pet_confrence_ViewController()
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+        Servicefile.shared.selectedindex = tag
+//        if Servicefile.shared.pet_applist_do_sp[tag].start_appointment_status == "In-Progress" {
+//            Servicefile.shared.selectedindex = tag
+//            let vc = UIStoryboard.Pet_confrence_ViewController()
+//            self.present(vc, animated: true, completion: nil)
+//        } else {
+//            self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+//        }
+        self.call_getdetails()
+    }
+    
+    func call_getdetails(){
+        Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        self.startAnimatingActivityIndicator()
+        var urllink = ""
+        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+            if Servicefile.shared.iswalkin {
+                urllink = Servicefile.Doc_fetch_walkin__appointment_id
+            }else{
+                urllink = Servicefile.Doc_fetch_appointment_id
+            }
+        }else{
+            urllink = Servicefile.SP_fetch_appointment_id
+        }
+        print(urllink)
+        if Servicefile.shared.updateUserInterface() { AF.request(urllink, method: .post, parameters:
+            ["apppointment_id": Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex]._id], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("app list success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let data = res["Data"] as! NSDictionary
+                        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                            let appoinment_status = data["start_appointment_status"] as? String ?? ""
+                            if appoinment_status == "In-Progress" {
+                                let vc = UIStoryboard.Pet_confrence_ViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            } else {
+                                self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+                            }
+                        }else{
+
+                        }
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "No Intenet Please check and try again ")
         }
     }
+    
+    
     
     @IBAction func action_notification(_ sender: Any) {
         let vc = UIStoryboard.pet_notification_ViewController()
@@ -343,6 +399,8 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.present(vc, animated: true, completion: nil)
     // }
     }
+    
+    
     
     @IBAction func action_confrim(_ sender: Any) {
         //print("appointment Booked time",Servicefile.shared.pet_applist_do_sp[indextag].appointment_time)
@@ -695,7 +753,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                                     let type  = dataitm["type"] as? String ?? ""
                                                                                     let updatedAt = dataitm["updatedAt"] as? String ?? ""
                                                                                     let user_feedback = dataitm["user_feedback"] as? String ?? ""
-                                                                                    let user_rate = dataitm["user_rate"] as? String ?? ""
+                                                                                    let user_rate = String(dataitm["user_rate"] as? Int ?? 0)
                                                                                     let doctor_name = dataitm["doctor_name"] as? String ?? ""
                                                                                     let doctor_id = dataitm["doctor_id"] as? String ?? ""
                                                                                     let sp_id = dataitm["sp_id"] as? String ?? ""

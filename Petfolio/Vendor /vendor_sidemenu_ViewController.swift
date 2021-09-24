@@ -25,8 +25,8 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
         
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Add Products","Manage Products","My orders","Notifications", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["add","shop-1","Doc","Bell", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Add Products","Manage Products","My orders","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["add","shop-1","Doc","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
         }else{
             self.labelmenu = ["Add Products","Manage Products","My orders","Notifications", "Logout"]
             self.imgmenu = ["add","shop-1","Doc","Bell","Exit"]

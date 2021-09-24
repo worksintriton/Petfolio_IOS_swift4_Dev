@@ -30,8 +30,8 @@ class Pet_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITable
         super.viewDidLoad()
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["Favourites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referral: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referral: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["Favourites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
         }else{
             self.labelmenu = ["Favourites","My Orders","My Appointments","Walk-in Appointments","My Coupons","Notifications","SOS", "Logout"]
             self.imgmenu = ["Like","Doc","Calendar","walkin","Discount","Bell","SOS", "Exit"]

@@ -105,7 +105,7 @@ class Pet_app_details_ViewController: UIViewController {
         self.view_reshedule.isHidden = true
         self.view_confrence.isHidden = true
         self.view_complete.isHidden = true
-         self.view_cancel.isHidden = true
+        self.view_cancel.isHidden = true
         self.label_Holder_service_name.isHidden = true
         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
             self.view_alergies.isHidden = false
@@ -542,17 +542,20 @@ class Pet_app_details_ViewController: UIViewController {
                             let user_id = data["user_id"] as! NSDictionary
                             let firstname = user_id["first_name"] as? String ?? ""
                             let lastname = user_id["last_name"] as? String ?? ""
-                            let userimage = user_id["profile_img"] as? String ?? Servicefile.sample_img
-                           
+                            
+                            
                             self.label_Holder_service_name.isHidden = false
                             self.label_Holder_service_name.text = data["service_name"] as? String ?? ""
                             let amt = data["service_amount"] as? String ?? ""
                             let sp_business_info = data["sp_business_info"] as! NSArray
+                            
                             let sp_business = sp_business_info[0] as! NSDictionary
                             let sp_loc  = sp_business["sp_loc"] as? String ?? ""
                             self.label_holder_name.text = sp_business["bussiness_name"] as? String ?? ""
                             self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = sp_loc
+                            let sp_id = data["sp_id"] as! NSDictionary
+                            let userimage = sp_id["profile_img"] as? String ?? Servicefile.sample_img
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {

@@ -203,7 +203,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             cell.view_cancnel.isHidden = true
             cell.view_completebtn.isHidden = true
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].completed_at
-            cell.labe_comMissed.text = "Completion on :"
+            cell.labe_comMissed.text = "Completed on :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else{

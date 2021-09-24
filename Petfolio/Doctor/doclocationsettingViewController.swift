@@ -50,7 +50,7 @@ class doclocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Pickup Location"
+        self.view_subpage_header.label_header_title.text = "Choose Location"
             self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
             self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
             self.view_subpage_header.view_profile.isHidden = true

@@ -49,6 +49,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         print("user name",Servicefile.shared.user_type, Servicefile.shared.first_name)
         Servicefile.shared.iswalkin = false
         self.inital_setup()
+        
         Servicefile.shared.pet_appint_pay_method = ""
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -81,10 +82,8 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         self.label_missed.textColor = appcolor
         self.view_completed.layer.borderColor = appcolor.cgColor
         self.view_missed.layer.borderColor = appcolor.cgColor
-        self.callcheckstatus()
-        self.callnoticartcount()
-        self.timer.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        
+        
     }
     
     @objc func updateCounter() {
@@ -93,18 +92,33 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
 //        }else{
 //            self.stoptimer()
 //        }
+        //self.callapp()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.callcheckstatus()
+        self.callnoticartcount()
+        self.timer.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        //self.stoptimer()
+        print("view had disappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("view is going to disappear")
         self.stoptimer()
     }
+    
     
     func stoptimer(){
         self.timer.invalidate()
     }
     
     func inital_setup(){
-        self.doc_header.btn_sidemenu.addTarget(self, action: #selector(self.docsidemenu), for: .touchUpInside)
+        self.doc_header.btn_sidemenu.addTarget(self, action: #selector(self.beforeback), for: .touchUpInside)
 //        var img = Servicefile.shared.userimage
 //        if img != "" {
 //            img = Servicefile.shared.userimage
@@ -137,9 +151,18 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
         //self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        self.view_footer.backgroundColor = UIColor.clear
+        self.view_footer.view_main.backgroundColor = UIColor.clear
+        self.view_footer.view_subview.backgroundColor = UIColor.clear
     }
     
-    
+    @objc func beforeback(){
+        print("view disappear")
+        self.stoptimer()
+        let vc = UIStoryboard.docsidemenuViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+   
    
     
     
@@ -202,7 +225,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_online.addTarget(self, action: #selector(action_online), for: .touchUpInside)
             
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked on :"
+            cell.labe_comMissed.text = "Booked for :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else if Servicefile.shared.appointtype == "Completed"{
@@ -281,7 +304,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.stoptimer()
         Servicefile.shared.Doc_selected_app_list = Servicefile.shared.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
@@ -291,6 +314,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     
     
     @objc func action_pres(sender : UIButton){
+        self.stoptimer()
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
         Servicefile.shared.pet_apoint_id = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].Appid
@@ -299,6 +323,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func action_complete(sender : UIButton){
+        self.stoptimer()
         let tag = sender.tag
         Servicefile.shared.appointmentindex = tag
         Servicefile.shared.pet_appint_pay_method = Servicefile.shared.Doc_dashlist[Servicefile.shared.appointmentindex].payment_method
@@ -307,6 +332,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func action_online(sender : UIButton){
+        self.stoptimer()
         let tag = sender.tag
         let alert = UIAlertController(title: "", message: "Are you sure you need to start the call?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -427,7 +453,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -505,7 +531,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -584,7 +610,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func callmiss(){
@@ -660,7 +686,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -714,7 +740,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -772,7 +798,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -812,7 +838,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -847,7 +873,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }
@@ -878,7 +904,7 @@ class DocdashboardViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
   

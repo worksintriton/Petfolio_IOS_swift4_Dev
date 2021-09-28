@@ -165,7 +165,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }
             cell.label_prod_ord_datetime.text = Servicefile.shared.order_productdetail[indexPath.row].v_order_booked_on
             cell.btn_order_details.tag = indexPath.row
-            cell.label_prod_date_title.text = "Booked on : "
+            cell.label_prod_date_title.text = "Booked for : "
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             return cell
         }  else {
@@ -350,7 +350,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -429,7 +429,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -508,7 +508,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -554,7 +554,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

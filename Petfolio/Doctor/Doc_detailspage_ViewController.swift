@@ -134,6 +134,7 @@ class Doc_detailspage_ViewController: UIViewController {
         self.view_footer.setup(b1: false, b2: false, b3: false)
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
+        self.view_footer.backgroundColor = UIColor.clear
     // footer action
     }
     
@@ -151,6 +152,15 @@ class Doc_detailspage_ViewController: UIViewController {
         let vc = UIStoryboard.Doc_profiledetails_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? DocdashboardViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+       
+       }
     
     
     @IBAction func action_prescrption(_ sender: Any) {
@@ -196,7 +206,7 @@ class Doc_detailspage_ViewController: UIViewController {
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
     
@@ -278,7 +288,7 @@ class Doc_detailspage_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -660,7 +670,7 @@ class Doc_detailspage_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -692,7 +702,7 @@ class Doc_detailspage_ViewController: UIViewController {
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
             self.dismiss(animated: true, completion: nil)
        }

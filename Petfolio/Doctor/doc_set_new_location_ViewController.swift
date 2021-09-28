@@ -114,7 +114,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
         if Servicefile.shared.long != 0.0 {
             self.dismiss(animated: true, completion: nil)
         }else{
-            self.alert(Message: "please select the location")
+            self.alert(Message: "Please select your location")
         }
         
     }
@@ -302,7 +302,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -336,7 +336,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -376,7 +376,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

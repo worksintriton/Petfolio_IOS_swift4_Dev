@@ -171,7 +171,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
             let vc = UIStoryboard.petsavelocationViewController()
             self.present(vc, animated: true, completion: nil)
         }else{
-            self.alert(Message: "please select the location")
+            self.alert(Message: "Please select your location")
         }
     }
     
@@ -313,7 +313,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -347,7 +347,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -387,7 +387,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

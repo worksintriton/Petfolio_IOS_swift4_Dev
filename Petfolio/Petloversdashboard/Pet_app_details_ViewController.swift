@@ -198,7 +198,7 @@ class Pet_app_details_ViewController: UIViewController {
             let vc = UIStoryboard.Pet_confrence_ViewController()
             self.present(vc, animated: true, completion: nil)
         } else {
-            self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+            self.alert(Message: "Doctor is yet to start the Appointment. Please wait for the Doctor to initiate the call")
         }
     }
     
@@ -283,7 +283,7 @@ class Pet_app_details_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -428,7 +428,7 @@ class Pet_app_details_ViewController: UIViewController {
                            
                             let firstname = doctor_id["first_name"] as? String ?? ""
                             let lastname = doctor_id["last_name"] as? String ?? ""
-                            let userimage = doctor_id["profile_img"] as? String ?? ""
+                            
                             self.label_holder_name.text = firstname + " " + lastname
                             let pet_handle = doc_busi["pet_handled"] as! NSArray
                             var petha = ""
@@ -481,6 +481,7 @@ class Pet_app_details_ViewController: UIViewController {
                             Servicefile.shared.doc_detail_id = _id
                             self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = clinic_loc
+                            let userimage  = doc_busi["thumbnail_image"] as? String ?? ""
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
@@ -600,7 +601,7 @@ class Pet_app_details_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -634,7 +635,7 @@ class Pet_app_details_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }
@@ -670,7 +671,7 @@ class Pet_app_details_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }

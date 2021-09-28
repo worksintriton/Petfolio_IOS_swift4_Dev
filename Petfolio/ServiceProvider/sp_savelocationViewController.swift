@@ -32,7 +32,8 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         
         @IBOutlet weak var switch_default: UISwitch!
         
-        @IBOutlet weak var img_other: UIImageView!
+    @IBOutlet weak var label_savelocation_btn: UILabel!
+    @IBOutlet weak var img_other: UIImageView!
         @IBOutlet weak var img_work: UIImageView!
         @IBOutlet weak var img_home: UIImageView!
         
@@ -70,6 +71,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
             self.textfield_location.isUserInteractionEnabled = false
             
             if Servicefile.shared.locaaccess == "Add" {
+                self.label_savelocation_btn.text = "Save this location & proceed"
                 self.textfield_pincode.text = Servicefile.shared.selectedPincode
                 self.textfield_cityname.text = Servicefile.shared.selectedCity
                 self.textfield_location.text = Servicefile.shared.selectedaddress
@@ -77,6 +79,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                 self.label_locadetail.text = Servicefile.shared.selectedaddress
                 self.switch_default.isOn = false
             }else{
+                self.label_savelocation_btn.text = "Save Changes"
                 self.textfield_pincode.text = Servicefile.shared.selectedPincode
                 self.textfield_cityname.text = Servicefile.shared.selectedCity
                 self.textfield_location.text = Servicefile.shared.selectedaddress
@@ -218,21 +221,21 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
         
         func textFieldDidBeginEditing(_ textField: UITextField) {
             if self.textfield_cityname == textField || self.textfield_pickname == textField{
-                self.moveTextField(textField: textField, up:true)
+                //self.moveTextField(textField: textField, up:true)
             }
             
         }
         
         func textFieldDidEndEditing(_ textField: UITextField) {
             if self.textfield_cityname == textField || self.textfield_pickname == textField{
-                self.moveTextField(textField: textField, up:false)
+                //self.moveTextField(textField: textField, up:false)
             }
         }
         
         
         @IBAction func action_savelocation(_ sender: Any) {
             if self.textfield_pickname.text == "" {
-                self.alert(Message: "Please enter pick a nick name for this location")
+                self.alert(Message: "Please enter name for this location")
             }else{
                 if Servicefile.shared.locaaccess == "Add" {
                     self.calladdlocation()
@@ -281,7 +284,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -325,7 +328,7 @@ class sp_savelocationViewController: UIViewController, GMSMapViewDelegate, CLLoc
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
       

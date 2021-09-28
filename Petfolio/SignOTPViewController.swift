@@ -37,6 +37,10 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
               }
     
     override func viewWillDisappear(_ animated: Bool) {
+       
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.stoptimer()
     }
     
@@ -45,7 +49,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -153,7 +157,6 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                         Servicefile.shared.user_type = String(user_details["user_type"] as! Int)
                         Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
                         Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
-                       
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -168,7 +171,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
             }
         } else {
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -232,7 +235,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -274,7 +277,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

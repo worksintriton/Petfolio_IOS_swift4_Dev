@@ -245,6 +245,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         Servicefile.shared.selectedindex = tag
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[tag].user_id
         Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[tag].amount)!
+        Servicefile.shared.pet_orgiapoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[tag].communication_type
         let vc = UIStoryboard.searchcalenderdetailsViewController()
         self.present(vc, animated: true, completion: nil)
@@ -253,6 +254,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Servicefile.shared.sear_Docapp_id = Servicefile.shared.moredocd[indexPath.row].user_id
         Servicefile.shared.pet_apoint_amount = Int(Servicefile.shared.moredocd[indexPath.row].amount)!
+        Servicefile.shared.pet_orgiapoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
         Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.moredocd[indexPath.row].communication_type
         let vc = UIStoryboard.SearchtoclinicdetailViewController()
         self.present(vc, animated: true, completion: nil)
@@ -303,7 +305,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                 }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -386,7 +388,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
         

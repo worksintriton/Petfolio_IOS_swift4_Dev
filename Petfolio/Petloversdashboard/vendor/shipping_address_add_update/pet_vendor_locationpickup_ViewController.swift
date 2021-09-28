@@ -168,7 +168,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
         if Servicefile.shared.long != 0.0 {
             self.dismiss(animated: true, completion: nil)
         }else{
-            self.alert(Message: "please select the location")
+            self.alert(Message: "Please select your location")
         }
     }
     
@@ -310,7 +310,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -344,7 +344,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -384,7 +384,7 @@ class pet_vendor_locationpickup_ViewController: UIViewController, GMSMapViewDele
             }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

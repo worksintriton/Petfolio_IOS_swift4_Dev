@@ -243,6 +243,10 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     }
     
     func call_service_details() {
+        Servicefile.shared.pet_SP_service_details.removeAll()
+        self.col_servic.reloadData()
+        self.tabl_service.reloadData()
+        self.label_nodatafound.isHidden = false
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() {
@@ -314,6 +318,11 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                                 self.tabl_service.reloadData()
                                 self.stopAnimatingActivityIndicator()
                             }else{
+                                if Servicefile.shared.pet_SP_service_details.count > 0 {
+                                    self.label_nodatafound.isHidden = true
+                                }else{
+                                    self.label_nodatafound.isHidden = false
+                                }
                                 self.stopAnimatingActivityIndicator()
                                 print("status code service denied")
                             }
@@ -326,7 +335,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                        }
         } else {
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

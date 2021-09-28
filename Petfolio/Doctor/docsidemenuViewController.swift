@@ -38,12 +38,12 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.delegate = self
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
-            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","My Coupons","Favourites","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Doc","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
-            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","Favourites","Notifications", "Logout"]
-            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Like","Bell", "Exit"]
+            self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","My Coupons","Favourites","Notifications", "Logout"]
+            self.imgmenu = ["Doc","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name
@@ -121,6 +121,9 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
             self.dismiss(animated: true, completion: nil)
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "doc_paymentdetilsViewController") as! doc_paymentdetilsViewController
 //            self.present(vc, animated: true, completion: nil)
+        }else if self.labelmenu[indexPath.row] == "My Coupons"{
+            let vc = UIStoryboard.mycouponViewController()
+            self.present(vc, animated: true, completion: nil)
         }else if self.labelmenu[indexPath.row] == "Manage Services" {
             let vc = UIStoryboard.Doc_profiledetails_ViewController()
             self.present(vc, animated: true, completion: nil)

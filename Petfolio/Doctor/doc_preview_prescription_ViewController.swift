@@ -42,6 +42,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
     @IBOutlet weak var view_pres_manual: UIView!
     @IBOutlet weak var view_pres_img: UIView!
     @IBOutlet weak var label_note: UILabel!
+    @IBOutlet weak var view_edit: UIView!
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -83,6 +84,10 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             self.view_btn.view_cornor()
              self.view_submit.view_cornor()
             self.view_submit.dropShadow()
+            
+            self.view_edit.view_cornor()
+           self.view_edit.dropShadow()
+            
             self.view_btn.dropShadow()
             self.textview_descrip.delegate = self
             self.textview_descrip.text =  Servicefile.shared.Doc_pre_descrip
@@ -102,7 +107,12 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         // header action
         }
-        
+    
+    
+    @IBAction func action_edit(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
         
         @IBAction func action_submitprescription(_ sender: Any) {
             if self.doctor_sub_diagnosis.text == "" {
@@ -110,9 +120,9 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
             }else if self.doctor_diagnosis.text == "" {
                 self.alert(Message: "Please select the diagnosis")
             }else if self.textview_descrip.text == "Write here..."{
-                self.alert(Message: "please enter the comments")
+                self.alert(Message: "Please enter your comments")
             }else if self.textview_descrip.text == ""{
-                self.alert(Message: "please enter the comments")
+                self.alert(Message: "Please enter your comments")
             }else{
                 self.callpescription()
             }
@@ -199,11 +209,11 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
         @objc func action_addtablet(sender: UIButton){
             print("data in doc pres",Servicefile.shared.medi, Servicefile.shared.noofday, Servicefile.shared.consdays)
             if Servicefile.shared.noofday == "" {
-                self.alert(Message: "please enter no of days")
+                self.alert(Message: "Please enter number of days")
             }else if Servicefile.shared.medi == "" {
-                 self.alert(Message: "please enter tablet name")
+                 self.alert(Message: "Please enter the name of the medicine")
             }else if Servicefile.shared.consdays == "" {
-                self.alert(Message: "please enter consumption")
+                self.alert(Message: "Please enter the time of the day for consuming the medicines")
             }else{
                 var B = Servicefile.shared.Doc_pres
                 var arr = B
@@ -269,7 +279,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                                            }
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        self.alert(Message: "No Intenet Please check and try again ")
+                        self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                     }
                 }
         
@@ -308,7 +318,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                                              }
                       }else{
                           self.stopAnimatingActivityIndicator()
-                          self.alert(Message: "No Intenet Please check and try again ")
+                          self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                       }
                   }
         
@@ -370,7 +380,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                                              }
                       }else{
                           self.stopAnimatingActivityIndicator()
-                          self.alert(Message: "No Intenet Please check and try again ")
+                          self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                       }
                   }
           
@@ -415,7 +425,7 @@ class doc_preview_prescription_ViewController: UIViewController, UITableViewDele
                                              }
                       }else{
                           self.stopAnimatingActivityIndicator()
-                          self.alert(Message: "No Intenet Please check and try again ")
+                          self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                       }
                   }
         

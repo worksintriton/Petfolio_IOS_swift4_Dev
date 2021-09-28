@@ -34,7 +34,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
             self.intial_setup_action()
             self.col_doc_fav.delegate = self
             self.col_doc_fav.dataSource = self
-            self.callproductdetails()
+            
             // Do any additional setup after loading the view.
         }
         
@@ -42,6 +42,10 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
             Servicefile.shared.petnewprod.removeAll()
         }
         
+    override func viewWillAppear(_ animated: Bool) {
+        self.callproductdetails()
+    }
+    
         func numberOfSections(in collectionView: UICollectionView) -> Int {
             return 1
         }
@@ -116,6 +120,13 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
             self.callfav()
         }
         
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
+        let vc = UIStoryboard.sp_productdetailspage_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
            
@@ -202,7 +213,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -233,7 +244,7 @@ class sp_favlist_ViewController:  UIViewController, UICollectionViewDelegate, UI
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         

@@ -97,10 +97,11 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.view_footer.view_cornor()
-        self.label_confirmall.text = "Cancel All"
+        self.label_confirmall.text = "Cancel order"
         self.order_change_status.removeAll()
         self.orgi_order_change_status.removeAll()
         Servicefile.shared.orderdetail_prod.removeAll()
+        Servicefile.shared.iscancelselect.removeAll()
         self.view_status.isHidden = true
         self.view_shipingaddress.isHidden = true
         self.view_orderdetails.isHidden = true
@@ -240,7 +241,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
         if Servicefile.shared.ordertype == "Completed" {
                 return "Delivered on :"
         }else if Servicefile.shared.ordertype == "New"{
-            return  "Booked on :"
+            return  "Booked for :"
         }else{
             return   "Cancelled on :"
         }
@@ -399,7 +400,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                             self.view_confirmall.isHidden = true
                         }else if Servicefile.shared.ordertype == "New"{
                                 let date = order_details["order_booked"] as? String ?? ""
-                                self.Label_status.text = "Booked on"
+                                self.Label_status.text = "Booked for"
                                 self.label_status_date.text = date
                         }else{
                                 self.Label_status.text = "Cancelled on"
@@ -472,7 +473,7 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

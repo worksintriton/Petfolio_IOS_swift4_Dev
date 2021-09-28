@@ -133,6 +133,7 @@ class Servicefile {
     static let docbussedit = baseurl + "/api/doctordetails/edit"
     
     static let cartnoticount = baseurl + "/api/product_cart_detail/getlist_count"
+    static let logoutprocess = baseurl + "/api/userdetails/logout"
     
     static let docdashboardnewapp = baseurl + "/api/appointments/mobile/doc_getlist/newapp"
     static let docdashboardcomapp = baseurl + "/api/appointments/mobile/doc_getlist/comapp"
@@ -434,6 +435,7 @@ class Servicefile {
     var pet_apoint_booking_time = ""
     var pet_apoint_booking_date_time = ""
     var pet_apoint_communication_type = ""
+    var pet_orgiapoint_communication_type = ""
     var pet_apoint_visit_type = ""
     var pet_apoint_location_id = ""
     var pet_apoint_video_id = ""
@@ -607,6 +609,7 @@ class Servicefile {
     var doc_sub_diag_id = ""
     var doc_diag_type = "PDF"  // Image
     var doc_diag_img = ""
+    var lastviewcontroller = UIViewController()
     // doc update
     // sp update
     var sp_id = ""
@@ -692,6 +695,12 @@ class Servicefile {
     var product_title = ""
     var iscancelselect = [0]
     var iscancelmulti = false
+    
+    var prod_couponcode = ""
+    var prod_couponstatus = ""
+    var prod_coupondiscountprice = ""
+    var prod_originalprice = ""
+    var prod_totalprice = ""
     
     var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
@@ -1056,6 +1065,13 @@ class Servicefile {
     func yyyyMMddHHmmssnumberformat(date: Date) -> String{
         let format = DateFormatter()
         format.dateFormat = "ddMMyyyyhhmmss"
+        let nextDate = format.string(from: date)
+        return nextDate
+    }
+    
+    func couponformat(date: Date) -> String{
+        let format = DateFormatter()
+        format.dateFormat = "ddMMhhmmss"
         let nextDate = format.string(from: date)
         return nextDate
     }

@@ -52,7 +52,7 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
             let vc = UIStoryboard.reg_cal_hour_ViewController()
             self.present(vc, animated: true, completion: nil)
         }else {
-            self.alert(Message: "Please select the week days")
+            self.alert(Message: "Please select the days of the week you are available")
         }
         
     }
@@ -173,7 +173,7 @@ class Reg_calender_ViewController: UIViewController, UITableViewDelegate, UITabl
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

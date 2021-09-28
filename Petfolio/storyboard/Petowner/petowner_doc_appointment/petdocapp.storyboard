@@ -82,14 +82,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jae-NT-1LB">
                                         <rect key="frame" x="0.0" y="62" width="414" height="756"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select health issue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Vf-uL-cvV">
-                                                <rect key="frame" x="10" y="16" width="165.66666666666666" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Vf-uL-cvV">
+                                                <rect key="frame" x="10" y="16" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q5p-gu-RDq">
-                                                <rect key="frame" x="10" y="58" width="394" height="690"/>
+                                                <rect key="frame" x="10" y="16" width="394" height="732"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gro-dj-Xs7">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -111,7 +111,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.93333333330000001" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Q5p-gu-RDq" firstAttribute="top" secondItem="7Vf-uL-cvV" secondAttribute="bottom" constant="16" id="0k3-14-Aa8"/>
+                                            <constraint firstItem="Q5p-gu-RDq" firstAttribute="top" secondItem="7Vf-uL-cvV" secondAttribute="bottom" id="0k3-14-Aa8"/>
                                             <constraint firstItem="7Vf-uL-cvV" firstAttribute="leading" secondItem="jae-NT-1LB" secondAttribute="leading" constant="10" id="6Cp-dD-OLI"/>
                                             <constraint firstItem="Q5p-gu-RDq" firstAttribute="leading" secondItem="jae-NT-1LB" secondAttribute="leading" constant="10" id="Ijp-lB-C8m"/>
                                             <constraint firstAttribute="bottom" secondItem="Q5p-gu-RDq" secondAttribute="bottom" constant="8" id="K2p-GF-dBO"/>
@@ -738,7 +738,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXd-Bb-9If">
                                                         <rect key="frame" x="16" y="533.66666666666663" width="382" height="42.666666666666629"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Consultation type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="BbW-mx-Wxk">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Consultation Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="BbW-mx-Wxk">
                                                                 <rect key="frame" x="13" y="10.5" width="160" height="21"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -876,7 +876,7 @@
                                                                     <constraint firstItem="GLx-E2-3xp" firstAttribute="centerY" secondItem="u4A-NN-snS" secondAttribute="centerY" constant="1.5" id="tNJ-Qi-daQ"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Visit type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-bb-LxI">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Visit Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-bb-LxI">
                                                                 <rect key="frame" x="13" y="11" width="160" height="21"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -2653,7 +2653,7 @@
                                                                     <constraint firstItem="wtb-Vf-F8l" firstAttribute="leading" secondItem="dde-Jo-g7a" secondAttribute="leading" id="wba-c9-bt1"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Consultation type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kUX-EW-nbS">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Consultation Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kUX-EW-nbS">
                                                                 <rect key="frame" x="13" y="11" width="160" height="21"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -2752,7 +2752,7 @@
                                                                     <constraint firstItem="if5-C4-bNp" firstAttribute="leading" secondItem="dQe-T1-qKZ" secondAttribute="leading" constant="5" id="ySA-mp-483"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Visit type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-mi-KVB">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Visit Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-mi-KVB">
                                                                 <rect key="frame" x="13" y="11" width="160" height="21"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -3264,14 +3264,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUq-Jp-ks2">
                                         <rect key="frame" x="0.0" y="62" width="414" height="756"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select health issue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sw3-r7-MGx">
-                                                <rect key="frame" x="10" y="16" width="165.66666666666666" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sw3-r7-MGx">
+                                                <rect key="frame" x="10" y="16" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6we-9L-hEI">
-                                                <rect key="frame" x="10" y="58" width="394" height="690"/>
+                                                <rect key="frame" x="10" y="16" width="394" height="732"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p2v-qj-VmO">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -3297,7 +3297,7 @@
                                             <constraint firstItem="Sw3-r7-MGx" firstAttribute="top" secondItem="gUq-Jp-ks2" secondAttribute="top" constant="16" id="59V-h9-Msk"/>
                                             <constraint firstAttribute="bottom" secondItem="6we-9L-hEI" secondAttribute="bottom" constant="8" id="K0I-rJ-Twk"/>
                                             <constraint firstItem="Sw3-r7-MGx" firstAttribute="leading" secondItem="gUq-Jp-ks2" secondAttribute="leading" constant="10" id="SnL-Mh-eSc"/>
-                                            <constraint firstItem="6we-9L-hEI" firstAttribute="top" secondItem="Sw3-r7-MGx" secondAttribute="bottom" constant="16" id="dNr-Rj-06m"/>
+                                            <constraint firstItem="6we-9L-hEI" firstAttribute="top" secondItem="Sw3-r7-MGx" secondAttribute="bottom" id="dNr-Rj-06m"/>
                                             <constraint firstAttribute="trailing" secondItem="6we-9L-hEI" secondAttribute="trailing" constant="10" id="tqU-oO-9Za"/>
                                         </constraints>
                                     </view>
@@ -5513,7 +5513,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this appoinment?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-2B-k3l">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this appointment?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-2B-k3l">
                                                 <rect key="frame" x="29" y="102" width="232" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="zEj-Cv-Ecf"/>
@@ -11571,7 +11571,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this appoinment?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZF-Fz-eEJ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this appointment?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZF-Fz-eEJ">
                                                 <rect key="frame" x="29" y="102" width="232" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="3au-pO-icc"/>

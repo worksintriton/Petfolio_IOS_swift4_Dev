@@ -328,7 +328,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
     
     @IBAction func action_check_status(_ sender: Any) {
         if self.Label_status.text == "Select Order Status"{
-           self.alert(Message: "Please select the status type")
+           self.alert(Message: "Please select the order status type")
        }else {
            self.callupdatestatus()
        }
@@ -340,10 +340,10 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
         self.textview_status_reason.resignFirstResponder()
         let text = self.textview_status_reason.text!
         if text.trimmingCharacters(in: .whitespaces).isEmpty{
-            self.alert(Message: "Please enter the status details")
+            self.alert(Message: "Please select the order status type")
             self.Label_status.text = "Select Order Status"
         }else if  text == "Reason....." || text == "Trackid....." {
-            self.alert(Message: "Please enter the status details")
+            self.alert(Message: "Please select the order status type")
             self.Label_status.text = "Select Order Status"
         } else{
             self.callupdatestatus()
@@ -437,7 +437,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -608,7 +608,7 @@ class vendor_orderstatus_ViewController: UIViewController, UITableViewDelegate, 
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

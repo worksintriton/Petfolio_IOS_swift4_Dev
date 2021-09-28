@@ -112,14 +112,14 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     
     func intial_setup_action(){
         // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: true, b3: true, b4: true)
         // header action
     }
     
@@ -189,7 +189,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             
             if Servicefile.shared.pet_apoint_visit_type == "" {
-                self.alert(Message: "Please select the visit type")
+                self.alert(Message: "Please select the type of visit")
             }else{
                 if self.pay_method != "Cash" {
                     self.showPaymentForm()
@@ -253,7 +253,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -358,6 +358,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
               "user_id" : Servicefile.shared.userid,
               "pet_id" : Servicefile.shared.pet_apoint_pet_id,
               "additional_info" : Servicefile.shared.pet_apoint_problem_info,
+              "current_img":Servicefile.shared.petlistimg,
               "sp_attched" : [],
               "sp_feedback" : "",
               "sp_rate" : "",
@@ -368,7 +369,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
               "payment_id" : Servicefile.shared.pet_apoint_payment_id,
               "payment_method" : pay_method,
               "service_name" : Servicefile.shared.service_id_title,
-              "service_amount" : Servicefile.shared.service_id_amount,
+              "service_amount" : Int(self.totalprice)!,
               "service_time" : Servicefile.shared.service_id_time,
               "completed_at" : "",
               "missed_at" : "",
@@ -405,7 +406,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                                      }
               }else{
                   self.stopAnimatingActivityIndicator()
-                  self.alert(Message: "No Intenet Please check and try again ")
+                  self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
               }
           }
     
@@ -432,7 +433,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
 }

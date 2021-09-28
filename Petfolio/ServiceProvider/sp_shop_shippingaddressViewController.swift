@@ -196,7 +196,11 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                      "prodouct_total": Servicefile.shared.labelamt_subtotal,
                      "shipping_charge": Servicefile.shared.labelamt_shipping,
                      "shipping_details_id": self.selectedid,
-                     "coupon_code" : "",
+                     "coupon_code" : Servicefile.shared.prod_couponcode,
+                     "coupon_status" :  Servicefile.shared.prod_couponstatus,
+                     "coupon_discount_price":Servicefile.shared.prod_coupondiscountprice,
+                     "original_price" :  Servicefile.shared.prod_originalprice,
+                     "total_price" : Servicefile.shared.prod_totalprice,
                      "discount_price": Servicefile.shared.labelamt_discount,
                      "shipping_address_id" : "",
                      "billling_address_id" : "",
@@ -227,7 +231,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                     }
                 }else{
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
             }
             
@@ -320,7 +324,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                                                                              }
                 }else{
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
                 
             }

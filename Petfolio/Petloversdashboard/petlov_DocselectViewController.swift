@@ -210,7 +210,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -311,6 +311,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                         self.clinic_name = Data["clinic_name"] as? String ?? ""
                         Servicefile.shared.clinic_name = self.clinic_name
                         Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
+                        Servicefile.shared.pet_orgiapoint_communication_type = Data["communication_type"] as? String ?? ""
                          let clidet = Data["clinic_pic"] as! NSArray
                         
                         let clicloc =  Data["clinic_loc"] as? String ?? ""
@@ -404,7 +405,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -458,7 +459,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -498,7 +499,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -783,7 +784,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
              }
          }else{
              self.stopAnimatingActivityIndicator()
-             self.alert(Message: "No Intenet Please check and try again ")
+             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
          }
      }
      
@@ -837,7 +838,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
                  }        }
          }else{
              self.stopAnimatingActivityIndicator()
-             self.alert(Message: "No Intenet Please check and try again ")
+             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
          }
      }
      
@@ -877,7 +878,7 @@ class petlov_DocselectViewController: UIViewController, UICollectionViewDelegate
              }
          }else{
              self.stopAnimatingActivityIndicator()
-             self.alert(Message: "No Intenet Please check and try again ")
+             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
          }
      }
      

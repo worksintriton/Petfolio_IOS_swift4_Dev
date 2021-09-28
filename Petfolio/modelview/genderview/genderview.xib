@@ -120,7 +120,7 @@
                         <constraint firstItem="rqI-Iv-2qK" firstAttribute="leading" secondItem="Vpd-gk-iVM" secondAttribute="leading" constant="2" id="pHY-7R-8Se"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxC-TK-Pkq">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxC-TK-Pkq">
                     <rect key="frame" x="219" y="3" width="100" height="104"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Others" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EN-AF-9hR">

@@ -202,7 +202,7 @@ class orderlistdetailsViewController: UIViewController {
                                 }
                             }else if Servicefile.shared.ordertype == "New"{
                                 if title == "Order Booked" {
-                                    self.Label_status.text = "Booked on"
+                                    self.Label_status.text = "Booked for"
                                     self.label_status_date.text = date
                                 }
                                 
@@ -246,7 +246,7 @@ class orderlistdetailsViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

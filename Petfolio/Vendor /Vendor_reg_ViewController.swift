@@ -48,6 +48,9 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var view_photoid_btn: UIView!
     @IBOutlet weak var view_govid_btn: UIView!
     @IBOutlet weak var view_header: header_title!
+    
+    @IBOutlet weak var label_popmsg: UILabel!
+    
     var selservice = ["0"]
     var selspec = ["0"]
     var added_service = [""]
@@ -68,7 +71,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     func intial_setup_action(){
         // header action
         self.view_header.label_title.text = "Vendor Business Info"
-        self.view_header.label_title.textColor = .white
+        self.view_header.label_title.textColor = .black
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_backlogin), for: .touchUpInside)
         // header action
     }
@@ -203,21 +206,23 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func action_submit(_ sender: Any) {
         if self.textfield_Bus_name.text == "" {
-            self.alert(Message: "Please enter the business name")
+            self.alert(Message: "Please enter the Business Name")
         }else if self.textfield_bus_email.text == "" {
-            self.alert(Message: "Please enter the business email")
-        }else if self.textfield_bus_phno.text == "" {
-            self.alert(Message: "Please enter the business Phone number")
-        }else if self.textfield_business.text == "" {
-            self.alert(Message: "Please enter the business")
+            self.alert(Message: "Please enter the Business Email")
+        }
+//        else if self.textfield_business.text == "" {
+//            self.alert(Message: "Please enter the business")
+//        }
+        else if self.textfield_bus_phno.text == "" {
+            self.alert(Message: "Please enter the Business Phone Number")
         }else if self.textfield_bus_reg.text == "" {
-            self.alert(Message: "Please enter the business details")
+            self.alert(Message: "Please enter the Business Registration details")
         }else if Servicefile.shared.gallerydicarray.count == 0 {
-            self.alert(Message: "Please upload the gallery image")
+            self.alert(Message: "Please upload an image")
         }else if self.image_photo == "" {
-            self.alert(Message: "Please upload the Photo ID")
+            self.alert(Message: "Please upload your Photo ID")
         }else if self.image_govid == "" {
-            self.alert(Message: "Please upload the Goverment Id")
+            self.alert(Message: "Please upload your Goverment Id")
         }else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please upload the certificates")
         }else if self.locationaddress == "" {
@@ -446,7 +451,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         print("size value",size)
         print("get the file size",filesize)
         if filesize > size {
-            self.alert(Message: "Please Select the file Less that 2MB")
+            self.alert(Message: "Please select the file Less that 2MB")
         }else{
             self.PDFupload(dat: myURL)
         }
@@ -467,7 +472,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             let size = Servicefile.shared.converttosize(size: 2)
             print("Image size",data!.count,"size value",size)
             if data!.count > size {
-                self.alert(Message: "Please Select the image Less that 2MB")
+                self.alert(Message: "Please select the image Less that 2MB")
             }else{
                 self.upload(imagedata: convertimg!)
             }
@@ -477,6 +482,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -545,6 +551,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     
     
     func PDFupload(dat: URL) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
@@ -632,6 +639,8 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                                                             print("success data",res)
                                                                             let Code  = res["Code"] as! Int
                                                                             if Code == 200 {
+                                                                                let Message = res["Message"] as? String ?? ""
+                                                                                self.label_popmsg.text = Message
                                                                                 //let Data = res["Data"] as! NSDictionary
                                                                                 self.callupdatestatus()
                                                                                 self.stopAnimatingActivityIndicator()
@@ -648,7 +657,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
                                                                       }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

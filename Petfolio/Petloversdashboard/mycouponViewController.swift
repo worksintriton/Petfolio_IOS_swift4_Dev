@@ -38,7 +38,7 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
         self.view_subheader.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subheader.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subheader.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subheader.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subheader.sethide_view(b1: true, b2: true, b3: true, b4: true)
     // header action
     }
     
@@ -150,7 +150,7 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
 

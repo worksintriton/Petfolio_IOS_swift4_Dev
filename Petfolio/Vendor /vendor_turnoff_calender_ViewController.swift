@@ -124,7 +124,7 @@ class sp_turnoff_calender_ViewController: UIViewController, FSCalendarDelegate, 
 //                if self.bookstatus[indexPath.row] == "1" {
 //                    self.callcheckdatedetails(index: indexPath.row)
 //                }else{
-//                    self.alert(Message: "Slot is not available")
+//                    self.alert(Message: "The chosen slot is not available")
 //                }
                 if self.bookstatus[indexPath.row] == "1" {
                     if self.seltime[indexPath.row] == "1" {
@@ -270,7 +270,7 @@ class sp_turnoff_calender_ViewController: UIViewController, FSCalendarDelegate, 
                     }
                 }else{
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
             }
             
@@ -314,7 +314,7 @@ class sp_turnoff_calender_ViewController: UIViewController, FSCalendarDelegate, 
                     }
                 }else{
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
             }
     
@@ -352,7 +352,7 @@ class sp_turnoff_calender_ViewController: UIViewController, FSCalendarDelegate, 
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

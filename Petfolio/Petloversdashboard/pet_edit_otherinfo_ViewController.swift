@@ -62,68 +62,99 @@ class pet_edit_otherinfo_ViewController: UIViewController {
             self.isallow_private_part = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_private_part
         }
         
-        if isspay {
-            self.img_spay_yes.image = UIImage(named: "selectedRadio")
-            self.img_spay_no.image = UIImage(named: "Radio")
-        }else{
+//        if isspay {
+//            self.img_spay_yes.image = UIImage(named: "selectedRadio")
+//            self.img_spay_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_spay_yes.image = UIImage(named: "Radio")
+//            self.img_spay_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if ispurebreed {
+//            self.img_purebreed_yes.image = UIImage(named: "selectedRadio")
+//            self.img_pure_breed_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_purebreed_yes.image = UIImage(named: "Radio")
+//            self.img_pure_breed_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if isfriend_dog {
+//            self.img_friend_dogs_yes.image = UIImage(named: "selectedRadio")
+//            self.img_friend_dog_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_friend_dogs_yes.image = UIImage(named: "Radio")
+//            self.img_friend_dog_no.image = UIImage(named: "selectedRadio")
+//        }
+//        if isfriend_cat {
+//            self.img_friend_cats.image = UIImage(named: "selectedRadio")
+//            self.img_friends_cats_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_friend_cats.image = UIImage(named: "Radio")
+//            self.img_friends_cats_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if isfriend_kid {
+//            self.img_friends_kid_yes.image = UIImage(named: "selectedRadio")
+//            self.img_friends_kid_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_friends_kid_yes.image = UIImage(named: "Radio")
+//            self.img_friends_kid_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if istickfree {
+//            self.img_tickfree_yes.image = UIImage(named: "selectedRadio")
+//            self.img_tickfree_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_tickfree_yes.image = UIImage(named: "Radio")
+//            self.img_tickfree_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if ismicrochip {
+//            self.img_microchip_yes.image = UIImage(named: "selectedRadio")
+//            self.img_microchip_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_microchip_yes.image = UIImage(named: "Radio")
+//            self.img_microchip_no.image = UIImage(named: "selectedRadio")
+//        }
+//
+//        if isallow_private_part {
+//            self.img_allowprivate_yes.image = UIImage(named: "selectedRadio")
+//            self.img_allowprivate_no.image = UIImage(named: "Radio")
+//        }else{
+//            self.img_allowprivate_yes.image = UIImage(named: "Radio")
+//            self.img_allowprivate_no.image = UIImage(named: "selectedRadio")
+//        }
+        
+        
             self.img_spay_yes.image = UIImage(named: "Radio")
-            self.img_spay_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_spay_no.image = UIImage(named: "Radio")
         
-        if ispurebreed {
-            self.img_purebreed_yes.image = UIImage(named: "selectedRadio")
-            self.img_pure_breed_no.image = UIImage(named: "Radio")
-        }else{
+        
+        
             self.img_purebreed_yes.image = UIImage(named: "Radio")
-            self.img_pure_breed_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_pure_breed_no.image = UIImage(named: "Radio")
+      
        
-        if isfriend_dog {
-            self.img_friend_dogs_yes.image = UIImage(named: "selectedRadio")
-            self.img_friend_dog_no.image = UIImage(named: "Radio")
-        }else{
+       
             self.img_friend_dogs_yes.image = UIImage(named: "Radio")
-            self.img_friend_dog_no.image = UIImage(named: "selectedRadio")
-        }
-        if isfriend_cat {
-            self.img_friend_cats.image = UIImage(named: "selectedRadio")
-            self.img_friends_cats_no.image = UIImage(named: "Radio")
-        }else{
+            self.img_friend_dog_no.image = UIImage(named: "Radio")
+       
             self.img_friend_cats.image = UIImage(named: "Radio")
-            self.img_friends_cats_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_friends_cats_no.image = UIImage(named: "Radio")
         
-        if isfriend_kid {
-            self.img_friends_kid_yes.image = UIImage(named: "selectedRadio")
-            self.img_friends_kid_no.image = UIImage(named: "Radio")
-        }else{
             self.img_friends_kid_yes.image = UIImage(named: "Radio")
-            self.img_friends_kid_no.image = UIImage(named: "selectedRadio")
-        }
-        
-        if istickfree {
-            self.img_tickfree_yes.image = UIImage(named: "selectedRadio")
-            self.img_tickfree_no.image = UIImage(named: "Radio")
-        }else{
+            self.img_friends_kid_no.image = UIImage(named: "Radio")
+       
             self.img_tickfree_yes.image = UIImage(named: "Radio")
-            self.img_tickfree_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_tickfree_no.image = UIImage(named: "Radio")
         
-        if ismicrochip {
-            self.img_microchip_yes.image = UIImage(named: "selectedRadio")
-            self.img_microchip_no.image = UIImage(named: "Radio")
-        }else{
             self.img_microchip_yes.image = UIImage(named: "Radio")
-            self.img_microchip_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_microchip_no.image = UIImage(named: "Radio")
         
-        if isallow_private_part {
-            self.img_allowprivate_yes.image = UIImage(named: "selectedRadio")
-            self.img_allowprivate_no.image = UIImage(named: "Radio")
-        }else{
             self.img_allowprivate_yes.image = UIImage(named: "Radio")
-            self.img_allowprivate_no.image = UIImage(named: "selectedRadio")
-        }
+            self.img_allowprivate_no.image = UIImage(named: "Radio")
+        
+        
         
         self.view_next_btn.view_cornor()
     }
@@ -310,7 +341,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -357,7 +388,7 @@ class pet_edit_otherinfo_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

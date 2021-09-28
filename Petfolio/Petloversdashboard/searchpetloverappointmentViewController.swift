@@ -101,7 +101,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.tblview_petbreed.isHidden = true
         self.tblview_pettype.isHidden = true
         self.tblview_petdetail.isHidden = true
-        
+        Servicefile.shared.pet_apoint_communication_type = Servicefile.shared.pet_orgiapoint_communication_type
         let apgreen = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.tblview_petbreed.layer.borderColor = apgreen.cgColor
         self.tblview_pettype.layer.borderColor = apgreen.cgColor
@@ -132,6 +132,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textview_descrip.textColor == UIColor.lightGray
         self.petimage = Servicefile.shared.sampleimag
         self.setuploadimg()
+        
         print("Communication type",Servicefile.shared.pet_apoint_communication_type)
         self.checkappointmentcommtype()
         self.textfield_pettype.text = Servicefile.shared.pet_type_val
@@ -143,7 +144,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -636,7 +637,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                 }
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             if Servicefile.shared.pet_apoint_visit_type == "" {
-                self.alert(Message: "Please select the visit type")
+                self.alert(Message: "Please select the type of visit")
             }else{
                 self.setappdetails()
             }
@@ -741,7 +742,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -787,7 +788,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -838,7 +839,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -880,7 +881,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -983,7 +984,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
                     textView.textColor = UIColor.black
                 }
             }
-            self.moveTextField(textview: textView, up:true)
+            //self.moveTextField(textview: textView, up:true)
             
         }
         
@@ -991,7 +992,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if self.textview_descrip == textView{
-            self.moveTextField(textview: textView, up:false)
+            //self.moveTextField(textview: textView, up:false)
         }
     }
     
@@ -1019,7 +1020,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

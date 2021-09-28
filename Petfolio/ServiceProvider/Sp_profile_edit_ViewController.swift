@@ -356,17 +356,17 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         }
         
         if self.textfield_Bus_name.text == "" {
-            self.alert(Message: "Please enter the business name")
+            self.alert(Message: "Please enter the Business Name")
         }else if Servicefile.shared.servicelistdicarray.count == 0 {
             self.alert(Message: "Please select service")
         }else if Servicefile.shared.speclistdicarray.count == 0 {
             self.alert(Message: "Please select Specialization")
         }else if Servicefile.shared.gallerydicarray.count == 0 {
-            self.alert(Message: "Please upload the gallery image")
+            self.alert(Message: "Please upload an image")
         }else if self.image_photo == "" {
-            self.alert(Message: "Please upload the Photo ID")
+            self.alert(Message: "Please upload your Photo ID")
         }else if self.image_govid == "" {
-            self.alert(Message: "Please upload the Goverment Id")
+            self.alert(Message: "Please upload your Goverment Id")
         }else if Servicefile.shared.certifdicarray.count == 0 {
             self.alert(Message: "Please upload the certificates")
         }else{
@@ -737,7 +737,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
         print("size value",size)
         print("get the file size",filesize)
         if filesize > size {
-            self.alert(Message: "Please Select the file Less that 2MB")
+            self.alert(Message: "Please select the file Less that 2MB")
         }else{
             self.PDFupload(dat: myURL)
         }
@@ -768,6 +768,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -942,7 +943,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -1021,7 +1022,7 @@ class Sp_profile_edit_ViewController: UIViewController , UIImagePickerController
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -1102,7 +1103,7 @@ extension Sp_profile_edit_ViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

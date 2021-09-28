@@ -31,6 +31,15 @@ class Doc_confrence_ViewController: UIViewController,JitsiMeetViewDelegate {
         }
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? DocdashboardViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+       }
+    
     func start_confrence(){
         let jitsiMeetView = JitsiMeetView()
         jitsiMeetView.delegate = self
@@ -115,7 +124,7 @@ class Doc_confrence_ViewController: UIViewController,JitsiMeetViewDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

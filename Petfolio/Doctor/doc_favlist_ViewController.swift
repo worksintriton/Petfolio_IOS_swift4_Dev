@@ -33,12 +33,20 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
         self.intial_setup_action()
         self.col_doc_fav.delegate = self
         self.col_doc_fav.dataSource = self
-        self.callproductdetails()
+       
         // Do any additional setup after loading the view.
     }
     
+    
+  
+    
     override func viewWillDisappear(_ animated: Bool) {
         Servicefile.shared.petnewprod.removeAll()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.callproductdetails()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -122,6 +130,14 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
             return CGSize(width: 140 , height:  200)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Servicefile.shared.product_id = Servicefile.shared.petnewprod[indexPath.row]._id
+        let vc = UIStoryboard.Doc_productdetails_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+   
     
      func intial_setup_action(){
      // header action
@@ -206,7 +222,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -237,7 +253,7 @@ class doc_favlist_ViewController: UIViewController, UICollectionViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

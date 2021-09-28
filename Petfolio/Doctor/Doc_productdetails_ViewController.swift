@@ -98,6 +98,8 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
         self.startTimer()
     }
     
+    
+    
     func intial_setup_action(){
     
         // footer action
@@ -109,9 +111,19 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
     }
   
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         self.timer.invalidate()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+       
+        if let firstVC = presentingViewController as? doc_favlist_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+    }
+    
     
     func startTimer() {
         self.timer.invalidate()
@@ -215,7 +227,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -276,7 +288,7 @@ class Doc_productdetails_ViewController: UIViewController, UICollectionViewDeleg
                cell.image_product.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
                cell.image_product.dropShadow()
                 cell.view_shopbag.layer.cornerRadius = cell.view_shopbag.frame.height / 2
-               if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img) {
+                if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.vendor_product_id_details[indexPath.row].thumbnail_image) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.vendor_product_id_details[indexPath.row].product_img)) { (image, error, cache, urls) in
                        if (error != nil) {
@@ -423,7 +435,7 @@ extension Doc_productdetails_ViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -456,7 +468,7 @@ extension Doc_productdetails_ViewController {
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
     
@@ -472,8 +484,10 @@ extension Doc_productdetails_ViewController {
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
-                        let vc = UIStoryboard.doc_vendorcartpageViewController()
-                        self.present(vc, animated: true, completion: nil)
+//                        let vc = UIStoryboard.doc_vendorcartpageViewController()
+//                        self.present(vc, animated: true, completion: nil)
+                        self.alert(Message: "Product added to cart")
+                        self.callnoticartcount()
                            self.stopAnimatingActivityIndicator()
                        }else{
                            
@@ -488,9 +502,39 @@ extension Doc_productdetails_ViewController {
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.label_cart_count.text  = String(Servicefile.shared.cart_count)
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
     
     func calldectheproductcount(){
              print("product_id", Servicefile.shared.product_id,"user_id",Servicefile.shared.userid)
@@ -518,7 +562,7 @@ extension Doc_productdetails_ViewController {
                  }
              }else{
                  self.stopAnimatingActivityIndicator()
-                 self.alert(Message: "No Intenet Please check and try again ")
+                 self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
              }
          }
    

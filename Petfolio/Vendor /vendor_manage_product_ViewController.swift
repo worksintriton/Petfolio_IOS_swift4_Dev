@@ -57,6 +57,8 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_lastview: UIView!
     
     
+    @IBOutlet weak var label_noproduct: UILabel!
+    
     @IBOutlet weak var view_header: petowner_otherpage_header!
     @IBOutlet weak var view_footer: doc_footer!
     var discount = 0
@@ -72,6 +74,8 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inital_setup()
+        self.view_app_deal.isHidden = true
+        self.label_noproduct.isHidden = true
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_app_deal.isHidden = false
         // self.label_apply_status.text = applylabelval
@@ -298,7 +302,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.textamt = self.textfield_deal_price.text!
         
        if self.textfield_startdate.text == "" &&  self.textfield_expirydate.text == ""{
-            self.alert(Message: "Please enter the Discount or  Amount")
+            self.alert(Message: "Please enter the Discount Percentage or Amount")
         }else if self.textfield_startdate.text == ""{
             self.alert(Message: "Please select the start date")
         }else if self.textfield_expirydate.text == ""{
@@ -690,6 +694,13 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
                         self.orgiselect = self.isselect
                         self.ismenu = self.orgiselect
                         self.tbl_manage_product.reloadData()
+                        if Servicefile.shared.manageproductDic.count > 0 {
+                            self.label_noproduct.isHidden = true
+                            self.view_app_deal.isHidden = false
+                        }else{
+                            self.label_noproduct.isHidden = false
+                            self.view_app_deal.isHidden = true
+                        }
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -704,7 +715,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -742,7 +753,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -782,7 +793,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func callsingleamount(){
@@ -823,7 +834,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -865,7 +876,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -906,7 +917,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -948,7 +959,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
 }

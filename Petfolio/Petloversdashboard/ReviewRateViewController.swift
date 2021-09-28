@@ -22,7 +22,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
-        Cosmos_rate.rating = 4
+        Cosmos_rate.rating = 0
         Cosmos_rate.settings.fillMode = .full
         self.view_main.view_cornor()
         self.view_addreview.view_cornor()
@@ -101,7 +101,7 @@ class ReviewRateViewController: UIViewController, UITextViewDelegate {
                                        }
                 }else{
                     self.stopAnimatingActivityIndicator()
-                    self.alert(Message: "No Intenet Please check and try again ")
+                    self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
             }
 }

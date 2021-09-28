@@ -65,6 +65,8 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
         Servicefile.shared.isspecialza.remove(at: indexPath.row)
          Servicefile.shared.isspecialza.insert("1", at: indexPath.row)
         Servicefile.shared.selspec = Servicefile.shared.isspecialza[indexPath.row]
+        Servicefile.shared.Count_value_end = Servicefile.shared.SP_filter_price[indexPath.row].Count_value_end
+        Servicefile.shared.Count_value_start = Servicefile.shared.SP_filter_price[indexPath.row].Count_value_start
         self.tbl_spec.reloadData()
     }
     
@@ -81,6 +83,7 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
     }
     
     @IBAction func action_apply(_ sender: Any) {
+        Servicefile.shared.review_count = Servicefile.shared.selrate
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -198,7 +201,7 @@ class pet_sp_filer_ViewController: UIViewController , UITableViewDelegate, UITab
         }        }
     }else{
                   self.stopAnimatingActivityIndicator()
-                  self.alert(Message: "No Intenet Please check and try again ")
+                  self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
               }
           }
     

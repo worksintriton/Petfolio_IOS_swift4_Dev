@@ -20,6 +20,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
      let imagepicker = UIImagePickerController()
     var uploadimage = Servicefile.sample_img
     @IBOutlet weak var coll_img_list: UICollectionView!
+    @IBOutlet weak var label_upload_pet_image: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
         self.checkimagecontent(intval : 0)
         self.coll_img_list.delegate = self
         self.coll_img_list.dataSource = self
+        
+        if Servicefile.shared.petlistimg.count > 0 {
+            self.label_upload_pet_image.isHidden = true
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -52,6 +57,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                self.imag_petimag.image = UIImage(named: imagelink.sample)
         }
         self.imag_petimag.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
+        
     }
     
     func setimage(strimg : String){
@@ -110,6 +116,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
           self.coll_img_list.reloadData()
         if Servicefile.shared.petlistimg.count == 0 {
             self.setimage(strimg: Servicefile.sample_img)
+            self.label_upload_pet_image.isHidden = false
+        }
+        if Servicefile.shared.petlistimg.count > 0 {
+            self.label_upload_pet_image.isHidden = true
         }
         //self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
       }
@@ -132,6 +142,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
           }
        
        func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
             print("Upload started")
                print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
            let headers: HTTPHeaders = [
@@ -153,9 +164,10 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                        print("success data",res)
                        let Code  = res["Code"] as! Int
                        if Code == 200 {
+                        self.label_upload_pet_image.isHidden = true
                         let Data = res["Data"] as? String ?? Servicefile.sample_img
                           print("Uploaded file url:",Data)
-                          self.uploadimage = Data
+                        self.uploadimage = Data
                         var B = Servicefile.shared.petlistimg
                         var arr = B
                         let a = ["pet_img":Data] as NSDictionary
@@ -165,8 +177,8 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                         Servicefile.shared.petlistimg = B
                         self.coll_img_list.reloadData()
                         self.checkimagecontent(intval: Servicefile.shared.petlistimg.count-1)
-                         self.setimage(strimg: self.uploadimage)
-                           self.stopAnimatingActivityIndicator()
+                        self.setimage(strimg: self.uploadimage)
+                        self.stopAnimatingActivityIndicator()
                        }else{
                            self.stopAnimatingActivityIndicator()
                            print("status code service denied")
@@ -188,12 +200,12 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
               alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-                  self.imagepicker.allowsEditing = true
+                  self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
               alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-                 self.imagepicker.allowsEditing = true
+                 self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
@@ -246,7 +258,7 @@ class petimageUploadViewController: UIViewController, UIImagePickerControllerDel
                                   }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
        

@@ -117,7 +117,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
+        self.view_footer.setup(b1: true, b2: false, b3: true, b4: false, b5: false)
         // footer action
     }
     
@@ -279,6 +279,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                                 self.clinic_name = Data["clinic_name"] as? String ?? ""
                                                                                 Servicefile.shared.clinic_name = self.clinic_name
                                                                                 Servicefile.shared.pet_apoint_communication_type = Data["communication_type"] as? String ?? ""
+                                                                                Servicefile.shared.pet_orgiapoint_communication_type = Data["communication_type"] as? String ?? ""
                                                                                 let clidet = Data["clinic_pic"] as! NSArray
                                                                                 let clicloc =  Data["clinic_loc"] as? String ?? ""
                                                                                 let amount =  Data["amount"] as? Int ?? 0
@@ -378,7 +379,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -410,7 +411,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -463,7 +464,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -501,7 +502,7 @@ class SearchtoclinicdetailViewController: UIViewController, UICollectionViewDele
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func setmarker(lat: Double,long: Double){

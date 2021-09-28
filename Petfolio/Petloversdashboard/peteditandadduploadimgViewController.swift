@@ -113,7 +113,13 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
           let tag = sender.tag
           Servicefile.shared.petlistimg.remove(at: tag)
           self.coll_img_list.reloadData()
-        self.checkimagecontent(intval: Servicefile.shared.petlistimg.count)
+//        if Servicefile.shared.petlistimg.count > 0 {
+//            self.checkimagecontent(intval: Servicefile.shared.petlistimg.count)
+//        }
+        if Servicefile.shared.petlistimg.count == 0 {
+            self.setimage(strimg: Servicefile.sample_img)
+        }
+       
       }
       
     
@@ -146,6 +152,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
           }
        
        func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
             print("Upload started")
                print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
            let headers: HTTPHeaders = [
@@ -180,9 +187,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                         Servicefile.shared.petlistimg = B
                         self.coll_img_list.reloadData()
                         self.setimage(strimg: Data)
-                      
-                        
-                           self.stopAnimatingActivityIndicator()
+                        self.stopAnimatingActivityIndicator()
                        }else{
                            self.stopAnimatingActivityIndicator()
                            print("status code service denied")
@@ -204,12 +209,12 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
               alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-                  self.imagepicker.allowsEditing = true
+                  self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .camera
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
               alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-                 self.imagepicker.allowsEditing = true
+                 self.imagepicker.allowsEditing = false
                  self.imagepicker.sourceType = .photoLibrary
                   self.present(self.imagepicker, animated: true, completion: nil)
               }))
@@ -301,7 +306,7 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
                                   }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
       

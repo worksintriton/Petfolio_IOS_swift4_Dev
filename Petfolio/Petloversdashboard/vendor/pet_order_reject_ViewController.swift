@@ -154,7 +154,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
             self.selval = self.textview_other_reason.text!
         }
         if self.selval.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.alert(Message: "Please enter the return reason")
+            self.alert(Message: "Please enter the reason for returning the product")
         }else{
             print(self.selval)
             self.call_submit_return()
@@ -238,7 +238,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -267,7 +267,7 @@ class pet_order_reject_ViewController: UIViewController, UITextViewDelegate, UIT
         }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

@@ -315,7 +315,7 @@ class myaddress_create_address_ViewController: UIViewController, UITextFieldDele
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }
@@ -358,7 +358,7 @@ class myaddress_create_address_ViewController: UIViewController, UITextFieldDele
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }

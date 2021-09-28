@@ -58,6 +58,10 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
         }
     
     override func viewWillDisappear(_ animated: Bool) {
+       // self.stoptimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.stoptimer()
     }
     
@@ -194,7 +198,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                       }
                }else{
                    self.stopAnimatingActivityIndicator()
-                   self.alert(Message: "No Intenet Please check and try again ")
+                   self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                }
            }
     
@@ -261,7 +265,7 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                   }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
 

@@ -50,7 +50,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.ac_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -131,7 +131,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
             Servicefile.shared.pet_apoint_booking_time = self.listtime[indexPath.row]
             self.coll_seltime.reloadData()
         }else{
-            self.alert(Message: "Slot is not available")
+            self.alert(Message: "The chosen slot is not available")
         }
         
     }
@@ -231,7 +231,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -271,7 +271,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
         //                               }
         //        }else{
         //            self.stopAnimatingActivityIndicator()
-        //            self.alert(Message: "No Intenet Please check and try again ")
+        //            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         //        }
         //    }
         

@@ -39,6 +39,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     var indextag = 0
     var statussel = ""
     var timer = Timer()
+    
     @IBOutlet weak var sp_header: petowner_header!
 //    var appointtype = "New"
     override func viewDidLoad() {
@@ -47,6 +48,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 //        Servicefile.shared.getuserdata()
         SDImageCache.shared.clearMemory()
         SDImageCache.shared.clearDisk()
+        self.view_footer.backgroundColor = UIColor.clear
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.inital_setup()
@@ -73,7 +75,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.tblview_applist.refreshControl = refreshControl
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        self.callnoticartcount()
+       
         self.view_new.backgroundColor = appgree
         self.label_new.textColor = UIColor.white
         self.timer.invalidate()
@@ -85,11 +87,17 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
 //        if Servicefile.shared.userid != "" {
 //            self.checkapp()
 //        }else{
-//            self.stoptimer()
+//
 //        }
+        //self.checkapp()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.stoptimer()
     }
     
@@ -98,7 +106,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func inital_setup(){
-        self.sp_header.btn_sidemenu.addTarget(self, action: #selector(self.spsidemenu), for: .touchUpInside)
+        self.sp_header.btn_sidemenu.addTarget(self, action: #selector(self.sidemenu_process), for: .touchUpInside)
 //        var img = Servicefile.shared.userimage
 //        if img != "" {
 //            img = Servicefile.shared.userimage
@@ -133,6 +141,12 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     }
     
+    @objc func sidemenu_process(){
+        self.stoptimer()
+        let vc = UIStoryboard.sp_side_menuViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func callnoticartcount(){
         print("notification")
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
@@ -159,7 +173,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                 }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -169,6 +183,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     @IBAction func action_profile(_ sender: Any) {
+        self.stoptimer()
         let vc = UIStoryboard.Sp_profile_ViewController()
         self.present(vc, animated: true, completion: nil)
     }
@@ -289,6 +304,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.stoptimer()
         Servicefile.shared.SP_selected_app_list = Servicefile.shared.appointtype
         Servicefile.shared.appointmentindex = indexPath.row
         Servicefile.shared.pet_apoint_id = Servicefile.shared.SP_Das_petdetails[Servicefile.shared.appointmentindex].Appid
@@ -297,6 +313,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
     @objc func action_complete(sender : UIButton){
+       
         let tag = sender.tag
         self.indextag = tag
         self.label_popalert_details.text = "Are you sure you want to complete this appointment"
@@ -306,6 +323,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         
     }
     @objc func action_cancelled(sender : UIButton){
+        
         let tag = sender.tag
         self.indextag = tag
         self.statussel = "cancel"
@@ -452,7 +470,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -517,7 +535,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -582,7 +600,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -631,12 +649,12 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
     func callcheckstatus(){
-        
+        self.callnoticartcount()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.sp_regi_status, method: .post, parameters: ["user_id": Servicefile.shared.userid]
@@ -687,7 +705,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -727,7 +745,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }
@@ -763,7 +781,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }

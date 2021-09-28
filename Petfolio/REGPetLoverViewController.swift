@@ -61,6 +61,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     var isselectdate = ""
     var isvaccin = true
     var gender = "Male"
+    var age = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -96,6 +97,12 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                        } else {
                            // Fallback on earlier versions
                 }
+        self.view_Petname.textfield_value.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        self.view_petbio.textfield_value.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        self.view_petweight.textfield_value.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        self.view_petcolor.textfield_value.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+        
+        
         self.textfiled_petage.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         self.datepicker_date.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         self.view_pet.btn_get_data.addTarget(self, action: #selector(action_getpet), for: .touchUpInside)
@@ -109,6 +116,11 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         self.view_gender.btn_m.addTarget(self, action: #selector(action_getm), for: .touchUpInside)
         self.view_gender.btn_f.addTarget(self, action: #selector(action_getf), for: .touchUpInside)
         self.view_gender.btn_o.addTarget(self, action: #selector(action_geto), for: .touchUpInside)
+        self.img_novaccine.image = UIImage(named: "selectedRadio")
+        self.img_yesvaccine.image = UIImage(named: "Radio")
+        self.view_datelabel.isHidden = true
+        self.view_selectdate.isHidden = true
+        self.isvaccin = false
     }
     
    
@@ -153,6 +165,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         self.view_selectdateCalender.textfield_value.placeholder = "Date of Birth"
         self.view_petcolor.textfield_value.placeholder = "Color"
         self.view_petweight.textfield_value.placeholder = "Weight (Kg)"
+        self.view_petweight.textfield_value.keyboardType = .numberPad
         self.view_petbio.textfield_value.placeholder = "Bio"
         self.view_pet.view_btn_side.isHidden = false
         self.view_pet.btn_get_data.isHidden = false
@@ -174,16 +187,16 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         let sedate = Servicefile.shared.ddMMyyyystringformat(date: senderdate)
         if self.isdob {
             self.isselectdate = sedate
-            self.view_selectdateCalender.textfield_value.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
+            self.textfiled_petage.text = Servicefile.shared.checkyearmonthdiffer(sdate: senderdate, edate: Date())
+            self.view_selectdateCalender.textfield_value.text = sedate
+            print(self.textfiled_petage.text,self.view_selectdateCalender.textfield_value.text)
         }else{
             self.view_selectdate.textfield_value.text = sedate
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) -> Bool {
-//        self.tblview_petbreed.isHidden = true
-//        self.tblview_pettype.isHidden = true
-//        self.tblview_gender.isHidden = true
+        self.view_calender.isHidden = true
         return true
     }
     
@@ -224,6 +237,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(textField : UITextField){
+        self.view_calender.isHidden = true
         if self.view_Petname.textfield_value == textField {
             if self.view_Petname.textfield_value.text!.count > 24 {
                 self.view_Petname.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
@@ -231,25 +245,30 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             }else{
                 self.view_Petname.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvedalphanumeric, textcount: 25)
             }
+        }
+        if self.view_petcolor.textfield_value == textField {
             if self.view_petcolor.textfield_value.text!.count > 14 {
                 self.view_petcolor.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
                 self.view_petcolor.textfield_value.resignFirstResponder()
             }else{
                 self.view_petcolor.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvestring, textcount: 15)
             }
+        }
+        if self.view_petweight.textfield_value == textField {
             if self.view_petweight.textfield_value.text!.count > 4 {
                 self.view_petweight.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
                 self.view_petweight.textfield_value.resignFirstResponder()
             }else{
                 self.view_petweight.textfield_value.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
             }
+        }
 //            if self.textfiled_petage.text!.count > 1 {
 //                self.textfiled_petage.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
 //                self.textfiled_petage.resignFirstResponder()
 //            }else{
 //                self.textfiled_petage.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 15)
 //            }
-        }
+        
     }
     
     @IBAction func action_skip(_ sender: Any) {
@@ -341,6 +360,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         self.view_datelabel.isHidden = true
         self.view_selectdate.isHidden = true
         self.isvaccin = false
+        self.view.endEditing(true)
     }
     
     
@@ -350,6 +370,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
         self.view_datelabel.isHidden = false
         self.view_selectdate.isHidden = false
         self.isvaccin = true
+        self.view.endEditing(true)
     }
     
     @IBAction func action_selectdate(_ sender: Any) {
@@ -360,26 +381,29 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
     @objc func action_showDOBcalender(_ sender: Any) {
         self.isdob = true
         self.view_calender.isHidden = false
+        self.view.endEditing(true)
     }
     
     @objc func action_showcalender(_ sender: Any) {
         self.isdob = false
         self.view_calender.isHidden = false
+        self.view.endEditing(true)
     }
     
     @IBAction func action_GetDate(_ sender: Any) {
         self.view_calender.isHidden = true
+        self.view.endEditing(true)
     }
     
     @IBAction func action_submit(_ sender: Any) {
         if self.view_Petname.textfield_value.text == "" {
-            self.alert(Message: "Please enter Pet name")
+            self.alert(Message: "Please enter the name of your Pet")
         }
 //        else if self.view_petbio.textfield_value.text == "" {
 //            self.alert(Message: "Please enter Pet Bio")
 //        }
         else if Servicefile.shared.pet_type_val == "" {
-            self.alert(Message: "Please select Pet Type and Breed")
+            self.alert(Message: "Please select Type and Breed of your Pet")
         }
 //        else if self.view_petcolor.textfield_value.text == "" {
 //            self.alert(Message: "Please enter Pet color")
@@ -390,27 +414,28 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             print("user_id", Servicefile.shared.userid,
                   "pet_img" ,"",
                   "pet_name" , Servicefile.shared.checktextfield(textfield: self.view_Petname.textfield_value.text!),
-                  "pet_type" , Servicefile.shared.pet_type_val ,
-                  "pet_breed" ,Servicefile.shared.Pet_breed_val,
-                  "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
+                  "pet_type" , Servicefile.shared.pet_type_val,
+                  "pet_breed" , Servicefile.shared.Pet_breed_val,
                   "pet_gender" , Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
+                  "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
                   "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
                   "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-                  "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                  "pet_age" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+                  "pet_dob" ,Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!) ,
                   "vaccinated" , self.isvaccin,
                   "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
                   "default_status" , true,
                   "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
             if self.isvaccin != false {
                 if self.view_selectdate.textfield_value.text == "" {
-                    self.alert(Message: "Please select vaccinated date")
+                    self.alert(Message: "Please select a valid vaccinated date")
                 }else{
                     let birthdate =  Servicefile.shared.ddMMyyyydateformat(date: self.isselectdate)
                     let vacinateddate = Servicefile.shared.ddMMyyyydateformat(date: self.view_selectdate.textfield_value.text! )
                     if  Servicefile.shared.checkdaydiffer(sdate: birthdate, edate: vacinateddate) {
                     self.calladdpetdetails()
                     }else{
-                        self.alert(Message: "Please select valid vaccinated date")
+                        self.alert(Message: "Please select a valid vaccinated date")
                     }
                 }
             }else{
@@ -502,7 +527,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func calladdpetdetails(){
@@ -515,11 +540,13 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
               "petbio" ,Servicefile.shared.checktextfield(textfield: self.view_petbio.textfield_value.text!),
               "pet_color" , Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
               "pet_weight" , Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-              "pet_age" , Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+              "pet_age" , Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+              "pet_dob" ,Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!) ,
               "vaccinated" , self.isvaccin,
               "last_vaccination_date" , Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
               "default_status" , true,
               "date_and_time" , Servicefile.shared.ddmmyyyyHHmmssstringformat(date: Date()))
+        
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petregister, method: .post, parameters:
             ["user_id": Servicefile.shared.userid,
@@ -531,7 +558,8 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
              "pet_gender" : Servicefile.shared.checktextfield(textfield: ""), /*self.textfield_petgender.text!*/
              "pet_color" : Servicefile.shared.checktextfield(textfield: self.view_petcolor.textfield_value.text!),
              "pet_weight" : Servicefile.shared.checkInttextfield(strtoInt: self.view_petweight.textfield_value.text!),
-             "pet_age" : Servicefile.shared.checkInttextfield(strtoInt: self.textfiled_petage.text!),"pet_dob" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+             "pet_age" : Servicefile.shared.checktextfield(textfield: self.textfiled_petage.text!),
+             "pet_dob" : Servicefile.shared.checktextfield(textfield: self.view_selectdateCalender.textfield_value.text!) ,
              "vaccinated" : self.isvaccin,
              "last_vaccination_date" : Servicefile.shared.checktextfield(textfield: self.view_selectdate.textfield_value.text!),
              "default_status" : true,
@@ -560,7 +588,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -595,7 +623,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -632,7 +660,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -685,7 +713,7 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -725,14 +753,14 @@ class REGPetLoverViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
 }
 
-extension UIViewController {
-    func pushtologin(){
+extension UIViewController { // pushtologin()
+    func calllogout(){
         UserDefaults.standard.set("", forKey: "userid")
         UserDefaults.standard.set("", forKey: "usertype")
         UserDefaults.standard.set("", forKey: "userid")
@@ -751,4 +779,40 @@ extension UIViewController {
         let vc = UIStoryboard.LoginViewController()
         self.present(vc, animated: true, completion: nil)
     }
+    
+    func pushtologin(){
+        self.startAnimatingActivityIndicator()
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.logoutprocess, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        self.calllogout()
+                        self.stopAnimatingActivityIndicator()
+                    }else{
+                        self.calllogout()
+                        print("status code service denied")
+                        self.stopAnimatingActivityIndicator()
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                    self.stopAnimatingActivityIndicator()
+                }
+            }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+           
+        }
+    }
+    
+    
+    
 }

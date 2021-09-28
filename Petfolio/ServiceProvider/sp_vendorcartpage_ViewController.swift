@@ -46,6 +46,8 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
         @IBOutlet weak var view_btn_alert: UIView!
         @IBOutlet weak var view_coupon: UIView!
         
+    @IBOutlet weak var view_bel_circle: UIView!
+    @IBOutlet weak var label_bel_count: UILabel!
     
     
     var textbtncoupon = "Apply"
@@ -62,6 +64,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             self.intial_setup_action()
             self.view_cart_count.isHidden = true
             self.view_cart_count.layer.cornerRadius = self.view_cart_count.frame.height / 2
+            self.view_bel_circle.layer.cornerRadius = self.view_bel_circle.frame.height / 2
             self.label_cart_count.text = "0"
             self.view_movetoshop.view_cornor()
             Servicefile.shared.labelamt_total = 0
@@ -81,6 +84,8 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             self.callcartdetails()
             self.view_btn_apply.view_cornor()
             self.view_coupon_discount.isHidden = true
+            self.view_bel_circle.isHidden = true
+            self.view_cart_count.isHidden = true
         }
         
         
@@ -115,9 +120,25 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             
         }
         
-        override func viewWillDisappear(_ animated: Bool) {
-            
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? sp_productdetailspage_ViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+        
+        if let firstVC = presentingViewController as? Sp_dash_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        if let firstVC = presentingViewController as? sp_shop_dashboard_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        
+       }
         
         @IBAction func action_continue(_ sender: Any) {
            
@@ -167,7 +188,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                     removedata()
                 }
             }else{
-                self.alert(Message: "Please enter the coupon code")
+                self.alert(Message: "Please enter the coupon code if available")
             }
            
             
@@ -216,6 +237,11 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                             self.label_coupon_discount.text = "INR " + self.discountprice
                             self.originalprice = String(data["original_price"] as! Int)
                             self.totalprice = String(data["total_price"] as! Int)
+                            Servicefile.shared.prod_coupondiscountprice = self.discountprice
+                            Servicefile.shared.prod_couponcode = self.couponcode
+                            Servicefile.shared.prod_couponstatus = self.coupon_status
+                            Servicefile.shared.prod_originalprice = self.originalprice
+                            Servicefile.shared.prod_totalprice = self.totalprice
                             Servicefile.shared.labelamt_total = data["total_price"] as! Int
                             self.label_amt_total.text = "INR " + self.totalprice
                             let Message = res["Message"] as? String ?? ""
@@ -234,7 +260,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -409,7 +435,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
     //            }
     //        }else{
     //            self.stopAnimatingActivityIndicator()
-    //            self.alert(Message: "No Intenet Please check and try again ")
+    //            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
     //        }
     //    }
         
@@ -453,13 +479,13 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                             if Servicefile.shared.cartdata.count > 0{
                                 self.view_cart_empty.isHidden = true
                                 self.view_cart_count.isHidden = false
-                                self.label_cart_count.text = String(Servicefile.shared.cartdata.count)
+                               
                             }else{
                                 self.view_cart_empty.isHidden = false
                                 self.view_cart_count.isHidden = true
                                 self.label_cart_count.text = "0"
                             }
-                           
+                            self.callnoticartcount()
                             self.tbl_productlist.reloadData()
                             self.stopAnimatingActivityIndicator()
                         }else{
@@ -475,7 +501,46 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+            }
+        }
+        
+        func callnoticartcount(){
+            print("notification")
+            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+                ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                    switch (response.result) {
+                    case .success:
+                        let res = response.value as! NSDictionary
+                        print("notification success data",res)
+                        let Code  = res["Code"] as! Int
+                        if Code == 200 {
+                            self.view_bel_circle.isHidden = true
+                            self.view_cart_count.isHidden = true
+                            let Data = res["Data"] as! NSDictionary
+                            let notification_count = Data["notification_count"] as! Int
+                            let product_count = Data["product_count"] as! Int
+                            if notification_count > 0 {
+                                self.view_bel_circle.isHidden = false
+                            }
+                            if product_count > 0 {
+                                self.view_cart_count.isHidden = false
+                            }
+                            Servicefile.shared.notifi_count = notification_count
+                            Servicefile.shared.cart_count = product_count
+                            self.label_cart_count.text = String(Servicefile.shared.cart_count)
+                            self.label_bel_count.text = String(Servicefile.shared.notifi_count)
+                        }else{
+                            print("status code service denied")
+                        }
+                        break
+                    case .failure(let Error):
+                        print("Can't Connect to Server / TimeOut",Error)
+                        break
+                    }
+                }
+            }else{
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -507,7 +572,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -538,7 +603,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         func callDeleteoverallproduct(){
@@ -568,7 +633,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
         
@@ -599,7 +664,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
                 }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
        

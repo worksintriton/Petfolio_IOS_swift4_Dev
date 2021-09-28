@@ -100,7 +100,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMf-zo-Gzv">
                             <rect key="frame" x="557" y="16" width="40" height="40"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group55" translatesAutoresizingMaskIntoConstraints="NO" id="P0I-Yo-ShC">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="P0I-Yo-ShC">
                                     <rect key="frame" x="4" y="4" width="32" height="32"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
@@ -108,7 +108,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.97899097199999996" green="0.70208579299999996" blue="0.093584232030000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="tCT-Qx-ipW" firstAttribute="leading" secondItem="yMf-zo-Gzv" secondAttribute="leading" id="Afc-qV-RHX"/>
                                 <constraint firstAttribute="trailing" secondItem="tCT-Qx-ipW" secondAttribute="trailing" id="LQd-iN-NdI"/>
@@ -153,5 +153,6 @@
     <resources>
         <image name="Bell" width="56" height="61"/>
         <image name="Group55" width="58" height="58"/>
+        <image name="User" width="51" height="61"/>
     </resources>
 </document>

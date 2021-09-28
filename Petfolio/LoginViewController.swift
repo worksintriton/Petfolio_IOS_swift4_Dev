@@ -69,7 +69,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             Servicefile.shared.user_phone = self.usercred.text!
             self.callLogin()
         }
-        
     }
     
     
@@ -122,7 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

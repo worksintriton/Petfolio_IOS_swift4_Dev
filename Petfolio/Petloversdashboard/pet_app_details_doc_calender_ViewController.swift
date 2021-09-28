@@ -116,7 +116,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
             self.callcheckdatedetails(index: indexPath.row)
             
         }else{
-            self.alert(Message: "Slot is not available")
+            self.alert(Message: "The chosen slot is not available")
         }
         
     }
@@ -225,7 +225,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -269,7 +269,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -307,7 +307,7 @@ class pet_app_details_doc_calender_ViewController: UIViewController , FSCalendar
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

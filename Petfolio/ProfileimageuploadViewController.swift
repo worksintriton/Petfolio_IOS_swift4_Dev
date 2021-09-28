@@ -19,12 +19,16 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
     
     @IBOutlet weak var view_continue: UIView!
     @IBOutlet weak var image_profile: UIImageView!
+    @IBOutlet weak var label_upload: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.view_continue.view_cornor()
         self.imagepicker.delegate = self
+        if  Servicefile.shared.userimage != "" {
+            self.label_upload.isHidden = true
+        }
         self.setimage(strimg: Servicefile.shared.userimage)
         self.image_profile.layer.cornerRadius = CGFloat(Servicefile.shared.viewcornorradius)
         self.image_profile.dropShadow()
@@ -140,6 +144,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
+                        self.label_upload.isHidden = true
                         let Data = res["Data"] as? String ?? Servicefile.sample_img
                         print("Uploaded file url:",Data)
                         self.imageval = Data
@@ -192,7 +197,7 @@ class ProfileimageuploadViewController: UIViewController, UIImagePickerControlle
             }
         } else {
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

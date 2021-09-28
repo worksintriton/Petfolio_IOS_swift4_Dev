@@ -123,7 +123,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -198,7 +198,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
               "coupon_code" , couponcode)
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             if Servicefile.shared.pet_apoint_visit_type == "" {
-                self.alert(Message: "Please select the visit type")
+                self.alert(Message: "Please select the type of visit")
             }else{
                 if self.pay_method != "Cash" {
                     if self.totalprice > "0"{
@@ -271,7 +271,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -288,6 +288,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
               "video_id":  Servicefile.shared.pet_apoint_video_id,
               "user_id": Servicefile.shared.userid,
               "pet_id" : Servicefile.shared.pet_apoint_pet_id,
+              "current_img":Servicefile.shared.petlistimg,
               "problem_info": Servicefile.shared.pet_apoint_problem_info,
               "doc_attched": Servicefile.shared.pet_apoint_doc_attched ,
               "doc_feedback":  Servicefile.shared.pet_apoint_doc_feedback,
@@ -339,7 +340,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -460,7 +461,7 @@ class pet_doc_search_payoptionViewController: UIViewController, UITextFieldDeleg
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

@@ -145,11 +145,11 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.moveTextField(textField: textField, up:true)
+        //self.moveTextField(textField: textField, up:true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        self.moveTextField(textField: textField, up:false)
+        //self.moveTextField(textField: textField, up:false)
     }
     
     func callotpresend(){
@@ -179,7 +179,7 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
             }
         } else {
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
 }

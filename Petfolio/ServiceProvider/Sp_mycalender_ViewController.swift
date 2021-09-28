@@ -52,7 +52,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
         let vc = UIStoryboard.Sp_calender_hour_ViewController()
                    self.present(vc, animated: true, completion: nil)
        }else {
-        self.alert(Message: "Please select the week days")
+        self.alert(Message: "Please select the days of the week you are available")
         }
        
     }
@@ -173,7 +173,7 @@ class Sp_mycalender_ViewController: UIViewController, UITableViewDelegate, UITab
                                       }
                }else{
                    self.stopAnimatingActivityIndicator()
-                   self.alert(Message: "No Intenet Please check and try again ")
+                   self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                }
            }
     

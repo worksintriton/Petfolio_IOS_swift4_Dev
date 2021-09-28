@@ -134,7 +134,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
@@ -442,6 +442,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
        }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
          print("Upload started",Servicefile.shared.userid +  Servicefile.shared.uploadddmmhhmmastringformat(date: Date()))
             print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -559,6 +560,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
              "user_id" : Servicefile.shared.userid,
              "pet_id" : Servicefile.shared.pet_apoint_pet_id,
              "additional_info" : Servicefile.shared.pet_apoint_problem_info,
+             "current_img":Servicefile.shared.petlistimg,
              "sp_attched" : [],
              "sp_feedback" : "",
              "sp_rate" : "",
@@ -598,7 +600,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                     }
              }else{
                  self.stopAnimatingActivityIndicator()
-                 self.alert(Message: "No Intenet Please check and try again ")
+                 self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
              }
          }
       
@@ -641,7 +643,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                     }
              }else{
                  self.stopAnimatingActivityIndicator()
-                 self.alert(Message: "No Intenet Please check and try again ")
+                 self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
              }
          }
     
@@ -693,7 +695,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -735,7 +737,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -817,7 +819,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                                          textView.textColor = UIColor.black
                                      }
             }
-            self.moveTextField(textview: textView, up:true)
+            //self.moveTextField(textview: textView, up:true)
            
            }
           
@@ -825,11 +827,11 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
        
        func textViewDidEndEditing(_ textView: UITextView) {
            if self.textview_descrip == textView{
-            self.moveTextField(textview: textView, up:false)
+            //self.moveTextField(textview: textView, up:false)
            }
        }
     
-    func callpaymentfail(){
+    func callpaymentfail() {
            if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
                ["appointment_UID": "",
                 "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
@@ -852,7 +854,7 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
                }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
 

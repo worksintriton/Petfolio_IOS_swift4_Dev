@@ -95,7 +95,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
             self.call_submit_cancel_new()
             print("cancel data",Servicefile.shared.iscancelselect)
         }else{
-            self.alert(Message: "please select the issue for cancellation")
+            self.alert(Message: "Please select the reason for cancellation")
         }
     }
     
@@ -154,7 +154,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -183,7 +183,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -220,7 +220,7 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

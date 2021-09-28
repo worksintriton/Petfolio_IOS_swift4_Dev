@@ -179,7 +179,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             cell.btn_online.addTarget(self, action: #selector(action_online), for: .touchUpInside)
             
             cell.label_completedon.text = Servicefile.shared.Doc_dashlist[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked on :"
+            cell.labe_comMissed.text = "Booked for :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }else if Servicefile.shared.appointtype == "Completed"{
@@ -401,7 +401,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -478,7 +478,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -556,7 +556,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func callmiss(){
@@ -631,7 +631,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -686,7 +686,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -744,7 +744,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -784,7 +784,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -819,7 +819,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }
@@ -850,7 +850,7 @@ class doc_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                 }
             }
         }else{
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
   

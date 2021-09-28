@@ -50,6 +50,7 @@ class pet_other_information_ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
+        
         self.img_spay_yes.image = UIImage(named: "Radio")
         self.img_spay_no.image = UIImage(named: "Radio")
         
@@ -210,7 +211,7 @@ class pet_other_information_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -257,7 +258,7 @@ class pet_other_information_ViewController: UIViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

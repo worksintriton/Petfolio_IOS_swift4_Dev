@@ -132,7 +132,7 @@ class dealupdateViewController: UIViewController, UITextFieldDelegate, UITextVie
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         //let Data = res["Data"] as! NSArray
-                        let alert = UIAlertController(title: "Product Updated", message: "", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "", message: "Product details added successfully", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                             self.dismiss(animated: true, completion: nil)
                         }))
@@ -152,7 +152,7 @@ class dealupdateViewController: UIViewController, UITextFieldDelegate, UITextVie
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

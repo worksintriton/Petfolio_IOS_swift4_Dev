@@ -218,7 +218,7 @@ extension pet_vendor_shop_search_ViewController {
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

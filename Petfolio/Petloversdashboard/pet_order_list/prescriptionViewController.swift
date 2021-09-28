@@ -78,6 +78,15 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
         return cell
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+            if let firstVC = presentingViewController as? DocdashboardViewController {
+                      DispatchQueue.main.async {
+                       firstVC.viewWillAppear(true)
+                      }
+                  }
+       
+       }
+    
     
     @IBAction func action_share(_ sender: Any) {
         let objectsToShare = [sharetext] as [Any]
@@ -121,6 +130,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                         self.label_dr_id.text = Data["doctor_id"] as? String ?? ""
                                                         self.label_doc_address.text = Data["clinic_loc"] as? String ?? ""
                                                         self.label_PH_no.text = Data["clinic_no"] as? String ?? ""
+                                                        
                                                         self.label_pres.text = Data["Prescription_id"] as? String ?? ""
                                                         let signature = Data["digital_sign"] as? String ?? ""
                                                         self.img_signature.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
@@ -151,7 +161,8 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                             }
                                                             
                                                         }
-                                                        self.label_subtittle.text = petha
+                                                        let clinic_name = Data["clinic_name"] as? String ?? ""
+                                                        self.label_subtittle.text = clinic_name
                                                         self.label_title.text =  Data["doctorname"] as? String ?? ""
                                                         self.label_doc_name.text =  Data["doctorname"] as? String ?? ""
                                                         Servicefile.shared.doc_diag_type =  Data["Prescription_type"] as? String ?? ""
@@ -163,6 +174,8 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                             self.view_manual.isHidden = true
                                                         }
                                                         let presimg =  Data["Prescription_img"] as? String ?? ""
+                                                        print(presimg)
+                                                        self.image_preview.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                                                         self.image_preview.sd_setImage(with: Servicefile.shared.StrToURL(url: presimg)) { (image, error, cache, urls) in
                                                             if (error != nil) {
                                                                 self.image_preview.image = UIImage(named: imagelink.sample)
@@ -180,11 +193,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                                         self.label_powered_title.text = Data["web_name"] as? String ?? ""
                                                         self.label_pet_weight.text = String(Data["weight"] as? Int ?? 0)
                                                         self.sharetext = Data["share_msg"] as? String ?? ""
-                                                        if Servicefile.shared.user_type == "4" {
-                                                            self.view_share.isHidden = false
-                                                        }else{
-                                                            self.view_share.isHidden = true
-                                                        }
+                                                        self.view_share.isHidden = false
                                                         self.stopAnimatingActivityIndicator()
                                                       }else{
                                                         self.stopAnimatingActivityIndicator()
@@ -199,7 +208,7 @@ class prescriptionViewController: UIViewController,UITableViewDelegate,UITableVi
                                    }
             }else{
                 self.stopAnimatingActivityIndicator()
-                self.alert(Message: "No Intenet Please check and try again ")
+                self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
             }
         }
     

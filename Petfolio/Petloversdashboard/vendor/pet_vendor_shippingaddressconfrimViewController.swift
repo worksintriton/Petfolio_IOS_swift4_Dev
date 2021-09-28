@@ -151,8 +151,26 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
            
        }
     
-    
     func callsubmitproduct(){
+        print("user_id",Servicefile.shared.userid,
+              "payment_id" , Servicefile.shared.pet_apoint_payment_id,
+              "Data", Servicefile.shared.cartdata,
+              "date_of_booking_display" , Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+              "date_of_booking" , Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+              "prodouct_total", Servicefile.shared.labelamt_subtotal,
+              "shipping_charge", Servicefile.shared.labelamt_shipping,
+              "shipping_details_id", self.selectedid,
+              "coupon_code" , Servicefile.shared.prod_couponcode,
+              "coupon_discount_price",Servicefile.shared.prod_coupondiscountprice,
+              "coupon_status" ,  Servicefile.shared.prod_couponstatus,
+              "original_price" ,  Servicefile.shared.prod_originalprice,
+              "total_price" , Servicefile.shared.prod_totalprice,
+              "discount_price", Servicefile.shared.labelamt_discount,
+              "shipping_address_id", "",
+              "billling_address_id" , "",
+              "shipping_address" , "",
+              "billing_address" , "",
+              "grand_total", Servicefile.shared.labelamt_total)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.Createproduct, method: .post, parameters:
             ["user_id":Servicefile.shared.userid,
@@ -163,7 +181,11 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
              "prodouct_total": Servicefile.shared.labelamt_subtotal,
              "shipping_charge": Servicefile.shared.labelamt_shipping,
              "shipping_details_id": self.selectedid,
-             "coupon_code" : "",
+             "coupon_code" : Servicefile.shared.prod_couponcode,
+             "coupon_status" :  Servicefile.shared.prod_couponstatus,
+             "coupon_discount_price":Servicefile.shared.prod_coupondiscountprice,
+             "original_price" :  Servicefile.shared.prod_originalprice,
+             "total_price" : Servicefile.shared.prod_totalprice,
              "discount_price": Servicefile.shared.labelamt_discount,
              "shipping_address_id" : "",
              "billling_address_id" : "",
@@ -194,7 +216,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -287,7 +309,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         
     }

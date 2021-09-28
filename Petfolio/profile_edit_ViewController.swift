@@ -108,7 +108,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                }
            } else {
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
     
@@ -261,7 +261,7 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -283,14 +283,14 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if self.textfield_email == textField || self.textfield_lastname == textField  {
-            self.moveTextField(textField: textField, up:true)
+            //self.moveTextField(textField: textField, up:true)
         }
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if self.textfield_email == textField || self.textfield_lastname == textField {
-            self.moveTextField(textField: textField, up:false)
+            //self.moveTextField(textField: textField, up:false)
         }
     }
     

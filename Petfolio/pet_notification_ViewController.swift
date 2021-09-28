@@ -34,9 +34,43 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+
+        
+        
+       }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if let firstVC = presentingViewController as? Sp_dash_ViewController {
+                              DispatchQueue.main.async {
+                               firstVC.viewWillAppear(true)
+            }
+        }
+        if let firstVC = presentingViewController as? sp_shop_dashboard_ViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+            }
+        }
+        
+        if let firstVC = presentingViewController as? doc_shop_dashboardViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+            }
+        }
+        
+        if let firstVC = presentingViewController as? DocdashboardViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+            }
+        }
+    }
+    
+    
+    
+    
     func intial_setup_action(){
     // header action
-        self.view_header.label_title.text = "Notifcations"
+        self.view_header.label_title.text = "Notifications"
         self.view_header.label_title.textColor = .black
         self.view_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
     // header action
@@ -206,7 +240,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -242,7 +276,7 @@ class pet_notification_ViewController: UIViewController, UITableViewDelegate, UI
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

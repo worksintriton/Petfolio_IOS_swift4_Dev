@@ -16,7 +16,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var tbl_cancellist: UITableView!
     var coupon_arr = [Any]()
-    
+    var reftype = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         coupon_arr.removeAll()
@@ -64,7 +64,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.label_sub_title.text = sub_title
         if ref != "" {
             let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-            cell.label_ref.text = "REF" + Servicefile.shared.yyyyMMddHHmmssnumberformat(date: Date())
+            cell.label_ref.text = "REF" + Servicefile.shared.couponformat(date: Date())
         }else{
             cell.label_ref.text = ""
         }
@@ -75,22 +75,29 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = self.coupon_arr[indexPath.row] as! NSDictionary
         let ref = data["refund"] as? String ?? ""
+        reftype = ref
         var refval = ""
         var c_type = ""
-        if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-            c_type = "1"
-        }else{
-            c_type = "2"
-        }
-        if ref != "" {
-            let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-            refval = "REF" + Servicefile.shared.yyyyMMddHHmmssnumberformat(date: Date())
-            self.callcreateprocess(code: refval,amount: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost,ctype: c_type, userid: Servicefile.shared.userid)
-        }else{
-            refval = "Bank"
-           // self.dismiss(animated: true, completion: nil)
-            self.callcreateprocess(code: refval,amount: "0",ctype: c_type, userid: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex]._id)
-        }
+//        if Servicefile.shared.iscancelselect.count > 0 {
+//            c_type = "3"
+//
+//        }else{
+            if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
+                c_type = "1"
+            }else{
+                c_type = "2"
+            }
+            if ref != "" {
+                let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
+                refval = "REF" + Servicefile.shared.couponformat(date: Date())
+                self.callcreateprocess(code: refval,amount: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost,ctype: c_type, userid: Servicefile.shared.userid)
+            }else{
+                refval = "Bank"
+               // self.dismiss(animated: true, completion: nil)
+                    self.callcreateprocess(code: refval,amount: "0",ctype: c_type, userid: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex]._id)
+            }
+       // }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -122,16 +129,17 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
     func callcreateprocess(code: String,amount: String,ctype: String, userid: String){
         
-        
+        self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_app_coupon_create, method: .post, parameters:
                                                                     ["created_by" : "User",
                                                                      "coupon_type" : ctype,
+                                                                     "mobile_type" : "IOS",
                                                                      "code" : code,
                                                                      "amount" : amount,
                                                                      "user_details" : Servicefile.shared.userid,
@@ -143,12 +151,29 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let data  = res["Data"] as! NSDictionary
+                        self.stopAnimatingActivityIndicator()
+                        if self.reftype != "" {
+                            let alert = UIAlertController(title: "", message: "Coupon code generated successfully. Generated coupon will also be available in My Coupons ", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                let vc = UIStoryboard.Pet_applist_ViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }else{
+                           // self.dismiss(animated: true, completion: nil)
+                            let alert = UIAlertController(title: "", message: "Your refund will be processed in 4-5 working days", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                let vc = UIStoryboard.Pet_applist_ViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                       
                         
-                        let vc = UIStoryboard.Pet_applist_ViewController()
-                        self.present(vc, animated: true, completion: nil)
-                        
-                        
+                       
                     }else{
+                        self.stopAnimatingActivityIndicator()
                         let vc = UIStoryboard.Pet_applist_ViewController()
                         self.present(vc, animated: true, completion: nil)
                        
@@ -162,7 +187,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

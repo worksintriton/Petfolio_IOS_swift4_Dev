@@ -266,21 +266,21 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if self.textfield_cityname == textField || self.textfield_pickname == textField{
-            self.moveTextField(textField: textField, up:true)
+            //self.moveTextField(textField: textField, up:true)
         }
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if self.textfield_cityname == textField || self.textfield_pickname == textField{
-            self.moveTextField(textField: textField, up:false)
+            //self.moveTextField(textField: textField, up:false)
         }
     }
     
     
     @IBAction func action_savelocation(_ sender: Any) {
         if self.textfield_pickname.text == "" {
-            self.alert(Message: "Please enter pick a nick name for this location")
+            self.alert(Message: "Please enter name for this location")
         }else{
             if Servicefile.shared.locaaccess == "Add" {
                 self.calladdlocation()
@@ -328,7 +328,7 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -371,7 +371,7 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
   

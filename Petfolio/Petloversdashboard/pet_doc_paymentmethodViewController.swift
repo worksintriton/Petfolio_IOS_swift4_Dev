@@ -120,14 +120,14 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Appoinment"
+        self.view_subpage_header.label_header_title.text = "Appointment"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
+        self.view_subpage_header.sethide_view(b1: true, b2: true, b3: true, b4: true)
     // header action
     }
    
@@ -196,7 +196,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
               "coupon_code" , couponcode)
         if Servicefile.shared.pet_apoint_communication_type == "Visit" {
             if Servicefile.shared.pet_apoint_visit_type == "" {
-                self.alert(Message: "Please select the visit type")
+                self.alert(Message: "Please select the type of visit")
             }else{
                 if self.pay_method != "Cash" {
                     if self.totalprice > "0"{
@@ -246,10 +246,12 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
                         let data  = res["Data"] as! NSDictionary
                         self.textbtncoupon = "Remove"
                         self.view_isonline.isHidden = false
-                        self.couponcode = self.textfield_coupon.text!
+                        
                         self.label_applyremove.text = self.textbtncoupon
                         self.discountprice = String(data["discount_price"] as! Int)
+                        
                         self.label_app_discount.text = "INR " + self.discountprice
+                        self.couponcode = self.textfield_coupon.text!
                         self.originalprice = String(data["original_price"] as! Int)
                         self.totalprice = String(data["total_price"] as! Int)
                         self.label_total_app_discount.text = "INR " + self.totalprice
@@ -268,7 +270,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
    
@@ -283,6 +285,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
               "video_id":  Servicefile.shared.pet_apoint_video_id,
               "user_id": Servicefile.shared.userid,
               "pet_id" : Servicefile.shared.pet_apoint_pet_id,
+              "current_img":Servicefile.shared.petlistimg,
               "problem_info": Servicefile.shared.pet_apoint_problem_info,
               "doc_attched": Servicefile.shared.pet_apoint_doc_attched ,
               "doc_feedback":  Servicefile.shared.pet_apoint_doc_feedback,
@@ -295,7 +298,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
               "payment_method" : pay_method,
               "appointment_types" : Servicefile.shared.pet_apoint_appointment_types,
               "allergies" : Servicefile.shared.pet_apoint_allergies,
-              "amount" : Servicefile.shared.pet_apoint_amount,
+              "amount" : Int(self.totalprice)!,
               "mobile_type" : "IOS",
               "service_name" : "",
               "service_amount": "",
@@ -334,7 +337,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -455,7 +458,7 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

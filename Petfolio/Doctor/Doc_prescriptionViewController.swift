@@ -148,6 +148,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
@@ -155,6 +156,11 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillDisappear(_ animated: Bool) {
         IQKeyboardManager.shared.enable = true
+        if let firstVC = presentingViewController as? DocdashboardViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+        }
     }
     
     
@@ -223,13 +229,13 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }else if self.doctor_sub_diagnosis.text == "" {
             self.alert(Message: "Please select the sub diagnosis")
         }else if self.textview_descrip.text == "Write here..."{
-            self.alert(Message: "please enter the comments")
+            self.alert(Message: "Please enter your comments")
         }else if self.textview_descrip.text == ""{
-            self.alert(Message: "please enter the comments")
+            self.alert(Message: "Please enter your comments")
         }else if checkispdf() {
-            self.alert(Message: "Please add the tablets")
+            self.alert(Message: "Please add the medicines to be prescribed")
         }else if checkisimage() {
-            self.alert(Message: "Please add the image")
+            self.alert(Message: "Please add an image")
         }else{
             if Servicefile.shared.pet_appint_pay_method != "Cash" {
                 self.callcash()
@@ -431,7 +437,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         if av == false && mv == false && nv == false {
-            self.alert(Message: "Consumption should not be empty ")
+            self.alert(Message: "Please enter the time of the day for consuming the medicines")
         }else{
             Servicefile.shared.Doc_pres.remove(at: tag)
             let a = ["Quantity": Quantity,
@@ -458,7 +464,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         if av == false && mv == false && nv == false {
-            self.alert(Message: "Consumption days should not be empty ")
+            self.alert(Message: "Please enter the time of the day for consuming the medicines")
         }else{
             Servicefile.shared.Doc_pres.remove(at: tag)
             let a = ["Quantity": Quantity,
@@ -486,7 +492,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         if av == false && mv == false && nv == false {
-            self.alert(Message: "Consumption days should not be empty ")
+            self.alert(Message: "Please enter the time of the day for consuming the medicines")
         }else{
             Servicefile.shared.Doc_pres.remove(at: tag)
             let a = ["Quantity": Quantity,
@@ -556,11 +562,11 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
         Servicefile.shared.noofday = self.textfield_noofdays.text!
         print("data in doc pres",Servicefile.shared.medi, Servicefile.shared.noofday, Servicefile.shared.consdays)
         if Servicefile.shared.medi == "" {
-            self.alert(Message: "please enter tablet name")
+            self.alert(Message: "Please enter the name of the medicine")
         } else if Servicefile.shared.noofday == "" {
-            self.alert(Message: "please enter no of days")
+            self.alert(Message: "Please enter number of days")
         } else if m == false && n == false && a == false {
-            self.alert(Message: "please enter consumption")
+            self.alert(Message: "Please enter the time of the day for consuming the medicines")
         } else {
             var B = Servicefile.shared.Doc_pres
             var arr = B
@@ -635,7 +641,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -687,7 +693,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -723,7 +729,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -784,6 +790,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started",Servicefile.shared.userid +  Servicefile.shared.uploadddmmhhmmastringformat(date: Date()))
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -885,7 +892,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -931,7 +938,7 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

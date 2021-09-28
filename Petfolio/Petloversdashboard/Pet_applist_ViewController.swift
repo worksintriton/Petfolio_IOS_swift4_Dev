@@ -57,14 +57,14 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     func intial_setup_action(){
         // header action
-        self.view_subpage_header.label_header_title.text = "My Appointment"
+        self.view_subpage_header.label_header_title.text = "My Appointments"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
         // header action
         // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)
@@ -72,7 +72,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button3), for: .touchUpInside)
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
-        self.view_footer.setup(b1: true, b2: false, b3: false, b4: false, b5: false)
+        self.view_footer.setup(b1: false, b2: false, b3: true, b4: false, b5: false)
         // footer action
     }
     
@@ -171,7 +171,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.btn_cancel.tag = indexPath.row
             cell.btn_cancel.addTarget(self, action: #selector(action_cancelled), for: .touchUpInside)
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].Booked_at
-            cell.labe_comMissed.text = "Booked On :"
+            cell.labe_comMissed.text = "Booked for :"
             cell.label_completedon.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             cell.labe_comMissed.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
@@ -213,7 +213,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             cell.view_completebtn.isHidden = true
             cell.view_commissed.isHidden = false
             cell.label_completedon.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].missed_at
-            cell.labe_comMissed.text = "Cancelled on :"
+            cell.labe_comMissed.text = "Missed on :"
             cell.label_completedon.textColor = UIColor.red
             cell.labe_comMissed.textColor = UIColor.red
             cell.label_status.isHidden = false
@@ -281,7 +281,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
 //            let vc = UIStoryboard.Pet_confrence_ViewController()
 //            self.present(vc, animated: true, completion: nil)
 //        } else {
-//            self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+//            self.alert(Message: "Doctor is yet to start the Appointment. Please wait for the Doctor to initiate the call")
 //        }
         self.call_getdetails()
     }
@@ -315,7 +315,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                 let vc = UIStoryboard.Pet_confrence_ViewController()
                                 self.present(vc, animated: true, completion: nil)
                             } else {
-                                self.alert(Message: "Doctor is yet to start the Appointment please wait for the doctor to initiate the Appointment")
+                                self.alert(Message: "Doctor is yet to start the Appointment. Please wait for the Doctor to initiate the call")
                             }
                         }else{
 
@@ -334,7 +334,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -428,7 +428,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_cancelled(_ sender: Any) {
-        self.label_nodata.text = "No Missed appointments"
+        self.label_nodata.text = "No missed appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_cancelled.backgroundColor = appcolor
         self.label_cancelled.textColor = UIColor.white
@@ -443,7 +443,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_completeappoint(_ sender: Any) {
-        self.label_nodata.text = "No Completed appointments"
+        self.label_nodata.text = "No completed appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_completed.backgroundColor = appcolor
         self.label_complete.textColor = UIColor.white
@@ -460,7 +460,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     func checkapp(){
         if Servicefile.shared.appointtype == "Completed" {
-            self.label_nodata.text = "No Completed appointments"
+            self.label_nodata.text = "No completed appointments"
             let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.view_completed.backgroundColor = appcolor
             self.label_complete.textColor = UIColor.white
@@ -472,7 +472,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             self.view_cancelled.layer.borderColor = appcolor.cgColor
             self.callcom()
         } else if Servicefile.shared.appointtype == "New" {
-            self.label_nodata.text = "No New appointments"
+            self.label_nodata.text = "No new appointments"
             let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.view_current.backgroundColor = appcolor
             self.label_current.textColor = UIColor.white
@@ -484,7 +484,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
             self.view_cancelled.layer.borderColor = appcolor.cgColor
             self.callnew()
         }else{
-            self.label_nodata.text = "No Missed appointments"
+            self.label_nodata.text = "No missed appointments"
             let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
             self.view_cancelled.backgroundColor = appcolor
             self.label_cancelled.textColor = UIColor.white
@@ -499,7 +499,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func action_currentappoint(_ sender: Any) {
-        self.label_nodata.text = "No New appointments"
+        self.label_nodata.text = "No new appointments"
         let appcolor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_current.backgroundColor = appcolor
         self.label_current.textColor = UIColor.white
@@ -588,7 +588,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -635,7 +635,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                  }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -709,7 +709,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func callmiss(){
@@ -783,7 +783,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                     }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -825,7 +825,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -863,7 +863,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

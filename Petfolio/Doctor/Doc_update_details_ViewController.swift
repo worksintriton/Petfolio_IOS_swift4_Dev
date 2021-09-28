@@ -318,7 +318,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         print("size value",size)
         print("get the file size",filesize)
         if filesize > size {
-            self.alert(Message: "Please Select the file Less that 2MB")
+            self.alert(Message: "Please select the file Less that 2MB")
         }else{
             self.PDFupload(dat: myURL)
         }
@@ -476,7 +476,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.textfield_ser_amt {
-            self.moveTextField(textField: textField, up:true)
+            //self.moveTextField(textField: textField, up:true)
         }
         self.tbl_commtype.isHidden = true
     }
@@ -484,7 +484,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     @IBAction func action_education_add(_ sender: Any) {
         if self.textfield_education.text == "" {
-            self.alert(Message: "Please enter Education")
+            self.alert(Message: "please enter the Education details")
         }else if self.textfield_edu_YOC.text == "" {
             self.alert(Message: "Please enter Year of completion")
         }else {
@@ -554,9 +554,9 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     @IBAction func action_experience_add(_ sender: Any) {
         if self.textfield_exp_company.text == "" {
-            self.alert(Message: "Please enter Education")
+            self.alert(Message: "please enter the Education details")
         }else if self.label_exp_from.text == "From" {
-            self.alert(Message: "Please Select from date")
+            self.alert(Message: "Please select from date")
         }else if self.label_exp_to.text == "To" {
             self.alert(Message: "Please Select To date")
         }else {
@@ -613,7 +613,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     @IBAction func action_exp_to(_ sender: Any) {
         self.seldate = "T"
         if self.label_exp_from.text == "From" {
-            self.alert(Message: "Please select the from date")
+            self.alert(Message: "Please select the From date")
             self.view_expire.isHidden = false
         }else{
             let format = DateFormatter()
@@ -633,7 +633,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         if Servicefile.shared.clinicdicarray.count < 3 {
             self.callgalaryimageprocess()
         }else{
-            self.alert(Message: "You can upload only 3 Photo")
+            self.alert(Message: "You can upload a maximum of only 3 Photos")
         }
         self.tbl_commtype.isHidden = true
     }
@@ -673,13 +673,13 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     @IBAction func action_submit(_ sender: Any) {
         self.tbl_commtype.isHidden = true
         if self.textfield_clinic_num.text == "" {
-            self.alert(Message: "please Enter the Clinic Number")
+            self.alert(Message: "Please Enter the Clinic Phone Number")
         } else if self.textfield_doctor_id.text == "" {
-            self.alert(Message: "please Enter the Doctor ID")
+            self.alert(Message: "Please Enter your Doctor ID")
         } else if self.textview_aboutdoc.text == "About Doctor" {
-            self.alert(Message: "please Enter the About Doctor")
+            self.alert(Message: "Please Fill in the About Section")
         } else if self.textfield_clinicname.text == "" {
-            self.alert(Message: "please enter the clinic name")
+            self.alert(Message: "Please enter the Clinic Name")
         }  else if self.textfield_commtype.text == "" {
             self.alert(Message: "please Select the Communication Type")
         } else if Servicefile.shared.edudicarray.count == 0 {
@@ -689,21 +689,21 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
         } else if Servicefile.shared.expdicarray.count == 0 {
             self.alert(Message: "please enter the Experience details")
         } else if Servicefile.shared.specdicarray.count == 0 {
-            self.alert(Message: "Please select the Specialisation")
+            self.alert(Message: "Please enter the Specialization")
         } else if Servicefile.shared.pethandicarray.count == 0 {
             self.alert(Message: "Please select the pet type")
         } else if Servicefile.shared.clinicdicarray.count == 0 {
             self.alert(Message: "Please select the pet type")
         } else if Servicefile.shared.certifdicarray.count == 0 {
-            self.alert(Message: "Please select the certificate")
+            self.alert(Message: "Please upload the certificate")
         } else if Servicefile.shared.govdicarray.count == 0 {
-            self.alert(Message: "Please select the certificate")
+            self.alert(Message: "Please upload the certificate")
         } else if Servicefile.shared.photodicarray.count == 0 {
-            self.alert(Message: "Please select the certificate")
+            self.alert(Message: "Please upload the certificate")
         }else if  self.textfield_ser_amt.text == "" {
-            self.alert(Message: "please enter the Service amount")
+            self.alert(Message: "Please enter the total amount of the Service")
         }else if  self.digisignature == "" {
-            self.alert(Message: "please upload the digital signature")
+            self.alert(Message: "please upload your digital signature")
         } else {
            
             print("doctor_id",Servicefile.shared.checktextfield(textfield: self.textfield_doctor_id.text!),
@@ -1201,6 +1201,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     }
     
     func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
         let headers: HTTPHeaders = [
@@ -1289,6 +1290,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     
     func PDFupload(dat: URL) {
+        self.startAnimatingActivityIndicator()
         print("Upload started")
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
@@ -1466,7 +1468,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -1525,7 +1527,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -1556,7 +1558,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -1579,7 +1581,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == self.textfield_ser_amt {
-            self.moveTextField(textField: textField, up:false)
+            //self.moveTextField(textField: textField, up:false)
         }
     }
     
@@ -1610,7 +1612,7 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
                 }        }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

@@ -539,7 +539,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
                             self.view_confirmall.isHidden = true
                         }else if Servicefile.shared.ordertype == "New"{
                                 let date = order_details["order_booked"] as? String ?? ""
-                                self.Label_status.text = "Booked on"
+                                self.Label_status.text = "Booked for"
                                 self.label_status_date.text = date
                         }else{
                                 self.Label_status.text = "Cancelled on"
@@ -612,7 +612,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -659,7 +659,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
          if checkdata == "Reject reason" {
             print("Rejected")
             if trimmed == "" {
-                self.alert(Message: "Please enter the details")
+                self.alert(Message: "Please enter the mandatory details")
             }else{
                 self.callreject()
             }
@@ -671,7 +671,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
         } else if checkdata == "Dispatch Track ID"{
             print("dispatch")
             if trimmed == "" {
-                self.alert(Message: "Please enter the details")
+                self.alert(Message: "Please enter the Dispatch Tracking ID")
             }else{
                 self.calldispatch()
             }
@@ -721,7 +721,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -768,7 +768,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -807,7 +807,7 @@ class orderdetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
 }

@@ -114,7 +114,16 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+        if let firstVC = presentingViewController as? DocdashboardViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
+        if let firstVC = presentingViewController as? doc_shop_dashboardViewController {
+                  DispatchQueue.main.async {
+                   firstVC.viewWillAppear(true)
+                  }
+              }
     }
     
     @IBAction func action_continue(_ sender: Any) {
@@ -165,7 +174,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
                 removedata()
             }
         }else{
-            self.alert(Message: "Please enter the coupon code")
+            self.alert(Message: "Please enter the coupon code if available")
         }
        
         
@@ -214,6 +223,11 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
                         self.label_coupon_discount.text = "INR " + self.discountprice
                         self.originalprice = String(data["original_price"] as! Int)
                         self.totalprice = String(data["total_price"] as! Int)
+                        Servicefile.shared.prod_coupondiscountprice = self.discountprice
+                        Servicefile.shared.prod_couponcode = self.couponcode
+                        Servicefile.shared.prod_couponstatus = self.coupon_status
+                        Servicefile.shared.prod_originalprice = self.originalprice
+                        Servicefile.shared.prod_totalprice = self.totalprice
                         Servicefile.shared.labelamt_total = data["total_price"] as! Int
                         self.label_amt_total.text = "INR " + self.totalprice
                         let Message = res["Message"] as? String ?? ""
@@ -232,7 +246,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -407,7 +421,7 @@ extension doc_vendorcartpageViewController {
 //            }
 //        }else{
 //            self.stopAnimatingActivityIndicator()
-//            self.alert(Message: "No Intenet Please check and try again ")
+//            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
 //        }
 //    }
     
@@ -473,7 +487,7 @@ extension doc_vendorcartpageViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -505,7 +519,7 @@ extension doc_vendorcartpageViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -536,7 +550,7 @@ extension doc_vendorcartpageViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     func callDeleteoverallproduct(){
@@ -566,7 +580,7 @@ extension doc_vendorcartpageViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -597,7 +611,7 @@ extension doc_vendorcartpageViewController {
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
    

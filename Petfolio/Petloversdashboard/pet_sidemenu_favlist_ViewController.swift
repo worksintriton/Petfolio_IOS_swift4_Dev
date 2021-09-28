@@ -231,7 +231,6 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             cell.view_rating.isUserInteractionEnabled = false
             cell.view_pet_paw.layer.cornerRadius = cell.view_pet_paw.frame.height / 2
             return cell
-            
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! pet_product_CollectionViewCell
             cell.image_shopping_bag.image = UIImage(named: "shopping-bag")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
@@ -239,7 +238,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             //cell.view_main.layer.borderWidth = 0.5
             //let color = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.extralightgray)
             //cell.view_main.layer.borderColor = color.cgColor
-         //cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
+            //cell.view_main.View_dropshadow(cornordarius: CGFloat(2.0), iscircle : true)
          cell.label_prod_title.text = Servicefile.shared.petnewprod[indexPath.row].product_title
             cell.label_price.text = "INR " + String(Servicefile.shared.petnewprod[indexPath.row].product_prices)
          
@@ -300,7 +299,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
          
             if Servicefile.shared.verifyUrl(urlString: Servicefile.shared.petnewprod[indexPath.row].products_img) {
                 cell.image_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].products_img)) { (image, error, cache, urls) in
+                cell.image_product.sd_setImage(with: Servicefile.shared.StrToURL(url: Servicefile.shared.petnewprod[indexPath.row].thumbnail_image)) { (image, error, cache, urls) in
                 if (error != nil) {
                     cell.image_product.image = UIImage(named: imagelink.sample)
                 } else {
@@ -400,7 +399,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -464,7 +463,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -520,7 +519,7 @@ class pet_sidemenu_favlist_ViewController: UIViewController, UICollectionViewDel
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

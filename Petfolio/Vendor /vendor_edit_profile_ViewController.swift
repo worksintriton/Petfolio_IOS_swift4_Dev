@@ -31,7 +31,10 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
      @IBOutlet weak var view_phno: UIView!
      @IBOutlet weak var view_ph_cou: UIView!
      @IBOutlet weak var view_reg: UIView!
-     
+    
+    
+    @IBOutlet weak var label_popmsg: UILabel!
+    
      @IBOutlet weak var textfield_Bus_name: UITextField!
      @IBOutlet weak var textfield_bus_email: UITextField!
      @IBOutlet weak var textfield_business: UITextField!
@@ -207,21 +210,23 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
     
     @IBAction func action_submit(_ sender: Any) {
      if self.textfield_Bus_name.text == "" {
-         self.alert(Message: "Please enter the business name")
+         self.alert(Message: "Please enter the Business Name")
      }else if self.textfield_bus_email.text == "" {
-         self.alert(Message: "Please enter the business email")
-     }else if self.textfield_bus_phno.text == "" {
-         self.alert(Message: "Please enter the business Phone number")
-     }else if self.textfield_business.text == "" {
-         self.alert(Message: "Please enter the business")
+         self.alert(Message: "Please enter the Business Email")
+     }
+//     else if self.textfield_business.text == "" {
+//        self.alert(Message: "Please enter the business")
+//     }
+     else if self.textfield_bus_phno.text == "" {
+         self.alert(Message: "Please enter the Business Phone Number")
      }else if self.textfield_bus_reg.text == "" {
-         self.alert(Message: "Please enter the business details")
+         self.alert(Message: "Please enter the Business Registration details")
      }else if Servicefile.shared.gallerydicarray.count == 0 {
-         self.alert(Message: "Please upload the gallery image")
+         self.alert(Message: "Please upload an image")
      }else if self.image_photo == "" {
-         self.alert(Message: "Please upload the Photo ID")
+         self.alert(Message: "Please upload your Photo ID")
      }else if self.image_govid == "" {
-         self.alert(Message: "Please upload the Goverment Id")
+         self.alert(Message: "Please upload your Goverment Id")
      }else if Servicefile.shared.certifdicarray.count == 0 {
          self.alert(Message: "Please upload the certificates")
      }else{
@@ -468,7 +473,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
         print("size value",size)
         print("get the file size",filesize)
         if filesize > size {
-            self.alert(Message: "Please Select the file Less that 2MB")
+            self.alert(Message: "Please select the file Less that 2MB")
         }else{
             self.PDFupload(dat: myURL)
         }
@@ -499,6 +504,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
           }
        
        func upload(imagedata: UIImage) {
+        self.startAnimatingActivityIndicator()
             print("Upload started")
                print("before uploaded data in clinic",Servicefile.shared.clinicdicarray)
            let headers: HTTPHeaders = [
@@ -569,6 +575,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
        
       
        func PDFupload(dat: URL) {
+        self.startAnimatingActivityIndicator()
                print("Upload started")
               let headers: HTTPHeaders = [
                   "Content-type": "multipart/form-data"
@@ -624,7 +631,32 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                       }
                   }
               }
-   
+   /*
+     
+     "_id" : self.In_id,
+"user_id": Servicefile.shared.userid,
+"user_name" : Servicefile.shared.first_name,
+"user_email": Servicefile.shared.user_email,
+"bussiness_name" : Servicefile.shared.checktextfield(textfield: self.textfield_Bus_name.text!),
+"bussiness_email" : Servicefile.shared.checktextfield(textfield: self.textfield_bus_email.text!),
+"bussiness" : Servicefile.shared.checktextfield(textfield: self.textfield_business.text!),
+"bussiness_phone": Servicefile.shared.checktextfield(textfield: self.textfield_bus_phno.text!),
+"business_reg" : Servicefile.shared.checktextfield(textfield: self.textfield_bus_reg.text!),
+"bussiness_gallery" : Servicefile.shared.gallerydicarray,
+"photo_id_proof" : self.image_photo,
+"govt_id_proof":  self.image_govid,
+"certifi" : Servicefile.shared.certifdicarray,
+"date_and_time" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
+"bussiness_loc" : self.locationaddress,
+"bussiness_lat" : self.latitude!,
+"bussiness_long" : self.longitude!,
+     
+"delete_status" : false
+"mobile_type" : "IOS",
+     "profile_status": true,
+     "profile_verification_status" : "Not Verified",
+     
+     */
     
     func callvendorreg(){
      print("details in vendor registration",Servicefile.shared.gallerydicarray,Servicefile.shared.certifdicarray,self.image_photo,self.image_govid)
@@ -644,13 +676,9 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                  "govt_id_proof":  self.image_govid,
                  "certifi" : Servicefile.shared.certifdicarray,
                  "date_and_time" : Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
-                 "mobile_type" : "IOS",
-                 "profile_status": true,
-                 "profile_verification_status" : "Not Verified",
                  "bussiness_loc" : self.locationaddress,
                  "bussiness_lat" : self.latitude!,
-                 "bussiness_long" : self.longitude!,
-                 "delete_status" : false], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                 "bussiness_long" : self.longitude!], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                             switch (response.result) {
                                             case .success:
                                                   let res = response.value as! NSDictionary
@@ -659,6 +687,8 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                                                   if Code == 200 {
                                                     //let Data = res["Data"] as! NSDictionary
                                                     //self.callupdatestatus()
+                                                    let Message = res["Message"] as? String ?? ""
+                                                    self.label_popmsg.text = Message
                                                     self.view_popup.isHidden = false
                                                     self.view_shadow.isHidden = false
                                                      self.stopAnimatingActivityIndicator()
@@ -675,7 +705,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                                }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -780,7 +810,7 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
                                   }
            }else{
                self.stopAnimatingActivityIndicator()
-               self.alert(Message: "No Intenet Please check and try again ")
+               self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
            }
        }
    }

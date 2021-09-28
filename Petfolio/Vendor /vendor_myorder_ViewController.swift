@@ -78,20 +78,20 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
     
     func inital_setup(){
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(self.vendorsidemenu), for: .touchUpInside)
-        var img = Servicefile.shared.userimage
-        if img != "" {
-            img = Servicefile.shared.userimage
-        }else{
-            img = Servicefile.sample_img
-        }
-       // self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-            } else {
-                self.view_header.image_profile.image = image
-            }
-        }
+//        var img = Servicefile.shared.userimage
+//        if img != "" {
+//            img = Servicefile.shared.userimage
+//        }else{
+//            img = Servicefile.sample_img
+//        }
+//        self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
+//            if (error != nil) {
+//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
+//            } else {
+//                self.view_header.image_profile.image = image
+//            }
+//        }
         self.view_header.contentMode = .scaleAspectFill
         self.view_header.label_title.text = "My Orders"
         self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
@@ -164,7 +164,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             cell.btn_order_details.addTarget(self, action: #selector(orderdetails), for: .touchUpInside)
             cell.btn_update_status.addTarget(self, action: #selector(updatestatusorderdetails), for: .touchUpInside)
             cell.selectionStyle = .none
-            cell.label_ord_date_title.text = "Booked on : "
+            cell.label_ord_date_title.text = "Booked for : "
             return cell
         } else  if  Servicefile.shared.ordertype == "Completed"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "curcell", for: indexPath) as! vendor_new_TableViewCell
@@ -403,7 +403,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -438,7 +438,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -474,7 +474,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -557,7 +557,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -640,7 +640,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -724,7 +724,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
    
@@ -770,7 +770,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     
@@ -817,7 +817,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
             }
         }else{
             self.stopAnimatingActivityIndicator()
-            self.alert(Message: "No Intenet Please check and try again ")
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }
     

@@ -275,10 +275,19 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         }
         cell.selectionStyle = .none
         let costamt = "INR " + String(productdata["discount_amount"] as? Int ?? 0)
+        
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         cell.label_product_amt.text = "INR " + String(productdata["cost"] as? Int ?? 0)
+        let cost = productdata["cost"] as? Int ?? 0
+        
         cell.label_final_amt.attributedText = attributeString
+        let cost_amt = productdata["discount_amount"] as? Int ?? 0
+        if cost_amt > 0 {
+            cell.label_final_amt.isHidden = false
+        }else{
+            cell.label_final_amt.isHidden = true
+        }
 //        let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
 //        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
 //        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
@@ -481,10 +490,10 @@ extension vendorcartpageViewController {
                         Servicefile.shared.labelsubtotal_itmcount = prodcut_item_count
                         Servicefile.shared.label_Original_amt_total = grand_total
                         self.totalprice = String(Servicefile.shared.labelamt_total)
-                        self.label_amt_total.text = " ₹" + String(Servicefile.shared.labelamt_total)
-                        self.label_amt_discount.text =  " ₹" + String(Servicefile.shared.labelamt_discount)
-                        self.label_amt_shipping.text =  " ₹" + String(Servicefile.shared.labelamt_shipping)
-                        self.label_amt_subtotal.text =  " ₹" + String(Servicefile.shared.labelamt_subtotal)
+                        self.label_amt_total.text = "INR " + String(Servicefile.shared.labelamt_total)
+                        self.label_amt_discount.text =  "INR " + String(Servicefile.shared.labelamt_discount)
+                        self.label_amt_shipping.text =  "INR " + String(Servicefile.shared.labelamt_shipping)
+                        self.label_amt_subtotal.text =  "INR " + String(Servicefile.shared.labelamt_subtotal)
                         var item = " item"
                         if Servicefile.shared.labelsubtotal_itmcount == 1 {
                             item = " item"

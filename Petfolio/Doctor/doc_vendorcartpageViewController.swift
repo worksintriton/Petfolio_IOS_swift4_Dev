@@ -281,6 +281,9 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         }else{
             cell.label_offer.isHidden = true
         }
+        
+       
+        
         cell.selectionStyle = .none
 //        let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
 //        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
@@ -305,6 +308,14 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
                 }
             }
         }
+        
+        let cost_amt = productdata["discount_amount"] as? Int ?? 0
+        if cost_amt > 0 {
+            cell.label_final_amt.isHidden = false
+        }else{
+            cell.label_final_amt.isHidden = true
+        }
+        
         cell.img_product.contentMode = .scaleAspectFill
         cell.btn_decrement.tag = indexPath.row
         cell.btn_increament.tag = indexPath.row

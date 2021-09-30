@@ -152,10 +152,11 @@ class sp_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITab
                             let alert = UIAlertController(title: "", message: "Coupon code generated successfully. Generated coupon will also be available in My Coupons ", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.sp_myorder_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
-                                
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.sp_myorder_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                let vc = UIStoryboard.mycouponViewController()
+                                self.present(vc, animated: true, completion: nil)
                             }))
                             self.present(alert, animated: true, completion: nil)
                             
@@ -164,9 +165,11 @@ class sp_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITab
                             let alert = UIAlertController(title: "", message: "Your refund will be processed in 4-5 working days", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.sp_myorder_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.sp_myorder_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                let vc = UIStoryboard.mycouponViewController()
+                                self.present(vc, animated: true, completion: nil)
                             }))
                             self.present(alert, animated: true, completion: nil)
                         }
@@ -175,7 +178,9 @@ class sp_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITab
                        
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        let vc = UIStoryboard.Pet_applist_ViewController()
+//                        let vc = UIStoryboard.Pet_applist_ViewController()
+//                        self.present(vc, animated: true, completion: nil)
+                        let vc = UIStoryboard.mycouponViewController()
                         self.present(vc, animated: true, completion: nil)
                        
                     }

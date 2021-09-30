@@ -31,15 +31,39 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
     
     func intial_setup_action(){
     // header action
-        self.view_subheader.label_header_title.text = "My Coupon"
+        self.view_subheader.label_header_title.text = "My Coupons"
         self.view_subheader.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subheader.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subheader.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subheader.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subheader.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subheader.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subheader.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
         self.view_subheader.sethide_view(b1: true, b2: true, b3: true, b4: true)
     // header action
+    }
+    
+    @objc func backaction(){
+        if Servicefile.shared.user_type == "1" {
+            
+            let vc = UIStoryboard.petloverDashboardViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        } else if Servicefile.shared.user_type == "4" {
+            
+            let vc = UIStoryboard.DocdashboardViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        } else if Servicefile.shared.user_type == "2" {
+            
+            let vc = UIStoryboard.Sp_dash_ViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        }else if Servicefile.shared.user_type == "3" {
+            
+            let vc = UIStoryboard.vendor_myorder_ViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

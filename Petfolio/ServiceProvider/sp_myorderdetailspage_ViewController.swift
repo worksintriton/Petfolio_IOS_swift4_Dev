@@ -20,12 +20,22 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
         @IBOutlet weak var label_status_date: UILabel!
         @IBOutlet weak var view_status: UIView!
         
-        @IBOutlet weak var view_orderdetails: UIView!
-        @IBOutlet weak var label_orderdate: UILabel!
+       // @IBOutlet weak var view_orderdetails: UIView!
+    
+    @IBOutlet weak var view_orderdetails: UIStackView!
+    @IBOutlet weak var label_orderdate: UILabel!
         @IBOutlet weak var label_id: UILabel!
         @IBOutlet weak var label_paymentmethod: UILabel!
         @IBOutlet weak var label_ordertotal: UILabel!
         @IBOutlet weak var label_quality: UILabel!
+    
+    
+        @IBOutlet weak var view_orginalprice: UIView!
+        @IBOutlet weak var label_orginalprice: UILabel!
+        @IBOutlet weak var view_couponprice: UIView!
+        @IBOutlet weak var label_couponprice: UILabel!
+    
+    
         @IBOutlet weak var label_product_amt: UILabel!
         //@IBOutlet weak var label_shipping_address: UILabel!
         
@@ -102,6 +112,8 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
             self.view_status.isHidden = true
             self.view_shipingaddress.isHidden = true
             self.view_orderdetails.isHidden = true
+            self.view_orginalprice.isHidden = true
+            self.view_couponprice.isHidden = true
             self.tbl_prod_details.register(UINib(nibName: "vendor_orderdetails_status_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell1")
             self.tbl_prod_details.register(UINib(nibName: "pet_vendor_orderdetails_cancel_TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
             self.tbl_prod_details.delegate = self
@@ -161,9 +173,9 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                 cell.label_order_id.text = Servicefile.shared.order_id
                 cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
                 if Servicefile.shared.orderdetail_prod[indexPath.row].product_count > 1{
-                    cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                    cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) items)"
                 }else{
-                    cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                    cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) item)"
                 }
                 cell.label_bookdate.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_booked
                 cell.label_orderdatetitle.text = self.check_order_details_status()
@@ -361,6 +373,21 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                             Servicefile.shared.product_quantity = order_details["order_product"] as? Int ?? 0
                             Servicefile.shared.order_id = order_details["order_id"] as? String ?? ""
                             Servicefile.shared.product_title = order_details["order_text"] as? String ?? ""
+                            
+                            let orderprice = String(order_details["original_price"] as? Int ?? 0)
+                            let coupon_discount_price = String(order_details["coupon_discount_price"] as? Int ?? 0)
+                            let coupon_status = order_details["coupon_status"] as? String ?? ""
+                            self.label_couponprice.text = "INR " + coupon_discount_price
+                            self.label_orginalprice.text = "INR " + orderprice
+                            
+                            if coupon_status != "Applied" {
+                                self.view_couponprice.isHidden = true
+                                self.view_orginalprice.isHidden = true
+                            }else{
+                                self.view_couponprice.isHidden = false
+                                self.view_orginalprice.isHidden = false
+                            }
+                            
                             let d_price = order_details["total_price"] as? Int ?? 0
                         if d_price > 0{
                             Servicefile.shared.prod_totalprice = String(d_price)

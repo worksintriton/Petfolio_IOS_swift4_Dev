@@ -177,11 +177,15 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                             let alert = UIAlertController(title: "", message: "Coupon code generated successfully. Generated coupon will also be available in My Coupons ", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 if Servicefile.shared.iscancelselect.count > 0 {
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                    let vc = UIStoryboard.mycouponViewController()
                                     self.present(vc, animated: true, completion: nil)
                                 }else{
-                                    let vc = UIStoryboard.Pet_applist_ViewController()
+//                                    let vc = UIStoryboard.Pet_applist_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                    let vc = UIStoryboard.mycouponViewController()
                                     self.present(vc, animated: true, completion: nil)
                                 }
                             }))
@@ -192,11 +196,15 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                             let alert = UIAlertController(title: "", message: "Your refund will be processed in 4-5 working days", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 if Servicefile.shared.iscancelselect.count > 0 {
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                    let vc = UIStoryboard.mycouponViewController()
                                     self.present(vc, animated: true, completion: nil)
                                 }else{
-                                    let vc = UIStoryboard.Pet_applist_ViewController()
+//                                    let vc = UIStoryboard.Pet_applist_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                    let vc = UIStoryboard.mycouponViewController()
                                     self.present(vc, animated: true, completion: nil)
                                 }
                                
@@ -208,9 +216,10 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                        
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        let vc = UIStoryboard.Pet_applist_ViewController()
+//                        let vc = UIStoryboard.Pet_applist_ViewController()
+//                        self.present(vc, animated: true, completion: nil)
+                        let vc = UIStoryboard.mycouponViewController()
                         self.present(vc, animated: true, completion: nil)
-                       
                     }
                     break
                 case .failure(let Error):

@@ -152,9 +152,11 @@ class doc_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITa
                             let alert = UIAlertController(title: "", message: "Coupon code generated successfully. Generated coupon will also be available in My Coupons ", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.doc_myorderdetails_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.doc_myorderdetails_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                let vc = UIStoryboard.mycouponViewController()
+                                self.present(vc, animated: true, completion: nil)
                                 
                             }))
                             self.present(alert, animated: true, completion: nil)
@@ -164,9 +166,11 @@ class doc_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITa
                             let alert = UIAlertController(title: "", message: "Your refund will be processed in 4-5 working days", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                 
-                                    Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.doc_myorderdetails_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
+//                                    Servicefile.shared.ordertype = "New"
+//                                    let vc = UIStoryboard.doc_myorderdetails_ViewController()
+//                                    self.present(vc, animated: true, completion: nil)
+                                let vc = UIStoryboard.mycouponViewController()
+                                self.present(vc, animated: true, completion: nil)
                             }))
                             self.present(alert, animated: true, completion: nil)
                         }
@@ -175,9 +179,10 @@ class doc_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITa
                        
                     }else{
                         self.stopAnimatingActivityIndicator()
-                        let vc = UIStoryboard.doc_myorderdetails_ViewController()
+//                        let vc = UIStoryboard.doc_myorderdetails_ViewController()
+//                        self.present(vc, animated: true, completion: nil)
+                        let vc = UIStoryboard.mycouponViewController()
                         self.present(vc, animated: true, completion: nil)
-                       
                     }
                     break
                 case .failure(let Error):

@@ -289,10 +289,10 @@ class Doc_prescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-            self.textview_descrip.resignFirstResponder()
-            return false
-        }
+//        if(text == "\n") {
+//            self.textview_descrip.resignFirstResponder()
+//            return false
+//        }
         
         return true
     }

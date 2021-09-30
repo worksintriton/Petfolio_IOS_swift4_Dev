@@ -69,6 +69,8 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var label_diagnosis: UILabel!
     
     @IBOutlet weak var label_sub_diagnosis: UILabel!
+    @IBOutlet weak var label_orginalprice: UILabel!
+    @IBOutlet weak var label_couponprice: UILabel!
     
     @IBOutlet weak var view_diagnosis: UIView!
     @IBOutlet weak var view_subdiagnosis: UIView!
@@ -80,6 +82,8 @@ class Pet_app_details_ViewController: UIViewController {
     @IBOutlet weak var view_pethandledetails: UIView!
     @IBOutlet weak var view_pethandle: UIView!
     @IBOutlet weak var view_visittype: UIView!
+    @IBOutlet weak var view_orginalprice: UIView!
+    @IBOutlet weak var view_couponprice: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -469,8 +473,18 @@ class Pet_app_details_ViewController: UIViewController {
                             let _id  = doctor_id["_id"] as? String ?? ""
                             let problem_info = data["problem_info"] as? String ?? ""
                             self.label_pet_comments.text = problem_info
+                            if problem_info != "" {
+                                self.view_comments.isHidden = false
+                            }else{
+                                self.view_comments.isHidden = true
+                            }
                             let allergies = data["allergies"] as? String ?? ""
                             self.label_alergies.text = allergies
+                            if allergies != "" {
+                                self.view_alergies.isHidden = false
+                            }else{
+                                self.view_alergies.isHidden = true
+                            }
                             let diagnosis = data["diagnosis"] as? String ?? ""
                             self.label_diagnosis.text = diagnosis
                             let sub_diagnosis = data["sub_diagnosis"] as? String ?? ""
@@ -482,6 +496,15 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = clinic_loc
                             let userimage  = doc_busi["thumbnail_image"] as? String ?? ""
+                            let orginalprice = String(data["original_price"] as? Int ?? 0)
+                            let couponprice =  String(data["discount_price"] as? Int ?? 0)
+                            self.label_orginalprice.text = "INR " +  orginalprice
+                            self.label_couponprice.text = "INR " +  couponprice
+                            let couponstatus = data["coupon_status"] as? String ?? ""
+                            if couponstatus != "Applied"{
+                                self.view_orginalprice.isHidden = true
+                                self.view_couponprice.isHidden = true
+                            }
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {
@@ -504,7 +527,16 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_orderdate.text = data["date_and_time"] as? String ?? ""
                             
                             self.view_confrence.isHidden = true
-                            self.label_order_id.text = data["payment_id"] as? String ?? ""
+                            let orginalprice = String(data["original_price"] as? Int ?? 0)
+                            let couponprice =  String(data["discount_price"] as? Int ?? 0)
+                            self.label_orginalprice.text = "INR " +  orginalprice
+                            self.label_couponprice.text = "INR " +  couponprice
+                            let couponstatus = data["coupon_status"] as? String ?? ""
+                            if couponstatus != "Applied"{
+                                self.view_orginalprice.isHidden = true
+                                self.view_couponprice.isHidden = true
+                            }
+                            self.label_order_id.text = data["appointment_UID"] as? String ?? ""
                             self.label_payment_method.text = data["payment_method"] as? String ?? ""
                             let amount_val = data["service_amount"] as? String ?? ""
                             self.label_ordercost.text = "INR " + amount_val
@@ -556,7 +588,21 @@ class Pet_app_details_ViewController: UIViewController {
                             self.label_Holder_cost.text = "INR " + amt
                             self.label_address_details.text = sp_loc
                             let sp_id = data["sp_id"] as! NSDictionary
-                            let userimage = sp_id["profile_img"] as? String ?? Servicefile.sample_img
+                            let allergies = data["allergies"] as? String ?? ""
+                            self.label_alergies.text = allergies
+                            if allergies != "" {
+                                self.view_alergies.isHidden = false
+                            }else{
+                                self.view_alergies.isHidden = true
+                            }
+                            let problem_info = data["problem_info"] as? String ?? ""
+                            self.label_pet_comments.text = problem_info
+                            if problem_info != "" {
+                                self.view_comments.isHidden = false
+                            }else{
+                                self.view_comments.isHidden = true
+                            }
+                            let userimage = sp_id["thumbnail_image"] as? String ?? Servicefile.sample_img
                             if userimage == "" {
                                 self.image_holder_name.image = UIImage(named: imagelink.sample)
                             } else {

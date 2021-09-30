@@ -39,11 +39,11 @@ class docsidemenuViewController: UIViewController,UITableViewDelegate, UITableVi
         self.tbl_menulist.dataSource = self
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","My Coupons","Favourites","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
             self.labelmenu = ["My Appointments","Walk-in Appointments","My Calendar","Manage Services","My Orders","My Coupons","Favourites","Notifications", "Logout"]
-            self.imgmenu = ["Doc","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit"]
+            self.imgmenu = ["Calendar","walkin","calender-menu","suitcase","Doc","Discount","Like","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name

@@ -96,7 +96,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hxJ-Aa-qdz">
-                                                <rect key="frame" x="10" y="139" width="394" height="549"/>
+                                                <rect key="frame" x="10" y="139" width="394" height="609"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9dH-v9-ZtS">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -186,7 +186,7 @@
                                             <constraint firstItem="v9m-il-BVC" firstAttribute="leading" secondItem="ysN-cG-OGy" secondAttribute="leading" id="fD5-uV-ECV"/>
                                             <constraint firstItem="hxJ-Aa-qdz" firstAttribute="leading" secondItem="A5W-ig-QP6" secondAttribute="leading" id="fO4-Vl-qvY"/>
                                             <constraint firstItem="JV0-hH-33u" firstAttribute="top" secondItem="A5W-ig-QP6" secondAttribute="bottom" constant="18" id="kqb-gR-Rjg"/>
-                                            <constraint firstAttribute="bottom" secondItem="hxJ-Aa-qdz" secondAttribute="bottom" constant="68" id="nIy-An-xoo"/>
+                                            <constraint firstAttribute="bottom" secondItem="hxJ-Aa-qdz" secondAttribute="bottom" constant="8" id="nIy-An-xoo"/>
                                             <constraint firstItem="v9m-il-BVC" firstAttribute="trailing" secondItem="JV0-hH-33u" secondAttribute="trailing" id="nT9-qj-9cn"/>
                                             <constraint firstItem="ysN-cG-OGy" firstAttribute="centerY" secondItem="JV0-hH-33u" secondAttribute="centerY" id="tSF-19-sQK"/>
                                         </constraints>
@@ -5250,15 +5250,10 @@
             <point key="canvasLocation" x="13882.608695652176" y="-302.00892857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="vcw-Lo-CQ5">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="AddAddress" width="161" height="161"/>
         <image name="Bag" width="63" height="61"/>
-        <image name="Bell" width="56" height="61"/>
+        <image name="Bell" width="162" height="209"/>
         <image name="Icon_map_pin" width="12.5" height="15.5"/>
         <image name="Orange_paw" width="12" height="10"/>
         <image name="Radio" width="62" height="62"/>

@@ -21,7 +21,7 @@ class sp_orderlist_cancel_ViewController:  UIViewController, UITableViewDelegate
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
         
         var cancellistval = [""]
-        var selval = "Select an issue"
+        var selval = "Select the reason"
         var showlist = true
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -89,7 +89,7 @@ class sp_orderlist_cancel_ViewController:  UIViewController, UITableViewDelegate
         
         
         @IBAction func action_cancel_order(_ sender: Any) {
-            if self.selval != "Select an issue" {
+            if self.selval != "Select the reason" {
                 self.call_submit_cancel_new()
                 print("cancel data",Servicefile.shared.iscancelselect)
             }else{

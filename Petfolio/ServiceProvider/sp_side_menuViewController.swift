@@ -24,11 +24,11 @@ class sp_side_menuViewController: UIViewController,UITableViewDelegate, UITableV
         //self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         if Servicefile.shared.my_ref_code != "" {
             self.labelmenu = ["My Appointments","My Calendar","My Orders","Favourites","My Coupons","Notifications", "Logout", "Referral code: \(Servicefile.shared.my_ref_code)"]
-            self.imgmenu = ["Doc","Calendar","Doc","Like","Discount","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
+            self.imgmenu = ["Calendar","calender-menu","Doc","Like","Discount","Bell", "Exit","Referral code: \(Servicefile.shared.my_ref_code)"]
             self.tbl_menulist.reloadData()
         }else{
             self.labelmenu = ["My Appointments","My Calendar","My Orders","Favourites","My Coupons","Notifications", "Logout"]
-            self.imgmenu = ["Doc","Calendar","Doc","Like","Discount","Bell", "Exit"]
+            self.imgmenu = ["Calendar","calender-menu","Doc","Like","Discount","Bell", "Exit"]
             self.tbl_menulist.reloadData()
         }
         self.label_user.text = Servicefile.shared.first_name + " " + Servicefile.shared.last_name

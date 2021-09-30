@@ -24,6 +24,7 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
     @IBOutlet weak var view_shadow: UIView!
     @IBOutlet weak var view_alert: UIView!
     @IBOutlet weak var view_btn_alert: UIView!
+    @IBOutlet weak var label_popupdetails: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,6 +202,8 @@ class pet_vendor_shippingaddressconfrimViewController: UIViewController, UITable
                         Servicefile.shared.pet_apoint_payment_id = ""
                         self.view_shadow.isHidden = false
                         self.view_alert.isHidden = false
+                        let Message = res["Message"] as? String ?? ""
+                        self.label_popupdetails.text = Message
                         self.stopAnimatingActivityIndicator()
                     }else{
                         

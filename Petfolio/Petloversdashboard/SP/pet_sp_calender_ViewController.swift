@@ -193,7 +193,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                 for timitm in 0..<timedic.count{
                                     let timitmdic = timedic[timitm] as! NSDictionary
                                     let timval = timitmdic["time"]  as? NSString ?? ""
-                                    self.listtime.append(timval as String)
+                                    self.listtime.append(String(timval))
                                     let bookstatus = timitmdic["book_status"]  as? Bool ?? false
                                     print("book status",bookstatus)
                                     if bookstatus ==  true {
@@ -203,7 +203,7 @@ class pet_sp_calender_ViewController: UIViewController , FSCalendarDelegate, UIC
                                     }
                                     if timitm == 0 {
                                         self.seltime.append("0")
-                                        self.selectedtime = timval as String
+                                        self.selectedtime = String(timval)
                                     }else{
                                         self.seltime.append("0")
                                     }

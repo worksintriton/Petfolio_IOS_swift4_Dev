@@ -21,7 +21,8 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             var razorpay: RazorpayCheckout!
             var selectedid = ""
             
-        @IBOutlet weak var view_header: petowner_otherpage_header!
+    @IBOutlet weak var label_popupdetails: UILabel!
+    @IBOutlet weak var view_header: petowner_otherpage_header!
         @IBOutlet weak var view_shadow: UIView!
             @IBOutlet weak var view_alert: UIView!
             @IBOutlet weak var view_btn_alert: UIView!
@@ -41,7 +42,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                 // Do any additional setup after loading the view.
                 self.tableview_list_address.delegate = self
                 self.tableview_list_address.dataSource = self
-               
+                
             }
         
         func intial_setup_action(){
@@ -216,6 +217,8 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                                 Servicefile.shared.pet_apoint_payment_id = ""
                                 self.view_shadow.isHidden = false
                                 self.view_alert.isHidden = false
+                                let Message = res["Message"] as? String ?? ""
+                                self.label_popupdetails.text = Message
                                 self.stopAnimatingActivityIndicator()
                             }else{
                                 

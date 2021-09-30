@@ -25,7 +25,8 @@ class doc_shop_shipaddress_ViewController: UIViewController, UITableViewDelegate
     @IBOutlet weak var view_shadow: UIView!
         @IBOutlet weak var view_alert: UIView!
         @IBOutlet weak var view_btn_alert: UIView!
-        
+    @IBOutlet weak var label_popupdetails: UILabel!
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -215,6 +216,8 @@ class doc_shop_shipaddress_ViewController: UIViewController, UITableViewDelegate
                             Servicefile.shared.pet_apoint_payment_id = ""
                             self.view_shadow.isHidden = false
                             self.view_alert.isHidden = false
+                            let Message = res["Message"] as? String ?? ""
+                            self.label_popupdetails.text = Message
                             self.stopAnimatingActivityIndicator()
                         }else{
                             

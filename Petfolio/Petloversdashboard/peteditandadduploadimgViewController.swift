@@ -18,8 +18,10 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
     @IBOutlet weak var view_continue: UIView!
      let imagepicker = UIImagePickerController()
     
+    @IBOutlet weak var label_uploadpetdetails: UILabel!
     @IBOutlet weak var coll_img_list: UICollectionView!
     var uploadimage = Servicefile.sample_img
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -119,11 +121,23 @@ class peteditandadduploadimgViewController: UIViewController, UIImagePickerContr
         if Servicefile.shared.petlistimg.count == 0 {
             self.setimage(strimg: Servicefile.sample_img)
         }
+        
+        if Servicefile.shared.petlistimg.count > 0 {
+            self.label_uploadpetdetails.isHidden = true
+        }else{
+            self.label_uploadpetdetails.isHidden = false
+        }
+            
        
       }
       
     
     func setimage(strimg : String){
+        if Servicefile.shared.petlistimg.count > 0 {
+            self.label_uploadpetdetails.isHidden = true
+        }else{
+            self.label_uploadpetdetails.isHidden = false
+        }
         self.imag_petimag.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         self.imag_petimag.sd_setImage(with: Servicefile.shared.StrToURL(url: strimg)) { (image, error, cache, urls) in
             if (error != nil) {

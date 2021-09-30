@@ -275,6 +275,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
         }
         
         func callnew(){
+            self.label_nodata.text = "No new orders"
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
             if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -354,6 +355,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
         }
         
         func callcomm(){
+            self.label_nodata.text = "No completed orders"
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
             if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -433,6 +435,7 @@ class sp_myorder_ViewController:  UIViewController, UITableViewDelegate, UITable
         }
         
         func callmissed(){
+            self.label_nodata.text = "No missed orders"
             Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
             self.startAnimatingActivityIndicator()
             if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:

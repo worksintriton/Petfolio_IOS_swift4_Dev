@@ -281,7 +281,7 @@ class Sp_dash_ViewController: UIViewController , UITableViewDelegate, UITableVie
         cell.label_servicename.text = Servicefile.shared.SP_Das_petdetails[indexPath.row].sername
         
         if Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img.count > 0 {
-        let petdic = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img[0] as! NSDictionary
+            let petdic = Servicefile.shared.SP_Das_petdetails[indexPath.row].pet_img[0] as? NSDictionary ?? ["":""]
         let petimg =  petdic["pet_img"] as? String ?? Servicefile.sample_img
         if petimg == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)

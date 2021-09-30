@@ -11,17 +11,18 @@ import UIKit
 import Alamofire
 
 
-class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate  {
     
     @IBOutlet weak var tbl_cancellist: UITableView!
     @IBOutlet weak var label_cancelval: UILabel!
     @IBOutlet weak var view_cancel: UIView!
     @IBOutlet weak var view_cancel_order: UIView!
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
-    
+    @IBOutlet weak var textview_others: UITextView!
+    @IBOutlet weak var view_others: UIView!
     @IBOutlet weak var view_footer: doc_footer!
     var cancellistval = [""]
-    var selval = "Select an issue"
+    var selval = "Select the reason"
     var showlist = true
     
     override func viewDidLoad() {
@@ -37,7 +38,12 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         self.cancellistval.removeAll()
         self.callcanceldetails()
         self.label_cancelval.text = self.selval
+        self.view_others.isHidden = true
+        self.textview_others.delegate = self
+        self.textview_others.text = "Write here..."
+        self.textview_others.textColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.appTextcolor)
     }
+    
     
     
     func intial_setup_action(){
@@ -57,6 +63,25 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         self.view_footer.view_main.backgroundColor = UIColor.clear
     // footer action
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.textview_others == textView  {
+            if textView.text == "Write here..." {
+                textView.text = ""
+                if textView.textColor == UIColor.gray {
+                    textView.text = ""
+                    textView.textColor = UIColor.black
+                }
+            }
+            if self.textview_others.text!.count > 49 {
+                self.textview_others.resignFirstResponder()
+            }else{
+                self.textview_others.text = textView.text
+            }
+        }
+        
+        return true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,13 +112,29 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tbl_cancellist.isHidden = true
         self.selval = self.cancellistval[indexPath.row]
-        self.label_cancelval.text = self.selval
+        self.label_cancelval.text = self.cancellistval[indexPath.row]
+        if self.selval != "Other"{
+            self.view_others.isHidden = true
+        } else {
+            self.view_others.isHidden = false
+        }
     }
     
     
     @IBAction func action_cancel_order(_ sender: Any) {
-        if self.selval != "Select an issue" {
-            self.call_submit_cancel_new()
+        if self.selval != "Select the reason" {
+            if self.label_cancelval.text != "Other" {
+                self.call_submit_cancel_new()
+            }else{
+                print(self.textview_others.text)
+                if self.textview_others.text != "Write here..."{
+                    self.selval = self.textview_others.text!
+                    self.call_submit_cancel_new()
+                }else{
+                    self.selval = ""
+                    self.call_submit_cancel_new()
+                }
+            }
             print("cancel data",Servicefile.shared.iscancelselect)
         }else{
             self.alert(Message: "Please select the reason for cancellation")

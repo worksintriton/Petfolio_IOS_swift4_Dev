@@ -312,7 +312,7 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                     Servicefile.shared.iscancelselect.append(Servicefile.shared.orderdetail_prod[i].product_id)
                 }
             }
-            let vc = UIStoryboard.sp_orderlist_cancel_ViewController()
+            let vc = UIStoryboard.sp_cancelorder_ViewController()
                   self.present(vc, animated: true, completion: nil)
            
         }
@@ -361,6 +361,12 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                             Servicefile.shared.product_quantity = order_details["order_product"] as? Int ?? 0
                             Servicefile.shared.order_id = order_details["order_id"] as? String ?? ""
                             Servicefile.shared.product_title = order_details["order_text"] as? String ?? ""
+                            let d_price = order_details["total_price"] as? Int ?? 0
+                        if d_price > 0{
+                            Servicefile.shared.prod_totalprice = String(d_price)
+                        }else{
+                            Servicefile.shared.prod_totalprice = String(Servicefile.shared.product_price)
+                        }
                             self.product_title.text = Servicefile.shared.product_title
                             if Servicefile.shared.product_quantity > 1 {
                                 self.label_product_amt.text = "INR " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) products )"

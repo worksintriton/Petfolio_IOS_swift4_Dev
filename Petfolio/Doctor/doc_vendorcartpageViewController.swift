@@ -332,6 +332,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         let alert = UIAlertController(title: "Are you sure need to delete the product?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callDeletetheproductcount()
+            self.removedata()
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         }))
@@ -349,6 +350,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         let threshould = productdata["threshould"] as? String ?? "0"
         if cartcount < Int(threshould)! {
             self.callinctheproductcount()
+            self.removedata()
         }else{
             self.alert(Message: "You can buy only up to "+threshould+" quantity of this "+product_name)
         }
@@ -365,6 +367,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         if cartcount > 0  {
             if  cartcount <= Int(threshould)! {
             self.calldectheproductcount()
+                self.removedata()
             }
         }
         

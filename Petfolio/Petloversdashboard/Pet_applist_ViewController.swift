@@ -36,6 +36,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.iscancelselect.removeAll()
         Servicefile.shared.app_type = "app" // walk
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)

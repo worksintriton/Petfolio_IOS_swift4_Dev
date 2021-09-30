@@ -40,7 +40,7 @@ class sp_cancelorder_ViewController: UIViewController, UITableViewDelegate, UITa
         
         func intial_setup_action(){
         // header action
-            self.view_subpage_header.label_header_title.text = "Order cancel"
+            self.view_subpage_header.label_header_title.text = "Cancel order"
             self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
             self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
             self.view_subpage_header.view_profile.isHidden = true
@@ -137,7 +137,8 @@ class sp_cancelorder_ViewController: UIViewController, UITableViewDelegate, UITa
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        self.dismiss(animated: true, completion: nil)
+                        let vc = UIStoryboard.sp_app_coupon_ViewController()
+                              self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -166,7 +167,9 @@ class sp_cancelorder_ViewController: UIViewController, UITableViewDelegate, UITa
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        self.dismiss(animated: true, completion: nil)
+                        
+                        let vc = UIStoryboard.sp_app_coupon_ViewController()
+                        self.present(vc, animated: true, completion: nil)
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

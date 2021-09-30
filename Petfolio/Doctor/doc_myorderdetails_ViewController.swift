@@ -62,7 +62,7 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
     // header action
         self.view_subpage_header.label_header_title.text = "My Orders"
         self.view_subpage_header.label_header_title.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backcall), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.docprofile), for: .touchUpInside)
        self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.view_sos.isHidden = true
@@ -80,6 +80,11 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
     // footer action
     }
+    
+    @objc func backcall(){
+     let vc = UIStoryboard.DocdashboardViewController()
+     self.present(vc, animated: true, completion: nil)
+     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.checkapp()

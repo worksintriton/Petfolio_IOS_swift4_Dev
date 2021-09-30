@@ -61,7 +61,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     // header action
         self.view_subpage_header.label_header_title.text = "My orders"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
-        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
+        self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backaction), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
@@ -77,6 +77,13 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         
         self.view_footer.setup(b1: false, b2: false, b3: false, b4: true, b5: false)
     // footer action
+    }
+    
+    @objc func backaction() {
+        //        Servicefile.shared.tabbar_selectedindex = 2
+        let tapbar = UIStoryboard.petloverDashboardViewController()
+        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,6 +282,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callnew(){
+        self.label_nodata.text = "No new orders"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -355,6 +363,7 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callcomm(){
+        self.label_nodata.text = "No completed orders"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:
@@ -433,7 +442,8 @@ class Petlover_myorder_ViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-    func callmissed(){  
+    func callmissed(){
+        self.label_nodata.text = "No missed orders"
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.orderlist, method: .post, parameters:

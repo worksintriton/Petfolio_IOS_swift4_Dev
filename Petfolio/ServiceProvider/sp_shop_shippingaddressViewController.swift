@@ -200,7 +200,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                      "coupon_status" :  Servicefile.shared.prod_couponstatus,
                      "coupon_discount_price":Servicefile.shared.prod_coupondiscountprice,
                      "original_price" :  Servicefile.shared.prod_originalprice,
-                     "total_price" : Servicefile.shared.prod_totalprice,
+                     "total_price" : Servicefile.shared.labelamt_total,
                      "discount_price": Servicefile.shared.labelamt_discount,
                      "shipping_address_id" : "",
                      "billling_address_id" : "",

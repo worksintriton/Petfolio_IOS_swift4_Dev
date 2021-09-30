@@ -483,6 +483,11 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "doc_order_cancel_ViewController") as! doc_order_cancel_ViewController
     }
     
+    static func doc_app_coupon_ViewController() -> doc_app_coupon_ViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "doc_app_coupon_ViewController") as! doc_app_coupon_ViewController
+    }
+    
     
     static func Doc_addholidayViewController() -> Doc_addholidayViewController {
         let homeStoryboard = UIStoryboard.mainStoryboard()
@@ -599,6 +604,13 @@ extension UIStoryboard {
         let homeStoryboard = UIStoryboard.mainStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "docsidemenuViewController") as! docsidemenuViewController
     }
+    
+    static func sp_app_coupon_ViewController() -> sp_app_coupon_ViewController {
+        let homeStoryboard = UIStoryboard.mainStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "sp_app_coupon_ViewController") as! sp_app_coupon_ViewController
+    }
+    
+    
     
     
     
@@ -945,6 +957,7 @@ extension UIStoryboard {
         let homeStoryboard = UIStoryboard.serviceStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "sp_shop_dashboard_ViewController") as! sp_shop_dashboard_ViewController
     }
+    
     
     
     

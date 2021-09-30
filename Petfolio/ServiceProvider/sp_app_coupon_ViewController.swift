@@ -1,8 +1,8 @@
 //
-//  App_couponViewController.swift
+//  sp_app_coupon_ViewController.swift
 //  Petfolio
 //
-//  Created by Admin on 20/08/21.
+//  Created by Admin on 29/09/21.
 //  Copyright © 2021 sriram ramachandran. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import SDWebImage
 
-class App_couponViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class sp_app_coupon_ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     
     @IBOutlet weak var view_popup: UIView!
     @IBOutlet weak var tbl_cancellist: UITableView!
@@ -62,21 +62,14 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         cell.label_title.text = title
         cell.label_sub_title.text = sub_title
-        if Servicefile.shared.iscancelselect.count > 0 {
+        
             if ref != "" {
                 let refdetail = Servicefile.shared.prod_totalprice
                 cell.label_ref.text = "REF" + Servicefile.shared.couponformat(date: Date())
             }else{
                 cell.label_ref.text = ""
             }
-        }else{
-            if ref != "" {
-                let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-                cell.label_ref.text = "REF" + Servicefile.shared.couponformat(date: Date())
-            }else{
-                cell.label_ref.text = ""
-            }
-        }
+       
         
         cell.selectionStyle = .none
         return cell
@@ -88,7 +81,6 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
         reftype = ref
         var refval = ""
         var c_type = ""
-        if Servicefile.shared.iscancelselect.count > 0 {
             c_type = "3"
             print("App coupon page from order module",Servicefile.shared.iscancelselect)
             if ref != "" {
@@ -100,24 +92,7 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                // self.dismiss(animated: true, completion: nil)
                     self.callcreateprocess(code: refval,amount: "0",ctype: c_type, userid: Servicefile.shared.orderid)
             }
-        }else{
-            if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].clinic_name != "" {
-                c_type = "1"
-                print("App coupon page from doctor module")
-            }else{
-                c_type = "2"
-                print("App coupon page from doctor module")
-            }
-            if ref != "" {
-                let refdetail = Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost
-                refval = "REF" + Servicefile.shared.couponformat(date: Date())
-                self.callcreateprocess(code: refval,amount: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost,ctype: c_type, userid: Servicefile.shared.userid)
-            }else{
-                refval = "Bank"
-               // self.dismiss(animated: true, completion: nil)
-                    self.callcreateprocess(code: refval,amount: "0",ctype: c_type, userid: Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex]._id)
-            }
-        }
+        
         
     }
     
@@ -176,14 +151,11 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                         if self.reftype != "" {
                             let alert = UIAlertController(title: "", message: "Coupon code generated successfully. Generated coupon will also be available in My Coupons ", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                                if Servicefile.shared.iscancelselect.count > 0 {
+                                
                                     Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+                                    let vc = UIStoryboard.sp_myorder_ViewController()
                                     self.present(vc, animated: true, completion: nil)
-                                }else{
-                                    let vc = UIStoryboard.Pet_applist_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
-                                }
+                                
                             }))
                             self.present(alert, animated: true, completion: nil)
                             
@@ -191,15 +163,10 @@ class App_couponViewController: UIViewController, UITableViewDelegate, UITableVi
                            // self.dismiss(animated: true, completion: nil)
                             let alert = UIAlertController(title: "", message: "Your refund will be processed in 4-5 working days", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                                if Servicefile.shared.iscancelselect.count > 0 {
+                                
                                     Servicefile.shared.ordertype = "New"
-                                    let vc = UIStoryboard.Petlover_myorder_ViewController()
+                                    let vc = UIStoryboard.sp_myorder_ViewController()
                                     self.present(vc, animated: true, completion: nil)
-                                }else{
-                                    let vc = UIStoryboard.Pet_applist_ViewController()
-                                    self.present(vc, animated: true, completion: nil)
-                                }
-                               
                             }))
                             self.present(alert, animated: true, completion: nil)
                         }

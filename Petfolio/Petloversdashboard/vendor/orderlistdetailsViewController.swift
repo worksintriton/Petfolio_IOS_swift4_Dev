@@ -89,7 +89,7 @@ class orderlistdetailsViewController: UIViewController {
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Order details"
+        self.view_subpage_header.label_header_title.text = "Order Details"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.btn_sos.addTarget(self, action: #selector(self.action_sos), for: .touchUpInside)

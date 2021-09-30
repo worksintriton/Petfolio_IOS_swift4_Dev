@@ -155,6 +155,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func action_coupon(_ sender: Any) {
+        self.view.endEditing(true)
         print("Coupon action")
         let cou = self.textfield_coupon.text?.removingLeadingSpaces()
         if cou != "" {
@@ -323,6 +324,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let alert = UIAlertController(title: "Are you sure that you need to delete the products? ", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.callDeletetheproductcount()
+            self.removedata()
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
         }))
@@ -340,9 +342,11 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let threshould = productdata["threshould"] as? String ?? "0"
         if cartcount < Int(threshould)! {
             self.callinctheproductcount()
+            self.removedata()
         }else{
             self.alert(Message: "You can buy only up to "+threshould+" quantity of this "+product_name)
         }
+        
        
     }
     
@@ -356,9 +360,9 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         if cartcount > 0  {
             if  cartcount <= Int(threshould)! {
             self.calldectheproductcount()
+                self.removedata()
             }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

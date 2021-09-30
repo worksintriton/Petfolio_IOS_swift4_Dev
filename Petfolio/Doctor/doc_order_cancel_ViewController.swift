@@ -23,6 +23,7 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     var cancellistval = [""]
     var selval = "Select an issue"
     var showlist = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -41,7 +42,7 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
     
     func intial_setup_action(){
     // header action
-        self.view_subpage_header.label_header_title.text = "Order cancel"
+        self.view_subpage_header.label_header_title.text = "Cancel order"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
         self.view_subpage_header.view_profile.isHidden = true
@@ -54,12 +55,13 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
         self.view_footer.btn_Fprocess_two.addTarget(self, action: #selector(self.docshop), for: .touchUpInside)
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.docDashboard), for: .touchUpInside)
         self.view_footer.btn_Fprocess_three.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
+        self.view_footer.view_main.backgroundColor = UIColor.clear
     // footer action
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.cancellistval.removeAll()
-        if let firstVC = presentingViewController as? pet_vendor_orderdetails_ViewController {
+        if let firstVC = presentingViewController as? doc_myorder_detailspage_ViewController {
             DispatchQueue.main.async {
                 firstVC.viewWillAppear(true)
             }
@@ -138,7 +140,8 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    self.dismiss(animated: true, completion: nil)
+                    let vc = UIStoryboard.doc_app_coupon_ViewController()
+                    self.present(vc, animated: true, completion: nil)
                     self.stopAnimatingActivityIndicator()
                 }else{
                     self.stopAnimatingActivityIndicator()
@@ -167,7 +170,8 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    self.dismiss(animated: true, completion: nil)
+                    let vc = UIStoryboard.doc_app_coupon_ViewController()
+                    self.present(vc, animated: true, completion: nil)
                     self.stopAnimatingActivityIndicator()
                 }else{
                     self.stopAnimatingActivityIndicator()

@@ -171,9 +171,9 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.label_order_id.text = Servicefile.shared.order_id
             cell.label_product_title.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_name
             if Servicefile.shared.orderdetail_prod[indexPath.row].product_count > 1{
-                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) items)"
             }else{
-                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) Qty)"
+                cell.label_AmtAndProdCount.text = "INR " + String(Servicefile.shared.orderdetail_prod[indexPath.row].product_price) + " ( \(String(Servicefile.shared.orderdetail_prod[indexPath.row].product_count)) item)"
             }
             cell.label_bookdate.text = Servicefile.shared.orderdetail_prod[indexPath.row].product_booked
             cell.label_orderdatetitle.text = self.check_order_details_status()
@@ -182,8 +182,8 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
             cell.btn_trackorder.tag = indexPath.row
             cell.btn_trackorder.addTarget(self, action: #selector(action_btn_trackorder), for: .touchUpInside)
             
-            cell.btn_cancel_order.tag = indexPath.row
-            cell.btn_cancel_order.addTarget(self, action: #selector(action_btn_cancelorder), for: .touchUpInside)
+//            cell.btn_cancel_order.tag = indexPath.row
+//            cell.btn_cancel_order.addTarget(self, action: #selector(action_btn_cancelorder), for: .touchUpInside)
             
             return cell
             
@@ -378,6 +378,13 @@ class pet_vendor_orderdetails_ViewController: UIViewController , UITableViewDele
                         Servicefile.shared.product_quantity = order_details["order_product"] as? Int ?? 0
                         Servicefile.shared.order_id = order_details["order_id"] as? String ?? ""
                         Servicefile.shared.product_title = order_details["order_text"] as? String ?? ""
+                        
+                            let d_price = order_details["total_price"] as? Int ?? 0
+                        if d_price > 0{
+                            Servicefile.shared.prod_totalprice = String(d_price)
+                        }else{
+                            Servicefile.shared.prod_totalprice = String(Servicefile.shared.product_price)
+                        }
                         self.product_title.text = Servicefile.shared.product_title
                         if Servicefile.shared.product_quantity > 1 {
                             self.label_product_amt.text = "INR " + String(Servicefile.shared.product_price)+" ( \(Servicefile.shared.product_quantity) products )"

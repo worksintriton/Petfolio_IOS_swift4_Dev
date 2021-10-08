@@ -111,7 +111,8 @@ class Servicefile {
     // http://15.207.51.203:3000
     // sprint 1
     //static let baseurl = "http://52.25.163.13:3000" // live
-    static let baseurl = "http://54.212.108.156:3000" // Dev
+    //static let baseurl = "http://54.212.108.156:3000" // Dev
+    static let baseurl = "https://petfolio.app" // live
     static let tokenupdate = baseurl + "/api/userdetails/mobile/update/fb_token"
     static let slider = baseurl + "/api/splashscreen/getlist"
     static let usertype = baseurl + "/api/usertype/mobile/getlist"
@@ -128,7 +129,7 @@ class Servicefile {
     static let pet_healthissue = baseurl + "/api/healthissue/getlist"
     static let petdetailget = baseurl + "/api/pettype/mobile/getlist"
     static let addlocation = baseurl + "/api/locationdetails/create"
-    static let imageupload = baseurl + "/upload1"
+    static let imageupload = baseurl + "/api/upload1"
     static let docbusscreate = baseurl + "/api/doctordetails/create"
     static let docbussedit = baseurl + "/api/doctordetails/edit"
     

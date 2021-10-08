@@ -466,7 +466,7 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
         print("size value",size)
         print("get the file size",filesize)
         if filesize > size {
-            self.alert(Message: "Please select the file Less that 2MB")
+            self.alert(Message: "Please select the file Less than 2MB")
         }else{
             self.PDFupload(dat: myURL)
         }
@@ -480,20 +480,23 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let pickedImg = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             //let reimage = Toucan(image: pickedImg).resize(CGSize(width: 100, height: 100), fitMode: Toucan.Resize.FitMode.crop).image
             let convertimg = pickedImg.resized(withPercentage: CGFloat(Servicefile.shared.imagequantity))
             let data = pickedImg.jpegData(compressionQuality: 0.9)
             let size = Servicefile.shared.converttosize(size: 2)
             print("Image size",data!.count,"size value",size)
-            if data!.count > size {
-                self.alert(Message: "Please select the image Less that 2MB")
-            }else{
-                self.upload(imagedata: convertimg!)
+            self.dismiss(animated: true) {
+                if data!.count > size {
+                    self.alert(Message: "Please select the image Less than 2MB")
+                }else{
+                    self.upload(imagedata: convertimg!)
+                }
             }
-            
+        }else{
+            self.dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
+        
     }
     
     func upload(imagedata: UIImage) {

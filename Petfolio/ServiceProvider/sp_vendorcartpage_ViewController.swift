@@ -308,7 +308,7 @@ class sp_vendorcartpage_ViewController: UIViewController, UITableViewDelegate, U
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             cell.label_product_amt.text = "INR " + String(productdata["cost"] as? Int ?? 0)
             cell.label_final_amt.attributedText = attributeString
-            
+            cell.label_final_amt.textColor = UIColor.gray
             let cost_amt = productdata["discount_amount"] as? Int ?? 0
             if cost_amt > 0 {
                 cell.label_final_amt.isHidden = false

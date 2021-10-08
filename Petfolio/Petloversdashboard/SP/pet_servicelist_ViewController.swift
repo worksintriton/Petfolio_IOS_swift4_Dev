@@ -46,7 +46,9 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.tabl_service.dataSource = self
         self.image_catimg.layer.cornerRadius = self.image_catimg.frame.height / 2
         self.view_sortby.layer.cornerRadius = self.view_sortby.frame.height / 2
-        self.view_filter.layer.cornerRadius = self.view_filter.frame.height / 2
+        self.view_filter.view_cornor()
+        self.view_filter.dropShadow()
+        
     }
     
     func intial_setup_action(){
@@ -58,7 +60,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_subpage_header.btn_bel.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
-        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: false, b4: true)
+        self.view_subpage_header.sethide_view(b1: true, b2: false, b3: true, b4: false)
         
         //        self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         //        self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
@@ -72,6 +74,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
         self.view_footer.btn_Fprocess_four.addTarget(self, action: #selector(self.button4), for: .touchUpInside)
         self.view_footer.btn_Fprocess_five.addTarget(self, action: #selector(self.button5), for: .touchUpInside)
         self.view_footer.setup(b1: false, b2: true, b3: false, b4: false, b5: false)
+        self.view_footer.view_main.backgroundColor = UIColor.clear
         // footer action
     }
     
@@ -195,6 +198,7 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
                 cell.image_data.image = image
             }
         }
+        cell.image_data.view_cornor()
         cell.label_sub_title.text = ""
         let servicelist = Servicefile.shared.pet_SP_service_details[indexPath.row].servicelist
         var spe = ""
@@ -224,7 +228,6 @@ class pet_servicelist_ViewController: UIViewController,UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = indexPath.row
         Servicefile.shared.service_index = tag
-        
         Servicefile.shared.service_sp_id = Servicefile.shared.pet_SP_service_details[tag]._id
         let vc = UIStoryboard.pet_sp_service_details_ViewController()
         self.present(vc, animated: true, completion: nil)

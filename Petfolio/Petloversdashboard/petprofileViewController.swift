@@ -24,9 +24,13 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var coll_petlist: UICollectionView!
     
     @IBOutlet weak var view_subpage_header: petowner_otherpage_header!
+    @IBOutlet weak var label_nodata: UILabel!
     
     var ismenu = ["0"]
     var isorgi = ["0"]
+    var doc = 0
+    var pro = 0
+    var ser = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,7 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func intial_setup_action(){
     // header action
+        self.label_nodata.isHidden = true
         self.view_subpage_header.label_header_title.text = "Profile"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.backpage), for: .touchUpInside)
@@ -280,14 +285,16 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
        }
     
     func callpetdash(){
-      
-              self.startAnimatingActivityIndicator()
-       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard, method: .post, parameters:
-           [   "user_id" : Servicefile.shared.userid,
-           "lat" : Servicefile.shared.pet_dash_lati,
-           "long" : Servicefile.shared.pet_dash_long,
+       self.startAnimatingActivityIndicator()
+       if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.petdashboard_new, method: .post, parameters:
+           [ "user_id" : Servicefile.shared.userid,
+             "lat" : Servicefile.shared.pet_dash_lati,
+             "long" : Servicefile.shared.pet_dash_long,
            "user_type" : 1 ,
-           "address" : Servicefile.shared.pet_dash_address], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+           "address" : Servicefile.shared.pet_dash_address,
+           "Doctor": self.doc,
+           "Product" : self.pro,
+           "service" : self.ser], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                   switch (response.result) {
                                                   case .success:
                                                         let res = response.value as! NSDictionary
@@ -404,6 +411,11 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
                                                             for itm in 0..<Servicefile.shared.pet_petlist.count{
                                                                        self.ismenu.append("0")
                                                                    }
+                                                            if Servicefile.shared.pet_petlist.count > 0 {
+                                                                self.label_nodata.isHidden = true
+                                                            }else{
+                                                                self.label_nodata.isHidden = false
+                                                            }
                                                             self.isorgi = self.ismenu
                                                             self.coll_petlist.reloadData()
                                                            self.stopAnimatingActivityIndicator()

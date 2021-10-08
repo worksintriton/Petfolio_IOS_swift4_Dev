@@ -591,9 +591,8 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
             let todate = format.date(from: self.label_exp_to.text!)
             
             var  compdate = Calendar.current.dateComponents([.year], from: fromdate!, to: todate!).year ?? 0
-            var cdate = String(compdate + 1)
+            var cdate = compdate + 1
             print("comared date",cdate)
-            
             var B = Servicefile.shared.expdicarray
             var arr = B
             let a = ["company":self.textfield_exp_company.text!,
@@ -1405,7 +1404,6 @@ class regdocViewController: UIViewController, UITableViewDataSource, UITableView
                         self.isspecialza.removeAll()
                         self.ispethandle.removeAll()
                         self.comm_type.removeAll()
-                        
                         
                         for item in 0..<comm_type_arr.count{
                             let pb = comm_type_arr[item] as! NSDictionary

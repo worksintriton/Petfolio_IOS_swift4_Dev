@@ -107,7 +107,6 @@ class pet_vendor_shipingaddlocationViewController: UIViewController, GMSMapViewD
         self.view_subpage_header.label_header_title.text = "Pickup Location"
         self.view_subpage_header.label_header_title.textColor =  Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.textcolor)
         self.view_subpage_header.btn_back.addTarget(self, action: #selector(self.action_back), for: .touchUpInside)
-        
         self.view_subpage_header.sethide_view(b1: true, b2: true, b3: true, b4: true)
     // header action
    

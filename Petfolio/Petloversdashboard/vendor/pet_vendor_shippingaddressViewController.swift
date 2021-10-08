@@ -260,7 +260,7 @@ class pet_vendor_shippingaddressViewController: UIViewController, UITextFieldDel
         }else if lastname.trim() == "" {
             self.alert(Message: "Please enter the last name ")
         }else if doorno.trim() == "" {
-            self.alert(Message: "Please enter the Door no")
+            self.alert(Message: "Please enter the door no")
         }else if street.trim() == "" {
             self.alert(Message: "Please enter the street")
         }else if pincode.trim() == "" {

@@ -296,7 +296,7 @@ class doc_vendorcartpageViewController:  UIViewController, UITableViewDelegate, 
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         cell.label_product_amt.text = "INR " + String(productdata["cost"] as? Int ?? 0)
         cell.label_final_amt.attributedText = attributeString
-        
+        cell.label_final_amt.textColor = UIColor.gray
         
         if product_img.count > 0 {
             cell.img_product.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge

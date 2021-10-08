@@ -742,33 +742,35 @@ class pet_sp_CreateApp_ViewController: UIViewController , UITableViewDelegate, U
     }
     
     func showPaymentForm(){
-           if Servicefile.shared.pet_apoint_amount == 0 {
-               Servicefile.shared.pet_apoint_amount = 0
-           }
-        let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
-           print("value changed",data)
-           self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-                   let options: [String:Any] = [
-                       "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
-                               "currency": "INR",//We support more that 92 international currencies.
-                               "description": "",
-                               "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                               "name": Servicefile.shared.first_name,
-                               "prefill": [
-                                   "contact": Servicefile.shared.user_phone,
-                                   "email": Servicefile.shared.user_email
-                               ],
-                               "theme": [
-                                "color": Servicefile.shared.appgreen
+           if Servicefile.shared.pet_apoint_amount != 0 {
+            let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
+               print("value changed",data)
+               self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+                       let options: [String:Any] = [
+                           "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
+                                   "currency": "INR",//We support more that 92 international currencies.
+                                   "description": "",
+                                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
+                                   "name": Servicefile.shared.first_name,
+                                   "prefill": [
+                                       "contact": Servicefile.shared.user_phone,
+                                       "email": Servicefile.shared.user_email
+                                   ],
+                                   "theme": [
+                                    "color": Servicefile.shared.appgreen
+                                   ]
                                ]
-                           ]
 
-                   if let rzp = self.razorpay {
-                             // rzp.open(options)
-                       rzp.open(options,displayController:self)
-                          } else {
-                              print("Unable to initialize")
-                          }
+                       if let rzp = self.razorpay {
+                                 // rzp.open(options)
+                           rzp.open(options,displayController:self)
+                              } else {
+                                  print("Unable to initialize")
+                              }
+           }else{
+            self.callsubmit()
+           }
+        
            }
            
            func onPaymentError(_ code: Int32, description str: String) {

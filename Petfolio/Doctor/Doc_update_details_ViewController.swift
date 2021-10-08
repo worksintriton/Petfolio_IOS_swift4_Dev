@@ -566,8 +566,8 @@ class Doc_update_details_ViewController: UIViewController, UITableViewDataSource
             let todate = format.date(from: self.label_exp_to.text!)
             
             var compdate = Calendar.current.dateComponents([.year], from: fromdate!, to: todate!).year ?? 0
-            let cdate = String(compdate + 1)
-            print("comared date",cdate)
+            let cdate = compdate + 1
+            //print("comared date",cdate)
             
             var B = Servicefile.shared.expdicarray
             var arr = B

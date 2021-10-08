@@ -73,6 +73,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         super.viewDidLoad()
         
         Servicefile.shared.petlistimg = [Any]()
+        Servicefile.shared.petlistimg.removeAll()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.coll_imag.delegate = self
@@ -139,7 +140,7 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         self.textfield_petbreed.text = Servicefile.shared.Pet_breed_val
         self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
         
-        self.ispetnameselect(index: Servicefile.shared.pet_index)
+        //self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
     
     func intial_setup_action(){
@@ -911,28 +912,6 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
             } else {
                 print("Unable to initialize")
             }
-            
-            //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-            //               let options: [AnyHashable:Any] = [
-            //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
-            //                   "currency": "INR",//We support more that 92 international currencies.
-            //                   "description": "some data",
-            //                   "order_id": "order_DBJOWzybf0sJbb",
-            //                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
-            //                   "name": "sriram",
-            //                   "prefill": [
-            //                       "contact": "9003525711",
-            //                       "email": "sriramchanr@gmail.com"
-            //                   ],
-            //                   "theme": [
-            //                       "color": "#F37254"
-            //                   ]
-            //               ]
-            //               if let rzp = self.razorpay {
-            //                   rzp.open(options)
-            //               } else {
-            //                   print("Unable to initialize")
-            //               }
         }
     }
     

@@ -41,7 +41,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         self.Viewotp.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.viewcoun.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.view_verifyemail.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
-        self.ViewChangeUtype.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
+        //self.ViewChangeUtype.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         self.intial_setup_action()
         Servicefile.shared.checkemailvalid = "signup"
         self.viewemail.view_cornor()
@@ -217,11 +217,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Action_Votp(_ sender: Any) {
         if self.textfield_fname.text! == "" {
-            self.alert(Message: "Please enter the First name")
+            self.alert(Message: "Please enter the first name")
         } else if self.textfield_lastname.text! == "" {
-            self.alert(Message: "Please enter the Last name")
+            self.alert(Message: "Please enter the last name")
         } else if self.textfield_phno.text! == "" {
-            self.alert(Message: "Please enter the Phone number")
+            self.alert(Message: "Please enter the phone number")
         } else {
             let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
             if emailval != "" {

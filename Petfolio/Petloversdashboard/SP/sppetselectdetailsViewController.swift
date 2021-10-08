@@ -106,8 +106,24 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
         Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[indexPath.row].id
         ischeck = true
         pindex = indexPath.row
-        self.col_app_pet.reloadData()
-        self.view_appointment.isHidden = false
+//        self.col_app_pet.reloadData()
+//        self.view_appointment.isHidden = false
+        Servicefile.shared.pet_apoint_problem_info = ""
+        Servicefile.shared.pet_apoint_doc_feedback = ""
+        Servicefile.shared.pet_apoint_doc_rate = 0
+        Servicefile.shared.pet_apoint_user_feedback = ""
+        Servicefile.shared.pet_apoint_user_rate = 0.0
+         let hhmmformat = Servicefile.shared.ddMMyyyyhhmmadateformat(date: Servicefile.shared.pet_apoint_booking_date + " " + Servicefile.shared.pet_apoint_booking_time)
+                   let stringformat = Servicefile.shared.yyyyMMddHHmmssstringformat(date: hhmmformat)
+                   Servicefile.shared.pet_apoint_display_date = stringformat
+        Servicefile.shared.pet_apoint_server_date_time = ""
+        Servicefile.shared.pet_apoint_payment_id = ""
+        Servicefile.shared.pet_apoint_payment_method = "Online"
+        Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
+        Servicefile.shared.pet_apoint_amount = Servicefile.shared.service_id_amount
+            //self.showPaymentForm()
+        let vc = UIStoryboard.pet_sp_app_payment_ViewController()
+           self.present(vc, animated: true, completion: nil)
         // let vc = UIStoryboard.sphealthissueViewController()
 //        let vc = UIStoryboard.pet_sp_CreateApp_ViewController()
 //        self.present(vc, animated: true, completion: nil)
@@ -308,10 +324,8 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
     
     
     func showPaymentForm(){
-           if Servicefile.shared.pet_apoint_amount == 0 {
-               Servicefile.shared.pet_apoint_amount = 0
-           }
-        let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
+           if Servicefile.shared.pet_apoint_amount != 0 {
+            let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
            print("value changed",data)
            self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
                    let options: [String:Any] = [
@@ -335,6 +349,10 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
                           } else {
                               print("Unable to initialize")
                           }
+           }else{
+            self.callsubmit()
+           }
+            
            }
            
            func onPaymentError(_ code: Int32, description str: String) {

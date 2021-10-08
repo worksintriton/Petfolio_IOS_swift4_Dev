@@ -78,6 +78,10 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.gallerydicarray.removeAll()
+        Servicefile.shared.certifdicarray.removeAll()
+        Servicefile.shared.speclistdicarray.removeAll()
+        Servicefile.shared.servicelistdicarray.removeAll()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.callcornor()
         self.textview_spaddress.delegate = self

@@ -27,9 +27,11 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
     var cate_dic = [Any]()
     var scate = ""
     var scateid = ""
+    var loadcount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.addproddic.removeAll()
         self.inital_setup()
         self.cate.removeAll()
         self.cate_dic.removeAll()
@@ -45,6 +47,7 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
         self.col_prodlist.delegate = self
         self.col_prodlist.dataSource = self
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
+        self.callnoticartcount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,11 +165,22 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
         self.dropdown_cate.showList()
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       if(self.col_prodlist.contentOffset.y >= (self.col_prodlist.contentSize.height - self.col_prodlist.bounds.size.height)) {
+               if self.loadcount != Servicefile.shared.addproddic.count {
+                                  self.callprodlist()
+               }
+       }
+   }
+    
+    
     func callprodlist(){
-        print("vendor_id", Servicefile.shared.vendorid,"cat_id",self.scateid,"skip_count",1)
+        self.loadcount = self.loadcount + 1
+        print("vendor_id", Servicefile.shared.vendorid,"cat_id",self.scateid,"skip_count",self.loadcount,"productcount" , Servicefile.shared.addproddic.count)
         self.startAnimatingActivityIndicator()
+        
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.vendor_add_product_list, method: .post, parameters:
-                                                                    ["vendor_id": Servicefile.shared.vendorid,"cat_id":self.scateid,"skip_count":1], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    ["vendor_id": Servicefile.shared.vendorid,"cat_id":self.scateid,"skip_count":self.loadcount], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {
                 case .success:
                     let res = response.value as! NSDictionary
@@ -174,7 +188,11 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         let Data = res["Data"] as! NSArray
-                        Servicefile.shared.addproddic = Data as! [Any]
+                        let value = Data as! [Any]
+                        for i in 0..<value.count{
+                            let vdata = value[i]
+                            Servicefile.shared.addproddic.append(vdata)
+                        }
                         if Servicefile.shared.addproddic.count > 0 {
                             self.label_noprodfound.isHidden = true
                         }else{
@@ -183,7 +201,11 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
                         self.col_prodlist.reloadData()
                         
                         self.stopAnimatingActivityIndicator()
-                        self.callget()
+                        if self.cate_dic.count > 0 {
+                            
+                        }else{
+                            self.callget()
+                        }
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
@@ -197,6 +219,36 @@ class AddproductViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }else{
             self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }

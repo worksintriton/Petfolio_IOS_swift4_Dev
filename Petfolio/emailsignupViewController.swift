@@ -23,6 +23,7 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.secondstext.text = "Don't receive OTP  Resend"+" "
         //self.view_main.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.apppagecolor)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         // self.callotpresend()
@@ -48,14 +49,14 @@ class emailsignupViewController: UIViewController , UITextFieldDelegate {
             let mm = String(format: "%02i",m)
             let ss = String(format: "%02i",s)
             print ("\(h) Hours, \(m) Minutes, \(s) Seconds")
-            self.secondstext.text = "Resend"+" "+"\(mm):\(ss)"
+            self.secondstext.text = "Resend"+" OTP in "+"\(mm):\(ss)"
             self.resendbtn.isHidden = true
             self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack)
         } else {
             print("(0) seconds to the end of the world")
-            self.secondstext.text = "Resend"+" OTP"
+            self.secondstext.text = "Don't receive OTP  Resend"+" "
             self.resendbtn.isHidden = false
-            self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.appblack)
+            self.secondstext.textColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)
         }
     }
     

@@ -142,9 +142,9 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func action_submit(_ sender: Any) {
         if self.textfield_firstname.text! == "" {
-            self.alert(Message: "Please enter the First name")
+            self.alert(Message: "Please enter the first name")
         }else if self.textfield_lastname.text! == "" {
-            self.alert(Message: "Please enter the Last name")
+            self.alert(Message: "Please enter the last name")
         } else {
              let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)
             if emailval != "" {
@@ -236,14 +236,17 @@ class profile_edit_ViewController: UIViewController, UITextFieldDelegate {
                                 //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
 //                                        self.present(tapbar, animated: true, completion: nil)
                                 self.dismiss(animated: true, completion: nil)
+                                self.stopAnimatingActivityIndicator()
                             } else if Servicefile.shared.user_type == "4" {
                                 self.dismiss(animated: true, completion: nil)
+                                self.stopAnimatingActivityIndicator()
 //                                let vc = UIStoryboard.DocdashboardViewController()
 //                                self.present(vc, animated: true, completion: nil)
                             } else if Servicefile.shared.user_type == "2" {
                                 self.dismiss(animated: true, completion: nil)
 //                                let vc = UIStoryboard.Sp_dash_ViewController()
 //                                self.present(vc, animated: true, completion: nil)
+                                self.stopAnimatingActivityIndicator()
                             }
                         }))
                         self.present(alert, animated: true, completion: nil)

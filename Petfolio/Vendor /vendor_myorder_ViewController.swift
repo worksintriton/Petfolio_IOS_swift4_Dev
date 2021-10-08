@@ -43,7 +43,6 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         
         SDImageCache.shared.clearMemory()
         SDImageCache.shared.clearDisk()
-        
         self.inital_setup()
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -71,9 +70,6 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         self.view_new.layer.borderColor = appgree.cgColor
         self.tblview_applist.delegate = self
         self.tblview_applist.dataSource = self
-        // Do any additional setup after loading the view.
-        
-        
     }
     
     func inital_setup(){
@@ -94,8 +90,6 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
 //        }
         self.view_header.contentMode = .scaleAspectFill
         self.view_header.label_title.text = "My Orders"
-        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
-        self.view_header.view_profile.layer.cornerRadius = self.view_header.view_profile.frame.height / 2
         self.view_header.btn_profile.addTarget(self, action: #selector(self.vendorprofile), for: .touchUpInside)
         self.view_header.btn_button2.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
         self.view_footer.setup(b1: true, b2: false, b3: false)
@@ -372,6 +366,36 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
         
     }
     
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
+    
     func callacceptorderreturn(){
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
         self.startAnimatingActivityIndicator()
@@ -460,6 +484,7 @@ class vendor_myorder_ViewController: UIViewController, UITableViewDelegate, UITa
                         Servicefile.shared.vendorid = Data["_id"] as? String ?? ""
                         print("vendor id data",Servicefile.shared.vendorid)
                         self.call_by_status()
+                        self.callnoticartcount()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

@@ -720,6 +720,16 @@ extension UIStoryboard {
         return homeStoryboard.instantiateViewController(withIdentifier: "Pet_applist_ViewController") as! Pet_applist_ViewController
     }
     
+    static func pet_doc_search_app_ResheduleViewController() -> pet_doc_search_app_ResheduleViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_doc_search_app_ResheduleViewController") as! pet_doc_search_app_ResheduleViewController
+    }
+    
+    static func pet_doc_appresheduleViewController() -> pet_doc_appresheduleViewController {
+        let homeStoryboard = UIStoryboard.petDocappStoryboard()
+        return homeStoryboard.instantiateViewController(withIdentifier: "pet_doc_appresheduleViewController") as! pet_doc_appresheduleViewController
+    }
+    
     static func pet_app_walkin_ViewController() -> pet_app_walkin_ViewController {
         let homeStoryboard = UIStoryboard.petDocappStoryboard()
         return homeStoryboard.instantiateViewController(withIdentifier: "pet_app_walkin_ViewController") as! pet_app_walkin_ViewController

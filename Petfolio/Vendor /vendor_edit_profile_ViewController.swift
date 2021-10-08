@@ -67,6 +67,19 @@ class vendor_edit_profile_ViewController: UIViewController , UIImagePickerContro
         self.call_protocals()
         self.added_service.removeAll()
         self.added_spec.removeAll()
+        self.textfield_bus_phno.delegate = self
+        self.textfield_bus_phno.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+    }
+    
+    @objc func textFieldDidChange(textField : UITextField){
+        if self.textfield_bus_phno == textField {
+            if self.textfield_bus_phno.text!.count > 9 {
+                self.textfield_bus_phno.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
+                self.textfield_bus_phno.resignFirstResponder()
+            }else{
+                self.textfield_bus_phno.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
+            }
+        }
     }
     
     func call_protocals(){

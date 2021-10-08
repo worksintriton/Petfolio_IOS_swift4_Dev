@@ -275,6 +275,12 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
     }
    
     func callsubmit(){
+        Servicefile.shared.Doc_paymentmethod = pay_method
+        Servicefile.shared.Doc_couponcode = couponcode
+        Servicefile.shared.Doc_couponstatus = coupon_status
+        Servicefile.shared.Doc_coupondiscountprice = Int(self.discountprice)!
+        Servicefile.shared.Doc_originalprice = Int(self.originalprice)!
+        Servicefile.shared.Doc_totalprice = Int(self.totalprice)!
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_doc_createappointm, method: .post, parameters:
             [ "doctor_id":  Servicefile.shared.pet_apoint_doctor_id,
@@ -326,7 +332,18 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
                         let Message = res["Message"] as? String ?? ""
-                        self.alert(Message: Message)
+                        if Message == "Slot Not Available" {
+                            let alert = UIAlertController(title: Message, message: "", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Reschedule", style: .default, handler: { action in
+                                let vc = UIStoryboard.pet_doc_appresheduleViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }else{
+                            
+                            self.alert(Message: Message)
+                        }
                     }
                     break
                 case .failure(let Error):
@@ -368,28 +385,9 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
             } else {
                 print("Unable to initialize")
             }
-            
-            //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-            //               let options: [AnyHashable:Any] = [
-            //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
-            //                   "currency": "INR",//We support more that 92 international currencies.
-            //                   "description": "some data",
-            //                   "order_id": "order_DBJOWzybf0sJbb",
-            //                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
-            //                   "name": "sriram",
-            //                   "prefill": [
-            //                       "contact": "9003525711",
-            //                       "email": "sriramchanr@gmail.com"
-            //                   ],
-            //                   "theme": [
-            //                       "color": "#F37254"
-            //                   ]
-            //               ]
-            //               if let rzp = self.razorpay {
-            //                   rzp.open(options)
-            //               } else {
-            //                   print("Unable to initialize")
-            //               }
+        }else{
+            Servicefile.shared.pet_apoint_payment_id = ""
+            self.callsubmit()
         }
     }
     

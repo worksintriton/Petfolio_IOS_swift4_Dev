@@ -220,6 +220,14 @@ class doc_myorderdetails_ViewController: UIViewController, UITableViewDelegate, 
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tag = indexPath.row
+        Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id
+        Servicefile.shared.orderid = Servicefile.shared.order_productdetail[tag].v_order_id
+        let vc = UIStoryboard.doc_myorder_detailspage_ViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @objc func orderdetails(sender: UIButton){
         let tag = sender.tag
         Servicefile.shared.vendorid = Servicefile.shared.order_productdetail[tag].v_vendor_id

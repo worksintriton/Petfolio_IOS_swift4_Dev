@@ -534,10 +534,9 @@ extension UIViewController {
     }
     
     @objc func button2(sender: UIButton){
-        //        Servicefile.shared.tabbar_selectedindex = 1
-                       let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
-        //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
-                       self.present(tapbar, animated: true, completion: nil)
+        
+        let tapbar = UIStoryboard.pet_dashfooter_servicelist_ViewController()
+        self.present(tapbar, animated: true, completion: nil)
     }
     
     @objc func button3(sender: UIButton){

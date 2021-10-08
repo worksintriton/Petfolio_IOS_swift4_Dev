@@ -776,6 +776,11 @@ extension UIViewController { // pushtologin()
         Servicefile.shared.cart_count = 0
         Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
+        Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+        Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
+        Servicefile.shared.last_name = UserDefaults.standard.string(forKey: "last_name")!
+        Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
+        Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
         let vc = UIStoryboard.LoginViewController()
         self.present(vc, animated: true, completion: nil)
     }

@@ -459,6 +459,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
     }
     
     func callnew(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -567,7 +568,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                                                                                 self.callDocappcancel()
                                                                                 
                                                                             }
-                                                                            self.stopAnimatingActivityIndicator()
+                                                                           
                                                                         }else{
                                                                             self.stopAnimatingActivityIndicator()
                                                                             print("status code service denied")
@@ -586,6 +587,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
     }
     
     func callcom(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -659,6 +661,7 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         }
     }
     func callmiss(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -746,15 +749,17 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                                                                             let res = response.value as! NSDictionary
                                                                             print("success data",res)
                                                                             let Code  = res["Code"] as! Int
+                                                                            self.stopAnimatingActivityIndicator()
                                                                             if Code == 200 {
+                                                                                self.view_shadow.isHidden = true
+                                                                                self.view_popup.isHidden = true
                                                                                 if Servicefile.shared.pet_applist_do_sp[self.indextag].payment_method != "Cash" {
                                                                                     let vc = UIStoryboard.App_couponViewController()
                                                                                     self.present(vc, animated: true, completion: nil)
                                                                                 }else{
                                                                                     self.callnew()
                                                                                 }
-                                                                                self.view_shadow.isHidden = true
-                                                                                self.view_popup.isHidden = true
+                                                                               
                                                                             }else{
                                                                             }
                                                                             break
@@ -771,7 +776,6 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
         }
     }
     
-    
     func callspappcancel(){
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
                                                                     ["appointment_UID": Servicefile.shared.pet_applist_do_sp[indextag].Booking_Id,
@@ -784,15 +788,16 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                                                                             let res = response.value as! NSDictionary
                                                                             print("success data",res)
                                                                             let Code  = res["Code"] as! Int
+                                                                            self.stopAnimatingActivityIndicator()
                                                                             if Code == 200 {
+                                                                                self.view_shadow.isHidden = true
+                                                                                self.view_popup.isHidden = true
                                                                                 if Servicefile.shared.pet_applist_do_sp[self.indextag].payment_method != "Cash" {
                                                                                     let vc = UIStoryboard.App_couponViewController()
                                                                                     self.present(vc, animated: true, completion: nil)
                                                                                 }else{
                                                                                     self.callnew()
                                                                                 }
-                                                                                self.view_shadow.isHidden = true
-                                                                                self.view_popup.isHidden = true
                                                                             }else{
                                                                             }
                                                                             break
@@ -805,6 +810,36 @@ class pet_app_walkin_ViewController: UIViewController , UITableViewDelegate, UIT
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_subpage_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }

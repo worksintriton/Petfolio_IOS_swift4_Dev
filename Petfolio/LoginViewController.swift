@@ -186,6 +186,7 @@ extension UIImage {
         image?.sd_roundedCornerImage(withRadius: 8.0, corners: .allCorners , borderWidth: 0.2, borderColor: .lightGray)
         return image
     }
+   
     
     
 }

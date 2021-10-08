@@ -57,6 +57,7 @@ class petlocationsettingViewController: UIViewController, GMSMapViewDelegate, CL
         self.view_subpage_header.btn_profile.addTarget(self, action: #selector(self.profile), for: .touchUpInside)
         self.view_subpage_header.btn_bag.addTarget(self, action: #selector(self.action_cart), for: .touchUpInside)
         self.view_subpage_header.view_sos.isHidden = true
+        self.view_subpage_header.view_bag.isHidden = true
     // header action
     // footer action
         self.view_footer.btn_Fprocess_one.addTarget(self, action: #selector(self.button1), for: .touchUpInside)

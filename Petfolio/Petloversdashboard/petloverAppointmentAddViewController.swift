@@ -72,6 +72,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         Servicefile.shared.petlistimg = [Any]()
+        Servicefile.shared.petlistimg.removeAll()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         Servicefile.shared.pet_apoint_doc_attched.removeAll()
@@ -139,7 +140,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         self.textfield_petname.text = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name
         print("pet name",Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].pet_name)
         //self.textfield_alergies.text = Servicefile.shared.healthissue
-        self.ispetnameselect(index: Servicefile.shared.pet_index)
+        //self.ispetnameselect(index: Servicefile.shared.pet_index)
     }
     
     

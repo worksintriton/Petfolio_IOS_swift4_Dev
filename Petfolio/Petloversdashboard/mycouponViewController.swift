@@ -110,6 +110,7 @@ class mycouponViewController: UIViewController, UITableViewDelegate, UITableView
         cell.label_ref.text = ref
         cell.btn_copy_coupon.tag = indexPath.row
         cell.btn_copy_coupon.addTarget(self, action: #selector(copycoupon), for: .touchUpInside)
+        cell.btn_copy_coupon.isHidden = false
         if used_status != "Used" {
             if expir != "" {
                 let dat = expir.detectDate

@@ -61,11 +61,26 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Servicefile.shared.gallerydicarray.removeAll()
+        Servicefile.shared.certifdicarray.removeAll()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.call_protocals()
         self.added_service.removeAll()
         self.added_spec.removeAll()
+        self.textfield_bus_phno.delegate = self
+        self.textfield_bus_phno.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+    }
+    
+    @objc func textFieldDidChange(textField : UITextField){
+        if self.textfield_bus_phno == textField {
+            if self.textfield_bus_phno.text!.count > 9 {
+                self.textfield_bus_phno.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
+                self.textfield_bus_phno.resignFirstResponder()
+            }else{
+                self.textfield_bus_phno.text  = Servicefile.textfieldrestrict(str: textField.text!, checkchar: Servicefile.approvednumber, textcount: 10)
+            }
+        }
     }
     
     func intial_setup_action(){

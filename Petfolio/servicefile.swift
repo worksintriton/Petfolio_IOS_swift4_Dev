@@ -702,6 +702,13 @@ class Servicefile {
     var prod_originalprice = ""
     var prod_totalprice = ""
     
+    var Doc_couponcode = ""
+    var Doc_couponstatus = ""
+    var Doc_coupondiscountprice = 0
+    var Doc_originalprice = 0
+    var Doc_totalprice = 0
+    var Doc_paymentmethod = ""
+    
     var vendor_gallary_img = [Any]()
     static let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 0.0).cgColor
     static let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor

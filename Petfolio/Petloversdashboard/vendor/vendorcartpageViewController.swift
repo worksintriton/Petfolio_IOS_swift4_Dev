@@ -282,12 +282,7 @@ class vendorcartpageViewController: UIViewController, UITableViewDelegate, UITab
         let cost = productdata["cost"] as? Int ?? 0
         
         cell.label_final_amt.attributedText = attributeString
-        let cost_amt = productdata["discount_amount"] as? Int ?? 0
-        if cost_amt > 0 {
-            cell.label_final_amt.isHidden = false
-        }else{
-            cell.label_final_amt.isHidden = true
-        }
+  
 //        let costamt = "₹ " + String(productdata["discount_amount"] as? Int ?? 0)
 //        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: costamt)
 //        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))

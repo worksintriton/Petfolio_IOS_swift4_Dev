@@ -86,6 +86,7 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
             
             @IBAction func action_changeaddress(_ sender: Any) {
                 Servicefile.shared.shipaddresslist.removeAll()
+                self.tableview_list_address.reloadData()
                 let vc = UIStoryboard.sp_editshippingaddress_ViewController()
                 self.present(vc, animated: true, completion: nil)
             }
@@ -137,28 +138,8 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                        } else {
                            print("Unable to initialize")
                        }
-                       //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-                       //               let options: [AnyHashable:Any] = [
-                       //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
-                       //                   "currency": "INR",//We support more that 92 international currencies.
-                       //                   "description": "some data",
-                       //                   "order_id": "order_DBJOWzybf0sJbb",
-                       //                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
-                       //                   "name": "sriram",
-                       //                   "prefill": [
-                       //                       "contact": "9003525711",
-                       //                       "email": "sriramchanr@gmail.com"
-                       //                   ],
-                       //                   "theme": [
-                       //                       "color": "#F37254"
-                       //                   ]
-                       //               ]
-                       //               if let rzp = self.razorpay {
-                       //                   rzp.open(options)
-                       //               } else {
-                       //                   print("Unable to initialize")
-                       //               }
                 }else{
+                    Servicefile.shared.pet_apoint_payment_id = ""
                     self.callsubmitproduct()
                 }
                }
@@ -329,8 +310,5 @@ class sp_shop_shippingaddressViewController:  UIViewController, UITableViewDeleg
                     self.stopAnimatingActivityIndicator()
                     self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
                 }
-                
             }
-          
-
-        }
+}

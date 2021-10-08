@@ -16,7 +16,9 @@
                 <outlet property="image_button2" destination="kan-ga-wKO" id="PPM-tk-i4h"/>
                 <outlet property="image_profile" destination="P0I-Yo-ShC" id="tKF-71-rd0"/>
                 <outlet property="image_sidemenu" destination="izE-Dz-Bgq" id="jAI-2u-1G8"/>
+                <outlet property="label_belcount" destination="Qz1-LH-sbe" id="Hw6-gN-hm0"/>
                 <outlet property="label_title" destination="OfQ-V4-qVI" id="TEx-5Y-tDs"/>
+                <outlet property="view_belcount" destination="0R2-sf-sf8" id="kIQ-qs-JvW"/>
                 <outlet property="view_btn_process" destination="7Fa-R4-rNJ" id="pDM-me-tBR"/>
                 <outlet property="view_profile" destination="yMf-zo-Gzv" id="Muc-u5-c2U"/>
             </connections>
@@ -79,6 +81,26 @@
                                     <rect key="frame" x="10" y="8" width="20" height="24"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-sf-sf8">
+                                    <rect key="frame" x="20" y="-5" width="20" height="20"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qz1-LH-sbe">
+                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="8"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.93463593720000004" green="0.73020488019999996" blue="0.084121264520000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="5RO-BC-MwU"/>
+                                        <constraint firstItem="Qz1-LH-sbe" firstAttribute="top" secondItem="0R2-sf-sf8" secondAttribute="top" id="7AT-mf-KuS"/>
+                                        <constraint firstAttribute="bottom" secondItem="Qz1-LH-sbe" secondAttribute="bottom" id="Kkt-oz-sIz"/>
+                                        <constraint firstAttribute="trailing" secondItem="Qz1-LH-sbe" secondAttribute="trailing" id="cev-Zy-cXp"/>
+                                        <constraint firstAttribute="width" constant="20" id="dMX-co-sA7"/>
+                                        <constraint firstItem="Qz1-LH-sbe" firstAttribute="leading" secondItem="0R2-sf-sf8" secondAttribute="leading" id="hpL-Ip-mAc"/>
+                                    </constraints>
+                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fa-R4-rNJ">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 </button>
@@ -86,7 +108,9 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="7Fa-R4-rNJ" firstAttribute="top" secondItem="hdN-zY-1MZ" secondAttribute="top" id="5Px-nQ-Scb"/>
+                                <constraint firstItem="0R2-sf-sf8" firstAttribute="top" secondItem="hdN-zY-1MZ" secondAttribute="top" constant="-5" id="6vY-wE-1uo"/>
                                 <constraint firstItem="kan-ga-wKO" firstAttribute="centerY" secondItem="hdN-zY-1MZ" secondAttribute="centerY" id="AZ4-bp-iLD"/>
+                                <constraint firstAttribute="trailing" secondItem="0R2-sf-sf8" secondAttribute="trailing" id="ENN-KD-xcl"/>
                                 <constraint firstAttribute="width" constant="40" id="Mck-Ag-n4e"/>
                                 <constraint firstAttribute="bottom" secondItem="7Fa-R4-rNJ" secondAttribute="bottom" id="Q9R-V0-7sa"/>
                                 <constraint firstItem="kan-ga-wKO" firstAttribute="width" secondItem="hdN-zY-1MZ" secondAttribute="width" multiplier="0.5" id="SWp-9D-fE1"/>
@@ -101,8 +125,12 @@
                             <rect key="frame" x="557" y="16" width="40" height="40"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="P0I-Yo-ShC">
-                                    <rect key="frame" x="4" y="4" width="32" height="32"/>
+                                    <rect key="frame" x="7.5" y="7.5" width="25" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="7o4-06-vrb"/>
+                                        <constraint firstAttribute="height" constant="25" id="aVY-as-I0Y"/>
+                                    </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCT-Qx-ipW">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -113,10 +141,8 @@
                                 <constraint firstItem="tCT-Qx-ipW" firstAttribute="leading" secondItem="yMf-zo-Gzv" secondAttribute="leading" id="Afc-qV-RHX"/>
                                 <constraint firstAttribute="trailing" secondItem="tCT-Qx-ipW" secondAttribute="trailing" id="LQd-iN-NdI"/>
                                 <constraint firstItem="P0I-Yo-ShC" firstAttribute="centerX" secondItem="yMf-zo-Gzv" secondAttribute="centerX" id="Weo-F6-jNs"/>
-                                <constraint firstItem="P0I-Yo-ShC" firstAttribute="width" secondItem="yMf-zo-Gzv" secondAttribute="width" multiplier="0.8" id="Xcv-4s-bpO"/>
                                 <constraint firstAttribute="height" constant="40" id="ZSa-vs-wZo"/>
                                 <constraint firstAttribute="width" constant="40" id="alU-Bz-T7p"/>
-                                <constraint firstItem="P0I-Yo-ShC" firstAttribute="height" secondItem="yMf-zo-Gzv" secondAttribute="height" multiplier="0.8" id="brC-Om-KWS"/>
                                 <constraint firstItem="tCT-Qx-ipW" firstAttribute="top" secondItem="yMf-zo-Gzv" secondAttribute="top" id="doq-D4-hz3"/>
                                 <constraint firstItem="P0I-Yo-ShC" firstAttribute="centerY" secondItem="yMf-zo-Gzv" secondAttribute="centerY" id="eN8-9L-uXk"/>
                                 <constraint firstAttribute="bottom" secondItem="tCT-Qx-ipW" secondAttribute="bottom" id="n9g-bT-eHC"/>
@@ -151,8 +177,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Bell" width="56" height="61"/>
+        <image name="Bell" width="162" height="209"/>
         <image name="Group55" width="58" height="58"/>
-        <image name="User" width="51" height="61"/>
+        <image name="User" width="512" height="512"/>
     </resources>
 </document>

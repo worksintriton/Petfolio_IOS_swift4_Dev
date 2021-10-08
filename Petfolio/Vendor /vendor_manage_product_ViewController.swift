@@ -123,6 +123,7 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
         self.textfield_deal_price.addTarget(self, action: #selector(textFielddeal_price), for: .editingChanged)
         self.imageaction.image = UIImage(named: "floaticn")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         self.imageaction.tintColor = Servicefile.shared.hexStringToUIColor(hex: colorpickert.footer_blue)
+        self.callnoticartcount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -634,6 +635,36 @@ class vendor_manage_product_ViewController: UIViewController, UITableViewDelegat
 //            self.view_discard.isHidden = true
 //        }
         print("ischeck final",self.isselectval,"selected", selectdata)
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

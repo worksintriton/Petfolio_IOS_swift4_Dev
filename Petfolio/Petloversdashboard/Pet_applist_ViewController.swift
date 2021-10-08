@@ -405,7 +405,10 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func action_confrim(_ sender: Any) {
         //print("appointment Booked time",Servicefile.shared.pet_applist_do_sp[indextag].appointment_time)
-        self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[indextag]._id, type:  Servicefile.shared.pet_applist_do_sp[indextag].appointment_for)
+        if Servicefile.shared.pet_applist_do_sp.count > 0 {
+            self.callcompleteMissedappoitment(Appointmentid: Servicefile.shared.pet_applist_do_sp[indextag]._id, type:  Servicefile.shared.pet_applist_do_sp[indextag].appointment_for)
+        }
+       
     }
     
     @IBAction func action_no(_ sender: Any) {
@@ -520,6 +523,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callnew(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -622,7 +626,6 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                             }else{
                                                                                 self.callDocappcancel()
                                                                             }
-                                                                            self.stopAnimatingActivityIndicator()
                                                                         }else{
                                                                             self.stopAnimatingActivityIndicator()
                                                                             print("status code service denied")
@@ -641,6 +644,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func callcom(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -714,6 +718,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func callmiss(){
+        self.callnoticartcount()
         Servicefile.shared.pet_applist_do_sp.removeAll()
         self.tbl_applist.reloadData()
         Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
@@ -808,6 +813,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                                         self.present(vc, animated: true, completion: nil)
                                                                                     }else{
                                                                                         self.callnew()
+                                                                                        
                                                                                     }
                                                                                 }else{
                                                                                     self.callnew()
@@ -832,6 +838,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func callspappcancel(){
+        
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_notification, method: .post, parameters:
                                                                     ["appointment_UID": Servicefile.shared.pet_applist_do_sp[indextag].Booking_Id,
                                                                      "date": Servicefile.shared.ddMMyyyyhhmmastringformat(date: Date()),
@@ -843,6 +850,7 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                             let res = response.value as! NSDictionary
                                                                             print("success data",res)
                                                                             let Code  = res["Code"] as! Int
+                                                                            self.stopAnimatingActivityIndicator()
                                                                             if Code == 200 {
                                                                                 if Servicefile.shared.pet_applist_do_sp[self.indextag].payment_method != "Cash" {
                                                                                     let vc = UIStoryboard.App_couponViewController()
@@ -864,6 +872,36 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                      }
         }else{
             self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
+    
+    func callnoticartcount(){
+        print("notification")
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
+            ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let res = response.value as! NSDictionary
+                    print("notification success data",res)
+                    let Code  = res["Code"] as! Int
+                    if Code == 200 {
+                        let Data = res["Data"] as! NSDictionary
+                        let notification_count = Data["notification_count"] as! Int
+                        let product_count = Data["product_count"] as! Int
+                        Servicefile.shared.notifi_count = notification_count
+                        Servicefile.shared.cart_count = product_count
+                        self.view_subpage_header.checknoti()
+                    }else{
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }
+            }
+        }else{
             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
     }

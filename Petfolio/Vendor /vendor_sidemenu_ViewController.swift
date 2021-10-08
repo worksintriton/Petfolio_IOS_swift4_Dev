@@ -74,7 +74,6 @@ class vendor_sidemenu_ViewController: UIViewController,UITableViewDelegate, UITa
     @IBAction func action_edit(_ sender: Any) {
         let vc = UIStoryboard.vendor_profile_view_ViewController()
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     @IBAction func action_dismiss(_ sender: Any) {

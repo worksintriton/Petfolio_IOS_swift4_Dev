@@ -23,6 +23,10 @@ class vendor_header: UIView {
     @IBOutlet weak var view_btn_process: UIView!
     @IBOutlet weak var btn_button2: UIButton!
     @IBOutlet weak var image_button2: UIImageView!
+    @IBOutlet weak var view_belcount: UIView!
+    @IBOutlet weak var label_belcount: UILabel!
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,9 +43,19 @@ class vendor_header: UIView {
             view.frame = self.bounds
             view.layer.masksToBounds = true
             self.image_sidemenu.image = UIImage(named: imagelink.sidemenu)
-            self.view_profile.layer.cornerRadius = self.view_profile.frame.height / 2
+            self.view_belcount.isHidden = true
             self.addSubview(view)
         }
+    }
+    
+    func checknoti(){
+        self.view_belcount.isHidden = true
+        self.view_belcount.layer.cornerRadius = self.view_belcount.frame.height / 2
+        if Servicefile.shared.notifi_count > 0 {
+            self.view_belcount.isHidden = false
+            self.label_belcount.text = String(Servicefile.shared.notifi_count)
+        }
+        
     }
 }
 

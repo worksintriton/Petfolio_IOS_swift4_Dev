@@ -192,7 +192,11 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                 self.alert(Message: "Please select the type of visit")
             }else{
                 if self.pay_method != "Cash" {
-                    self.showPaymentForm()
+                    if self.totalprice > "0"{
+                        self.showPaymentForm()
+                    }else{
+                        self.callsubmit()
+                    }
                 }else{
                     self.callsubmit()
                 }
@@ -201,7 +205,11 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         } else {
             
             if self.pay_method != "Cash" {
-                self.showPaymentForm()
+                if self.totalprice > "0"{
+                    self.showPaymentForm()
+                }else{
+                    self.callsubmit()
+                }
             }else{
                 self.callsubmit()
             }
@@ -277,7 +285,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
     }
     
     func showPaymentForm(){
-        if Int(self.totalprice)! != 0 {
+        if Int(self.totalprice)! > 0 {
             let data = Double(Int(self.totalprice)!) * Double(100)
             print("value changed",data)
             self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
@@ -302,28 +310,9 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
             } else {
                 print("Unable to initialize")
             }
-            
-            //        self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
-            //               let options: [AnyHashable:Any] = [
-            //                   "amount": 100, //This is in currency subunits. 100 = 100 paise= INR 1.
-            //                   "currency": "INR",//We support more that 92 international currencies.
-            //                   "description": "some data",
-            //                   "order_id": "order_DBJOWzybf0sJbb",
-            //                   "image": "http://52.25.163.13:3000/api/uploads/template.png",
-            //                   "name": "sriram",
-            //                   "prefill": [
-            //                       "contact": "9003525711",
-            //                       "email": "sriramchanr@gmail.com"
-            //                   ],
-            //                   "theme": [
-            //                       "color": "#F37254"
-            //                   ]
-            //               ]
-            //               if let rzp = self.razorpay {
-            //                   rzp.open(options)
-            //               } else {
-            //                   print("Unable to initialize")
-            //               }
+        } else {
+            Servicefile.shared.pet_apoint_payment_id = ""
+             self.callsubmit()
         }
     }
            

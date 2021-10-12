@@ -687,7 +687,7 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
         Servicefile.shared.pet_apoint_appointment_types = Servicefile.shared.pet_apoint_appointment_types
         Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
         self.view.endEditing(true)
-        if self.textfield_selectpettype.text != ""{
+//        if self.textfield_selectpettype.text != ""{
             print("old pet ",Servicefile.shared.pet_apoint_pet_id)
             if self.textview_descrip.text == "" {
                 self.textview_descrip.text = "No Comments"
@@ -702,9 +702,9 @@ class petloverAppointmentAddViewController: UIViewController, UITableViewDelegat
             let vc = UIStoryboard.pet_doc_paymentmethodViewController()
             self.present(vc, animated: true, completion: nil)
             
-        }else{
-            self.calladdpetdetails()
-        }
+//        }else{
+//            self.calladdpetdetails()
+//        }
         
     }
     

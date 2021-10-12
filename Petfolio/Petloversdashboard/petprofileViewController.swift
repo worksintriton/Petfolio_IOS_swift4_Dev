@@ -253,6 +253,18 @@ class petprofileViewController: UIViewController, UICollectionViewDelegate, UICo
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func action_logout(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.pushtologin()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func calldeleteaddress(id : String){
            self.startAnimatingActivityIndicator()

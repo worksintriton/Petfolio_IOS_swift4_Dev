@@ -679,16 +679,16 @@ class searchpetloverappointmentViewController: UIViewController, UITableViewDele
         Servicefile.shared.pet_apoint_allergies = self.textfield_alergies.text!
         
         self.view.endEditing(true)
-        if self.textfield_selectpettype.text != ""{
+       // if self.textfield_selectpettype.text != ""{
             print("old pet ",Servicefile.shared.pet_apoint_pet_id)
             Servicefile.shared.pet_apoint_pet_id = Servicefile.shared.pet_petlist[Servicefile.shared.pet_index].id
             //self.showPaymentForm()
             print("663 search pet lover appointment app",Servicefile.shared.clinic_name,Servicefile.shared.dr_name)
             let vc = UIStoryboard.pet_doc_search_payoptionViewController()
             self.present(vc, animated: true, completion: nil)
-        }else{
-            self.calladdpetdetails()
-        }
+//        }else{
+//            self.calladdpetdetails()
+//        }
         
     }
     

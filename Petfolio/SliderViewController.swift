@@ -94,6 +94,19 @@ class SliderViewController: UIViewController, UICollectionViewDelegate, UICollec
                 Servicefile.shared.user_email = UserDefaults.standard.string(forKey: "user_email")!
                 Servicefile.shared.user_phone = UserDefaults.standard.string(forKey: "user_phone")!
                 Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
+                if  UserDefaults.standard.string(forKey: "P_key") != nil {
+                    if  UserDefaults.standard.string(forKey: "P_key") != "" {
+                Servicefile.shared.user_payment_key = UserDefaults.standard.string(forKey: "P_key")!
+                    }else{
+                        print("pushed to login not find p_key")
+                        let vc = UIStoryboard.LoginViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }else{
+                    print("pushed to login not find p_key")
+                    let vc = UIStoryboard.LoginViewController()
+                    self.present(vc, animated: true, completion: nil)
+                }
                 if UserDefaults.standard.string(forKey: "my_ref_code") != nil {
                     if  UserDefaults.standard.string(forKey: "my_ref_code") != "" {
                     Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!

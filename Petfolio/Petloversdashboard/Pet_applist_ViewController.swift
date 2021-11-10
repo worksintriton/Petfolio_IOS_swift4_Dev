@@ -258,6 +258,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
         cell.label_type_pet.text = Servicefile.shared.pet_applist_do_sp[indexPath.row].pet_name
         cell.img_petimg.image = UIImage(named: imagelink.sample)
         cell.label_amount.text =  "INR " + Servicefile.shared.pet_applist_do_sp[indexPath.row].cost
+//        if Servicefile.shared.pet_applist_do_sp[indexPath.row].clinic_name != "" {
+//
+//        }else{
+//            cell.label_amount.text =  "INR " + Servicefile.shared.pet_applist_do_sp[indexPath.row].service_cost
+//        }
+        
         if Servicefile.shared.pet_applist_do_sp[indexPath.row].photo == "" {
             cell.img_petimg.image = UIImage(named: imagelink.sample)
         }else{
@@ -853,8 +859,12 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
                                                                             self.stopAnimatingActivityIndicator()
                                                                             if Code == 200 {
                                                                                 if Servicefile.shared.pet_applist_do_sp[self.indextag].payment_method != "Cash" {
-                                                                                    let vc = UIStoryboard.App_couponViewController()
-                                                                                    self.present(vc, animated: true, completion: nil)
+                                                                                    let cost = Int(Servicefile.shared.pet_applist_do_sp[self.indextag].service_cost)
+                                                                                    if cost! > 0 {
+                                                                                        let vc = UIStoryboard.App_couponViewController()
+                                                                                        self.present(vc, animated: true, completion: nil)
+                                                                                    }
+                                                                                    
                                                                                 }else{
                                                                                     self.callnew()
                                                                                 }
@@ -878,6 +888,9 @@ class Pet_applist_ViewController: UIViewController, UITableViewDelegate, UITable
     
     func callnoticartcount(){
         print("notification")
+        Servicefile.shared.notifi_count = 0
+        Servicefile.shared.cart_count = 0
+        self.view_subpage_header.checknoti()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {

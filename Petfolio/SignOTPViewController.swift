@@ -162,11 +162,14 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     }else{
                         self.stopAnimatingActivityIndicator()
                         print("status code service denied")
+                        let message = res["Message"] as? String ?? ""
+                        self.alert(Message: message)
                     }
                     break
                 case .failure(let Error):
                     self.stopAnimatingActivityIndicator()
                     print("Can't Connect to Server / TimeOut",Error)
+                    
                     break
                 }
             }
@@ -201,6 +204,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     Servicefile.shared.email_status = user_details["user_email_verification"] as? Bool ?? false
                     Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
                     
+                    
                     UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                     UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                     UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")
@@ -212,6 +216,11 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(Servicefile.shared.email_status, forKey: "email_status")
                     UserDefaults.standard.set(Servicefile.shared.my_ref_code, forKey: "my_ref_code")
                     
+                    let P_details = res["payment_gateway_detail"] as! NSDictionary
+                    Servicefile.shared.user_payment_key = P_details["rzpkey"] as? String ?? ""
+                    UserDefaults.standard.set(Servicefile.shared.user_payment_key, forKey: "P_key")
+                    Servicefile.shared.user_payment_key = UserDefaults.standard.string(forKey: "P_key")!
+                    
                     Servicefile.shared.userid = UserDefaults.standard.string(forKey: "userid")!
                     Servicefile.shared.user_type = UserDefaults.standard.string(forKey: "usertype")!
                     Servicefile.shared.first_name = UserDefaults.standard.string(forKey: "first_name")!
@@ -221,6 +230,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
                     Servicefile.shared.userimage = UserDefaults.standard.string(forKey: "user_image")!
                     Servicefile.shared.email_status = UserDefaults.standard.bool(forKey: "email_status")
                     Servicefile.shared.my_ref_code = UserDefaults.standard.string(forKey: "my_ref_code")!
+                    
                     self.callSkipupdatestatus()
                     self.stopAnimatingActivityIndicator()
                 }else{

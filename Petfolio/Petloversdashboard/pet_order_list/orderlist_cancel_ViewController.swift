@@ -182,8 +182,13 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    let vc = UIStoryboard.App_couponViewController()
-                    self.present(vc, animated: true, completion: nil)
+                    if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                        let vc = UIStoryboard.App_couponViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let vc = UIStoryboard.Petlover_myorder_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }
                     self.stopAnimatingActivityIndicator()
                 }else{
                     self.stopAnimatingActivityIndicator()
@@ -212,8 +217,13 @@ class orderlist_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    let vc = UIStoryboard.App_couponViewController()
-                    self.present(vc, animated: true, completion: nil)
+                    if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                        let vc = UIStoryboard.App_couponViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let vc = UIStoryboard.Petlover_myorder_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }
                     //self.dismiss(animated: true, completion: nil)
                     self.stopAnimatingActivityIndicator()
                 }else{

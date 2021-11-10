@@ -50,6 +50,7 @@ class vendor_header: UIView {
     
     func checknoti(){
         self.view_belcount.isHidden = true
+        self.label_belcount.text = ""
         self.view_belcount.layer.cornerRadius = self.view_belcount.frame.height / 2
         if Servicefile.shared.notifi_count > 0 {
             self.view_belcount.isHidden = false

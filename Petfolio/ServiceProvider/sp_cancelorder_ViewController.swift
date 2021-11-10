@@ -178,8 +178,14 @@ class sp_cancelorder_ViewController: UIViewController, UITableViewDelegate, UITa
                     print("success data",res)
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
-                        let vc = UIStoryboard.sp_app_coupon_ViewController()
-                              self.present(vc, animated: true, completion: nil)
+                        
+                        if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                            let vc = UIStoryboard.sp_app_coupon_ViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }else{
+                            let vc = UIStoryboard.sp_myorder_ViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -209,8 +215,14 @@ class sp_cancelorder_ViewController: UIViewController, UITableViewDelegate, UITa
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         
-                        let vc = UIStoryboard.sp_app_coupon_ViewController()
-                        self.present(vc, animated: true, completion: nil)
+                        if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                            let vc = UIStoryboard.sp_app_coupon_ViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }else{
+                            let vc = UIStoryboard.sp_myorder_ViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                        
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()

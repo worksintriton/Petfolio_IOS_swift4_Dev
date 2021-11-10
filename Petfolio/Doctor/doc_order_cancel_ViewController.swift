@@ -181,8 +181,14 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    let vc = UIStoryboard.doc_app_coupon_ViewController()
-                    self.present(vc, animated: true, completion: nil)
+                    if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                        let vc = UIStoryboard.doc_app_coupon_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let vc = UIStoryboard.doc_myorderdetails_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                    
                     self.stopAnimatingActivityIndicator()
                 }else{
                     self.stopAnimatingActivityIndicator()
@@ -211,8 +217,14 @@ class doc_order_cancel_ViewController: UIViewController, UITableViewDelegate, UI
                 print("success data",res)
                 let Code  = res["Code"] as! Int
                 if Code == 200 {
-                    let vc = UIStoryboard.doc_app_coupon_ViewController()
-                    self.present(vc, animated: true, completion: nil)
+                    if Int(Servicefile.shared.prod_totalprice)! > 0 {
+                        let vc = UIStoryboard.doc_app_coupon_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        let vc = UIStoryboard.doc_myorderdetails_ViewController()
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                    
                     self.stopAnimatingActivityIndicator()
                 }else{
                     self.stopAnimatingActivityIndicator()

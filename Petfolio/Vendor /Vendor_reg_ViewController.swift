@@ -425,12 +425,12 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
     func callgalaryprocess(){
         let alert = UIAlertController(title: "Profile", message: "Choose the process", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Take Photo", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .camera
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Pick from Gallery", style: UIAlertAction.Style.default, handler: { action in
-            self.imagepicker.allowsEditing = false
+            self.imagepicker.allowsEditing = true
             self.imagepicker.sourceType = .photoLibrary
             self.present(self.imagepicker, animated: true, completion: nil)
         }))
@@ -459,8 +459,6 @@ class Vendor_reg_ViewController: UIViewController, UIImagePickerControllerDelega
             return
         }
         let filename = URL(fileURLWithPath: String(describing:urls)).lastPathComponent // print: myfile.pdf]
-        
-        
         let size = 2.0
         let filesize = Servicefile.shared.fileSize(forURL: myURL)
         print("size value",size)

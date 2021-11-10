@@ -184,16 +184,18 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                             Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
                                                            let userid = user_details["_id"] as? String ?? ""
                                                            UserDefaults.standard.set(userid, forKey: "userid")
-                                                           
-                                                            self.stopAnimatingActivityIndicator()
+                                                           self.stopAnimatingActivityIndicator()
                                                          }else{
                                                            self.stopAnimatingActivityIndicator()
                                                            print("status code service denied")
+                                                            let message = res["Message"] as? String ?? ""
+                                                            self.alert(Message: message)
                                                          }
                                                        break
                                                    case .failure(let Error):
                                                        self.stopAnimatingActivityIndicator()
                                                        print("Can't Connect to Server / TimeOut",Error)
+                                                    
                                                        break
                                                    }
                                       }
@@ -225,6 +227,12 @@ class loginotpViewController: UIViewController , UITextFieldDelegate {
                                                          Servicefile.shared.date_of_reg = user_details["date_of_reg"] as? String ?? ""
                                                          Servicefile.shared.otp = String(user_details["otp"] as? Int ?? 0)
                                                          Servicefile.shared.my_ref_code = user_details["my_ref_code"] as? String ?? ""
+                                                        
+                                                        let P_details = res["payment_gateway_detail"] as! NSDictionary
+                                                        Servicefile.shared.user_payment_key = P_details["rzpkey"] as? String ?? ""
+                                                        UserDefaults.standard.set(Servicefile.shared.user_payment_key, forKey: "P_key")
+                                                        Servicefile.shared.user_payment_key = UserDefaults.standard.string(forKey: "P_key")!
+                                                        
                                                         UserDefaults.standard.set(Servicefile.shared.userid, forKey: "userid")
                                                         UserDefaults.standard.set(Servicefile.shared.user_type, forKey: "usertype")
                                                         UserDefaults.standard.set(Servicefile.shared.first_name, forKey: "first_name")

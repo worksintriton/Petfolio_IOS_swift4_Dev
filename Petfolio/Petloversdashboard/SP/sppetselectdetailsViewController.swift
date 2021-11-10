@@ -327,7 +327,7 @@ class sppetselectdetailsViewController: UIViewController, UICollectionViewDelega
            if Servicefile.shared.pet_apoint_amount != 0 {
             let data = Double(Servicefile.shared.pet_apoint_amount) * Double(100)
            print("value changed",data)
-           self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+           self.razorpay = RazorpayCheckout.initWithKey(Servicefile.shared.user_payment_key, andDelegate: self)
                    let options: [String:Any] = [
                        "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                                "currency": "INR",//We support more that 92 international currencies.

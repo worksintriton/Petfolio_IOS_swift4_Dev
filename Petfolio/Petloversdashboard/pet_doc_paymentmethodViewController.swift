@@ -360,10 +360,11 @@ class pet_doc_paymentmethodViewController: UIViewController, UITextFieldDelegate
     
     
     func showPaymentForm(){
+        
         if Int(self.totalprice)! != 0 {
             let data = Double(Int(self.totalprice)!) * Double(100)
             print("value changed",data)
-            self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+            self.razorpay = RazorpayCheckout.initWithKey(Servicefile.shared.user_payment_key, andDelegate: self)
             let options: [String:Any] = [
                 "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                 "currency": "INR",//We support more that 92 international currencies.

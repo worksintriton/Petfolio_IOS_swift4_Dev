@@ -268,6 +268,9 @@ class sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegate, U
     
     func callnoticartcount(){
         print("notification")
+        Servicefile.shared.notifi_count = 0
+        Servicefile.shared.cart_count = 0
+        self.view_header.checknoti()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.cartnoticount, method: .post, parameters:
             ["user_id" : Servicefile.shared.userid], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                 switch (response.result) {

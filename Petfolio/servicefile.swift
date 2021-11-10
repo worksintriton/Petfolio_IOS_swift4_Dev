@@ -267,7 +267,8 @@ class Servicefile {
     //static let vendor_status_orderlist = baseurl + "/api/vendor_order_booking/fetch_order_details_id"
     static let vendor_status_orderlist = baseurl + "/api/vendor_order_group/get_product_list_by_vendor"
     
-    static let petlover_status_orderlist = baseurl + "/api/petlover_order_group/get_product_list_by_petlover"
+//    static let petlover_status_orderlist = baseurl + "/api/petlover_order_group/get_product_list_by_petlover"
+    static let petlover_status_orderlist = baseurl + "/api/petlover_order_group/get_product_list_by_petlover1"
     static let vendor_product_order_status_list = baseurl + "/api/vendor_order_group/fetch_single_product_detail"
     static let pet_product_order_status_list = baseurl + "/api/petlover_order_group/fetch_single_product_detail"
     static let vendor_update_status_accept_return = baseurl + "/api/vendor_order_booking/update_status_accept_return"
@@ -369,6 +370,7 @@ class Servicefile {
     // Desing Value
     var locaaccess = ""
     // userdetails
+    var user_payment_key = "" //"rzp_test_zioohqmxDjJJtd" test key
     var first_name = ""
     var last_name = ""
     var user_email = ""

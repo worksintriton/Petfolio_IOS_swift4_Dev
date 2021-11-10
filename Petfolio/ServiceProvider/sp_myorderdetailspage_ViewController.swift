@@ -459,19 +459,16 @@ class sp_myorderdetailspage_ViewController:  UIViewController , UITableViewDeleg
                             }
                             self.orgi_order_change_status = self.order_change_status
                             self.tbl_prod_details.reloadData()
-                            let  shipping_details_id = Data["shipping_address"] as! NSDictionary
-                            let city =  shipping_details_id["user_city"] as? String ?? ""
-                            let Fname =  shipping_details_id["user_first_name"] as? String ?? ""
-                            let lname =  shipping_details_id["user_last_name"] as? String ?? ""
-                            let Doorno =  shipping_details_id["user_flat_no"] as? String ?? ""
-                            let user_stree =  shipping_details_id["user_stree"] as? String ?? ""
-                            let user_mobile =  shipping_details_id["user_mobile"] as? String ?? ""
-                            let user_picocode =  shipping_details_id["user_picocode"] as? String ?? ""
-                            let user_state =  shipping_details_id["user_state"] as? String ?? ""
-                            let user_landmark =  shipping_details_id["user_landmark"] as? String ?? ""
-                            self.label_ship_name.text = Fname + " " + lname
-                            self.label_address.text = Doorno +  ", " + user_stree +  ", "
-                            self.label_city_state_pincode.text = city +  ", " + user_state +  " - " +  user_picocode + ". "
+                            let shipping_details_id = Data["shipping_address"] as? NSDictionary ?? ["":""]
+                            print("shipping_details_id data",shipping_details_id)
+                            let shipping_location =  shipping_details_id["shipping_location"] as? String ?? ""
+                            let Fname =  shipping_details_id["user_name"] as? String ?? ""
+                            let user_mobile =  shipping_details_id["user_phone"] as? String ?? ""
+                            let location_title =  shipping_details_id["location_title"] as? String ?? ""
+                            let user_landmark =  shipping_details_id["land_mark"] as? String ?? ""
+                            self.label_ship_name.text = Fname
+                            self.label_address.text = location_title
+                            self.label_city_state_pincode.text = shipping_location
                             self.label_landmark.text = "landmark : " + " " + user_landmark + ". "
                             self.label_phoneno.text = "Phone : " + " " + user_mobile + ". "
                             self.stopAnimatingActivityIndicator()

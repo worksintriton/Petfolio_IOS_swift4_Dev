@@ -213,9 +213,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
             }else{
                 self.callsubmit()
             }
-            
         }
-        
     }
     
     func callcheckcoupon(){
@@ -241,10 +239,10 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
                                                                                 self.view_isonline.isHidden = false
                                                                                 self.couponcode = self.textfield_coupon.text!
                                                                                 self.label_applyremove.text = self.textbtncoupon
-                                                                                self.discountprice = String(data["discount_price"] as! Int)
+                                                                                self.discountprice = String(data["discount_price"] as? Int ?? 0)
                                                                                 self.label_app_discount.text = "INR " + self.discountprice
-                                                                                self.originalprice = String(data["original_price"] as! Int)
-                                                                                self.totalprice = String(data["total_price"] as! Int)
+                                                                                self.originalprice = String(data["original_price"] as? Int ?? 0)
+                                                                                self.totalprice = String(data["total_price"] as? Int ?? 0)
                                                                                 self.label_total_app_discount.text = "INR " + self.totalprice
                                                                                 let Message = res["Message"] as? String ?? ""
                                                                                 self.alert(Message: Message)
@@ -288,7 +286,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
         if Int(self.totalprice)! > 0 {
             let data = Double(Int(self.totalprice)!) * Double(100)
             print("value changed",data)
-            self.razorpay = RazorpayCheckout.initWithKey("rzp_test_zioohqmxDjJJtd", andDelegate: self)
+            self.razorpay = RazorpayCheckout.initWithKey(Servicefile.shared.user_payment_key, andDelegate: self)
             let options: [String:Any] = [
                 "amount": data, //This is in currency subunits. 100 = 100 paise= INR 1.
                 "currency": "INR",//We support more that 92 international currencies.
@@ -338,6 +336,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
               }
     
     func callsubmit(){
+        print("sp service_amount", self.totalprice)
               self.startAnimatingActivityIndicator()
           if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_sp_createappointm, method: .post, parameters:
              ["sp_id" : Servicefile.shared.sp_user_id,
@@ -358,7 +357,7 @@ class pet_sp_app_payment_ViewController: UIViewController, UITextFieldDelegate, 
               "payment_id" : Servicefile.shared.pet_apoint_payment_id,
               "payment_method" : pay_method,
               "service_name" : Servicefile.shared.service_id_title,
-              "service_amount" : Int(self.totalprice)!,
+              "service_amount" : self.totalprice,
               "service_time" : Servicefile.shared.service_id_time,
               "completed_at" : "",
               "missed_at" : "",

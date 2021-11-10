@@ -53,6 +53,7 @@ class petowner_otherpage_header: UIView {
             self.image_profile.image = UIImage(named: imagelink.image_profile)
             self.image_back.image = UIImage(named: imagelink.image_back)
             self.checknoti()
+            self.view_sos.isHidden = true
             self.addSubview(view)
         }
     }
@@ -68,6 +69,8 @@ class petowner_otherpage_header: UIView {
     func checknoti(){
         self.view_belcount.isHidden = true
         self.view_cartcount.isHidden = true
+        self.label_cartcount.text = ""
+        self.label_belcount.text = ""
         self.view_belcount.layer.cornerRadius = self.view_belcount.frame.height / 2
         self.view_cartcount.layer.cornerRadius = self.view_cartcount.frame.height / 2
         if Servicefile.shared.notifi_count > 0 {

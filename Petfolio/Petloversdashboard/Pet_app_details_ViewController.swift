@@ -665,8 +665,12 @@ class Pet_app_details_ViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].payment_method != "Cash" {
-                            let vc = UIStoryboard.App_couponViewController()
-                            self.present(vc, animated: true, completion: nil)
+                            if Int(Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].cost)! > 0 {
+                                let vc = UIStoryboard.App_couponViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            }else{
+                                self.dismiss(animated: true, completion: nil)
+                            }
                         }else{
                             self.dismiss(animated: true, completion: nil)
                         }
@@ -701,8 +705,12 @@ class Pet_app_details_ViewController: UIViewController {
                     let Code  = res["Code"] as! Int
                     if Code == 200 {
                         if Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].payment_method != "Cash" {
-                            let vc = UIStoryboard.App_couponViewController()
-                            self.present(vc, animated: true, completion: nil)
+                            if Int(Servicefile.shared.pet_applist_do_sp[Servicefile.shared.selectedindex].service_cost)! > 0 {
+                                let vc = UIStoryboard.App_couponViewController()
+                                self.present(vc, animated: true, completion: nil)
+                            }else{
+                                self.dismiss(animated: true, completion: nil)
+                            }
                         }else{
                             self.dismiss(animated: true, completion: nil)
                         }

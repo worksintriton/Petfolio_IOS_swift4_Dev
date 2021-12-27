@@ -119,6 +119,7 @@ class Servicefile {
     static let signup = baseurl + "/api/userdetails/create"
     static let verifyemail = baseurl + "/api/userdetails/send/emailotp"
     static let resend = baseurl + "/api/userdetails/mobile/resendotp"
+    static let checkotp = baseurl + "/api/userdetails/verify_otp"
     static let petregister = baseurl + "/api/petdetails/mobile/create"
     static let login = baseurl + "/api/userdetails/mobile/login"
     //static let petdashboard = baseurl + "/api/userdetails/petlove/mobile/dashboard"

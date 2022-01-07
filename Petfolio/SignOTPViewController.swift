@@ -116,7 +116,7 @@ class SignOTPViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func action_Submit(_ sender: Any) {
-        if Servicefile.shared.otp != "0"{
+        if Servicefile.shared.otp != ""{
             if Servicefile.shared.user_phone == "9710809161" {
                 if self.textfield_otp.text! == "1234" {
                     self.callFCM()

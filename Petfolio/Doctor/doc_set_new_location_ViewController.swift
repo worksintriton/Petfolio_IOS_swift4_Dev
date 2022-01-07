@@ -277,7 +277,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
     
     func findareabylatlong(){
         let latlng = String(self.latitude)+","+String(self.longitude)
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=\(Servicefile.googleApiKey)", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
             switch (response.result) {
             case .success:
                 let data = response.value as! NSDictionary
@@ -310,7 +310,7 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
         //self.loader(Message: "Please Wait...")
         let area = text.replacingOccurrences(of: " ", with: "%20")
         
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+area+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+area+"&key=\(Servicefile.googleApiKey)", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
             switch (response.result) {
             case .success:
                 self.searlocation.removeAll()
@@ -319,16 +319,18 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
                 let data = response.value as! NSDictionary
                 //print("success data",data)
                 let desc = data["predictions"] as! NSArray
-                let descvalue = desc[0] as! NSDictionary
-                let value = descvalue["description"] as? String ?? ""
-                print("Address data",value)
-                for item in 0..<desc.count {
-                    let descvalue = desc[item] as! NSDictionary
+                if desc.count > 0 {
+                    let descvalue = desc[0] as! NSDictionary
                     let value = descvalue["description"] as? String ?? ""
-                    self.searlocation.append(value)
+                    print("Address data",value)
+                    for item in 0..<desc.count {
+                        let descvalue = desc[item] as! NSDictionary
+                        let value = descvalue["description"] as? String ?? ""
+                        self.searlocation.append(value)
+                    }
+                    print("list of address",self.searlocation)
+                    self.tbl_searchlist.reloadData()
                 }
-                print("list of address",self.searlocation)
-                self.tbl_searchlist.reloadData()
                 break
             case .failure(let Error):
                 print("Can't Connect to Server / TimeOut",Error)
@@ -346,28 +348,30 @@ class Doc_new_setlocation_ViewController: UIViewController , GMSMapViewDelegate,
         //self.loader(Message: "Please Wait...")
         self.searlocation.removeAll()
         let raddress = Address.replacingOccurrences(of: " ", with: "%20")
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?&address="+raddress+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?&address="+raddress+"&key=\(Servicefile.googleApiKey)", encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
             switch (response.result) {
             case .success:
                 //self.dismiss(animated: true, completion: nil)
                 let data = response.value as! NSDictionary
                 //print("success data",data)
                 let result = data["results"] as! NSArray
-                let gemontary = result[0] as! NSDictionary
-                let location = gemontary["geometry"] as! NSDictionary
-                let locations = location["location"] as! NSDictionary
-                let lat = locations["lat"] as! NSNumber
-                let lng = locations["lng"] as! NSNumber
-                self.latitude = Double(truncating: lat)
-                self.longitude = Double(truncating: lng)
-                Servicefile.shared.lati = self.latitude
-                Servicefile.shared.long = self.longitude
-                self.setmarker(lat: self.latitude, long: self.longitude)
-                self.latLong(lat: Servicefile.shared.lati,long: Servicefile.shared.long)
-                self.textfield_search.text = gemontary["formatted_address"] as? String
-                
-                Servicefile.shared.selectedaddress = self.textfield_search.text!
-                self.textfield_search.resignFirstResponder()
+                if result.count > 0 {
+                    let gemontary = result[0] as! NSDictionary
+                    let location = gemontary["geometry"] as! NSDictionary
+                    let locations = location["location"] as! NSDictionary
+                    let lat = locations["lat"] as! NSNumber
+                    let lng = locations["lng"] as! NSNumber
+                    self.latitude = Double(truncating: lat)
+                    self.longitude = Double(truncating: lng)
+                    Servicefile.shared.lati = self.latitude
+                    Servicefile.shared.long = self.longitude
+                    self.setmarker(lat: self.latitude, long: self.longitude)
+                    self.latLong(lat: Servicefile.shared.lati,long: Servicefile.shared.long)
+                    self.textfield_search.text = gemontary["formatted_address"] as? String
+                    
+                    Servicefile.shared.selectedaddress = self.textfield_search.text!
+                    self.textfield_search.resignFirstResponder()
+                }
                 //print("lat and lng",locations)
                 break
             case .failure(let Error):

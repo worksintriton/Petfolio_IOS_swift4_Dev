@@ -1167,7 +1167,7 @@ class SP_Reg_ViewController: UIViewController, UIImagePickerControllerDelegate, 
     func findareabylatlong(){
         
         let latlng = String(Servicefile.shared.sp_lat)+","+String(Servicefile.shared.sp_long)
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=\(Servicefile.googleApiKey)", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
             switch (response.result) {
             case .success:
                 let data = response.value as! NSDictionary

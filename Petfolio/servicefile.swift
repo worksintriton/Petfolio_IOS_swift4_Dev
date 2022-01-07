@@ -337,6 +337,10 @@ class Servicefile {
     static let pet_app_coupon_create = baseurl + "/api/refund_coupon/create"
     static let sp_avail_time = baseurl + "/api/sp_available_time/slot/get_sp_new"
     static let sp_avail_time_turnoff = baseurl + "/api/block_slot/create"
+    // old AIzaSyBq6YK_r9XNtKCycLN0cS3kGdzAYdTcFqQ
+    // new AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A
+    static let googleApiKey = "AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A"
+    
     
     // Signup page
     var email_status = false

@@ -1689,15 +1689,17 @@ extension regdocViewController { // location setup
     func findareabylatlong(){
        
         let latlng = String(Servicefile.shared.Doc_lat)+","+String(Servicefile.shared.Doc_long)
-        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+        if Servicefile.shared.updateUserInterface() { AF.request("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng+"&key=\(Servicefile.googleApiKey)", method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
             switch (response.result) {
             case .success:
                 let data = response.value as! NSDictionary
                 let area = data["results"] as! NSArray
+                if area.count > 0 {
                 let areadetails = area[0] as! NSDictionary
                 Servicefile.shared.Doc_loc = (areadetails["formatted_address"] as? String)!
                 _ = areadetails["address_components"] as! NSArray
                 self.textview_clinicaddress.text! = Servicefile.shared.Doc_loc
+                }
                 break
             case .failure(let Error):
                 print("Can't Connect to Server / TimeOut",Error)

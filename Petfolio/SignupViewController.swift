@@ -220,7 +220,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             self.alert(Message: "Please enter the first name")
         } else if self.textfield_lastname.text! == "" {
             self.alert(Message: "Please enter the last name")
-        } else if self.textfield_phno.text! == "" {
+        } else if self.textfield_phno.text!.count < 10 {
             self.alert(Message: "Please enter the phone number")
         } else {
             let emailval = Servicefile.shared.checktextfield(textfield: self.textfield_email.text!)

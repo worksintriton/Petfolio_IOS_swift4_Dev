@@ -63,11 +63,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func Action_OTP(_ sender: Any) {
-        if self.usercred.text! == "" {
-            self.alert(Message: "Please enter the Phone number")
-        }else{
+        if self.usercred.text!.count > 9 {
             Servicefile.shared.user_phone = self.usercred.text!
             self.callLogin()
+        }else{
+            self.alert(Message: "Please enter the Phone number")
         }
     }
     

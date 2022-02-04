@@ -14,7 +14,7 @@
 		<key>AASignatureView.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>26</integer>
+			<integer>30</integer>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
@@ -26,7 +26,7 @@
 		<key>CircleBar.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>31</integer>
 		</dict>
 		<key>Cosmos.xcscheme</key>
 		<dict>
@@ -73,7 +73,7 @@
 		<key>FirebaseCrashlytics.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>32</integer>
 		</dict>
 		<key>FirebaseInstallations.xcscheme</key>
 		<dict>
@@ -134,17 +134,17 @@
 		<key>IQKeyboardManagerSwift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>32</integer>
+			<integer>27</integer>
 		</dict>
 		<key>ImageCropper.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>30</integer>
+			<integer>33</integer>
 		</dict>
 		<key>JJFloatingActionButton.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>31</integer>
+			<integer>26</integer>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
@@ -198,7 +198,7 @@
 		<key>SNShadowSDK.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>33</integer>
+			<integer>29</integer>
 		</dict>
 		<key>Toucan.xcscheme</key>
 		<dict>

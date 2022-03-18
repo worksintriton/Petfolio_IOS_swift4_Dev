@@ -18,8 +18,8 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     // old AIzaSyCX3487yLNeuS5v3mtf4J95ervrmSo7MRc
     // old AIzaSyBq6YK_r9XNtKCycLN0cS3kGdzAYdTcFqQ up to 2021
-    
-let googleApiKey = "AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A"
+    // old AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A
+let googleApiKey = "AIzaSyDap8qav1flUsql0VWUYkjgB0noN0o_U1Y"
 var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //UIApplication.shared.statusBarView?.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appgreen)

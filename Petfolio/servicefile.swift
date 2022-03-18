@@ -339,8 +339,8 @@ class Servicefile {
     static let sp_avail_time_turnoff = baseurl + "/api/block_slot/create"
     // old AIzaSyBq6YK_r9XNtKCycLN0cS3kGdzAYdTcFqQ
     // new AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A
-    static let googleApiKey = "AIzaSyAlvAK3lZepIaApTDbDZUNfO0dBmuP6h4A"
     
+    static let googleApiKey = "AIzaSyDap8qav1flUsql0VWUYkjgB0noN0o_U1Y"
     
     // Signup page
     var email_status = false

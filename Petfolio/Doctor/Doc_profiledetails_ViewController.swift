@@ -26,9 +26,11 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var imag_user: UIImageView!
     @IBOutlet weak var view_img_user: SNShadowView!
     @IBOutlet weak var label_clinic_name: UILabel!
+    @IBOutlet weak var btn_logout: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.btn_logout.setTitle("", for: .normal)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
         self.coll_clinic.delegate = self
@@ -127,6 +129,16 @@ class Doc_profiledetails_ViewController: UIViewController, UICollectionViewDeleg
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func action_logout(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure you need to logout?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.pushtologin()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func action_image_upload(_ sender: Any) {
         let vc = UIStoryboard.ProfileimageuploadViewController()

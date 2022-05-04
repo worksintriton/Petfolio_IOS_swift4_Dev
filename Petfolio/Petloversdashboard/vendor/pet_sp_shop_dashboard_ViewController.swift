@@ -19,6 +19,8 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var textfield_search: UITextField!
     
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -30,35 +32,27 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
         self.view_search.view_cornor()
         self.tbl_dash_list.delegate = self
         self.tbl_dash_list.dataSource = self
-       
+        if Servicefile.shared.sp_dash_Banner_details.count == 0 || Servicefile.shared.sp_dash_Product_details.count == 0 {
+            self.callpetshopdashget()
+        }
+        
+        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        self.tbl_dash_list.addSubview(refreshControl) // not required when using UITableViewController
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        self.callpetshopdashget()
+        self.refreshControl.endRefreshing()
+    }
     
     func intial_setup_action(){
     // header action
         self.view_header.btn_sidemenu.addTarget(self, action: #selector(sidemenu), for: .touchUpInside)
-        //self.view_header.btn_profile.addTarget(self, action: #selector(profile), for: .touchUpInside)
         self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
         self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-       
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
-        
-//        var img = Servicefile.shared.userimage
-//        if img != "" {
-//            img = Servicefile.shared.userimage
-//        }else{
-//            img = Servicefile.sample_img
-//        }
-//        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-//            if (error != nil) {
-//                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-//            } else {
-//                self.view_header.image_profile.image = image
-//            }
-//        }
-        //self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
     // header action
@@ -121,7 +115,6 @@ class pet_sp_shop_dashboard_ViewController: UIViewController, UITableViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.callpetshopdashget()
         self.callnoticartcount()
     }
     

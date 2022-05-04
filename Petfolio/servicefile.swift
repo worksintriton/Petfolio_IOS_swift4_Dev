@@ -384,6 +384,7 @@ class Servicefile {
     var my_ref_code = ""
     var user_type = ""
     var otp = ""
+    var comm_type = 0
     var userid = ""
     var vendorid = ""
     var orderid = ""
@@ -424,6 +425,7 @@ class Servicefile {
     var product_id = ""
     var manageproductDic = [Any]()
     var addproddic = [Any]()
+    var DOcbanner = [Any]()
     // pet dashboard
     // pet service
     var pet_servicecat = [service_cat]()

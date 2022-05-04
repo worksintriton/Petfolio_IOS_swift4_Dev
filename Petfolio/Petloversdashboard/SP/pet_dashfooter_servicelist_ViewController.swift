@@ -19,17 +19,26 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
     @IBOutlet weak var view_header: petowner_header!
     @IBOutlet weak var view_footer: petowner_footerview!
     
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
         self.intial_setup_action()
+        if Servicefile.shared.pet_servicecat.count == 0 {
+            self.call_service_cat()
+        }
+        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        self.coll_servicelist.addSubview(refreshControl) // not required when using UITableViewController
         self.coll_servicelist.delegate = self
         self.coll_servicelist.dataSource = self
-        self.call_service_cat()
         self.callnoticartcount()
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        self.call_service_cat()
+        self.refreshControl.endRefreshing()
+    }
     
     func intial_setup_action(){
         // header action
@@ -40,20 +49,6 @@ class pet_dashfooter_servicelist_ViewController: UIViewController, UICollectionV
         self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
         self.view_header.btn_button2.addTarget(self, action: #selector(action_cart), for: .touchUpInside)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-        //        var img = Servicefile.shared.userimage
-        //        if img != "" {
-        //            img = Servicefile.shared.userimage
-        //        }else{
-        //            img = Servicefile.sample_img
-        //        }
-        //        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-        //            if (error != nil) {
-        //                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-        //            } else {
-        //                self.view_header.image_profile.image = image
-        //            }
-        //        }
-        //        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
         // header action

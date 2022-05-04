@@ -51,8 +51,8 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         super.viewDidLoad()
 //        CacheManager.shared.clearCache()
 //        Servicefile.shared.getuserdata()
-        SDImageCache.shared.clearMemory()
-        SDImageCache.shared.clearDisk()
+//        SDImageCache.shared.clearMemory()
+//        SDImageCache.shared.clearDisk()
         print("user name",Servicefile.shared.user_type, Servicefile.shared.first_name)
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
@@ -185,6 +185,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     
     @objc func refresh(_ sender: AnyObject) {
         self.call_dashboard_api_details()
+        self.refreshControl.endRefreshing()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -246,9 +247,11 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
         self.present(vc, animated: true, completion: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.timer.invalidate()
     }
+    
     
     func startTimer() {
         self.timer.invalidate()
@@ -256,6 +259,7 @@ class petloverDashboardViewController: UIViewController, UICollectionViewDelegat
     }
     
     @objc func scrollAutomatically(_ timer1: Timer) {
+        print("dashboard banner call")
            if Servicefile.shared.petbanner.count > 0 {
                self.pagcount += 1
                if self.pagcount == Servicefile.shared.petbanner.count {
@@ -548,10 +552,7 @@ extension UIViewController {
     }
     
     @objc func button4(sender: UIButton){
-        
-    //        Servicefile.shared.tabbar_selectedindex = 3
                    let tapbar = UIStoryboard.pet_sp_shop_dashboard_ViewController() // shop
-    //               tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
                    self.present(tapbar, animated: true, completion: nil)
        
     }
@@ -818,6 +819,9 @@ extension petloverDashboardViewController {
                         self.col_shop.reloadData()
                         self.startTimer()
                         self.refreshControl.endRefreshing()
+                        self.callsearchlist()
+                        self.callpetshopdashget()
+                        self.call_service_cat()
                         self.stopAnimatingActivityIndicator()
                     }else{
                         self.stopAnimatingActivityIndicator()
@@ -835,6 +839,179 @@ extension petloverDashboardViewController {
             self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
         }
         self.startAnimatingActivityIndicator()
+    }
+    
+    func callsearchlist(){
+        Servicefile.shared.moredocd.removeAll()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_search, method: .post, parameters:
+                                                                    ["user_id" : Servicefile.shared.userid,
+                                                                     "search_string": "",
+                                                                     "communication_type": Servicefile.shared.comm_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                        switch (response.result) {
+                                                                        case .success:
+                                                                            let res = response.value as! NSDictionary
+                                                                            print("success data",res)
+                                                                            let Code  = res["Code"] as! Int
+                                                                            if Code == 200 {
+                                                                                Servicefile.shared.moredocd.removeAll()
+                                                                                let Data = res["Data"] as! NSArray
+                                                                                for itm in 0..<Data.count{
+                                                                                    let dat = Data[itm] as! NSDictionary
+                                                                                    let _id = dat["_id"] as? String ?? ""
+                                                                                    let amount = String(dat["amount"] as? Int ?? 0)
+                                                                                    let clinic_loc = dat["clinic_loc"] as? String ?? ""
+                                                                                    let city_name = dat["city_name"] as? String ?? ""
+                                                                                    let clinic_name = dat["clinic_name"] as? String ?? ""
+                                                                                    let communication_type = dat["communication_type"] as? String ?? ""
+                                                                                    let distance = dat["distance"] as? String ?? ""
+                                                                                    let doctor_img = dat["doctor_img"] as? String ?? Servicefile.sample_img
+                                                                                    let doctor_name = dat["doctor_name"] as? String ?? ""
+                                                                                    let dr_title = dat["dr_title"] as? String ?? ""
+                                                                                    let review_count = String(dat["review_count"] as? Int ?? 0)
+                                                                                    let specializations = dat["specialization"] as! NSArray
+                                                                                    Servicefile.shared.specd.removeAll()
+                                                                                    for i in 0..<specializations.count{
+                                                                                        let item = specializations[i] as! NSDictionary
+                                                                                        let specialization = item["specialization"] as? String ?? ""
+                                                                                        Servicefile.shared.specd.append(spec.init(i_spec: specialization))
+                                                                                    }
+                                                                                    let star_count = String(Double(truncating: dat["star_count"] as? NSNumber ?? 0))
+                                                                                    let user_id = dat["user_id"] as? String ?? ""
+                                                                                    
+                                                                                    let thumbnail_image = dat["thumbnail_image"] as? String ?? ""
+                                                                                    Servicefile.shared.moredocd.append(moredoc.init(I_id: _id, I_clinic_loc: clinic_loc, I_clinic_name: clinic_name, I_communication_type: communication_type, I_distance: distance, I_doctor_img: doctor_img, I_doctor_name: doctor_name, I_dr_title: dr_title, I_review_count: review_count, I_star_count: star_count, I_user_id: user_id, Icity_name: city_name, I_specialization:  Servicefile.shared.specd, in_amount: amount, in_thumbnail_image: thumbnail_image))
+                                                                                }
+                                                                               Servicefile.shared.DOcbanner  = (res["banner"] as! NSArray) as! [Any]
+                                                                            }else{
+                                                                                print("status code service denied")
+                                                                            }
+                                                                            break
+                                                                        case .failure(let Error):
+                                                                            print("Can't Connect to Server / TimeOut",Error)
+                                                                            break
+                                                                        }
+                                                                     }
+        }else{
+            
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+        
+        
+    }
+    
+    func callpetshopdashget(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_shop_dash, method: .post, parameters: ["user_id": Servicefile.shared.userid]
+            , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                switch (response.result) {
+                case .success:
+                    let resp = response.value as! NSDictionary
+                    print("display data",resp)
+                    let Code  = resp["Code"] as! Int
+                    if Code == 200 {
+                        let Data = resp["Data"] as! NSDictionary
+                        let Banner_details = Data["Banner_details"] as! NSArray
+                        let Product_details = Data["Product_details"] as! NSArray
+                        let Today_Special = Data["Today_Special"] as! NSArray
+                        Servicefile.shared.sp_dash_Banner_details.removeAll()
+                        Servicefile.shared.sp_dash_Product_details.removeAll()
+                        Servicefile.shared.sp_dash_Today_Special.removeAll()
+                        for bann in 0..<Banner_details.count{
+                            let idata = Banner_details[bann] as! NSDictionary
+                            let bann_imag = idata["banner_img"] as? String ?? Servicefile.sample_bannerimg
+                            let banner_title = idata["banner_title"] as? String ?? ""
+                            Servicefile.shared.sp_dash_Banner_details.append(pet_sp_dash_banner.init(In_banner: bann_imag, In_banner_title: banner_title))
+                        }
+                        for itm in 0..<Today_Special.count{
+                            let itmdata = Today_Special[itm] as! NSDictionary
+                            let id  = itmdata["_id"] as? String ?? ""
+                            let product_discount = itmdata["product_discount"] as? Int ?? 0
+                            let product_fav = itmdata["product_fav"] as? Bool ?? false
+                            let product_img = itmdata["product_img"] as? String ?? Servicefile.sample_img
+                            let product_price = itmdata["product_price"] as? Int ?? 0
+                            let product_rating = String(itmdata["product_rating"] as? Double ?? 0.0 )
+                            let product_review = String(itmdata["product_review"] as? Int ?? 0)
+                            let product_title = itmdata["product_title"] as? String ?? ""
+                            let thumbnail_image = itmdata["thumbnail_image"] as? String ?? ""
+                            let product_discount_price = itmdata["product_discount_price"] as? Int ?? 0
+                            Servicefile.shared.sp_dash_Today_Special.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price ))
+                        }
+                        for cat_prod_deta in 0..<Product_details.count{
+                            let catval = Product_details[cat_prod_deta] as! NSDictionary
+                            let cat_id = catval["cat_id"] as? String ?? ""
+                            let cat_name = catval["cat_name"] as? String ?? ""
+                            let product_list = catval["product_list"] as! NSArray
+                            Servicefile.shared.sp_dash_productdetails.removeAll()
+                            for prodi in 0..<product_list.count{
+                                let prodval = product_list[prodi] as! NSDictionary
+                                let id  = prodval["_id"] as? String ?? ""
+                                let product_discount = prodval["product_discount"] as? Int ?? 0
+                                let product_fav = prodval["product_fav"] as? Bool ?? false
+                                let product_img = prodval["product_img"] as? String ?? Servicefile.sample_img
+                                let product_price = prodval["product_price"] as? Int ?? 0
+                                let product_rating = String(prodval["product_rating"] as? Double ?? 0.0)
+                                let product_review = String(prodval["product_review"] as? Int ?? 0)
+                                let product_title = prodval["product_title"] as? String ?? ""
+                                let thumbnail_image = prodval["thumbnail_image"] as? String ?? ""
+                                let product_discount_price = prodval["product_discount_price"] as? Int ?? 0
+                                
+                                Servicefile.shared.sp_dash_productdetails.append(productdetails.init(In_id: id, In_product_discount: product_discount, In_product_fav: product_fav, In_product_img: product_img, In_product_price: product_price, In_product_rating: product_rating, In_product_review: product_review, In_product_title: product_title, In_thumbnail_image: thumbnail_image, Iproduct_discount_price: product_discount_price))
+                            }
+                            if Servicefile.shared.sp_dash_productdetails.count > 0 {
+                                Servicefile.shared.sp_dash_Product_details.append(pet_sp_dash_productdetails.init(In_cartid: cat_id, In_cart_name: cat_name, In_product_details: Servicefile.shared.sp_dash_productdetails))
+                            }
+                        }
+                        self.stopAnimatingActivityIndicator()
+                        
+                    }else{
+                        self.stopAnimatingActivityIndicator()
+                        print("status code service denied")
+                    }
+                    break
+                case .failure(let Error):
+                    self.stopAnimatingActivityIndicator()
+                    print("Can't Connect to Server / TimeOut",Error)
+                    break
+                }        }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
+    }
+    
+    func call_service_cat(){
+        self.startAnimatingActivityIndicator()
+        if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_service_cat, method: .post, parameters: ["user_id": Servicefile.shared.userid]
+                                                                 , encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                    switch (response.result) {
+                                                                    case .success:
+                                                                        let res = response.value as! NSDictionary
+                                                                        print("success data",res)
+                                                                        let Code  = res["Code"] as! Int
+                                                                        if Code == 200 {
+                                                                            Servicefile.shared.pet_servicecat.removeAll()
+                                                                            let Data = res["Data"] as! NSArray
+                                                                            for itm in 0..<Data.count {
+                                                                                let itm_val = Data[itm] as! NSDictionary
+                                                                                let _id = itm_val["_id"] as? String ?? ""
+                                                                                let image = itm_val["image"] as? String ?? Servicefile.sample_img
+                                                                                let sub_title = itm_val["sub_title"] as? String ?? ""
+                                                                                let title = itm_val["title"] as? String ?? ""
+                                                                                Servicefile.shared.pet_servicecat.append(service_cat.init(I_id: _id, Iimage: image, Isub_title: sub_title, Ititle: title))
+                                                                            }
+                                                                        }else{
+                                                                            print("status code service denied")
+                                                                        }
+                                                                        break
+                                                                    case .failure(let Error):
+                                                                        print("Can't Connect to Server / TimeOut",Error)
+                                                                        break
+                                                                    }
+                                                                 }
+        }else{
+            self.stopAnimatingActivityIndicator()
+            self.alert(Message: "Seems there is a connectivity issue. Please check your internet connection and try again ")
+        }
     }
     
     func callnoticartcount(){

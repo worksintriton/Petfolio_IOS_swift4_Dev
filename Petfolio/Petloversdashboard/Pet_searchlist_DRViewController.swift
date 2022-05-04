@@ -17,7 +17,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var view_header: petowner_header!
     
     var refreshControl = UIRefreshControl()
-    var comm_type = 0
+    
     
     @IBOutlet weak var view_top_doc: UIView!
     @IBOutlet weak var view_bac: UIView!
@@ -29,18 +29,14 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var view_search: UIView!
     @IBOutlet weak var view_care: UIView!
     @IBOutlet weak var col_ban: UICollectionView!
-    var banner = [Any]()
     var pagcount = 0
     //var timer = Timer()
     var timer : Timer?
     override func viewDidLoad(){
         super.viewDidLoad()
-        self.banner.removeAll()
         self.tbl_searchlist.register(UINib(nibName: "listvalTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.view.backgroundColor = Servicefile.shared.hexStringToUIColor(hex: Servicefile.shared.appviewcolor)
-        Servicefile.shared.moredocd.removeAll()
         self.view_top_doc.layer.cornerRadius = 20.0
-        self.callsearchlist()
         self.noofdoc.text = "0"
         self.label_nodata.isHidden = true
         self.tbl_searchlist.delegate = self
@@ -57,34 +53,44 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.view_search.view_cornor()
         self.view_search.dropShadow()
         self.intial_setup_action()
-        
+        self.checkdata()
+    }
+    
+    func checkdata(){
+        if  Servicefile.shared.moredocd.count ==  0{
+            self.label_nodata.isHidden = false
+            self.noofdoc.text = "0 Doctors"
+        }else{
+            self.label_nodata.isHidden = true
+            self.noofdoc.text = String(Servicefile.shared.moredocd.count) + "  Doctors"
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+       
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.timer!.invalidate()
         self.timer = nil
     }
     
     
-    
     @IBAction func action_bac(_ sender: Any) {
-        //        Servicefile.shared.tabbar_selectedindex = 2
         let tapbar = UIStoryboard.petloverDashboardViewController()
-        //        tapbar.selectedIndex = Servicefile.shared.tabbar_selectedindex
         self.present(tapbar, animated: true, completion: nil)
     }
     
     func startTimer() {
-        //        self.timer!.invalidate()
         self.timer = nil
         timer =  Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
     }
     
     @objc func scrollAutomatically(_ timer1: Timer) {
-        //print("data in doctor",Servicefile.shared.moredocd)
-        if self.banner.count > 0 {
+        print("Doctor timer start")
+        if Servicefile.shared.DOcbanner.count > 0 {
             self.pagcount += 1
-            if self.pagcount == self.banner.count {
+            if self.pagcount == Servicefile.shared.DOcbanner.count {
                 self.pagcount = 0
                 let indexPath = IndexPath(row: pagcount, section: 0)
                 self.col_ban.scrollToItem(at: indexPath, at: .right, animated: false)
@@ -101,13 +107,12 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.banner.count
+        return Servicefile.shared.DOcbanner.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ban", for: indexPath) as!  petbannerCollectionViewCell
-        let val = self.banner[indexPath.row] as! NSDictionary
+        let val = Servicefile.shared.DOcbanner[indexPath.row] as! NSDictionary
         let img = val["image_path"] as? String ?? ""
         cell.img_banner.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.img_banner.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
@@ -162,6 +167,7 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @objc func refresh(_ sender: AnyObject) {
         self.callsearchlist()
+        self.refreshControl.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,11 +179,11 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     
     @IBAction func action_switch(_ sender: UISwitch) {
         if sender.isOn {
-            self.comm_type = 1
+            Servicefile.shared.comm_type = 1
             self.callsearchlist()
             self.label_comm_type.text = "Online"
         } else {
-            self.comm_type = 0
+            Servicefile.shared.comm_type = 0
             self.callsearchlist()
             self.label_comm_type.text = "Clinic vists" // "Offline Doctors"
         }
@@ -313,14 +319,16 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func callsearchlist(){
+        Servicefile.shared.moredocd.removeAll()
+        self.tbl_searchlist.reloadData()
         print("user_id" , Servicefile.shared.userid,
               "search_string", self.textfield_search.text!,
-              "communication_type", self.comm_type)
+              "communication_type", Servicefile.shared.comm_type)
         self.startAnimatingActivityIndicator()
         if Servicefile.shared.updateUserInterface() { AF.request(Servicefile.pet_search, method: .post, parameters:
                                                                     ["user_id" : Servicefile.shared.userid,
                                                                      "search_string": self.textfield_search.text!,
-                                                                     "communication_type": self.comm_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
+                                                                     "communication_type": Servicefile.shared.comm_type], encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseJSON { response in
                                                                         switch (response.result) {
                                                                         case .success:
                                                                             let res = response.value as! NSDictionary
@@ -361,11 +369,9 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
                                                                                 }else{
                                                                                     self.label_nodata.isHidden = true
                                                                                 }
-                                                                                self.banner  = (res["banner"] as! NSArray) as! [Any]
-                                                                                
+                                                                                Servicefile.shared.DOcbanner  = (res["banner"] as! NSArray) as! [Any]
                                                                                 self.tbl_searchlist.reloadData()
                                                                                 self.col_ban.reloadData()
-                                                                                self.startTimer()
                                                                                 self.refreshControl.endRefreshing()
                                                                                 self.stopAnimatingActivityIndicator()
                                                                             }else{
@@ -406,21 +412,6 @@ class Pet_searchlist_DRViewController: UIViewController, UITableViewDelegate, UI
         self.view_header.image_button2.image = UIImage(named: imagelink.image_bag)
         self.view_header.image_profile.image = UIImage(named: imagelink.image_bel)
         self.view_header.btn_profile.addTarget(self, action: #selector(self.action_notifi), for: .touchUpInside)
-        //        var img = Servicefile.shared.userimage
-        //        if img != "" {
-        //            img = Servicefile.shared.userimage
-        //        }else{
-        //            img = Servicefile.sample_img
-        //        }
-        //        self.view_header.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        //        self.view_header.image_profile.sd_setImage(with: Servicefile.shared.StrToURL(url: img)) { (image, error, cache, urls) in
-        //            if (error != nil) {
-        //                self.view_header.image_profile.image = UIImage(named: imagelink.sample)
-        //            } else {
-        //                self.view_header.image_profile.image = image
-        //            }
-        //        }
-        //        self.view_header.image_profile.layer.cornerRadius = self.view_header.image_profile.frame.height / 2
         self.view_header.label_location.text = Servicefile.shared.pet_header_city
         self.view_header.btn_location.addTarget(self, action: #selector(manageaddress), for: .touchUpInside)
         // header action
